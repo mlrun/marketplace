@@ -1,3 +1,15 @@
+### Change log [2021-05-13 22:15:52]
+1. New item created: `rnn_serving` (version: `0.0.1`)
+2. New item created: `gen_class_data` (version: `0.0.1`)
+3. New item created: `feature_selection` (version: `0.0.1`)
+4. New item created: `arc_to_parquet` (version: `0.0.1`)
+5. New item created: `bert_embeddings` (version: `0.0.1`)
+6. New item created: `xgb_custom` (version: `0.0.1`)
+7. New item created: `xgb_test` (version: `0.0.1`)
+8. New item created: `xgb_serving` (version: `0.0.1`)
+9. New item created: `xgb_trainer` (version: `0.0.1`)
+10. New item created: `describe_dask` (version: `0.0.1`)
+
 ### Change log [2021-05-05 15:15:37]
 1. New item created: `aggregate` (version: `0.0.1`)
 2. New item created: `sentiment_analysis_serving` (version: `0.0.1`)
