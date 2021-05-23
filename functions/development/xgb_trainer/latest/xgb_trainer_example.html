@@ -1,0 +1,1072 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>XGBoost trainer</title>
+<link href="../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" rel="stylesheet" type="text/css">
+<link href="../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../_static/documentation_options.js"></script>
+<script src="../../_static/jquery.js"></script>
+<script src="../../_static/underscore.js"></script>
+<script src="../../_static/doctools.js"></script>
+<script src="../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/xgb_trainer_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fxgb_trainer_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/xgb_trainer_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#steps">
+   Steps
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#generate-a-xgboost-model">
+   Generate a XGBoost model
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#train">
+   Train
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#import-function">
+   Import Function
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-function">
+   Test Function
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#generate-test-data">
+     Generate test data
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setup-xgboost-parameters">
+     Setup XGBoost Parameters
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-locally">
+     run locally
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-remotely">
+     run remotely
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="xgboost-trainer">
+<h1>XGBoost trainer<a class="headerlink" href="#xgboost-trainer" title="Permalink to this headline">¶</a></h1>
+<p>This notebook function handles training and logging of xgboost models <strong>only</strong>, exposing both the sklearn and low level api”s.</p>
+<div class="section" id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>generate an xgboost model configuration by selecting one of 5 available types (currently, only classification implemented)</p></li>
+<li><p>get a sample of data from a data source (random rows, consecutive rows, or the entire dataset, custom sample)</p></li>
+<li><p>split the data into train, validation, and test sets (WIP, this will be parametrized cross-validator)</p></li>
+<li><p>train the model using xgboost in one of its flavours (dask, gpu, mpi…)</p></li>
+<li><p>dump the model</p></li>
+<li><p>evaluate the model</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun.mlutils.data</span> <span class="kn">import</span> <span class="n">get_sample</span><span class="p">,</span> <span class="n">get_splits</span>
+<span class="kn">from</span> <span class="nn">mlrun.mlutils.models</span> <span class="kn">import</span> <span class="n">gen_sklearn_model</span><span class="p">,</span> <span class="n">eval_model_v2</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils.helpers</span> <span class="kn">import</span> <span class="n">create_class</span>
+
+<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore</span> <span class="kn">import</span> <span class="n">DataItem</span>
+
+<span class="kn">from</span> <span class="nn">cloudpickle</span> <span class="kn">import</span> <span class="n">dumps</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-a-xgboost-model">
+<h2>Generate a XGBoost model<a class="headerlink" href="#generate-a-xgboost-model" title="Permalink to this headline">¶</a></h2>
+<p>generate a model config using the xgboost’s sklearn api</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_gen_xgb_model</span><span class="p">(</span><span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">xgb_params</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="sd">"""generate an xgboost model</span>
+<span class="sd">    </span>
+<span class="sd">    Multiple model types that can be estimated using</span>
+<span class="sd">    the XGBoost Scikit-Learn API.</span>
+<span class="sd">    </span>
+<span class="sd">    Input can either be a predefined json model configuration or one</span>
+<span class="sd">    of the five xgboost model types: "classifier", "regressor", "ranker",</span>
+<span class="sd">    "rf_classifier", or "rf_regressor".</span>
+<span class="sd">    </span>
+<span class="sd">    In either case one can pass in a params dict to modify defaults values.</span>
+<span class="sd">    </span>
+<span class="sd">    Based on `mlutils.models.gen_sklearn_model`, see the function</span>
+<span class="sd">    `sklearn_classifier` in this repository.</span>
+<span class="sd">    </span>
+<span class="sd">    :param model_type: one of "classifier", "regressor",</span>
+<span class="sd">                       "ranker", "rf_classifier", or</span>
+<span class="sd">                      "rf_regressor"</span>
+<span class="sd">    :param xgb_params: class init parameters</span>
+<span class="sd">    """</span>
+    <span class="c1"># generate model and fit function</span>
+    <span class="n">mtypes</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"classifier"</span>   <span class="p">:</span> <span class="s2">"xgboost.XGBClassifier"</span><span class="p">,</span>
+        <span class="s2">"regressor"</span>    <span class="p">:</span> <span class="s2">"xgboost.XGBRegressor"</span><span class="p">,</span>
+        <span class="s2">"ranker"</span>       <span class="p">:</span> <span class="s2">"xgboost.XGBRanker"</span><span class="p">,</span>
+        <span class="s2">"rf_classifier"</span><span class="p">:</span> <span class="s2">"xgboost.XGBRFClassifier"</span><span class="p">,</span>
+        <span class="s2">"rf_regressor"</span> <span class="p">:</span> <span class="s2">"xgboost.XGBRFRegressor"</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="n">model_type</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"json"</span><span class="p">):</span>
+        <span class="n">model_config</span> <span class="o">=</span> <span class="n">model_type</span>
+    <span class="k">elif</span> <span class="n">model_type</span> <span class="ow">in</span> <span class="n">mtypes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">model_config</span> <span class="o">=</span> <span class="n">mtypes</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"unrecognized model type, see help documentation"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">gen_sklearn_model</span><span class="p">(</span><span class="n">model_config</span><span class="p">,</span> <span class="n">xgb_params</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="train">
+<h2>Train<a class="headerlink" href="#train" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">DataItem</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="n">label_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"labels"</span><span class="p">,</span>
+    <span class="n">encode_cols</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">sample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">imbal_vec</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span>
+    <span class="n">valid_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">models_dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"models"</span><span class="p">,</span>
+    <span class="n">plots_dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"plots"</span><span class="p">,</span>
+    <span class="n">eval_metrics</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span> <span class="p">[</span><span class="s2">"error"</span><span class="p">,</span> <span class="s2">"auc"</span><span class="p">],</span>
+    <span class="n">file_ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"parquet"</span><span class="p">,</span>
+    <span class="n">test_set</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test_set"</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""train an xgboost model.</span>
+<span class="sd">    </span>
+<span class="sd">    Note on imabalanced data:  the `imbal_vec` parameter represents the measured</span>
+<span class="sd">    class representations in the sample and can be used as a first step in tuning</span>
+<span class="sd">    an XGBoost model.  This isn't a hyperparamter, merely an estimate that should</span>
+<span class="sd">    be set as 'constant' throughout tuning process.</span>
+<span class="sd">    </span>
+<span class="sd">    :param context:           the function context</span>
+<span class="sd">    :param model_type:        the model type to train, "classifier", "regressor"...</span>
+<span class="sd">    :param dataset:           ("data") name of raw data file</span>
+<span class="sd">    :param label_column:      ground-truth (y) labels</span>
+<span class="sd">    :param encode_cols:       dictionary of names and prefixes for columns that are</span>
+<span class="sd">                              to hot be encoded.</span>
+<span class="sd">    :param sample:            Selects the first n rows, or select a sample</span>
+<span class="sd">                              starting from the first. If negative &lt;-1, select</span>
+<span class="sd">                              a random sample</span>
+<span class="sd">    :param imbal_vec:         ([]) vector of class weights seen in sample</span>
+<span class="sd">    :param test_size:         (0.05) test set size</span>
+<span class="sd">    :param valid_size:        (0.75) Once the test set has been removed the</span>
+<span class="sd">                              training set gets this proportion.</span>
+<span class="sd">    :param random_state:      (1) sklearn rng seed</span>
+<span class="sd">    :param models_dest:       destination subfolder for model artifacts</span>
+<span class="sd">    :param plots_dest:        destination subfolder for plot artifacts</span>
+<span class="sd">    :param eval_metrics:      (["error", "auc"]) learning curve metrics</span>
+<span class="sd">    :param file_ext:          format for test_set_key hold out data</span>
+<span class="sd">    :param test-set:          (test_set) key of held out data in artifact store</span>
+<span class="sd">    """</span>
+    <span class="c1"># deprecate:</span>
+    <span class="n">models_dest</span> <span class="o">=</span> <span class="n">models_dest</span> <span class="ow">or</span> <span class="s2">"models"</span>
+    <span class="n">plots_dest</span> <span class="o">=</span> <span class="n">plots_dest</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">"plots/</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span>
+    
+    <span class="c1"># get a sample from the raw data</span>
+    <span class="n">raw</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">get_sample</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">label_column</span><span class="p">)</span>
+    
+    <span class="c1"># hot-encode</span>
+    <span class="k">if</span> <span class="n">encode_cols</span><span class="p">:</span>
+        <span class="n">raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> 
+                             <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">encode_cols</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> 
+                             <span class="n">prefix</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">encode_cols</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> 
+                             <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># split the sample into train validate, test and calibration sets:</span>
+    <span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">),</span> <span class="p">(</span><span class="n">xvalid</span><span class="p">,</span> <span class="n">yvalid</span><span class="p">),</span> <span class="p">(</span><span class="n">xtest</span><span class="p">,</span> <span class="n">ytest</span><span class="p">)</span> <span class="o">=</span> \
+        <span class="n">get_splits</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">test_size</span><span class="p">,</span> <span class="n">valid_size</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
+    
+    <span class="c1"># save test data</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="n">test_set</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">xtest</span><span class="p">,</span> <span class="n">ytest</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="n">file_ext</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># get model config</span>
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">_gen_xgb_model</span><span class="p">(</span><span class="n">model_type</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="c1"># create model instance</span>
+    <span class="n">XGBBoostClass</span> <span class="o">=</span> <span class="n">create_class</span><span class="p">(</span><span class="n">model_config</span><span class="p">[</span><span class="s2">"META"</span><span class="p">][</span><span class="s2">"class"</span><span class="p">])</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">XGBBoostClass</span><span class="p">(</span><span class="o">**</span><span class="n">model_config</span><span class="p">[</span><span class="s2">"CLASS"</span><span class="p">])</span>
+
+    <span class="c1"># update the model config with training data and callbacks</span>
+    <span class="n">model_config</span><span class="p">[</span><span class="s2">"FIT"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"X"</span><span class="p">:</span> <span class="n">xtrain</span><span class="p">,</span> 
+                                <span class="s2">"y"</span><span class="p">:</span> <span class="n">ytrain</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+                                <span class="s2">"eval_set"</span><span class="p">:[(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">),</span> <span class="p">(</span><span class="n">xvalid</span><span class="p">,</span> <span class="n">yvalid</span><span class="p">)],</span>
+                                <span class="s2">"eval_metric"</span><span class="p">:</span> <span class="n">eval_metrics</span><span class="p">})</span>
+
+    <span class="c1"># run the fit</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">model_config</span><span class="p">[</span><span class="s2">"FIT"</span><span class="p">])</span>
+
+    <span class="c1"># evaluate model</span>
+    <span class="n">eval_metrics</span> <span class="o">=</span> <span class="n">eval_model_v2</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">xvalid</span><span class="p">,</span> <span class="n">yvalid</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+    
+    <span class="n">model_bin</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">model_bin</span><span class="p">,</span>
+                      <span class="n">artifact_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_path</span><span class="p">,</span> <span class="n">models_dest</span><span class="p">),</span>
+                      <span class="c1">#model_dir=models_dest, </span>
+                      <span class="n">model_file</span><span class="o">=</span><span class="s2">"model.pkl"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="import-function">
+<h2>Import Function<a class="headerlink" href="#import-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">import_function</span>
+<span class="kn">from</span> <span class="nn">mlrun.platforms.other</span> <span class="kn">import</span> <span class="n">auto_mount</span>
+
+<span class="n">GPU</span> <span class="o">=</span> <span class="kc">False</span>
+
+
+<span class="n">fn</span> <span class="o">=</span> <span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://xgb_trainer"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="s2">"mlrun/ml-models"</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">GPU</span> <span class="k">else</span> <span class="s2">"mlrun/ml-models-gpu"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[mlrun] 2020-07-06 15:43:06,061 function spec saved to path: function.yaml
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f20319a4e80&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="test-function">
+<h2>Test Function<a class="headerlink" href="#test-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generate-test-data">
+<h3>Generate test data<a class="headerlink" href="#generate-test-data" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">import_function</span><span class="p">,</span> <span class="n">mlconf</span><span class="p">,</span> <span class="n">NewTask</span>
+<span class="kn">from</span> <span class="nn">mlrun.platforms.other</span> <span class="kn">import</span> <span class="n">auto_mount</span>
+
+<span class="n">gen_data</span> <span class="o">=</span> <span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://gen_class_data"</span><span class="p">,</span> <span class="s2">"gendata"</span><span class="p">)</span>
+<span class="n">gen_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">auto_mount</span><span class="p">())</span>
+
+<span class="n">gen_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"name"</span><span class="p">:</span>        <span class="s2">"tasks generate classification data"</span><span class="p">,</span> 
+    <span class="s2">"params"</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"n_samples"</span>   <span class="p">:</span> <span class="mi">10_000</span><span class="p">,</span>
+        <span class="s2">"m_features"</span>  <span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">"k_classes"</span>   <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"weight"</span>      <span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+        <span class="s2">"sk_params"</span>   <span class="p">:</span> <span class="p">{</span><span class="s2">"n_informative"</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+        <span class="s2">"file_ext"</span>    <span class="p">:</span> <span class="s2">"csv"</span><span class="p">}}</span>
+
+
+<span class="n">gen_data</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">NewTask</span><span class="p">(</span><span class="o">**</span><span class="n">gen_params</span><span class="p">),</span> <span class="n">artifact_path</span><span class="o">=</span><span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span><span class="o">+</span><span class="s2">"/xgb"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[mlrun] 2020-06-14 10:39:49,413 starting run tasks generate classification data uid=00dc12c4e979447698fb1e6f17efa469  -&gt; http://mlrun-api:8080
+[mlrun] 2020-06-14 10:39:49,533 Job is running in the background, pod: tasks-generate-classification-data-ncbd8
+[mlrun] 2020-06-14 10:39:53,013 starting local run: main.py # gen_class_data
+[mlrun] 2020-06-14 10:39:53,565 log artifact classifier-data at /User/artifacts/xgb/classifier-data.csv, size: 998700, db: Y
+
+[mlrun] 2020-06-14 10:39:53,583 run executed, status=completed
+final state: succeeded
+</pre></div>
+</div>
+<div class="output text_html"><style> 
+.dictlist {
+  background-color: #b3edff; 
+  text-align: center; 
+  margin: 4px; 
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer; 
+  background-color: #ffe6cc; 
+  text-align: left; 
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #ffe6cc;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }  
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="00dc12c4e979447698fb1e6f17efa469"><a href="https://mlrun-ui.default-tenant.app.flobdnzhgtgt.iguazio-cd2.com/projects/default/jobs/00dc12c4e979447698fb1e6f17efa469/info" target="_blank">...17efa469</a></div></td>
+<td>0</td>
+<td>Jun 14 10:39:53</td>
+<td>completed</td>
+<td>tasks generate classification data</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div><div class="dictlist">host=tasks-generate-classification-data-ncbd8</div></td>
+<td></td>
+<td><div class="dictlist">n_samples=10000</div><div class="dictlist">m_features=5</div><div class="dictlist">k_classes=2</div><div class="dictlist">weight=[0.5, 0.5]</div><div class="dictlist">sk_params={'n_informative': 2}</div><div class="dictlist">file_ext=csv</div></td>
+<td></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result595f12dc" title="/files/artifacts/xgb/classifier-data.csv">classifier-data</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result595f12dc-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result595f12dc-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result595f12dc">×</span>
+</div>
+<iframe class="fileview" id="result595f12dc-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run 00dc12c4e979447698fb1e6f17efa469 --project default , !mlrun logs 00dc12c4e979447698fb1e6f17efa469 --project default
+[mlrun] 2020-06-14 10:39:55,676 run executed, status=completed
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.model.RunObject at 0x7f067ab89c50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="setup-xgboost-parameters">
+<h3>Setup XGBoost Parameters<a class="headerlink" href="#setup-xgboost-parameters" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"name"</span> <span class="p">:</span> <span class="s2">"tasks xgb cpu trainer"</span><span class="p">,</span>
+    <span class="s2">"params"</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"model_type"</span>              <span class="p">:</span> <span class="s2">"classifier"</span><span class="p">,</span>
+        <span class="s2">"CLASS_tree_method"</span>       <span class="p">:</span> <span class="s2">"hist"</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">gpus</span> <span class="k">else</span> <span class="s2">"gpu_hist"</span><span class="p">,</span>
+        <span class="s2">"CLASS_objective"</span>         <span class="p">:</span> <span class="s2">"binary:logistic"</span><span class="p">,</span>
+        <span class="s2">"CLASS_booster"</span>           <span class="p">:</span> <span class="s2">"gbtree"</span><span class="p">,</span>
+        <span class="s2">"FIT_verbose"</span>             <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">"label_column"</span>            <span class="p">:</span> <span class="s2">"labels"</span><span class="p">}}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-locally">
+<h3>run locally<a class="headerlink" href="#run-locally" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">run_local</span><span class="p">,</span> <span class="n">NewTask</span><span class="p">,</span> <span class="n">mlconf</span>
+
+<span class="n">run</span> <span class="o">=</span> <span class="n">run_local</span><span class="p">(</span>
+    <span class="n">NewTask</span><span class="p">(</span><span class="o">**</span><span class="n">task_params</span><span class="p">),</span>
+    <span class="n">handler</span><span class="o">=</span><span class="n">train_model</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span>  <span class="p">:</span> <span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span><span class="o">+</span><span class="s2">"/xgb/classifier-data.csv"</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[mlrun] 2020-06-14 10:39:55,699 starting run tasks xgb cpu trainer uid=e02fc9ca13674195ae6cb1d79e10e372  -&gt; http://mlrun-api:8080
+[mlrun] 2020-06-14 10:39:55,858 log artifact test_set at /User/artifacts/test_set.parquet, size: 123488, db: Y
+[mlrun] 2020-06-14 10:39:56,857 log artifact probability-calibration at /User/artifacts/plots/probability-calibration.html, size: 25986, db: N
+[mlrun] 2020-06-14 10:39:57,038 log artifact confusion-matrix at /User/artifacts/plots/confusion-matrix.html, size: 10209, db: N
+[mlrun] 2020-06-14 10:39:57,251 log artifact feature-importances at /User/artifacts/plots/feature-importances.html, size: 8417, db: N
+[mlrun] 2020-06-14 10:39:57,369 log artifact precision-recall-binary at /User/artifacts/plots/precision-recall-binary.html, size: 16425, db: N
+[mlrun] 2020-06-14 10:39:57,501 log artifact roc-binary at /User/artifacts/plots/roc-binary.html, size: 19805, db: N
+[mlrun] 2020-06-14 10:39:57,537 log artifact model at /User/artifacts/models/, size: 127681, db: Y
+</pre></div>
+</div>
+<div class="output text_html"><style> 
+.dictlist {
+  background-color: #b3edff; 
+  text-align: center; 
+  margin: 4px; 
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer; 
+  background-color: #ffe6cc; 
+  text-align: left; 
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #ffe6cc;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }  
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="e02fc9ca13674195ae6cb1d79e10e372"><a href="https://mlrun-ui.default-tenant.app.flobdnzhgtgt.iguazio-cd2.com/projects/default/jobs/e02fc9ca13674195ae6cb1d79e10e372/info" target="_blank">...9e10e372</a></div></td>
+<td>0</td>
+<td>Jun 14 10:39:55</td>
+<td>completed</td>
+<td>tasks xgb cpu trainer</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=handler</div><div class="dictlist">owner=admin</div><div class="dictlist">host=jupyter-7b44c8d958-kklf7</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result5831ff1a" title="/files/artifacts/xgb/classifier-data.csv">dataset</div></td>
+<td><div class="dictlist">model_type=classifier</div><div class="dictlist">CLASS_tree_method=hist</div><div class="dictlist">CLASS_objective=binary:logistic</div><div class="dictlist">CLASS_booster=gbtree</div><div class="dictlist">FIT_verbose=0</div><div class="dictlist">label_column=labels</div></td>
+<td><div class="dictlist">accuracy=0.9548444444444445</div><div class="dictlist">test-error=0.04515555555555555</div><div class="dictlist">rocauc=0.9803470988703957</div><div class="dictlist">brier_score=0.03883511625461902</div><div class="dictlist">f1-score=0.9545779685264664</div><div class="dictlist">precision_score=0.9663287472845764</div><div class="dictlist">recall_score=0.9431095406360424</div></td>
+<td><div title="/User/artifacts/test_set.parquet">test_set</div><div class="artifact" onclick="expandPanel(this)" panename="result5831ff1a" title="/files/artifacts/plots/probability-calibration.html">probability-calibration</div><div class="artifact" onclick="expandPanel(this)" panename="result5831ff1a" title="/files/artifacts/plots/confusion-matrix.html">confusion-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="result5831ff1a" title="/files/artifacts/plots/feature-importances.html">feature-importances</div><div class="artifact" onclick="expandPanel(this)" panename="result5831ff1a" title="/files/artifacts/plots/precision-recall-binary.html">precision-recall-binary</div><div class="artifact" onclick="expandPanel(this)" panename="result5831ff1a" title="/files/artifacts/plots/roc-binary.html">roc-binary</div><div title="/User/artifacts/models">model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result5831ff1a-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result5831ff1a-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result5831ff1a">×</span>
+</div>
+<iframe class="fileview" id="result5831ff1a-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run e02fc9ca13674195ae6cb1d79e10e372 --project default , !mlrun logs e02fc9ca13674195ae6cb1d79e10e372 --project default
+[mlrun] 2020-06-14 10:39:57,597 run executed, status=completed
+</pre></div>
+</div>
+<img alt="_images/xgb_trainer_example_17_3.png" src="_images/xgb_trainer_example_17_3.png"/>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/xgb_trainer_example_17_5.png" src="_images/xgb_trainer_example_17_5.png"/>
+<img alt="_images/xgb_trainer_example_17_6.png" src="_images/xgb_trainer_example_17_6.png"/>
+</div>
+</div>
+</div>
+<div class="section" id="run-remotely">
+<h3>run remotely<a class="headerlink" href="#run-remotely" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">NewTask</span><span class="p">(</span><span class="o">**</span><span class="n">task_params</span><span class="p">),</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span>  <span class="p">:</span> <span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span><span class="o">+</span><span class="s2">"/xgb/classifier-data.csv"</span><span class="p">},</span>
+    <span class="n">artifact_path</span><span class="o">=</span><span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span><span class="o">+</span><span class="s2">"/xgb"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[mlrun] 2020-06-14 10:39:57,945 starting run tasks xgb cpu trainer uid=1af3790534694ceab73b3c364771578a  -&gt; http://mlrun-api:8080
+[mlrun] 2020-06-14 10:39:58,090 Job is running in the background, pod: tasks-xgb-cpu-trainer-4t9sb
+[mlrun] 2020-06-14 10:40:01,567 starting local run: main.py # train_model
+[mlrun] 2020-06-14 10:40:02,461 log artifact test_set at /User/artifacts/xgb/test_set.parquet, size: 123680, db: Y
+[mlrun] 2020-06-14 10:40:03,682 log artifact probability-calibration at /User/artifacts/xgb/plots/probability-calibration.html, size: 50142, db: N
+[mlrun] 2020-06-14 10:40:03,817 log artifact confusion-matrix at /User/artifacts/xgb/plots/confusion-matrix.html, size: 18905, db: N
+[mlrun] 2020-06-14 10:40:04,066 log artifact feature-importances at /User/artifacts/xgb/plots/feature-importances.html, size: 18029, db: N
+[mlrun] 2020-06-14 10:40:04,289 log artifact precision-recall-binary at /User/artifacts/xgb/plots/precision-recall-binary.html, size: 30789, db: N
+[mlrun] 2020-06-14 10:40:04,402 log artifact roc-binary at /User/artifacts/xgb/plots/roc-binary.html, size: 35757, db: N
+[mlrun] 2020-06-14 10:40:04,435 log artifact model at /User/artifacts/xgb/models/, size: 131656, db: Y
+
+[mlrun] 2020-06-14 10:40:04,461 run executed, status=completed
+final state: succeeded
+</pre></div>
+</div>
+<div class="output text_html"><style> 
+.dictlist {
+  background-color: #b3edff; 
+  text-align: center; 
+  margin: 4px; 
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer; 
+  background-color: #ffe6cc; 
+  text-align: left; 
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #ffe6cc;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }  
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="1af3790534694ceab73b3c364771578a"><a href="https://mlrun-ui.default-tenant.app.flobdnzhgtgt.iguazio-cd2.com/projects/default/jobs/1af3790534694ceab73b3c364771578a/info" target="_blank">...4771578a</a></div></td>
+<td>0</td>
+<td>Jun 14 10:40:02</td>
+<td>completed</td>
+<td>tasks xgb cpu trainer</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div><div class="dictlist">host=tasks-xgb-cpu-trainer-4t9sb</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result5aa60ec8" title="/files/artifacts/xgb/classifier-data.csv">dataset</div></td>
+<td><div class="dictlist">model_type=classifier</div><div class="dictlist">CLASS_tree_method=hist</div><div class="dictlist">CLASS_objective=binary:logistic</div><div class="dictlist">CLASS_booster=gbtree</div><div class="dictlist">FIT_verbose=0</div><div class="dictlist">label_column=labels</div></td>
+<td><div class="dictlist">accuracy=0.9552</div><div class="dictlist">test-error=0.0448</div><div class="dictlist">rocauc=0.9799618829687036</div><div class="dictlist">brier_score=0.038984999293145965</div><div class="dictlist">f1-score=0.954983922829582</div><div class="dictlist">precision_score=0.965679190751445</div><div class="dictlist">recall_score=0.9445229681978798</div></td>
+<td><div title="/User/artifacts/xgb/test_set.parquet">test_set</div><div class="artifact" onclick="expandPanel(this)" panename="result5aa60ec8" title="/files/artifacts/xgb/plots/probability-calibration.html">probability-calibration</div><div class="artifact" onclick="expandPanel(this)" panename="result5aa60ec8" title="/files/artifacts/xgb/plots/confusion-matrix.html">confusion-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="result5aa60ec8" title="/files/artifacts/xgb/plots/feature-importances.html">feature-importances</div><div class="artifact" onclick="expandPanel(this)" panename="result5aa60ec8" title="/files/artifacts/xgb/plots/precision-recall-binary.html">precision-recall-binary</div><div class="artifact" onclick="expandPanel(this)" panename="result5aa60ec8" title="/files/artifacts/xgb/plots/roc-binary.html">roc-binary</div><div title="/User/artifacts/xgb/models">model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result5aa60ec8-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result5aa60ec8-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result5aa60ec8">×</span>
+</div>
+<iframe class="fileview" id="result5aa60ec8-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run 1af3790534694ceab73b3c364771578a --project default , !mlrun logs 1af3790534694ceab73b3c364771578a --project default
+[mlrun] 2020-06-14 10:40:07,313 run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
