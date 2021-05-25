@@ -6,664 +6,1277 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/snackbarjs/1.1.0/snackbar.min.js"
-        integrity="sha512-Knad2JJvcddGNKm03ySDgeTKXQfBjH0XPrFqUyzM0BuJhKkVfLzoOK5Ii9jsLmbZTXM8YNqn42suHyIEbQXboQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href="https://unpkg.com/tabulator-tables@4.9.3/dist/css/tabulator.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://unpkg.com/tabulator-tables@4.9.3/dist/js/tabulator.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
-        integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <link rel="stylesheet" href="https:////cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <style>
-         .tabulator-col-title { text-align: center !important; }
-        .shadow { filter: drop-shadow(2px 2px 2px rgb(149, 149, 149)); }
-        a { color: #6f1e7c; font-weight: lighter; }
-        .nav-header { color: #231025; font-family: Arial, Helvetica, sans-serif; }
-        .tabulator { border-radius: 20px; border-width: 2px; }
-        .tabulator-col { background-color: #fbfeff !important; }
-        .tabulator-col-title { color: #763b80; }
-        .tabulator-row.tabulator-row-even { background-color: #fffbff; }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="_static/styles.css">
     <title>Marketplace</title>
 </head>
 
-<body class="m-1">
-    <!-- Just an image -->
-    <nav class="navbar d-flex justify-content-between">
-        <a class="w-25" href="https://mlrun.org/">
-            <img width="45%" height="auto" src="https://docs.mlrun.org/en/latest/_static/MLRun_Character.png" alt="">
-        </a>
-        <h2 class="mx-auto display-4 nav-header">Function
-            Marketplace</h2>
-        <div class="w-25"></div>
-    </nav>
-    <div id="table"></div>
-    <script>
-        const tabledata = [{
-            "id": 1,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Model Monitoring Batch",
-            "description": "",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/model_monitoring_batch/latest/item.yaml",
-            "function_yaml": "functions/master/model_monitoring_batch/latest/function.yaml",
-            "categories": "",
-            "file_url": "functions/master/model_monitoring_batch/latest/model_monitoring_batch.html",
-            "example_url": "functions/master/model_monitoring_batch/latest/model_monitoring_batch_example.html"
-        }, {
-            "id": 2,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Concept Drift",
-            "description": "Deploy a streaming Concept Drift detector on a labeled stream",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-04",
-            "item_yaml": "functions/master/concept_drift/latest/item.yaml",
-            "function_yaml": "functions/master/concept_drift/latest/function.yaml",
-            "categories": "ml, serve",
-            "example_url": "functions/master/concept_drift/latest/concept_drift_example.html"
-        }, {
-            "id": 3,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Aggregate",
-            "description": "Rolling aggregation over Metrics and Lables according to specifications",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-31",
-            "item_yaml": "functions/master/aggregate/latest/item.yaml",
-            "function_yaml": "functions/master/aggregate/latest/function.yaml",
-            "categories": "data-prep",
-            "file_url": "functions/master/aggregate/latest/aggregate.html",
-            "example_url": "functions/master/aggregate/latest/aggregate_example.html"
-        }, {
-            "id": 4,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Model Monitoring Stream",
-            "description": "",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/model_monitoring_stream/latest/item.yaml",
-            "function_yaml": "functions/master/model_monitoring_stream/latest/function.yaml",
-            "categories": "",
-            "file_url": "functions/master/model_monitoring_stream/latest/model_monitoring_stream.html",
-            "example_url": "functions/master/model_monitoring_stream/latest/model_monitoring_stream_example.html"
-        }, {
-            "id": 5,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Rnn Serving",
-            "description": "deploy an rnn based stock analysis model server.",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/rnn_serving/latest/item.yaml",
-            "function_yaml": "functions/master/rnn_serving/latest/function.yaml",
-            "categories": "model-serving",
-            "file_url": "functions/master/rnn_serving/latest/rnn_serving.html",
-            "example_url": "functions/master/rnn_serving/latest/rnn_serving_example.html"
-        }, {
-            "id": 6,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Concept Drift Streaming",
-            "description": "Deploy a streaming Concept Drift detector on a labeled stream. the nuclio part of the concept_drift function",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/concept_drift_streaming/latest/item.yaml",
-            "function_yaml": "functions/master/concept_drift_streaming/latest/function.yaml",
-            "categories": "ml, serve",
-            "example_url": "functions/master/concept_drift_streaming/latest/concept_drift_streaming_example.html"
-        }, {
-            "id": 7,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Gen Class Data",
-            "description": "Create a binary classification sample dataset and save.",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/gen_class_data/latest/item.yaml",
-            "function_yaml": "functions/master/gen_class_data/latest/function.yaml",
-            "categories": "data-prep",
-            "file_url": "functions/master/gen_class_data/latest/gen_class_data.html",
-            "example_url": "functions/master/gen_class_data/latest/gen_class_data_example.html"
-        }, {
-            "id": 8,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Churn Server",
-            "description": "churn classification and predictor",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-04",
-            "item_yaml": "functions/master/churn_server/latest/item.yaml",
-            "function_yaml": "functions/master/churn_server/latest/function.yaml",
-            "categories": "serving, ml",
-            "example_url": "functions/master/churn_server/latest/churn_server_example.html"
-        }, {
-            "id": 9,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Github Utils",
-            "description": "add comments to github pull request",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/github_utils/latest/item.yaml",
-            "function_yaml": "functions/master/github_utils/latest/function.yaml",
-            "categories": "notifications, utils",
-            "example_url": "functions/master/github_utils/latest/github_utils_example.html"
-        }, {
-            "id": 10,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Send Email",
-            "description": "Send Email messages through SMTP server",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/send_email/latest/item.yaml",
-            "function_yaml": "functions/master/send_email/latest/function.yaml",
-            "categories": "notifications",
-            "example_url": "functions/master/send_email/latest/send_email_example.html"
-        }, {
-            "id": 11,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "V2 Model Server",
-            "description": "generic sklearn model server",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/v2_model_server/latest/item.yaml",
-            "function_yaml": "functions/master/v2_model_server/latest/function.yaml",
-            "categories": "serving, ml",
-            "example_url": "functions/master/v2_model_server/latest/v2_model_server_example.html"
-        }, {
-            "id": 12,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Open Archive",
-            "description": "Open a file/object archive into a target directory",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/open_archive/latest/item.yaml",
-            "function_yaml": "functions/master/open_archive/latest/function.yaml",
-            "categories": "data-movement, utils",
-            "example_url": "functions/master/open_archive/latest/open_archive_example.html"
-        }, {
-            "id": 13,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Sklearn Classifier",
-            "description": "train any classifier using scikit-learn's API",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/sklearn_classifier/latest/item.yaml",
-            "function_yaml": "functions/master/sklearn_classifier/latest/function.yaml",
-            "categories": "ml, training",
-            "example_url": "functions/master/sklearn_classifier/latest/sklearn_classifier_example.html"
-        }, {
-            "id": 14,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Arc To Parquet",
-            "description": "retrieve remote archive, open and save as parquet",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-04",
-            "item_yaml": "functions/master/arc_to_parquet/latest/item.yaml",
-            "function_yaml": "functions/master/arc_to_parquet/latest/function.yaml",
-            "categories": "data-movement, utils",
-            "file_url": "functions/master/arc_to_parquet/latest/arc_to_parquet.html",
-            "example_url": "functions/master/arc_to_parquet/latest/arc_to_parquet_example.html"
-        }, {
-            "id": 15,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Describe",
-            "description": "describe and visualizes dataset stats",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/describe/latest/item.yaml",
-            "function_yaml": "functions/master/describe/latest/function.yaml",
-            "categories": "analysis",
-            "example_url": "functions/master/describe/latest/describe_example.html"
-        }, {
-            "id": 16,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Spark Submit",
-            "description": "",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/spark_submit/latest/item.yaml",
-            "function_yaml": "functions/master/spark_submit/latest/function.yaml",
-            "categories": "",
-            "example_url": "functions/master/spark_submit/latest/spark_submit_example.html"
-        }, {
-            "id": 17,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Coxph Test",
-            "description": "Test cox proportional hazards model",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/coxph_test/latest/item.yaml",
-            "function_yaml": "functions/master/coxph_test/latest/function.yaml",
-            "categories": "ml, test",
-            "example_url": "functions/master/coxph_test/latest/coxph_test_example.html"
-        }, {
-            "id": 18,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Describe Spark",
-            "description": "",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/describe_spark/latest/item.yaml",
-            "function_yaml": "functions/master/describe_spark/latest/function.yaml",
-            "categories": "",
-            "file_url": "functions/master/describe_spark/latest/describe-spark.html",
-            "example_url": "functions/master/describe_spark/latest/describe_spark_example.html"
-        }, {
-            "id": 19,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Test Classifier",
-            "description": "test a classifier using held-out or new data",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/test_classifier/latest/item.yaml",
-            "function_yaml": "functions/master/test_classifier/latest/function.yaml",
-            "categories": "ml, test",
-            "example_url": "functions/master/test_classifier/latest/test_classifier_example.html"
-        }, {
-            "id": 20,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Xgb Test",
-            "description": "Test one or more classifier models against held-out dataset.",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/xgb_test/latest/item.yaml",
-            "function_yaml": "functions/master/xgb_test/latest/function.yaml",
-            "categories": "model-test",
-            "example_url": "functions/master/xgb_test/latest/xgb_test_example.html"
-        }, {
-            "id": 21,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Xgb Trainer",
-            "description": "train multiple model types using xgboost.",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/xgb_trainer/latest/item.yaml",
-            "function_yaml": "functions/master/xgb_trainer/latest/function.yaml",
-            "categories": "model-prep",
-            "example_url": "functions/master/xgb_trainer/latest/xgb_trainer_example.html"
-        }, {
-            "id": 22,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Feature Selection",
-            "description": "Select features through multiple Statistical and Model filters",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/feature_selection/latest/item.yaml",
-            "function_yaml": "functions/master/feature_selection/latest/function.yaml",
-            "categories": "data-prep, ml",
-            "file_url": "functions/master/feature_selection/latest/feature_selection.html",
-            "example_url": "functions/master/feature_selection/latest/feature_selection_example.html"
-        }, {
-            "id": 23,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Describe Dask",
-            "description": "describe and visualizes dataset stats",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/describe_dask/latest/item.yaml",
-            "function_yaml": "functions/master/describe_dask/latest/function.yaml",
-            "categories": "analysis",
-            "file_url": "functions/master/describe_dask/latest/describe_dask.html",
-            "example_url": "functions/master/describe_dask/latest/describe_dask_example.html"
-        }, {
-            "id": 24,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Sentiment Analysis Serving",
-            "description": "BERT based sentiment classification model",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/sentiment_analysis_serving/latest/item.yaml",
-            "function_yaml": "functions/master/sentiment_analysis_serving/latest/function.yaml",
-            "categories": "serving, NLP, BERT, sentiment analysis",
-            "file_url": "functions/master/sentiment_analysis_serving/latest/sentiment_analysis_serving.html",
-            "example_url": "functions/master/sentiment_analysis_serving/latest/sentiment_analysis_serving_example.html"
-        }, {
-            "id": 25,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Load Dataset",
-            "description": "load a toy dataset from scikit-learn",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/load_dataset/latest/item.yaml",
-            "function_yaml": "functions/master/load_dataset/latest/function.yaml",
-            "categories": "data-source, ml",
-            "file_url": "functions/master/load_dataset/latest/load_dataset.html",
-            "example_url": "functions/master/load_dataset/latest/load_dataset_example.html"
-        }, {
-            "id": 26,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Model Server",
-            "description": "generic sklearn model server",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/model_server/latest/item.yaml",
-            "function_yaml": "functions/master/model_server/latest/function.yaml",
-            "categories": "serving, ml",
-            "example_url": "functions/master/model_server/latest/model_server_example.html"
-        }, {
-            "id": 27,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "V2 Model Tester",
-            "description": "test v2 model servers",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/v2_model_tester/latest/item.yaml",
-            "function_yaml": "functions/master/v2_model_tester/latest/function.yaml",
-            "categories": "ml, test",
-            "example_url": "functions/master/v2_model_tester/latest/v2_model_tester_example.html"
-        }, {
-            "id": 28,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Tf2 Serving V2",
-            "description": "tf2 image classification server v2",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/tf2_serving_v2/latest/item.yaml",
-            "function_yaml": "functions/master/tf2_serving_v2/latest/function.yaml",
-            "categories": "serving, dl",
-            "example_url": "functions/master/tf2_serving_v2/latest/tf2_serving_v2_example.html"
-        }, {
-            "id": 29,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Tf2 Serving",
-            "description": "tf2 image classification server",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/tf2_serving/latest/item.yaml",
-            "function_yaml": "functions/master/tf2_serving/latest/function.yaml",
-            "categories": "serving, dl",
-            "example_url": "functions/master/tf2_serving/latest/tf2_serving_example.html"
-        }, {
-            "id": 30,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Tf1 Serving",
-            "description": "tf1 image classification server",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/tf1_serving/latest/item.yaml",
-            "function_yaml": "functions/master/tf1_serving/latest/function.yaml",
-            "categories": "serving, dl",
-            "example_url": "functions/master/tf1_serving/latest/tf1_serving_example.html"
-        }, {
-            "id": 31,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Xgb Serving",
-            "description": "deploy an XGBoost model server.",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/xgb_serving/latest/item.yaml",
-            "function_yaml": "functions/master/xgb_serving/latest/function.yaml",
-            "categories": "model-serving",
-            "file_url": "functions/master/xgb_serving/latest/xgb_serving.html",
-            "example_url": "functions/master/xgb_serving/latest/xgb_serving_example.html"
-        }, {
-            "id": 32,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Coxph Trainer",
-            "description": "cox proportional hazards, kaplan meier plots",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/coxph_trainer/latest/item.yaml",
-            "function_yaml": "functions/master/coxph_trainer/latest/function.yaml",
-            "categories": "training, ml",
-            "example_url": "functions/master/coxph_trainer/latest/coxph_trainer_example.html"
-        }, {
-            "id": 33,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Sklearn Classifier Dask",
-            "description": "train any classifier using scikit-learn's API over Dask",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/sklearn_classifier_dask/latest/item.yaml",
-            "function_yaml": "functions/master/sklearn_classifier_dask/latest/function.yaml",
-            "categories": "ml, training, dask",
-            "file_url": "functions/master/sklearn_classifier_dask/latest/sklearn-classifier-dask.html",
-            "example_url": "functions/master/sklearn_classifier_dask/latest/sklearn_classifier_dask_example.html"
-        }, {
-            "id": 34,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Virtual Drift",
-            "description": "Compute drift magnitude between Time-Samples T and U",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/virtual_drift/latest/item.yaml",
-            "function_yaml": "functions/master/virtual_drift/latest/function.yaml",
-            "categories": "ml, serve, concept-drift",
-            "example_url": "functions/master/virtual_drift/latest/virtual_drift_example.html"
-        }, {
-            "id": 35,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Pandas Profiling Report",
-            "description": "Create Pandas Profiling Report from Dataset",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/pandas_profiling_report/latest/item.yaml",
-            "function_yaml": "functions/master/pandas_profiling_report/latest/function.yaml",
-            "categories": "analysis",
-            "example_url": "functions/master/pandas_profiling_report/latest/pandas_profiling_report_example.html"
-        }, {
-            "id": 36,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Slack Notify",
-            "description": "Send Slack notification",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/slack_notify/latest/item.yaml",
-            "function_yaml": "functions/master/slack_notify/latest/function.yaml",
-            "categories": "ops",
-            "example_url": "functions/master/slack_notify/latest/slack_notify_example.html"
-        }, {
-            "id": 37,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Load Dask",
-            "description": "load dask cluster with data",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/load_dask/latest/item.yaml",
-            "function_yaml": "functions/master/load_dask/latest/function.yaml",
-            "categories": "data-movement, utils",
-            "file_url": "functions/master/load_dask/latest/load_dask.html",
-            "example_url": "functions/master/load_dask/latest/load_dask_example.html"
-        }, {
-            "id": 38,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Xgb Custom",
-            "description": "simulate data with outliers.",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/xgb_custom/latest/item.yaml",
-            "function_yaml": "functions/master/xgb_custom/latest/function.yaml",
-            "categories": "model-testing",
-            "file_url": "functions/master/xgb_custom/latest/xgb_custom.html",
-            "example_url": "functions/master/xgb_custom/latest/xgb_custom_example.html"
-        }, {
-            "id": 39,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Stream To Parquet",
-            "description": "Saves a stream to Parquet and can lunch drift detection task on it",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/stream_to_parquet/latest/item.yaml",
-            "function_yaml": "functions/master/stream_to_parquet/latest/function.yaml",
-            "categories": "ml, serve",
-            "example_url": "functions/master/stream_to_parquet/latest/stream_to_parquet_example.html"
-        }, {
-            "id": 40,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Bert Embeddings",
-            "description": "Get BERT based embeddings for given text",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-04",
-            "item_yaml": "functions/master/bert_embeddings/latest/item.yaml",
-            "function_yaml": "functions/master/bert_embeddings/latest/function.yaml",
-            "categories": "NLP, BERT, embeddings",
-            "file_url": "functions/master/bert_embeddings/latest/bert_embeddings.html",
-            "example_url": "functions/master/bert_embeddings/latest/bert_embeddings_example.html"
-        }, {
-            "id": 41,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Model Server Tester",
-            "description": "test model servers",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/model_server_tester/latest/item.yaml",
-            "function_yaml": "functions/master/model_server_tester/latest/function.yaml",
-            "categories": "ml, test",
-            "example_url": "functions/master/model_server_tester/latest/model_server_tester_example.html"
-        }, {
-            "id": 42,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Feature Perms",
-            "description": "estimate feature importances using permutations",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:22-41",
-            "item_yaml": "functions/master/feature_perms/latest/item.yaml",
-            "function_yaml": "functions/master/feature_perms/latest/function.yaml",
-            "categories": "analysis",
-            "example_url": "functions/master/feature_perms/latest/feature_perms_example.html"
-        }, {
-            "id": 43,
-            "source_name": "functions",
-            "channel_name": "master",
-            "name": "Sql To File",
-            "description": "SQL To File - Ingest data using SQL query",
-            "version": "0.0.1",
-            "generation_date": "2021-05-19:23-13",
-            "item_yaml": "functions/master/sql_to_file/latest/item.yaml",
-            "function_yaml": "functions/master/sql_to_file/latest/function.yaml",
-            "categories": "data-prep",
-            "example_url": "functions/master/sql_to_file/latest/sql_to_file_example.html"
-        }];
-
-        var functionYamlFormatter = function (cell, formatterParams, onRendered) {
-            let value = cell.getValue();
-            if (value) {
-                return `<a href=${value}>View</a> <i class="far fa-clipboard fa-lg ml-3 shadow" onclick=onClickClipboard("${value.split("/")[2]}")></i>`;
-            } else {
-                return "";
-            }
-        };
-
-        var onClickClipboard = function (hubUrl) {
-            if (hubUrl) {
-                let text = "from mlrun import import_function\n\nfn = import_function('hub://{" + hubUrl + "}')";
-                navigator.clipboard.writeText(text).then(function () {
-                    toastr.success('Deployment copied to clipboard!');
-                }, function (err) {
-                });
-            }
-        }
-
-        var table = new Tabulator("#table", {
-            data: tabledata,
-            layout: "fitColumns",
-            responsiveLayout: "hide",
-            tooltips: true,
-            cellHozAlign: "center",
-            columns: [
-                { title: "#", field: "id", width: 50 },
-                { title: "Name", field: "name", headerFilter: true },
-                { title: "Description", field: "description", headerFilter: true },
-                { title: "Categories", field: "categories", headerFilter: true },
-                { title: "Channel", field: "channel_name", visible: false },
-                { title: "Version", field: "version" },
-                {
-                    title: "Last Updated", field: "generation_date",
-                    formatter: "datetimediff", formatterParams: {
-                        inputFormat: "YYYY-MM-DD:hh-mm",
-                        humanize: true,
-                        invalidPlaceholder: "(invalid date)",
-                    }
-                },
-                {
-                    title: "Documentation",
-                    field: "file_url",
-                    headerSort: false,
-                    formatter: "link",
-                    formatterParams: {
-                        label: (cell) => { return (cell._cell.value === undefined ? '' : 'View'); },
-                        target: "_blank"
-                    },
-                },
-                {
-                    title: "Example Notebook",
-                    field: "example_url",
-                    headerSort: false,
-                    formatter: "link",
-                    formatterParams: {
-                        label: (cell) => { return (cell._cell.value === undefined ? '' : 'View'); },
-                        target: "_blank"
-                    },
-                },
-                {
-                    title: "Spec",
-                    field: "item_yaml",
-                    headerSort: false,
-                    formatter: "link",
-                    formatterParams: {
-                        label: (cell) => { return (cell._cell.value === undefined ? '' : 'View'); },
-                        target: "_blank"
-                    },
-                },
-                {
-                    title: "Deployment",
-                    field: "function_yaml",
-                    headerSort: false,
-                    formatter: functionYamlFormatter,
-                },
-            ]
-        });
-
-        table.addFilter("channel_name", "=", "master");
-
-    </script>
+<body>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Source</th>
+                <th scope="col">Channel</th>
+                <th scope="col">Version</th>
+                <th scope="col">Generation Date</th>
+                <th scope="col">Docs URL</th>
+                <th scope="col">Example URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <th scope="row">1</th>
+                <td>Pandas Profiling Report</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/pandas_profiling_report/latest/pandas_profiling_report_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">2</th>
+                <td>Xgb Trainer</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/xgb_trainer/latest/xgb_trainer_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">3</th>
+                <td>Tf1 Serving</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/tf1_serving/latest/tf1_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">4</th>
+                <td>Slack Notify</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/slack_notify/latest/slack_notify_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">5</th>
+                <td>Churn Server</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-04</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/churn_server/latest/churn_server_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">6</th>
+                <td>Tf2 Serving</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/tf2_serving/latest/tf2_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">7</th>
+                <td>Virtual Drift</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/virtual_drift/latest/virtual_drift_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">8</th>
+                <td>Xgb Serving</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/xgb_serving/latest/xgb_serving.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/xgb_serving/latest/xgb_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">9</th>
+                <td>Xgb Test</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/xgb_test/latest/xgb_test_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">10</th>
+                <td>Coxph Test</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/coxph_test/latest/coxph_test_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">11</th>
+                <td>Send Email</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/send_email/latest/send_email_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">12</th>
+                <td>Coxph Trainer</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/coxph_trainer/latest/coxph_trainer_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">13</th>
+                <td>Gen Class Data</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td><a href=functions/development/gen_class_data/latest/gen_class_data.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/gen_class_data/latest/gen_class_data_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">14</th>
+                <td>Feature Selection</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td><a href=functions/development/feature_selection/latest/feature_selection.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/feature_selection/latest/feature_selection_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">15</th>
+                <td>Sentiment Analysis Serving</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/sentiment_analysis_serving/latest/sentiment_analysis_serving.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/sentiment_analysis_serving/latest/sentiment_analysis_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">16</th>
+                <td>Model Server</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/model_server/latest/model_server_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">17</th>
+                <td>Concept Drift</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-04</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/concept_drift/latest/concept_drift_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">18</th>
+                <td>Rnn Serving</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/rnn_serving/latest/rnn_serving.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/rnn_serving/latest/rnn_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">19</th>
+                <td>Bert Embeddings</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-04</td>
+                
+                    <td><a href=functions/development/bert_embeddings/latest/bert_embeddings.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/bert_embeddings/latest/bert_embeddings_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">20</th>
+                <td>V2 Model Server</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/v2_model_server/latest/v2_model_server_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">21</th>
+                <td>Sklearn Classifier Dask</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/sklearn_classifier_dask/latest/sklearn-classifier-dask.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/sklearn_classifier_dask/latest/sklearn_classifier_dask_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">22</th>
+                <td>Test Classifier</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/test_classifier/latest/test_classifier_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">23</th>
+                <td>Sql To File</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/sql_to_file/latest/sql_to_file_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">24</th>
+                <td>Describe</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/describe/latest/describe_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">25</th>
+                <td>Aggregate</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-31</td>
+                
+                    <td><a href=functions/development/aggregate/latest/aggregate.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/aggregate/latest/aggregate_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">26</th>
+                <td>V2 Model Tester</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/v2_model_tester/latest/v2_model_tester_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">27</th>
+                <td>Model Monitoring Stream</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/model_monitoring_stream/latest/model_monitoring_stream.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/model_monitoring_stream/latest/model_monitoring_stream_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">28</th>
+                <td>Model Monitoring Batch</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/model_monitoring_batch/latest/model_monitoring_batch.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/model_monitoring_batch/latest/model_monitoring_batch_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">29</th>
+                <td>Stream To Parquet</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/stream_to_parquet/latest/stream_to_parquet_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">30</th>
+                <td>Tf2 Serving V2</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/tf2_serving_v2/latest/tf2_serving_v2_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">31</th>
+                <td>Describe Spark</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td><a href=functions/development/describe_spark/latest/describe-spark.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/describe_spark/latest/describe_spark_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">32</th>
+                <td>Load Dataset</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/load_dataset/latest/load_dataset.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/load_dataset/latest/load_dataset_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">33</th>
+                <td>Feature Perms</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/feature_perms/latest/feature_perms_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">34</th>
+                <td>Concept Drift Streaming</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/concept_drift_streaming/latest/concept_drift_streaming_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">35</th>
+                <td>Github Utils</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/github_utils/latest/github_utils_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">36</th>
+                <td>Model Server Tester</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/model_server_tester/latest/model_server_tester_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">37</th>
+                <td>Describe Dask</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td><a href=functions/development/describe_dask/latest/describe_dask.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/describe_dask/latest/describe_dask_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">38</th>
+                <td>Load Dask</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/load_dask/latest/load_dask.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/load_dask/latest/load_dask_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">39</th>
+                <td>Sklearn Classifier</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/development/sklearn_classifier/latest/sklearn_classifier_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">40</th>
+                <td>Xgb Custom</td>
+                <td>functions</td>
+                <td>development</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/development/xgb_custom/latest/xgb_custom.html>Link</a></td>
+                
+                
+                    <td><a href=functions/development/xgb_custom/latest/xgb_custom_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">41</th>
+                <td>Pandas Profiling Report</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/pandas_profiling_report/latest/pandas_profiling_report_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">42</th>
+                <td>Xgb Trainer</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/xgb_trainer/latest/xgb_trainer_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">43</th>
+                <td>Tf1 Serving</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/tf1_serving/latest/tf1_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">44</th>
+                <td>Slack Notify</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/slack_notify/latest/slack_notify_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">45</th>
+                <td>Churn Server</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-04</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/churn_server/latest/churn_server_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">46</th>
+                <td>Tf2 Serving</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/tf2_serving/latest/tf2_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">47</th>
+                <td>Arc To Parquet</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-04</td>
+                
+                    <td><a href=functions/master/arc_to_parquet/latest/arc_to_parquet.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/arc_to_parquet/latest/arc_to_parquet_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">48</th>
+                <td>Virtual Drift</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/virtual_drift/latest/virtual_drift_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">49</th>
+                <td>Xgb Serving</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/xgb_serving/latest/xgb_serving.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/xgb_serving/latest/xgb_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">50</th>
+                <td>Xgb Test</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/xgb_test/latest/xgb_test_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">51</th>
+                <td>Coxph Test</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/coxph_test/latest/coxph_test_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">52</th>
+                <td>Send Email</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/send_email/latest/send_email_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">53</th>
+                <td>Coxph Trainer</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/coxph_trainer/latest/coxph_trainer_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">54</th>
+                <td>Gen Class Data</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td><a href=functions/master/gen_class_data/latest/gen_class_data.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/gen_class_data/latest/gen_class_data_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">55</th>
+                <td>Feature Selection</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td><a href=functions/master/feature_selection/latest/feature_selection.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/feature_selection/latest/feature_selection_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">56</th>
+                <td>Sentiment Analysis Serving</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/sentiment_analysis_serving/latest/sentiment_analysis_serving.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/sentiment_analysis_serving/latest/sentiment_analysis_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">57</th>
+                <td>Model Server</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/model_server/latest/model_server_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">58</th>
+                <td>Concept Drift</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-04</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/concept_drift/latest/concept_drift_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">59</th>
+                <td>Open Archive</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/open_archive/latest/open_archive_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">60</th>
+                <td>Rnn Serving</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/rnn_serving/latest/rnn_serving.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/rnn_serving/latest/rnn_serving_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">61</th>
+                <td>Bert Embeddings</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-04</td>
+                
+                    <td><a href=functions/master/bert_embeddings/latest/bert_embeddings.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/bert_embeddings/latest/bert_embeddings_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">62</th>
+                <td>V2 Model Server</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/v2_model_server/latest/v2_model_server_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">63</th>
+                <td>Sklearn Classifier Dask</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/sklearn_classifier_dask/latest/sklearn-classifier-dask.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/sklearn_classifier_dask/latest/sklearn_classifier_dask_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">64</th>
+                <td>Test Classifier</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/test_classifier/latest/test_classifier_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">65</th>
+                <td>Spark Submit</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/spark_submit/latest/spark_submit_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">66</th>
+                <td>Sql To File</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/sql_to_file/latest/sql_to_file_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">67</th>
+                <td>Describe</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/describe/latest/describe_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">68</th>
+                <td>Aggregate</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-31</td>
+                
+                    <td><a href=functions/master/aggregate/latest/aggregate.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/aggregate/latest/aggregate_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">69</th>
+                <td>V2 Model Tester</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/v2_model_tester/latest/v2_model_tester_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">70</th>
+                <td>Model Monitoring Stream</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/model_monitoring_stream/latest/model_monitoring_stream.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/model_monitoring_stream/latest/model_monitoring_stream_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">71</th>
+                <td>Model Monitoring Batch</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/model_monitoring_batch/latest/model_monitoring_batch.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/model_monitoring_batch/latest/model_monitoring_batch_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">72</th>
+                <td>Stream To Parquet</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/stream_to_parquet/latest/stream_to_parquet_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">73</th>
+                <td>Tf2 Serving V2</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/tf2_serving_v2/latest/tf2_serving_v2_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">74</th>
+                <td>Describe Spark</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td><a href=functions/master/describe_spark/latest/describe-spark.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/describe_spark/latest/describe_spark_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">75</th>
+                <td>Load Dataset</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/load_dataset/latest/load_dataset.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/load_dataset/latest/load_dataset_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">76</th>
+                <td>Feature Perms</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/feature_perms/latest/feature_perms_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">77</th>
+                <td>Concept Drift Streaming</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/concept_drift_streaming/latest/concept_drift_streaming_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">78</th>
+                <td>Github Utils</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/github_utils/latest/github_utils_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">79</th>
+                <td>Model Server Tester</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/model_server_tester/latest/model_server_tester_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">80</th>
+                <td>Describe Dask</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:22-41</td>
+                
+                    <td><a href=functions/master/describe_dask/latest/describe_dask.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/describe_dask/latest/describe_dask_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">81</th>
+                <td>Load Dask</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/load_dask/latest/load_dask.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/load_dask/latest/load_dask_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">82</th>
+                <td>Sklearn Classifier</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td>--</td>
+                
+                
+                    <td><a href=functions/master/sklearn_classifier/latest/sklearn_classifier_example.html>Link</a></td>
+                
+            </tr>
+            
+            <tr>
+                <th scope="row">83</th>
+                <td>Xgb Custom</td>
+                <td>functions</td>
+                <td>master</td>
+                <td>0.0.1</td>
+                <td>2021-05-19:23-13</td>
+                
+                    <td><a href=functions/master/xgb_custom/latest/xgb_custom.html>Link</a></td>
+                
+                
+                    <td><a href=functions/master/xgb_custom/latest/xgb_custom_example.html>Link</a></td>
+                
+            </tr>
+            
+        </tbody>
+    </table>
 </body>
 
 </html>

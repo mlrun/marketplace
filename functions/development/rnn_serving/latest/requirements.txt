@@ -1,0 +1,5 @@
+mlrun
+keras
+tensorflow
+wget
+pygit2
