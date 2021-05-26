@@ -1,0 +1,431 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sending an email</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/send_email_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fsend_email_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/send_email_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#">
+   Sending an email
+  </a>
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#mlrun-conf">
+     MLRun conf
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#save-function">
+     Save function
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-function">
+   Test the function
+  </a>
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#create-some-artifacts">
+     Create some artifacts
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#sending-the-email">
+     Sending the email
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#configure-task-parameters-to-be-used-when-executing-the-function">
+     Configure task parameters to be used when executing the function
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-locally">
+     Run locally
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-remotely">
+     Run remotely
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="sending-an-email">
+<h1>Sending an email<a class="headerlink" href="#sending-an-email" title="Permalink to this headline">¶</a></h1>
+<p>This notebook shows how to create an email and send it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nuclio</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: start-code</span>
+<span class="o">%</span><span class="k">nuclio</span> config kind = "job"
+<span class="o">%</span><span class="k">nuclio</span> config spec.image = "mlrun/ml-models"
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="c1"># Import the email modules we'll need</span>
+<span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.message</span> <span class="kn">import</span> <span class="n">EmailMessage</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1"># For guessing MIME type based on file name extension</span>
+<span class="kn">import</span> <span class="nn">mimetypes</span>
+
+<span class="k">def</span> <span class="nf">send_email</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">sender</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">to</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">subject</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">content</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">server_addr</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">attachments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""Send an email.</span>
+<span class="sd">    :param sender: Sender email address</span>
+<span class="sd">    :param context: The function context</span>
+<span class="sd">    :param to: Email address of mail recipient</span>
+<span class="sd">    :param subject: Email subject</span>
+<span class="sd">    :param content: Optional mail text</span>
+<span class="sd">    :param server_addr: Address of SMTP server to use. Use format &lt;addr&gt;:&lt;port&gt;</span>
+<span class="sd">    :param attachments: List of attachments to add.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Validate inputs</span>
+    <span class="n">email_user</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="s2">"SMTP_USER"</span><span class="p">)</span>
+    <span class="n">email_pass</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="s2">"SMTP_PASSWORD"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">email_user</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">email_pass</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Missing sender email or password - cannot send email."</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="n">server_addr</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Server not specified - cannot send email."</span><span class="p">)</span>
+        <span class="k">return</span>
+        
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">EmailMessage</span><span class="p">()</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">'From'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sender</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">'Subject'</span><span class="p">]</span> <span class="o">=</span> <span class="n">subject</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">'To'</span><span class="p">]</span> <span class="o">=</span> <span class="n">to</span>
+    <span class="n">msg</span><span class="o">.</span><span class="n">set_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>   
+
+    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">attachments</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Looking at attachment: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Filename does not exist </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="c1"># Guess the content type based on the file's extension.  Encoding</span>
+        <span class="c1"># will be ignored, although we should check for simple things like</span>
+        <span class="c1"># gzip'd or compressed files.</span>
+        <span class="n">ctype</span><span class="p">,</span> <span class="n">encoding</span> <span class="o">=</span> <span class="n">mimetypes</span><span class="o">.</span><span class="n">guess_type</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ctype</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">encoding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># No guess could be made, or the file is encoded (compressed), so</span>
+            <span class="c1"># use a generic bag-of-bits type.</span>
+            <span class="n">ctype</span> <span class="o">=</span> <span class="s1">'application/octet-stream'</span>
+        <span class="n">maintype</span><span class="p">,</span> <span class="n">subtype</span> <span class="o">=</span> <span class="n">ctype</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">msg</span><span class="o">.</span><span class="n">add_attachment</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
+                               <span class="n">maintype</span><span class="o">=</span><span class="n">maintype</span><span class="p">,</span>
+                               <span class="n">subtype</span><span class="o">=</span><span class="n">subtype</span><span class="p">,</span>
+                               <span class="n">filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Added attachment: Filename: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s1">, of mimetype: </span><span class="si">{</span><span class="n">maintype</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">subtype</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">server_addr</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">starttls</span><span class="p">()</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">email_user</span><span class="p">,</span><span class="n">email_pass</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">send_message</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Email sent successfully.'</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTPException</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">'SMTP exception caught in SMTP code: </span><span class="si">{</span><span class="n">exp</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ConnectionError</span> <span class="k">as</span> <span class="n">ce</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Connection error caught in SMTP code: </span><span class="si">{</span><span class="n">ce</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mlrun-conf">
+<h2>MLRun conf<a class="headerlink" href="#mlrun-conf" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">mlconf</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="c1">#artifact_path = mlconf.artifact_path or os.path.abspath('jobs')</span>
+<span class="n">artifact_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'jobs'</span><span class="p">)</span>
+<span class="n">mlconf</span><span class="o">.</span><span class="n">dbpath</span> <span class="o">=</span> <span class="s1">'http://mlrun-api:8080'</span>
+<span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span> <span class="o">=</span> <span class="n">artifact_path</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Artifacts path: </span><span class="si">{</span><span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span><span class="si">}</span><span class="se">\n</span><span class="s1">MLRun DB path: </span><span class="si">{</span><span class="n">mlconf</span><span class="o">.</span><span class="n">dbpath</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save-function">
+<h2>Save function<a class="headerlink" href="#save-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">code_to_function</span>
+
+<span class="c1"># create job function object from notebook code</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">code_to_function</span><span class="p">(</span><span class="s2">"send_email"</span><span class="p">)</span>
+<span class="c1"># add metadata (for templates and reuse)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">default_handler</span> <span class="o">=</span> <span class="s2">"send_email"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">"Send Email messages through SMTP server"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"notifications"</span><span class="p">]</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"author"</span><span class="p">:</span> <span class="s2">"saarc"</span><span class="p">}</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">"function.yaml"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="test-the-function">
+<h1>Test the function<a class="headerlink" href="#test-the-function" title="Permalink to this headline">¶</a></h1>
+<p>First, configure MLRun. Define project parameters that will be used for testing the function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">getenv</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">new_project</span>
+
+<span class="n">project_name</span> <span class="o">=</span> <span class="s1">'-'</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="p">[</span><span class="s1">'email-sending'</span><span class="p">,</span> <span class="n">getenv</span><span class="p">(</span><span class="s1">'V3IO_USERNAME'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)]))</span>
+<span class="n">project_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'conf'</span><span class="p">)</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">new_project</span><span class="p">(</span><span class="n">project_name</span><span class="p">,</span> <span class="n">project_path</span><span class="p">,</span> <span class="n">init_git</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Project path: </span><span class="si">{</span><span class="n">project_path</span><span class="si">}</span><span class="se">\n</span><span class="s1">Project name: </span><span class="si">{</span><span class="n">project_name</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">run_local</span><span class="p">,</span> <span class="n">NewTask</span><span class="p">,</span> <span class="n">import_function</span><span class="p">,</span> <span class="n">mount_v3io</span>
+
+<span class="c1"># Target location for storing pipeline artifacts</span>
+<span class="n">artifact_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'jobs'</span><span class="p">)</span>
+<span class="c1"># MLRun DB path or API service URL</span>
+<span class="n">mlconf</span><span class="o">.</span><span class="n">dbpath</span> <span class="o">=</span> <span class="n">mlconf</span><span class="o">.</span><span class="n">dbpath</span> <span class="ow">or</span> <span class="s1">'http://mlrun-api:8080'</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Artifacts path: </span><span class="si">{</span><span class="n">artifact_path</span><span class="si">}</span><span class="se">\n</span><span class="s1">MLRun DB path: </span><span class="si">{</span><span class="n">mlconf</span><span class="o">.</span><span class="n">dbpath</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="create-some-artifacts">
+<h2>Create some artifacts<a class="headerlink" href="#create-some-artifacts" title="Permalink to this headline">¶</a></h2>
+<p>First we’ll load the Iris dataset and use the describe function to generate some artifacts describing it.</p>
+<blockquote>
+<div><p>This is only used to generate some nice artifacts so we can send them later via email. If all you want is to test the email sending functionality you can safely ignore this part (and modify the code that actually sends the email to not use attachments).</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Ingest a data set into the platform</span>
+<span class="k">def</span> <span class="nf">get_data</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> 
+             <span class="n">source_url</span><span class="p">,</span> 
+             <span class="nb">format</span><span class="o">=</span><span class="s1">'csv'</span><span class="p">):</span>
+
+    <span class="n">iris_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">source_url</span><span class="p">))</span>
+
+    <span class="n">target_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_path</span><span class="p">,</span> <span class="s1">'data'</span><span class="p">)</span>
+    <span class="c1"># Optionally print data to your logger</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Saving Iris data set to </span><span class="si">{}</span><span class="s1"> ...'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">target_path</span><span class="p">))</span>
+
+    <span class="c1"># Store the data set in your artifacts database</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="s1">'iris_dataset'</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">iris_dataset</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="nb">format</span><span class="p">,</span>
+                        <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">artifact_path</span><span class="o">=</span><span class="n">target_path</span><span class="p">)</span>
+    
+<span class="n">source_url</span> <span class="o">=</span> <span class="s1">'http://iguazio-sample-data.s3.amazonaws.com/iris_dataset.csv'</span>
+
+<span class="n">get_data_run</span> <span class="o">=</span> <span class="n">run_local</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'get_data'</span><span class="p">,</span>
+                         <span class="n">handler</span><span class="o">=</span><span class="n">get_data</span><span class="p">,</span>
+                         <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">'source_url'</span><span class="p">:</span><span class="n">source_url</span><span class="p">},</span>
+                         <span class="n">project</span><span class="o">=</span><span class="n">project_name</span><span class="p">,</span> <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">)</span>
+
+<span class="n">project</span><span class="o">.</span><span class="n">set_function</span><span class="p">(</span><span class="s1">'hub://describe'</span><span class="p">,</span> <span class="s1">'describe'</span><span class="p">)</span>
+<span class="n">describe</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="s1">'describe'</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_v3io</span><span class="p">())</span>
+
+<span class="n">describe_run</span> <span class="o">=</span> <span class="n">describe</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'label_column'</span><span class="p">:</span> <span class="s1">'label'</span><span class="p">},</span>
+                            <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"table"</span><span class="p">:</span>
+                                    <span class="n">get_data_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'iris_dataset'</span><span class="p">]},</span>
+                            <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sending-the-email">
+<h2>Sending the email<a class="headerlink" href="#sending-the-email" title="Permalink to this headline">¶</a></h2>
+<p>Sending emails need to have server_addr set to confirure the SMTP address. It also needs to have secrets created with the SMTP_USER and SMTP_PASSWORD secrets set, so it can login to the server.</p>
+<p>We’ll send an email with the artifacts generated by the describe function. Note that some of these artifacts are HTML and the last one is a CSV. The send_email function will attempt to auto-detect the attachments’ MIME types and add them to the email with their appropriate types.</p>
+</div>
+<div class="section" id="configure-task-parameters-to-be-used-when-executing-the-function">
+<h2>Configure task parameters to be used when executing the function<a class="headerlink" href="#configure-task-parameters-to-be-used-when-executing-the-function" title="Permalink to this headline">¶</a></h2>
+<p><em><strong>Make sure to replace placeholders with actual SMTP configuration (address/email/password)</strong></em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'sender'</span> <span class="p">:</span> <span class="s1">'&lt;sender email&gt;'</span><span class="p">,</span>
+    <span class="s1">'to'</span><span class="p">:</span> <span class="s1">'&lt;recipient email&gt;'</span><span class="p">,</span>
+    <span class="s1">'subject'</span><span class="p">:</span> <span class="s1">'Dataset description, sent by the send_email function'</span><span class="p">,</span>
+    <span class="s1">'content'</span><span class="p">:</span> <span class="s1">'Some basic analysis of the iris dataset.'</span><span class="p">,</span>
+    <span class="s1">'attachments'</span><span class="p">:</span> <span class="p">[</span><span class="n">describe_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'histograms'</span><span class="p">],</span>
+                    <span class="n">describe_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'correlation'</span><span class="p">],</span>
+                    <span class="n">describe_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'correlation-matrix'</span><span class="p">]],</span>
+    <span class="s1">'server_addr'</span><span class="p">:</span> <span class="s1">'&lt;server address&gt;:&lt;port&gt;'</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">NewTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'email_task'</span><span class="p">,</span> <span class="n">project</span><span class="o">=</span><span class="n">project_name</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="n">send_email</span><span class="p">,</span> <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span>
+              <span class="n">params</span><span class="o">=</span><span class="n">task_params</span><span class="p">)</span>
+
+<span class="n">task_secrets</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'SMTP_USER'</span><span class="p">:</span><span class="s1">'&lt;username&gt;'</span><span class="p">,</span>
+                <span class="s1">'SMTP_PASSWORD'</span><span class="p">:</span> <span class="s1">'&lt;password&gt;'</span><span class="p">}</span>
+
+<span class="n">task</span><span class="o">.</span><span class="n">with_secrets</span><span class="p">(</span><span class="s1">'inline'</span><span class="p">,</span><span class="n">task_secrets</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-locally">
+<h2>Run locally<a class="headerlink" href="#run-locally" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">send_email_run</span> <span class="o">=</span> <span class="n">run_local</span><span class="p">(</span><span class="n">task</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">'send_email'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-remotely">
+<h2>Run remotely<a class="headerlink" href="#run-remotely" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Convert the local get_data function into an email_func project function</span>
+<span class="n">email_func</span> <span class="o">=</span> <span class="n">code_to_function</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'send_email'</span><span class="p">)</span>
+<span class="n">email_func</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_v3io</span><span class="p">())</span>
+
+<span class="n">email_func</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">task_params</span><span class="p">,</span>  <span class="n">workdir</span><span class="o">=</span><span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span><span class="p">)</span>
+<span class="n">email_func</span><span class="o">.</span><span class="n">doc</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
