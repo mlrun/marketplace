@@ -1,0 +1,226 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BERT Based Sentiment Analysis Model Server</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/sentiment_analysis_serving_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fsentiment_analysis_serving_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/sentiment_analysis_serving_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-1">
+   example 1
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-2">
+   example 2
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#remote-activation">
+   remote activation
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="bert-based-sentiment-analysis-model-server">
+<h1>BERT Based Sentiment Analysis Model Server<a class="headerlink" href="#bert-based-sentiment-analysis-model-server" title="Permalink to this headline">¶</a></h1>
+<p>The model used here, was trained with the concept of transfer learning  i.e. taking huggingface transformers pretrained BERT model and further training it on a custom dataset of reviews. this yields a sentiment analysis model based on the prior knowledge of BERT.
+The model server is given a list of texts and outputs a list of labels corresponding to its prediction.
+The labels express the sentiment of the writer towards the topic of the text:
+0 for negative sentiment, 1 for neutral and 2 for positive.</p>
+<p>The model file (~430 MB), can be downloaded to your local environment from: https://iguazio-sample-data.s3.amazonaws.com/models/model.pt</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">wget</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">import_function</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"models"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run this to download the pre-trained model to your `models` directory</span>
+<span class="k">def</span> <span class="nf">download_pretrained_model</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
+    <span class="n">model_location</span> <span class="o">=</span> <span class="s1">'https://iguazio-sample-data.s3.amazonaws.com/models/model.pt'</span>
+    <span class="c1"># Create paths</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">model_filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">model_location</span><span class="p">))</span>
+    <span class="o">!</span>wget -nc -P <span class="o">{</span>saved_models_directory<span class="o">}</span> <span class="o">{</span>model_location<span class="o">}</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>File ‘/User/myfunctions/functions/sentiment_analysis_serving/models/model.pt’ already there; not retrieving.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">MODEL_PATH</span> <span class="o">/</span> <span class="s1">'model.pt'</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">model</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+    <span class="n">download_pretrained_model</span><span class="p">(</span><span class="n">MODEL_PATH</span><span class="p">)</span>
+
+<span class="n">fn</span> <span class="o">=</span> <span class="n">import_function</span><span class="p">(</span><span class="s1">'hub://sentiment_analysis_serving'</span><span class="p">)</span>
+
+<span class="n">fn</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s1">'mymodel'</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">resolve</span><span class="p">()),</span> <span class="n">class_name</span><span class="o">=</span><span class="s1">'SentimentClassifierServing'</span><span class="p">)</span>
+<span class="c1"># create an emulator (mock server) from the function configuration)</span>
+<span class="n">server</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">to_mock_server</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-03-15 14:38:21,799 [info] model model1 was loaded
+&gt; 2021-03-15 14:38:21,800 [info] Loaded ['model1']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-1">
+<h2>example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>Here we test a pretty straightforward example for positive sentiment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">instances</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'I had a pleasure to work with such dedicated team. Looking forward to </span><span class="se">\</span>
+<span class="s1">                 cooperate with each and every one of them again.'</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">"/v2/models/mymodel/infer"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"instances"</span><span class="p">:</span> <span class="n">instances</span><span class="p">})</span>
+<span class="n">result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-2">
+<h2>example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<p>Now we will test a couple more examples. These are arguably harder due to misleading words that express, on their own, an opposite sentiment comparing to the full text.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">instances</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'This app is amazingly.'</span><span class="p">,</span> 
+                     <span class="s1">'As much as I hate to admit it, the new added feature is surprisingly user friendly.'</span><span class="p">]</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">test</span><span class="p">(</span><span class="s2">"/v2/models/mymodel/infer"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"instances"</span><span class="p">:</span> <span class="n">instances</span><span class="p">})</span>
+<span class="n">result2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 2]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="remote-activation">
+<h2>remote activation<a class="headerlink" href="#remote-activation" title="Permalink to this headline">¶</a></h2>
+<p>Create a function object with custom specification.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">addr</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">'bert-example'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
