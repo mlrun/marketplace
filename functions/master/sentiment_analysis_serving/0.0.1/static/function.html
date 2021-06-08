@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/yaml.min.js"></script>
+    <title>Source</title>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body style="background-color:darkgray; margin: 0 0 0 0;">
+    <pre style="margin: 0 1em;">
+        <code class="yaml">
+kind: serving
+metadata:
+  name: sentiment-analysis-serving
+  tag: ''
+  hash: 57f986a36042c46f266afcce1fc58d4a065bfd69
+  project: default
+  labels:
+    author: avia
+    framework: pytorch
+  categories:
+  - serving
+  - NLP
+  - BERT
+  - sentiment analysis
+spec:
+  command: ''
+  args: []
+  image: mlrun/ml-models
+  entry_points:
+    forward:
+      name: forward
+      doc: ''
+      parameters:
+      - name: self
+        default: ''
+      - name: input_ids
+        default: ''
+      - name: attention_mask
+        default: ''
+      outputs:
+      - default: ''
+      lineno: 19
+    load:
+      name: load
+      doc: load bert model into class
+      parameters:
+      - name: self
+        default: ''
+      outputs:
+      - default: ''
+      lineno: 30
+    predict:
+      name: predict
+      doc: predict function
+      parameters:
+      - name: self
+        default: ''
+      - name: body
+        doc: set of inputs for bert model to predict from
+        default: ''
+      outputs:
+      - default: ''
+      lineno: 41
+    init_context:
+      name: init_context
+      doc: ''
+      parameters:
+      - name: context
+        default: ''
+      outputs:
+      - default: ''
+      lineno: 64
+    handler:
+      name: handler
+      doc: ''
+      parameters:
+      - name: context
+        default: ''
+      - name: event
+        default: ''
+      outputs:
+      - default: ''
+      lineno: 67
+  description: BERT based sentiment classification model
+  min_replicas: 1
+  max_replicas: 4
+  env: []
+  base_spec:
+    apiVersion: nuclio.io/v1
+    kind: Function
+    metadata:
+      name: sentiment-analysis-serving
+      labels: {}
+      annotations:
+        nuclio.io/generated_by: function generated from /Users/aviasulin/PycharmProjects/mlrun/functions/sentiment_analysis_serving/sentiment_analysis_serving.py
+    spec:
+      runtime: python:3.6
+      handler: sentiment_analysis_serving:handler
+      env: []
+      volumes: []
+      build:
+        commands: []
+        noBaseImagesPull: true
+        functionSourceCode: aW1wb3J0IHRvcmNoCmltcG9ydCB0b3JjaC5ubiBhcyBubgpmcm9tIHRyYW5zZm9ybWVycyBpbXBvcnQgQmVydE1vZGVsLCBCZXJ0VG9rZW5pemVyCmltcG9ydCBtbHJ1bgpmcm9tIG1scnVuLnJ1bnRpbWVzIGltcG9ydCBudWNsaW9faW5pdF9ob29rCgpQUkVUUkFJTkVEX01PREVMID0gJ2JlcnQtYmFzZS1jYXNlZCcKdG9rZW5pemVyID0gQmVydFRva2VuaXplci5mcm9tX3ByZXRyYWluZWQoJ2JlcnQtYmFzZS1jYXNlZCcpCgoKY2xhc3MgQmVydFNlbnRpbWVudENsYXNzaWZpZXIobm4uTW9kdWxlKToKICAgIGRlZiBfX2luaXRfXyhzZWxmLCBuX2NsYXNzZXMpOgogICAgICAgIHN1cGVyKEJlcnRTZW50aW1lbnRDbGFzc2lmaWVyLCBzZWxmKS5fX2luaXRfXygpCiAgICAgICAgc2VsZi5iZXJ0ID0gQmVydE1vZGVsLmZyb21fcHJldHJhaW5lZChQUkVUUkFJTkVEX01PREVMKQogICAgICAgIHNlbGYuZHJvcG91dCA9IG5uLkRyb3BvdXQocD0wLjIpCiAgICAgICAgc2VsZi5vdXRfbGluZWFyID0gbm4uTGluZWFyKHNlbGYuYmVydC5jb25maWcuaGlkZGVuX3NpemUsIG5fY2xhc3NlcykKICAgICAgICBzZWxmLnNvZnRtYXggPSBubi5Tb2Z0bWF4KGRpbT0xKQoKICAgIGRlZiBmb3J3YXJkKHNlbGYsIGlucHV0X2lkcywgYXR0ZW50aW9uX21hc2spOgogICAgICAgIF8sIHBvb2xlZF9vdXQgPSBzZWxmLmJlcnQoCiAgICAgICAgICAgIGlucHV0X2lkcz1pbnB1dF9pZHMsCiAgICAgICAgICAgIGF0dGVudGlvbl9tYXNrPWF0dGVudGlvbl9tYXNrCiAgICAgICAgKQogICAgICAgIG91dCA9IHNlbGYuZHJvcG91dChwb29sZWRfb3V0KQogICAgICAgIG91dCA9IHNlbGYub3V0X2xpbmVhcihvdXQpCiAgICAgICAgcmV0dXJuIHNlbGYuc29mdG1heChvdXQpCgoKY2xhc3MgU2VudGltZW50Q2xhc3NpZmllclNlcnZpbmcobWxydW4uc2VydmluZy5WMk1vZGVsU2VydmVyKToKICAgIGRlZiBsb2FkKHNlbGYpOgogICAgICAgICIiIgogICAgICAgIGxvYWQgYmVydCBtb2RlbCBpbnRvIGNsYXNzCiAgICAgICAgIiIiCiAgICAgICAgbW9kZWxfZmlsZSwgXyA9IHNlbGYuZ2V0X21vZGVsKCcucHQnKQogICAgICAgIGRldmljZSA9IHRvcmNoLmRldmljZSgnY3VkYTowJykgaWYgdG9yY2guY3VkYS5pc19hdmFpbGFibGUoKSBlbHNlIHRvcmNoLmRldmljZSgnY3B1JykKICAgICAgICBtb2RlbCA9IEJlcnRTZW50aW1lbnRDbGFzc2lmaWVyKG5fY2xhc3Nlcz0zKQogICAgICAgIG1vZGVsLmxvYWRfc3RhdGVfZGljdCh0b3JjaC5sb2FkKG1vZGVsX2ZpbGUsIG1hcF9sb2NhdGlvbj1kZXZpY2UpKQogICAgICAgIG1vZGVsLmV2YWwoKQogICAgICAgIHNlbGYubW9kZWwgPSBtb2RlbAoKICAgIGRlZiBwcmVkaWN0KHNlbGYsIGJvZHkpOgogICAgICAgICIiIgogICAgICAgIHByZWRpY3QgZnVuY3Rpb24KICAgICAgICA6cGFyYW0gYm9keTogc2V0IG9mIGlucHV0cyBmb3IgYmVydCBtb2RlbCB0byBwcmVkaWN0IGZyb20KICAgICAgICAiIiIKICAgICAgICB0cnk6CiAgICAgICAgICAgIGluc3RhbmNlcyA9IGJvZHlbJ2lucHV0cyddCiAgICAgICAgICAgIGVuYyA9IHRva2VuaXplci5iYXRjaF9lbmNvZGVfcGx1cyhpbnN0YW5jZXMsIHJldHVybl90ZW5zb3JzPSdwdCcsIHBhZF90b19tYXhfbGVuZ3RoPVRydWUpCiAgICAgICAgICAgIG91dHB1dHMgPSBzZWxmLm1vZGVsKGlucHV0X2lkcz1lbmNbJ2lucHV0X2lkcyddLCBhdHRlbnRpb25fbWFzaz1lbmNbJ2F0dGVudGlvbl9tYXNrJ10pCiAgICAgICAgICAgIF8sIHByZWRpY3RzID0gdG9yY2gubWF4KG91dHB1dHMsIGRpbT0xKQogICAgICAgICAgICByZXR1cm4gcHJlZGljdHMuY3B1KCkudG9saXN0KCkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHJhaXNlIEV4Y2VwdGlvbigiRmFpbGVkIHRvIHByZWRpY3QgJXMiICUgZSkKCgpkZWYgaW5pdF9jb250ZXh0KGNvbnRleHQpOgogICAgbnVjbGlvX2luaXRfaG9vayhjb250ZXh0LCBnbG9iYWxzKCksICdzZXJ2aW5nX3YyJykKCgpkZWYgaGFuZGxlcihjb250ZXh0LCBldmVudCk6CiAgICByZXR1cm4gY29udGV4dC5tbHJ1bl9oYW5kbGVyKGNvbnRleHQsIGV2ZW50KQoKZnJvbSBtbHJ1bi5ydW50aW1lcyBpbXBvcnQgbnVjbGlvX2luaXRfaG9vawpkZWYgaW5pdF9jb250ZXh0KGNvbnRleHQpOgogICAgbnVjbGlvX2luaXRfaG9vayhjb250ZXh0LCBnbG9iYWxzKCksICdzZXJ2aW5nX3YyJykKCmRlZiBoYW5kbGVyKGNvbnRleHQsIGV2ZW50KToKICAgIHJldHVybiBjb250ZXh0Lm1scnVuX2hhbmRsZXIoY29udGV4dCwgZXZlbnQpCg==
+  source: ''
+  function_kind: serving_v2
+  build:
+    commands:
+    - python -m pip install transformers==3.0.2
+    code_origin: http://github.com/aviaIguazio/functions.git#14dcd7dc800138844ca62ef9ac8ce1a3cbdf7dd1:/Users/aviasulin/PycharmProjects/mlrun/functions/sentiment_analysis_serving/sentiment_analysis_serving.py
+  secret_sources: []
+  affinity: null
+verbose: false
+
+        </code>
+    </pre>
+</body>
+</html>

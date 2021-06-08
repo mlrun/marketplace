@@ -1,0 +1,851 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Virtual Drift</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/virtual_drift_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fvirtual_drift_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/virtual_drift_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#">
+   Virtual Drift
+  </a>
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#environment-setup">
+     Environment setup
+    </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#function">
+     Function
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test">
+   Test
+  </a>
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#wine-dataset">
+     Wine dataset
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="virtual-drift">
+<h1>Virtual Drift<a class="headerlink" href="#virtual-drift" title="Permalink to this headline">¶</a></h1>
+<p>Drift magnitude metrics
+Computes drift magnitude metrics between base dataset t and dataset u.</p>
+<p>Metrics:</p>
+<ul class="simple">
+<li><p>TVD (Total Variation Distance)</p></li>
+<li><p>Helinger</p></li>
+<li><p>KL Divergence</p></li>
+</ul>
+<div class="section" id="environment-setup">
+<h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> autoreload
+<span class="o">%</span><span class="k">autoreload</span> 2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">nuclio</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">code_to_function</span><span class="p">,</span> <span class="n">mount_v3io</span><span class="p">,</span> <span class="n">run_local</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="function">
+<h2>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: start-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">import</span> <span class="nn">v3io_frames</span> <span class="k">as</span> <span class="nn">v3f</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">KBinsDiscretizer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">to_observations</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="c1"># Create density</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'_'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">val</span><span class="p">])</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'_'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">val</span><span class="p">])</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+
+    <span class="c1"># Add 0s if needed</span>
+    <span class="n">joined_uniques</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="n">joined_uniques</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'t'</span><span class="p">,</span> <span class="s1">'u'</span><span class="p">]</span>
+
+    <span class="n">t_obs</span> <span class="o">=</span> <span class="n">joined_uniques</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">'t'</span><span class="p">]</span>
+    <span class="n">u_obs</span> <span class="o">=</span> <span class="n">joined_uniques</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s1">'u'</span><span class="p">]</span>
+
+    <span class="n">t_pdf</span> <span class="o">=</span> <span class="n">t_obs</span><span class="o">/</span><span class="n">t_obs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">u_pdf</span> <span class="o">=</span> <span class="n">u_obs</span><span class="o">/</span><span class="n">u_obs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">_t_pdf'</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">t_pdf</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'parquet'</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1">_u_pdf'</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">u_pdf</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'parquet'</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t_pdf</span><span class="p">,</span> <span class="n">u_pdf</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tvd</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">u</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">helinger</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="mi">2</span><span class="p">))))</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">kl_divergence</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="n">t_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">t</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">u</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">u_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">u</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">u</span> <span class="o">/</span> <span class="n">t</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">t_u</span> <span class="o">+</span> <span class="n">u_t</span>
+
+<span class="k">def</span> <span class="nf">all_metrics</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tvd</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">),</span> <span class="n">helinger</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">),</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">drift_magnitude</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> 
+         <span class="n">label_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prediction_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+         <span class="n">discretizers</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+         <span class="n">stream_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'some_stream'</span><span class="p">,</span>
+         <span class="n">results_tsdb_container</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'bigdata'</span><span class="p">,</span>
+         <span class="n">results_tsdb_table</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">'concept_drift/drift_magnitude'</span><span class="p">):</span>
+    <span class="sd">"""Drift magnitude metrics</span>
+<span class="sd">       Computes drift magnitude metrics between base dataset t and dataset u.</span>
+<span class="sd">       Metrics:</span>
+<span class="sd">        - TVD (Total Variation Distance)</span>
+<span class="sd">        - Helinger</span>
+<span class="sd">        - KL Divergence</span>
+<span class="sd">        </span>
+<span class="sd">    :param context: MLRun context</span>
+<span class="sd">    :param t: Base dataset for the drift metrics</span>
+<span class="sd">    :param u: Test dataset for the drift metrics</span>
+<span class="sd">    :param label_col: Label colum in t and u</span>
+<span class="sd">    :param prediction_col: Predictions column in t and u</span>
+<span class="sd">    :param discritizers: Dictionary of dicsritizers for the features if available</span>
+<span class="sd">                         (Created automatically if not provided)</span>
+<span class="sd">    :param n_bins: Number of bins to be used for histrogram creation from continuous variables</span>
+<span class="sd">    :param stream_name: Output stream to push metrics to</span>
+<span class="sd">    :param results_tsdb_container: TSDB table container to push metrics to</span>
+<span class="sd">    :param results_tsdb_table: TSDB table to push metrics to</span>
+<span class="sd">    """</span>
+    
+    <span class="c1"># Setup v3io connection and TSDB table</span>
+    <span class="n">v3io_client</span> <span class="o">=</span> <span class="n">v3f</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="s1">'framesd:8081'</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="n">results_tsdb_container</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">v3io_client</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">'tsdb'</span><span class="p">,</span> <span class="n">results_tsdb_table</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="s1">'1/s'</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">v3io_client</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s1">'tsdb'</span><span class="p">,</span> <span class="n">results_tsdb_table</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s1">'rate'</span><span class="p">:</span> <span class="s1">'1/s'</span><span class="p">})</span>
+    
+    <span class="c1"># Get input DFs</span>
+    <span class="n">df_t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+    <span class="n">df_u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+    
+    <span class="c1"># Get feature cols</span>
+    
+    <span class="n">drop_columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">label_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">drop_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_col</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">prediction_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">drop_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prediction_col</span><span class="p">)</span>
+    
+    
+    <span class="c1"># Discretize continuous featuers</span>
+    <span class="n">continuous_features</span> <span class="o">=</span> <span class="n">df_t</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">([</span><span class="s1">'float'</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">discretizers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">discretizers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">continuous_features</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Fitting discretizer for </span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+            <span class="c1"># Need to train a new discretizer</span>
+            <span class="n">discretizer</span> <span class="o">=</span> <span class="n">KBinsDiscretizer</span><span class="p">(</span><span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">,</span>
+                                           <span class="n">encode</span><span class="o">=</span><span class="s1">'ordinal'</span><span class="p">,</span>
+                                           <span class="n">strategy</span><span class="o">=</span><span class="s1">'uniform'</span><span class="p">)</span>
+
+            <span class="n">discretizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">continuous_features</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">discretizers</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">discretizer</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">discretizers_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_path</span><span class="si">}</span><span class="s1">/discritizer.pkl'</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">discretizers_path</span><span class="p">,</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">discretizers</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="s1">'discritizers'</span><span class="p">,</span> <span class="n">target_path</span><span class="o">=</span><span class="n">discretizers_path</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Discretizing featuers'</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">discretizer</span> <span class="ow">in</span> <span class="n">discretizers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">df_t</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">discretizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">df_u</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">discretizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df_u</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">df_t</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_t</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'int'</span><span class="p">)</span>
+        <span class="n">df_u</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_u</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'int'</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="s1">'t_discrete'</span><span class="p">,</span> <span class="n">df_t</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'parquet'</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="s1">'u_discrete'</span><span class="p">,</span> <span class="n">df_u</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">'parquet'</span><span class="p">)</span>
+    
+    <span class="c1"># Estimate probabilities </span>
+    <span class="c1"># P(X), P(y), P(X|y), P(y|X) for t and u</span>
+    
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Compute prior metrics'</span><span class="p">)</span>
+    
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">t_prior</span><span class="p">,</span> <span class="n">u_prior</span> <span class="o">=</span> <span class="n">to_observations</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">df_t</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> 
+                                       <span class="n">df_u</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="s1">'features'</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">'prior_tvd'</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">'prior_helinger'</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">'prior_kld'</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_metrics</span><span class="p">(</span><span class="n">t_prior</span><span class="p">,</span> <span class="n">u_prior</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">prediction_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Compute prediction metrics'</span><span class="p">)</span>
+        <span class="n">t_predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">prediction_col</span><span class="p">])</span>
+        <span class="n">u_predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_u</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">prediction_col</span><span class="p">])</span>
+        <span class="n">t_class</span><span class="p">,</span> <span class="n">u_class</span> <span class="o">=</span> <span class="n">to_observations</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">t_predictions</span><span class="p">,</span>
+                                           <span class="n">u_predictions</span><span class="p">,</span> <span class="s1">'prediction'</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s1">'prediction_shift_tvd'</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">'prediction_shift_helinger'</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">'prediction_shift_kld'</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_metrics</span><span class="p">(</span><span class="n">t_class</span><span class="p">,</span> <span class="n">u_class</span><span class="p">)</span>
+        
+    <span class="k">if</span> <span class="n">label_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">'Compute class metrics'</span><span class="p">)</span>
+        <span class="n">t_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">label_col</span><span class="p">])</span>
+        <span class="n">u_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_u</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">label_col</span><span class="p">])</span>
+        <span class="n">t_class</span><span class="p">,</span> <span class="n">u_class</span> <span class="o">=</span> <span class="n">to_observations</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">t_labels</span><span class="p">,</span>
+                                           <span class="n">u_labels</span><span class="p">,</span> <span class="s1">'class'</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="s1">'class_shift_tvd'</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">'class_shift_helinger'</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s1">'class_shift_kld'</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_metrics</span><span class="p">(</span><span class="n">t_class</span><span class="p">,</span> <span class="n">u_class</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s1">'inf'</span><span class="p">):</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span>
+    <span class="c1"># Log results</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        
+    <span class="c1"># Push results to TSDB</span>
+    <span class="n">now</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
+    <span class="n">now</span>
+    
+    <span class="n">results</span><span class="p">[</span><span class="s1">'timestamp'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">((</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())))</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Timestamp: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">'timestamp'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s1">'stream'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stream_name</span>
+    <span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())],</span>
+                              <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span>
+    <span class="n">results_df</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'timestamp'</span><span class="p">,</span> <span class="s1">'stream'</span><span class="p">])</span>
+    <span class="n">v3io_client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">'tsdb'</span><span class="p">,</span> <span class="n">results_tsdb_table</span><span class="p">,</span> <span class="n">dfs</span><span class="o">=</span><span class="n">results_df</span><span class="p">)</span>
+<span class="c1">#     context.log_dataset('results', results_df, format='pq')</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="test">
+<h1>Test<a class="headerlink" href="#test" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="wine-dataset">
+<h2>Wine dataset<a class="headerlink" href="#wine-dataset" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_wine</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">NewTask</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wine</span> <span class="o">=</span> <span class="n">load_wine</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_wine</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="s1">'data'</span><span class="p">],</span>
+                       <span class="n">columns</span><span class="o">=</span><span class="n">wine</span><span class="p">[</span><span class="s1">'feature_names'</span><span class="p">])</span>
+<span class="n">df_wine</span><span class="p">[</span><span class="s1">'y'</span><span class="p">]</span> <span class="o">=</span> <span class="n">wine</span><span class="p">[</span><span class="s1">'target'</span><span class="p">]</span>
+<span class="n">df_wine</span><span class="p">[</span><span class="s1">'prediction'</span><span class="p">]</span> <span class="o">=</span> <span class="n">wine</span><span class="p">[</span><span class="s1">'target'</span><span class="p">]</span>
+<span class="n">df_wine</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">'data/wine_t.pq'</span><span class="p">)</span>
+<span class="n">df_wine</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>alcohol</th>
+<th>malic_acid</th>
+<th>ash</th>
+<th>alcalinity_of_ash</th>
+<th>magnesium</th>
+<th>total_phenols</th>
+<th>flavanoids</th>
+<th>nonflavanoid_phenols</th>
+<th>proanthocyanins</th>
+<th>color_intensity</th>
+<th>hue</th>
+<th>od280/od315_of_diluted_wines</th>
+<th>proline</th>
+<th>y</th>
+<th>prediction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>14.23</td>
+<td>1.71</td>
+<td>2.43</td>
+<td>15.6</td>
+<td>127.0</td>
+<td>2.80</td>
+<td>3.06</td>
+<td>0.28</td>
+<td>2.29</td>
+<td>5.64</td>
+<td>1.04</td>
+<td>3.92</td>
+<td>1065.0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>13.20</td>
+<td>1.78</td>
+<td>2.14</td>
+<td>11.2</td>
+<td>100.0</td>
+<td>2.65</td>
+<td>2.76</td>
+<td>0.26</td>
+<td>1.28</td>
+<td>4.38</td>
+<td>1.05</td>
+<td>3.40</td>
+<td>1050.0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>13.16</td>
+<td>2.36</td>
+<td>2.67</td>
+<td>18.6</td>
+<td>101.0</td>
+<td>2.80</td>
+<td>3.24</td>
+<td>0.30</td>
+<td>2.81</td>
+<td>5.68</td>
+<td>1.03</td>
+<td>3.17</td>
+<td>1185.0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>14.37</td>
+<td>1.95</td>
+<td>2.50</td>
+<td>16.8</td>
+<td>113.0</td>
+<td>3.85</td>
+<td>3.49</td>
+<td>0.24</td>
+<td>2.18</td>
+<td>7.80</td>
+<td>0.86</td>
+<td>3.45</td>
+<td>1480.0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>13.24</td>
+<td>2.59</td>
+<td>2.87</td>
+<td>21.0</td>
+<td>118.0</td>
+<td>2.80</td>
+<td>2.69</td>
+<td>0.39</td>
+<td>1.82</td>
+<td>4.32</td>
+<td>1.04</td>
+<td>2.93</td>
+<td>735.0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">df_wine</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># change_feature = [random.choice(wine['feature_names']), random.choice(wine['feature_names'])]</span>
+<span class="c1"># u[change_feature] = 1</span>
+<span class="n">u</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">'data/wine_u.pq'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create job function object from notebook code</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">code_to_function</span><span class="p">(</span><span class="s2">"virtual_drift"</span><span class="p">,</span> 
+                      <span class="n">kind</span><span class="o">=</span><span class="s1">'job'</span><span class="p">,</span> 
+                      <span class="n">image</span><span class="o">=</span><span class="s1">'mlrun/ml-models'</span><span class="p">)</span>
+
+<span class="c1"># add metadata (for templates and reuse)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">default_handler</span> <span class="o">=</span> <span class="s2">"drift_magnitude"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">"Compute drift magnitude between Time-Samples T and U"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ml"</span><span class="p">,</span> <span class="s2">"serve"</span><span class="p">,</span> <span class="s2">"concept-drift"</span><span class="p">]</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"author"</span><span class="p">:</span> <span class="s2">"orz"</span><span class="p">}</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">"function.yaml"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[mlrun] 2020-07-14 13:58:50,586 function spec saved to path: function.yaml
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f23c8ab3f28&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_v3io</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f9b09fb0e80&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">NewTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'drift_magnitude'</span><span class="p">,</span>
+               <span class="n">handler</span><span class="o">=</span><span class="s1">'drift_magnitude'</span><span class="p">,</span>
+               <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'label_col'</span><span class="p">:</span> <span class="s1">'y'</span><span class="p">,</span>
+                       <span class="s1">'results_tsdb_container'</span><span class="p">:</span> <span class="s1">'bigdata'</span><span class="p">,</span>
+                       <span class="s1">'results_tsdb_table'</span><span class="p">:</span> <span class="s1">'drift_magnitude'</span><span class="p">},</span>
+               <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">'t'</span><span class="p">:</span> <span class="s1">'/User/functions/virtual_drift/data/wine_t.pq'</span><span class="p">,</span>
+                       <span class="s1">'u'</span><span class="p">:</span> <span class="s1">'/User/functions/virtual_drift/data/wine_u.pq'</span><span class="p">},</span>
+               <span class="n">artifact_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'/User/functions/virtual_drift/artifacts'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">with_code</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[mlrun] 2020-06-02 12:56:25,352 starting run drift_magnitude uid=a20c78ddc72e45119ac4684bc4b32876  -&gt; http://10.192.65.32:8080
+[mlrun] 2020-06-02 12:56:26,121 Job is running in the background, pod: drift-magnitude-xqb5r
+[mlrun] 2020-06-02 12:56:44,171 starting local run: main.py # drift_magnitude
+[mlrun] 2020-06-02 12:56:48,652 Fitting discretizer for alcohol
+[mlrun] 2020-06-02 12:56:48,655 Fitting discretizer for malic_acid
+[mlrun] 2020-06-02 12:56:48,657 Fitting discretizer for ash
+[mlrun] 2020-06-02 12:56:48,658 Fitting discretizer for alcalinity_of_ash
+[mlrun] 2020-06-02 12:56:48,660 Fitting discretizer for magnesium
+[mlrun] 2020-06-02 12:56:48,662 Fitting discretizer for total_phenols
+[mlrun] 2020-06-02 12:56:48,663 Fitting discretizer for flavanoids
+[mlrun] 2020-06-02 12:56:48,664 Fitting discretizer for nonflavanoid_phenols
+[mlrun] 2020-06-02 12:56:48,666 Fitting discretizer for proanthocyanins
+[mlrun] 2020-06-02 12:56:48,668 Fitting discretizer for color_intensity
+[mlrun] 2020-06-02 12:56:48,670 Fitting discretizer for hue
+[mlrun] 2020-06-02 12:56:48,670 Fitting discretizer for od280/od315_of_diluted_wines
+[mlrun] 2020-06-02 12:56:48,672 Fitting discretizer for proline
+[mlrun] 2020-06-02 12:56:48,752 log artifact discritizers at /User/demo-network-operations/artifacts/discritizer.pkl, size: None, db: Y
+[mlrun] 2020-06-02 12:56:48,754 Discretizing featuers
+[mlrun] 2020-06-02 12:56:49,199 log artifact t_discrete at /User/demo-network-operations/artifacts/t_discrete.parquet, size: 11803, db: Y
+[mlrun] 2020-06-02 12:56:49,549 log artifact u_discrete at /User/demo-network-operations/artifacts/u_discrete.parquet, size: 12370, db: Y
+[mlrun] 2020-06-02 12:56:49,552 Compute prior metrics
+[mlrun] 2020-06-02 12:56:49,968 log artifact features_t_pdf at /User/demo-network-operations/artifacts/features_t_pdf.parquet, size: 4399, db: Y
+[mlrun] 2020-06-02 12:56:50,103 log artifact features_u_pdf at /User/demo-network-operations/artifacts/features_u_pdf.parquet, size: 4428, db: Y
+[mlrun] 2020-06-02 12:56:50,123 Compute class metrics
+[mlrun] 2020-06-02 12:56:50,292 log artifact class_t_pdf at /User/demo-network-operations/artifacts/class_t_pdf.parquet, size: 2162, db: Y
+[mlrun] 2020-06-02 12:56:50,408 log artifact class_u_pdf at /User/demo-network-operations/artifacts/class_u_pdf.parquet, size: 2162, db: Y
+[mlrun] 2020-06-02 12:56:50,424 value: inf
+[mlrun] 2020-06-02 12:56:50,459 Timestamp: 2020-06-02 12:56:50.458032
+
+[mlrun] 2020-06-02 12:56:50,834 run executed, status=completed
+/usr/local/lib/python3.7/site-packages/pandas/core/series.py:679: RuntimeWarning: divide by zero encountered in log
+  result = getattr(ufunc, method)(*inputs, **kwargs)
+final state: succeeded
+</pre></div>
+</div>
+<div class="output text_html"><style> 
+.dictlist {
+  background-color: #b3edff; 
+  text-align: center; 
+  margin: 4px; 
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer; 
+  background-color: #ffe6cc; 
+  text-align: left; 
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #ffe6cc;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }  
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="a20c78ddc72e45119ac4684bc4b32876"><a href="https://mlrun-ui.default-tenant.app.dev6.lab.iguazeng.com/projects/default/jobs/a20c78ddc72e45119ac4684bc4b32876/info" target="_blank">...c4b32876</a></div></td>
+<td>0</td>
+<td>Jun 02 12:56:48</td>
+<td>completed</td>
+<td>drift_magnitude</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div><div class="dictlist">host=drift-magnitude-xqb5r</div></td>
+<td><div title="/User/functions/virtual_drift/data/wine_t.pq">t</div><div title="/User/functions/virtual_drift/data/wine_u.pq">u</div></td>
+<td><div class="dictlist">label_col=y</div><div class="dictlist">results_tsdb_container=bigdata</div><div class="dictlist">results_tsdb_table=drift_magnitude</div></td>
+<td><div class="dictlist">prior_tvd=0.5</div><div class="dictlist">prior_helinger=0.541</div><div class="dictlist">prior_kld=10</div><div class="dictlist">class_shift_tvd=0.028</div><div class="dictlist">class_shift_helinger=0.02</div><div class="dictlist">class_shift_kld=0.003</div></td>
+<td><div title="/User/demo-network-operations/artifacts/discritizer.pkl">discritizers</div><div title="/User/demo-network-operations/artifacts/t_discrete.parquet">t_discrete</div><div title="/User/demo-network-operations/artifacts/u_discrete.parquet">u_discrete</div><div title="/User/demo-network-operations/artifacts/features_t_pdf.parquet">features_t_pdf</div><div title="/User/demo-network-operations/artifacts/features_u_pdf.parquet">features_u_pdf</div><div title="/User/demo-network-operations/artifacts/class_t_pdf.parquet">class_t_pdf</div><div title="/User/demo-network-operations/artifacts/class_u_pdf.parquet">class_u_pdf</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result146ce7d5-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result146ce7d5-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result146ce7d5">×</span>
+</div>
+<iframe class="fileview" id="result146ce7d5-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run a20c78ddc72e45119ac4684bc4b32876  , !mlrun logs a20c78ddc72e45119ac4684bc4b32876 
+[mlrun] 2020-06-02 12:56:57,590 run executed, status=completed
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.model.RunObject at 0x7f9b0d967128&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
