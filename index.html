@@ -107,6 +107,7 @@
         item.source = source;
         item.channel = channel;
         item.prettyName = itemKey.replaceAll("_", " ").toLowerCase();
+        item.kind = item.spec.kind;
 
         const base_url = `${source}/${channel}/${itemKey}/latest`;
         item.documentation = item.spec.filename ? `${base_url}/static/documentation.html` : null;
@@ -140,6 +141,7 @@
                 },
                 width: 150
             },
+            {title: "Kind", field: "kind", width: 100},
             {
                 title: "Documentation",
                 field: "documentation",
