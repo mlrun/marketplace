@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/yaml.min.js"></script>
+    <title>Source</title>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body style="background-color:darkgray; margin: 0 0 0 0;">
+    <pre style="margin: 0 1em;">
+        <code class="yaml">
+kind: remote
+metadata:
+  name: churn-server
+  hash: c18a06be870a239420439f6aba76ca8bbadcc578
+  project: default
+  labels:
+    author: yashab
+    framework: churn
+  categories:
+  - serving
+  - ml
+spec:
+  command: ''
+  args: []
+  image: ''
+  description: churn classification and predictor
+  max_replicas: 4
+  env:
+  - name: SERVING_MODEL_churn_server_v1
+    value: /User/artifacts/churn/models
+  - name: MODEL_CLASS
+    value: ChurnModel
+  - name: ENABLE_EXPLAINER
+    value: 'False'
+  config:
+    spec.triggers.http:
+      kind: http
+      maxWorkers: 8
+      attributes:
+        ingresses: {}
+      annotations: {}
+  base_spec:
+    apiVersion: nuclio.io/v1
+    kind: nuclio:serving
+    metadata:
+      annotations:
+        nuclio.io/generated_by: function generated from 30-08-2020
+      labels: {}
+      name: churn-server
+    spec:
+      build:
+        baseImage: mlrun/ml-models
+        commands: []
+        functionSourceCode: IyBHZW5lcmF0ZWQgYnkgbnVjbGlvLmV4cG9ydC5OdWNsaW9FeHBvcnRlcgoKaW1wb3J0IG9zCmltcG9ydCBqc29uCmltcG9ydCBudW1weSBhcyBucApmcm9tIGNsb3VkcGlja2xlIGltcG9ydCBsb2FkCgoKaW1wb3J0IG1scnVuCmNsYXNzIENodXJuTW9kZWwobWxydW4ucnVudGltZXMuTUxNb2RlbFNlcnZlcik6CiAgICBkZWYgbG9hZChzZWxmKToKICAgICAgICAiIiIKICAgICAgICBsb2FkIG11bHRpcGxlIG1vZGVscyBpbiBuZXN0ZWQgZm9sZGVycywgY2h1cm4gbW9kZWwgb25seQogICAgICAgICIiIgogICAgICAgIGNsZl9tb2RlbF9maWxlLCBleHRyYV9kYXRhID0gc2VsZi5nZXRfbW9kZWwoIi5wa2wiKQogICAgICAgIHNlbGYubW9kZWwgPSBsb2FkKG9wZW4oc3RyKGNsZl9tb2RlbF9maWxlKSwgInJiIikpCiAgICAgICAgCiAgICAgICAgaWYgImNveCIgaW4gZXh0cmFfZGF0YS5rZXlzKCk6CiAgICAgICAgICAgIGNveF9tb2RlbF9maWxlID0gZXh0cmFfZGF0YVsiY294Il0KICAgICAgICAgICAgc2VsZi5jb3hfbW9kZWwgPSBsb2FkKG9wZW4oc3RyKGNveF9tb2RlbF9maWxlKSwgInJiIikpCiAgICAgICAgICAgIGlmICJjb3gva20iIGluIGV4dHJhX2RhdGEua2V5cygpOgogICAgICAgICAgICAgICAga21fbW9kZWxfZmlsZSA9IGV4dHJhX2RhdGFbImNveC9rbSJdCiAgICAgICAgICAgICAgICBzZWxmLmttX21vZGVsID0gbG9hZChvcGVuKHN0cihrbV9tb2RlbF9maWxlKSwgInJiIikpCiAgICAgICAgcmV0dXJuCgogICAgZGVmIHByZWRpY3Qoc2VsZiwgYm9keSk6CiAgICAgICAgdHJ5OgogICAgICAgICAgICBmZWF0cyA9IG5wLmFzYXJyYXkoYm9keVsiaW5zdGFuY2VzIl0sIGR0eXBlPW5wLmZsb2F0MzIpLnJlc2hhcGUoLTEsIDIzKQogICAgICAgICAgICByZXN1bHQgPSBzZWxmLm1vZGVsLnByZWRpY3QoZmVhdHMsIHZhbGlkYXRlX2ZlYXR1cmVzPUZhbHNlKQogICAgICAgICAgICByZXR1cm4gcmVzdWx0LnRvbGlzdCgpCiAgICAgICAgZXhjZXB0IEV4Y2VwdGlvbiBhcyBlOgogICAgICAgICAgICByYWlzZSBFeGNlcHRpb24oIkZhaWxlZCB0byBwcmVkaWN0ICVzIiAlIGUpCgoKZnJvbSBtbHJ1bi5ydW50aW1lcyBpbXBvcnQgbnVjbGlvX2luaXRfaG9vawpkZWYgaW5pdF9jb250ZXh0KGNvbnRleHQpOgogICAgbnVjbGlvX2luaXRfaG9vayhjb250ZXh0LCBnbG9iYWxzKCksICdzZXJ2aW5nJykKCmRlZiBoYW5kbGVyKGNvbnRleHQsIGV2ZW50KToKICAgIHJldHVybiBjb250ZXh0Lm1scnVuX2hhbmRsZXIoY29udGV4dCwgZXZlbnQpCg==
+        noBaseImagesPull: true
+      env:
+      - name: MODEL_CLASS
+        value: ChurnModel
+      handler: churn_server:handler
+      runtime: python:3.6
+      volumes: []
+  source: ''
+  function_kind: serving
+
+        </code>
+    </pre>
+</body>
+</html>
