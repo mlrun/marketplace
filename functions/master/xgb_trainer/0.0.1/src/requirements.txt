@@ -1,0 +1,9 @@
+mlrun
+pandas
+xgboost
+cloudpickle
+pygit2
+sklearn
+matplotlib
+seaborn
+scikit-plot

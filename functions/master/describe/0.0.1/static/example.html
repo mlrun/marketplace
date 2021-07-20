@@ -1,0 +1,756 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Describe</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/describe_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fdescribe_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/describe_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#mlconfig">
+   MLconfig
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#save">
+   Save
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#tests">
+   Tests
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-locally">
+     Run Locally
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-remotely">
+     Run Remotely
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="describe">
+<h1>Describe<a class="headerlink" href="#describe" title="Permalink to this headline">¶</a></h1>
+<p>Describe and visualizes dataset statistics</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">'ignore'</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore</span> <span class="kn">import</span> <span class="n">DataItem</span>
+<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">PlotArtifact</span><span class="p">,</span> <span class="n">TableArtifact</span>
+<span class="kn">from</span> <span class="nn">mlrun.mlutils.plots</span> <span class="kn">import</span> <span class="n">gcf_clear</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"display.float_format"</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s2">"</span><span class="si">%.2f</span><span class="s2">"</span> <span class="o">%</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">summarize</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">table</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">label_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">class_labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="n">plot_hist</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">plots_dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"plots"</span><span class="p">,</span>
+    <span class="n">update_dataset</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""Summarize a table</span>
+
+<span class="sd">    :param context:         the function context</span>
+<span class="sd">    :param table:           MLRun input pointing to pandas dataframe (csv/parquet file path)</span>
+<span class="sd">    :param label_column:    ground truth column label</span>
+<span class="sd">    :param class_labels:    label for each class in tables and plots</span>
+<span class="sd">    :param plot_hist:       (True) set this to False for large tables</span>
+<span class="sd">    :param plots_dest:      destination folder of summary plots (relative to artifact_path)</span>
+<span class="sd">    :param update_dataset:  when the table is a registered dataset update the charts in-place </span>
+<span class="sd">    """</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span>
+    <span class="n">extra_data</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">gcf_clear</span><span class="p">(</span><span class="n">plt</span><span class="p">)</span>
+        <span class="n">snsplt</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="n">label_column</span><span class="p">)</span><span class="c1">#, diag_kws={"bw": 1.5})</span>
+        <span class="n">extra_data</span><span class="p">[</span><span class="s2">"histograms"</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">PlotArtifact</span><span class="p">(</span><span class="s2">"histograms"</span><span class="p">,</span>  <span class="n">body</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()),</span>
+                                                        <span class="n">local_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plots_dest</span><span class="si">}</span><span class="s2">/hist.html"</span><span class="p">,</span> <span class="n">db_key</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Failed to create pairplot histograms due to: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">gcf_clear</span><span class="p">(</span><span class="n">plt</span><span class="p">)</span>
+        <span class="n">plot_cols</span> <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">plot_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">plot_cols</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">plot_rows</span><span class="p">,</span> <span class="n">plot_cols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">plot_rows</span> <span class="o">*</span> <span class="n">plot_cols</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">):</span>
+                <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">header</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">plot_cols</span><span class="p">)][</span><span class="n">i</span> <span class="o">%</span> <span class="n">plot_cols</span><span class="p">],</span> 
+                            <span class="n">orient</span><span class="o">=</span><span class="s1">'h'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s2">"quartile"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">delaxes</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span> <span class="o">/</span> <span class="n">plot_cols</span><span class="p">)][</span><span class="n">i</span> <span class="o">%</span> <span class="n">plot_cols</span><span class="p">])</span>        
+            <span class="n">i</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="n">extra_data</span><span class="p">[</span><span class="s2">"violin"</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">PlotArtifact</span><span class="p">(</span><span class="s2">"violin"</span><span class="p">,</span>  <span class="n">body</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Violin Plot'</span><span class="p">),</span>
+                                                    <span class="n">local_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plots_dest</span><span class="si">}</span><span class="s2">/violin.html"</span><span class="p">,</span> <span class="n">db_key</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Failed to create violin distribution plots due to: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">label_column</span><span class="p">:</span> 
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">label_column</span><span class="p">)</span>
+        <span class="n">imbtable</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">gcf_clear</span><span class="p">(</span><span class="n">plt</span><span class="p">)</span>  
+            <span class="n">balancebar</span> <span class="o">=</span> <span class="n">imbtable</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">'class imbalance - labels'</span><span class="p">)</span>
+            <span class="n">balancebar</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'class'</span><span class="p">)</span>
+            <span class="n">balancebar</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"proportion of total"</span><span class="p">)</span>
+            <span class="n">extra_data</span><span class="p">[</span><span class="s2">"imbalance"</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">PlotArtifact</span><span class="p">(</span><span class="s2">"imbalance"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()),</span> 
+                                                        <span class="n">local_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plots_dest</span><span class="si">}</span><span class="s2">/imbalance.html"</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Failed to create class imbalance plot due to: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">TableArtifact</span><span class="p">(</span><span class="s2">"imbalance-weights-vec"</span><span class="p">,</span> 
+                                           <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">"weights"</span><span class="p">:</span> <span class="n">imbtable</span><span class="p">})),</span>
+                             <span class="n">local_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plots_dest</span><span class="si">}</span><span class="s2">/imbalance-weights-vec.csv"</span><span class="p">,</span> <span class="n">db_key</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">tblcorr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">tblcorr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+    <span class="n">mask</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">mask</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">True</span>
+    
+    <span class="n">dfcorr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tblcorr</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+    <span class="n">dfcorr</span> <span class="o">=</span> <span class="n">dfcorr</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dfcorr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dfcorr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">TableArtifact</span><span class="p">(</span><span class="s2">"correlation-matrix"</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">tblcorr</span><span class="p">,</span> <span class="n">visible</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> 
+                         <span class="n">local_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plots_dest</span><span class="si">}</span><span class="s2">/correlation-matrix.csv"</span><span class="p">,</span> <span class="n">db_key</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">gcf_clear</span><span class="p">(</span><span class="n">plt</span><span class="p">)</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
+        <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">tblcorr</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">mask</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Reds</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"features correlation"</span><span class="p">)</span>
+        <span class="n">extra_data</span><span class="p">[</span><span class="s2">"correlation"</span><span class="p">]</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">PlotArtifact</span><span class="p">(</span><span class="s2">"correlation"</span><span class="p">,</span>  <span class="n">body</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="n">title</span><span class="o">=</span><span class="s1">'Correlation Matrix'</span><span class="p">),</span>
+                                                        <span class="n">local_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plots_dest</span><span class="si">}</span><span class="s2">/corr.html"</span><span class="p">,</span> <span class="n">db_key</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Failed to create features correlation plot due to: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+    
+
+    <span class="n">gcf_clear</span><span class="p">(</span><span class="n">plt</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">update_dataset</span> <span class="ow">and</span> <span class="n">table</span><span class="o">.</span><span class="n">meta</span> <span class="ow">and</span> <span class="n">table</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s1">'dataset'</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">update_dataset_meta</span>
+        <span class="n">update_dataset_meta</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">meta</span><span class="p">,</span> <span class="n">extra_data</span><span class="o">=</span><span class="n">extra_data</span><span class="p">)</span>
+        
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="mlconfig">
+<h2>MLconfig<a class="headerlink" href="#mlconfig" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">api_path</span> <span class="o">=</span> <span class="s1">'http://mlrun-api:8080'</span><span class="p">,</span>
+                      <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'./'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>('default', '/User/functions/describe')
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save">
+<h2>Save<a class="headerlink" href="#save" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create job function object from notebook code</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span><span class="s2">"describe"</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="s2">"summarize"</span><span class="p">,</span>
+                                        <span class="n">description</span><span class="o">=</span><span class="s2">"describe and visualizes dataset stats"</span><span class="p">,</span>
+                                        <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s2">"analysis"</span><span class="p">],</span>
+                                        <span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"author"</span><span class="p">:</span> <span class="s2">"yjb"</span><span class="p">},</span>
+                                        <span class="n">code_output</span><span class="o">=</span><span class="s1">'.'</span><span class="p">)</span>
+
+<span class="n">fn</span><span class="o">.</span><span class="n">export</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-05-15 04:36:15,638 [info] function spec saved to path: function.yaml
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f535cc8b410&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tests">
+<h2>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">platforms</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f535cc8b410&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_URL</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv'</span>
+
+<span class="n">task</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">NewTask</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"tasks-describe"</span><span class="p">,</span> 
+                     <span class="n">handler</span><span class="o">=</span><span class="n">summarize</span><span class="p">,</span> 
+                     <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"table"</span><span class="p">:</span> <span class="n">DATA_URL</span><span class="p">},</span> 
+                     <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'update_dataset'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> 
+                             <span class="s1">'label_column'</span><span class="p">:</span> <span class="s1">'label'</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="run-locally">
+<h3>Run Locally<a class="headerlink" href="#run-locally" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">run_local</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-05-15 04:36:15,671 [info] starting run tasks-describe uid=7618d6230e204cc296d1099820178985 DB=http://mlrun-api:8080
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="7618d6230e204cc296d1099820178985"><a href="https://dashboard.default-tenant.app.wmrgcuazrrpg.iguazio-c1.com/mlprojects/default/jobs/monitor/7618d6230e204cc296d1099820178985/overview" target="_blank">...20178985</a></div></td>
+<td>0</td>
+<td>May 15 04:36:15</td>
+<td>completed</td>
+<td>tasks-describe</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=handler</div><div class="dictlist">owner=admin</div><div class="dictlist">host=jupyter-5d9f5c8864-zrl77</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">table</div></td>
+<td><div class="dictlist">update_dataset=True</div><div class="dictlist">label_column=label</div></td>
+<td></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result93b13deb" title="/files/functions/describe/plots/hist.html">histograms</div><div class="artifact" onclick="expandPanel(this)" panename="result93b13deb" title="/files/functions/describe/plots/violin.html">violin</div><div class="artifact" onclick="expandPanel(this)" panename="result93b13deb" title="/files/functions/describe/plots/imbalance.html">imbalance</div><div class="artifact" onclick="expandPanel(this)" panename="result93b13deb" title="/files/functions/describe/plots/imbalance-weights-vec.csv">imbalance-weights-vec</div><div class="artifact" onclick="expandPanel(this)" panename="result93b13deb" title="/files/functions/describe/plots/correlation-matrix.csv">correlation-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="result93b13deb" title="/files/functions/describe/plots/corr.html">correlation</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result93b13deb-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result93b13deb-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result93b13deb">×</span>
+</div>
+<iframe class="fileview" id="result93b13deb-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run 7618d6230e204cc296d1099820178985 --project default , !mlrun logs 7618d6230e204cc296d1099820178985 --project default
+&gt; 2021-05-15 04:36:19,993 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-remotely">
+<h3>Run Remotely<a class="headerlink" href="#run-remotely" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"table"</span><span class="p">:</span> <span class="n">DATA_URL</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-05-15 04:36:19,998 [info] starting run tasks-describe uid=6d6581db18e5460eba3d785d7b568db5 DB=http://mlrun-api:8080
+&gt; 2021-05-15 04:36:20,140 [info] Job is running in the background, pod: tasks-describe-smp2z
+&gt; 2021-05-15 04:36:30,035 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="6d6581db18e5460eba3d785d7b568db5"><a href="https://dashboard.default-tenant.app.wmrgcuazrrpg.iguazio-c1.com/mlprojects/default/jobs/monitor/6d6581db18e5460eba3d785d7b568db5/overview" target="_blank">...7b568db5</a></div></td>
+<td>0</td>
+<td>May 15 04:36:25</td>
+<td>completed</td>
+<td>tasks-describe</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div><div class="dictlist">host=tasks-describe-smp2z</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">table</div></td>
+<td><div class="dictlist">update_dataset=True</div><div class="dictlist">label_column=label</div></td>
+<td></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result662e29ac" title="/files/functions/describe/plots/hist.html">histograms</div><div class="artifact" onclick="expandPanel(this)" panename="result662e29ac" title="/files/functions/describe/plots/violin.html">violin</div><div class="artifact" onclick="expandPanel(this)" panename="result662e29ac" title="/files/functions/describe/plots/imbalance.html">imbalance</div><div class="artifact" onclick="expandPanel(this)" panename="result662e29ac" title="/files/functions/describe/plots/imbalance-weights-vec.csv">imbalance-weights-vec</div><div class="artifact" onclick="expandPanel(this)" panename="result662e29ac" title="/files/functions/describe/plots/correlation-matrix.csv">correlation-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="result662e29ac" title="/files/functions/describe/plots/corr.html">correlation</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result662e29ac-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result662e29ac-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result662e29ac">×</span>
+</div>
+<iframe class="fileview" id="result662e29ac-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run 6d6581db18e5460eba3d785d7b568db5 --project default , !mlrun logs 6d6581db18e5460eba3d785d7b568db5 --project default
+&gt; 2021-05-15 04:36:39,367 [info] run executed, status=completed
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.model.RunObject at 0x7f534a725090&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>

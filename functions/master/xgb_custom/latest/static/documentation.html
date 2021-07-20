@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>xgb_custom package</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/xgb_custom.rst.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.rst</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fxgb_custom.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/xgb_custom.rst"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-xgb_custom.xgb_custom">
+   xgb_custom.xgb_custom module
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-xgb_custom">
+   Module contents
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="xgb-custom-package">
+<h1>xgb_custom package<a class="headerlink" href="#xgb-custom-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-xgb_custom.xgb_custom">
+<span id="xgb-custom-xgb-custom-module"></span><h2>xgb_custom.xgb_custom module<a class="headerlink" href="#module-xgb_custom.xgb_custom" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.fit">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">fit</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.datastore.base.DataItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_boost_round</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evals</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">xgboost.DMatrix</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feval</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maximize</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_stopping_rounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">evals_result</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_eval</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xgb_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.datastore.base.DataItem</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'labels'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">encode_cols</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">-</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1994</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models_dest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'models'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots_dest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'plots'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_ext</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'csv'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set_key</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'test-set'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gpus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/xgb_custom/xgb_custom.html#fit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xgb_custom.xgb_custom.fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>low level xgboost train api</p>
+<p>for the xgboost <cite>train</cite> params see:
+<a class="reference external" href="https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.train">https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.train</a></p>
+<dl class="simple">
+<dt>Note:  the first parameter of xgboost’s <cite>train</cite> method is a dict of parameters</dt><dd><p>supplied to the booster (engine).  To modify one of those simply
+add a task parameter (when running you supply an mlrun NewTask) with the
+prefix “<a href="#id1"><span class="problematic" id="id2">XGB_</span></a>”. So for example, to set the ‘tree_method’ parameter to ‘approx’,
+add {“XGB_tree_method”:”approx”} to the task params key.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – the function context</p></li>
+<li><p><strong>dataset</strong> – the full data set, train, valid and test will be extracted and
+each converted to a DMatrix for input to xgboost’s <cite>train</cite></p></li>
+<li><p><strong>label_column</strong> – ground-truth (y) labels</p></li>
+<li><p><strong>encode_cols</strong> – dictionary of names and prefixes for columns that are
+to hot be encoded.</p></li>
+<li><p><strong>sample</strong> – Selects the first n rows, or select a sample
+starting from the first. If negative &lt;-1, select
+a random sample</p></li>
+<li><p><strong>test_size</strong> – (0.05) test set size</p></li>
+<li><p><strong>valid_size</strong> – (0.75) Once the test set has been removed the
+training set gets this proportion.</p></li>
+<li><p><strong>random_state</strong> – <ol class="arabic simple">
+<li><p>sklearn rng seed</p></li>
+</ol>
+</p></li>
+<li><p><strong>models_dest</strong> – destination subfolder for model artifacts</p></li>
+<li><p><strong>plots_dest</strong> – destination subfolder for plot artifacts</p></li>
+<li><p><strong>file_ext</strong> – format for test_set_key hold out data</p></li>
+<li><p><strong>test_set_key</strong> – (test-set), key of held out data in artifact store</p></li>
+<li><p><strong>gpus</strong> – (False), run on gpus</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.gen_outliers">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">gen_outliers</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nrows</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4096</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feats</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">omax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'labels'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'int32'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xgb-outs'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xgb_custom'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/xgb_custom/xgb_custom.html#gen_outliers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xgb_custom.xgb_custom.gen_outliers" title="Permalink to this definition">¶</a></dt>
+<dd><p>simulate data with outliers</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – the function’s execution context</p></li>
+<li><p><strong>nrows</strong> – <ol class="arabic simple" start="4096">
+<li><p>number of data points</p></li>
+</ol>
+</p></li>
+<li><p><strong>feats</strong> – <ol class="arabic simple" start="16">
+<li><p>number of features</p></li>
+</ol>
+</p></li>
+<li><p><strong>outs</strong> – <ol class="arabic simple" start="64">
+<li><p>number of outliers</p></li>
+</ol>
+</p></li>
+<li><p><strong>omax</strong> – (10_100) max value of outliers</p></li>
+<li><p><strong>labels_col</strong> – (labels) name of labels column</p></li>
+<li><p><strong>header</strong> – () header for dataset, will default to
+<cite>feat_</cite></p></li>
+<li><p><strong>label_type</strong> – (int32) data type for the label column</p></li>
+<li><p><strong>key</strong> – key of datset in artifact store</p></li>
+<li><p><strong>local_path</strong> – path in artifact store where data will be
+serialized</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.gradient">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">gradient</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predt</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtrain</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">xgboost.DMatrix</span></span></em><span class="sig-paren">)</span> → <span class="pre">numpy.ndarray</span><a class="reference internal" href="_modules/xgb_custom/xgb_custom.html#gradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xgb_custom.xgb_custom.gradient" title="Permalink to this definition">¶</a></dt>
+<dd><p>gradient of squared log error</p>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.hessian">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">hessian</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predt</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtrain</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">xgboost.DMatrix</span></span></em><span class="sig-paren">)</span> → <span class="pre">numpy.ndarray</span><a class="reference internal" href="_modules/xgb_custom/xgb_custom.html#hessian"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xgb_custom.xgb_custom.hessian" title="Permalink to this definition">¶</a></dt>
+<dd><p>hessian of squared log error</p>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.learning_curves">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">learning_curves</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">results</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsz</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">(10,</span> <span class="pre">10)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plots_dest</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'plots'</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/xgb_custom/xgb_custom.html#learning_curves"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xgb_custom.xgb_custom.learning_curves" title="Permalink to this definition">¶</a></dt>
+<dd><p>plot xgb learning curves</p>
+<p>this will also log a model’s learning curves</p>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.randint">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">randint</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">low</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xgb_custom.xgb_custom.randint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return random integers from <cite>low</cite> (inclusive) to <cite>high</cite> (exclusive).</p>
+<p>Return random integers from the “discrete uniform” distribution of
+the specified dtype in the “half-open” interval [<cite>low</cite>, <cite>high</cite>). If
+<cite>high</cite> is None (the default), then results are from [0, <cite>low</cite>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>New code should use the <code class="docutils literal notranslate"><span class="pre">integers</span></code> method of a <code class="docutils literal notranslate"><span class="pre">default_rng()</span></code>
+instance instead; please see the <span class="xref std std-ref">random-quick-start</span>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>low</strong> (<em>int</em><em> or </em><em>array-like of ints</em>) – Lowest (signed) integers to be drawn from the distribution (unless
+<code class="docutils literal notranslate"><span class="pre">high=None</span></code>, in which case this parameter is one above the
+<em>highest</em> such integer).</p></li>
+<li><p><strong>high</strong> (<em>int</em><em> or </em><em>array-like of ints</em><em>, </em><em>optional</em>) – If provided, one above the largest (signed) integer to be drawn
+from the distribution (see above for behavior if <code class="docutils literal notranslate"><span class="pre">high=None</span></code>).
+If array-like, must contain integer values</p></li>
+<li><p><strong>size</strong> (<em>int</em><em> or </em><em>tuple of ints</em><em>, </em><em>optional</em>) – Output shape.  If the given shape is, e.g., <code class="docutils literal notranslate"><span class="pre">(m,</span> <span class="pre">n,</span> <span class="pre">k)</span></code>, then
+<code class="docutils literal notranslate"><span class="pre">m</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">k</span></code> samples are drawn.  Default is None, in which case a
+single value is returned.</p></li>
+<li><p><strong>dtype</strong> (<em>dtype</em><em>, </em><em>optional</em>) – <p>Desired dtype of the result. Byteorder must be native.
+The default value is int.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">New in version 1.11.0.</span></p>
+</div>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>out</strong> – <cite>size</cite>-shaped array of random integers from the appropriate
+distribution, or a single such random int if <cite>size</cite> not provided.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int or ndarray of ints</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">random_integers</span></code></dt><dd><p>similar to <cite>randint</cite>, only for the closed interval [<cite>low</cite>, <cite>high</cite>], and 1 is the lowest value if <cite>high</cite> is omitted.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Generator.integers</span></code></dt><dd><p>which should be used for new code.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">array([1, 0, 0, 0, 1, 1, 0, 0, 1, 0]) # random</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="go">array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])</span>
+</pre></div>
+</div>
+<p>Generate a 2 x 4 array of ints between 0 and 4, inclusive:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="go">array([[4, 0, 2, 1], # random</span>
+<span class="go">       [3, 2, 2, 0]])</span>
+</pre></div>
+</div>
+<p>Generate a 1 x 3 array with 3 different upper bounds</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="go">array([2, 2, 9]) # random</span>
+</pre></div>
+</div>
+<p>Generate a 1 by 3 array with 3 different lower bounds</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="mi">10</span><span class="p">)</span>
+<span class="go">array([9, 8, 7]) # random</span>
+</pre></div>
+</div>
+<p>Generate a 2 by 4 array using broadcasting with dtype of uint8</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[[</span><span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">20</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+<span class="go">array([[ 8,  6,  9,  7], # random</span>
+<span class="go">       [ 1, 16,  9, 12]], dtype=uint8)</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.randn">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">randn</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">d0</span></em>, <em class="sig-param"><span class="pre">d1</span></em>, <em class="sig-param"><span class="pre">...</span></em>, <em class="sig-param"><span class="pre">dn</span></em><span class="sig-paren">)</span><a class="headerlink" href="#xgb_custom.xgb_custom.randn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a sample (or samples) from the “standard normal” distribution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a convenience function for users porting code from Matlab,
+and wraps <cite>standard_normal</cite>. That function takes a
+tuple to specify the size of the output, which is consistent with
+other NumPy functions like <cite>numpy.zeros</cite> and <cite>numpy.ones</cite>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>New code should use the <code class="docutils literal notranslate"><span class="pre">standard_normal</span></code> method of a <code class="docutils literal notranslate"><span class="pre">default_rng()</span></code>
+instance instead; please see the <span class="xref std std-ref">random-quick-start</span>.</p>
+</div>
+<p>If positive int_like arguments are provided, <cite>randn</cite> generates an array
+of shape <code class="docutils literal notranslate"><span class="pre">(d0,</span> <span class="pre">d1,</span> <span class="pre">...,</span> <span class="pre">dn)</span></code>, filled
+with random floats sampled from a univariate “normal” (Gaussian)
+distribution of mean 0 and variance 1. A single float randomly sampled
+from the distribution is returned if no argument is provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d0</strong> (<em>int</em><em>, </em><em>optional</em>) – The dimensions of the returned array, must be non-negative.
+If no argument is given a single Python float is returned.</p></li>
+<li><p><strong>d1</strong> (<em>int</em><em>, </em><em>optional</em>) – The dimensions of the returned array, must be non-negative.
+If no argument is given a single Python float is returned.</p></li>
+<li><p><strong>..</strong> (<em>int</em><em>, </em><em>optional</em>) – The dimensions of the returned array, must be non-negative.
+If no argument is given a single Python float is returned.</p></li>
+<li><p><strong>dn</strong> (<em>int</em><em>, </em><em>optional</em>) – The dimensions of the returned array, must be non-negative.
+If no argument is given a single Python float is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>Z</strong> – A <code class="docutils literal notranslate"><span class="pre">(d0,</span> <span class="pre">d1,</span> <span class="pre">...,</span> <span class="pre">dn)</span></code>-shaped array of floating-point samples from
+the standard normal distribution, or a single such float if
+no parameters were supplied.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ndarray or float</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">standard_normal</span></code></dt><dd><p>Similar, but takes a tuple as its argument.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">normal</span></code></dt><dd><p>Also accepts mu and sigma arguments.</p>
+</dd>
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Generator.standard_normal</span></code></dt><dd><p>which should be used for new code.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>For random samples from <span class="math notranslate nohighlight">\(N(\mu, \sigma^2)\)</span>, use:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sigma</span> <span class="pre">*</span> <span class="pre">np.random.randn(...)</span> <span class="pre">+</span> <span class="pre">mu</span></code></p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+<span class="go">2.1923875335537315  # random</span>
+</pre></div>
+</div>
+<p>Two-by-four array of samples from N(3, 6.25):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="mi">3</span> <span class="o">+</span> <span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="go">array([[-4.49401501,  4.00950034, -1.81814867,  7.29718677],   # random</span>
+<span class="go">       [ 0.39924804,  4.68456316,  4.99394529,  4.84057254]])  # random</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.rmsle">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">rmsle</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predt</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtrain</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">xgboost.DMatrix</span></span></em><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/xgb_custom/xgb_custom.html#rmsle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xgb_custom.xgb_custom.rmsle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root mean squared log error metric.</p>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.seed">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">seed</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">self</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#xgb_custom.xgb_custom.seed" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reseed a legacy MT19937 BitGenerator</p>
+<p class="rubric">Notes</p>
+<p>This is a convenience, legacy function.</p>
+<p>The best practice is to <strong>not</strong> reseed a BitGenerator, rather to
+recreate a new one. This method is here for legacy reasons.
+This example demonstrates best practice.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">MT19937</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">RandomState</span><span class="p">,</span> <span class="n">SeedSequence</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rs</span> <span class="o">=</span> <span class="n">RandomState</span><span class="p">(</span><span class="n">MT19937</span><span class="p">(</span><span class="n">SeedSequence</span><span class="p">(</span><span class="mi">123456789</span><span class="p">)))</span>
+<span class="go"># Later, you want to restart the stream</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rs</span> <span class="o">=</span> <span class="n">RandomState</span><span class="p">(</span><span class="n">MT19937</span><span class="p">(</span><span class="n">SeedSequence</span><span class="p">(</span><span class="mi">987654321</span><span class="p">)))</span>
+</pre></div>
+</div>
+</dd></dl>
+<dl class="py function">
+<dt id="xgb_custom.xgb_custom.squared_log">
+<code class="sig-prename descclassname"><span class="pre">xgb_custom.xgb_custom.</span></code><code class="sig-name descname"><span class="pre">squared_log</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">predt</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtrain</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">xgboost.DMatrix</span></span></em><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">,</span> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="_modules/xgb_custom/xgb_custom.html#squared_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#xgb_custom.xgb_custom.squared_log" title="Permalink to this definition">¶</a></dt>
+<dd><p>squared log error objective</p>
+<p>simplified version for RMSLE used as objective function</p>
+</dd></dl>
+</div>
+<div class="section" id="module-xgb_custom">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-xgb_custom" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+apiVersion: v1
+categories:
+- data-prep
+description: Rolling aggregation over Metrics and Lables according to specifications
+doc: ''
+example: aggregate.ipynb
+generationDate: 2021-05-19:22-31
+icon: ''
+labels:
+  author: avia
+maintainers: []
+marketplaceType: ''
+mlrunVersion: 0.6.2
+name: aggregate
+platformVersion: 3.0.0
+spec:
+  filename: aggregate.py
+  handler: aggregate
+  image: mlrun/mlrun
+  kind: job
+  requirements: []
+url: ''
+version: 0.0.1
