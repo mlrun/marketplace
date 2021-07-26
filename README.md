@@ -1,3 +1,7 @@
+### Change log [2021-07-26 15:21:44]
+1. New item created: `open_archive` (version: `0.0.1`)
+2. New item created: `arc_to_parquet` (version: `0.0.1`)
+
 ### Change log [2021-05-26 23:15:30]
 1. New item created: `pandas_profiling_report` (version: `0.0.1`)
 2. New item created: `xgb_trainer` (version: `0.0.1`)
