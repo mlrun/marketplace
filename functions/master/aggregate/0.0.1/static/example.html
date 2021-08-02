@@ -1,0 +1,571 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aggregate Function Example</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/aggregate_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Faggregate_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/aggregate_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#show-results">
+   Show results
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="aggregate-function-example">
+<h1>Aggregate Function Example<a class="headerlink" href="#aggregate-function-example" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Time-series aggregation function<br/>
+performs a rolling aggregation on {df_artifact}, over {window} by the selected {keys}
+applying {metric_aggs} on {metrics} and {label_aggs} on {labels}. adding {suffix} to the
+feature names.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>/User/align_mlrun.sh
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Both server &amp; client are aligned (0.6.5).
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">import_function</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># declare the dataset</span>
+<span class="n">DATA</span> <span class="o">=</span> <span class="s2">"https://s3.wasabisys.com/iguazio/data/market-palce/aggregate/metrics.pq"</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import the function</span>
+<span class="n">aggregate_function</span> <span class="o">=</span> <span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://aggregate"</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">platforms</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aggregate_run</span> <span class="o">=</span> <span class="n">aggregate_function</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'metrics'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'cpu_utilization'</span><span class="p">],</span>
+               <span class="s1">'labels'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'is_error'</span><span class="p">],</span>
+               <span class="s1">'metric_aggs'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+               <span class="s1">'label_aggs'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'max'</span><span class="p">],</span>
+               <span class="s1">'suffix'</span><span class="p">:</span> <span class="s1">'daily'</span><span class="p">,</span>
+               <span class="s1">'inplace'</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+               <span class="s1">'window'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+               <span class="s1">'center'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>               
+               <span class="s1">'files_to_select'</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>           
+           <span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">'df_artifact'</span><span class="p">:</span> <span class="n">DATA</span><span class="p">}</span>
+           <span class="p">)</span>
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-07-26 10:43:47,828 [info] starting run aggregate-aggregate uid=3d1a344b77df4507a79fdec73b3519b3 DB=http://mlrun-api:8080
+&gt; 2021-07-26 10:43:47,986 [info] Job is running in the background, pod: aggregate-aggregate-9lcqf
+&gt; 2021-07-26 10:43:52,200 [info] Aggregating https://s3.wasabisys.com/iguazio/data/market-palce/aggregate/metrics.pq
+&gt; 2021-07-26 10:43:52,741 [info] Logging artifact
+&gt; 2021-07-26 10:43:52,878 [info] run executed, status=completed
+Converting input from bool to &lt;class 'numpy.uint8'&gt; for compatibility.
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="3d1a344b77df4507a79fdec73b3519b3"><a href="https://dashboard.default-tenant.app.app-lab-testing.iguazio-cd2.com/mlprojects/default/jobs/monitor/3d1a344b77df4507a79fdec73b3519b3/overview" target="_blank">...3b3519b3</a></div></td>
+<td>0</td>
+<td>Jul 26 10:43:52</td>
+<td>completed</td>
+<td>aggregate-aggregate</td>
+<td><div class="dictlist">v3io_user=avia</div><div class="dictlist">kind=job</div><div class="dictlist">owner=avia</div><div class="dictlist">host=aggregate-aggregate-9lcqf</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/market-palce/aggregate/metrics.pq">df_artifact</div></td>
+<td><div class="dictlist">metrics=['cpu_utilization']</div><div class="dictlist">labels=['is_error']</div><div class="dictlist">metric_aggs=['mean', 'sum']</div><div class="dictlist">label_aggs=['max']</div><div class="dictlist">suffix=daily</div><div class="dictlist">inplace=False</div><div class="dictlist">window=5</div><div class="dictlist">center=True</div><div class="dictlist">files_to_select=2</div></td>
+<td></td>
+<td><div title="v3io:///projects/default/artifacts/aggregated-df.pq">aggregate</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result74cebba6-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result74cebba6-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result74cebba6">×</span>
+</div>
+<iframe class="fileview" id="result74cebba6-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run 3d1a344b77df4507a79fdec73b3519b3 --project default , !mlrun logs 3d1a344b77df4507a79fdec73b3519b3 --project default
+&gt; 2021-07-26 10:43:54,122 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+<p>Convert the code to an MLRun function</p>
+<div class="section" id="show-results">
+<h2>Show results<a class="headerlink" href="#show-results" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aggregate_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s1">'aggregate'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th>cpu_utilization</th>
+<th>latency</th>
+<th>packet_loss</th>
+<th>throughput</th>
+<th>is_error</th>
+<th>cpu_utilization_mean_daily</th>
+<th>cpu_utilization_sum_daily</th>
+<th>is_error_max_daily</th>
+</tr>
+<tr>
+<th>timestamp</th>
+<th>company</th>
+<th>data_center</th>
+<th>device</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th rowspan="5" valign="top">2021-04-27 14:46:46.780</th>
+<th rowspan="2" valign="top">Smith_Group</th>
+<th rowspan="2" valign="top">Debra_Gateway</th>
+<th>0388020295311</th>
+<td>73.243063</td>
+<td>9.372341</td>
+<td>2.170138</td>
+<td>260.883807</td>
+<td>False</td>
+<td>66.482142</td>
+<td>332.410712</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>9633813691441</th>
+<td>60.830420</td>
+<td>12.241878</td>
+<td>2.295717</td>
+<td>244.238613</td>
+<td>False</td>
+<td>63.920820</td>
+<td>319.604098</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th rowspan="3" valign="top">Ferrell_Ltd</th>
+<th rowspan="2" valign="top">Murphy_Meadow</th>
+<th>1517129765931</th>
+<td>72.647964</td>
+<td>0.535463</td>
+<td>0.000000</td>
+<td>212.944943</td>
+<td>False</td>
+<td>68.488200</td>
+<td>342.441002</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>6964486699383</th>
+<td>62.792277</td>
+<td>1.758166</td>
+<td>3.840787</td>
+<td>238.125042</td>
+<td>False</td>
+<td>64.804826</td>
+<td>324.024128</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>Nicholas_Estate</th>
+<th>8002897098167</th>
+<td>72.927277</td>
+<td>4.996304</td>
+<td>1.528991</td>
+<td>235.680379</td>
+<td>False</td>
+<td>71.184971</td>
+<td>355.924855</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>...</th>
+<th>...</th>
+<th>...</th>
+<th>...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr>
+<th rowspan="5" valign="top">2021-04-27 15:46:46.780</th>
+<th rowspan="3" valign="top">Smith_Group</th>
+<th>Denise_Crest</th>
+<th>2891755865712</th>
+<td>68.366869</td>
+<td>6.541913</td>
+<td>0.000000</td>
+<td>235.135714</td>
+<td>False</td>
+<td>68.616762</td>
+<td>343.083810</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th rowspan="2" valign="top">Debra_Gateway</th>
+<th>0388020295311</th>
+<td>50.567891</td>
+<td>3.827033</td>
+<td>0.000000</td>
+<td>215.669876</td>
+<td>False</td>
+<td>67.013836</td>
+<td>335.069180</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>9633813691441</th>
+<td>77.875954</td>
+<td>3.250584</td>
+<td>0.000000</td>
+<td>245.150281</td>
+<td>False</td>
+<td>66.124137</td>
+<td>330.620687</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th rowspan="2" valign="top">Ferrell_Ltd</th>
+<th rowspan="2" valign="top">Murphy_Meadow</th>
+<th>1517129765931</th>
+<td>77.831459</td>
+<td>0.000000</td>
+<td>0.000000</td>
+<td>235.109321</td>
+<td>False</td>
+<td>64.103853</td>
+<td>320.519265</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>6964486699383</th>
+<td>55.978514</td>
+<td>2.977447</td>
+<td>0.533963</td>
+<td>277.622402</td>
+<td>False</td>
+<td>68.239283</td>
+<td>341.196414</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+<p>5764 rows × 8 columns</p>
+</div></div></div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
