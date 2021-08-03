@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>&lt;no title&gt;</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/rnn_serving_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Frnn_serving_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/rnn_serving_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="simple visible nav section-nav flex-column">
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: ignore</span>
+<span class="kn">import</span> <span class="nn">nuclio</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">nuclio</span> config 
+spec.build.baseImage = "mlrun/mlrun"
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">nuclio</span> config kind="serving"
+<span class="o">%</span><span class="k">nuclio</span> cmd python -m pip install torch==1.6.0
+<span class="o">%</span><span class="k">nuclio</span> cmd python -m pip install tensorflow
+<span class="o">%</span><span class="k">nuclio</span> cmd python -m pip install keras
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">keras</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RNN_Model_Serving</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">serving</span><span class="o">.</span><span class="n">V2ModelServer</span><span class="p">):</span>
+
+
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">"""load and initialize the model and/or other elements"""</span>
+        <span class="n">model_file</span><span class="p">,</span><span class="n">extra_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">suffix</span> <span class="o">=</span> <span class="s2">".h5"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="sd">"""Generate model predictions from sample."""</span>
+            <span class="n">feats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">body</span><span class="p">[</span><span class="s1">'inputs'</span><span class="p">])</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feats</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Failed to predict </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test localy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run this to download the pre-trained model to your `models` directory</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">model_location</span> <span class="o">=</span> <span class="s1">'https://igz-app-lab.s3.us-east-2.amazonaws.com/RNN.h5'</span>
+<span class="n">saved_models_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'./'</span><span class="p">),</span> <span class="s1">'models'</span><span class="p">)</span>
+
+<span class="c1"># Create paths</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">saved_models_directory</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model_filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">saved_models_directory</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">model_location</span><span class="p">))</span>
+<span class="o">!</span>wget -nc -P <span class="o">{</span>saved_models_directory<span class="o">}</span> <span class="o">{</span>model_location<span class="o">}</span>
+
+
+
+
+<span class="n">model_dir</span> <span class="o">=</span> <span class="n">model_filepath</span>
+<span class="n">model_server</span> <span class="o">=</span> <span class="n">RNN_Model_Serving</span><span class="p">(</span><span class="n">model_dir</span> <span class="o">=</span> <span class="n">model_dir</span><span class="p">,</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"RNN_serving"</span><span class="p">)</span>
+<span class="n">model_server</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># test remotely</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">new_model_server</span><span class="p">,</span> <span class="n">mount_v3io</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span> <span class="o">=</span> <span class="n">new_model_server</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'RNN-serving'</span><span class="p">,</span>
+                      <span class="n">model_class</span><span class="o">=</span><span class="s1">'RNN_Model_Serving'</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">"RNN based stock prediction"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'RNN'</span><span class="p">,</span> <span class="s1">'Stocks'</span><span class="p">,</span> <span class="s1">'Predictions'</span><span class="p">]</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'author'</span><span class="p">:</span> <span class="s1">'Daniel'</span><span class="p">,</span> <span class="s1">'framework'</span><span class="p">:</span> <span class="s2">"tensorflow, keras"</span><span class="p">}</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">max_replicas</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">"function.yaml"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_v3io</span><span class="p">())</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s1">'RNN_stocks'</span><span class="p">,</span> <span class="s2">"/Users/test/demos/stock-analysis/models/RNN.h5"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-04-25 15:04:37,946 [info] function spec saved to path: function.yaml
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.function.RemoteRuntime at 0x7f6a64571250&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">addr</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-04-25 15:04:37,956 [info] Starting remote function deploy
+2021-04-25 15:04:38  (info) Deploying function
+2021-04-25 15:04:38  (info) Building
+2021-04-25 15:04:38  (info) Staging files and preparing base images
+2021-04-25 15:04:38  (info) Building processor image
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># getting answer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">[[[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0003997438873852843</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0031504590166214763</span><span class="p">,</span> <span class="mf">0.07695351128043912</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0076737889289563155</span><span class="p">,</span> <span class="mf">0.0011658857834522252</span><span class="p">,</span> <span class="mf">0.0034156784725392075</span><span class="p">,</span> <span class="mf">0.0014412414129996165</span><span class="p">,</span> <span class="mf">0.04148475898082488</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.005938872792230376</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.004308552624495143</span><span class="p">,</span> <span class="mf">0.0052619477491432365</span><span class="p">,</span> <span class="mf">0.030420689911339623</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.00974237019744173</span><span class="p">,</span> <span class="mf">0.002864898969104024</span><span class="p">,</span> <span class="mf">0.009126076646371328</span><span class="p">,</span> <span class="mf">0.00754097274129828</span><span class="p">,</span> <span class="mf">0.03420920993845116</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.012044527240189229</span><span class="p">,</span> <span class="mf">0.006196233583000366</span><span class="p">,</span> <span class="mf">0.01248470808067681</span><span class="p">,</span> <span class="mf">0.009082756366275535</span><span class="p">,</span> <span class="mf">0.03354111121910287</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.013579264661919943</span><span class="p">,</span> <span class="mf">0.006129643489857672</span><span class="p">,</span> <span class="mf">0.012247201899718174</span><span class="p">,</span> <span class="mf">0.011462630413374697</span><span class="p">,</span> <span class="mf">0.034077706918863734</span><span class="p">],[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.01594821582320083</span><span class="p">,</span> <span class="mf">0.009427632225050497</span><span class="p">,</span> <span class="mf">0.01567375140495164</span><span class="p">,</span> <span class="mf">0.014746872963329771</span><span class="p">,</span> <span class="mf">0.041772700519581665</span><span class="p">],[</span><span class="mf">0.00030003000301803695</span><span class="p">,</span> <span class="mf">0.015347577857912631</span><span class="p">,</span> <span class="mf">0.01465785196829128</span><span class="p">,</span> <span class="mf">0.010008183299277662</span><span class="p">,</span> <span class="mf">0.015383674399518488</span><span class="p">,</span> <span class="mf">0.09121246281753899</span><span class="p">],[</span><span class="mf">0.00030003000301803695</span><span class="p">,</span> <span class="mf">0.019851802585909906</span><span class="p">,</span> <span class="mf">0.01057694673341536</span><span class="p">,</span> <span class="mf">0.01258648165342402</span><span class="p">,</span> <span class="mf">0.015283029906551948</span><span class="p">,</span> <span class="mf">0.04697070093018961</span><span class="p">],[</span><span class="mf">0.00030003000301803695</span><span class="p">,</span> <span class="mf">0.019718316169145544</span><span class="p">,</span> <span class="mf">0.01062686388720635</span><span class="p">,</span> <span class="mf">0.013909641632783631</span><span class="p">,</span> <span class="mf">0.010724979922241862</span><span class="p">,</span> <span class="mf">0.03015250378874856</span><span class="p">],[</span><span class="mf">0.00030003000301803695</span><span class="p">,</span> <span class="mf">0.015247488500415018</span><span class="p">,</span> <span class="mf">0.007595438853113201</span><span class="p">,</span> <span class="mf">0.011372653202875505</span><span class="p">,</span> <span class="mf">0.008378858601442496</span><span class="p">,</span> <span class="mf">0.024210897325231427</span><span class="p">],[</span><span class="mf">0.00030003000301803695</span><span class="p">,</span> <span class="mf">0.012878639159436767</span><span class="p">,</span> <span class="mf">0.008361580749180142</span><span class="p">,</span> <span class="mf">0.012077613789687636</span><span class="p">,</span> <span class="mf">0.013104547126374655</span><span class="p">,</span> <span class="mf">0.023022372892001874</span><span class="p">],[</span><span class="mf">0.00030003000301803695</span><span class="p">,</span> <span class="mf">0.017633036371026645</span><span class="p">,</span> <span class="mf">0.010127184027974745</span><span class="p">,</span> <span class="mf">0.01808246164906735</span><span class="p">,</span> <span class="mf">0.013422334158536331</span><span class="p">,</span> <span class="mf">0.030119960676463234</span><span class="p">],[</span><span class="mf">0.00030003000301803695</span><span class="p">,</span> <span class="mf">0.017983400032419605</span><span class="p">,</span> <span class="mf">0.011592979391230274</span><span class="p">,</span> <span class="mf">0.018353926865489978</span><span class="p">,</span> <span class="mf">0.01575229508310738</span><span class="p">,</span> <span class="mf">0.03006790591664354</span><span class="p">],[</span><span class="mf">0.00040004000402404927</span><span class="p">,</span> <span class="mf">0.026291122165628233</span><span class="p">,</span> <span class="mf">0.018955200421947316</span><span class="p">,</span> <span class="mf">0.01818423522181467</span><span class="p">,</span> <span class="mf">0.015819289130762915</span><span class="p">,</span> <span class="mf">0.07152689652172939</span><span class="p">],[</span><span class="mf">0.00040004000402404927</span><span class="p">,</span> <span class="mf">0.020318954134433742</span><span class="p">,</span> <span class="mf">0.013358582670024766</span><span class="p">,</span> <span class="mf">0.012077613789687636</span><span class="p">,</span> <span class="mf">0.011462323570408328</span><span class="p">,</span> <span class="mf">0.0456794077047931</span><span class="p">],[</span><span class="mf">0.00040004000402404927</span><span class="p">,</span> <span class="mf">0.01588142170466733</span><span class="p">,</span> <span class="mf">0.007395465245156219</span><span class="p">,</span> <span class="mf">0.007908106850034513</span><span class="p">,</span> <span class="mf">0.005597122549398592</span><span class="p">,</span> <span class="mf">0.031427718441502224</span><span class="p">],[</span><span class="mf">0.00040004000402404927</span><span class="p">,</span> <span class="mf">0.010042638269934567</span><span class="p">,</span> <span class="mf">0.005296809836383476</span><span class="p">,</span> <span class="mf">0.009621381602651136</span><span class="p">,</span> <span class="mf">0.00738243720867815</span><span class="p">,</span> <span class="mf">0.02567574365912337</span><span class="p">],[</span><span class="mf">0.00040004000402404927</span><span class="p">,</span> <span class="mf">0.011977834941958365</span><span class="p">,</span> <span class="mf">0.006362759647989491</span><span class="p">,</span> <span class="mf">0.010788412845792017</span><span class="p">,</span> <span class="mf">0.008764355648181232</span><span class="p">,</span> <span class="mf">0.022205280753766737</span><span class="p">],[</span><span class="mf">0.00040004000402404927</span><span class="p">,</span> <span class="mf">0.013178907231929493</span><span class="p">,</span> <span class="mf">0.004497220397348678</span><span class="p">,</span> <span class="mf">0.010177771409308312</span><span class="p">,</span> <span class="mf">0.0074069846459871025</span><span class="p">,</span> <span class="mf">0.025356051256133154</span><span class="p">],[</span><span class="mf">0.00040004000402404927</span><span class="p">,</span> <span class="mf">0.011810951465927255</span><span class="p">,</span> <span class="mf">0.0022319372593224696</span><span class="p">,</span> <span class="mf">0.0040711499771812765</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.031626735214947514</span><span class="p">],[</span><span class="mf">0.0005000500050300616</span><span class="p">,</span> <span class="mf">0.025123446934923743</span><span class="p">,</span> <span class="mf">0.028016434638316157</span><span class="p">,</span> <span class="mf">0.023612400680174672</span><span class="p">,</span> <span class="mf">0.032778090757603406</span><span class="p">,</span> <span class="mf">0.10153228594145776</span><span class="p">],[</span><span class="mf">0.0005000500050300616</span><span class="p">,</span> <span class="mf">0.03713457711584622</span><span class="p">,</span> <span class="mf">0.03174761480386212</span><span class="p">,</span> <span class="mf">0.03477405231513664</span><span class="p">,</span> <span class="mf">0.030096896917537364</span><span class="p">,</span> <span class="mf">0.047626905771733244</span><span class="p">],[</span><span class="mf">0.0005000500050300616</span><span class="p">,</span> <span class="mf">0.03456554905987275</span><span class="p">,</span> <span class="mf">0.025784497378993576</span><span class="p">,</span> <span class="mf">0.03300994254296863</span><span class="p">,</span> <span class="mf">0.02869022647874786</span><span class="p">,</span> <span class="mf">0.028768812095043804</span><span class="p">],[</span><span class="mf">0.0005000500050300616</span><span class="p">,</span> <span class="mf">0.03329870085439446</span><span class="p">,</span> <span class="mf">0.026250831359521554</span><span class="p">,</span> <span class="mf">0.03389163506129611</span><span class="p">,</span> <span class="mf">0.028856842209482148</span><span class="p">,</span> <span class="mf">0.025428460696670638</span><span class="p">],[</span><span class="mf">0.0005000500050300616</span><span class="p">,</span> <span class="mf">0.033264387412404006</span><span class="p">,</span> <span class="mf">0.02518488154791565</span><span class="p">,</span> <span class="mf">0.031652823528145024</span><span class="p">,</span> <span class="mf">0.02952708952900418</span><span class="p">,</span> <span class="mf">0.028119392147072767</span><span class="p">],[</span><span class="mf">0.0005000500050300616</span><span class="p">,</span> <span class="mf">0.03399840997415393</span><span class="p">,</span> <span class="mf">0.029015896021043597</span><span class="p">,</span> <span class="mf">0.03396659342006425</span><span class="p">,</span> <span class="mf">0.03401824774664752</span><span class="p">,</span> <span class="mf">0.033913843613464494</span><span class="p">],[</span><span class="mf">0.0005000500050300616</span><span class="p">,</span> <span class="mf">0.038369148285386845</span><span class="p">,</span> <span class="mf">0.030614871570584734</span><span class="p">,</span> <span class="mf">0.0350454139979145</span><span class="p">,</span> <span class="mf">0.031102319037314974</span><span class="p">,</span> <span class="mf">0.033925229639953834</span><span class="p">],[</span><span class="mf">0.0006000600060360739</span><span class="p">,</span> <span class="mf">0.04257300312058865</span><span class="p">,</span> <span class="mf">0.04390696581173115</span><span class="p">,</span> <span class="mf">0.03887905779413703</span><span class="p">,</span> <span class="mf">0.04573187570650594</span><span class="p">,</span> <span class="mf">0.09803619685873038</span><span class="p">],[</span><span class="mf">0.0006000600060360739</span><span class="p">,</span> <span class="mf">0.05008001039381649</span><span class="p">,</span> <span class="mf">0.04099204802457179</span><span class="p">,</span> <span class="mf">0.045291103478150685</span><span class="p">,</span> <span class="mf">0.041925488708792535</span><span class="p">,</span> <span class="mf">0.036871285277117145</span><span class="p">],[</span><span class="mf">0.0006000600060360739</span><span class="p">,</span> <span class="mf">0.04614302657184077</span><span class="p">,</span> <span class="mf">0.0375107586207738</span><span class="p">,</span> <span class="mf">0.04030399134624385</span><span class="p">,</span> <span class="mf">0.03666589342239146</span><span class="p">,</span> <span class="mf">0.04111875053787802</span><span class="p">],[</span><span class="mf">0.0006000600060360739</span><span class="p">,</span> <span class="mf">0.04090477928209357</span><span class="p">,</span> <span class="mf">0.03571180946327568</span><span class="p">,</span> <span class="mf">0.039964711592538005</span><span class="p">,</span> <span class="mf">0.040218521286923936</span><span class="p">,</span> <span class="mf">0.027399177725746942</span><span class="p">],[</span><span class="mf">0.0006000600060360739</span><span class="p">,</span> <span class="mf">0.044508199792612446</span><span class="p">,</span> <span class="mf">0.03767738635002715</span><span class="p">,</span> <span class="mf">0.04535891801543401</span><span class="p">,</span> <span class="mf">0.042307610482901215</span><span class="p">,</span> <span class="mf">0.030618589411891214</span><span class="p">],[</span><span class="mf">0.0006000600060360739</span><span class="p">,</span> <span class="mf">0.04657678106109786</span><span class="p">,</span> <span class="mf">0.04117524702891262</span><span class="p">,</span> <span class="mf">0.04627560490567262</span><span class="p">,</span> <span class="mf">0.044793447634383865</span><span class="p">,</span> <span class="mf">0.05405884268018613</span><span class="p">],[</span><span class="mf">0.0006000600060360739</span><span class="p">,</span> <span class="mf">0.04910742286297509</span><span class="p">,</span> <span class="mf">0.047837916256705526</span><span class="p">,</span> <span class="mf">0.04749626657677186</span><span class="p">,</span> <span class="mf">0.05335661657762081</span><span class="p">,</span> <span class="mf">0.06314168219836809</span><span class="p">],[</span><span class="mf">0.007700770077008201</span><span class="p">,</span> <span class="mf">0.030194810748639833</span><span class="p">,</span> <span class="mf">0.06282892201923929</span><span class="p">,</span> <span class="mf">0.03002444636418833</span><span class="p">,</span> <span class="mf">0.05895373912701951</span><span class="p">,</span> <span class="mf">0.2321397402054094</span><span class="p">],[</span><span class="mf">0.007700770077008201</span><span class="p">,</span> <span class="mf">0.06292535431428914</span><span class="p">,</span> <span class="mf">0.05726493849616998</span><span class="p">,</span> <span class="mf">0.060116707265659874</span><span class="p">,</span> <span class="mf">0.05526702088618707</span><span class="p">,</span> <span class="mf">0.078071078727893</span><span class="p">],[</span><span class="mf">0.007700770077008201</span><span class="p">,</span> <span class="mf">0.05958890663729899</span><span class="p">,</span> <span class="mf">0.05200208452407595</span><span class="p">,</span> <span class="mf">0.04851400230424485</span><span class="p">,</span> <span class="mf">0.04286626924365666</span><span class="p">,</span> <span class="mf">0.07557726468701688</span><span class="p">],[</span><span class="mf">0.007700770077008201</span><span class="p">,</span> <span class="mf">0.04721071426535017</span><span class="p">,</span> <span class="mf">0.03784391241501628</span><span class="p">,</span> <span class="mf">0.03962543183883216</span><span class="p">,</span> <span class="mf">0.039346780419491134</span><span class="p">,</span> <span class="mf">0.0617907570715274</span><span class="p">],[</span><span class="mf">0.007700770077008201</span><span class="p">,</span> <span class="mf">0.043530928527849455</span><span class="p">,</span> <span class="mf">0.03890996389088652</span><span class="p">,</span> <span class="mf">0.04125391253643351</span><span class="p">,</span> <span class="mf">0.044340956539989596</span><span class="p">,</span> <span class="mf">0.03782111959214908</span><span class="p">],[</span><span class="mf">0.007700770077008201</span><span class="p">,</span> <span class="mf">0.0485636006265614</span><span class="p">,</span> <span class="mf">0.04137511897260526</span><span class="p">,</span> <span class="mf">0.045935703950098494</span><span class="p">,</span> <span class="mf">0.04155011747994375</span><span class="p">,</span> <span class="mf">0.0446209643074681</span><span class="p">],[</span><span class="mf">0.007700770077008201</span><span class="p">,</span> <span class="mf">0.04580936144008119</span><span class="p">,</span> <span class="mf">0.036544643116749764</span><span class="p">,</span> <span class="mf">0.03738630970474699</span><span class="p">,</span> <span class="mf">0.03525830245470285</span><span class="p">,</span> <span class="mf">0.05051381704471508</span><span class="p">],[</span><span class="mf">0.008000800080026238</span><span class="p">,</span> <span class="mf">0.03993728276638431</span><span class="p">,</span> <span class="mf">0.037731268410127417</span><span class="p">,</span> <span class="mf">0.03160944293101264</span><span class="p">,</span> <span class="mf">0.04028224234293831</span><span class="p">,</span> <span class="mf">0.09797242089055323</span><span class="p">],[</span><span class="mf">0.008000800080026238</span><span class="p">,</span> <span class="mf">0.04313250568360927</span><span class="p">,</span> <span class="mf">0.03691114278969587</span><span class="p">,</span> <span class="mf">0.041932368510200546</span><span class="p">,</span> <span class="mf">0.040620792415823725</span><span class="p">,</span> <span class="mf">0.03983262723887141</span><span class="p">],[</span><span class="mf">0.008000800080026238</span><span class="p">,</span> <span class="mf">0.04514213299686476</span><span class="p">,</span> <span class="mf">0.03984273351620693</span><span class="p">,</span> <span class="mf">0.04647853084929898</span><span class="p">,</span> <span class="mf">0.0439723358564007</span><span class="p">,</span> <span class="mf">0.03439152856064892</span><span class="p">],[</span><span class="mf">0.008000800080026238</span><span class="p">,</span> <span class="mf">0.048335115867431555</span><span class="p">,</span> <span class="mf">0.03857681009664404</span><span class="p">,</span> <span class="mf">0.03775954849391683</span><span class="p">,</span> <span class="mf">0.0353588446666806</span><span class="p">,</span> <span class="mf">0.04126804866755406</span><span class="p">],[</span><span class="mf">0.008000800080026238</span><span class="p">,</span> <span class="mf">0.0397703992903532</span><span class="p">,</span> <span class="mf">0.03627818107991432</span><span class="p">,</span> <span class="mf">0.0411181799282222</span><span class="p">,</span> <span class="mf">0.04165976269992355</span><span class="p">,</span> <span class="mf">0.029229849676112238</span><span class="p">],[</span><span class="mf">0.008000800080026238</span><span class="p">,</span> <span class="mf">0.04600954015507641</span><span class="p">,</span> <span class="mf">0.04194149058924401</span><span class="p">,</span> <span class="mf">0.04400190253425518</span><span class="p">,</span> <span class="mf">0.04668707786078907</span><span class="p">,</span> <span class="mf">0.04065361967520816</span><span class="p">],[</span><span class="mf">0.008000800080026238</span><span class="p">,</span> <span class="mf">0.05101421167056164</span><span class="p">,</span> <span class="mf">0.04513954335259052</span><span class="p">,</span> <span class="mf">0.051906592774014215</span><span class="p">,</span> <span class="mf">0.04899965101726622</span><span class="p">,</span> <span class="mf">0.03669087617586497</span><span class="p">],[</span><span class="mf">0.00810081008103225</span><span class="p">,</span> <span class="mf">0.05958890663729899</span><span class="p">,</span> <span class="mf">0.060596883095652365</span><span class="p">,</span> <span class="mf">0.05923460061275354</span><span class="p">,</span> <span class="mf">0.06327715652305188</span><span class="p">,</span> <span class="mf">0.0879437184546251</span><span class="p">],[</span><span class="mf">0.00810081008103225</span><span class="p">,</span> <span class="mf">0.06756306545905066</span><span class="p">,</span> <span class="mf">0.062162614430754326</span><span class="p">,</span> <span class="mf">0.06873391604829482</span><span class="p">,</span> <span class="mf">0.06699742292820654</span><span class="p">,</span> <span class="mf">0.04326880002341804</span><span class="p">],[</span><span class="mf">0.00810081008103225</span><span class="p">,</span> <span class="mf">0.0711663841492669</span><span class="p">,</span> <span class="mf">0.06549394904465067</span><span class="p">,</span> <span class="mf">0.0727161306246723</span><span class="p">,</span> <span class="mf">0.06872341461398956</span><span class="p">,</span> <span class="mf">0.04025076154082211</span><span class="p">],[</span><span class="mf">0.00810081008103225</span><span class="p">,</span> <span class="mf">0.07293469734525959</span><span class="p">,</span> <span class="mf">0.06572716686704694</span><span class="p">,</span> <span class="mf">0.07304246867278985</span><span class="p">,</span> <span class="mf">0.07101921368830555</span><span class="p">,</span> <span class="mf">0.03401019316500588</span><span class="p">],[</span><span class="mf">0.00810081008103225</span><span class="p">,</span> <span class="mf">0.07523685438800698</span><span class="p">,</span> <span class="mf">0.06839229555672255</span><span class="p">,</span> <span class="mf">0.07562087056058087</span><span class="p">,</span> <span class="mf">0.07413622682159382</span><span class="p">,</span> <span class="mf">0.042899714001500375</span><span class="p">],[</span><span class="mf">0.00810081008103225</span><span class="p">,</span> <span class="mf">0.07830643105177104</span><span class="p">,</span> <span class="mf">0.06949159124703208</span><span class="p">,</span> <span class="mf">0.07365311010927356</span><span class="p">,</span> <span class="mf">0.06820259981908527</span><span class="p">,</span> <span class="mf">0.0531809708965342</span><span class="p">],[</span><span class="mf">0.00810081008103225</span><span class="p">,</span> <span class="mf">0.07233416120027403</span><span class="p">,</span> <span class="mf">0.06372834576585618</span><span class="p">,</span> <span class="mf">0.06798754200359969</span><span class="p">,</span> <span class="mf">0.06445021718345156</span><span class="p">,</span> <span class="mf">0.05271274214084092</span><span class="p">],[</span><span class="mf">0.008200820082038263</span><span class="p">,</span> <span class="mf">0.07760570372898534</span><span class="p">,</span> <span class="mf">0.07595438853113234</span><span class="p">,</span> <span class="mf">0.07419593700847404</span><span class="p">,</span> <span class="mf">0.0738178261034993</span><span class="p">,</span> <span class="mf">0.1051673434581077</span><span class="p">],[</span><span class="mf">0.008200820082038263</span><span class="p">,</span> <span class="mf">0.07803945821824254</span><span class="p">,</span> <span class="mf">0.07592104265242872</span><span class="p">,</span> <span class="mf">0.07908127556763367</span><span class="p">,</span> <span class="mf">0.0799008856306257</span><span class="p">,</span> <span class="mf">0.06479979642881596</span><span class="p">],[</span><span class="mf">0.008200820082038263</span><span class="p">,</span> <span class="mf">0.0840451251290063</span><span class="p">,</span> <span class="mf">0.07642072251166032</span><span class="p">,</span> <span class="mf">0.08345774626305669</span><span class="p">,</span> <span class="mf">0.07933107824209251</span><span class="p">,</span> <span class="mf">0.038738024827896046</span><span class="p">],[</span><span class="mf">0.008200820082038263</span><span class="p">,</span> <span class="mf">0.08354457652121561</span><span class="p">,</span> <span class="mf">0.07695374824959555</span><span class="p">,</span> <span class="mf">0.08169353295724402</span><span class="p">,</span> <span class="mf">0.07758759650722691</span><span class="p">,</span> <span class="mf">0.037608309576979866</span><span class="p">]]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">event_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'inputs'</span><span class="p">:</span><span class="n">X_test</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
+
+<span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">addr</span><span class="o">+</span><span class="s2">"/RNN_stocks/predict"</span><span class="p">,</span> <span class="n">json</span> <span class="o">=</span> <span class="n">event_data</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>

@@ -1,0 +1,1196 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Import and Config</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.e8e5499552300ddf5d7adccae7cc3b70.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/describe_spark_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fdescribe_spark_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/describe_spark_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#">
+   Import and Config
+  </a>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#build-spark-describe-helper-functions">
+   Build Spark Describe Helper Functions
+  </a>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#build-spark-describe-function">
+   Build Spark Describe Function
+  </a>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#save-and-config">
+   Save and Config
+  </a>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#set-environment">
+   Set Environment
+  </a>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-and-save-outputs">
+   Run and Save Outputs
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="import-and-config">
+<h1>Import and Config<a class="headerlink" href="#import-and-config" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: ignore</span>
+<span class="kn">import</span> <span class="nn">nuclio</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">nuclio</span> config kind = "job"
+<span class="o">%</span><span class="k">nuclio</span> config spec.image = "iguazio/shell:3.0_b5565_20201026062233_wsdf" # docker image available on idan707/spark_shell 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>%nuclio: setting kind to 'job'
+%nuclio: setting spec.image to 'iguazio/shell:3.0_b5565_20201026062233_wsdf'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">from</span> <span class="nn">mlrun.platforms.iguazio</span> <span class="kn">import</span> <span class="n">mount_v3io</span><span class="p">,</span> <span class="n">mount_v3iod</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore</span> <span class="kn">import</span> <span class="n">DataItem</span>
+<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">run</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">LongType</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="build-spark-describe-helper-functions">
+<h1>Build Spark Describe Helper Functions<a class="headerlink" href="#build-spark-describe-helper-functions" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">base64</span> <span class="k">as</span> <span class="nn">b64</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">pkg_resources</span> <span class="kn">import</span> <span class="n">resource_filename</span>
+<span class="kn">import</span> <span class="nn">six</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">DataFrame</span> <span class="k">as</span> <span class="n">SparkDataFrame</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="p">(</span><span class="nb">abs</span> <span class="k">as</span> <span class="n">df_abs</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">countDistinct</span><span class="p">,</span>
+                                   <span class="nb">max</span> <span class="k">as</span> <span class="n">df_max</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="nb">min</span> <span class="k">as</span> <span class="n">df_min</span><span class="p">,</span>
+                                   <span class="nb">sum</span> <span class="k">as</span> <span class="n">df_sum</span><span class="p">,</span> <span class="n">when</span>
+                                   <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">variance</span><span class="p">,</span> <span class="n">stddev</span><span class="p">,</span> <span class="n">kurtosis</span><span class="p">,</span> <span class="n">skewness</span>
+
+
+<span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">corr_reject</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">SparkDataFrame</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"df must be of type pyspark.sql.DataFrame"</span><span class="p">)</span>
+
+    <span class="c1"># Number of rows:</span>
+    <span class="n">table_stats</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"n"</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()}</span>
+    <span class="k">if</span> <span class="n">table_stats</span><span class="p">[</span><span class="s2">"n"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"df cannot be empty"</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">matplotlib</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s2">"default"</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># Function to "pretty name" floats:</span>
+    <span class="k">def</span> <span class="nf">pretty_name</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">*=</span> <span class="mi">100</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">'</span><span class="si">%.0f%%</span><span class="s1">'</span> <span class="o">%</span> <span class="n">x</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">'</span><span class="si">%.1f%%</span><span class="s1">'</span> <span class="o">%</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">corr_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">columns</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+        <span class="n">combinations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">columns</span><span class="p">,</span><span class="n">columns</span><span class="p">))</span>
+
+        <span class="k">def</span> <span class="nf">separate</span><span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">n</span><span class="p">):</span>
+                <span class="k">yield</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="p">]</span>
+
+        <span class="n">grouped</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">separate</span><span class="p">(</span><span class="n">combinations</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)))</span>
+        <span class="n">df_cleaned</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="o">*</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">how</span><span class="o">=</span><span class="s2">"any"</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">grouped</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+                <span class="n">i</span><span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="n">j</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="p">(</span><span class="n">df_cleaned</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])),)</span>
+
+        <span class="n">df_pandas</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">grouped</span><span class="p">)</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">df_pandas</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
+        <span class="n">df_pandas</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">columns</span>
+        
+        <span class="k">return</span> <span class="n">df_pandas</span>
+
+    <span class="k">def</span> <span class="nf">create_hist_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">minim</span><span class="p">,</span> <span class="n">maxim</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">create_all_conditions</span><span class="p">(</span><span class="n">current_col</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">left_edges</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+            <span class="sd">"""</span>
+<span class="sd">            Recursive function that exploits the</span>
+<span class="sd">            ability to call the Spark SQL Column method</span>
+<span class="sd">            .when() in a recursive way.</span>
+<span class="sd">            """</span>
+            <span class="n">left_edges</span> <span class="o">=</span> <span class="n">left_edges</span><span class="p">[:]</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">left_edges</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">current_col</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">left_edges</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">next_col</span> <span class="o">=</span> <span class="n">current_col</span><span class="o">.</span><span class="n">when</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">float</span><span class="p">(</span><span class="n">left_edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">count</span><span class="p">)</span>
+                <span class="n">left_edges</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">create_all_conditions</span><span class="p">(</span><span class="n">next_col</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">left_edges</span><span class="p">[:],</span> <span class="n">count</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">next_col</span> <span class="o">=</span> <span class="n">current_col</span><span class="o">.</span><span class="n">when</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">left_edges</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span>
+                                        <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="n">left_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="n">count</span><span class="p">)</span>
+            <span class="n">left_edges</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">create_all_conditions</span><span class="p">(</span><span class="n">next_col</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">left_edges</span><span class="p">[:],</span> <span class="n">count</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">num_range</span> <span class="o">=</span> <span class="n">maxim</span> <span class="o">-</span> <span class="n">minim</span>
+        <span class="n">bin_width</span> <span class="o">=</span> <span class="n">num_range</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">bins</span><span class="p">)</span>
+        <span class="n">left_edges</span> <span class="o">=</span> <span class="p">[</span><span class="n">minim</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">_bin</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bins</span><span class="p">):</span>
+            <span class="n">left_edges</span> <span class="o">=</span> <span class="n">left_edges</span> <span class="o">+</span> <span class="p">[</span><span class="n">left_edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bin_width</span><span class="p">]</span>
+        <span class="n">left_edges</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">expression_col</span> <span class="o">=</span> <span class="n">when</span><span class="p">((</span><span class="nb">float</span><span class="p">(</span><span class="n">left_edges</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;=</span> <span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span>
+                              <span class="o">&amp;</span> <span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="n">left_edges</span><span class="p">[</span><span class="mi">1</span><span class="p">])),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">left_edges_copy</span> <span class="o">=</span> <span class="n">left_edges</span><span class="p">[:]</span>
+        <span class="n">left_edges_copy</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">bin_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span>
+                    <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                    <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">),</span>
+                            <span class="n">create_all_conditions</span><span class="p">(</span><span class="n">expression_col</span><span class="p">,</span>
+                                                  <span class="n">column</span><span class="p">,</span>
+                                                  <span class="n">left_edges_copy</span>
+                                                 <span class="p">)</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"bin_id"</span><span class="p">)</span>
+                           <span class="p">)</span>
+                    <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"bin_id"</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+                   <span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+
+        <span class="n">bin_data</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">bin_data</span><span class="p">[</span><span class="s2">"bin_id"</span><span class="p">]</span>
+        <span class="n">new_index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">bins</span><span class="p">))</span>
+        <span class="n">bin_data</span> <span class="o">=</span> <span class="n">bin_data</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">new_index</span><span class="p">)</span>
+        <span class="n">bin_data</span><span class="p">[</span><span class="s2">"bin_id"</span><span class="p">]</span> <span class="o">=</span> <span class="n">bin_data</span><span class="o">.</span><span class="n">index</span>
+        <span class="n">bin_data</span> <span class="o">=</span> <span class="n">bin_data</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">bin_data</span><span class="p">[</span><span class="s2">"left_edge"</span><span class="p">]</span> <span class="o">=</span> <span class="n">left_edges</span>
+        <span class="n">bin_data</span><span class="p">[</span><span class="s2">"width"</span><span class="p">]</span> <span class="o">=</span> <span class="n">bin_width</span>
+        
+
+        <span class="k">return</span> <span class="n">bin_data</span>
+
+
+    <span class="k">def</span> <span class="nf">describe_integer_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">current_result</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
+        
+        <span class="n">stats_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">),</span>
+                                                       <span class="n">df_min</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"min"</span><span class="p">),</span>
+                                                       <span class="n">df_max</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"max"</span><span class="p">),</span>
+                                                       <span class="n">variance</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"variance"</span><span class="p">),</span>
+                                                       <span class="n">kurtosis</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"kurtosis"</span><span class="p">),</span>
+                                                       <span class="n">stddev</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"std"</span><span class="p">),</span>
+                                                       <span class="n">skewness</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"skewness"</span><span class="p">),</span>
+                                                       <span class="n">df_sum</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"sum"</span><span class="p">)</span>
+                                                       <span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">]):</span>
+            <span class="n">stats_df</span><span class="p">[</span><span class="n">pretty_name</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                                        <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                                        <span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s2">"percentile(`</span><span class="si">{col}</span><span class="s2">`,CAST(</span><span class="si">{n}</span><span class="s2"> AS DOUBLE))"</span>
+                                                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+                                        <span class="p">)</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">stats_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">stats</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">column</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"range"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"max"</span><span class="p">]</span> <span class="o">-</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"min"</span><span class="p">]</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"iqr"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="n">pretty_name</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)]</span> <span class="o">-</span> <span class="n">stats</span><span class="p">[</span><span class="n">pretty_name</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)]</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"cv"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"std"</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">"mean"</span><span class="p">])</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"mad"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df_abs</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s2">"mean"</span><span class="p">])</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">))</span>
+                        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">df_sum</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">)))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">current_result</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]))</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"NUM"</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s1">'n_zeros'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">==</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s1">'p_zeros'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">'n_zeros'</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+
+        <span class="n">hist_data</span> <span class="o">=</span> <span class="n">create_hist_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"min"</span><span class="p">],</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"max"</span><span class="p">],</span> <span class="n">bins</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">stats</span>
+
+    <span class="k">def</span> <span class="nf">describe_float_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">current_result</span><span class="p">,</span> <span class="n">nrows</span><span class="p">):</span>
+        <span class="n">stats_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"mean"</span><span class="p">),</span>
+                                                       <span class="n">df_min</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"min"</span><span class="p">),</span>
+                                                       <span class="n">df_max</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"max"</span><span class="p">),</span>
+                                                       <span class="n">variance</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"variance"</span><span class="p">),</span>
+                                                       <span class="n">kurtosis</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"kurtosis"</span><span class="p">),</span>
+                                                       <span class="n">stddev</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"std"</span><span class="p">),</span>
+                                                       <span class="n">skewness</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"skewness"</span><span class="p">),</span>
+                                                       <span class="n">df_sum</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"sum"</span><span class="p">)</span>
+                                                       <span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">]):</span>
+            <span class="n">stats_df</span><span class="p">[</span><span class="n">pretty_name</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                                        <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                                        <span class="o">.</span><span class="n">selectExpr</span><span class="p">(</span><span class="s2">"percentile_approx(`</span><span class="si">{col}</span><span class="s2">`,CAST(</span><span class="si">{n}</span><span class="s2"> AS DOUBLE))"</span>
+                                                    <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+                                        <span class="p">)</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">stats_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">stats</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">column</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"range"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"max"</span><span class="p">]</span> <span class="o">-</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"min"</span><span class="p">]</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"iqr"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="n">pretty_name</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)]</span> <span class="o">-</span> <span class="n">stats</span><span class="p">[</span><span class="n">pretty_name</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)]</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"cv"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"std"</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">"mean"</span><span class="p">])</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"mad"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                        <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">df_abs</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">-</span><span class="n">stats</span><span class="p">[</span><span class="s2">"mean"</span><span class="p">])</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">))</span>
+                        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">df_sum</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s2">"delta"</span><span class="p">)))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">current_result</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]))</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"NUM"</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s1">'n_zeros'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">==</span><span class="mf">0.0</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s1">'p_zeros'</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s1">'n_zeros'</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+
+        <span class="n">hist_data</span> <span class="o">=</span> <span class="n">create_hist_data</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"min"</span><span class="p">],</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"max"</span><span class="p">],</span> <span class="n">bins</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">stats</span>
+
+    <span class="k">def</span> <span class="nf">describe_date_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+        <span class="n">stats_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">df_min</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"min"</span><span class="p">),</span>
+                                                   <span class="n">df_max</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"max"</span><span class="p">)</span>
+                                                  <span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">stats_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">stats</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">column</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">"max"</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">):</span>
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
+            <span class="n">stats</span><span class="p">[</span><span class="s2">"max"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">"max"</span><span class="p">]</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">())</span>
+            <span class="n">stats</span><span class="p">[</span><span class="s2">"min"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">"min"</span><span class="p">]</span><span class="o">.</span><span class="n">to_pydatetime</span><span class="p">())</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stats</span><span class="p">[</span><span class="s2">"range"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"max"</span><span class="p">]</span> <span class="o">-</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"min"</span><span class="p">]</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"DATE"</span>
+        <span class="k">return</span> <span class="n">stats</span>
+
+    <span class="k">def</span> <span class="nf">guess_json_type</span><span class="p">(</span><span class="n">string_value</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">string_value</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">describe_categorical_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+        <span class="n">value_counts</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                        <span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                        <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)))</span>
+                        <span class="o">.</span><span class="n">orderBy</span><span class="p">(</span><span class="s2">"count(</span><span class="si">{c}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">column</span><span class="p">),</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                       <span class="p">)</span><span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+
+        <span class="c1"># Get the most frequent class:</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="p">(</span><span class="n">value_counts</span>
+                 <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                 <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="s2">"top"</span><span class="p">)</span>
+                 <span class="o">.</span><span class="n">withColumnRenamed</span><span class="p">(</span><span class="s2">"count(</span><span class="si">{c}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">column</span><span class="p">),</span> <span class="s2">"freq"</span><span class="p">)</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">top_50</span> <span class="o">=</span> <span class="n">value_counts</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">"count(</span><span class="si">{c}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">column</span><span class="p">),</span>
+                                                               <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">top_50_categories</span> <span class="o">=</span> <span class="n">top_50</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="n">others_count</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                        <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="o">*</span><span class="n">top_50_categories</span><span class="p">)))</span>
+                        <span class="o">.</span><span class="n">count</span><span class="p">()</span>
+                        <span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"***Other Values***"</span><span class="p">])</span>
+        <span class="n">others_distinct_count</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">value_counts</span>
+                                <span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="o">*</span><span class="n">top_50_categories</span><span class="p">)))</span>
+                                <span class="o">.</span><span class="n">count</span><span class="p">()</span>
+                                <span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">"***Other Values Distinct Count***"</span><span class="p">])</span>
+
+        <span class="n">top</span> <span class="o">=</span> <span class="n">top_50</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="n">column</span><span class="p">)[</span><span class="s2">"count(</span><span class="si">{c}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">column</span><span class="p">)]</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">others_count</span><span class="p">)</span>
+        <span class="n">top</span> <span class="o">=</span> <span class="n">top</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">others_distinct_count</span><span class="p">)</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"value_counts"</span><span class="p">]</span> <span class="o">=</span> <span class="n">top</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"CAT"</span>
+        <span class="n">value_counts</span><span class="o">.</span><span class="n">unpersist</span><span class="p">()</span>
+        <span class="n">unparsed_valid_jsons</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">rdd</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">guess_json_type</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">column</span><span class="p">]))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"unparsed_json_types"</span><span class="p">]</span> <span class="o">=</span> <span class="n">unparsed_valid_jsons</span>
+        <span class="k">return</span> <span class="n">stats</span>
+
+    <span class="k">def</span> <span class="nf">describe_constant_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">'CONST'</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'type'</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"value_counts"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                                 <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                                 <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">stats</span>
+
+    <span class="k">def</span> <span class="nf">describe_unique_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">):</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">'UNIQUE'</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'type'</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">column</span><span class="p">)</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">"value_counts"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                                 <span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span>
+                                 <span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">stats</span>
+
+    <span class="k">def</span> <span class="nf">describe_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">nrows</span><span class="p">,</span> <span class="n">lookup_config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">column_type</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="s2">"array"</span> <span class="ow">in</span> <span class="n">column_type</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">"stuct"</span> <span class="ow">in</span> <span class="n">column_type</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="s2">"map"</span> <span class="ow">in</span> <span class="n">column_type</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Column </span><span class="si">{c}</span><span class="s2"> is of type </span><span class="si">{t}</span><span class="s2"> and cannot be analyzed"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">column_type</span><span class="p">))</span>
+
+        <span class="n">distinct_count</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">countDistinct</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"distinct_count"</span><span class="p">))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+        <span class="n">non_nan_count</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">na</span><span class="o">.</span><span class="n">drop</span><span class="p">()</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">count</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="s2">"count"</span><span class="p">))</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+        <span class="n">results_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">distinct_count</span><span class="p">,</span> <span class="n">non_nan_count</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">results_data</span><span class="p">[</span><span class="s2">"p_unique"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_data</span><span class="p">[</span><span class="s2">"distinct_count"</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">results_data</span><span class="p">[</span><span class="s2">"count"</span><span class="p">])</span>
+        <span class="n">results_data</span><span class="p">[</span><span class="s2">"is_unique"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_data</span><span class="p">[</span><span class="s2">"distinct_count"</span><span class="p">]</span> <span class="o">==</span> <span class="n">nrows</span>
+        <span class="n">results_data</span><span class="p">[</span><span class="s2">"n_missing"</span><span class="p">]</span> <span class="o">=</span> <span class="n">nrows</span> <span class="o">-</span> <span class="n">results_data</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span>
+        <span class="n">results_data</span><span class="p">[</span><span class="s2">"p_missing"</span><span class="p">]</span> <span class="o">=</span> <span class="n">results_data</span><span class="p">[</span><span class="s2">"n_missing"</span><span class="p">]</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+        <span class="n">results_data</span><span class="p">[</span><span class="s2">"p_infinite"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">results_data</span><span class="p">[</span><span class="s2">"n_infinite"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">results_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">result</span><span class="p">[</span><span class="s2">"memorysize"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">column</span>
+
+        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">"distinct_count"</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">describe_constant_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">column_type</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"tinyint"</span><span class="p">,</span> <span class="s2">"smallint"</span><span class="p">,</span> <span class="s2">"int"</span><span class="p">,</span> <span class="s2">"bigint"</span><span class="p">}:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">describe_integer_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">column_type</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"float"</span><span class="p">,</span> <span class="s2">"double"</span><span class="p">,</span> <span class="s2">"decimal"</span><span class="p">}:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">describe_float_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">nrows</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">column_type</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"date"</span><span class="p">,</span> <span class="s2">"timestamp"</span><span class="p">}:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">describe_date_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">result</span><span class="p">[</span><span class="s2">"is_unique"</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">describe_unique_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">describe_categorical_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="p">))</span>
+            <span class="c1"># Fix to also count MISSING value in the distict_count field:</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">"n_missing"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s2">"distinct_count"</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">"distinct_count"</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">"count"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">result</span><span class="p">[</span><span class="s2">"distinct_count"</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">"top"</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">"value_counts"</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1"># If and IndexError happens,</span>
+            <span class="c1"># it is because all column are NULLs:</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s2">"mode"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"MISSING"</span>
+
+        <span class="k">if</span> <span class="n">lookup_config</span><span class="p">:</span>
+            <span class="n">lookup_object</span> <span class="o">=</span> <span class="n">lookup_config</span><span class="p">[</span><span class="s1">'object'</span><span class="p">]</span>
+            <span class="n">col_name_in_db</span> <span class="o">=</span> <span class="n">lookup_config</span><span class="p">[</span><span class="s1">'col_name_in_db'</span><span class="p">]</span> <span class="k">if</span> <span class="s1">'col_name_in_db'</span> <span class="ow">in</span> <span class="n">lookup_config</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">matched</span><span class="p">,</span> <span class="n">unmatched</span> <span class="o">=</span> <span class="n">lookup_object</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">),</span> <span class="n">col_name_in_db</span><span class="p">)</span>
+                <span class="n">result</span><span class="p">[</span><span class="s1">'lookedup_values'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">matched</span><span class="o">.</span><span class="n">count</span><span class="p">())</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">())</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="s1">'lookedup_values'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'FAILED'</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span><span class="p">[</span><span class="s1">'lookedup_values'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">''</span>
+
+        <span class="k">return</span> <span class="n">result</span>
+
+
+    <span class="c1"># Do the thing:</span>
+    <span class="n">ldesc</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">colum</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">colum</span> <span class="ow">in</span> <span class="n">config</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">'lookup'</span> <span class="ow">in</span> <span class="n">config</span><span class="p">[</span><span class="n">colum</span><span class="p">]:</span>
+                <span class="n">lookup_config</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="n">colum</span><span class="p">][</span><span class="s1">'lookup'</span><span class="p">]</span>
+                <span class="n">desc</span> <span class="o">=</span> <span class="n">describe_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">colum</span><span class="p">,</span> <span class="n">table_stats</span><span class="p">[</span><span class="s2">"n"</span><span class="p">],</span> <span class="n">lookup_config</span><span class="o">=</span><span class="n">lookup_config</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">desc</span> <span class="o">=</span> <span class="n">describe_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">colum</span><span class="p">,</span> <span class="n">table_stats</span><span class="p">[</span><span class="s2">"n"</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">desc</span> <span class="o">=</span> <span class="n">describe_1d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">colum</span><span class="p">,</span> <span class="n">table_stats</span><span class="p">[</span><span class="s2">"n"</span><span class="p">])</span>
+        <span class="n">ldesc</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">colum</span><span class="p">:</span> <span class="n">desc</span><span class="p">})</span>
+
+    <span class="c1"># Compute correlation matrix</span>
+    <span class="k">if</span> <span class="n">corr_reject</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">computable_corrs</span> <span class="o">=</span> <span class="p">[</span><span class="n">colum</span> <span class="k">for</span> <span class="n">colum</span> <span class="ow">in</span> <span class="n">ldesc</span> <span class="k">if</span> <span class="n">ldesc</span><span class="p">[</span><span class="n">colum</span><span class="p">][</span><span class="s2">"type"</span><span class="p">]</span> <span class="ow">in</span> <span class="p">{</span><span class="s2">"NUM"</span><span class="p">}]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">computable_corrs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">corr</span> <span class="o">=</span> <span class="n">corr_matrix</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">computable_corrs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">corr_x</span> <span class="ow">in</span> <span class="n">corr</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">y</span><span class="p">,</span> <span class="n">corr</span> <span class="ow">in</span> <span class="n">corr_x</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+                        <span class="k">break</span>
+
+    <span class="c1"># Convert ldesc to a DataFrame</span>
+    <span class="n">variable_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ldesc</span><span class="p">)</span>
+
+    <span class="c1"># General statistics</span>
+    <span class="n">table_stats</span><span class="p">[</span><span class="s2">"nvar"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">table_stats</span><span class="p">[</span><span class="s2">"total_missing"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">variable_stats</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">"n_missing"</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">table_stats</span><span class="p">[</span><span class="s2">"n"</span><span class="p">]</span> <span class="o">*</span> <span class="n">table_stats</span><span class="p">[</span><span class="s2">"nvar"</span><span class="p">])</span>
+    <span class="n">memsize</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">table_stats</span><span class="p">[</span><span class="s1">'memsize'</span><span class="p">]</span> <span class="o">=</span> <span class="n">fmt_bytesize</span><span class="p">(</span><span class="n">memsize</span><span class="p">)</span>
+    <span class="n">table_stats</span><span class="p">[</span><span class="s1">'recordsize'</span><span class="p">]</span> <span class="o">=</span> <span class="n">fmt_bytesize</span><span class="p">(</span><span class="n">memsize</span> <span class="o">/</span> <span class="n">table_stats</span><span class="p">[</span><span class="s1">'n'</span><span class="p">])</span>
+    <span class="n">table_stats</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"NUM"</span><span class="p">,</span> <span class="s2">"DATE"</span><span class="p">,</span> <span class="s2">"CONST"</span><span class="p">,</span> <span class="s2">"CAT"</span><span class="p">,</span> <span class="s2">"UNIQUE"</span><span class="p">,</span> <span class="s2">"CORR"</span><span class="p">)})</span>
+    <span class="n">table_stats</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">variable_stats</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">'type'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()))</span>
+    <span class="n">table_stats</span><span class="p">[</span><span class="s1">'REJECTED'</span><span class="p">]</span> <span class="o">=</span> <span class="n">table_stats</span><span class="p">[</span><span class="s1">'CONST'</span><span class="p">]</span> <span class="o">+</span> <span class="n">table_stats</span><span class="p">[</span><span class="s1">'CORR'</span><span class="p">]</span>
+
+    <span class="n">freq_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">variable_stats</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"value_counts"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">variable_stats</span><span class="p">[</span><span class="n">var</span><span class="p">]:</span>
+            <span class="k">pass</span>
+        <span class="k">elif</span> <span class="ow">not</span><span class="p">(</span><span class="n">variable_stats</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">"value_counts"</span><span class="p">]</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">):</span>
+            <span class="n">freq_dict</span><span class="p">[</span><span class="n">var</span><span class="p">]</span> <span class="o">=</span> <span class="n">variable_stats</span><span class="p">[</span><span class="n">var</span><span class="p">][</span><span class="s2">"value_counts"</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">variable_stats</span> <span class="o">=</span> <span class="n">variable_stats</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"value_counts"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="p">(</span><span class="ne">ValueError</span><span class="p">,</span> <span class="ne">KeyError</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">return</span> <span class="n">table_stats</span><span class="p">,</span> <span class="n">variable_stats</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">freq_dict</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="nb">abs</span> <span class="k">as</span> <span class="n">absou</span>
+
+<span class="n">SKEWNESS_CUTOFF</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">DEFAULT_FLOAT_FORMATTER</span> <span class="o">=</span> <span class="sa">u</span><span class="s1">'spark_df_profiling.__default_float_formatter'</span>
+
+
+<span class="k">def</span> <span class="nf">gradient_format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">limit1</span><span class="p">,</span> <span class="n">limit2</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">LerpColour</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">t</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">c1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">c2</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">c1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">t</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">c1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">c2</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">c1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">t</span><span class="p">),</span><span class="nb">int</span><span class="p">(</span><span class="n">c1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="p">(</span><span class="n">c2</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">c1</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="n">t</span><span class="p">))</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">LerpColour</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">c2</span><span class="p">,</span> <span class="p">(</span><span class="n">value</span><span class="o">-</span><span class="n">limit1</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">limit2</span><span class="o">-</span><span class="n">limit1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">fmt_color</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="s2">"rgb</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">c</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">fmt_color</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">color</span><span class="p">):</span>
+    <span class="k">return</span><span class="p">(</span><span class="sa">u</span><span class="s1">'&lt;span style="color:</span><span class="si">{color}</span><span class="s1">"&gt;</span><span class="si">{text}</span><span class="s1">&lt;/span&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">fmt_class</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+    <span class="k">return</span><span class="p">(</span><span class="sa">u</span><span class="s1">'&lt;span class="</span><span class="si">{cls}</span><span class="s1">"&gt;</span><span class="si">{text}</span><span class="s1">&lt;/span&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="o">=</span><span class="bp">cls</span><span class="p">,</span><span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)))</span>
+
+
+<span class="k">def</span> <span class="nf">fmt_bytesize</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s1">'B'</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">''</span><span class="p">,</span><span class="s1">'Ki'</span><span class="p">,</span><span class="s1">'Mi'</span><span class="p">,</span><span class="s1">'Gi'</span><span class="p">,</span><span class="s1">'Ti'</span><span class="p">,</span><span class="s1">'Pi'</span><span class="p">,</span><span class="s1">'Ei'</span><span class="p">,</span><span class="s1">'Zi'</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">*-</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mf">1024.0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s2">"</span><span class="si">%3.1f</span><span class="s2"> </span><span class="si">%s%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
+            <span class="n">num</span> <span class="o">/=</span> <span class="mf">1024.0</span>
+    <span class="k">return</span> <span class="s2">"</span><span class="si">%.1f</span><span class="s2"> </span><span class="si">%s%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="s1">'Yi'</span><span class="p">,</span> <span class="n">suffix</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">fmt_percent</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span>  <span class="s2">"</span><span class="si">{:2.1f}</span><span class="s2">%"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">fmt_varname</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">u</span><span class="s1">'&lt;code&gt;</span><span class="si">{0}</span><span class="s1">&lt;/code&gt;'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+
+<span class="n">value_formatters</span><span class="o">=</span><span class="p">{</span>
+        <span class="sa">u</span><span class="s1">'freq'</span><span class="p">:</span> <span class="p">(</span><span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">gradient_format</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">62000</span><span class="p">,</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">244</span><span class="p">),</span> <span class="p">(</span><span class="mi">99</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">72</span><span class="p">))),</span>
+        <span class="sa">u</span><span class="s1">'p_missing'</span><span class="p">:</span> <span class="n">fmt_percent</span><span class="p">,</span>
+        <span class="sa">u</span><span class="s1">'p_infinite'</span><span class="p">:</span> <span class="n">fmt_percent</span><span class="p">,</span>
+        <span class="sa">u</span><span class="s1">'p_unique'</span><span class="p">:</span> <span class="n">fmt_percent</span><span class="p">,</span>
+        <span class="sa">u</span><span class="s1">'p_zeros'</span><span class="p">:</span> <span class="n">fmt_percent</span><span class="p">,</span>
+        <span class="sa">u</span><span class="s1">'memorysize'</span><span class="p">:</span> <span class="n">fmt_bytesize</span><span class="p">,</span>
+        <span class="sa">u</span><span class="s1">'total_missing'</span><span class="p">:</span> <span class="n">fmt_percent</span><span class="p">,</span>
+        <span class="n">DEFAULT_FLOAT_FORMATTER</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="s1">'</span><span class="si">{:.5g}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">)))</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">'0'</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">'.'</span><span class="p">),</span>
+        <span class="sa">u</span><span class="s1">'correlation_var'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="n">fmt_varname</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+        <span class="sa">u</span><span class="s1">'unparsed_json_types'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="s1">', '</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">s</span><span class="o">.</span><span class="vm">__name__</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">v</span><span class="p">])</span>
+        <span class="p">}</span>
+
+<span class="k">def</span> <span class="nf">fmt_row_severity</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">&lt;=</span> <span class="mf">0.01</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"ignore"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"alert"</span>
+
+<span class="k">def</span> <span class="nf">fmt_skewness</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span><span class="o">&lt;-</span><span class="n">SKEWNESS_CUTOFF</span> <span class="ow">or</span> <span class="n">v</span><span class="o">&gt;</span> <span class="n">SKEWNESS_CUTOFF</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"alert"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">""</span>
+
+<span class="n">row_formatters</span><span class="o">=</span><span class="p">{</span>
+    <span class="sa">u</span><span class="s1">'p_zeros'</span><span class="p">:</span> <span class="n">fmt_row_severity</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'p_missing'</span><span class="p">:</span> <span class="n">fmt_row_severity</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'p_infinite'</span><span class="p">:</span> <span class="n">fmt_row_severity</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'n_duplicates'</span><span class="p">:</span> <span class="n">fmt_row_severity</span><span class="p">,</span>
+    <span class="sa">u</span><span class="s1">'skewness'</span><span class="p">:</span> <span class="n">fmt_skewness</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="build-spark-describe-function">
+<h1>Build Spark Describe Function<a class="headerlink" href="#build-spark-describe-function" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">([</span><span class="s2">"/bin/bash"</span><span class="p">,</span> <span class="s2">"/etc/config/v3io/v3io-spark-operator.sh"</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">describe_spark</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span> 
+                   <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+                   <span class="n">bins</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+                   <span class="n">describe_extended</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""</span>
+<span class="sd">    Generates profile reports from an Apache Spark DataFrame. </span>
+<span class="sd">    Based on pandas_profiling, but for Spark's DataFrames instead of pandas.</span>
+<span class="sd">    For each column the following statistics - if relevant for the column type - are presented:</span>
+<span class="sd">    </span>
+<span class="sd">    Essentials: type, unique values, missing values</span>
+<span class="sd">    Quantile statistics: minimum value, Q1, median, Q3, maximum, range, interquartile range</span>
+<span class="sd">    Descriptive statistics: mean, mode, standard deviation, sum, median absolute deviation, coefficient of variation, kurtosis, skewness</span>
+<span class="sd">    Most frequent values: for categorical data </span>
+<span class="sd">    </span>
+<span class="sd">    :param context:               Function context.</span>
+<span class="sd">    :param dataset:               Raw data file (currently needs to be a local file located in v3io://User/bigdata)</span>
+<span class="sd">    :param bins:                  Number of bin in histograms</span>
+<span class="sd">    :param describe_extended:     (True) set to False if the aim is to get a simple .describe() infomration</span>
+<span class="sd">    """</span>
+    
+    <span class="c1"># get file location</span>
+    <span class="n">location</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">local</span><span class="p">()</span>
+    
+    <span class="c1"># build spark session</span>
+    <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">"Spark job"</span><span class="p">)</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+    
+    <span class="c1"># read csv</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">csv</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inferSchema</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># No use for now</span>
+    <span class="n">kwargs</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="c1"># take only numric column</span>
+    <span class="n">float_cols</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">dtypes</span> <span class="k">if</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'float'</span><span class="p">)</span> <span class="ow">or</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'double'</span><span class="p">)]</span>
+    
+    <span class="k">if</span> <span class="n">describe_extended</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        
+        <span class="c1"># run describe function</span>
+        <span class="n">table</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">freq</span> <span class="o">=</span> <span class="n">describe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">float_cols</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># get summary table</span>
+        <span class="n">tbl_1</span> <span class="o">=</span> <span class="n">variables</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+        <span class="c1"># prep report </span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tbl_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">orient</span> <span class="o">=</span> <span class="s2">"index"</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+            <span class="n">tbl_2</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'col'</span><span class="p">,</span> <span class="s1">'key'</span><span class="p">,</span> <span class="s1">'val'</span><span class="p">]</span>
+            <span class="n">tbl_2</span><span class="p">[</span><span class="s1">'Merged'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[{</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span><span class="p">}</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">tbl_2</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">tbl_2</span><span class="o">.</span><span class="n">val</span><span class="p">)]</span>
+            <span class="n">tbl_2</span> <span class="o">=</span> <span class="n">tbl_2</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'col'</span><span class="p">,</span> <span class="n">as_index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="p">))[[</span><span class="s1">'col'</span><span class="p">,</span><span class="s1">'Merged'</span><span class="p">]]</span>
+
+            <span class="c1"># get summary</span>
+            <span class="n">summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">tbl_1</span><span class="p">,</span> <span class="n">tbl_2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="s1">'index'</span><span class="p">,</span> <span class="n">right_on</span><span class="o">=</span><span class="s1">'col'</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">summary</span> <span class="o">=</span> <span class="n">tbl_1</span>
+
+        <span class="c1"># log final report</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="s2">"summary_stats"</span><span class="p">,</span> 
+                            <span class="n">df</span><span class="o">=</span><span class="n">summary</span><span class="p">,</span>
+                            <span class="nb">format</span><span class="o">=</span><span class="s2">"csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">artifact_path</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_subpath</span><span class="p">(</span><span class="s1">'data'</span><span class="p">))</span>
+
+        <span class="c1"># log overview</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_results</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># run simple describe and save to pandas</span>
+        <span class="n">tbl_1</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">toPandas</span><span class="p">()</span>
+        
+        <span class="c1"># save final report and transpose </span>
+        <span class="n">summary</span> <span class="o">=</span> <span class="n">tbl_1</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="c1"># log final report</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="s2">"summary_stats"</span><span class="p">,</span> 
+                            <span class="n">df</span><span class="o">=</span><span class="n">summary</span><span class="p">,</span>
+                            <span class="nb">format</span><span class="o">=</span><span class="s2">"csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">artifact_path</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_subpath</span><span class="p">(</span><span class="s1">'data'</span><span class="p">))</span>
+    
+    <span class="c1"># stop spark session</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="save-and-config">
+<h1>Save and Config<a class="headerlink" href="#save-and-config" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span><span class="n">handler</span><span class="o">=</span><span class="s2">"describe_spark"</span><span class="p">,</span> <span class="n">code_output</span><span class="o">=</span><span class="s2">"."</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_v3io</span><span class="p">())</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_v3iod</span><span class="p">(</span><span class="n">namespace</span><span class="o">=</span><span class="s2">"default-tenant"</span><span class="p">,</span> <span class="n">v3io_config_configmap</span><span class="o">=</span><span class="s2">"spark-operator-v3io-config"</span><span class="p">))</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">image_pull_policy</span> <span class="o">=</span> <span class="s2">"IfNotPresent"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">"function.yaml"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2020-10-28 13:54:47,724 [info] function spec saved to path: function.yaml
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7fb4beb8fa50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="set-environment">
+<h1>Set Environment<a class="headerlink" href="#set-environment" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artifact_path</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">api_path</span> <span class="o">=</span> <span class="s1">'http://mlrun-api:8080'</span><span class="p">,</span>
+                                      <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'./'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2020-10-28 13:54:47,738 [warning] warning!, server (0.5.3-rc1) and client (0.5.2) ver dont match
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-and-save-outputs">
+<h1>Run and Save Outputs<a class="headerlink" href="#run-and-save-outputs" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_res</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span><span class="p">:</span> <span class="s2">"iris_dataset.csv"</span><span class="p">},</span>
+                 <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span> <span class="n">watch</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2020-10-28 13:54:47,762 [warning] warning!, server (0.5.3-rc1) and client (0.5.2) ver dont match
+&gt; 2020-10-28 13:54:47,763 [info] starting run describe-spark-describe_spark uid=a9cc8a2b48ce42d180e490043091da52  -&gt; http://mlrun-api:8080
+&gt; 2020-10-28 13:54:48,205 [info] Job is running in the background, pod: describe-spark-describe-spark-pxzxc
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #b3edff;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #ffe6cc;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #ffe6cc;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="a9cc8a2b48ce42d180e490043091da52"><a href="https://mlrun-ui.default-tenant.app.dsteam.iguazio-cd1.com/projects/default/jobs/a9cc8a2b48ce42d180e490043091da52/info" target="_blank">...3091da52</a></div></td>
+<td>0</td>
+<td>Oct 28 13:54:47</td>
+<td>running</td>
+<td>describe-spark-describe_spark</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="resulta279d734" title="/files/functions/describe_spark/iris_dataset.csv">dataset</div></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resulta279d734-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resulta279d734-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resulta279d734">×</span>
+</div>
+<iframe class="fileview" id="resulta279d734-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run a9cc8a2b48ce42d180e490043091da52 --project default , !mlrun logs a9cc8a2b48ce42d180e490043091da52 --project default
+&gt; 2020-10-28 13:54:48,285 [info] run executed, status=running
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run_res</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2020-10-28 13:55:36,021 [warning] warning!, server (0.5.3-rc1) and client (0.5.2) ver dont match
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #b3edff;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #ffe6cc;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #ffe6cc;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="a9cc8a2b48ce42d180e490043091da52"><a href="https://mlrun-ui.default-tenant.app.dsteam.iguazio-cd1.com/projects/default/jobs/a9cc8a2b48ce42d180e490043091da52/info" target="_blank">...3091da52</a></div></td>
+<td>0</td>
+<td>Oct 28 13:54:55</td>
+<td>completed</td>
+<td>describe-spark-describe_spark</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div><div class="dictlist">host=describe-spark-describe-spark-pxzxc</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result258198bb" title="/files/functions/describe_spark/iris_dataset.csv">dataset</div></td>
+<td></td>
+<td><div class="dictlist">n=150</div><div class="dictlist">nvar=5</div><div class="dictlist">total_missing=0.0</div><div class="dictlist">memsize=0.0 YiB</div><div class="dictlist">recordsize=0.0 YiB</div><div class="dictlist">NUM=5</div><div class="dictlist">DATE=0</div><div class="dictlist">CONST=0</div><div class="dictlist">CAT=0</div><div class="dictlist">UNIQUE=0</div><div class="dictlist">CORR=0</div><div class="dictlist">REJECTED=0</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result258198bb" title="/files/functions/describe_spark/data/summary_stats.csv">summary_stats</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result258198bb-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result258198bb-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result258198bb">×</span>
+</div>
+<iframe class="fileview" id="result258198bb-body"></iframe>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
