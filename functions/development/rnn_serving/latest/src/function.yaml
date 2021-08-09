@@ -1,0 +1,45 @@
+kind: serving
+metadata:
+  name: rnn-serving
+  tag: ''
+  hash: c21d8eee1a9d5eb69be14cc4d397f1227137fa93
+  project: default
+  labels:
+    author: Daniel
+  categories:
+  - model-serving
+  - machine-learning
+spec:
+  command: ''
+  args: []
+  image: mlrun/ml-models
+  description: deploy an rnn based stock analysis model server.
+  min_replicas: 1
+  max_replicas: 4
+  env: []
+  base_spec:
+    apiVersion: nuclio.io/v1
+    kind: Function
+    metadata:
+      name: rnn-serving
+      labels: {}
+      annotations:
+        nuclio.io/generated_by: function generated from /home/kali/functions/rnn_serving/rnn_serving.py
+    spec:
+      runtime: python:3.6
+      handler: rnn_serving:handler
+      env: []
+      volumes: []
+      build:
+        commands: []
+        noBaseImagesPull: true
+        functionSourceCode: aW1wb3J0IG1scnVuCmltcG9ydCBudW1weSBhcyBucAppbXBvcnQga2VyYXMKaW1wb3J0IGpzb24KCgpjbGFzcyBSTk5fTW9kZWxfU2VydmluZyhtbHJ1bi5zZXJ2aW5nLlYyTW9kZWxTZXJ2ZXIpOgogICAgZGVmIGxvYWQoc2VsZik6CiAgICAgICAgIiIibG9hZCBhbmQgaW5pdGlhbGl6ZSB0aGUgbW9kZWwgYW5kL29yIG90aGVyIGVsZW1lbnRzIiIiCiAgICAgICAgbW9kZWxfZmlsZSwgZXh0cmFfZGF0YSA9IHNlbGYuZ2V0X21vZGVsKHN1ZmZpeD0iLmg1IikKICAgICAgICBzZWxmLm1vZGVsID0ga2VyYXMubW9kZWxzLmxvYWRfbW9kZWwobW9kZWxfZmlsZSkKCiAgICBkZWYgcHJlZGljdChzZWxmLCBib2R5KToKICAgICAgICB0cnk6CiAgICAgICAgICAgICIiIkdlbmVyYXRlIG1vZGVsIHByZWRpY3Rpb25zIGZyb20gc2FtcGxlLiIiIgogICAgICAgICAgICBmZWF0cyA9IG5wLmFzYXJyYXkoYm9keVsnaW5wdXRzJ10pCiAgICAgICAgICAgIHJlc3VsdCA9IHNlbGYubW9kZWwucHJlZGljdChmZWF0cykKICAgICAgICAgICAgcmVzdWx0ID0ganNvbi5kdW1wcyhyZXN1bHQudG9saXN0KCkpCiAgICAgICAgICAgIHJldHVybiByZXN1bHQKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHJhaXNlIEV4Y2VwdGlvbigiRmFpbGVkIHRvIHByZWRpY3QgJXMiICUgZSkKZnJvbSBtbHJ1bi5ydW50aW1lcyBpbXBvcnQgbnVjbGlvX2luaXRfaG9vawpkZWYgaW5pdF9jb250ZXh0KGNvbnRleHQpOgogICAgbnVjbGlvX2luaXRfaG9vayhjb250ZXh0LCBnbG9iYWxzKCksICdzZXJ2aW5nX3YyJykKCmRlZiBoYW5kbGVyKGNvbnRleHQsIGV2ZW50KToKICAgIHJldHVybiBjb250ZXh0Lm1scnVuX2hhbmRsZXIoY29udGV4dCwgZXZlbnQpCg==
+  source: ''
+  function_kind: serving_v2
+  build:
+    commands:
+    - python -m pip install keras
+    code_origin: https://github.com/daniels290813/functions.git#55a79c32be5d233cc11efcf40cd3edbe309bfdef:/home/kali/functions/rnn_serving/rnn_serving.py
+  secret_sources: []
+  affinity: null
+verbose: false
