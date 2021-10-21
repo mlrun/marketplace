@@ -1,3 +1,6 @@
+### Change log [2021-10-21 14:48:16]
+1. Item Updated: `aggregate` (from version: `0.0.3` to `0.0.3`)
+
 ### Change log [2021-08-09 08:28:20]
 1. New item created: `xgb_custom` (version: `0.0.1`)
 2. New item created: `tf2_serving` (version: `0.0.1`)
