@@ -1,3 +1,6 @@
+### Change log [2021-10-24 14:44:31]
+1. Item Updated: `aggregate` (from version: `0.0.2` to `0.0.2`)
+
 ### Change log [2021-10-24 06:37:50]
 1. Item Updated: `aggregate` (from version: `0.0.2` to `0.0.2`)
 
