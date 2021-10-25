@@ -1,3 +1,7 @@
+### Change log [2021-10-25 13:15:02]
+1. Item Updated: `concept_drift_streaming` (from version: `0.0.2` to `0.0.2`)
+2. Item Updated: `concept_drift` (from version: `0.0.2` to `0.0.2`)
+
 ### Change log [2021-10-24 06:37:50]
 1. Item Updated: `aggregate` (from version: `0.0.2` to `0.0.2`)
 
