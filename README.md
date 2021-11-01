@@ -1,3 +1,8 @@
+### Change log [2021-11-01 13:21:49]
+1. New item created: `mlrun_onnx` (version: `0.0.1`)
+2. Item Updated: `concept_drift_streaming` (from version: `0.0.2` to `0.0.2`)
+3. Item Updated: `concept_drift` (from version: `0.0.2` to `0.0.2`)
+
 ### Change log [2021-10-24 06:37:50]
 1. Item Updated: `aggregate` (from version: `0.0.2` to `0.0.2`)
 
