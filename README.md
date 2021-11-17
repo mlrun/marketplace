@@ -1,3 +1,6 @@
+### Change log [2021-11-17 17:31:12]
+1. Item Updated: `arc_to_parquet` (from version: `0.0.8` to `0.0.8`)
+
 ### Change log [2021-11-14 13:45:58]
 1. New item created: `onnx_utils` (version: `0.0.1`)
 2. Item Updated: `aggregate` (from version: `1.0.0` to `1.0.0`)
