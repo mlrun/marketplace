@@ -1,0 +1,4 @@
+mlrun
+keras
+tensorflow
+wget
