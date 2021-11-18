@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ONNX Utils</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/onnx_utils_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fonnx_utils_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/onnx_utils_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#to-onnx">
+   1. to_onnx
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#docs">
+     1.1. Docs
+    </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry">
+<a class="reference internal nav-link" href="#parameters">
+       Parameters:
+      </a>
+</li>
+<li class="toc-h4 nav-item toc-entry">
+<a class="reference internal nav-link" href="#supported-keyword-arguments-framework-kwargs-per-framework">
+       Supported keyword arguments (
+       <code class="docutils literal notranslate">
+<span class="pre">
+         framework_kwargs
+        </span>
+</code>
+       ) per framework:
+      </a>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#demo">
+     1.2. Demo
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#optimize">
+   2. optimize
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id1">
+     2.1. Docs
+    </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id2">
+       Parameters:
+      </a>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id3">
+     2.2. Demo
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="tex2jax_ignore mathjax_ignore section" id="onnx-utils">
+<h1>ONNX Utils<a class="headerlink" href="#onnx-utils" title="Permalink to this headline">¶</a></h1>
+<p>A collection of ONNX utils in one MLRun function. The function includes the following handlers:</p>
+<ol class="simple">
+<li><p><a class="reference external" href="#handler1">to_onnx</a> - Convert your model into <code class="docutils literal notranslate"><span class="pre">onnx</span></code> format.</p></li>
+<li><p><a class="reference external" href="#handler2">optimize</a> - Perform ONNX optimizations using <code class="docutils literal notranslate"><span class="pre">onnxmodeloptimizer</span></code> on a given ONNX model.</p></li>
+</ol>
+<p><a id="handler1"></a></p>
+<div class="section" id="to-onnx">
+<h2>1. to_onnx<a class="headerlink" href="#to-onnx" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="docs">
+<h3>1.1. Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h3>
+<p>Convert the given model to an ONNX model.</p>
+<div class="section" id="parameters">
+<h4>Parameters:<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">context</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">mlrun.MLClientCtx</span></code> - The MLRun function execution context</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">model_name</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">str</span></code> - The model’s name.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">model_path</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">str</span></code> - The model path store object.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">onnx_model_name</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></code> - The name to use to log the converted ONNX model. If not given, the given <code class="docutils literal notranslate"><span class="pre">model_name</span></code> will be used with an additional suffix <code class="docutils literal notranslate"><span class="pre">_onnx</span></code>. Defaulted to None.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">optimize_model</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></code> - Whether to optimize the ONNX model using ‘onnxoptimizer’ before saving the model. Defaulted to True.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">framework</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></code> - The model’s framework. If None, it will be read from the ‘framework’ label of the model artifact provided. Defaulted to None.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">framework_kwargs</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">Dict[str,</span> <span class="pre">Any]</span> <span class="pre">=</span> <span class="pre">None</span></code> - Additional arguments each framework may require in order to convert to ONNX. <em>To get the doc string of the desired framework onnx conversion function, <strong>pass “help”</strong>.</em></p></li>
+</ul>
+</div>
+<div class="section" id="supported-keyword-arguments-framework-kwargs-per-framework">
+<h4>Supported keyword arguments (<code class="docutils literal notranslate"><span class="pre">framework_kwargs</span></code>) per framework:<a class="headerlink" href="#supported-keyword-arguments-framework-kwargs-per-framework" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">tf.keras</span></code>:</p>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">input_signature</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">List[Tuple[Tuple[int],</span> <span class="pre">str]]</span> <span class="pre">=</span> <span class="pre">None</span></code> - A list of the input layers shape and data type properties. Expected to receive a list where each element is an input layer tuple. An input layer tuple is a tuple of:</p>
+<ul class="simple">
+<li><p>[0] = Layer’s shape, a tuple of integers.</p></li>
+<li><p>[1] = Layer’s data type, a dtype numpy string.</p></li>
+</ul>
+<p>If None, the input signature will be tried to be read automatically before converting to ONNX. Defaulted to None.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="demo">
+<h3>1.2. Demo<a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h3>
+<p>We will use MobileNetV2 as our model and convert it to ONNX using the <code class="docutils literal notranslate"><span class="pre">to_onnx</span></code> handler.</p>
+<p>1.2.1. First we will set a temporary artifact path for our model to be saved in and choose the models names:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+
+<span class="c1"># Create a temporary directory for the model artifact:</span>
+<span class="n">ARTIFACT_PATH</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span><span class="o">.</span><span class="n">name</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">ARTIFACT_PATH</span><span class="p">)</span>
+
+<span class="c1"># Choose our model's name:</span>
+<span class="n">MODEL_NAME</span> <span class="o">=</span> <span class="s2">"mobilenetv2"</span>
+
+<span class="c1"># Choose our ONNX version model's name:</span>
+<span class="n">ONNX_MODEL_NAME</span> <span class="o">=</span> <span class="s2">"onnx_mobilenetv2"</span>
+
+<span class="c1"># Choose our optimized ONNX version model's name:</span>
+<span class="n">OPTIMIZED_ONNX_MODEL_NAME</span> <span class="o">=</span> <span class="s2">"optimized_onnx_mobilenetv2"</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>1.2.2. Download the model from <code class="docutils literal notranslate"><span class="pre">keras.applications</span></code> and log it with MLRun’s <code class="docutils literal notranslate"><span class="pre">TFKerasModelHandler</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mlrun: start-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">mlrun.frameworks.tf_keras</span> <span class="k">as</span> <span class="nn">mlrun_tf_keras</span>
+
+
+<span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="c1"># Download the MobileNetV2 model:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">applications</span><span class="o">.</span><span class="n">mobilenet_v2</span><span class="o">.</span><span class="n">MobileNetV2</span><span class="p">()</span>
+
+    <span class="c1"># Initialize a model handler for logging the model:</span>
+    <span class="n">model_handler</span> <span class="o">=</span> <span class="n">mlrun_tf_keras</span><span class="o">.</span><span class="n">TFKerasModelHandler</span><span class="p">(</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Log the model:</span>
+    <span class="n">model_handler</span><span class="o">.</span><span class="n">log</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># mlrun: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>1.2.3. Create the function using MLRun’s <code class="docutils literal notranslate"><span class="pre">code_to_function</span></code> and run it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+
+
+<span class="c1"># Create the function parsing this notebook's code using 'code_to_function':</span>
+<span class="n">get_model_function</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"get_mobilenetv2"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"job"</span><span class="p">,</span>
+    <span class="n">image</span><span class="o">=</span><span class="s2">"mlrun/ml-models"</span>
+<span class="p">)</span>
+
+<span class="c1"># Run the function to log the model:</span>
+<span class="n">get_model_run</span> <span class="o">=</span> <span class="n">get_model_function</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"get_model"</span><span class="p">,</span>
+    <span class="n">artifact_path</span><span class="o">=</span><span class="n">ARTIFACT_PATH</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model_name"</span><span class="p">:</span> <span class="n">MODEL_NAME</span>
+    <span class="p">},</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>1.2.4. Import the <code class="docutils literal notranslate"><span class="pre">onnx_utils</span></code> MLRun function and run it:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the ONNX function from the marketplace:</span>
+<span class="n">onnx_utils_function</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://onnx_utils"</span><span class="p">)</span>
+
+<span class="c1"># Run the function to convert our model to ONNX:</span>
+<span class="n">to_onnx_run</span> <span class="o">=</span> <span class="n">onnx_utils_function</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"to_onnx"</span><span class="p">,</span>
+    <span class="n">artifact_path</span><span class="o">=</span><span class="n">ARTIFACT_PATH</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model_name"</span><span class="p">:</span> <span class="n">MODEL_NAME</span><span class="p">,</span>
+        <span class="s2">"model_path"</span><span class="p">:</span> <span class="n">get_model_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">MODEL_NAME</span><span class="p">],</span>  <span class="c1"># &lt;- Take the logged model from the previous function.</span>
+        <span class="s2">"onnx_model_name"</span><span class="p">:</span> <span class="n">ONNX_MODEL_NAME</span><span class="p">,</span>
+        <span class="s2">"optimize_model"</span><span class="p">:</span> <span class="kc">False</span>  <span class="c1"># &lt;- For optimizing it later in the demo, we mark the flag as False</span>
+    <span class="p">},</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>1.2.5. Now, listing the artifact directory we will see both our <code class="docutils literal notranslate"><span class="pre">tf.keras</span></code> model and the <code class="docutils literal notranslate"><span class="pre">onnx</span></code> model:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">ARTIFACT_PATH</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="handler2"></a></p>
+</div>
+</div>
+<div class="section" id="optimize">
+<h2>2. optimize<a class="headerlink" href="#optimize" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>2.1. Docs<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Optimize the given ONNX model.</p>
+<div class="section" id="id2">
+<h4>Parameters:<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">context</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">mlrun.MLClientCtx</span></code> - The MLRun function execution context</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">model_name</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">str</span></code> - The model’s name.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">model_path</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">str</span></code> - The model path store object.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">optimizations</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">None</span></code> - List of possible optimizations. <em>To see what optimizations are available, <strong>pass “help”</strong>.</em> If None, all of the optimizations will be used. Defaulted to None.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">fixed_point</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></code> - Optimize the weights using fixed point. Defaulted to False.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">optimized_model_name</span></code></strong>: <code class="docutils literal notranslate"><span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></code> - The name of the optimized model. If None, the original model will be overridden. Defaulted to None.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>2.2. Demo<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>We will use our converted model from the last example and optimize it.</p>
+<p>2.2.1. We will call now the <code class="docutils literal notranslate"><span class="pre">optimize</span></code> handler:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">onnx_utils_function</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"optimize"</span><span class="p">,</span>
+    <span class="n">artifact_path</span><span class="o">=</span><span class="n">ARTIFACT_PATH</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model_name"</span><span class="p">:</span> <span class="n">ONNX_MODEL_NAME</span><span class="p">,</span>
+        <span class="s2">"model_path"</span><span class="p">:</span> <span class="n">to_onnx_run</span><span class="o">.</span><span class="n">output</span><span class="p">(</span><span class="n">ONNX_MODEL_NAME</span><span class="p">),</span>  <span class="c1"># &lt;- Take the logged model from the previous function.</span>
+        <span class="s2">"optimized_model_name"</span><span class="p">:</span> <span class="n">OPTIMIZED_ONNX_MODEL_NAME</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>2.2.2. And now our model was optimized and can be seen under the <code class="docutils literal notranslate"><span class="pre">ARTIFACT_PATH</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">ARTIFACT_PATH</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Lastly, run this code to clean up the models:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
+
+
+<span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">ARTIFACT_PATH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
