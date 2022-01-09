@@ -1,3 +1,7 @@
+### Change log [2022-01-09 12:58:33]
+1. Item Updated: `onnx_utils` (from version: `0.8.1` to `0.8.1`)
+2. Item Updated: `feature_selection` (from version: `0.9.0` to `0.9.0`)
+
 ### Change log [2021-11-18 11:22:47]
 1. Item Updated: `describe` (from version: `0.8.0` to `0.8.0`)
 2. New item created: `onnx_utils` (version: `0.8.0`)
