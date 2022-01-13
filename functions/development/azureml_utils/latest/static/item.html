@@ -18,27 +18,28 @@
 apiVersion: v1
 categories:
 - Utilities
-description: ONNX intigration in MLRun, some utils functions for the ONNX framework,
-  optimizing and converting models from different framework to ONNX using MLRun.
+- machine-learning
+- model-training
+description: Azure AutoML integration in MLRun, including utils functions for training models on Azure AutoML platfrom.
 doc: ''
-example: onnx_utils.ipynb
-generationDate: 2021-11-18:12-28
+example: azureml_utils.ipynb
+generationDate: 2021-11-13:00-15
 icon: ''
 labels:
-  author: guyl
+  author: yonish
 maintainers: []
 marketplaceType: ''
-mlrunVersion: 0.8.0
-name: onnx_utils
-platformVersion: 3.2.0
+mlrunVersion: ''
+name: azureml_utils
+platformVersion: ''
 spec:
-  filename: onnx_utils.py
-  handler: to_onnx
-  image: mlrun/ml-models
+  filename: azureml_utils.py
+  handler: automl_train
+  image: mlrun/mlrun
   kind: job
   requirements: []
 url: ''
-version: 0.8.1
+version: 0.0.1
         </code>
     </pre>
 </body>
