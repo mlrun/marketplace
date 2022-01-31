@@ -1,3 +1,9 @@
+### Change log [2022-01-31 12:18:23]
+1. Item Updated: `onnx_utils` (from version: `0.8.1` to `0.8.1`)
+2. New item created: `get_offline_features` (version: `0.0.1`)
+3. Item Updated: `feature_selection` (from version: `0.9.0` to `0.9.0`)
+4. New item created: `azureml_utils` (version: `0.0.1`)
+
 ### Change log [2021-11-18 11:22:47]
 1. Item Updated: `describe` (from version: `0.8.0` to `0.8.0`)
 2. New item created: `onnx_utils` (version: `0.8.0`)
