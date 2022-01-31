@@ -1,0 +1,982 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AzureML AutoML Demo</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/azureml_utils_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fazureml_utils_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/azureml_utils_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setup-mlrun-project">
+   1. Setup MLRun Project
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#preparing-dataset-iris">
+   2. Preparing Dataset (Iris)
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submit-azure-automl-training-job">
+   3. Submit Azure AutoML Training Job
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submit-azure-secrets">
+     Submit Azure Secrets
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#import-azureml-utils-from-marketplace">
+     Import azureml_utils from marketplace
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#automl-configuration-run-parameters">
+     Automl configuration &amp; run parameters
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-azure-automl-train">
+     Run Azure AutoML train:
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#deploying-the-model-serving-function">
+   4. Deploying the Model-Serving Function
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-v2-model-server-function-from-marketplace-for-serving-the-model">
+     Importing
+     <code class="docutils literal notranslate">
+<span class="pre">
+       v2_model_server
+      </span>
+</code>
+     function from marketplace for serving the model
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#building-and-deploying-the-serving-function">
+     Building and Deploying the Serving Function
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-the-live-model-serving-function">
+   5. Using the Live Model-Serving Function
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#clean-up">
+   6. Clean up
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="tex2jax_ignore mathjax_ignore section" id="azureml-automl-demo">
+<h1>AzureML AutoML Demo<a class="headerlink" href="#azureml-automl-demo" title="Permalink to this headline">¶</a></h1>
+<p>MLRun function for using Azure AutoML, Including the following handlers:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init_experiment</span></code> -     Initialize workspace and experiment in Azure ML.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">init_compute</span></code> -        Initialize Azure ML compute target to run experiment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">register_dataset</span></code> -    Register dataset object (can be also an Iguazio FeatureVector) in Azure ML.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">download_model</span></code> -      Download trained model from Azure ML to local filesystem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upload_model</span></code> -        Upload pre-trained model from local filesystem to Azure ML.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">submit_training_job</span></code> - Submit training job to Azure AutoML and download trained model when completed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">automl_train</span></code> -        Whole training flow for Azure AutoML:
+- Initializing workspace and experiment in Azure ML
+- Registers dataset/feature vector,
+- submits training job
+- downloads trained model</p></li>
+</ol>
+<div class="section" id="setup-mlrun-project">
+<h2>1. Setup MLRun Project<a class="headerlink" href="#setup-mlrun-project" title="Permalink to this headline">¶</a></h2>
+<p>Creating MLRun project</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-03 17:34:51,578 [info] Server and client versions are not the same: {'parsed_server_version': VersionInfo(major=0, minor=8, patch=0, prerelease=None, build=None), 'parsed_client_version': VersionInfo(major=0, minor=9, patch=1, prerelease=None, build=None)}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the MLRun project object</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s1">'azureml'</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"./"</span><span class="p">,</span> <span class="n">user_project</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-03 17:34:51,619 [info] loaded project azureml from MLRun DB
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="preparing-dataset-iris">
+<h2>2. Preparing Dataset (Iris)<a class="headerlink" href="#preparing-dataset-iris" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Preparing training URI for the MLRun function</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_URL</span> <span class="o">=</span> <span class="s2">"https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv"</span>
+
+<span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">DATA_URL</span><span class="p">)</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sepal length (cm)</th>
+<th>sepal width (cm)</th>
+<th>petal length (cm)</th>
+<th>petal width (cm)</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>5.1</td>
+<td>3.5</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>4.9</td>
+<td>3.0</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>4.7</td>
+<td>3.2</td>
+<td>1.3</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4.6</td>
+<td>3.1</td>
+<td>1.5</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="submit-azure-automl-training-job">
+<h2>3. Submit Azure AutoML Training Job<a class="headerlink" href="#submit-azure-automl-training-job" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="submit-azure-secrets">
+<h3>Submit Azure Secrets<a class="headerlink" href="#submit-azure-secrets" title="Permalink to this headline">¶</a></h3>
+<p>For more information about working with secrets see:  <a class="reference external" href="https://docs.mlrun.org/en/latest/secrets.html">MLRun docs: Working with secrets</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">dotenv_values</span>
+<span class="n">secrets</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">dotenv_values</span><span class="p">(</span><span class="s2">"env"</span><span class="p">))</span>
+
+<span class="n">mlrun</span><span class="o">.</span><span class="n">get_run_db</span><span class="p">()</span><span class="o">.</span><span class="n">create_project_secrets</span><span class="p">(</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">provider</span><span class="o">=</span><span class="n">mlrun</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">schemas</span><span class="o">.</span><span class="n">SecretProviderName</span><span class="o">.</span><span class="n">kubernetes</span><span class="p">,</span>
+    <span class="n">secrets</span><span class="o">=</span><span class="n">secrets</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="import-azureml-utils-from-marketplace">
+<h3>Import azureml_utils from marketplace<a class="headerlink" href="#import-azureml-utils-from-marketplace" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">azureml_fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"azure"</span><span class="p">,</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s2">"azure_automl.py"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"job"</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="c1"># azureml_fn = mlrun.import_function('hub://azureml_utils')</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlrun</span><span class="o">.</span><span class="n">build_function</span><span class="p">(</span>
+    <span class="n">azureml_fn</span><span class="p">,</span> 
+    <span class="n">with_mlrun</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">skip_deployed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+    <span class="n">base_image</span><span class="o">=</span><span class="s2">"mlrun/mlrun"</span><span class="p">,</span> 
+    <span class="n">commands</span><span class="o">=</span><span class="p">[</span><span class="s2">"python -m pip install azureml-core azureml-train-automl-client"</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-03 17:34:52,312 [info] Started building image: .mlrun/func-azureml-yonatan-azure:latest
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image manifest mlrun/mlrun:0.8.0  
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image mlrun/mlrun:0.8.0 from registry index.docker.io 
+<span class="-Color -Color-Cyan">INFO</span>[0000] Built cross stage deps: map[]                
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image manifest mlrun/mlrun:0.8.0  
+<span class="-Color -Color-Cyan">INFO</span>[0000] Returning cached image manifest              
+<span class="-Color -Color-Cyan">INFO</span>[0000] Executing 0 build triggers                   
+<span class="-Color -Color-Cyan">INFO</span>[0000] Unpacking rootfs as cmd RUN python -m pip install azureml-core azureml-train-automl-client requires it. 
+<span class="-Color -Color-Cyan">INFO</span>[0014] RUN python -m pip install azureml-core azureml-train-automl-client 
+<span class="-Color -Color-Cyan">INFO</span>[0014] Taking snapshot of full filesystem...        
+<span class="-Color -Color-Cyan">INFO</span>[0026] cmd: /bin/sh                                 
+<span class="-Color -Color-Cyan">INFO</span>[0026] args: [-c python -m pip install azureml-core azureml-train-automl-client] 
+<span class="-Color -Color-Cyan">INFO</span>[0026] Running: [/bin/sh -c python -m pip install azureml-core azureml-train-automl-client] 
+Collecting azureml-core
+  Downloading azureml_core-1.37.0.post1-py3-none-any.whl (2.5 MB)
+Collecting azureml-train-automl-client
+  Downloading azureml_train_automl_client-1.37.0-py3-none-any.whl (136 kB)
+Requirement already satisfied: PyJWT&lt;3.0.0 in /usr/local/lib/python3.7/site-packages (from azureml-core) (2.3.0)
+Collecting msrestazure&lt;=0.6.4,&gt;=0.4.33
+  Downloading msrestazure-0.6.4-py2.py3-none-any.whl (40 kB)
+Collecting pkginfo
+  Downloading pkginfo-1.8.2-py2.py3-none-any.whl (26 kB)
+Requirement already satisfied: msal&lt;2.0.0,&gt;=1.15.0 in /usr/local/lib/python3.7/site-packages (from azureml-core) (1.16.0)
+Requirement already satisfied: adal&lt;=1.2.7,&gt;=1.2.0 in /usr/local/lib/python3.7/site-packages (from azureml-core) (1.2.7)
+Requirement already satisfied: urllib3&lt;=1.26.7,&gt;=1.23 in /usr/local/lib/python3.7/site-packages (from azureml-core) (1.26.7)
+Requirement already satisfied: packaging&lt;22.0 in /usr/local/lib/python3.7/site-packages (from azureml-core) (21.2)
+Requirement already satisfied: azure-core&lt;1.21 in /usr/local/lib/python3.7/site-packages (from azureml-core) (1.19.0)
+Collecting azure-mgmt-resource&lt;20.0.0,&gt;=15.0.0
+  Downloading azure_mgmt_resource-19.0.0-py2.py3-none-any.whl (2.2 MB)
+Collecting contextlib2&lt;22.0.0
+  Downloading contextlib2-21.6.0-py2.py3-none-any.whl (13 kB)
+Collecting argcomplete~=1.8
+  Downloading argcomplete-1.12.3-py2.py3-none-any.whl (38 kB)
+Requirement already satisfied: pytz in /usr/local/lib/python3.7/site-packages (from azureml-core) (2021.3)
+Collecting azure-mgmt-storage&lt;20.0.0,&gt;=16.0.0
+  Downloading azure_mgmt_storage-19.0.0-py2.py3-none-any.whl (1.8 MB)
+Collecting pathspec&lt;1.0.0
+  Downloading pathspec-0.9.0-py2.py3-none-any.whl (31 kB)
+Requirement already satisfied: python-dateutil&lt;3.0.0,&gt;=2.7.3 in /usr/local/lib/python3.7/site-packages (from azureml-core) (2.8.2)
+Collecting azure-mgmt-containerregistry&gt;=2.0.0
+  Downloading azure_mgmt_containerregistry-8.2.0-py2.py3-none-any.whl (928 kB)
+Requirement already satisfied: requests[socks]&lt;3.0.0,&gt;=2.19.1 in /usr/local/lib/python3.7/site-packages (from azureml-core) (2.26.0)
+Collecting paramiko&lt;3.0.0,&gt;=2.0.8
+  Downloading paramiko-2.9.1-py2.py3-none-any.whl (210 kB)
+Requirement already satisfied: azure-common&lt;2.0.0,&gt;=1.1.12 in /usr/local/lib/python3.7/site-packages (from azureml-core) (1.1.27)
+Collecting ndg-httpsclient&lt;=0.5.1
+  Downloading ndg_httpsclient-0.5.1-py3-none-any.whl (34 kB)
+Collecting knack~=0.8.2
+  Downloading knack-0.8.2-py3-none-any.whl (59 kB)
+Collecting azure-graphrbac&lt;1.0.0,&gt;=0.40.0
+  Downloading azure_graphrbac-0.61.1-py2.py3-none-any.whl (141 kB)
+Collecting backports.tempfile
+  Downloading backports.tempfile-1.0-py2.py3-none-any.whl (4.4 kB)
+Collecting SecretStorage&lt;4.0.0
+  Downloading SecretStorage-3.3.1-py3-none-any.whl (15 kB)
+Collecting docker&lt;6.0.0
+  Downloading docker-5.0.3-py2.py3-none-any.whl (146 kB)
+Collecting azure-mgmt-keyvault&lt;10.0.0,&gt;=0.40.0
+  Downloading azure_mgmt_keyvault-9.3.0-py2.py3-none-any.whl (412 kB)
+Requirement already satisfied: msal-extensions&lt;0.4,&gt;=0.3.0 in /usr/local/lib/python3.7/site-packages (from azureml-core) (0.3.0)
+Collecting azure-mgmt-authorization&lt;1.0.0,&gt;=0.40.0
+  Downloading azure_mgmt_authorization-0.61.0-py2.py3-none-any.whl (94 kB)
+Collecting pyopenssl&lt;22.0.0
+  Downloading pyOpenSSL-21.0.0-py2.py3-none-any.whl (55 kB)
+Collecting jsonpickle&lt;3.0.0
+  Downloading jsonpickle-2.0.0-py2.py3-none-any.whl (37 kB)
+Requirement already satisfied: jmespath&lt;1.0.0 in /usr/local/lib/python3.7/site-packages (from azureml-core) (0.10.0)
+Requirement already satisfied: msrest&lt;1.0.0,&gt;=0.5.1 in /usr/local/lib/python3.7/site-packages (from azureml-core) (0.6.21)
+Requirement already satisfied: cryptography!=1.9,!=2.0.*,!=2.1.*,!=2.2.*,&lt;4.0.0 in /usr/local/lib/python3.7/site-packages (from azureml-core) (3.3.2)
+Requirement already satisfied: humanfriendly&lt;10.0,&gt;=4.7 in /usr/local/lib/python3.7/site-packages (from azureml-core) (8.2)
+Collecting azureml-dataset-runtime~=1.37.0
+  Downloading azureml_dataset_runtime-1.37.0-py3-none-any.whl (3.5 kB)
+Collecting azureml-train-core~=1.37.0
+  Downloading azureml_train_core-1.37.0-py3-none-any.whl (8.6 MB)
+Collecting azureml-telemetry~=1.37.0
+  Downloading azureml_telemetry-1.37.0-py3-none-any.whl (30 kB)
+Collecting azureml-automl-core~=1.37.0
+  Downloading azureml_automl_core-1.37.0-py3-none-any.whl (222 kB)
+Requirement already satisfied: six in /usr/local/lib/python3.7/site-packages (from msrestazure&lt;=0.6.4,&gt;=0.4.33-&gt;azureml-core) (1.16.0)
+Requirement already satisfied: pyparsing&lt;3,&gt;=2.0.2 in /usr/local/lib/python3.7/site-packages (from packaging&lt;22.0-&gt;azureml-core) (2.4.7)
+Collecting azure-mgmt-core&lt;2.0.0,&gt;=1.2.0
+  Downloading azure_mgmt_core-1.3.0-py2.py3-none-any.whl (25 kB)
+Requirement already satisfied: importlib-metadata&lt;5,&gt;=0.23; python_version == "3.7" in /usr/local/lib/python3.7/site-packages (from argcomplete~=1.8-&gt;azureml-core) (4.8.1)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.7/site-packages (from requests[socks]&lt;3.0.0,&gt;=2.19.1-&gt;azureml-core) (2021.10.8)
+Requirement already satisfied: charset-normalizer~=2.0.0; python_version &gt;= "3" in /usr/local/lib/python3.7/site-packages (from requests[socks]&lt;3.0.0,&gt;=2.19.1-&gt;azureml-core) (2.0.7)
+Requirement already satisfied: idna&lt;4,&gt;=2.5; python_version &gt;= "3" in /usr/local/lib/python3.7/site-packages (from requests[socks]&lt;3.0.0,&gt;=2.19.1-&gt;azureml-core) (3.3)
+Collecting PySocks!=1.5.7,&gt;=1.5.6; extra == "socks"
+  Downloading PySocks-1.7.1-py3-none-any.whl (16 kB)
+Collecting bcrypt&gt;=3.1.3
+  Downloading bcrypt-3.2.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (61 kB)
+Collecting pynacl&gt;=1.0.1
+  Downloading PyNaCl-1.4.0-cp35-abi3-manylinux1_x86_64.whl (961 kB)
+Requirement already satisfied: pyasn1&gt;=0.1.1 in /usr/local/lib/python3.7/site-packages (from ndg-httpsclient&lt;=0.5.1-&gt;azureml-core) (0.4.8)
+Requirement already satisfied: pygments in /usr/local/lib/python3.7/site-packages (from knack~=0.8.2-&gt;azureml-core) (2.10.0)
+Collecting colorama
+  Downloading colorama-0.4.4-py2.py3-none-any.whl (16 kB)
+Requirement already satisfied: tabulate in /usr/local/lib/python3.7/site-packages (from knack~=0.8.2-&gt;azureml-core) (0.8.3)
+Requirement already satisfied: pyyaml in /usr/local/lib/python3.7/site-packages (from knack~=0.8.2-&gt;azureml-core) (5.4.1)
+Collecting backports.weakref
+  Downloading backports.weakref-1.0.post1-py2.py3-none-any.whl (5.2 kB)
+Collecting jeepney&gt;=0.6
+  Downloading jeepney-0.7.1-py3-none-any.whl (54 kB)
+Requirement already satisfied: websocket-client&gt;=0.32.0 in /usr/local/lib/python3.7/site-packages (from docker&lt;6.0.0-&gt;azureml-core) (1.2.1)
+Requirement already satisfied: portalocker~=1.0; platform_system != "Windows" in /usr/local/lib/python3.7/site-packages (from msal-extensions&lt;0.4,&gt;=0.3.0-&gt;azureml-core) (1.7.1)
+Requirement already satisfied: isodate&gt;=0.6.0 in /usr/local/lib/python3.7/site-packages (from msrest&lt;1.0.0,&gt;=0.5.1-&gt;azureml-core) (0.6.0)
+Requirement already satisfied: requests-oauthlib&gt;=0.5.0 in /usr/local/lib/python3.7/site-packages (from msrest&lt;1.0.0,&gt;=0.5.1-&gt;azureml-core) (1.3.0)
+Requirement already satisfied: cffi&gt;=1.12 in /usr/local/lib/python3.7/site-packages (from cryptography!=1.9,!=2.0.*,!=2.1.*,!=2.2.*,&lt;4.0.0-&gt;azureml-core) (1.15.0)
+Requirement already satisfied: pyarrow&lt;4.0.0,&gt;=0.17.0 in /usr/local/lib/python3.7/site-packages (from azureml-dataset-runtime~=1.37.0-&gt;azureml-train-automl-client) (1.0.1)
+Requirement already satisfied: numpy!=1.19.3; sys_platform == "linux" in /usr/local/lib/python3.7/site-packages (from azureml-dataset-runtime~=1.37.0-&gt;azureml-train-automl-client) (1.19.5)
+Collecting azureml-dataprep&lt;2.26.0a,&gt;=2.25.0a
+  Downloading azureml_dataprep-2.25.2-py3-none-any.whl (39.4 MB)
+Collecting azureml-train-restclients-hyperdrive~=1.37.0
+  Downloading azureml_train_restclients_hyperdrive-1.37.0-py3-none-any.whl (19 kB)
+Collecting applicationinsights
+  Downloading applicationinsights-0.11.10-py2.py3-none-any.whl (55 kB)
+Requirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.7/site-packages (from importlib-metadata&lt;5,&gt;=0.23; python_version == "3.7"-&gt;argcomplete~=1.8-&gt;azureml-core) (3.6.0)
+Requirement already satisfied: typing-extensions&gt;=3.6.4; python_version &lt; "3.8" in /usr/local/lib/python3.7/site-packages (from importlib-metadata&lt;5,&gt;=0.23; python_version == "3.7"-&gt;argcomplete~=1.8-&gt;azureml-core) (3.10.0.2)
+Requirement already satisfied: oauthlib&gt;=3.0.0 in /usr/local/lib/python3.7/site-packages (from requests-oauthlib&gt;=0.5.0-&gt;msrest&lt;1.0.0,&gt;=0.5.1-&gt;azureml-core) (3.1.1)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.7/site-packages (from cffi&gt;=1.12-&gt;cryptography!=1.9,!=2.0.*,!=2.1.*,!=2.2.*,&lt;4.0.0-&gt;azureml-core) (2.20)
+Collecting azureml-dataprep-native&lt;39.0.0,&gt;=38.0.0
+  Downloading azureml_dataprep_native-38.0.0-cp37-cp37m-manylinux1_x86_64.whl (1.3 MB)
+Requirement already satisfied: azure-identity==1.7.0 in /usr/local/lib/python3.7/site-packages (from azureml-dataprep&lt;2.26.0a,&gt;=2.25.0a-&gt;azureml-dataset-runtime~=1.37.0-&gt;azureml-train-automl-client) (1.7.0)
+Collecting cloudpickle&lt;2.0.0,&gt;=1.1.0
+  Downloading cloudpickle-1.6.0-py3-none-any.whl (23 kB)
+Collecting azureml-dataprep-rslex~=2.1.0dev0
+  Downloading azureml_dataprep_rslex-2.1.1-cp37-cp37m-manylinux2010_x86_64.whl (13.2 MB)
+Collecting dotnetcore2&lt;3.0.0,&gt;=2.1.14
+  Downloading dotnetcore2-2.1.22-py3-none-manylinux1_x86_64.whl (29.3 MB)
+Collecting distro&gt;=1.2.0
+  Downloading distro-1.6.0-py2.py3-none-any.whl (19 kB)
+Installing collected packages: msrestazure, pkginfo, azure-mgmt-core, azure-mgmt-resource, contextlib2, argcomplete, azure-mgmt-storage, pathspec, azure-mgmt-containerregistry, bcrypt, pynacl, paramiko, pyopenssl, ndg-httpsclient, colorama, knack, azure-graphrbac, backports.weakref, backports.tempfile, jeepney, SecretStorage, docker, azure-mgmt-keyvault, azure-mgmt-authorization, jsonpickle, azureml-core, azureml-dataprep-native, cloudpickle, azureml-dataprep-rslex, distro, dotnetcore2, azureml-dataprep, azureml-dataset-runtime, azureml-train-restclients-hyperdrive, applicationinsights, azureml-telemetry, azureml-train-core, azureml-automl-core, azureml-train-automl-client, PySocks
+  Attempting uninstall: cloudpickle
+    Found existing installation: cloudpickle 2.0.0
+    Uninstalling cloudpickle-2.0.0:
+      Successfully uninstalled cloudpickle-2.0.0
+Successfully installed PySocks-1.7.1 SecretStorage-3.3.1 applicationinsights-0.11.10 argcomplete-1.12.3 azure-graphrbac-0.61.1 azure-mgmt-authorization-0.61.0 azure-mgmt-containerregistry-8.2.0 azure-mgmt-core-1.3.0 azure-mgmt-keyvault-9.3.0 azure-mgmt-resource-19.0.0 azure-mgmt-storage-19.0.0 azureml-automl-core-1.37.0 azureml-core-1.37.0.post1 azureml-dataprep-2.25.2 azureml-dataprep-native-38.0.0 azureml-dataprep-rslex-2.1.1 azureml-dataset-runtime-1.37.0 azureml-telemetry-1.37.0 azureml-train-automl-client-1.37.0 azureml-train-core-1.37.0 azureml-train-restclients-hyperdrive-1.37.0 backports.tempfile-1.0 backports.weakref-1.0.post1 bcrypt-3.2.0 cloudpickle-1.6.0 colorama-0.4.4 contextlib2-21.6.0 distro-1.6.0 docker-5.0.3 dotnetcore2-2.1.22 jeepney-0.7.1 jsonpickle-2.0.0 knack-0.8.2 msrestazure-0.6.4 ndg-httpsclient-0.5.1 paramiko-2.9.1 pathspec-0.9.0 pkginfo-1.8.2 pynacl-1.4.0 pyopenssl-21.0.0
+WARNING: You are using pip version 20.2.4; however, version 21.3.1 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+<span class="-Color -Color-Cyan">INFO</span>[0041] Taking snapshot of full filesystem...        
+<span class="-Color -Color-Cyan">INFO</span>[0050] Pushing image to docker-registry.default-tenant.app.yh41.iguazio-cd1.com/mlrun/func-azureml-yonatan-azure:latest 
+<span class="-Color -Color-Cyan">INFO</span>[0051] Pushed image to 1 destinations               
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BuildStatus(ready=True, outputs={'image': '.mlrun/func-azureml-yonatan-azure:latest'})
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="automl-configuration-run-parameters">
+<h3>Automl configuration &amp; run parameters<a class="headerlink" href="#automl-configuration-run-parameters" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">automl_settings</span></code> object is the setup for Azure AutoML. It holds the <code class="docutils literal notranslate"><span class="pre">task</span></code> type, number of  models to train - <code class="docutils literal notranslate"><span class="pre">iterations</span></code>, the desired metric - <code class="docutils literal notranslate"><span class="pre">primary</span> <span class="pre">metric</span></code>, the allowed types of models <code class="docutils literal notranslate"><span class="pre">allowed_models</span></code> and more.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">params</span></code> are the parameters for the MLRun function, such as experiment (<code class="docutils literal notranslate"><span class="pre">experiment_name</span></code>) and cpu cluster (<code class="docutils literal notranslate"><span class="pre">cpu_cluster_name</span></code>) names in AzureML, dataset properties for registration, target label for training - <code class="docutils literal notranslate"><span class="pre">label_column_name</span></code>, number of models to download <code class="docutils literal notranslate"><span class="pre">save_n_models</span></code> and more.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_column_name</span> <span class="o">=</span> <span class="s1">'label'</span> <span class="c1"># target label</span>
+
+<span class="c1"># Configure automl settings:</span>
+<span class="n">automl_settings</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"task"</span><span class="p">:</span> <span class="s1">'classification'</span><span class="p">,</span>
+            <span class="s2">"debug_log"</span><span class="p">:</span> <span class="s1">'automl_errors.log'</span><span class="p">,</span>
+<span class="c1">#             "experiment_exit_score" : 0.9,</span>
+            <span class="s2">"enable_early_stopping"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"allowed_models"</span><span class="p">:</span> <span class="p">[</span><span class="s1">'LogisticRegression'</span><span class="p">,</span> <span class="s1">'SGD'</span><span class="p">,</span> <span class="s1">'SVM'</span><span class="p">],</span>
+            <span class="s2">"iterations"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">"iteration_timeout_minutes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"max_concurrent_iterations"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"max_cores_per_iteration"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"n_cross_validations"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">"primary_metric"</span><span class="p">:</span> <span class="s1">'accuracy'</span><span class="p">,</span>
+            <span class="s2">"featurization"</span><span class="p">:</span> <span class="s1">'off'</span><span class="p">,</span>
+            <span class="s2">"model_explainability"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"enable_voting_ensemble"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"enable_stack_ensemble"</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">}</span>
+
+<span class="c1"># Setting params to azure_run function:</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"experiment_name"</span><span class="p">:</span> <span class="s1">'azure-automl-test'</span><span class="p">,</span>
+    <span class="s2">"cpu_cluster_name"</span><span class="p">:</span> <span class="s1">'azureml-cpu'</span><span class="p">,</span>
+    <span class="s2">"dataset_name"</span><span class="p">:</span> <span class="s1">'iris'</span><span class="p">,</span>
+    <span class="s2">"dataset_description"</span><span class="p">:</span> <span class="s1">'iris training data'</span><span class="p">,</span>
+    <span class="s2">"label_column_name"</span><span class="p">:</span> <span class="n">label_column_name</span><span class="p">,</span>
+    <span class="s2">"create_new_version"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"register_model_name"</span><span class="p">:</span> <span class="s2">"iris-model"</span><span class="p">,</span>
+    <span class="s2">"save_n_models"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"automl_settings"</span><span class="p">:</span> <span class="n">automl_settings</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="run-azure-automl-train">
+<h3>Run Azure AutoML train:<a class="headerlink" href="#run-azure-automl-train" title="Permalink to this headline">¶</a></h3>
+<p>This MLRun function will perform the following:</p>
+<ul class="simple">
+<li><p>Initialize workspace and experiment in your AzureML</p></li>
+<li><p>Register the dataset/feature vector to Iguazio and to AzureML.</p></li>
+<li><p>Submit the training job to AzureML and print the live training results fro each model</p></li>
+<li><p>Generate the top trained models.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">azureml_run</span> <span class="o">=</span> <span class="n">azureml_fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"automl_train"</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"training_data"</span><span class="p">:</span> <span class="n">DATA_URL</span><span class="p">},</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-03 17:35:49,618 [info] starting run azure-automl_train uid=4f6705ed258746d58f9603ae2b8a5314 DB=http://mlrun-api:8080
+&gt; 2022-01-03 17:35:49,869 [info] Job is running in the background, pod: azure-automl-train-44ph4
+&gt; 2022-01-03 17:35:59,136 [info] Loading AzureML Workspace
+&gt; 2022-01-03 17:36:02,114 [info] Initializing AzureML experiment azure-automl-test
+&gt; 2022-01-03 17:36:03,331 [info] Initializing AzureML compute target azureml-cpu
+&gt; 2022-01-03 17:36:03,567 [info] Found existing cluster, will use it.
+Succeeded
+AmlCompute wait for completion finished
+
+Minimum number of nodes requested have been provisioned
+&gt; 2022-01-03 17:36:03,747 [info] Connecting to AzureML experiment default datastore
+&gt; 2022-01-03 17:36:05,005 [info] Retrieving feature vector and uploading to Azure blob storage: az://azureml-blobstore-27f8977b-4946-4ca0-bdc5-5a685d2fe8d7/iris.csv
+&gt; 2022-01-03 17:36:05,312 [info] Registering dataset iris in Azure ML
+&gt; 2022-01-03 17:36:05,312 [info] OpenSSL version must be 1.1. Overriding the OpenSSL version to 1.1
+&gt; 2022-01-03 17:36:12,261 [info] Setting up experiment parameters
+&gt; 2022-01-03 17:36:12,431 [info] Submitting and running experiment
+Submitting remote run.
+Parent Run ID: AutoML_21f468b2-f244-4b2e-b1ed-15768e16bb31
+https://ml.azure.com/runs/AutoML_21f468b2-f244-4b2e-b1ed-15768e16bb31?wsid=/subscriptions/8d81bc0b-6abd-4395-be83-000251d9fdbe/resourcegroups/nick/workspaces/NickAzureML&amp;tid=af053911-a8b7-450d-9f58-0c08567d4769
+
+Current status: ModelSelection. Beginning model selection.
+
+********************************************************************************************
+DATA GUARDRAILS: 
+
+TYPE:         Class balancing detection
+STATUS:       PASSED
+DESCRIPTION:  Your inputs were analyzed, and all classes are balanced in your training data.
+              Learn more about imbalanced data: https://aka.ms/AutomatedMLImbalancedData
+
+********************************************************************************************
+
+********************************************************************************************
+ITER: The iteration being evaluated.
+PIPELINE: A summary description of the pipeline being evaluated.
+DURATION: Time taken for the current iteration.
+METRIC: The result of computing score on the fitted pipeline.
+BEST: The best observed score thus far.
+********************************************************************************************
+
+ ITER   PIPELINE                                       DURATION            METRIC      BEST
+    1   StandardScalerWrapper SVM                      0:02:04             0.9600    0.9600
+    0   RobustScaler LogisticRegression                0:04:10             0.9667    0.9667
+    2   StandardScalerWrapper LogisticRegression       0:04:05             0.9733    0.9733
+    3   MaxAbsScaler LogisticRegression                0:03:57             0.9533    0.9733
+    4   MaxAbsScaler LogisticRegression                0:03:54             0.9733    0.9733
+&gt; 2022-01-03 17:47:54,842 [info] Registering model
+&gt; 2022-01-03 17:47:56,570 [info] Registered model with name 'iris-model', id 'iris-model:91', version '91'
+&gt; 2022-01-03 17:47:56,570 [info] Downloading model iris-model:91
+&gt; 2022-01-03 17:48:01,600 [info] Logging LogisticRegression model to MLRun
+&gt; 2022-01-03 17:48:02,085 [info] Registering model
+&gt; 2022-01-03 17:48:03,070 [info] Registered model with name 'iris-model', id 'iris-model:92', version '92'
+&gt; 2022-01-03 17:48:03,070 [info] Downloading model iris-model:92
+&gt; 2022-01-03 17:48:08,193 [info] Logging LogisticRegression model to MLRun
+&gt; 2022-01-03 17:48:08,601 [info] Registering model
+&gt; 2022-01-03 17:48:09,402 [info] Registered model with name 'iris-model', id 'iris-model:93', version '93'
+&gt; 2022-01-03 17:48:09,402 [info] Downloading model iris-model:93
+&gt; 2022-01-03 17:48:14,101 [info] Logging LogisticRegression model to MLRun
+&gt; 2022-01-03 17:48:15,136 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>azureml-yonatan</td>
+<td><div title="4f6705ed258746d58f9603ae2b8a5314"><a href="https://dashboard.default-tenant.app.yh41.iguazio-cd1.com/mlprojects/azureml-yonatan/jobs/monitor/4f6705ed258746d58f9603ae2b8a5314/overview" target="_blank">...2b8a5314</a></div></td>
+<td>0</td>
+<td>Jan 03 17:35:59</td>
+<td>completed</td>
+<td>azure-automl_train</td>
+<td><div class="dictlist">v3io_user=yonatan</div><div class="dictlist">kind=job</div><div class="dictlist">owner=yonatan</div><div class="dictlist">host=azure-automl-train-44ph4</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">training_data</div></td>
+<td><div class="dictlist">experiment_name=azure-automl-test</div><div class="dictlist">cpu_cluster_name=azureml-cpu</div><div class="dictlist">dataset_name=iris</div><div class="dictlist">dataset_description=iris training data</div><div class="dictlist">label_column_name=label</div><div class="dictlist">create_new_version=True</div><div class="dictlist">register_model_name=iris-model</div><div class="dictlist">save_n_models=3</div><div class="dictlist">automl_settings={'task': 'classification', 'debug_log': 'automl_errors.log', 'enable_early_stopping': False, 'allowed_models': ['LogisticRegression', 'SGD', 'SVM'], 'iterations': 5, 'iteration_timeout_minutes': 2, 'max_concurrent_iterations': 2, 'max_cores_per_iteration': -1, 'n_cross_validations': 5, 'primary_metric': 'accuracy', 'featurization': 'off', 'model_explainability': False, 'enable_voting_ensemble': False, 'enable_stack_ensemble': False}</div></td>
+<td><div class="dictlist">dataset_blob_path=az://azureml-blobstore-27f8977b-4946-4ca0-bdc5-5a685d2fe8d7/iris.csv</div><div class="dictlist">best_iteration=1</div><div class="dictlist">auc_macro=0.9973298059964726</div><div class="dictlist">recall_score_macro=0.9729629629629629</div><div class="dictlist">average_precision_score_micro=0.9962110898173272</div><div class="dictlist">recall_score_micro=0.9733333333333334</div><div class="dictlist">norm_macro_recall=0.9594444444444443</div><div class="dictlist">weighted_accuracy=0.9739694654594448</div><div class="dictlist">auc_weighted=0.9972857142857142</div><div class="dictlist">log_loss=0.0724925102796574</div><div class="dictlist">f1_score_macro=0.9721779225097302</div><div class="dictlist">matthews_correlation=0.9613232982405628</div><div class="dictlist">f1_score_micro=0.9733333333333334</div><div class="dictlist">average_precision_score_macro=0.9952267382822939</div><div class="dictlist">auc_micro=0.998</div><div class="dictlist">precision_score_micro=0.9733333333333334</div><div class="dictlist">average_precision_score_weighted=0.9952664742664743</div><div class="dictlist">precision_score_macro=0.9754761904761905</div><div class="dictlist">recall_score_weighted=0.9733333333333334</div><div class="dictlist">precision_score_weighted=0.9767380952380952</div><div class="dictlist">balanced_accuracy=0.9729629629629629</div><div class="dictlist">f1_score_weighted=0.9730901151988108</div><div class="dictlist">accuracy=0.9733333333333334</div></td>
+<td><div title="v3io:///projects/azureml-yonatan/artifacts/models/1/">model</div><div title="v3io:///projects/azureml-yonatan/artifacts/models/">model_0</div><div title="v3io:///projects/azureml-yonatan/artifacts/models/">model_1</div><div title="v3io:///projects/azureml-yonatan/artifacts/models/">model_2</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultba0d83d8-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultba0d83d8-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultba0d83d8">×</span>
+</div>
+<iframe class="fileview" id="resultba0d83d8-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.yh41.iguazio-cd1.com/mlprojects/azureml-yonatan/jobs/monitor/4f6705ed258746d58f9603ae2b8a5314/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-03 17:48:16,307 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deploying-the-model-serving-function">
+<h2>4. Deploying the Model-Serving Function<a class="headerlink" href="#deploying-the-model-serving-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="importing-v2-model-server-function-from-marketplace-for-serving-the-model">
+<h3>Importing <code class="docutils literal notranslate"><span class="pre">v2_model_server</span></code> function from marketplace for serving the model<a class="headerlink" href="#importing-v2-model-server-function-from-marketplace-for-serving-the-model" title="Permalink to this headline">¶</a></h3>
+<p>Firstly we collect the model paths from our run object and getting the best model.</p>
+<p>Then importing the serving function from marketplace and adding our best model to the serving function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get trained models:</span>
+<span class="n">model_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">azureml_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">azureml_run</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="s2">"model"</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]</span>
+<span class="n">best_model_path</span> <span class="o">=</span> <span class="n">model_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Importing serving function from marketplace:</span>
+<span class="n">serving_fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s1">'hub://v2_model_server'</span><span class="p">)</span>
+<span class="n">serving_fn</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s1">'best_model'</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="n">best_model_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.serving.states.TaskStep at 0x7feea7f07a90&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_model_path</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'store://artifacts/azureml-yonatan/model_0_logisticregression:4f6705ed258746d58f9603ae2b8a5314'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">azureml_run</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[('dataset_blob_path',
+  'az://azureml-blobstore-27f8977b-4946-4ca0-bdc5-5a685d2fe8d7/iris.csv'),
+ ('best_iteration', 1),
+ ('auc_macro', 0.9973298059964726),
+ ('recall_score_macro', 0.9729629629629629),
+ ('average_precision_score_micro', 0.9962110898173272),
+ ('recall_score_micro', 0.9733333333333334),
+ ('norm_macro_recall', 0.9594444444444443),
+ ('weighted_accuracy', 0.9739694654594448),
+ ('auc_weighted', 0.9972857142857142),
+ ('log_loss', 0.0724925102796574),
+ ('f1_score_macro', 0.9721779225097302),
+ ('matthews_correlation', 0.9613232982405628),
+ ('f1_score_micro', 0.9733333333333334),
+ ('average_precision_score_macro', 0.9952267382822939),
+ ('auc_micro', 0.998),
+ ('precision_score_micro', 0.9733333333333334),
+ ('average_precision_score_weighted', 0.9952664742664743),
+ ('precision_score_macro', 0.9754761904761905),
+ ('recall_score_weighted', 0.9733333333333334),
+ ('precision_score_weighted', 0.9767380952380952),
+ ('balanced_accuracy', 0.9729629629629629),
+ ('f1_score_weighted', 0.9730901151988108),
+ ('accuracy', 0.9733333333333334),
+ ('model',
+  'store://artifacts/azureml-yonatan/model_0_logisticregression:4f6705ed258746d58f9603ae2b8a5314'),
+ ('model_0',
+  'store://artifacts/azureml-yonatan/model_0_logisticregression:4f6705ed258746d58f9603ae2b8a5314'),
+ ('model_1',
+  'store://artifacts/azureml-yonatan/model_1_logisticregression:4f6705ed258746d58f9603ae2b8a5314'),
+ ('model_2',
+  'store://artifacts/azureml-yonatan/model_2_logisticregression:4f6705ed258746d58f9603ae2b8a5314')]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="building-and-deploying-the-serving-function">
+<h3>Building and Deploying the Serving Function<a class="headerlink" href="#building-and-deploying-the-serving-function" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_address</span> <span class="o">=</span> <span class="n">serving_fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-03 17:48:16,624 [info] Starting remote function deploy
+2022-01-03 17:48:16  (info) Deploying function
+2022-01-03 17:48:16  (info) Building
+2022-01-03 17:48:17  (info) Staging files and preparing base images
+2022-01-03 17:48:17  (info) Building processor image
+2022-01-03 17:48:18  (info) Build complete
+2022-01-03 17:48:24  (info) Function deploy complete
+&gt; 2022-01-03 17:48:25,070 [info] successfully deployed function: {'internal_invocation_urls': ['nuclio-azureml-yonatan-v2-model-server.default-tenant.svc.cluster.local:8080'], 'external_invocation_urls': ['azureml-yonatan-v2-model-server-azureml-yonatan.default-tenant.app.yh41.iguazio-cd1.com/']}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-the-live-model-serving-function">
+<h2>5. Using the Live Model-Serving Function<a class="headerlink" href="#using-the-live-model-serving-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">'The address for the function is </span><span class="si">{</span><span class="n">function_address</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="o">!</span>curl <span class="nv">$function_address</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The address for the function is http://azureml-yonatan-v2-model-server-azureml-yonatan.default-tenant.app.yh41.iguazio-cd1.com/ 
+
+{"name": "ModelRouter", "version": "v2", "extensions": []}
+</pre></div>
+</div>
+</div>
+</div>
+<p>After deploying the serving function with the required model we can make prediction:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">serving_fn</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="sa">f</span><span class="s1">'/v2/models/best_model/infer'</span><span class="p">,</span> <span class="s1">'0,1,2'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-03 17:50:08,449 [info] invoking function: {'method': 'POST', 'path': 'http://nuclio-azureml-yonatan-v2-model-server.default-tenant.svc.cluster.local:8080/v2/models/best_model/infer'}
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">17</span><span class="o">-</span><span class="mi">7</span><span class="n">cfa9b91719c</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">serving_fn</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="sa">f</span><span class="s1">'/v2/models/best_model/infer'</span><span class="p">,</span> <span class="s1">'0,1,2'</span><span class="p">)</span>
+
+<span class="nn">~/.pythonlibs/jupyter-yoni/lib/python3.7/site-packages/mlrun/runtimes/function.py</span> in <span class="ni">invoke</span><span class="nt">(self, path, body, method, headers, dashboard, force_external_address, auth_info)</span>
+<span class="g g-Whitespace">    </span><span class="mi">896</span>             <span class="k">raise</span> <span class="ne">OSError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"error: cannot run function at url </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">err</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">897</span>         <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">898</span>             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"bad function response </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">status_code</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">resp</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">899</span> 
+<span class="g g-Whitespace">    </span><span class="mi">900</span>         <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">content</span>
+
+<span class="ne">RuntimeError</span>: bad function response 400: Unrecognized request format: Extra data: line 1 column 2 (char 1)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="clean-up">
+<h2>6. Clean up<a class="headerlink" href="#clean-up" title="Permalink to this headline">¶</a></h2>
+<p>For cleaning up AzureML resources see:
+https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-auto-train-models#clean-up-resources</p>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
