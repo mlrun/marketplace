@@ -1,0 +1,753 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Concept Drift - Deployer</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/concept_drift_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fconcept_drift_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/concept_drift_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#steps">
+<strong>
+    Steps
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#data-exploration">
+<strong>
+    Data exploration
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#creating-the-input-stream">
+<strong>
+    Creating the input stream
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-the-function">
+<strong>
+    Importing the function
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-the-function-remotely">
+<strong>
+    Running the function remotely
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#testing-the-function">
+<strong>
+    Testing the function
+   </strong>
+</a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#make-sure-some-time-has-passed-the-function-needs-to-be-triggered-by-the-input-stream-then-it-ll-write-to-the-output-stream">
+     Make sure some time has passed - the function needs to be triggered by the input stream, then it’ll write to the output stream
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="tex2jax_ignore mathjax_ignore section" id="concept-drift-deployer">
+<h1>Concept Drift - Deployer<a class="headerlink" href="#concept-drift-deployer" title="Permalink to this headline">¶</a></h1>
+<p>Deploy a streaming Concept Drift detector on a labeled stream.<br/>
+It will initialize the selected drift detectors with the base_dataset’s statistics and deploy the <a class="reference external" href="https://github.com/mlrun/functions/blob/master/concept_drift_streaming/concept_drift_streaming.ipynb">concept_drift_streaming</a> function from the hub. <br/>
+adding <a class="reference external" href="https://nuclio.io/docs/latest/reference/triggers/v3iostream/">V3IOStreamTrigger</a> in order to listen to the input_stream.</p>
+<div class="section" id="steps">
+<h2><strong>Steps</strong><a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#Data-exploration">Data exploration</a></p></li>
+<li><p><a class="reference external" href="#Creating-the-input-stream">Creating the input stream</a></p></li>
+<li><p><a class="reference external" href="#Importing-the-function">Importing the function</a></p></li>
+<li><p><a class="reference external" href="#Running-the-function-remotely">Running the function remotely</a></p></li>
+<li><p><a class="reference external" href="#Testing-the-function">Testing the function</a></p></li>
+</ol>
+</div>
+<div class="section" id="data-exploration">
+<h2><strong>Data exploration</strong><a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h2>
+<p>In order to know about the performance of a drift detector by measuring the different detection metrics, we need to know beforehand where a real drift occurs.<br/>
+This is only possible with synthetic datasets.<br/> The scikit-multiflow framework allows generating several kinds of synthetic data to simulate the occurrence of drifts.<br/>
+<a class="reference external" href="https://dataverse.harvard.edu">Harvard dataverse</a> provides futher explanations on the <a class="reference external" href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5OWRGB">used dataset</a> along with different kinds of drifted datasets.<br/>
+mixed_0101_abrupto has 4 concepts and 3 drifts at time steps 10000, 20000, and 30000.<br/>
+Our dataset will be train-test-splitted, the train part (first 5000 examples) is used to train the model (that is generated easly using <a class="reference external" href="https://github.com/mlrun/functions/blob/master/sklearn_classifier/sklearn_classifier.ipynb">sklearn_classifer</a>). <br/>
+The test part (which is already predicted by the model) will be pushed to the input stream in order to detect drifts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/data/function-marketplace-data/concept_drift/mixed_0101_abrupto.csv'</span>
+<span class="n">predicted_train_path</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/data/function-marketplace-data/concept_drift/predicted_abrupto_train.csv'</span>
+<span class="n">predicted_test_data_path</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/data/function-marketplace-data/concept_drift/predicted_abrupto_test.csv'</span>
+<span class="c1"># You can find the model used here</span>
+<span class="n">models_path</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/models/function-marketplace-models/concept_drift/concept_drift_random_forest.pkl'</span>
+<span class="n">original_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+<span class="n">original_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>X1</th>
+<th>X2</th>
+<th>X3</th>
+<th>X4</th>
+<th>class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0.0</td>
+<td>1.0</td>
+<td>0.460101</td>
+<td>0.592744</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.588788</td>
+<td>0.574984</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.401641</td>
+<td>0.679325</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.306076</td>
+<td>0.182108</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.962847</td>
+<td>0.579245</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predicted_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">predicted_test_data_path</span><span class="p">)</span>
+<span class="n">predicted_test</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>X1</th>
+<th>X2</th>
+<th>X3</th>
+<th>X4</th>
+<th>class</th>
+<th>predicted_col</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>34995</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.010106</td>
+<td>0.647269</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>34996</th>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.293651</td>
+<td>0.737291</td>
+<td>1.0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>34997</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.848546</td>
+<td>0.552337</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+<tr>
+<th>34998</th>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.614754</td>
+<td>0.859896</td>
+<td>1.0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>34999</th>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.265306</td>
+<td>0.843716</td>
+<td>0.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="creating-the-input-stream">
+<h2><strong>Creating the input stream</strong><a class="headerlink" href="#creating-the-input-stream" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span> 
+
+<span class="n">container</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'V3IO_HOME'</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"V3IO_USERNAME"</span><span class="p">]</span>
+<span class="n">rel_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()[</span><span class="mi">6</span><span class="p">:]</span> <span class="o">+</span> <span class="s1">'/artifacts'</span>
+
+<span class="n">base_input_stream</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="n">rel_path</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/inputs_stream"</span>
+<span class="n">base_output_stream</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">user</span><span class="p">,</span><span class="n">rel_path</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/output_stream"</span>
+<span class="n">input_stream</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">container</span><span class="p">,</span><span class="n">base_input_stream</span><span class="p">)</span>
+<span class="n">output_stream</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">container</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">rel_path</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/output_stream"</span>
+<span class="n">tsdb_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">container</span><span class="p">,</span><span class="n">user</span><span class="p">,</span><span class="n">rel_path</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"/output_tsdb"</span>
+
+<span class="n">stream_consumer_group</span> <span class="o">=</span> <span class="s1">'cg45'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">v3io.dataplane</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">v3io</span><span class="o">.</span><span class="n">dataplane</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">container</span> <span class="o">=</span> <span class="n">container</span><span class="p">,</span>
+                                <span class="n">stream_path</span><span class="o">=</span><span class="n">base_input_stream</span><span class="p">,</span>
+                                <span class="n">shard_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                <span class="n">raise_for_status</span> <span class="o">=</span> <span class="n">v3io</span><span class="o">.</span><span class="n">dataplane</span><span class="o">.</span><span class="n">RaiseForStatus</span><span class="o">.</span><span class="n">never</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">([</span><span class="mi">409</span><span class="p">,</span> <span class="mi">204</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-the-function">
+<h2><strong>Importing the function</strong><a class="headerlink" href="#importing-the-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the function</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">'function-marketplace'</span><span class="p">)</span>
+
+<span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://concept_drift:development"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-25 10:27:04,105 [info] created and saved project function-marketplace
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f145dd80fd0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-function-remotely">
+<h2><strong>Running the function remotely</strong><a class="headerlink" href="#running-the-function-remotely" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drift_run</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'concept_drift'</span><span class="p">,</span>
+                   <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'input_stream'</span>    <span class="p">:</span> <span class="n">input_stream</span><span class="p">,</span>
+                           <span class="s1">'consumer_group'</span>  <span class="p">:</span> <span class="n">stream_consumer_group</span><span class="p">,</span>
+                           <span class="s1">'output_stream'</span>   <span class="p">:</span> <span class="n">output_stream</span><span class="p">,</span>
+                           <span class="s1">'output_tsdb'</span>     <span class="p">:</span> <span class="n">tsdb_path</span><span class="p">,</span>
+                           <span class="s1">'tsdb_batch_size'</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                           <span class="s1">'models'</span>          <span class="p">:</span> <span class="p">[</span><span class="s1">'ddm'</span><span class="p">,</span> <span class="s1">'eddm'</span><span class="p">,</span> <span class="s1">'pagehinkley'</span><span class="p">],</span> <span class="c1"># defaults</span>
+                           <span class="s1">'label_col'</span>       <span class="p">:</span> <span class="s1">'class'</span><span class="p">,</span>
+                           <span class="s1">'prediction_col'</span>  <span class="p">:</span> <span class="s1">'predicted_col'</span><span class="p">,</span>
+                           <span class="s1">'fn_tag'</span>          <span class="p">:</span> <span class="s1">'development'</span><span class="p">},</span>
+                   <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">'base_dataset'</span>    <span class="p">:</span> <span class="n">predicted_train_path</span><span class="p">},</span>
+                   <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="s1">'artifacts'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-25 10:27:04,567 [info] starting run concept_drift uid=fa07c222e77d4eac86d2ce9317aaded1 DB=http://mlrun-api:8080
+&gt; 2021-10-25 10:27:04,709 [info] Job is running in the background, pod: concept-drift-ggxgb
+&gt; 2021-10-25 10:27:11,199 [info] Loading base dataset
+&gt; 2021-10-25 10:27:13,227 [info] Creating models
+&gt; 2021-10-25 10:27:13,227 [info] Streaming data to models
+&gt; 2021-10-25 10:27:13,347 [info] Logging ready models
+&gt; 2021-10-25 10:27:13,487 [info] Deploying Concept Drift Streaming function
+&gt; 2021-10-25 10:27:13,490 [info] Starting remote function deploy
+2021-10-25 10:27:13  (info) Deploying function
+2021-10-25 10:27:13  (info) Building
+2021-10-25 10:27:13  (info) Staging files and preparing base images
+2021-10-25 10:27:13  (info) Building processor image
+2021-10-25 10:27:15  (info) Build complete
+2021-10-25 10:27:21  (info) Function deploy complete
+&gt; 2021-10-25 10:27:21,797 [info] successfully deployed function: {'internal_invocation_urls': ['nuclio-function-marketplace-concept-drift-streaming.default-tenant.svc.cluster.local:8080'], 'external_invocation_urls': ['default-tenant.app.dev39.lab.iguazeng.com:31143']}
+&gt; 2021-10-25 10:27:21,868 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="fa07c222e77d4eac86d2ce9317aaded1"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/fa07c222e77d4eac86d2ce9317aaded1/overview" target="_blank">...17aaded1</a></div></td>
+<td>0</td>
+<td>Oct 25 10:27:10</td>
+<td>completed</td>
+<td>concept_drift</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=job</div><div class="dictlist">owner=dani</div><div class="dictlist">host=concept-drift-ggxgb</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/function-marketplace-data/concept_drift/predicted_abrupto_train.csv">base_dataset</div></td>
+<td><div class="dictlist">input_stream=/users/dani/test/functions/concept_drift/artifacts/inputs_stream</div><div class="dictlist">consumer_group=cg45</div><div class="dictlist">output_stream=/users/dani/test/functions/concept_drift/artifacts/output_stream</div><div class="dictlist">output_tsdb=/users/dani/test/functions/concept_drift/artifacts/output_tsdb</div><div class="dictlist">tsdb_batch_size=1</div><div class="dictlist">models=['ddm', 'eddm', 'pagehinkley']</div><div class="dictlist">label_col=class</div><div class="dictlist">prediction_col=predicted_col</div><div class="dictlist">fn_tag=development</div></td>
+<td></td>
+<td><div title="/User/test/functions/concept_drift/artifacts/models">eddm_concept_drift</div><div title="/User/test/functions/concept_drift/artifacts/models">pagehinkley_concept_drift</div><div title="/User/test/functions/concept_drift/artifacts/models">ddm_concept_drift</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultdead8c4e-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultdead8c4e-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultdead8c4e">×</span>
+</div>
+<iframe class="fileview" id="resultdead8c4e-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/fa07c222e77d4eac86d2ce9317aaded1/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-25 10:27:23,031 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="testing-the-function">
+<h2><strong>Testing the function</strong><a class="headerlink" href="#testing-the-function" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>Mark that we are testing the deployed function - concept_drift_streaming</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="c1"># Reshaping the data to V3IOStream format.</span>
+<span class="k">def</span> <span class="nf">restructure_stream_event</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="n">instances</span> <span class="o">=</span> <span class="p">[</span><span class="nb">dict</span><span class="p">()]</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">predicted_test</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'when'</span><span class="p">,</span> <span class="s1">'class'</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">,</span> <span class="s1">'worker'</span><span class="p">,</span> <span class="s1">'hostname'</span><span class="p">,</span> <span class="s1">'predicted_col'</span><span class="p">]:</span>
+            <span class="n">instances</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="n">key</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">)})</span>
+    <span class="n">event</span><span class="p">[</span><span class="s1">'request'</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'instances'</span><span class="p">:</span> <span class="n">instances</span><span class="p">}</span>
+    <span class="n">event</span><span class="p">[</span><span class="s1">'resp'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'predicted_col'</span><span class="p">))]</span>
+    <span class="n">event</span><span class="p">[</span><span class="s1">'when'</span><span class="p">]</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">event</span><span class="p">[</span><span class="s1">'model'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'sklearn.ensemble.RandomForestClassifier'</span>
+    <span class="k">return</span> <span class="n">event</span>
+    
+    
+<span class="n">records</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">predicted_test</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s1">'records'</span><span class="p">))</span>
+<span class="n">records</span> <span class="o">=</span> <span class="p">[{</span><span class="s1">'data'</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">restructure_stream_event</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">record</span><span class="p">))}</span> <span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">records</span><span class="p">]</span>
+
+<span class="c1"># showing first record</span>
+<span class="n">records</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'data': '{"class": 1.0, "request": {"instances": [{"X1": 0.0, "X2": 0.0, "X3": 0.0634475073, "X4": 0.4136568818}]}, "resp": [1], "when": "2021-10-25 10:27:23.152584", "model": "sklearn.ensemble.RandomForestClassifier"}'}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creating v3io client</span>
+<span class="n">v3io_client</span> <span class="o">=</span> <span class="n">v3io</span><span class="o">.</span><span class="n">dataplane</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+
+<span class="c1"># Pushing some undrifted data to the input stream</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">v3io_client</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">put_records</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container</span><span class="p">,</span>
+                                          <span class="n">stream_path</span><span class="o">=</span><span class="n">base_input_stream</span><span class="p">,</span> 
+                                          <span class="n">records</span><span class="o">=</span><span class="n">records</span><span class="p">[</span><span class="mi">4900</span><span class="p">:</span><span class="mi">5100</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting earliest location in the shard</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">v3io_client</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container</span><span class="p">,</span>
+                                              <span class="n">stream_path</span><span class="o">=</span><span class="n">base_input_stream</span><span class="p">,</span>
+                                              <span class="n">shard_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                              <span class="n">seek_type</span><span class="o">=</span><span class="s1">'EARLIEST'</span><span class="p">)</span><span class="o">.</span><span class="n">body</span><span class="p">)[</span><span class="s1">'Location'</span><span class="p">]</span>
+<span class="c1"># Getting records from input stream</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">v3io_client</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">get_records</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container</span><span class="p">,</span>
+                                          <span class="n">stream_path</span><span class="o">=</span><span class="n">base_input_stream</span><span class="p">,</span>
+                                          <span class="n">shard_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+<span class="c1"># Showing the last sequence that is written to the input stream</span>
+<span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)[</span><span class="s1">'Records'</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'SequenceNumber': 200,
+ 'Data': 'eyJjbGFzcyI6IDAuMCwgInJlcXVlc3QiOiB7Imluc3RhbmNlcyI6IFt7IlgxIjogMC4wLCAiWDIiOiAwLjAsICJYMyI6IDAuMzMzMTYzNjk4OSwgIlg0IjogMC40MjE2NzY1Njg3fV19LCAicmVzcCI6IFsxXSwgIndoZW4iOiAiMjAyMS0xMC0yNSAxMDoyNzoyMy4yOTM3OTgiLCAibW9kZWwiOiAic2tsZWFybi5lbnNlbWJsZS5SYW5kb21Gb3Jlc3RDbGFzc2lmaWVyIn0=',
+ 'ArrivalTimeSec': 1635157644,
+ 'ArrivalTimeNSec': 395309631}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="make-sure-some-time-has-passed-the-function-needs-to-be-triggered-by-the-input-stream-then-it-ll-write-to-the-output-stream">
+<h3>Make sure some time has passed - the function needs to be triggered by the input stream, then it’ll write to the output stream<a class="headerlink" href="#make-sure-some-time-has-passed-the-function-needs-to-be-triggered-by-the-input-stream-then-it-ll-write-to-the-output-stream" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting earliest location in the shard</span>
+<span class="n">location</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">v3io_client</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container</span><span class="p">,</span>
+                                              <span class="n">stream_path</span><span class="o">=</span><span class="n">base_output_stream</span><span class="p">,</span>
+                                              <span class="n">shard_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                              <span class="n">seek_type</span><span class="o">=</span><span class="s1">'EARLIEST'</span><span class="p">)</span><span class="o">.</span><span class="n">body</span><span class="p">)[</span><span class="s1">'Location'</span><span class="p">]</span>
+<span class="c1"># Getting records from output stream</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">v3io_client</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">get_records</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="n">container</span><span class="p">,</span>
+                                          <span class="n">stream_path</span><span class="o">=</span><span class="n">base_output_stream</span><span class="p">,</span>
+                                          <span class="n">shard_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Showing changed detected</span>
+<span class="kn">import</span> <span class="nn">base64</span>
+<span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)[</span><span class="s1">'Records'</span><span class="p">]:</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="n">instance</span><span class="p">[</span><span class="s2">"SequenceNumber"</span><span class="p">]</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">base64</span><span class="o">.</span><span class="n">b64decode</span><span class="p">(</span><span class="n">instance</span><span class="p">[</span><span class="s1">'Data'</span><span class="p">]))</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'ddm_drift'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="s1">'eddm_drift'</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'sequence number : </span><span class="si">{</span><span class="n">seq</span><span class="si">}</span><span class="s1">, data : </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sequence number : 106, data : {'class': 0.0, 'request': {'instances': [{'X1': 0.0, 'X2': 0.0, 'X3': 0.9628473804, 'X4': 0.5792453402}]}, 'resp': [1], 'when': '2021-10-25 10:27:23.291145', 'model': 'sklearn.ensemble.RandomForestClassifier', 'ddm_warning_zone': 0, 'ddm_drift': 1, 'eddm_warning_zone': 0, 'eddm_drift': 0}
+sequence number : 122, data : {'class': 0.0, 'request': {'instances': [{'X1': 0.0, 'X2': 0.0, 'X3': 0.4969765505, 'X4': 0.9784738351}]}, 'resp': [1], 'when': '2021-10-25 10:27:23.291558', 'model': 'sklearn.ensemble.RandomForestClassifier', 'ddm_warning_zone': 0, 'ddm_drift': 0, 'eddm_warning_zone': 0, 'eddm_drift': 1}
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that the system detected a change in the 106 instance, which is 10006 instance in the real dataset - <br/>
+5000 first instances are for train, we started pushing data from the 4900 instance of the test dataset (9900 from the real dataset), and we pushed only 200 instances.</p>
+<p><a class="reference external" href="#Concept-Drift---Deployer">Back to the top</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br>
+</br></p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>

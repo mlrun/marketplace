@@ -1,0 +1,1564 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Coxph trainer - Survival analysis</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/coxph_trainer_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fcoxph_trainer_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/coxph_trainer_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#basics-of-the-cox-proportional-hazards-model">
+<strong>
+    Basics of the Cox proportional hazards model
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#kaplan-meier-survival-estimate">
+<strong>
+    Kaplan-Meier survival estimate
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#the-function">
+<strong>
+    The function
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#data-exploration">
+<strong>
+    Data exploration
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#training-cox-proprotional-hazards-and-kaplan-meier-model">
+<strong>
+    Training Cox proprotional hazards and Kaplan-Meier model
+   </strong>
+</a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-the-function">
+<strong>
+      Importing the function
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setup-function-parameters">
+<strong>
+      Setup function parameters
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-the-function-locally">
+<strong>
+      Running the function locally
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#a-peek-at-a-pickled-kaplan-meier-model">
+<strong>
+      A peek at a pickled kaplan-meier model
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#a-peek-at-a-pickeld-cox-hazards-default-model">
+<strong>
+      A peek at a pickeld cox hazards default model
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#some-potential-default-analyses-of-coxph">
+<strong>
+      Some potential default analyses of coxph
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-the-function-remotely">
+<strong>
+      Running the function remotely
+     </strong>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="tex2jax_ignore mathjax_ignore section" id="coxph-trainer-survival-analysis">
+<h1><strong>Coxph trainer - Survival analysis</strong><a class="headerlink" href="#coxph-trainer-survival-analysis" title="Permalink to this headline">¶</a></h1>
+<p>The following function provides both <a class="reference external" href="https://en.wikipedia.org/wiki/Proportional_hazards_model">Cox proprotional hazards modelling</a>
+and <a class="reference external" href="https://en.wikipedia.org/wiki/Kaplan%E2%80%93Meier_estimator">Kaplan-Meier</a> plots.</p>
+<div class="section" id="basics-of-the-cox-proportional-hazards-model">
+<h2><strong>Basics of the Cox proportional hazards model</strong><a class="headerlink" href="#basics-of-the-cox-proportional-hazards-model" title="Permalink to this headline">¶</a></h2>
+<p>The purpose of the model is to evaluate simultaneously the effect of several factors on survival.<br/> In other words, it allows us to examine how specified factors influence the rate of a particular event happening (e.g., infection, death) at a particular point in time.<br/> This rate is commonly referred as the hazard rate (<a class="reference external" href="http://www.sthda.com/english/wiki/cox-proportional-hazards-model">link</a>).</p>
+</div>
+<div class="section" id="kaplan-meier-survival-estimate">
+<h2><strong>Kaplan-Meier survival estimate</strong><a class="headerlink" href="#kaplan-meier-survival-estimate" title="Permalink to this headline">¶</a></h2>
+<p>The Kaplan-Meier (KM) method is a non-parametric method used to estimate the survival probability from observed survival times (Kaplan and Meier, 1958)(<a class="reference external" href="http://www.sthda.com/english/wiki/survival-analysis-basics">link</a>).</p>
+</div>
+<div class="section" id="the-function">
+<h2><strong>The function</strong><a class="headerlink" href="#the-function" title="Permalink to this headline">¶</a></h2>
+<p>train models to predict the timing of events.<br/>
+Although identical in structure to other training functions, this one
+requires generating a ‘Y’ that represents the age/duration/tenure of
+the obervation, designated ‘tenure’ here, and a binary labels columns that
+represents the event of interest, churned/not-churned.<br/>
+In addition, there is a strata_cols parameter, representing a list of
+stratification (aka grouping) variables.</p>
+<p>The following example covers:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="#Data-exploration">Data exploration</a></p></li>
+<li><p><a class="reference external" href="#Training-Cox-proprotional-hazards-and-Kaplan-Meier-model">Training Cox proprotional hazards and Kaplan-Meier model</a></p></li>
+<li><ul>
+<li><p><a class="reference external" href="#Importing-the-function">Importing the function</a></p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><a class="reference external" href="#Setup-function-parameters">Setup function parameters</a></p></li>
+</ul>
+</li>
+<li><ul>
+<li><p><a class="reference external" href="#Running-the-function-locally">Running the function locally</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference external" href="#A-peek-at-a-pickled-kaplan-meier-model">A peek at a pickled kaplan-meier model</a></p></li>
+<li><p><a class="reference external" href="#A-peek-at-a-pickeld-cox-hazards-default-model">A peek at a pickeld cox hazards default model</a></p></li>
+<li><p><a class="reference external" href="#Some-potential-default-analyses-of-coxph">Some potential default analyses of coxph</a></p></li>
+<li><ul>
+<li><p><a class="reference external" href="#Running-the-function-remotely">Running the function remotely</a></p></li>
+</ul>
+</li>
+</ul>
+<p>We will train on <a class="reference external" href="https://www.kaggle.com/blastchar/telco-customer-churn">Telco Customer Churn dataset</a> from kaggle, click the link for context.<br/>
+The dataset is transformed using <a class="reference external" href="https://en.wikipedia.org/wiki/One-hot">one-hot-encoding</a>, check out <a class="reference external" href="https://github.com/mlrun/demos/tree/master/customer-churn-prediction">customer-churn-prediction demo</a> in the clean_data section for further information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make sure the following libraries are installed </span>
+<span class="c1"># !pip install lifelines</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="data-exploration">
+<h2><strong>Data exploration</strong><a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Getting raw data as - downloaded from kaggle</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"https://s3.wasabisys.com/iguazio/data/function-marketplace-data/coxph_trainer/WA_Fn-UseC_-Telco-Customer-Churn.csv"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'raw dataset'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raw dataset
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>customerID</th>
+<th>gender</th>
+<th>SeniorCitizen</th>
+<th>Partner</th>
+<th>Dependents</th>
+<th>tenure</th>
+<th>PhoneService</th>
+<th>MultipleLines</th>
+<th>InternetService</th>
+<th>OnlineSecurity</th>
+<th>...</th>
+<th>DeviceProtection</th>
+<th>TechSupport</th>
+<th>StreamingTV</th>
+<th>StreamingMovies</th>
+<th>Contract</th>
+<th>PaperlessBilling</th>
+<th>PaymentMethod</th>
+<th>MonthlyCharges</th>
+<th>TotalCharges</th>
+<th>Churn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>7590-VHVEG</td>
+<td>Female</td>
+<td>0</td>
+<td>Yes</td>
+<td>No</td>
+<td>1</td>
+<td>No</td>
+<td>No phone service</td>
+<td>DSL</td>
+<td>No</td>
+<td>...</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Month-to-month</td>
+<td>Yes</td>
+<td>Electronic check</td>
+<td>29.85</td>
+<td>29.85</td>
+<td>No</td>
+</tr>
+<tr>
+<th>1</th>
+<td>5575-GNVDE</td>
+<td>Male</td>
+<td>0</td>
+<td>No</td>
+<td>No</td>
+<td>34</td>
+<td>Yes</td>
+<td>No</td>
+<td>DSL</td>
+<td>Yes</td>
+<td>...</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>One year</td>
+<td>No</td>
+<td>Mailed check</td>
+<td>56.95</td>
+<td>1889.5</td>
+<td>No</td>
+</tr>
+<tr>
+<th>2</th>
+<td>3668-QPYBK</td>
+<td>Male</td>
+<td>0</td>
+<td>No</td>
+<td>No</td>
+<td>2</td>
+<td>Yes</td>
+<td>No</td>
+<td>DSL</td>
+<td>Yes</td>
+<td>...</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Month-to-month</td>
+<td>Yes</td>
+<td>Mailed check</td>
+<td>53.85</td>
+<td>108.15</td>
+<td>Yes</td>
+</tr>
+<tr>
+<th>3</th>
+<td>7795-CFOCW</td>
+<td>Male</td>
+<td>0</td>
+<td>No</td>
+<td>No</td>
+<td>45</td>
+<td>No</td>
+<td>No phone service</td>
+<td>DSL</td>
+<td>Yes</td>
+<td>...</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+<td>One year</td>
+<td>No</td>
+<td>Bank transfer (automatic)</td>
+<td>42.30</td>
+<td>1840.75</td>
+<td>No</td>
+</tr>
+<tr>
+<th>4</th>
+<td>9237-HQITU</td>
+<td>Female</td>
+<td>0</td>
+<td>No</td>
+<td>No</td>
+<td>2</td>
+<td>Yes</td>
+<td>No</td>
+<td>Fiber optic</td>
+<td>No</td>
+<td>...</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>No</td>
+<td>Month-to-month</td>
+<td>Yes</td>
+<td>Electronic check</td>
+<td>70.70</td>
+<td>151.65</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"https://s3.wasabisys.com/iguazio/data/function-marketplace-data/coxph_trainer/encoded-data.csv"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'encoded dataset'</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>encoded dataset
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>gender</th>
+<th>senior</th>
+<th>partner</th>
+<th>deps</th>
+<th>tenure</th>
+<th>PhoneService</th>
+<th>MultipleLines</th>
+<th>InternetService</th>
+<th>OnlineSecurity</th>
+<th>OnlineBackup</th>
+<th>DeviceProtection</th>
+<th>TechSupport</th>
+<th>StreamingTV</th>
+<th>StreamingMovies</th>
+<th>Contract</th>
+<th>PaperlessBilling</th>
+<th>PaymentMethod</th>
+<th>MonthlyCharges</th>
+<th>labels</th>
+<th>tenure_map</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>29.85</td>
+<td>0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>34</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>56.95</td>
+<td>0</td>
+<td>2.0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>3</td>
+<td>53.85</td>
+<td>1</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>45</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>42.30</td>
+<td>0</td>
+<td>3.0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>70.70</td>
+<td>1</td>
+<td>0.0</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="training-cox-proprotional-hazards-and-kaplan-meier-model">
+<h2><strong>Training Cox proprotional hazards and Kaplan-Meier model</strong><a class="headerlink" href="#training-cox-proprotional-hazards-and-kaplan-meier-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="importing-the-function">
+<h3><strong>Importing the function</strong><a class="headerlink" href="#importing-the-function" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">'function-marketplace'</span><span class="p">)</span>
+
+<span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://coxph_trainer"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">image</span><span class="o">=</span><span class="s1">'mlrun/mlrun'</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-13 13:22:07,678 [info] loaded project function-marketplace from MLRun DB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f77c03c33d0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="setup-function-parameters">
+<h3><strong>Setup function parameters</strong><a class="headerlink" href="#setup-function-parameters" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">new_task</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"tasks-survive-trainer"</span><span class="p">,</span>
+                      <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"event_column"</span> <span class="p">:</span> <span class="s2">"labels"</span><span class="p">,</span> 
+                                <span class="s2">"strata_cols"</span>  <span class="p">:</span> <span class="p">[</span><span class="s1">'InternetService'</span><span class="p">,</span> <span class="s1">'StreamingMovies'</span><span class="p">,</span> <span class="s1">'StreamingTV'</span><span class="p">,</span> <span class="s1">'PhoneService'</span><span class="p">],</span>
+                                <span class="s2">"p_value"</span>      <span class="p">:</span> <span class="mf">0.005</span><span class="p">,</span>
+                                <span class="s2">"encode_cols"</span>  <span class="p">:</span> <span class="p">{</span><span class="s2">"Contract"</span>       <span class="p">:</span> <span class="s2">"Contract"</span><span class="p">,</span>
+                                                  <span class="s2">"PaymentMethod"</span>  <span class="p">:</span> <span class="s2">"Payment"</span><span class="p">},</span>
+                                <span class="s2">"models_dest"</span>  <span class="p">:</span> <span class="s1">'models/cox'</span><span class="p">,</span>
+                                <span class="s2">"file_ext"</span> <span class="p">:</span> <span class="s2">"csv"</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-function-locally">
+<h3><strong>Running the function locally</strong><a class="headerlink" href="#running-the-function-locally" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># running the function with the task provided</span>
+<span class="n">coxph_run</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="p">,</span>
+                   <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                   <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span>  <span class="p">:</span> <span class="s2">"https://s3.wasabisys.com/iguazio/data/function-marketplace-data/coxph_trainer/encoded-data.csv"</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-13 13:18:36,975 [info] starting run tasks-survive-trainer uid=c525c7402c7e4188b0e22996e8fc682c DB=http://mlrun-api:8080
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="c525c7402c7e4188b0e22996e8fc682c"><a href="https://dashboard.default-tenant.app.app-lab-eks-testing.iguazio-cd1.com/mlprojects/default/jobs/monitor/c525c7402c7e4188b0e22996e8fc682c/overview" target="_blank">...e8fc682c</a></div></td>
+<td>0</td>
+<td>Oct 13 13:18:37</td>
+<td>completed</td>
+<td>tasks-survive-trainer</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=</div><div class="dictlist">owner=dani</div><div class="dictlist">host=jupyter-dani-5bbd9959b7-tsgh8</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/function-marketplace-data/coxph_trainer/encoded-data.csv">dataset</div></td>
+<td><div class="dictlist">event_column=labels</div><div class="dictlist">strata_cols=['InternetService', 'StreamingMovies', 'StreamingTV', 'PhoneService']</div><div class="dictlist">p_value=0.005</div><div class="dictlist">encode_cols={'Contract': 'Contract', 'PaymentMethod': 'Payment'}</div><div class="dictlist">models_dest=models/cox</div><div class="dictlist">file_ext=csv</div></td>
+<td></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result108d6e32" title="files/v3io/projects/default/artifacts/tenured-test-set.csv">tenured-test-set</div><div class="artifact" onclick="expandPanel(this)" panename="result108d6e32" title="files/v3io/projects/default/artifacts/km-timelines.csv">km-timelines</div><div class="artifact" onclick="expandPanel(this)" panename="result108d6e32" title="files/v3io/projects/default/artifacts/plots/km-survival.html">km-survival</div><div title="v3io:///projects/default/artifacts/models/cox/km/">km-model</div><div class="artifact" onclick="expandPanel(this)" panename="result108d6e32" title="files/v3io/projects/default/artifacts/coxhazard-summary.csv">coxhazard-summary</div><div title="v3io:///projects/default/artifacts/models/cox/">cx-model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result108d6e32-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result108d6e32-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result108d6e32">×</span>
+</div>
+<iframe class="fileview" id="result108d6e32-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.app-lab-eks-testing.iguazio-cd1.com/mlprojects/default/jobs/monitor/c525c7402c7e4188b0e22996e8fc682c/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-13 13:18:41,277 [info] run executed, status=completed
+</pre></div>
+</div>
+<img alt="_images/coxph_trainer_example_16_5.png" src="_images/coxph_trainer_example_16_5.png"/>
+</div>
+</div>
+</div>
+<div class="section" id="a-peek-at-a-pickled-kaplan-meier-model">
+<h3><strong>A peek at a pickled kaplan-meier model</strong><a class="headerlink" href="#a-peek-at-a-pickled-kaplan-meier-model" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loading the model trained</span>
+<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">get_model</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="n">model_file</span><span class="p">,</span> <span class="n">model_obj</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="n">coxph_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s1">'km-model'</span><span class="p">))</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span><span class="s1">'rb'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">200</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1      0.969027
+10     0.869452
+30     0.781377
+100    0.668167
+200    0.668167
+Name: KM_estimate, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/coxph_trainer_example_20_0.png" src="_images/coxph_trainer_example_20_0.png"/>
+</div>
+</div>
+</div>
+<div class="section" id="a-peek-at-a-pickeld-cox-hazards-default-model">
+<h3><strong>A peek at a pickeld cox hazards default model</strong><a class="headerlink" href="#a-peek-at-a-pickeld-cox-hazards-default-model" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># loading the model trained</span>
+<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">get_model</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="n">model_file</span><span class="p">,</span> <span class="n">model_obj</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_model</span><span class="p">(</span><span class="n">coxph_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s1">'cx-model'</span><span class="p">))</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span><span class="s1">'rb'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">print_summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<tbody>
+<tr>
+<th>model</th>
+<td>lifelines.CoxPHFitter</td>
+</tr>
+<tr>
+<th>duration col</th>
+<td>'tenure'</td>
+</tr>
+<tr>
+<th>event col</th>
+<td>'labels'</td>
+</tr>
+<tr>
+<th>strata</th>
+<td>[InternetService, StreamingMovies, StreamingTV...</td>
+</tr>
+<tr>
+<th>baseline estimation</th>
+<td>breslow</td>
+</tr>
+<tr>
+<th>number of observations</th>
+<td>226</td>
+</tr>
+<tr>
+<th>number of events observed</th>
+<td>55</td>
+</tr>
+<tr>
+<th>partial log-likelihood</th>
+<td>-102.57</td>
+</tr>
+<tr>
+<th>time fit was run</th>
+<td>2021-10-13 13:18:38 UTC</td>
+</tr>
+</tbody>
+</table>
+</div><table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th style="min-width: 12px;"></th>
+<th style="min-width: 12px;">coef</th>
+<th style="min-width: 12px;">exp(coef)</th>
+<th style="min-width: 12px;">se(coef)</th>
+<th style="min-width: 12px;">coef lower 95%</th>
+<th style="min-width: 12px;">coef upper 95%</th>
+<th style="min-width: 12px;">exp(coef) lower 95%</th>
+<th style="min-width: 12px;">exp(coef) upper 95%</th>
+<th style="min-width: 12px;">z</th>
+<th style="min-width: 12px;">p</th>
+<th style="min-width: 12px;">-log2(p)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>gender</th>
+<td>0.71</td>
+<td>2.04</td>
+<td>0.34</td>
+<td>0.04</td>
+<td>1.39</td>
+<td>1.04</td>
+<td>4.00</td>
+<td>2.08</td>
+<td>0.04</td>
+<td>4.72</td>
+</tr>
+<tr>
+<th>senior</th>
+<td>-0.33</td>
+<td>0.72</td>
+<td>0.44</td>
+<td>-1.20</td>
+<td>0.54</td>
+<td>0.30</td>
+<td>1.72</td>
+<td>-0.74</td>
+<td>0.46</td>
+<td>1.13</td>
+</tr>
+<tr>
+<th>partner</th>
+<td>-0.39</td>
+<td>0.67</td>
+<td>0.43</td>
+<td>-1.24</td>
+<td>0.45</td>
+<td>0.29</td>
+<td>1.57</td>
+<td>-0.91</td>
+<td>0.36</td>
+<td>1.47</td>
+</tr>
+<tr>
+<th>deps</th>
+<td>0.62</td>
+<td>1.85</td>
+<td>0.50</td>
+<td>-0.36</td>
+<td>1.59</td>
+<td>0.70</td>
+<td>4.93</td>
+<td>1.24</td>
+<td>0.22</td>
+<td>2.21</td>
+</tr>
+<tr>
+<th>MultipleLines</th>
+<td>-0.79</td>
+<td>0.45</td>
+<td>1.09</td>
+<td>-2.92</td>
+<td>1.34</td>
+<td>0.05</td>
+<td>3.83</td>
+<td>-0.72</td>
+<td>0.47</td>
+<td>1.09</td>
+</tr>
+<tr>
+<th>OnlineSecurity</th>
+<td>-0.77</td>
+<td>0.46</td>
+<td>1.30</td>
+<td>-3.31</td>
+<td>1.78</td>
+<td>0.04</td>
+<td>5.93</td>
+<td>-0.59</td>
+<td>0.56</td>
+<td>0.85</td>
+</tr>
+<tr>
+<th>OnlineBackup</th>
+<td>-0.47</td>
+<td>0.63</td>
+<td>0.95</td>
+<td>-2.33</td>
+<td>1.39</td>
+<td>0.10</td>
+<td>4.03</td>
+<td>-0.49</td>
+<td>0.62</td>
+<td>0.68</td>
+</tr>
+<tr>
+<th>DeviceProtection</th>
+<td>-0.41</td>
+<td>0.66</td>
+<td>1.08</td>
+<td>-2.54</td>
+<td>1.71</td>
+<td>0.08</td>
+<td>5.54</td>
+<td>-0.38</td>
+<td>0.70</td>
+<td>0.51</td>
+</tr>
+<tr>
+<th>TechSupport</th>
+<td>0.51</td>
+<td>1.66</td>
+<td>1.17</td>
+<td>-1.78</td>
+<td>2.80</td>
+<td>0.17</td>
+<td>16.43</td>
+<td>0.44</td>
+<td>0.66</td>
+<td>0.59</td>
+</tr>
+<tr>
+<th>PaperlessBilling</th>
+<td>0.35</td>
+<td>1.42</td>
+<td>0.41</td>
+<td>-0.45</td>
+<td>1.15</td>
+<td>0.64</td>
+<td>3.16</td>
+<td>0.86</td>
+<td>0.39</td>
+<td>1.35</td>
+</tr>
+<tr>
+<th>MonthlyCharges</th>
+<td>-0.08</td>
+<td>0.92</td>
+<td>0.19</td>
+<td>-0.46</td>
+<td>0.30</td>
+<td>0.63</td>
+<td>1.35</td>
+<td>-0.40</td>
+<td>0.69</td>
+<td>0.54</td>
+</tr>
+<tr>
+<th>Contract_1</th>
+<td>-2.19</td>
+<td>0.11</td>
+<td>0.71</td>
+<td>-3.58</td>
+<td>-0.79</td>
+<td>0.03</td>
+<td>0.45</td>
+<td>-3.07</td>
+<td>&lt;0.005</td>
+<td>8.88</td>
+</tr>
+<tr>
+<th>Contract_2</th>
+<td>-19.94</td>
+<td>0.00</td>
+<td>3478.68</td>
+<td>-6838.04</td>
+<td>6798.16</td>
+<td>0.00</td>
+<td>inf</td>
+<td>-0.01</td>
+<td>1.00</td>
+<td>0.01</td>
+</tr>
+<tr>
+<th>Payment_1</th>
+<td>-0.87</td>
+<td>0.42</td>
+<td>0.62</td>
+<td>-2.07</td>
+<td>0.34</td>
+<td>0.13</td>
+<td>1.40</td>
+<td>-1.41</td>
+<td>0.16</td>
+<td>2.65</td>
+</tr>
+<tr>
+<th>Payment_2</th>
+<td>0.46</td>
+<td>1.58</td>
+<td>0.45</td>
+<td>-0.42</td>
+<td>1.33</td>
+<td>0.66</td>
+<td>3.80</td>
+<td>1.03</td>
+<td>0.31</td>
+<td>1.71</td>
+</tr>
+<tr>
+<th>Payment_3</th>
+<td>0.23</td>
+<td>1.26</td>
+<td>0.64</td>
+<td>-1.02</td>
+<td>1.49</td>
+<td>0.36</td>
+<td>4.43</td>
+<td>0.36</td>
+<td>0.72</td>
+<td>0.48</td>
+</tr>
+</tbody>
+</table><br/><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<tbody>
+<tr>
+<th>Concordance</th>
+<td>0.88</td>
+</tr>
+<tr>
+<th>Partial AIC</th>
+<td>237.14</td>
+</tr>
+<tr>
+<th>log-likelihood ratio test</th>
+<td>106.72 on 16 df</td>
+</tr>
+<tr>
+<th>-log2(p) of ll-ratio test</th>
+<td>48.92</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="some-potential-default-analyses-of-coxph">
+<h3><strong>Some potential default analyses of coxph</strong><a class="headerlink" href="#some-potential-default-analyses-of-coxph" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">baseline_survival_</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f77c03141d0&gt;
+</pre></div>
+</div>
+<img alt="_images/coxph_trainer_example_25_1.png" src="_images/coxph_trainer_example_25_1.png"/>
+</div>
+</div>
+<ul class="simple">
+<li><p>run the following for each of the lines that passes some test (p &lt; 0.005,for example):<br/>
+<code class="docutils literal notranslate"><span class="pre">model.plot_covariate_groups('Contract_1',</span> <span class="pre">values=[0,</span> <span class="pre">1]);</span></code><br/>
+the plot needs to have the strata decoded</p></li>
+</ul>
+<p>In the train_model above, set param <code class="docutils literal notranslate"><span class="pre">plot_cov_groups=True</span></code> and produce the following set of artifacts by selecting only those covariates whose p-values
+are below some threshold <code class="docutils literal notranslate"><span class="pre">p_value</span></code></p>
+</div>
+<div class="section" id="running-the-function-remotely">
+<h3><strong>Running the function remotely</strong><a class="headerlink" href="#running-the-function-remotely" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">commands</span><span class="o">=</span><span class="p">[</span><span class="s1">'pip install lifelines'</span><span class="p">]</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span><span class="n">with_mlrun</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-13 13:18:42,095 [info] Started building image: .mlrun/func-default-coxph-trainer:latest
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image manifest mlrun/mlrun:0.7.1  
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image manifest mlrun/mlrun:0.7.1  
+<span class="-Color -Color-Cyan">INFO</span>[0000] Built cross stage deps: map[]                
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image manifest mlrun/mlrun:0.7.1  
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image manifest mlrun/mlrun:0.7.1  
+<span class="-Color -Color-Cyan">INFO</span>[0001] Executing 0 build triggers                   
+<span class="-Color -Color-Cyan">INFO</span>[0001] Unpacking rootfs as cmd RUN pip install lifelines requires it. 
+<span class="-Color -Color-Cyan">INFO</span>[0015] RUN pip install lifelines                    
+<span class="-Color -Color-Cyan">INFO</span>[0015] Taking snapshot of full filesystem...        
+<span class="-Color -Color-Cyan">INFO</span>[0026] cmd: /bin/sh                                 
+<span class="-Color -Color-Cyan">INFO</span>[0026] args: [-c pip install lifelines]             
+<span class="-Color -Color-Cyan">INFO</span>[0026] Running: [/bin/sh -c pip install lifelines]  
+Collecting lifelines
+  Downloading lifelines-0.26.3-py3-none-any.whl (348 kB)
+Requirement already satisfied: numpy&gt;=1.14.0 in /usr/local/lib/python3.7/site-packages (from lifelines) (1.19.5)
+Collecting autograd-gamma&gt;=0.3
+  Downloading autograd-gamma-0.5.0.tar.gz (4.0 kB)
+Collecting autograd&gt;=1.3
+  Downloading autograd-1.3.tar.gz (38 kB)
+Requirement already satisfied: matplotlib&gt;=3.0 in /usr/local/lib/python3.7/site-packages (from lifelines) (3.4.3)
+Collecting formulaic&lt;0.3,&gt;=0.2.2
+  Downloading formulaic-0.2.4-py3-none-any.whl (55 kB)
+Requirement already satisfied: pandas&gt;=0.23.0 in /usr/local/lib/python3.7/site-packages (from lifelines) (1.3.2)
+Requirement already satisfied: scipy&gt;=1.2.0 in /usr/local/lib/python3.7/site-packages (from lifelines) (1.7.1)
+Requirement already satisfied: future&gt;=0.15.2 in /usr/local/lib/python3.7/site-packages (from autograd&gt;=1.3-&gt;lifelines) (0.18.2)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.7/site-packages (from matplotlib&gt;=3.0-&gt;lifelines) (0.10.0)
+Requirement already satisfied: pillow&gt;=6.2.0 in /usr/local/lib/python3.7/site-packages (from matplotlib&gt;=3.0-&gt;lifelines) (8.3.2)
+Requirement already satisfied: pyparsing&gt;=2.2.1 in /usr/local/lib/python3.7/site-packages (from matplotlib&gt;=3.0-&gt;lifelines) (2.4.7)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.7/site-packages (from matplotlib&gt;=3.0-&gt;lifelines) (1.3.2)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /usr/local/lib/python3.7/site-packages (from matplotlib&gt;=3.0-&gt;lifelines) (2.8.2)
+Collecting interface-meta&gt;=1.2
+  Downloading interface_meta-1.2.4-py2.py3-none-any.whl (14 kB)
+Requirement already satisfied: wrapt in /usr/local/lib/python3.7/site-packages (from formulaic&lt;0.3,&gt;=0.2.2-&gt;lifelines) (1.12.1)
+Collecting astor
+  Downloading astor-0.8.1-py2.py3-none-any.whl (27 kB)
+Requirement already satisfied: pytz&gt;=2017.3 in /usr/local/lib/python3.7/site-packages (from pandas&gt;=0.23.0-&gt;lifelines) (2021.1)
+Requirement already satisfied: six in /usr/local/lib/python3.7/site-packages (from cycler&gt;=0.10-&gt;matplotlib&gt;=3.0-&gt;lifelines) (1.16.0)
+Building wheels for collected packages: autograd-gamma, autograd
+  Building wheel for autograd-gamma (setup.py): started
+  Building wheel for autograd-gamma (setup.py): finished with status 'done'
+  Created wheel for autograd-gamma: filename=autograd_gamma-0.5.0-py3-none-any.whl size=4034 sha256=5211d5dddff0a9102583375dc2c468962b66b424d3fc0c75437b2d2f0d7e2576
+  Stored in directory: /tmp/pip-ephem-wheel-cache-vbqa_7jp/wheels/9f/01/ee/1331593abb5725ff7d8c1333aee93a50a1c29d6ddda9665c9f
+  Building wheel for autograd (setup.py): started
+  Building wheel for autograd (setup.py): finished with status 'done'
+  Created wheel for autograd: filename=autograd-1.3-py3-none-any.whl size=47989 sha256=f7fbf41d442f597b0969c5314cbdbda143f3bd2da827efc46f58d03ca6373e55
+  Stored in directory: /tmp/pip-ephem-wheel-cache-vbqa_7jp/wheels/ef/32/31/0e87227cd0ca1d99ad51fbe4b54c6fa02afccf7e483d045e04
+Successfully built autograd-gamma autograd
+Installing collected packages: autograd, autograd-gamma, interface-meta, astor, formulaic, lifelines
+Successfully installed astor-0.8.1 autograd-1.3 autograd-gamma-0.5.0 formulaic-0.2.4 interface-meta-1.2.4 lifelines-0.26.3
+WARNING: You are using pip version 20.2.4; however, version 21.3 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+<span class="-Color -Color-Cyan">INFO</span>[0029] Taking snapshot of full filesystem...        
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coxph_run</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">task</span><span class="p">,</span>
+                   <span class="n">local</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                   <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span>  <span class="p">:</span> <span class="s2">"https://s3.wasabisys.com/iguazio/data/function-marketplace-data/coxph_trainer/encoded-data.csv"</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-13 13:19:41,275 [info] starting run tasks-survive-trainer uid=8b4ee122120645be9eb29a646ef6e562 DB=http://mlrun-api:8080
+&gt; 2021-10-13 13:19:41,455 [info] Job is running in the background, pod: tasks-survive-trainer-swjkk
+&gt; 2021-10-13 13:19:50,461 [info] run executed, status=completed
+
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+Column Contract_2 have very low variance when conditioned on death event present or not. This may harm convergence. This could be a form of 'complete separation'. For example, try the following code:
+
+&gt;&gt;&gt; events = df['labels'].astype(bool)
+&gt;&gt;&gt; print(df.loc[events, 'Contract_2'].var())
+&gt;&gt;&gt; print(df.loc[~events, 'Contract_2'].var())
+
+A very low variance means that the column Contract_2 completely determines whether a subject dies or not. See https://stats.stackexchange.com/questions/11109/how-to-deal-with-perfect-separation-in-logistic-regression.
+
+Newton-Rhaphson convergence completed successfully but norm(delta) is still high, 0.443. This may imply non-unique solutions to the maximum likelihood. Perhaps there is collinearity or complete separation in the dataset?
+
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="8b4ee122120645be9eb29a646ef6e562"><a href="https://dashboard.default-tenant.app.app-lab-eks-testing.iguazio-cd1.com/mlprojects/default/jobs/monitor/8b4ee122120645be9eb29a646ef6e562/overview" target="_blank">...6ef6e562</a></div></td>
+<td>0</td>
+<td>Oct 13 13:19:47</td>
+<td>completed</td>
+<td>tasks-survive-trainer</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=job</div><div class="dictlist">owner=dani</div><div class="dictlist">host=tasks-survive-trainer-swjkk</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/function-marketplace-data/coxph_trainer/encoded-data.csv">dataset</div></td>
+<td><div class="dictlist">event_column=labels</div><div class="dictlist">strata_cols=['InternetService', 'StreamingMovies', 'StreamingTV', 'PhoneService']</div><div class="dictlist">p_value=0.005</div><div class="dictlist">encode_cols={'Contract': 'Contract', 'PaymentMethod': 'Payment'}</div><div class="dictlist">models_dest=models/cox</div><div class="dictlist">file_ext=csv</div></td>
+<td></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result70efc3e8" title="files/v3io/projects/default/artifacts/tenured-test-set.csv">tenured-test-set</div><div class="artifact" onclick="expandPanel(this)" panename="result70efc3e8" title="files/v3io/projects/default/artifacts/km-timelines.csv">km-timelines</div><div class="artifact" onclick="expandPanel(this)" panename="result70efc3e8" title="files/v3io/projects/default/artifacts/plots/km-survival.html">km-survival</div><div title="v3io:///projects/default/artifacts/models/cox/km/">km-model</div><div class="artifact" onclick="expandPanel(this)" panename="result70efc3e8" title="files/v3io/projects/default/artifacts/coxhazard-summary.csv">coxhazard-summary</div><div title="v3io:///projects/default/artifacts/models/cox/">cx-model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result70efc3e8-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result70efc3e8-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result70efc3e8">×</span>
+</div>
+<iframe class="fileview" id="result70efc3e8-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.app-lab-eks-testing.iguazio-cd1.com/mlprojects/default/jobs/monitor/8b4ee122120645be9eb29a646ef6e562/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-13 13:19:50,645 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="#Coxph-trainer---Survival-analysis">Back to the top</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br>
+</br></p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
