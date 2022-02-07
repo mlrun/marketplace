@@ -1,0 +1,722 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Live Model Server Testing</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/v2_model_tester_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fv2_model_tester_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/v2_model_tester_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#steps">
+<strong>
+    Steps
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setup-function-parameters">
+<strong>
+    Setup function parameters
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-the-function">
+<strong>
+    Importing the function
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-the-function-locally">
+<strong>
+    Running the function locally
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-the-function-remotely">
+<strong>
+    Running the function remotely
+   </strong>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="tex2jax_ignore mathjax_ignore section" id="live-model-server-testing">
+<h1><strong>Live Model Server Testing</strong><a class="headerlink" href="#live-model-server-testing" title="Permalink to this headline">¶</a></h1>
+<p>Test model server via HTTP calls.<br/>
+To see how the model is trained or how the data-set is generated, check out <code class="docutils literal notranslate"><span class="pre">sklearn_classifier</span></code> function from the function marketplace repository</p>
+<div class="section" id="steps">
+<h2><strong>Steps</strong><a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="#Setup-function-parameters">Setup function parameters</a></p></li>
+<li><p><a class="reference external" href="#Importing-the-function">Importing the function</a></p></li>
+<li><p><a class="reference external" href="#Running-the-function-locally">Running the function locally</a></p></li>
+<li><p><a class="reference external" href="#Running-the-function-remotely">Running the function remotely</a></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="setup-function-parameters">
+<h2><strong>Setup function parameters</strong><a class="headerlink" href="#setup-function-parameters" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Declaring the model's path that we are going to test</span>
+<span class="n">models_path</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/models/function-marketplace-models/test_classifier/RandomForestClassifier.pkl'</span>
+<span class="c1"># Testing with dataset</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/data/function-marketplace-data/sklearn_classifier/iris_dataset.csv'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">'function-marketplace'</span><span class="p">)</span>
+
+<span class="c1"># deploying v2_model_server in order to get an http endpoint to test</span>
+<span class="c1"># importing the function from the hub</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://v2_model_server"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+
+<span class="c1"># Adding the model </span>
+<span class="n">fn</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s1">'RandomForestClassifier'</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="n">models_path</span> <span class="p">,</span><span class="n">class_name</span><span class="o">=</span><span class="s1">'ClassifierModel'</span><span class="p">)</span>
+<span class="n">address</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-18 05:03:08,020 [info] loaded project function-marketplace from MLRun DB
+&gt; 2021-10-18 05:03:08,791 [info] Starting remote function deploy
+2021-10-18 05:03:08  (info) Deploying function
+2021-10-18 05:03:08  (info) Building
+2021-10-18 05:03:08  (info) Staging files and preparing base images
+2021-10-18 05:03:08  (info) Building processor image
+2021-10-18 05:03:10  (info) Build complete
+2021-10-18 05:03:18  (info) Function deploy complete
+&gt; 2021-10-18 05:03:18,932 [info] successfully deployed function: {'internal_invocation_urls': ['nuclio-function-marketplace-v2-model-server.default-tenant.svc.cluster.local:8080'], 'external_invocation_urls': ['default-tenant.app.dev39.lab.iguazeng.com:31003']}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-the-function">
+<h2><strong>Importing the function</strong><a class="headerlink" href="#importing-the-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing the function from the hub</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://v2_model_tester"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f6ec6f06790&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-function-locally">
+<h2><strong>Running the function locally</strong><a class="headerlink" href="#running-the-function-locally" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tester_run</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'model_server_tester'</span><span class="p">,</span>
+                    <span class="n">handler</span> <span class="o">=</span> <span class="s1">'model_server_tester'</span><span class="p">,</span> <span class="c1"># default value is 'handler', therefore specifying function entry point.</span>
+                    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'addr'</span><span class="p">:</span> <span class="n">address</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">:</span> <span class="s1">'RandomForestClassifier'</span><span class="p">},</span>
+                    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">'table'</span><span class="p">:</span> <span class="n">data_path</span><span class="p">},</span>
+                    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-18 05:10:09,850 [info] starting run model_server_tester uid=c5773ef3ebc544d390c3b66cce7d7665 DB=http://mlrun-api:8080
+&gt; 2021-10-18 05:10:11,386 [info] testing with dataset against http://default-tenant.app.dev39.lab.iguazeng.com:31003, model: RandomForestClassifier
+{'id': '674dc477-0281-4aaa-b98c-e74998ac295d', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '8ff10778-834b-4920-a455-2d638d125116', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': 'c4a03a43-2715-4772-b88b-6db8a222f8d4', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': '03d3b15c-843d-4ba3-af90-ec5aaf5ccec4', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': '10caf431-7375-4d0a-840c-6d4bd479d2e3', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '7b9c8753-6ff7-46f4-a77c-e91a2f49826d', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': 'e08f322b-f732-4d88-9911-a6b4d55b6b51', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '2eb7912a-d464-45c0-a4d7-c884613f9a93', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': 'a03751af-e2c5-4123-b75f-7d03618cff30', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '22a2abfa-cab6-44c3-8253-8f598b01ab5b', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '881e7014-8eeb-4e44-a88e-f8fa2bd865e8', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': '400ead78-7335-4037-89b6-e19b5fef8e7b', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': 'de3f8418-6ac6-482d-876d-8a12964f3c15', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': '80d4adf7-c44f-450f-83a7-bb9f22f5600e', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': '38fbb00f-dee5-4f48-a3b5-422c9100bf70', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': '2fb61f97-ab33-4bfe-aa7a-cb65dac9f525', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '803731c6-d1a1-4ec1-a1da-91b0915596a2', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '92c7a186-e714-4dc4-860a-50b17696cf86', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': 'f6fd25a4-b056-4fc7-a37a-244f01268c36', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '4e37f305-ed1e-4594-8289-28353898a2e5', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+&gt; 2021-10-18 05:10:11,984 [info] run 20 tests, 0 errors and 9 match expected value
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="c5773ef3ebc544d390c3b66cce7d7665"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/c5773ef3ebc544d390c3b66cce7d7665/overview" target="_blank">...ce7d7665</a></div></td>
+<td>0</td>
+<td>Oct 18 05:10:10</td>
+<td>completed</td>
+<td>model_server_tester</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=</div><div class="dictlist">owner=dani</div><div class="dictlist">host=jupyter-dani-6bfbd76d96-zxx6f</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/function-marketplace-data/sklearn_classifier/iris_dataset.csv">table</div></td>
+<td><div class="dictlist">addr=http://default-tenant.app.dev39.lab.iguazeng.com:31003</div><div class="dictlist">model=RandomForestClassifier</div></td>
+<td><div class="dictlist">total_tests=20</div><div class="dictlist">errors=0</div><div class="dictlist">match=9</div><div class="dictlist">avg_latency=26833</div><div class="dictlist">min_latency=19420</div><div class="dictlist">max_latency=152063</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="resultd4aa3882" title="files/v3io/projects/function-marketplace/artifacts/latency.html">latency</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultd4aa3882-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultd4aa3882-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultd4aa3882">×</span>
+</div>
+<iframe class="fileview" id="resultd4aa3882-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/c5773ef3ebc544d390c3b66cce7d7665/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-18 05:10:12,045 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tester_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s1">'latency'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<html>
+<head>
+<script src="https://www.gstatic.com/charts/loader.js" type="text/javascript"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([["Test", "Latency (microsec)"], [1, 22314], [2, 20785], [3, 20540], [4, 20365], [5, 152063], [6, 20341], [7, 19769], [8, 20269], [9, 19755], [10, 19434], [11, 19912], [12, 19924], [13, 19420], [14, 19678], [15, 19716], [16, 20814], [17, 20145], [18, 20743], [19, 20666], [20, 20015]]);
+        var options = {"title": "latency"};
+        var chart = new google.visualization.LineChart(
+            document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+</head>
+<body>
+<div id="chart_div" style="width: 100%; height: 500px;"></div>
+</body>
+</html>
+</div></div>
+</div>
+</div>
+<div class="section" id="running-the-function-remotely">
+<h2><strong>Running the function remotely</strong><a class="headerlink" href="#running-the-function-remotely" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tester_run</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'model_server_tester'</span><span class="p">,</span>
+                    <span class="n">handler</span> <span class="o">=</span> <span class="s1">'model_server_tester'</span><span class="p">,</span> <span class="c1"># default value is 'handler', therefore specifying function entry point.</span>
+                    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'addr'</span><span class="p">:</span> <span class="n">address</span><span class="p">,</span> <span class="s1">'model'</span><span class="p">:</span> <span class="s1">'RandomForestClassifier'</span><span class="p">},</span>
+                    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s1">'table'</span><span class="p">:</span> <span class="n">data_path</span><span class="p">},</span>
+                    <span class="n">local</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-18 05:12:30,250 [info] starting run model_server_tester uid=a3ffac1155564332a828961fa66ab30c DB=http://mlrun-api:8080
+&gt; 2021-10-18 05:12:30,380 [info] Job is running in the background, pod: model-server-tester-thhll
+&gt; 2021-10-18 05:12:36,763 [info] testing with dataset against http://default-tenant.app.dev39.lab.iguazeng.com:31003, model: RandomForestClassifier
+{'id': '4318bfe9-ec16-43ad-9990-d637a87275a7', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': '71ba6a72-dd4c-4cb0-a877-39dc8d739377', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': 'c5359476-b0b1-4dd8-8ce7-562addb02929', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '0679c92f-9f92-46bc-a773-8df73de2c5de', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': '2c272335-ee43-458e-b662-c236d29f62dc', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': 'c9e600b5-36ef-4366-b771-519a3037bb2e', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': '84ea193f-ff47-4431-b689-5ad29284e3cc', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': 'dea37518-ceff-487c-a416-d7f4eb69a448', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': 'c35b9f63-95b5-4c3a-af3f-1f47a9427285', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': '7df9a5f2-5cd7-40d3-bc44-60ba8a87d349', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '58d7fa40-f094-49c0-bf94-626571aab0fd', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': 'b1ced717-5ddd-4148-8a6a-c98e737e2649', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': '9cec3bb4-4770-4679-abaf-4f3fec2302da', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': '5971197e-1d33-4338-a114-9cf79349d69b', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+{'id': 'd844c786-c799-429c-9192-0bf71c63099b', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': '383ee50e-e8be-4744-8cad-ab35be13acd9', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': '627d7683-cf8e-4e1f-832c-a8da929b1ce5', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': '35759e5a-33a7-443d-a7e2-11f081347cc6', 'model_name': 'RandomForestClassifier', 'outputs': [1]}
+{'id': 'bdb5571f-116d-4744-93e3-a2e5f983112f', 'model_name': 'RandomForestClassifier', 'outputs': [2]}
+{'id': '978496b0-22bf-4372-a77f-90091f96388a', 'model_name': 'RandomForestClassifier', 'outputs': [0]}
+&gt; 2021-10-18 05:12:37,462 [info] run 20 tests, 0 errors and 6 match expected value
+&gt; 2021-10-18 05:12:37,553 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="a3ffac1155564332a828961fa66ab30c"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/a3ffac1155564332a828961fa66ab30c/overview" target="_blank">...a66ab30c</a></div></td>
+<td>0</td>
+<td>Oct 18 05:12:35</td>
+<td>completed</td>
+<td>model_server_tester</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=job</div><div class="dictlist">owner=dani</div><div class="dictlist">host=model-server-tester-thhll</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/function-marketplace-data/sklearn_classifier/iris_dataset.csv">table</div></td>
+<td><div class="dictlist">addr=http://default-tenant.app.dev39.lab.iguazeng.com:31003</div><div class="dictlist">model=RandomForestClassifier</div></td>
+<td><div class="dictlist">total_tests=20</div><div class="dictlist">errors=0</div><div class="dictlist">match=6</div><div class="dictlist">avg_latency=29752</div><div class="dictlist">min_latency=27708</div><div class="dictlist">max_latency=33304</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result218f4616" title="files/v3io/projects/function-marketplace/artifacts/latency.html">latency</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result218f4616-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result218f4616-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result218f4616">×</span>
+</div>
+<iframe class="fileview" id="result218f4616-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/a3ffac1155564332a828961fa66ab30c/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-18 05:12:39,586 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="#Live-Model-Server-Testing">Back to the top</a></p>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br>
+</br></p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Describe</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/describe_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fdescribe_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/describe_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#set-up">
+   Set-up
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#loading-dataset">
+   Loading dataset
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-and-running-the-function">
+   Importing and running the function
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#plotting-results">
+   Plotting results
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="tex2jax_ignore mathjax_ignore section" id="describe">
+<h1>Describe<a class="headerlink" href="#describe" title="Permalink to this headline">¶</a></h1>
+<p>Describe and visualizes dataset statistics</p>
+<div class="section" id="set-up">
+<h2>Set-up<a class="headerlink" href="#set-up" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_boston</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">project</span> <span class="o">=</span> <span class="s2">"function-marketplace"</span><span class="p">)</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="s2">"function-marketplace"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-08-15 12:40:11,673 [info] logging run results to: http://mlrun-api:8080
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="loading-dataset">
+<h2>Loading dataset<a class="headerlink" href="#loading-dataset" title="Permalink to this headline">¶</a></h2>
+<p>We will use boston hose prices dataset from sklearn</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_dataset</span> <span class="o">=</span> <span class="n">load_boston</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">boston_dataset</span><span class="p">[</span><span class="s2">"DESCR"</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. _boston_dataset:
+
+Boston house prices dataset
+---------------------------
+
+**Data Set Characteristics:**  
+
+    :Number of Instances: 506 
+
+    :Number of Attributes: 13 numeric/categorical predictive. Median Value (attribute 14) is usually the target.
+
+    :Attribute Information (in order):
+        - CRIM     per capita crime rate by town
+        - ZN       proportion of residential land zoned for lots over 25,000 sq.ft.
+        - INDUS    proportion of non-retail business acres per town
+        - CHAS     Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)
+        - NOX      nitric oxides concentration (parts per 10 million)
+        - RM       average number of rooms per dwelling
+        - AGE      proportion of owner-occupied units built prior to 1940
+        - DIS      weighted distances to five Boston employment centres
+        - RAD      index of accessibility to radial highways
+        - TAX      full-value property-tax rate per $10,000
+        - PTRATIO  pupil-teacher ratio by town
+        - B        1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town
+        - LSTAT    % lower status of the population
+        - MEDV     Median value of owner-occupied homes in $1000's
+
+    :Missing Attribute Values: None
+
+    :Creator: Harrison, D. and Rubinfeld, D.L.
+
+This is a copy of UCI ML housing dataset.
+https://archive.ics.uci.edu/ml/machine-learning-databases/housing/
+
+
+This dataset was taken from the StatLib library which is maintained at Carnegie Mellon University.
+
+The Boston house-price data of Harrison, D. and Rubinfeld, D.L. 'Hedonic
+prices and the demand for clean air', J. Environ. Economics &amp; Management,
+vol.5, 81-102, 1978.   Used in Belsley, Kuh &amp; Welsch, 'Regression diagnostics
+...', Wiley, 1980.   N.B. Various transformations are used in the table on
+pages 244-261 of the latter.
+
+The Boston house-price data has been used in many machine learning papers that address regression
+problems.   
+     
+.. topic:: References
+
+   - Belsley, Kuh &amp; Welsch, 'Regression diagnostics: Identifying Influential Data and Sources of Collinearity', Wiley, 1980. 244-261.
+   - Quinlan,R. (1993). Combining Instance-Based and Model-Based Learning. In Proceedings on the Tenth International Conference of Machine Learning, 236-243, University of Massachusetts, Amherst. Morgan Kaufmann.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">boston_dataset</span><span class="p">[</span><span class="s2">"data"</span><span class="p">],</span><span class="n">columns</span> <span class="o">=</span> <span class="n">boston_dataset</span><span class="p">[</span><span class="s2">"feature_names"</span><span class="p">])</span>
+<span class="n">boston_df</span><span class="p">[</span><span class="s2">"TARGET"</span><span class="p">]</span> <span class="o">=</span> <span class="n">boston_dataset</span><span class="p">[</span><span class="s2">"target"</span><span class="p">]</span>
+<span class="c1"># taking first 100 rows - so calculating all the histograms will be fast.</span>
+<span class="n">boston_df</span> <span class="o">=</span> <span class="n">boston_df</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s1">'artifacts'</span><span class="p">)</span>
+<span class="n">boston_df</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s2">"artifacts/boston_housing.parquet"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-and-running-the-function">
+<h2>Importing and running the function<a class="headerlink" href="#importing-and-running-the-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">describe</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://describe"</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">describe_task</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">new_task</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'describe_boston'</span><span class="p">,</span>
+                               <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'key'</span> <span class="p">:</span> <span class="s1">'summary'</span><span class="p">,</span>
+                                         <span class="s1">'label_column'</span> <span class="p">:</span> <span class="s1">'TARGET'</span><span class="p">,</span>
+                                         <span class="s1">'plot_hist'</span> <span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                                         <span class="s1">'plot_dest'</span> <span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()},</span>
+                               <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"table"</span> <span class="p">:</span> <span class="s2">"artifacts/boston_housing.parquet"</span><span class="p">},</span>
+                               
+                               <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">'/artifacts'</span><span class="p">,</span>
+                               <span class="n">in_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">describe</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">describe_task</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-08-15 12:40:11,960 [info] starting run describe_boston uid=b374a4254bdf45f684ea50b3e0b9f13e DB=http://mlrun-api:8080
+&gt; 2021-08-15 12:40:12,073 [info] Job is running in the background, pod: describe-boston-4ll6h
+&gt; 2021-08-15 12:41:18,183 [info] run executed, status=completed
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+Dataset has 0 variance; skipping density estimate.
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="b374a4254bdf45f684ea50b3e0b9f13e"><a href="https://dashboard.default-tenant.app.dev8.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/b374a4254bdf45f684ea50b3e0b9f13e/overview" target="_blank">...e0b9f13e</a></div></td>
+<td>0</td>
+<td>Aug 15 12:40:18</td>
+<td>completed</td>
+<td>describe_boston</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=job</div><div class="dictlist">owner=dani</div><div class="dictlist">host=describe-boston-4ll6h</div></td>
+<td><div title="/User/test/functions/describe/artifacts/boston_housing.parquet">table</div></td>
+<td><div class="dictlist">key=summary</div><div class="dictlist">label_column=TARGET</div><div class="dictlist">plot_hist=True</div><div class="dictlist">plot_dest=/User/test/functions/describe</div></td>
+<td></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="resultfd381c27" title="/files/test/functions/describe/artifacts/plots/hist.html">histograms</div><div class="artifact" onclick="expandPanel(this)" panename="resultfd381c27" title="/files/test/functions/describe/artifacts/plots/violin.html">violin</div><div class="artifact" onclick="expandPanel(this)" panename="resultfd381c27" title="/files/test/functions/describe/artifacts/plots/imbalance.html">imbalance</div><div class="artifact" onclick="expandPanel(this)" panename="resultfd381c27" title="/files/test/functions/describe/artifacts/plots/imbalance-weights-vec.csv">imbalance-weights-vec</div><div class="artifact" onclick="expandPanel(this)" panename="resultfd381c27" title="/files/test/functions/describe/artifacts/plots/correlation-matrix.csv">correlation-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="resultfd381c27" title="/files/test/functions/describe/artifacts/plots/corr.html">correlation</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultfd381c27-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultfd381c27-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultfd381c27">×</span>
+</div>
+<iframe class="fileview" id="resultfd381c27-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run b374a4254bdf45f684ea50b3e0b9f13e --project function-marketplace , !mlrun logs b374a4254bdf45f684ea50b3e0b9f13e --project function-marketplace
+&gt; 2021-08-15 12:41:21,502 [info] run executed, status=completed
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.model.RunObject at 0x7f4d42f32690&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="plotting-results">
+<h2>Plotting results<a class="headerlink" href="#plotting-results" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">IFrame</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">IFrame</span><span class="p">(</span><span class="s2">"artifacts/plots/violin.html"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1300</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe allowfullscreen="" frameborder="0" height="600" src="artifacts/plots/violin.html" width="1300"></iframe>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">heatmap</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">my_heatmap</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"artifacts/plots/correlation-matrix.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Unnamed: 0"</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">"CHAS"</span><span class="p">],</span><span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s2">"CHAS"</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">heatmap</span><span class="p">(</span><span class="n">my_heatmap</span><span class="p">,</span><span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7f4d43a6c510&gt;
+</pre></div>
+</div>
+<img alt="_images/describe_example_17_1.png" src="_images/describe_example_17_1.png"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>

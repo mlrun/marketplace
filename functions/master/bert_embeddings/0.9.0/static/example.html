@@ -1,0 +1,489 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BERT Embeddings Serverless Function</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/bert_embeddings_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fbert_embeddings_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/bert_embeddings_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#">
+   BERT Embeddings Serverless Function
+  </a>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#embeddings-without-bert">
+   Embeddings without bert
+  </a>
+</li>
+<li class="toc-h1 nav-item toc-entry">
+<a class="reference internal nav-link" href="#introducing-bert-embeddings">
+   Introducing Bert embeddings
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="bert-embeddings-serverless-function">
+<h1>BERT Embeddings Serverless Function<a class="headerlink" href="#bert-embeddings-serverless-function" title="Permalink to this headline">¶</a></h1>
+<p>This notebook presents deployment of pretrained BERT model that outputs embeddings for given textual sequences as a serverless function. Embeddings are meaningful, contextual representations of text in the form of ndarrays that are used frequently as input to various learning tasks in the field of NLP.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>/User/align_mlrun.sh
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Both server &amp; client are aligned (0.6.5).
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="embeddings-without-bert">
+<h1>Embeddings without bert<a class="headerlink" href="#embeddings-without-bert" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/One-hot">One-Hot Encoding</a> is a general method that can vectorize any categorical features. It is simple and fast to create and update the vectorization.<br/>
+in case of <b>text</b> embeddings, each <b>row</b> is a <b>sentence</b> and each <b>column</b> is a <b>word/char/<a class="reference external" href="https://en.wikipedia.org/wiki/N-gram">n-gram</a></b>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># some sentences to do examine</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'the quick brown fox jumps over the lazy dog'</span><span class="p">,</span>
+              <span class="s1">'Hello I am Jacob'</span><span class="p">,</span>
+              <span class="s1">'Daniel visited Tel-Aviv last month'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>lets see the difference between bert embeddings and one-hot encoding</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># constructing a list of all the words (will be our columns) - make sure no duplicate words are set</span>
+<span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tokens</span> <span class="k">else</span> <span class="s2">""</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>['the', 'quick', 'brown', 'fox', 'jumps', 'over', 'lazy', 'dog', 'Hello', 'I', 'am', 'Jacob', 'Daniel', 'visited', 'Tel-Aviv', 'last', 'month']
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># constructing the one hot vector</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">one_hot</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)))</span>
+<span class="c1"># filling our empty dataframe with each sentence encoding</span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+    <span class="n">vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+        <span class="n">vector</span><span class="p">[</span><span class="n">tokens</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">word</span><span class="p">)]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">one_hot</span> <span class="o">=</span> <span class="n">one_hot</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">vector</span><span class="p">),</span><span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">one_hot</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">tokens</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">one_hot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>the</th>
+<th>quick</th>
+<th>brown</th>
+<th>fox</th>
+<th>jumps</th>
+<th>over</th>
+<th>lazy</th>
+<th>dog</th>
+<th>Hello</th>
+<th>I</th>
+<th>am</th>
+<th>Jacob</th>
+<th>Daniel</th>
+<th>visited</th>
+<th>Tel-Aviv</th>
+<th>last</th>
+<th>month</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+<p>The table above represents the one-hot encoding of our sentences, each row is a sentence and each column is a word.
+this representation is very slim and will be a very weak learning dataset.</p>
+</div>
+<div class="section" id="introducing-bert-embeddings">
+<h1>Introducing Bert embeddings<a class="headerlink" href="#introducing-bert-embeddings" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">import_function</span><span class="p">,</span> <span class="n">auto_mount</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># importing the function from the hub</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://bert_embeddings"</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># deploying the function</span>
+<span class="n">addr</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span><span class="n">project</span> <span class="o">=</span> <span class="s2">"function-marketplace"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-08-11 14:49:02,307 [info] Starting remote function deploy
+2021-08-11 14:49:02  (info) Deploying function
+2021-08-11 14:49:02  (info) Building
+2021-08-11 14:49:03  (info) Staging files and preparing base images
+2021-08-11 14:49:03  (info) Building processor image
+2021-08-11 14:49:10  (info) Build complete
+2021-08-11 14:49:42  (info) Function deploy complete
+&gt; 2021-08-11 14:49:43,742 [info] function deployed, address=default-tenant.app.dev39.lab.iguazeng.com:32500
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="c1"># sending a request to the function endpoint to get the sentences' embeddings</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">sentences</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pickle</span>
+<span class="n">output_embeddings</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'embeddings per token shape: </span><span class="si">{</span><span class="n">output_embeddings</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">, pooled embeddings shape: </span><span class="si">{</span><span class="n">output_embeddings</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>embeddings per token shape: (3, 11, 768), pooled embeddings shape: (3, 768)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">output_embeddings</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>...</th>
+<th>758</th>
+<th>759</th>
+<th>760</th>
+<th>761</th>
+<th>762</th>
+<th>763</th>
+<th>764</th>
+<th>765</th>
+<th>766</th>
+<th>767</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>-0.733322</td>
+<td>-0.223540</td>
+<td>0.342462</td>
+<td>0.383463</td>
+<td>-0.164796</td>
+<td>0.040522</td>
+<td>0.802845</td>
+<td>0.152842</td>
+<td>0.331639</td>
+<td>-0.999779</td>
+<td>...</td>
+<td>0.206564</td>
+<td>0.231415</td>
+<td>0.196434</td>
+<td>0.797908</td>
+<td>0.435176</td>
+<td>0.749370</td>
+<td>0.246098</td>
+<td>0.427603</td>
+<td>-0.577384</td>
+<td>0.842063</td>
+</tr>
+<tr>
+<th>1</th>
+<td>-0.953005</td>
+<td>-0.535132</td>
+<td>-0.743821</td>
+<td>0.893934</td>
+<td>0.646276</td>
+<td>-0.279388</td>
+<td>0.943513</td>
+<td>0.275504</td>
+<td>-0.555108</td>
+<td>-0.999992</td>
+<td>...</td>
+<td>0.582385</td>
+<td>-0.004613</td>
+<td>0.976079</td>
+<td>0.931517</td>
+<td>-0.391442</td>
+<td>0.530384</td>
+<td>0.675933</td>
+<td>-0.682720</td>
+<td>-0.746339</td>
+<td>0.957809</td>
+</tr>
+<tr>
+<th>2</th>
+<td>-0.843678</td>
+<td>-0.453405</td>
+<td>-0.826011</td>
+<td>0.650805</td>
+<td>0.494036</td>
+<td>-0.154117</td>
+<td>0.821642</td>
+<td>0.349507</td>
+<td>-0.650629</td>
+<td>-0.999978</td>
+<td>...</td>
+<td>0.618286</td>
+<td>-0.336700</td>
+<td>0.936262</td>
+<td>0.857577</td>
+<td>-0.787489</td>
+<td>0.246137</td>
+<td>0.676243</td>
+<td>-0.612531</td>
+<td>-0.708786</td>
+<td>0.840879</td>
+</tr>
+</tbody>
+</table>
+<p>3 rows × 768 columns</p>
+</div></div></div>
+</div>
+<p>we can see that the size of the first dimension of the outputs is three since we passed in three sequences. Also the intermediate dimension of the first output is the maximal number of tokens across all input sequences. Sequences with less tokens are padded with zero values.<br/>
+Note that the first input has an intermediate dimension of size 11 that corresponds to the number of max tokens in the input sequence after addition of two special tokens marking beginning and end of a sequence by the tokenizer.<br/>
+The last dimension for both is of size 768 which is the embedding dimension for this default configuration of bert.<br/>
+Now you tell me, which encoding are you gonna use in your project ??</p>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br>
+</br></p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
