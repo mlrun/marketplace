@@ -1,0 +1,1193 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Generic Scikit-Learn Classifier With Dask</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="_sources/sklearn_classifier_dask_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fsklearn_classifier_dask_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/sklearn_classifier_dask_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#save-and-config">
+   Save and Config
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#init-dask">
+   Init Dask
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#init-a-dask-cluster-and-set-dask-specs">
+     init a dask cluster and set dask specs
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#init-dask-client">
+     init dask client
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#set-parameters">
+   Set Parameters
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-and-run">
+   Test and Run
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="tex2jax_ignore mathjax_ignore section" id="generic-scikit-learn-classifier-with-dask">
+<h1>Generic Scikit-Learn Classifier With Dask<a class="headerlink" href="#generic-scikit-learn-classifier-with-dask" title="Permalink to this headline">¶</a></h1>
+<p>Run any scikit-learn compatible classifier or list of classifiers</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-01-26 15:20:40,329 [warning] Failed resolving version info. Ignoring and using defaults
+&gt; 2021-01-26 15:20:42,044 [warning] Unable to parse server or client version. Assuming compatible: {'server_version': 'unstable', 'client_version': 'unstable'}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">nuclio</span> config kind = "job"
+<span class="o">%</span><span class="k">nuclio</span> config spec.image = "mlrun/ml-models"
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>%nuclio: setting kind to 'job'
+%nuclio: setting spec.image to 'mlrun/ml-models'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">'ignore'</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">joblib</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">cloudpickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
+
+<span class="kn">from</span> <span class="nn">dask</span> <span class="kn">import</span> <span class="n">dataframe</span> <span class="k">as</span> <span class="n">dd</span>
+<span class="kn">from</span> <span class="nn">dask</span> <span class="kn">import</span> <span class="n">array</span> <span class="k">as</span> <span class="n">da</span>
+<span class="kn">from</span> <span class="nn">dask.delayed</span> <span class="kn">import</span> <span class="n">delayed</span>
+<span class="kn">from</span> <span class="nn">dask_ml</span> <span class="kn">import</span> <span class="n">model_selection</span>
+<span class="kn">from</span> <span class="nn">dask_ml</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="kn">from</span> <span class="nn">dask_ml.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span><span class="p">,</span> <span class="n">LabelEncoder</span>
+
+<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">PlotArtifact</span>
+<span class="kn">from</span> <span class="nn">mlrun.mlutils.models</span> <span class="kn">import</span> <span class="n">gen_sklearn_model</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils.helpers</span> <span class="kn">import</span> <span class="n">create_class</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">yellowbrick.classifier</span> <span class="kn">import</span> <span class="n">ROCAUC</span><span class="p">,</span> <span class="n">ClassificationReport</span><span class="p">,</span> <span class="n">ConfusionMatrix</span>
+<span class="kn">from</span> <span class="nn">yellowbrick.model_selection</span> <span class="kn">import</span> <span class="n">FeatureImportances</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">train_model</span><span class="p">(</span><span class="n">context</span><span class="p">,</span>
+                <span class="n">dataset</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span>
+                <span class="n">model_pkg_class</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                <span class="n">label_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"label"</span><span class="p">,</span>
+                <span class="n">train_validation_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span>
+                <span class="n">sample</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                <span class="n">models_dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"models"</span><span class="p">,</span>
+                <span class="n">test_set_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test_set"</span><span class="p">,</span>
+                <span class="n">plots_dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"plots"</span><span class="p">,</span>
+                <span class="n">dask_function</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="n">dask_client</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">file_ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"parquet"</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    
+    <span class="sd">"""</span>
+<span class="sd">    Train a sklearn classifier with Dask</span>
+<span class="sd">    </span>
+<span class="sd">    :param context:                 Function context.</span>
+<span class="sd">    :param dataset:                 Raw data file.</span>
+<span class="sd">    :param model_pkg_class:         Model to train, e.g, "sklearn.ensemble.RandomForestClassifier", </span>
+<span class="sd">                                    or json model config.</span>
+<span class="sd">    :param label_column:            (label) Ground-truth y labels.</span>
+<span class="sd">    :param train_validation_size:   (0.75) Train validation set proportion out of the full dataset.</span>
+<span class="sd">    :param sample:                  (1.0) Select sample from dataset (n-rows/% of total), randomzie rows as default.</span>
+<span class="sd">    :param models_dest:             (models) Models subfolder on artifact path.</span>
+<span class="sd">    :param test_set_key:            (test_set) Mlrun db key of held out data in artifact store.</span>
+<span class="sd">    :param plots_dest:              (plots) Plot subfolder on artifact path.</span>
+<span class="sd">    :param dask_function:           dask function url (db://..)</span>
+<span class="sd">    :param dask_client:             dask client object</span>
+<span class="sd">    :param file_ext:                (parquet) format for test_set_key hold out data</span>
+<span class="sd">    :param random_state:            (42) sklearn seed</span>
+<span class="sd">    """</span>
+    
+    <span class="c1"># set up dask client </span>
+    <span class="k">if</span> <span class="n">dask_function</span><span class="p">:</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="n">dask_function</span><span class="p">)</span><span class="o">.</span><span class="n">client</span>
+    <span class="k">elif</span> <span class="n">dask_client</span><span class="p">:</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">dask_client</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">'dask client was not provided'</span><span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Read Data"</span><span class="p">)</span>
+    <span class="c1"># read data with dask and mlrun</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">as_df</span><span class="p">(</span><span class="n">df_module</span><span class="o">=</span><span class="n">dd</span><span class="p">)</span> 
+
+    <span class="c1"># take only numrical cols</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Prep Data"</span><span class="p">)</span>
+    <span class="n">numerics</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'int16'</span><span class="p">,</span> <span class="s1">'int32'</span><span class="p">,</span> <span class="s1">'int64'</span><span class="p">,</span> <span class="s1">'float16'</span><span class="p">,</span> <span class="s1">'float32'</span><span class="p">,</span> <span class="s1">'float64'</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="n">numerics</span><span class="p">)</span>
+    
+    <span class="c1"># dropna</span>
+    <span class="k">if</span> <span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">any</span><span class="p">()</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">'NAs valus found'</span><span class="p">)</span>
+    
+    <span class="c1"># save cols names</span>
+    <span class="n">df_header</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="n">sample</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+    <span class="n">encoder</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">label_column</span><span class="p">])</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">label_column</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_dask_array</span><span class="p">(</span><span class="n">lengths</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">label_column</span><span class="p">])</span>
+
+    <span class="n">classes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">label_column</span><span class="p">]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span> <span class="c1"># no unique values in dask</span>
+    <span class="n">classes</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">]</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Split and Train"</span><span class="p">)</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">model_selection</span><span class="o">.</span><span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">train_size</span><span class="o">=</span><span class="n">train_validation_size</span><span class="p">,</span>
+                                                                        <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+    
+    <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+    <span class="n">scaler</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">X_train_transformed</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+    <span class="n">X_test_transformed</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+    
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">gen_sklearn_model</span><span class="p">(</span><span class="n">model_pkg_class</span><span class="p">,</span>
+                                     <span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+
+    <span class="n">model_config</span><span class="p">[</span><span class="s2">"FIT"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"X"</span><span class="p">:</span> <span class="n">X_train_transformed</span><span class="p">,</span>
+                                <span class="s2">"y"</span><span class="p">:</span> <span class="n">y_train</span><span class="p">})</span>
+    
+    <span class="n">ClassifierClass</span> <span class="o">=</span> <span class="n">create_class</span><span class="p">(</span><span class="n">model_config</span><span class="p">[</span><span class="s2">"META"</span><span class="p">][</span><span class="s2">"class"</span><span class="p">])</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ClassifierClass</span><span class="p">(</span><span class="o">**</span><span class="n">model_config</span><span class="p">[</span><span class="s2">"CLASS"</span><span class="p">])</span>
+    
+    <span class="c1"># load and fit model</span>
+    <span class="k">with</span> <span class="n">joblib</span><span class="o">.</span><span class="n">parallel_backend</span><span class="p">(</span><span class="s2">"dask"</span><span class="p">):</span>
+        
+        <span class="c1"># initialize classifier from sklearn</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">**</span><span class="n">model_config</span><span class="p">[</span><span class="s2">"FIT"</span><span class="p">])</span>
+
+    <span class="c1"># create reports</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Evaluate"</span><span class="p">)</span>
+    <span class="n">extra_data_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">report</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ROCAUC</span><span class="p">,</span> <span class="n">ClassificationReport</span><span class="p">,</span> <span class="n">ConfusionMatrix</span><span class="p">):</span>
+        
+        <span class="n">report_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">report</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="c1"># clear output</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        
+        <span class="c1"># genrate report</span>
+        <span class="n">viz</span> <span class="o">=</span> <span class="n">report</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span> <span class="n">per_class</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">is_fitted</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>               <span class="c1"># Fit the training data to the visualizer</span>
+        <span class="n">viz</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test_transformed</span><span class="p">,</span> <span class="n">y_test</span><span class="o">.</span><span class="n">compute</span><span class="p">())</span>     <span class="c1"># Evaluate the model on the test data</span>
+        
+        <span class="c1"># log reports</span>
+        <span class="n">plot</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">PlotArtifact</span><span class="p">(</span><span class="n">report_name</span><span class="p">,</span> 
+                                                 <span class="n">body</span><span class="o">=</span><span class="n">viz</span><span class="o">.</span><span class="n">fig</span><span class="p">,</span>
+                                                 <span class="n">title</span><span class="o">=</span><span class="n">report_name</span><span class="p">),</span> 
+                                                 <span class="n">db_key</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">extra_data_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">report</span><span class="p">)]</span> <span class="o">=</span> <span class="n">plot</span>
+        
+        <span class="c1"># log results</span>
+        <span class="k">if</span> <span class="n">report_name</span> <span class="o">==</span> <span class="s1">'ROCAUC'</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">log_results</span><span class="p">({</span><span class="s2">"micro"</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">roc_auc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"micro"</span><span class="p">),</span>
+                                <span class="s2">"macro"</span><span class="p">:</span> <span class="n">viz</span><span class="o">.</span><span class="n">roc_auc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"macro"</span><span class="p">)})</span>
+            
+        <span class="k">elif</span> <span class="n">report_name</span> <span class="o">==</span> <span class="s1">'ClassificationReport'</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">score_name</span> <span class="ow">in</span> <span class="n">viz</span><span class="o">.</span><span class="n">scores_</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">score_class</span> <span class="ow">in</span> <span class="n">viz</span><span class="o">.</span><span class="n">scores_</span><span class="p">[</span><span class="n">score_name</span><span class="p">]:</span>
+                    
+                    <span class="n">context</span><span class="o">.</span><span class="n">log_results</span><span class="p">({</span><span class="n">score_name</span> <span class="o">+</span> <span class="s2">"-"</span> <span class="o">+</span> <span class="n">score_class</span> <span class="p">:</span> 
+                                         <span class="n">viz</span><span class="o">.</span><span class="n">scores_</span><span class="p">[</span><span class="n">score_name</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">score_class</span><span class="p">)})</span>
+        
+        <span class="c1">#viz.show()</span>
+    
+    <span class="c1"># get feature importance</span>
+    <span class="n">viz</span> <span class="o">=</span> <span class="n">FeatureImportances</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">classes</span><span class="o">=</span><span class="n">classes</span><span class="p">,</span> <span class="n">per_class</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+                             <span class="n">is_fitted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">df_header</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">df_header</span><span class="o">.</span><span class="n">get_loc</span><span class="p">(</span><span class="n">label_column</span><span class="p">)))</span>
+    <span class="n">viz</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_transformed</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span> 
+    <span class="n">viz</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test_transformed</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+    <span class="c1">#viz.show()</span>
+    
+    <span class="n">plot</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">PlotArtifact</span><span class="p">(</span><span class="s2">"FeatureImportances"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">viz</span><span class="o">.</span><span class="n">fig</span><span class="p">,</span> 
+                                             <span class="n">title</span><span class="o">=</span><span class="s2">"FeatureImportances"</span><span class="p">),</span> <span class="n">db_key</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">extra_data_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="s2">"FeatureImportances"</span><span class="p">)]</span> <span class="o">=</span> <span class="n">plot</span>
+    
+    <span class="c1"># clear final output</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># log artifacts</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Log artifacts"</span><span class="p">)</span>
+    <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">artifact_subpath</span><span class="p">(</span><span class="n">models_dest</span><span class="p">)</span>
+    
+    <span class="c1"># set label</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">'class'</span><span class="p">,</span> <span class="n">model_pkg_class</span><span class="p">)</span>
+    
+    <span class="c1"># log models</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">dumps</span><span class="p">(</span><span class="n">model</span><span class="p">),</span>
+                      <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span>
+                      <span class="n">model_file</span><span class="o">=</span><span class="s2">"model.pkl"</span><span class="p">,</span>
+                      <span class="n">extra_data</span><span class="o">=</span><span class="n">extra_data_dict</span><span class="p">,</span>
+                      <span class="n">metrics</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">results</span><span class="p">,</span>
+                      <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">"class"</span><span class="p">:</span> <span class="n">model_pkg_class</span><span class="p">})</span>
+    
+    <span class="c1"># log scalers</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="s2">"standard_scaler"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">dumps</span><span class="p">(</span><span class="n">scaler</span><span class="p">),</span>
+                         <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span>
+                         <span class="n">model_file</span><span class="o">=</span><span class="s2">"scaler.gz"</span><span class="p">,</span>
+                         <span class="n">label</span><span class="o">=</span><span class="s2">"standard_scaler"</span><span class="p">)</span>
+    
+    <span class="c1"># log encoder</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="s2">"label_encoder"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">dumps</span><span class="p">(</span><span class="n">encoder</span><span class="p">),</span>
+                         <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span>
+                         <span class="n">model_file</span><span class="o">=</span><span class="s2">"encoder.gz"</span><span class="p">,</span>
+                         <span class="n">label</span><span class="o">=</span><span class="s2">"label_encoder"</span><span class="p">)</span>
+    
+    <span class="c1"># set aside some test data</span>
+    <span class="n">df_to_save</span> <span class="o">=</span> <span class="n">delayed</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">)((</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="n">test_set_key</span><span class="p">,</span> 
+                        <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_to_save</span><span class="p">,</span> 
+                                        <span class="n">columns</span><span class="o">=</span><span class="n">df_header</span><span class="p">),</span> <span class="c1"># improve log dataset ability</span>
+                        <span class="nb">format</span><span class="o">=</span><span class="n">file_ext</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
+                        <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">"data-type"</span><span class="p">:</span> <span class="s2">"held-out"</span><span class="p">},</span>
+                        <span class="n">artifact_path</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_subpath</span><span class="p">(</span><span class="s1">'data'</span><span class="p">))</span>
+    
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Done!"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="save-and-config">
+<h2>Save and Config<a class="headerlink" href="#save-and-config" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">artifact_path</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">artifact_path</span><span class="o">=</span><span class="s1">'./'</span><span class="p">)</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">code_to_function</span><span class="p">(</span><span class="s1">'sklearn-classifier-dask'</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">'job'</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="s1">'train_model'</span><span class="p">,</span> 
+                            <span class="n">description</span><span class="o">=</span><span class="s2">"train any classifier using scikit-learn's API over Dask"</span><span class="p">,</span> 
+                            <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="s2">"ml"</span><span class="p">,</span> <span class="s2">"training"</span><span class="p">,</span> <span class="s2">"dask"</span><span class="p">],</span> 
+                            <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">'author'</span><span class="p">:</span> <span class="s1">'yjb'</span><span class="p">,</span> <span class="s2">"framework"</span><span class="p">:</span> <span class="s2">"sklearn"</span><span class="p">},</span>
+                            <span class="n">code_output</span><span class="o">=</span><span class="s1">'.'</span><span class="p">)</span>
+
+<span class="n">fn</span><span class="o">.</span><span class="n">export</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-01-26 15:31:31,836 [info] function spec saved to path: function.yaml
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f25d2bc3a50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="init-dask">
+<h2>Init Dask<a class="headerlink" href="#init-dask" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="init-a-dask-cluster-and-set-dask-specs">
+<h3>init a dask cluster and set dask specs<a class="headerlink" href="#init-a-dask-cluster-and-set-dask-specs" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">platforms</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+<span class="n">DATA_URL</span> <span class="o">=</span> <span class="s2">"/User/iris.csv"</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>curl -L <span class="s2">"https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv"</span> &gt; <span class="o">{</span>DATA_URL<span class="o">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  2776  100  2776    0     0  16722      0 --:--:-- --:--:-- --:--:-- 16622
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a dask test cluster (dask function)</span>
+<span class="n">dask_cluster</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">new_function</span><span class="p">(</span><span class="s1">'dask_tests'</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">'dask'</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="s1">'mlrun/ml-models'</span><span class="p">)</span>
+<span class="n">dask_cluster</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">mount_v3io</span><span class="p">())</span>
+<span class="n">dask_cluster</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">remote</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">dask_cluster</span><span class="o">.</span><span class="n">with_requests</span><span class="p">(</span><span class="n">mem</span><span class="o">=</span><span class="s1">'8G'</span><span class="p">)</span>
+<span class="n">dask_cluster</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-01-26 15:22:37,907 [info] using in-cluster config.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'0f3172545726617a0f38a9661e5d731315f0b4ca'
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="init-dask-client">
+<h3>init dask client<a class="headerlink" href="#init-dask-client" title="Permalink to this headline">¶</a></h3>
+<p>copy the scheduler address to <strong>DASK_CLIENT</strong> param in the following cell, this will make the function use the dask cluster.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dask_cluster</span><span class="o">.</span><span class="n">client</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-01-26 15:22:45,162 [info] to get a dashboard link, use NodePort service_type
+&gt; 2021-01-26 15:22:45,163 [info] trying dask client at: tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786
+&gt; 2021-01-26 15:22:45,197 [info] using remote dask scheduler (mlrun-dask-tests-58d71599-7) at: tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786
+</pre></div>
+</div>
+<div class="output text_html"><table style="border: 2px solid white;">
+<tr>
+<td style="vertical-align: top; border: 0px solid white">
+<h3 style="text-align: left;">Client</h3>
+<ul style="text-align: left; list-style: none; margin: 0; padding: 0;">
+<li><b>Scheduler: </b>tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786</li>
+<li><b>Dashboard: </b><a href="http://mlrun-dask-tests-58d71599-7.default-tenant:8787/status" target="_blank">http://mlrun-dask-tests-58d71599-7.default-tenant:8787/status</a></li>
+</ul>
+</td>
+<td style="vertical-align: top; border: 0px solid white">
+<h3 style="text-align: left;">Cluster</h3>
+<ul style="text-align: left; list-style:none; margin: 0; padding: 0;">
+<li><b>Workers: </b>0</li>
+<li><b>Cores: </b>0</li>
+<li><b>Memory: </b>0 B</li>
+</ul>
+</td>
+</tr>
+</table></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="set-parameters">
+<h2>Set Parameters<a class="headerlink" href="#set-parameters" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"params"</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"sample"</span>             <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"train_val_split"</span>    <span class="p">:</span> <span class="mf">0.75</span><span class="p">,</span>
+        <span class="s2">"random_state"</span>       <span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+        <span class="s2">"n_jobs"</span>             <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"plots_dest"</span>         <span class="p">:</span> <span class="s2">"plots-p"</span><span class="p">,</span>
+        <span class="s2">"models_dest"</span>        <span class="p">:</span> <span class="s1">'sklearn-clfmodel'</span><span class="p">}}</span>
+
+
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"sklearn.ensemble.RandomForestClassifier"</span><span class="p">,</span>
+    <span class="s2">"sklearn.ensemble.AdaBoostClassifier"</span><span class="p">,</span>
+    <span class="s2">"sklearn.linear_model.LogisticRegression"</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="test-and-run">
+<h2>Test and Run<a class="headerlink" href="#test-and-run" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+    <span class="n">task_copy</span> <span class="o">=</span> <span class="n">task_params</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">task_copy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">"params"</span><span class="p">:{</span> <span class="s2">"model_pkg_class"</span> <span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                       <span class="s2">"label_column"</span>    <span class="p">:</span> <span class="s2">"label"</span><span class="p">,</span>
+                       <span class="s2">"dask_function"</span><span class="p">:</span> <span class="s1">'db://default/dask_tests'</span><span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># customize specific model parameters</span>
+    <span class="k">if</span> <span class="s2">"RandomForestClassifier"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_max_depth"</span> <span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+
+    <span class="k">if</span> <span class="s2">"LogisticRegression"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_solver"</span> <span class="p">:</span> <span class="s2">"liblinear"</span><span class="p">})</span>
+    
+    <span class="k">if</span> <span class="s2">"AdaBoostClassifier"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_n_estimators"</span>  <span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                                    <span class="s2">"CLASS_learning_rate"</span> <span class="p">:</span> <span class="mf">0.01</span>
+                                   <span class="p">})</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">NewTask</span><span class="p">(</span><span class="o">**</span><span class="n">task_copy</span><span class="p">),</span>
+                             <span class="n">handler</span><span class="o">=</span><span class="n">train_model</span><span class="p">,</span>
+                             <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                             <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span>      <span class="p">:</span> <span class="n">DATA_URL</span><span class="p">},</span>
+                             <span class="n">artifact_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artifact_path</span><span class="p">,</span> <span class="n">model</span><span class="p">),</span>
+                             <span class="n">local</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">outputs</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-01-26 15:22:47,942 [info] starting run sklearn_ensemble_RandomForestClassifier uid=c536e15d7f804262a3b14305fbb8d47b DB=http://mlrun-api:8080
+&gt; 2021-01-26 15:22:48,160 [info] Job is running in the background, pod: sklearn-ensemble-randomforestclassifier-r48fw
+&gt; 2021-01-26 15:22:51,784 [warning] Unable to parse server or client version. Assuming compatible: {'server_version': 'unstable', 'client_version': 'unstable'}
+&gt; 2021-01-26 15:22:53,372 [info] using in-cluster config.
+&gt; 2021-01-26 15:22:53,372 [info] to get a dashboard link, use NodePort service_type
+&gt; 2021-01-26 15:22:53,372 [info] trying dask client at: tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786
+&gt; 2021-01-26 15:22:53,404 [info] using remote dask scheduler (mlrun-dask-tests-58d71599-7) at: tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786
+&gt; 2021-01-26 15:22:53,404 [info] Read Data
+&gt; 2021-01-26 15:22:53,426 [info] Prep Data
+&gt; 2021-01-26 15:22:57,916 [info] Split and Train
+&gt; 2021-01-26 15:22:59,187 [info] Evaluate
+&gt; 2021-01-26 15:23:00,997 [info] Log artifacts
+&gt; 2021-01-26 15:23:01,557 [info] Done!
+&gt; 2021-01-26 15:23:01,601 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="c536e15d7f804262a3b14305fbb8d47b"><a href="https://mlrun-ui.default-tenant.app.yh57.iguazio-cd0.com/projects/default/jobs/monitor/c536e15d7f804262a3b14305fbb8d47b/info" target="_blank">...fbb8d47b</a></div></td>
+<td>0</td>
+<td>Jan 26 15:22:53</td>
+<td>completed</td>
+<td>sklearn_ensemble_RandomForestClassifier</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div><div class="dictlist">host=sklearn-ensemble-randomforestclassifier-r48fw</div><div class="dictlist">class=sklearn.ensemble.RandomForestClassifier</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="resultec8bfe34" title="/files/iris.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.ensemble.RandomForestClassifier</div><div class="dictlist">label_column=label</div><div class="dictlist">dask_function=db://default/dask_tests</div><div class="dictlist">CLASS_max_depth=5</div></td>
+<td><div class="dictlist">micro=1.0</div><div class="dictlist">macro=1.0</div><div class="dictlist">precision-2=1.0</div><div class="dictlist">precision-1=1.0</div><div class="dictlist">precision-0=1.0</div><div class="dictlist">recall-2=1.0</div><div class="dictlist">recall-1=1.0</div><div class="dictlist">recall-0=1.0</div><div class="dictlist">f1-2=1.0</div><div class="dictlist">f1-1=1.0</div><div class="dictlist">f1-0=1.0</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="resultec8bfe34" title="/files/functions/sklearn_classifier_dask/sklearn.ensemble.RandomForestClassifier/ROCAUC.html">ROCAUC</div><div class="artifact" onclick="expandPanel(this)" panename="resultec8bfe34" title="/files/functions/sklearn_classifier_dask/sklearn.ensemble.RandomForestClassifier/ClassificationReport.html">ClassificationReport</div><div class="artifact" onclick="expandPanel(this)" panename="resultec8bfe34" title="/files/functions/sklearn_classifier_dask/sklearn.ensemble.RandomForestClassifier/ConfusionMatrix.html">ConfusionMatrix</div><div class="artifact" onclick="expandPanel(this)" panename="resultec8bfe34" title="/files/functions/sklearn_classifier_dask/sklearn.ensemble.RandomForestClassifier/FeatureImportances.html">FeatureImportances</div><div title="/User/functions/sklearn_classifier_dask/sklearn.ensemble.RandomForestClassifier/models">model</div><div title="/User/functions/sklearn_classifier_dask/sklearn.ensemble.RandomForestClassifier/models/standard_scaler">standard_scaler</div><div title="/User/functions/sklearn_classifier_dask/sklearn.ensemble.RandomForestClassifier/models/label_encoder">label_encoder</div><div title="/User/functions/sklearn_classifier_dask/sklearn.ensemble.RandomForestClassifier/data/test_set.parquet">test_set</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultec8bfe34-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultec8bfe34-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultec8bfe34">×</span>
+</div>
+<iframe class="fileview" id="resultec8bfe34-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run c536e15d7f804262a3b14305fbb8d47b --project default , !mlrun logs c536e15d7f804262a3b14305fbb8d47b --project default
+&gt; 2021-01-26 15:23:03,504 [info] run executed, status=completed
+&gt; 2021-01-26 15:23:03,505 [info] starting run sklearn_ensemble_AdaBoostClassifier uid=3ebb600c11d542cda56fceaad8a5f32d DB=http://mlrun-api:8080
+&gt; 2021-01-26 15:23:03,704 [info] Job is running in the background, pod: sklearn-ensemble-adaboostclassifier-vhxtc
+&gt; 2021-01-26 15:23:07,391 [warning] Unable to parse server or client version. Assuming compatible: {'server_version': 'unstable', 'client_version': 'unstable'}
+&gt; 2021-01-26 15:23:08,963 [info] using in-cluster config.
+&gt; 2021-01-26 15:23:08,963 [info] to get a dashboard link, use NodePort service_type
+&gt; 2021-01-26 15:23:08,963 [info] trying dask client at: tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786
+&gt; 2021-01-26 15:23:08,993 [info] using remote dask scheduler (mlrun-dask-tests-58d71599-7) at: tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786
+&gt; 2021-01-26 15:23:08,993 [info] Read Data
+&gt; 2021-01-26 15:23:09,017 [info] Prep Data
+&gt; 2021-01-26 15:23:13,294 [info] Split and Train
+&gt; 2021-01-26 15:23:14,196 [info] Evaluate
+&gt; 2021-01-26 15:23:16,017 [info] Log artifacts
+&gt; 2021-01-26 15:23:23,885 [info] Done!
+&gt; 2021-01-26 15:23:23,928 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="3ebb600c11d542cda56fceaad8a5f32d"><a href="https://mlrun-ui.default-tenant.app.yh57.iguazio-cd0.com/projects/default/jobs/monitor/3ebb600c11d542cda56fceaad8a5f32d/info" target="_blank">...d8a5f32d</a></div></td>
+<td>0</td>
+<td>Jan 26 15:23:08</td>
+<td>completed</td>
+<td>sklearn_ensemble_AdaBoostClassifier</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div><div class="dictlist">host=sklearn-ensemble-adaboostclassifier-vhxtc</div><div class="dictlist">class=sklearn.ensemble.AdaBoostClassifier</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="resultb55dd1e1" title="/files/iris.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.ensemble.AdaBoostClassifier</div><div class="dictlist">label_column=label</div><div class="dictlist">dask_function=db://default/dask_tests</div><div class="dictlist">CLASS_n_estimators=200</div><div class="dictlist">CLASS_learning_rate=0.01</div></td>
+<td><div class="dictlist">micro=0.9761080332409972</div><div class="dictlist">macro=0.9848504273504274</div><div class="dictlist">precision-2=1.0</div><div class="dictlist">precision-0=0.8571428571428571</div><div class="dictlist">precision-1=0.9230769230769231</div><div class="dictlist">recall-2=1.0</div><div class="dictlist">recall-0=0.9230769230769231</div><div class="dictlist">recall-1=0.8571428571428571</div><div class="dictlist">f1-2=1.0</div><div class="dictlist">f1-0=0.888888888888889</div><div class="dictlist">f1-1=0.888888888888889</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="resultb55dd1e1" title="/files/functions/sklearn_classifier_dask/sklearn.ensemble.AdaBoostClassifier/ROCAUC.html">ROCAUC</div><div class="artifact" onclick="expandPanel(this)" panename="resultb55dd1e1" title="/files/functions/sklearn_classifier_dask/sklearn.ensemble.AdaBoostClassifier/ClassificationReport.html">ClassificationReport</div><div class="artifact" onclick="expandPanel(this)" panename="resultb55dd1e1" title="/files/functions/sklearn_classifier_dask/sklearn.ensemble.AdaBoostClassifier/ConfusionMatrix.html">ConfusionMatrix</div><div class="artifact" onclick="expandPanel(this)" panename="resultb55dd1e1" title="/files/functions/sklearn_classifier_dask/sklearn.ensemble.AdaBoostClassifier/FeatureImportances.html">FeatureImportances</div><div title="/User/functions/sklearn_classifier_dask/sklearn.ensemble.AdaBoostClassifier/models">model</div><div title="/User/functions/sklearn_classifier_dask/sklearn.ensemble.AdaBoostClassifier/models/standard_scaler">standard_scaler</div><div title="/User/functions/sklearn_classifier_dask/sklearn.ensemble.AdaBoostClassifier/models/label_encoder">label_encoder</div><div title="/User/functions/sklearn_classifier_dask/sklearn.ensemble.AdaBoostClassifier/data/test_set.parquet">test_set</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultb55dd1e1-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultb55dd1e1-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultb55dd1e1">×</span>
+</div>
+<iframe class="fileview" id="resultb55dd1e1-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run 3ebb600c11d542cda56fceaad8a5f32d --project default , !mlrun logs 3ebb600c11d542cda56fceaad8a5f32d --project default
+&gt; 2021-01-26 15:23:29,053 [info] run executed, status=completed
+&gt; 2021-01-26 15:23:29,054 [info] starting run sklearn_linear_model_LogisticRegression uid=9c623457a4de47b3881cc1ef3dacbd24 DB=http://mlrun-api:8080
+&gt; 2021-01-26 15:23:29,247 [info] Job is running in the background, pod: sklearn-linear-model-logisticregression-pr8j9
+&gt; 2021-01-26 15:23:32,848 [warning] Unable to parse server or client version. Assuming compatible: {'server_version': 'unstable', 'client_version': 'unstable'}
+&gt; 2021-01-26 15:23:34,379 [info] using in-cluster config.
+&gt; 2021-01-26 15:23:34,380 [info] to get a dashboard link, use NodePort service_type
+&gt; 2021-01-26 15:23:34,380 [info] trying dask client at: tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786
+&gt; 2021-01-26 15:23:34,405 [info] using remote dask scheduler (mlrun-dask-tests-58d71599-7) at: tcp://mlrun-dask-tests-58d71599-7.default-tenant:8786
+&gt; 2021-01-26 15:23:34,405 [info] Read Data
+&gt; 2021-01-26 15:23:34,424 [info] Prep Data
+&gt; 2021-01-26 15:23:38,842 [info] Split and Train
+&gt; 2021-01-26 15:23:39,510 [info] Evaluate
+&gt; 2021-01-26 15:23:41,290 [info] Log artifacts
+&gt; 2021-01-26 15:23:41,871 [info] Done!
+&gt; 2021-01-26 15:23:41,920 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="9c623457a4de47b3881cc1ef3dacbd24"><a href="https://mlrun-ui.default-tenant.app.yh57.iguazio-cd0.com/projects/default/jobs/monitor/9c623457a4de47b3881cc1ef3dacbd24/info" target="_blank">...3dacbd24</a></div></td>
+<td>0</td>
+<td>Jan 26 15:23:34</td>
+<td>completed</td>
+<td>sklearn_linear_model_LogisticRegression</td>
+<td><div class="dictlist">v3io_user=admin</div><div class="dictlist">kind=job</div><div class="dictlist">owner=admin</div><div class="dictlist">host=sklearn-linear-model-logisticregression-pr8j9</div><div class="dictlist">class=sklearn.linear_model.LogisticRegression</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result8120860f" title="/files/iris.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.linear_model.LogisticRegression</div><div class="dictlist">label_column=label</div><div class="dictlist">dask_function=db://default/dask_tests</div><div class="dictlist">CLASS_solver=liblinear</div></td>
+<td><div class="dictlist">micro=0.9916897506925207</div><div class="dictlist">macro=0.9985119047619048</div><div class="dictlist">precision-2=1.0</div><div class="dictlist">precision-1=1.0</div><div class="dictlist">precision-0=0.7857142857142857</div><div class="dictlist">recall-2=1.0</div><div class="dictlist">recall-1=0.7857142857142857</div><div class="dictlist">recall-0=1.0</div><div class="dictlist">f1-2=1.0</div><div class="dictlist">f1-1=0.88</div><div class="dictlist">f1-0=0.88</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="result8120860f" title="/files/functions/sklearn_classifier_dask/sklearn.linear_model.LogisticRegression/ROCAUC.html">ROCAUC</div><div class="artifact" onclick="expandPanel(this)" panename="result8120860f" title="/files/functions/sklearn_classifier_dask/sklearn.linear_model.LogisticRegression/ClassificationReport.html">ClassificationReport</div><div class="artifact" onclick="expandPanel(this)" panename="result8120860f" title="/files/functions/sklearn_classifier_dask/sklearn.linear_model.LogisticRegression/ConfusionMatrix.html">ConfusionMatrix</div><div class="artifact" onclick="expandPanel(this)" panename="result8120860f" title="/files/functions/sklearn_classifier_dask/sklearn.linear_model.LogisticRegression/FeatureImportances.html">FeatureImportances</div><div title="/User/functions/sklearn_classifier_dask/sklearn.linear_model.LogisticRegression/models">model</div><div title="/User/functions/sklearn_classifier_dask/sklearn.linear_model.LogisticRegression/models/standard_scaler">standard_scaler</div><div title="/User/functions/sklearn_classifier_dask/sklearn.linear_model.LogisticRegression/models/label_encoder">label_encoder</div><div title="/User/functions/sklearn_classifier_dask/sklearn.linear_model.LogisticRegression/data/test_set.parquet">test_set</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result8120860f-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result8120860f-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result8120860f">×</span>
+</div>
+<iframe class="fileview" id="result8120860f-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>to track results use .show() or .logs() or in CLI: 
+!mlrun get run 9c623457a4de47b3881cc1ef3dacbd24 --project default , !mlrun logs 9c623457a4de47b3881cc1ef3dacbd24 --project default
+&gt; 2021-01-26 15:23:44,614 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
