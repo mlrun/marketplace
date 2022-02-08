@@ -1,3 +1,6 @@
+### Change log [2022-02-08 07:14:49]
+1. Item Updated: `azureml_utils` (from version: `0.9.2` to `0.9.2`)
+
 ### Change log [2022-02-07 12:04:23]
 1. New item created: `ingest` (version: `0.9.0`)
 2. Item Updated: `load_dataset` (from version: `0.9.0` to `0.9.0`)
