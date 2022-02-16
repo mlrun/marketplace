@@ -1,3 +1,8 @@
+### Change log [2022-02-16 10:07:39]
+1. Item Updated: `feature_selection` (from version: `0.9.1` to `0.9.1`)
+2. Item Updated: `onnx_utils` (from version: `0.10.1` to `0.10.1`)
+3. Item Updated: `azureml_utils` (from version: `0.9.3` to `0.9.3`)
+
 ### Change log [2022-02-07 12:04:23]
 1. New item created: `ingest` (version: `0.9.0`)
 2. Item Updated: `load_dataset` (from version: `0.9.0` to `0.9.0`)
