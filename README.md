@@ -1,3 +1,6 @@
+### Change log [2022-03-23 15:09:53]
+1. Item Updated: `auto_trainer` (from version: `0.10.0` to `0.10.0`)
+
 ### Change log [2022-03-22 15:17:55]
 1. Item Updated: `feature_selection` (from version: `0.9.1` to `0.9.1`)
 2. New item created: `auto_trainer` (version: `0.9.0`)
