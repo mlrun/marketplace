@@ -1,3 +1,11 @@
+### Change log [2022-03-29 12:33:28]
+1. Item Updated: `concept_drift` (from version: `0.9.1` to `0.9.1`)
+2. Item Updated: `auto_trainer` (from version: `0.10.2` to `0.10.2`)
+3. Item Updated: `sql_to_file` (from version: `0.9.1` to `0.9.1`)
+4. Item Updated: `concept_drift_streaming` (from version: `0.9.1` to `0.9.1`)
+5. Item Updated: `model_monitoring_batch` (from version: `0.9.1` to `0.9.1`)
+6. Item Updated: `model_monitoring_stream` (from version: `0.9.1` to `0.9.1`)
+
 ### Change log [2022-03-28 09:19:29]
 1. Item Updated: `auto_trainer` (from version: `0.10.1` to `0.10.1`)
 
