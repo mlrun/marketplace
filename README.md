@@ -1,3 +1,11 @@
+### Change log [2022-03-30 09:17:18]
+1. Item Updated: `tf2_serving` (from version: `0.9.1` to `0.9.1`)
+2. Item Updated: `tf2_serving_v2` (from version: `0.9.1` to `0.9.1`)
+3. Item Updated: `sklearn_classifier_dask` (from version: `0.9.1` to `0.9.1`)
+4. Item Updated: `azureml_utils` (from version: `0.9.4` to `0.9.4`)
+5. Item Updated: `describe_spark` (from version: `0.9.1` to `0.9.1`)
+6. Item Updated: `tf1_serving` (from version: `0.9.1` to `0.9.1`)
+
 ### Change log [2022-03-29 12:33:28]
 1. Item Updated: `concept_drift` (from version: `0.9.1` to `0.9.1`)
 2. Item Updated: `auto_trainer` (from version: `0.10.2` to `0.10.2`)
