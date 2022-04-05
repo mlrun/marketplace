@@ -1,3 +1,20 @@
+### Change log [2022-04-05 14:21:49]
+1. Item Updated: `tf2_serving` (from version: `0.9.1` to `0.9.1`)
+2. Item Updated: `sql_to_file` (from version: `0.9.1` to `0.9.1`)
+3. Item Updated: `feature_selection` (from version: `0.9.1` to `0.9.1`)
+4. Item Updated: `concept_drift` (from version: `0.9.1` to `0.9.1`)
+5. Item Updated: `concept_drift_streaming` (from version: `0.9.1` to `0.9.1`)
+6. New item created: `auto_trainer` (version: `0.10.2`)
+7. Item Updated: `tf2_serving_v2` (from version: `0.9.1` to `0.9.1`)
+8. Item Updated: `tf1_serving` (from version: `0.9.1` to `0.9.1`)
+9. Item Updated: `model_monitoring_batch` (from version: `0.9.1` to `0.9.1`)
+10. Item Updated: `onnx_utils` (from version: `0.10.2` to `0.10.2`)
+11. Item Updated: `sklearn_classifier_dask` (from version: `0.9.1` to `0.9.1`)
+12. Item Updated: `gen_class_data` (from version: `0.10.0` to `0.10.0`)
+13. Item Updated: `azureml_utils` (from version: `0.9.4` to `0.9.4`)
+14. Item Updated: `describe_spark` (from version: `0.9.1` to `0.9.1`)
+15. Item Updated: `model_monitoring_stream` (from version: `0.9.1` to `0.9.1`)
+
 ### Change log [2022-04-05 08:10:38]
 1. Item Updated: `onnx_utils` (from version: `0.10.2` to `0.10.2`)
 
