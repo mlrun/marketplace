@@ -1,3 +1,6 @@
+### Change log [2022-04-05 08:10:38]
+1. Item Updated: `onnx_utils` (from version: `0.10.2` to `0.10.2`)
+
 ### Change log [2022-03-30 09:17:18]
 1. Item Updated: `tf2_serving` (from version: `0.9.1` to `0.9.1`)
 2. Item Updated: `tf2_serving_v2` (from version: `0.9.1` to `0.9.1`)
