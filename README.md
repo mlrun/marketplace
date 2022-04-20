@@ -1,3 +1,6 @@
+### Change log [2022-04-20 12:54:07]
+1. Item Updated: `azureml_utils` (from version: `0.9.5` to `0.9.5`)
+
 ### Change log [2022-04-05 14:21:49]
 1. Item Updated: `tf2_serving` (from version: `0.9.1` to `0.9.1`)
 2. Item Updated: `sql_to_file` (from version: `0.9.1` to `0.9.1`)
