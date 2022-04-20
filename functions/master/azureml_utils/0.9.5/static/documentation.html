@@ -1,0 +1,243 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>azureml_utils package</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fazureml_utils.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/azureml_utils.rst"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-azureml_utils.azureml_utils">
+   azureml_utils.azureml_utils module
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-azureml_utils">
+   Module contents
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="azureml-utils-package">
+<h1>azureml_utils package<a class="headerlink" href="#azureml-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-azureml_utils.azureml_utils">
+<span id="azureml-utils-azureml-utils-module"></span><h2>azureml_utils.azureml_utils module<a class="headerlink" href="#module-azureml_utils.azureml_utils" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="azureml_utils.azureml_utils.download_model">
+<code class="sig-prename descclassname"><span class="pre">azureml_utils.azureml_utils.</span></code><code class="sig-name descname"><span class="pre">download_model</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_version</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'.'</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/azureml_utils/azureml_utils.html#download_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#azureml_utils.azureml_utils.download_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download trained model from Azure ML to local filesystem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – MLRun context.</p></li>
+<li><p><strong>model_name</strong> – Name of trained and registered model.</p></li>
+<li><p><strong>model_version</strong> – Version of model to download.</p></li>
+<li><p><strong>target_dir</strong> – Target directory to download model.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="azureml_utils.azureml_utils.init_compute">
+<code class="sig-prename descclassname"><span class="pre">azureml_utils.azureml_utils.</span></code><code class="sig-name descname"><span class="pre">init_compute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_cluster_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vm_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'STANDARD_D2_V2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nodes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> → <span class="pre">azureml.core.compute.ComputeTarget</span><a class="reference internal" href="_modules/azureml_utils/azureml_utils.html#init_compute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#azureml_utils.azureml_utils.init_compute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initialize Azure ML compute target to run experiment. Checks for
+existing compute target and creates new if does not exist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – MLRun context.</p></li>
+<li><p><strong>cpu_cluster_name</strong> – Name of Azure ML compute target. Created if does not exist.</p></li>
+<li><p><strong>vm_size</strong> – Azure machine type for compute target.</p></li>
+<li><p><strong>max_nodes</strong> – Maximum number of concurrent compute targets.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Azure ML Compute Target.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="azureml_utils.azureml_utils.register_dataset">
+<code class="sig-prename descclassname"><span class="pre">azureml_utils.azureml_utils.</span></code><code class="sig-name descname"><span class="pre">register_dataset</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.datastore.base.DataItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_new_version</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/azureml_utils/azureml_utils.html#register_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#azureml_utils.azureml_utils.register_dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register dataset object (can be also an Iguazio FeatureVector) in Azure ML.
+Uploads parquet file to Azure blob storage and registers
+that file as a dataset in Azure ML.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – MLRun context.</p></li>
+<li><p><strong>dataset_name</strong> – Name of Azure dataset to register.</p></li>
+<li><p><strong>dataset_description</strong> – Description of Azure dataset to register.</p></li>
+<li><p><strong>data</strong> – MLRun FeatureVector or dataset object to upload.</p></li>
+<li><p><strong>create_new_version</strong> – Register Azure dataset as new version. Must be used when
+modifying dataset schema.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="azureml_utils.azureml_utils.submit_training_job">
+<code class="sig-prename descclassname"><span class="pre">azureml_utils.azureml_utils.</span></code><code class="sig-name descname"><span class="pre">submit_training_job</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">azureml.core.experiment.Experiment</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compute_target</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">azureml.core.compute.ComputeTarget</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">register_model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registered_dataset_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">automl_settings</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">training_set</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.datastore.base.DataItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_column_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_n_models</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_output</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/azureml_utils/azureml_utils.html#submit_training_job"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#azureml_utils.azureml_utils.submit_training_job" title="Permalink to this definition">¶</a></dt>
+<dd><p>Submit training job to Azure AutoML and download trained model
+when completed. Uses previously registered dataset for training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – MLRun context.</p></li>
+<li><p><strong>experiment</strong> – Azure experiment.</p></li>
+<li><p><strong>compute_target</strong> – Azure compute target.</p></li>
+<li><p><strong>register_model_name</strong> – Name of model to register in Azure.</p></li>
+<li><p><strong>registered_dataset_name</strong> – Name of dataset registered in Azure ML.</p></li>
+<li><p><strong>label_column_name</strong> – Name of target column in dataset.</p></li>
+<li><p><strong>automl_settings</strong> – JSON string of all Azure AutoML settings.</p></li>
+<li><p><strong>training_set</strong> – Training set to log with model. For model
+monitoring integration.</p></li>
+<li><p><strong>show_output</strong> – Displaying Azure logs.</p></li>
+<li><p><strong>save_n_models</strong> – How many of the top performing models to log.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="azureml_utils.azureml_utils.train">
+<code class="sig-prename descclassname"><span class="pre">azureml_utils.azureml_utils.</span></code><code class="sig-name descname"><span class="pre">train</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.datastore.base.DataItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">experiment_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cpu_cluster_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vm_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'STANDARD_D2_V2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_nodes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset_description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create_new_version</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_column_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">register_model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_n_models</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_azure</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">automl_settings</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/azureml_utils/azureml_utils.html#train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#azureml_utils.azureml_utils.train" title="Permalink to this definition">¶</a></dt>
+<dd><p>Whole training flow for Azure AutoML. Registers dataset/feature vector,
+submits training job to Azure AutoML, and downloads trained model
+when completed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – MLRun context.</p></li>
+<li><p><strong>dataset</strong> – MLRun FeatureVector or dataset URI to upload. Will drop
+index before uploading when it is a FeatureVector.</p></li>
+<li><p><strong>experiment_name</strong> – Name of experiment to create in Azure ML.</p></li>
+<li><p><strong>cpu_cluster_name</strong> – Name of Azure ML compute target. Created if does not exist.</p></li>
+<li><p><strong>vm_size</strong> – Azure machine type for compute target.</p></li>
+<li><p><strong>max_nodes</strong> – Maximum number of concurrent compute targets.</p></li>
+<li><p><strong>dataset_name</strong> – Name of Azure dataset to register.</p></li>
+<li><p><strong>dataset_description</strong> – Description of Azure dataset to register.</p></li>
+<li><p><strong>create_new_version</strong> – Register Azure dataset as new version. Must be used when
+modifying dataset schema.</p></li>
+<li><p><strong>label_column_name</strong> – Target column in dataset.</p></li>
+<li><p><strong>register_model_name</strong> – Name of model to register in Azure.</p></li>
+<li><p><strong>save_n_models</strong> – How many of the top performing models to log.</p></li>
+<li><p><strong>log_azure</strong> – Displaying Azure logs.</p></li>
+<li><p><strong>automl_settings</strong> – JSON string of all Azure AutoML settings.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt id="azureml_utils.azureml_utils.upload_model">
+<code class="sig-prename descclassname"><span class="pre">azureml_utils.azureml_utils.</span></code><code class="sig-name descname"><span class="pre">upload_model</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_tags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="_modules/azureml_utils/azureml_utils.html#upload_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#azureml_utils.azureml_utils.upload_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upload pre-trained model from local filesystem to Azure ML.
+:param context:           MLRun context.
+:param model_name:        Name of trained and registered model.
+:param model_path:        Path to file on local filesystem.
+:param model_description: Description of models.
+:param model_tags:        KV pairs of model tags.</p>
+</dd></dl>
+</div>
+<div class="section" id="module-azureml_utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-azureml_utils" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
