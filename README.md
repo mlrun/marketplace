@@ -1,3 +1,8 @@
+### Change log [2022-04-27 09:02:21]
+1. New item created: `snowflake_dask` (version: `0.9.0`)
+2. Item Updated: `auto_trainer` (from version: `0.10.3` to `0.10.3`)
+3. Item Updated: `describe` (from version: `0.9.1` to `0.9.1`)
+
 ### Change log [2022-04-20 13:19:52]
 1. Item Updated: `azureml_utils` (from version: `0.9.5` to `0.9.5`)
 
