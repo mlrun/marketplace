@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MLRun Auto-Trainer Tutorial</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="../src/auto_trainer.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fauto_trainer_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/auto_trainer_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#fetching-a-dataset">
+<strong>
+    Fetching a Dataset
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-the-mlhandlers-functions-from-the-marketplace">
+<strong>
+    Importing the MLhandlers functions from the Marketplace
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#training-a-model">
+<strong>
+    Training a model
+   </strong>
+</a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#define-task-parameters">
+     Define task parameters¶
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-the-training-job-with-the-train-handler">
+     Running the Training job with the “train” handler
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#the-result-of-the-train-run">
+     The result of the train run
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#getting-the-model-for-evaluating-and-predicting">
+     Getting the model for evaluating and predicting
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#evaluating-a-model">
+<strong>
+    Evaluating a model
+   </strong>
+</a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#the-result-of-the-evaluate-run">
+     The result of the evaluate run
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#making-a-prediction">
+<strong>
+    Making a prediction
+   </strong>
+</a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#showing-the-predeiction-results">
+     Showing the predeiction results
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="tex2jax_ignore mathjax_ignore section" id="mlrun-auto-trainer-tutorial">
+<h1>MLRun Auto-Trainer Tutorial<a class="headerlink" href="#mlrun-auto-trainer-tutorial" title="Permalink to this headline">¶</a></h1>
+<p>This notebook shows how to use the handlers of the MLRun’s Auto-trainer.
+the following handlers are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">train</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluate</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">predict</span></code></p></li>
+</ul>
+<p>All you need is simply <strong>ML model type</strong> and a <strong>dataset</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s1">'auto-trainer'</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"./"</span><span class="p">,</span> <span class="n">user_project</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="fetching-a-dataset">
+<h2><strong>Fetching a Dataset</strong><a class="headerlink" href="#fetching-a-dataset" title="Permalink to this headline">¶</a></h2>
+<p>To generate the dataset we used the “gen_class_data” function from the hub,
+which wraps scikit-learn’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html#sklearn-datasets-make-classification">make_classification</a>.<br/>
+See the link for a description of all parameters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATASET_URL</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/data/function-marketplace-data/xgb_trainer/classifier-data.csv'</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">DATASET_URL</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="importing-the-mlhandlers-functions-from-the-marketplace">
+<h2><strong>Importing the MLhandlers functions from the Marketplace</strong><a class="headerlink" href="#importing-the-mlhandlers-functions-from-the-marketplace" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">auto_trainer</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"function.yaml"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="training-a-model">
+<h2><strong>Training a model</strong><a class="headerlink" href="#training-a-model" title="Permalink to this headline">¶</a></h2>
+<p>Choosing the <code class="docutils literal notranslate"><span class="pre">train</span></code> handler</p>
+<div class="section" id="define-task-parameters">
+<h3>Define task parameters¶<a class="headerlink" href="#define-task-parameters" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>Class parameters should contain the prefix <code class="docutils literal notranslate"><span class="pre">CLASS_</span></code></p></li>
+<li><p>Fit parameters should contain the prefix <code class="docutils literal notranslate"><span class="pre">FIT_</span></code></p></li>
+<li><p>Predict parameters should contain the prefix <code class="docutils literal notranslate"><span class="pre">PREDICT_</span></code></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_class</span> <span class="o">=</span> <span class="s2">"sklearn.ensemble.RandomForestClassifier"</span>
+<span class="n">additional_parameters</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"CLASS_max_depth"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="running-the-training-job-with-the-train-handler">
+<h3>Running the Training job with the “train” handler<a class="headerlink" href="#running-the-training-job-with-the-train-handler" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_run</span> <span class="o">=</span> <span class="n">auto_trainer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span><span class="p">:</span> <span class="n">DATASET_URL</span><span class="p">},</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"model_class"</span><span class="p">:</span> <span class="n">model_class</span><span class="p">,</span>
+        <span class="s2">"drop_columns"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"feat_0"</span><span class="p">,</span> <span class="s2">"feat_2"</span><span class="p">],</span>
+        <span class="s2">"train_test_split_size"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
+        <span class="s2">"random_state"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+        <span class="s2">"label_columns"</span><span class="p">:</span> <span class="s2">"labels"</span><span class="p">,</span>
+        <span class="s2">"model_name"</span><span class="p">:</span> <span class="s1">'MyModel'</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">additional_parameters</span>
+    <span class="p">},</span> 
+    <span class="n">handler</span><span class="o">=</span><span class="s1">'train'</span><span class="p">,</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-result-of-the-train-run">
+<h3>The result of the train run<a class="headerlink" href="#the-result-of-the-train-run" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_run</span><span class="o">.</span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s1">'confusion-matrix'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="getting-the-model-for-evaluating-and-predicting">
+<h3>Getting the model for evaluating and predicting<a class="headerlink" href="#getting-the-model-for-evaluating-and-predicting" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_path</span> <span class="o">=</span> <span class="n">train_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'model'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="evaluating-a-model">
+<h2><strong>Evaluating a model</strong><a class="headerlink" href="#evaluating-a-model" title="Permalink to this headline">¶</a></h2>
+<p>Choosing the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> handler</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_run</span> <span class="o">=</span> <span class="n">auto_trainer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span><span class="p">:</span> <span class="n">train_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'test_set'</span><span class="p">]},</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="n">model_path</span><span class="p">,</span>
+        <span class="s2">"drop_columns"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"feat_0"</span><span class="p">,</span> <span class="s2">"feat_2"</span><span class="p">],</span> <span class="c1"># Not actually necessary on the test set (already done in the previous step)</span>
+        <span class="s2">"label_columns"</span><span class="p">:</span> <span class="s2">"labels"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"evaluate"</span><span class="p">,</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="the-result-of-the-evaluate-run">
+<h3>The result of the evaluate run<a class="headerlink" href="#the-result-of-the-evaluate-run" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">evaluate_run</span><span class="o">.</span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="making-a-prediction">
+<h2><strong>Making a prediction</strong><a class="headerlink" href="#making-a-prediction" title="Permalink to this headline">¶</a></h2>
+<p>Choosing the <code class="docutils literal notranslate"><span class="pre">predict</span></code> handler</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predict_run</span> <span class="o">=</span> <span class="n">auto_trainer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span><span class="p">:</span> <span class="n">DATASET_URL</span><span class="p">},</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="n">model_path</span><span class="p">,</span>
+        <span class="s2">"drop_columns"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"feat_0"</span><span class="p">,</span> <span class="s2">"feat_2"</span><span class="p">],</span> <span class="c1"># Not actually necessary on the test set (already done in the previous step)</span>
+        <span class="s2">"label_columns"</span><span class="p">:</span> <span class="s2">"labels"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"predict"</span><span class="p">,</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="showing-the-predeiction-results">
+<h3>Showing the predeiction results<a class="headerlink" href="#showing-the-predeiction-results" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predict_run</span><span class="o">.</span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predict_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s1">'prediction'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="#XGBoost-trainer">Back to the top</a></p>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br>
+</br></p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
