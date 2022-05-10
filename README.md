@@ -1,3 +1,7 @@
+### Change log [2022-05-10 12:26:58]
+1. Item Updated: `describe` (from version: `0.9.2` to `0.9.2`)
+2. Item Updated: `auto_trainer` (from version: `1.0.0` to `1.0.0`)
+
 ### Change log [2022-05-09 13:04:41]
 1. New item created: `snowflake_dask` (version: `0.9.0`)
 2. Item Updated: `describe` (from version: `0.9.1` to `0.9.1`)
