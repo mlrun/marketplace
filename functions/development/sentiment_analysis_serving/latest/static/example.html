@@ -13,13 +13,16 @@
 <link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
 <link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
 <link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
 <script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
 <script src="../../../_static/jquery.js"></script>
 <script src="../../../_static/underscore.js"></script>
 <script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
 <script src="../../../_static/togglebutton.js"></script>
 <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
 <script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
@@ -44,7 +47,7 @@
 <div class="dropdown-buttons">
 <!-- ipynb file if we had a myst markdown file -->
 <!-- Download raw file -->
-<a class="dropdown-buttons" href="_sources/sentiment_analysis_serving_example.ipynb.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<a class="dropdown-buttons" href="../src/sentiment_analysis_serving.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
 <!-- Download PDF via print -->
 <button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
 </div>
@@ -112,7 +115,7 @@
 <div class="row" id="main-content">
 <div class="col-12 col-md-9 pl-md-3 pr-md-0">
 <div>
-<div class="tex2jax_ignore mathjax_ignore section" id="bert-based-sentiment-analysis-model-server">
+<div class="section" id="bert-based-sentiment-analysis-model-server">
 <h1><strong>BERT Based Sentiment Analysis Model Server</strong><a class="headerlink" href="#bert-based-sentiment-analysis-model-server" title="Permalink to this headline">¶</a></h1>
 <p>The model used here, was trained with the concept of transfer learning  i.e. taking <code class="docutils literal notranslate"><span class="pre">huggingface</span></code> transformers pretrained <code class="docutils literal notranslate"><span class="pre">BERT</span></code> model and further training it on a custom dataset of reviews.<br/> this yields a sentiment analysis model based on the prior knowledge of BERT. <br/>
 The model server is given a list of texts and outputs a list of labels corresponding to its prediction.<br/>
@@ -122,11 +125,11 @@ This function is part of the <a class="reference external" href="https://github.
 <p>The model file (~430 MB), can be downloaded to your local environment from: https://iguazio-sample-data.s3.amazonaws.com/models/model.pt</p>
 <div class="section" id="steps">
 <h2><strong>Steps</strong><a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
-<ol class="simple">
-<li><p><a class="reference external" href="#Setup-function-parameters">Setup function parameters</a></p></li>
-<li><p><a class="reference external" href="#Importing-the-function">Importing the function</a></p></li>
-<li><p><a class="reference external" href="#Testing-the-function-locally">Testing the function locally</a></p></li>
-<li><p><a class="reference external" href="#Testing-the-function-remotely">Testing the function remotely</a></p></li>
+<ol class="arabic simple">
+<li><p><span class="xref myst">Setup function parameters</span></p></li>
+<li><p><span class="xref myst">Importing the function</span></p></li>
+<li><p><span class="xref myst">Testing the function locally</span></p></li>
+<li><p><span class="xref myst">Testing the function remotely</span></p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -262,7 +265,7 @@ This function is part of the <a class="reference external" href="https://github.
 </div>
 </div>
 </div>
-<p><a class="reference external" href="#BERT-Based-Sentiment-Analysis-Model-Server">Back to the top</a></p>
+<p><span class="xref myst">Back to the top</span></p>
 </div>
 </div>
 </div>
