@@ -17,29 +17,28 @@
         <code class="yaml">
 apiVersion: v1
 categories:
-- data-preparation
-- data-analysis
-- feature-store
-description: retrieve offline feature vector results
+- machine-learning
+- model-training
+description: Automatic train, evaluate and predict functions for the ML frameworks - Scikit-Learn, XGBoost and LightGBM.
 doc: ''
-example: get_offline_features.ipynb
-generationDate: 2022-05-25:10-58
+example: auto_trainer.ipynb
+generationDate: 2022-04-26:10-43
 icon: ''
 labels:
   author: yonish
 maintainers: []
 marketplaceType: ''
-mlrunVersion: 1.0.1
-name: get_offline_features
+mlrunVersion: 1.0.0
+name: auto_trainer
 platformVersion: ''
 spec:
-  filename: get_offline_features.py
-  handler: get_offline_features
-  image: mlrun/mlrun
+  filename: auto_trainer.py
+  handler: train
+  image: ''
   kind: job
   requirements: []
 url: ''
-version: 1.0.0
+version: 1.0.1
         </code>
     </pre>
 </body>
