@@ -1,8 +1,27 @@
+### Change log [2022-05-26 09:51:49]
+1. Item Updated: `model_server_tester` (from version: `1.0.0` to `1.0.0`)
+2. Item Updated: `test_classifier` (from version: `1.0.0` to `1.0.0`)
+3. Item Updated: `xgb_test` (from version: `1.0.0` to `1.0.0`)
+4. Item Updated: `model_server` (from version: `1.0.0` to `1.0.0`)
+5. Item Updated: `sentiment_analysis_serving` (from version: `1.0.0` to `1.0.0`)
+6. Item Updated: `xgb_trainer` (from version: `1.0.0` to `1.0.0`)
+7. Item Updated: `v2_model_server` (from version: `1.0.0` to `1.0.0`)
+8. Item Updated: `describe` (from version: `0.9.2` to `0.9.2`)
+9. Item Updated: `get_offline_features` (from version: `1.0.0` to `1.0.0`)
+10. Item Updated: `coxph_test` (from version: `1.0.0` to `1.0.0`)
+11. Item Updated: `sklearn_classifier` (from version: `1.0.0` to `1.0.0`)
+12. Item Updated: `rnn_serving` (from version: `1.0.0` to `1.0.0`)
+13. Item Updated: `churn_server` (from version: `1.0.0` to `1.0.0`)
+14. Item Updated: `feature_perms` (from version: `1.0.0` to `1.0.0`)
+15. Item Updated: `auto_trainer` (from version: `1.0.2` to `1.0.2`)
+16. Item Updated: `xgb_serving` (from version: `1.0.0` to `1.0.0`)
+
 ### Change log [2022-05-25 11:14:54]
 1. Item Updated: `sentiment_analysis_serving` (from version: `1.0.0` to `1.0.0`)
 2. Item Updated: `describe` (from version: `0.9.2` to `0.9.2`)
 3. Item Updated: `get_offline_features` (from version: `0.9.1` to `0.9.1`)
 4. Item Updated: `auto_trainer` (from version: `1.0.1` to `1.0.1`)
+
 
 ### Change log [2022-05-09 13:04:41]
 1. New item created: `snowflake_dask` (version: `0.9.0`)
