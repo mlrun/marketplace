@@ -1,3 +1,9 @@
+### Change log [2022-05-25 11:14:54]
+1. Item Updated: `sentiment_analysis_serving` (from version: `1.0.0` to `1.0.0`)
+2. Item Updated: `describe` (from version: `0.9.2` to `0.9.2`)
+3. Item Updated: `get_offline_features` (from version: `0.9.1` to `0.9.1`)
+4. Item Updated: `auto_trainer` (from version: `1.0.1` to `1.0.1`)
+
 ### Change log [2022-05-09 13:04:41]
 1. New item created: `snowflake_dask` (version: `0.9.0`)
 2. Item Updated: `describe` (from version: `0.9.1` to `0.9.1`)

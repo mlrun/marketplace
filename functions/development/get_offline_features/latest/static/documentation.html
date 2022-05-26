@@ -13,13 +13,16 @@
 <link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
 <link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
 <link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
 <script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
 <script src="../../../_static/jquery.js"></script>
 <script src="../../../_static/underscore.js"></script>
 <script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
 <script src="../../../_static/togglebutton.js"></script>
 <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
 <script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
@@ -44,7 +47,7 @@
 <div class="dropdown-buttons">
 <!-- ipynb file if we had a myst markdown file -->
 <!-- Download raw file -->
-<a class="dropdown-buttons" href="_sources/get_offline_features.rst.txt"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.rst</button></a>
+
 <!-- Download PDF via print -->
 <button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
 </div>
@@ -75,7 +78,7 @@
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#get-offline-features-get-offline-features-module">
+<a class="reference internal nav-link" href="#module-get_offline_features.get_offline_features">
    get_offline_features.get_offline_features module
   </a>
 </li>
@@ -97,8 +100,47 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="get-offline-features-get-offline-features-module">
-<h2>get_offline_features.get_offline_features module<a class="headerlink" href="#get-offline-features-get-offline-features-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-get_offline_features.get_offline_features">
+<span id="get-offline-features-get-offline-features-module"></span><h2>get_offline_features.get_offline_features module<a class="headerlink" href="#module-get_offline_features.get_offline_features" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="get_offline_features.get_offline_features.get_offline_features">
+<code class="sig-prename descclassname"><span class="pre">get_offline_features.get_offline_features.</span></code><code class="sig-name descname"><span class="pre">get_offline_features</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_vector</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">features</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_feature</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_rows</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.datastore.base.DataItem</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_timestamp_column</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_config</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_indexes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update_stats</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/get_offline_features/get_offline_features.html#get_offline_features"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#get_offline_features.get_offline_features.get_offline_features" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve offline feature vector results</p>
+<p>specify a feature vector object/uri and retrieve the desired features, their metadata
+and statistics. returns <code class="xref py py-class docutils literal notranslate"><span class="pre">OfflineVectorResponse</span></code>,
+results can be returned as a dataframe or written to a target.
+If feature vector does not exist, a new one will be created and saved with the given features.</p>
+<p>The start_time and end_time attributes allow filtering the data to a given time range, they accept
+string values or pandas <cite>Timestamp</cite> objects, string values can also be relative, for example:
+“now”, “now - 1d2h”, “now+5m”, where a valid pandas Timedelta string follows the verb “now”,
+for time alignment you can use the verb “floor” e.g. “now -1d floor 1H” will align the time to the last hour
+(the floor string is passed to pandas.Timestamp.floor(), can use D, H, T, S for day, hour, min, sec alignment)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – MLRun context</p></li>
+<li><p><strong>feature_vector</strong> – feature vector uri</p></li>
+<li><p><strong>features</strong> – Relevant only if feature_vector not exist. list of feature to collect to this vector
+format [&lt;project&gt;/]&lt;feature_set&gt;.&lt;feature_name or <a href="#id1"><span class="problematic" id="id2">*</span></a>&gt; [as &lt;alias&gt;]</p></li>
+<li><p><strong>label_feature</strong> – feature name to be used as label data</p></li>
+<li><p><strong>description</strong> – text description of the vector</p></li>
+<li><p><strong>entity_rows</strong> – URI of the data entity rows to join with</p></li>
+<li><p><strong>target</strong> – where to write the results to</p></li>
+<li><p><strong>drop_columns</strong> – list of columns to drop from the final result</p></li>
+<li><p><strong>entity_timestamp_column</strong> – timestamp column name in the entity rows dataframe</p></li>
+<li><p><strong>run_config</strong> – function and/or run configuration
+see <code class="xref py py-class docutils literal notranslate"><span class="pre">RunConfig</span></code></p></li>
+<li><p><strong>start_time</strong> – datetime, low limit of time needed to be filtered. Optional
+entity_timestamp_column must be passed when using time filtering</p></li>
+<li><p><strong>end_time</strong> – datetime, high limit of time needed to be filtered. Optional
+entity_timestamp_column must be passed when using time filtering</p></li>
+<li><p><strong>with_indexes</strong> – return vector with index columns (default False)</p></li>
+<li><p><strong>update_stats</strong> – update features statistics from the requested feature sets on the vector. Default is False.</p></li>
+</ul>
+</dd>
+</dl>
+<p>:returns feature_vector input</p>
+</dd></dl>
 </div>
 <div class="section" id="module-get_offline_features">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-get_offline_features" title="Permalink to this headline">¶</a></h2>
