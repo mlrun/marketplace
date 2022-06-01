@@ -1,0 +1,1259 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>get_offline_features() from MLRun FeatureStore</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="../src/get_offline_features.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fget_offline_features_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/get_offline_features_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#generating-the-same-featuresets-and-featurevecotrs-based-on-the-stocks-example">
+   Generating the Same FeatureSets and FeatureVecotrs Based on the Stocks Example
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#create-sample-data-for-demo">
+     Create Sample Data For Demo
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#build-ingest-simple-feature-set-stocks">
+     Build &amp; Ingest Simple Feature Set (stocks)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#build-advanced-feature-set-with-feature-engineering-pipeline">
+     Build Advanced feature set - with feature engineering pipeline
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#ingest-data-into-offline-and-online-stores">
+     Ingest Data Into Offline And Online Stores
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#get-an-offline-feature-vector">
+     Get an Offline Feature Vector
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-get-offline-features">
+     Using
+     <code class="docutils literal notranslate">
+<span class="pre">
+       get_offline_features()
+      </span>
+</code>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="get-offline-features-from-mlrun-featurestore">
+<h1><code class="docutils literal notranslate"><span class="pre">get_offline_features()</span></code> from MLRun FeatureStore<a class="headerlink" href="#get-offline-features-from-mlrun-featurestore" title="Permalink to this headline">¶</a></h1>
+<p>This MLRun Function has the following <code class="docutils literal notranslate"><span class="pre">params</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">feature_vector:</span> <span class="pre">str</span></code>,                 feature vector uri.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entity_rows:</span> <span class="pre">DataItem</span></code> = None,        URI of the data entity rows to join with.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">entity_timestamp_column:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></code>, timestamp column name in the entity rows dataframe.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target:</span> <span class="pre">Union[str,</span> <span class="pre">Dict]</span> <span class="pre">=</span> <span class="pre">None</span></code>,     where to write the results to.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_config:</span> <span class="pre">Union[str,</span> <span class="pre">Dict]</span> <span class="pre">=</span> <span class="pre">None</span></code>, function and/or run configuration see :py:class:<code class="docutils literal notranslate"><span class="pre">~mlrun.feature_store.RunConfig</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">drop_columns:</span> <span class="pre">List[str]</span> <span class="pre">=</span> <span class="pre">None</span></code>,      list of columns to drop from the final result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_time:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></code>,              datetime, low limit of time needed to be filtered. Optional. <code class="docutils literal notranslate"><span class="pre">entity_timestamp_column</span></code> must be passed when using time filtering.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end_time:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></code>,                datetime, high limit of time needed to be filtered. Optional. <code class="docutils literal notranslate"><span class="pre">entity_timestamp_column</span></code> must be passed when using time filtering.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">with_indexes:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></code>,          return vector with index columns (default False).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">update_stats:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">False</span></code>,          update features statistics from the requested feature sets on the vector. Default is False.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">mlrun.feature_store</span> <span class="k">as</span> <span class="nn">fstore</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore.targets</span> <span class="kn">import</span> <span class="n">CSVTarget</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore.sources</span> <span class="kn">import</span> <span class="n">CSVSource</span>
+<span class="kn">from</span> <span class="nn">mlrun.run</span> <span class="kn">import</span> <span class="n">get_dataitem</span>
+<span class="kn">from</span> <span class="nn">mlrun.feature_store.steps</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">mlrun.features</span> <span class="kn">import</span> <span class="n">MinMaxValidator</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ABS_PATH</span> <span class="o">=</span> <span class="s1">'v3io://users/</span><span class="si">{}</span><span class="s1">/get_offline_features/'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'V3IO_USERNAME'</span><span class="p">])</span>
+<span class="c1"># Initialize the MLRun project object</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s1">'get-offline-features'</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"./"</span><span class="p">,</span> <span class="n">user_project</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-31 14:41:48,288 [info] loaded project get-offline-features from MLRun DB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="generating-the-same-featuresets-and-featurevecotrs-based-on-the-stocks-example">
+<h2>Generating the Same FeatureSets and FeatureVecotrs Based on the Stocks Example<a class="headerlink" href="#generating-the-same-featuresets-and-featurevecotrs-based-on-the-stocks-example" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-sample-data-for-demo">
+<h3>Create Sample Data For Demo<a class="headerlink" href="#create-sample-data-for-demo" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quotes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">{</span>
+        <span class="s2">"time"</span><span class="p">:</span> <span class="p">[</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.023"</span><span class="p">),</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.023"</span><span class="p">),</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.030"</span><span class="p">),</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.041"</span><span class="p">),</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.048"</span><span class="p">),</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.049"</span><span class="p">),</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.072"</span><span class="p">),</span>
+            <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.075"</span><span class="p">)</span>
+        <span class="p">],</span>
+        <span class="s2">"ticker"</span><span class="p">:</span> <span class="p">[</span>
+               <span class="s2">"GOOG"</span><span class="p">,</span>
+               <span class="s2">"MSFT"</span><span class="p">,</span>
+               <span class="s2">"MSFT"</span><span class="p">,</span>
+               <span class="s2">"MSFT"</span><span class="p">,</span>
+               <span class="s2">"GOOG"</span><span class="p">,</span>
+               <span class="s2">"AAPL"</span><span class="p">,</span>
+               <span class="s2">"GOOG"</span><span class="p">,</span>
+               <span class="s2">"MSFT"</span>
+           <span class="p">],</span>
+           <span class="s2">"bid"</span><span class="p">:</span> <span class="p">[</span><span class="mf">720.50</span><span class="p">,</span> <span class="mf">51.95</span><span class="p">,</span> <span class="mf">51.97</span><span class="p">,</span> <span class="mf">51.99</span><span class="p">,</span> <span class="mf">720.50</span><span class="p">,</span> <span class="mf">97.99</span><span class="p">,</span> <span class="mf">720.50</span><span class="p">,</span> <span class="mf">52.01</span><span class="p">],</span>
+           <span class="s2">"ask"</span><span class="p">:</span> <span class="p">[</span><span class="mf">720.93</span><span class="p">,</span> <span class="mf">51.96</span><span class="p">,</span> <span class="mf">51.98</span><span class="p">,</span> <span class="mf">52.00</span><span class="p">,</span> <span class="mf">720.93</span><span class="p">,</span> <span class="mf">98.01</span><span class="p">,</span> <span class="mf">720.88</span><span class="p">,</span> <span class="mf">52.03</span><span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">trades</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+       <span class="p">{</span>
+           <span class="s2">"time"</span><span class="p">:</span> <span class="p">[</span>
+               <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.023"</span><span class="p">),</span>
+               <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.038"</span><span class="p">),</span>
+               <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.048"</span><span class="p">),</span>
+               <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.048"</span><span class="p">),</span>
+               <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="s2">"2016-05-25 13:30:00.048"</span><span class="p">)</span>
+           <span class="p">],</span>
+           <span class="s2">"ticker"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"MSFT"</span><span class="p">,</span> <span class="s2">"MSFT"</span><span class="p">,</span> <span class="s2">"GOOG"</span><span class="p">,</span> <span class="s2">"GOOG"</span><span class="p">,</span> <span class="s2">"AAPL"</span><span class="p">],</span>
+           <span class="s2">"price"</span><span class="p">:</span> <span class="p">[</span><span class="mf">51.95</span><span class="p">,</span> <span class="mf">51.95</span><span class="p">,</span> <span class="mf">720.77</span><span class="p">,</span> <span class="mf">720.92</span><span class="p">,</span> <span class="mf">98.0</span><span class="p">],</span>
+           <span class="s2">"quantity"</span><span class="p">:</span> <span class="p">[</span><span class="mi">75</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+       <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">stocks</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+       <span class="p">{</span>
+           <span class="s2">"ticker"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"MSFT"</span><span class="p">,</span> <span class="s2">"GOOG"</span><span class="p">,</span> <span class="s2">"AAPL"</span><span class="p">],</span>
+           <span class="s2">"name"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"Microsoft Corporation"</span><span class="p">,</span> <span class="s2">"Alphabet Inc"</span><span class="p">,</span> <span class="s2">"Apple Inc"</span><span class="p">],</span>
+           <span class="s2">"exchange"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"NASDAQ"</span><span class="p">,</span> <span class="s2">"NASDAQ"</span><span class="p">,</span> <span class="s2">"NASDAQ"</span><span class="p">]</span>
+       <span class="p">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">move_date</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+    <span class="n">max_date</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">now_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">now_date</span> <span class="o">-</span> <span class="n">max_date</span> 
+    <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta</span> 
+    <span class="k">return</span> <span class="n">df</span>
+
+<span class="n">quotes</span> <span class="o">=</span> <span class="n">move_date</span><span class="p">(</span><span class="n">quotes</span><span class="p">,</span> <span class="s2">"time"</span><span class="p">)</span>
+<span class="n">trades</span> <span class="o">=</span> <span class="n">move_date</span><span class="p">(</span><span class="n">trades</span><span class="p">,</span> <span class="s2">"time"</span><span class="p">)</span>
+<span class="n">trades</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'trades.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">data_uri</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ABS_PATH</span><span class="p">,</span> <span class="s1">'trades.csv'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quotes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>time</th>
+<th>ticker</th>
+<th>bid</th>
+<th>ask</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2022-01-31 14:41:48.260566</td>
+<td>GOOG</td>
+<td>720.50</td>
+<td>720.93</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2022-01-31 14:41:48.260566</td>
+<td>MSFT</td>
+<td>51.95</td>
+<td>51.96</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2022-01-31 14:41:48.267566</td>
+<td>MSFT</td>
+<td>51.97</td>
+<td>51.98</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2022-01-31 14:41:48.278566</td>
+<td>MSFT</td>
+<td>51.99</td>
+<td>52.00</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2022-01-31 14:41:48.285566</td>
+<td>GOOG</td>
+<td>720.50</td>
+<td>720.93</td>
+</tr>
+<tr>
+<th>5</th>
+<td>2022-01-31 14:41:48.286566</td>
+<td>AAPL</td>
+<td>97.99</td>
+<td>98.01</td>
+</tr>
+<tr>
+<th>6</th>
+<td>2022-01-31 14:41:48.309566</td>
+<td>GOOG</td>
+<td>720.50</td>
+<td>720.88</td>
+</tr>
+<tr>
+<th>7</th>
+<td>2022-01-31 14:41:48.312566</td>
+<td>MSFT</td>
+<td>52.01</td>
+<td>52.03</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">trades</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>time</th>
+<th>ticker</th>
+<th>price</th>
+<th>quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>2022-01-31 14:41:48.288476</td>
+<td>MSFT</td>
+<td>51.95</td>
+<td>75</td>
+</tr>
+<tr>
+<th>1</th>
+<td>2022-01-31 14:41:48.303476</td>
+<td>MSFT</td>
+<td>51.95</td>
+<td>155</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2022-01-31 14:41:48.313476</td>
+<td>GOOG</td>
+<td>720.77</td>
+<td>100</td>
+</tr>
+<tr>
+<th>3</th>
+<td>2022-01-31 14:41:48.313476</td>
+<td>GOOG</td>
+<td>720.92</td>
+<td>100</td>
+</tr>
+<tr>
+<th>4</th>
+<td>2022-01-31 14:41:48.313476</td>
+<td>AAPL</td>
+<td>98.00</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stocks</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>ticker</th>
+<th>name</th>
+<th>exchange</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>MSFT</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>1</th>
+<td>GOOG</td>
+<td>Alphabet Inc</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>2</th>
+<td>AAPL</td>
+<td>Apple Inc</td>
+<td>NASDAQ</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="build-ingest-simple-feature-set-stocks">
+<h3>Build &amp; Ingest Simple Feature Set (stocks)<a class="headerlink" href="#build-ingest-simple-feature-set-stocks" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># add feature set without time column (stock ticker metadata) </span>
+<span class="n">stocks_set</span> <span class="o">=</span> <span class="n">fstore</span><span class="o">.</span><span class="n">FeatureSet</span><span class="p">(</span><span class="s2">"stocks"</span><span class="p">,</span> <span class="n">entities</span><span class="o">=</span><span class="p">[</span><span class="n">fstore</span><span class="o">.</span><span class="n">Entity</span><span class="p">(</span><span class="s2">"ticker"</span><span class="p">)])</span>
+<span class="n">fstore</span><span class="o">.</span><span class="n">ingest</span><span class="p">(</span><span class="n">stocks_set</span><span class="p">,</span> <span class="n">stocks</span><span class="p">,</span> <span class="n">infer_options</span><span class="o">=</span><span class="n">fstore</span><span class="o">.</span><span class="n">InferOptions</span><span class="o">.</span><span class="n">default</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>name</th>
+<th>exchange</th>
+</tr>
+<tr>
+<th>ticker</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>MSFT</th>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>Alphabet Inc</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>AAPL</th>
+<td>Apple Inc</td>
+<td>NASDAQ</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="build-advanced-feature-set-with-feature-engineering-pipeline">
+<h3>Build Advanced feature set - with feature engineering pipeline<a class="headerlink" href="#build-advanced-feature-set-with-feature-engineering-pipeline" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quotes_set</span> <span class="o">=</span> <span class="n">fstore</span><span class="o">.</span><span class="n">FeatureSet</span><span class="p">(</span><span class="s2">"stock-quotes"</span><span class="p">,</span> <span class="n">entities</span><span class="o">=</span><span class="p">[</span><span class="n">fstore</span><span class="o">.</span><span class="n">Entity</span><span class="p">(</span><span class="s2">"ticker"</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyMap</span><span class="p">(</span><span class="n">MapClass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_multiplier</span> <span class="o">=</span> <span class="n">multiplier</span>
+
+    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">event</span><span class="p">[</span><span class="s2">"multi"</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="s2">"bid"</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_multiplier</span>
+        <span class="k">return</span> <span class="n">event</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">quotes_set</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"MyMap"</span><span class="p">,</span> <span class="n">multiplier</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"storey.Extend"</span><span class="p">,</span> <span class="n">_fn</span><span class="o">=</span><span class="s2">"({'extra': event['bid'] * 77})"</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">"storey.Filter"</span><span class="p">,</span> <span class="s2">"filter"</span><span class="p">,</span> <span class="n">_fn</span><span class="o">=</span><span class="s2">"(event['bid'] &gt; 51.92)"</span><span class="p">)</span>\
+                <span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">FeaturesetValidator</span><span class="p">())</span>
+
+<span class="n">quotes_set</span><span class="o">.</span><span class="n">add_aggregation</span><span class="p">(</span><span class="s2">"ask"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"sum"</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">],</span> <span class="s2">"1h"</span><span class="p">,</span> <span class="s2">"10m"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"asks1"</span><span class="p">)</span>
+<span class="n">quotes_set</span><span class="o">.</span><span class="n">add_aggregation</span><span class="p">(</span><span class="s2">"ask"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"sum"</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">],</span> <span class="s2">"5h"</span><span class="p">,</span> <span class="s2">"10m"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"asks5"</span><span class="p">)</span>
+<span class="n">quotes_set</span><span class="o">.</span><span class="n">add_aggregation</span><span class="p">(</span><span class="s2">"bid"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"min"</span><span class="p">,</span> <span class="s2">"max"</span><span class="p">],</span> <span class="s2">"1h"</span><span class="p">,</span> <span class="s2">"10m"</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"bids"</span><span class="p">)</span>
+
+<span class="c1"># add feature validation policy</span>
+<span class="n">quotes_set</span><span class="p">[</span><span class="s2">"bid"</span><span class="p">]</span> <span class="o">=</span> <span class="n">fstore</span><span class="o">.</span><span class="n">Feature</span><span class="p">(</span><span class="n">validator</span><span class="o">=</span><span class="n">MinMaxValidator</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">52</span><span class="p">,</span> <span class="n">severity</span><span class="o">=</span><span class="s2">"info"</span><span class="p">))</span>
+
+<span class="c1"># add default target definitions and plot</span>
+<span class="n">quotes_set</span><span class="o">.</span><span class="n">set_targets</span><span class="p">()</span>
+<span class="n">quotes_set</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s2">"LR"</span><span class="p">,</span> <span class="n">with_targets</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/01e548158b906df8cc3f4f282097c5f50e603245dd43f2314bc9ff5ef6aa1447.svg" src="_images/01e548158b906df8cc3f4f282097c5f50e603245dd43f2314bc9ff5ef6aa1447.svg"/></div>
+</div>
+</div>
+<div class="section" id="ingest-data-into-offline-and-online-stores">
+<h3>Ingest Data Into Offline And Online Stores<a class="headerlink" href="#ingest-data-into-offline-and-online-stores" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># save ingest data and print the FeatureSet spec</span>
+<span class="n">fstore</span><span class="o">.</span><span class="n">ingest</span><span class="p">(</span><span class="n">quotes_set</span><span class="p">,</span> <span class="n">quotes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>info! bid value is smaller than min, key=['MSFT'] time=2022-01-31 14:41:51.377248+00:00 args={'min': 52, 'value': 51.95}
+info! bid value is smaller than min, key=['MSFT'] time=2022-01-31 14:41:51.377927+00:00 args={'min': 52, 'value': 51.97}
+info! bid value is smaller than min, key=['MSFT'] time=2022-01-31 14:41:51.378103+00:00 args={'min': 52, 'value': 51.99}
+info! bid value is smaller than min, key=['MSFT'] time=2022-01-31 14:41:51.578640+00:00 args={'min': 52, 'value': 51.95}
+info! bid value is smaller than min, key=['MSFT'] time=2022-01-31 14:41:51.581692+00:00 args={'min': 52, 'value': 51.97}
+info! bid value is smaller than min, key=['MSFT'] time=2022-01-31 14:41:51.584351+00:00 args={'min': 52, 'value': 51.99}
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>asks1_max_1h</th>
+<th>asks1_sum_1h</th>
+<th>asks5_max_5h</th>
+<th>asks5_sum_5h</th>
+<th>bids_max_1h</th>
+<th>bids_min_1h</th>
+<th>time</th>
+<th>bid</th>
+<th>ask</th>
+<th>multi</th>
+<th>extra</th>
+</tr>
+<tr>
+<th>ticker</th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>GOOG</th>
+<td>720.93</td>
+<td>720.93</td>
+<td>720.93</td>
+<td>720.93</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>2022-01-31 14:41:48.260566</td>
+<td>720.50</td>
+<td>720.93</td>
+<td>2161.50</td>
+<td>55478.50</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>51.96</td>
+<td>51.96</td>
+<td>51.96</td>
+<td>51.96</td>
+<td>51.95</td>
+<td>51.95</td>
+<td>2022-01-31 14:41:48.260566</td>
+<td>51.95</td>
+<td>51.96</td>
+<td>155.85</td>
+<td>4000.15</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>51.98</td>
+<td>103.94</td>
+<td>51.98</td>
+<td>103.94</td>
+<td>51.97</td>
+<td>51.95</td>
+<td>2022-01-31 14:41:48.267566</td>
+<td>51.97</td>
+<td>51.98</td>
+<td>155.91</td>
+<td>4001.69</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>52.00</td>
+<td>155.94</td>
+<td>52.00</td>
+<td>155.94</td>
+<td>51.99</td>
+<td>51.95</td>
+<td>2022-01-31 14:41:48.278566</td>
+<td>51.99</td>
+<td>52.00</td>
+<td>155.97</td>
+<td>4003.23</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>720.93</td>
+<td>1441.86</td>
+<td>720.93</td>
+<td>1441.86</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>2022-01-31 14:41:48.285566</td>
+<td>720.50</td>
+<td>720.93</td>
+<td>2161.50</td>
+<td>55478.50</td>
+</tr>
+<tr>
+<th>AAPL</th>
+<td>98.01</td>
+<td>98.01</td>
+<td>98.01</td>
+<td>98.01</td>
+<td>97.99</td>
+<td>97.99</td>
+<td>2022-01-31 14:41:48.286566</td>
+<td>97.99</td>
+<td>98.01</td>
+<td>293.97</td>
+<td>7545.23</td>
+</tr>
+<tr>
+<th>GOOG</th>
+<td>720.93</td>
+<td>2162.74</td>
+<td>720.93</td>
+<td>2162.74</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>2022-01-31 14:41:48.309566</td>
+<td>720.50</td>
+<td>720.88</td>
+<td>2161.50</td>
+<td>55478.50</td>
+</tr>
+<tr>
+<th>MSFT</th>
+<td>52.03</td>
+<td>207.97</td>
+<td>52.03</td>
+<td>207.97</td>
+<td>52.01</td>
+<td>51.95</td>
+<td>2022-01-31 14:41:48.312566</td>
+<td>52.01</td>
+<td>52.03</td>
+<td>156.03</td>
+<td>4004.77</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="get-an-offline-feature-vector">
+<h3>Get an Offline Feature Vector<a class="headerlink" href="#get-an-offline-feature-vector" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"stock-quotes.multi"</span><span class="p">,</span>
+    <span class="s2">"stock-quotes.asks5_sum_5h as total_ask"</span><span class="p">,</span>
+    <span class="s2">"stock-quotes.bids_min_1h"</span><span class="p">,</span>
+    <span class="s2">"stock-quotes.bids_max_1h"</span><span class="p">,</span>
+    <span class="s2">"stocks.*"</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">vector</span> <span class="o">=</span> <span class="n">fstore</span><span class="o">.</span><span class="n">FeatureVector</span><span class="p">(</span><span class="s2">"stocks-vec"</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+<span class="n">vector</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target_dict</span> <span class="o">=</span> <span class="n">CSVTarget</span><span class="p">(</span><span class="s1">'mycsv'</span><span class="p">,</span><span class="n">path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ABS_PATH</span><span class="p">,</span> <span class="s1">'my_csv.csv'</span><span class="p">))</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-get-offline-features">
+<h3>Using <code class="docutils literal notranslate"><span class="pre">get_offline_features()</span></code><a class="headerlink" href="#using-get-offline-features" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_offline_features_fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s1">'hub://get_offline_features:development'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gof_run</span> <span class="o">=</span> <span class="n">get_offline_features_fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s1">'get_offline_features'</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span> <span class="p">{</span><span class="s1">'entity_rows'</span><span class="p">:</span> <span class="n">data_uri</span><span class="p">},</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'feature_vector'</span><span class="p">:</span> <span class="n">vector</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span>
+           <span class="s1">'target'</span><span class="p">:</span> <span class="n">target_dict</span><span class="p">,</span>
+            <span class="s1">'entity_timestamp_column'</span><span class="p">:</span> <span class="s2">"time"</span><span class="p">,</span>
+           <span class="p">},</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-31 14:41:52,066 [info] starting run get-offline-features-get_offline_features uid=956663b9a9ba448c9ea65e8e9245718e DB=http://mlrun-api:8080
+&gt; 2022-01-31 14:41:52,214 [info] Creating DataFrame from entity_rows = v3io://users/yonatan/get_offline_features/trades.csv
+&gt; 2022-01-31 14:41:52,292 [info] Preparing 'mycsv' target
+&gt; 2022-01-31 14:41:52,294 [info] getting offline features from the FeatureVector store://feature-vectors/get-offline-features-yonatan/stocks-vec
+&gt; 2022-01-31 14:41:52,708 [info] wrote target: {'name': 'mycsv', 'kind': 'csv', 'path': 'v3io://users/yonatan/get_offline_features/my_csv.csv', 'status': 'ready', 'updated': '2022-01-31T14:41:52.708534+00:00'}
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get-offline-features-yonatan</td>
+<td><div title="956663b9a9ba448c9ea65e8e9245718e"><a href="https://dashboard.default-tenant.app.yh41.iguazio-cd1.com/mlprojects/get-offline-features-yonatan/jobs/monitor/956663b9a9ba448c9ea65e8e9245718e/overview" target="_blank">...9245718e</a></div></td>
+<td>0</td>
+<td>Jan 31 14:41:52</td>
+<td>completed</td>
+<td>get-offline-features-get_offline_features</td>
+<td><div class="dictlist">v3io_user=yonatan</div><div class="dictlist">kind=</div><div class="dictlist">owner=yonatan</div><div class="dictlist">host=jupyter-yoni-647b99c95d-w4jlc</div></td>
+<td><div class="artifact" onclick="expandPanel(this)" panename="resultd40d304d" title="files/v3io/yonatan/get_offline_features/trades.csv">entity_rows</div></td>
+<td><div class="dictlist">feature_vector=store://feature-vectors/get-offline-features-yonatan/stocks-vec</div><div class="dictlist">target={'name': 'mycsv', 'kind': 'csv', 'path': 'v3io://users/yonatan/get_offline_features/my_csv.csv', 'partitioned': False}</div><div class="dictlist">entity_timestamp_column=time</div></td>
+<td><div class="dictlist">target=v3io://users/yonatan/get_offline_features/my_csv.csv</div><div class="dictlist">feature_vector=store://feature-vectors/get-offline-features-yonatan/stocks-vec</div></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultd40d304d-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultd40d304d-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultd40d304d">×</span>
+</div>
+<iframe class="fileview" id="resultd40d304d-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.yh41.iguazio-cd1.com/mlprojects/get-offline-features-yonatan/jobs/monitor/956663b9a9ba448c9ea65e8e9245718e/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-01-31 14:41:52,896 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gof_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'feature_vector'</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'store://feature-vectors/get-offline-features-yonatan/stocks-vec'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">gof_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s1">'feature_vector'</span><span class="p">])</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>Unnamed: 0</th>
+<th>price</th>
+<th>quantity</th>
+<th>multi</th>
+<th>total_ask</th>
+<th>bids_min_1h</th>
+<th>bids_max_1h</th>
+<th>name</th>
+<th>exchange</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>0</td>
+<td>51.95</td>
+<td>75</td>
+<td>155.85</td>
+<td>51.96</td>
+<td>51.95</td>
+<td>51.95</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>1</th>
+<td>1</td>
+<td>51.95</td>
+<td>75</td>
+<td>155.91</td>
+<td>103.94</td>
+<td>51.95</td>
+<td>51.97</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>2</th>
+<td>2</td>
+<td>51.95</td>
+<td>75</td>
+<td>155.97</td>
+<td>155.94</td>
+<td>51.95</td>
+<td>51.99</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>3</th>
+<td>3</td>
+<td>51.95</td>
+<td>75</td>
+<td>156.03</td>
+<td>207.97</td>
+<td>51.95</td>
+<td>52.01</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>4</th>
+<td>4</td>
+<td>51.95</td>
+<td>155</td>
+<td>155.85</td>
+<td>51.96</td>
+<td>51.95</td>
+<td>51.95</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>5</th>
+<td>5</td>
+<td>51.95</td>
+<td>155</td>
+<td>155.91</td>
+<td>103.94</td>
+<td>51.95</td>
+<td>51.97</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>6</th>
+<td>6</td>
+<td>51.95</td>
+<td>155</td>
+<td>155.97</td>
+<td>155.94</td>
+<td>51.95</td>
+<td>51.99</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>7</th>
+<td>7</td>
+<td>51.95</td>
+<td>155</td>
+<td>156.03</td>
+<td>207.97</td>
+<td>51.95</td>
+<td>52.01</td>
+<td>Microsoft Corporation</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>8</th>
+<td>8</td>
+<td>720.77</td>
+<td>100</td>
+<td>2161.50</td>
+<td>720.93</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>Alphabet Inc</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>9</th>
+<td>9</td>
+<td>720.77</td>
+<td>100</td>
+<td>2161.50</td>
+<td>1441.86</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>Alphabet Inc</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>10</th>
+<td>10</td>
+<td>720.77</td>
+<td>100</td>
+<td>2161.50</td>
+<td>2162.74</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>Alphabet Inc</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>11</th>
+<td>11</td>
+<td>720.92</td>
+<td>100</td>
+<td>2161.50</td>
+<td>720.93</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>Alphabet Inc</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>12</th>
+<td>12</td>
+<td>720.92</td>
+<td>100</td>
+<td>2161.50</td>
+<td>1441.86</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>Alphabet Inc</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>13</th>
+<td>13</td>
+<td>720.92</td>
+<td>100</td>
+<td>2161.50</td>
+<td>2162.74</td>
+<td>720.50</td>
+<td>720.50</td>
+<td>Alphabet Inc</td>
+<td>NASDAQ</td>
+</tr>
+<tr>
+<th>14</th>
+<td>14</td>
+<td>98.00</td>
+<td>100</td>
+<td>293.97</td>
+<td>98.01</td>
+<td>97.99</td>
+<td>97.99</td>
+<td>Apple Inc</td>
+<td>NASDAQ</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>

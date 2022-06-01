@@ -1,3 +1,7 @@
+### Change log [2022-06-01 07:26:09]
+1. Item Updated: `get_offline_features` (from version: `1.0.1` to `1.0.1`)
+2. Item Updated: `auto_trainer` (from version: `1.0.5` to `1.0.5`)
+
 ### Change log [2022-05-31 13:01:02]
 1. Item Updated: `model_server_tester` (from version: `1.0.0` to `1.0.0`)
 2. Item Updated: `test_classifier` (from version: `1.0.0` to `1.0.0`)
