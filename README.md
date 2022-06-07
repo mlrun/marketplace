@@ -1,3 +1,7 @@
+### Change log [2022-06-07 10:50:58]
+1. Item Updated: `auto_trainer` (from version: `1.0.7` to `1.0.7`)
+2. Item Updated: `get_offline_features` (from version: `1.0.2` to `1.0.2`)
+
 ### Change log [2022-06-01 13:25:31]
 1. Item Updated: `auto_trainer` (from version: `1.0.7` to `1.0.7`)
 
