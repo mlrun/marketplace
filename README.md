@@ -1,3 +1,8 @@
+### Change log [2022-06-19 16:17:14]
+1. Item Updated: `auto_trainer` (from version: `1.0.7` to `1.0.7`)
+2. Item Updated: `get_offline_features` (from version: `1.0.2` to `1.0.2`)
+3. Item Updated: `sentiment_analysis_serving` (from version: `1.0.4` to `1.0.4`)
+
 ### Change log [2022-06-07 11:04:44]
 1. Item Updated: `get_offline_features` (from version: `1.0.2` to `1.0.2`)
 
