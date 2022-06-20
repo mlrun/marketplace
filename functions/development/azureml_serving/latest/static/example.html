@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AzureML Serving</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="../src/azureml_serving.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fazureml_serving_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/azureml_serving_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#import-the-function-from-the-marketplace">
+   Import the Function from the Marketplace
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setting-topology-and-adding-the-trained-models">
+   Setting Topology and Adding the Trained Models
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-server-locally">
+   Test the Server Locally
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#deploying-the-serving-function">
+   Deploying the Serving Function
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-the-live-model-serving-function">
+   Using the Live Model-Serving Function
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="azureml-serving">
+<h1>AzureML Serving<a class="headerlink" href="#azureml-serving" title="Permalink to this headline">¶</a></h1>
+<p>After using the <a class="reference external" href="https://mlrun.org/marketplace/functions/master/azureml_utils/"><strong>azureml_utils function</strong></a> from the MLRun’s function marketplace and you have a model(s) in your hand, it is time for serving!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-06-08 08:18:28,666 [info] Server and client versions are not the same: {'parsed_server_version': VersionInfo(major=1, minor=1, patch=0, prerelease='rc3', build=None), 'parsed_client_version': VersionInfo(major=1, minor=0, patch=2, prerelease=None, build=None)}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="import-the-function-from-the-marketplace">
+<h2>Import the Function from the Marketplace<a class="headerlink" href="#import-the-function-from-the-marketplace" title="Permalink to this headline">¶</a></h2>
+<p>So for using the AzureML model server function, you will need first to import the function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># serving_fn = mlrun.import_function('hub://azureml_serving')</span>
+<span class="n">serving_fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s1">'function.yaml'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="setting-topology-and-adding-the-trained-models">
+<h2>Setting Topology and Adding the Trained Models<a class="headerlink" href="#setting-topology-and-adding-the-trained-models" title="Permalink to this headline">¶</a></h2>
+<p>In the <a class="reference external" href="https://github.com/mlrun/demos/blob/1.0.x/azureml-demo/azureml_demo.ipynb"><strong>azureml-demo</strong></a> it is explained in details how to get the trained model after using the <code class="docutils literal notranslate"><span class="pre">azureml_utils</span></code> function. So for this example we will use a model that we trained on AzureML:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_path</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_sample_path</span><span class="p">(</span><span class="s1">'models/function-marketplace-models/azureml_serving/model_1.pkl'</span><span class="p">)</span>
+<span class="n">iris_path</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_sample_path</span><span class="p">(</span><span class="s1">'data/iris/iris_dataset.csv'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">serving_fn</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="s1">'mymodel'</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">)</span>
+
+<span class="c1"># Plot the ensemble configuration</span>
+<span class="n">serving_fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/426c70223eca35c24d73eb7c0b5f87a8c5f8b8336931d7ba57555cd51f29d2d2.svg" src="_images/426c70223eca35c24d73eb7c0b5f87a8c5f8b8336931d7ba57555cd51f29d2d2.svg"/></div>
+</div>
+</div>
+<div class="section" id="test-the-server-locally">
+<h2>Test the Server Locally<a class="headerlink" href="#test-the-server-locally" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">iris_path</span><span class="p">)</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'label'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5.4, 3.9, 1.7, 0.4],
+ [6.0, 3.0, 4.8, 1.8],
+ [5.0, 3.5, 1.3, 0.3],
+ [5.6, 2.8, 4.9, 2.0],
+ [6.5, 3.0, 5.8, 2.2]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a mock server from the serving function and test it (require azureml-automl-runtime~=1.38.1 to be installed locally)</span>
+
+<span class="c1"># local_server = serving_fn.to_mock_server()</span>
+<span class="c1"># local_server.test(f'/v2/models/infer', {"inputs": sample})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="deploying-the-serving-function">
+<h2>Deploying the Serving Function<a class="headerlink" href="#deploying-the-serving-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">serving_fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-06-08 08:18:43,039 [info] Starting remote function deploy
+2022-06-08 08:18:43  (info) Deploying function
+2022-06-08 08:18:43  (info) Building
+2022-06-08 08:18:43  (info) Staging files and preparing base images
+2022-06-08 08:18:43  (info) Building processor image
+2022-06-08 08:19:48  (info) Build complete
+2022-06-08 08:20:02  (info) Function deploy complete
+&gt; 2022-06-08 08:20:03,334 [info] successfully deployed function: {'internal_invocation_urls': ['nuclio-default-azureml-serving.default-tenant.svc.cluster.local:8080'], 'external_invocation_urls': ['default-azureml-serving-default.default-tenant.app.yh43.iguazio-cd1.com/']}
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'http://default-azureml-serving-default.default-tenant.app.yh43.iguazio-cd1.com/'
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="using-the-live-model-serving-function">
+<h2>Using the Live Model-Serving Function<a class="headerlink" href="#using-the-live-model-serving-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">serving_fn</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="sa">f</span><span class="s1">'/v2/models/mymodel/infer'</span><span class="p">,</span> <span class="p">{</span><span class="s2">"inputs"</span><span class="p">:</span> <span class="n">sample</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-06-08 08:25:54,202 [info] invoking function: {'method': 'POST', 'path': 'http://nuclio-default-azureml-serving.default-tenant.svc.cluster.local:8080/v2/models/mymodel/infer'}
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'id': 'e7e5c580-1d61-4b8e-9c95-32b57d1f3d42',
+ 'model_name': 'mymodel',
+ 'outputs': [0, 2, 0, 2, 2]}
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
