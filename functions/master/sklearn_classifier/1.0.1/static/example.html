@@ -1,0 +1,1759 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Generic scikit-learn classifier</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="../src/sklearn_classifier.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fsklearn_classifier_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/sklearn_classifier_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#function-steps">
+<strong>
+    Function steps
+   </strong>
+   :
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#example-steps">
+<strong>
+    Example steps
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#data-exploration">
+<strong>
+    Data exploration
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-the-function">
+<strong>
+    Importing the function
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setup-sklearn-trainer-parameters">
+<strong>
+    Setup sklearn trainer parameters
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#set-model-parameters-and-run-locally">
+<strong>
+    Set model parameters and run locally
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#set-model-parameters-and-run-remotely">
+<strong>
+    Set model parameters and run remotely
+   </strong>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="generic-scikit-learn-classifier">
+<h1>Generic scikit-learn classifier<a class="headerlink" href="#generic-scikit-learn-classifier" title="Permalink to this headline">¶</a></h1>
+<p>run any scikit-learn compatible classifier or list of classifiers</p>
+<div class="section" id="function-steps">
+<h2><strong>Function steps</strong> :<a class="headerlink" href="#function-steps" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><strong>Generate a scikit-learn model configuration</strong> using the <code class="docutils literal notranslate"><span class="pre">model_pkg_class</span></code> parameter</p>
+<ul class="simple">
+<li><p>input a package and class name, for example, <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.LogisticRegression</span></code></p></li>
+<li><p>mlrun will find the class and instantiate a copy using default parameters</p></li>
+<li><p>You can modify both the model class instantiator and the fit methods  (other functions could be similarly modified)</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Get a sample of data</strong> from a data source</p>
+<ul class="simple">
+<li><p>select all rows using -1</p></li>
+<li><p>select a random sample of rows using a negative integer</p></li>
+<li><p>select consecutive rows using a positive integer</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Split the data</strong> into train, validation, and test sets</p>
+<ul class="simple">
+<li><p>the test set is saved as an artifact and never seen again until testing</p></li>
+<li><p>WIP: this will be parametrized to produce cross-validator splits (one way of performing CV)</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Train the model</strong> using xgboost in one of its flavours (dask, gpu, mpi…)</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Pickle / serialize the model</strong></p>
+<ul class="simple">
+<li><p>models can be pickled or saved as json (a newer xgboost format)</p></li>
+</ul>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Evaluate the model</strong></p>
+<ul class="simple">
+<li><p>a custom evaluator can be provided, see function doc for details</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="example-steps">
+<h2><strong>Example steps</strong><a class="headerlink" href="#example-steps" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p><span class="xref myst">Data exploration</span></p></li>
+<li><p><span class="xref myst">Importing the function</span></p></li>
+<li><p><span class="xref myst">Setup sklearn trainer parameters</span></p></li>
+<li><p><span class="xref myst">Set model parameters and run locally</span></p></li>
+<li><p><span class="xref myst">Set model parameters and run remotely</span></p></li>
+</ol>
+</div>
+<div class="section" id="data-exploration">
+<h2><strong>Data exploration</strong><a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dataset is generated from sklearn's load_iris</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'DESCR'</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. _iris_dataset:
+
+Iris plants dataset
+--------------------
+
+**Data Set Characteristics:**
+
+    :Number of Instances: 150 (50 in each of three classes)
+    :Number of Attributes: 4 numeric, predictive attributes and the class
+    :Attribute Information:
+        - sepal length in cm
+        - sepal width in cm
+        - petal length in cm
+        - petal width in cm
+        - class:
+                - Iris-Setosa
+                - Iris-Versicolour
+                - Iris-Virginica
+                
+    :Summary Statistics:
+
+    ============== ==== ==== ======= ===== ====================
+                    Min  Max   Mean    SD   Class Correlation
+    ============== ==== ==== ======= ===== ====================
+    sepal length:   4.3  7.9   5.84   0.83    0.7826
+    sepal width:    2.0  4.4   3.05   0.43   -0.4194
+    petal length:   1.0  6.9   3.76   1.76    0.9490  (high!)
+    petal width:    0.1  2.5   1.20   0.76    0.9565  (high!)
+    ============== ==== ==== ======= ===== ====================
+
+    :Missing Attribute Values: None
+    :Class Distribution: 33.3% for each of 3 classes.
+    :Creator: R.A. Fisher
+    :Donor: Michael Marshall (MARSHALL%PLU@io.arc.nasa.gov)
+    :Date: July, 1988
+
+The famous Iris database, first used by Sir R.A. Fisher. The dataset is taken
+from Fisher's paper. Note that it's the same as in R, but not as in the UCI
+Machine Learning Repository, which has two wrong data points.
+
+This is perhaps the best known database to be found in the
+pattern recognition literature.  Fisher's paper is a classic in the field and
+is referenced frequently to this day.  (See Duda &amp; Hart, for example.)  The
+data set contains 3 classes of 50 instances each, where each class refers to a
+type of iris plant.  One class is linearly separable from the other 2; the
+latter are NOT linearly separable from each other.
+
+.. topic:: References
+
+   - Fisher, R.A. "The use of multiple measurements in taxonomic problems"
+     Annual Eugenics, 7, Part II, 179-188 (1936); also in "Contributions to
+     Mathematical Statistics" (John Wiley, NY, 1950).
+   - Duda, R.O., &amp; Hart, P.E. (1973) Pattern Classification and Scene Analysis.
+     (Q327.D83) John Wiley &amp; Sons.  ISBN 0-471-22361-1.  See page 218.
+   - Dasarathy, B.V. (1980) "Nosing Around the Neighborhood: A New System
+     Structure and Classification Rule for Recognition in Partially Exposed
+     Environments".  IEEE Transactions on Pattern Analysis and Machine
+     Intelligence, Vol. PAMI-2, No. 1, 67-71.
+   - Gates, G.W. (1972) "The Reduced Nearest Neighbor Rule".  IEEE Transactions
+     on Information Theory, May 1972, 431-433.
+   - See also: 1988 MLC Proceedings, 54-64.  Cheeseman et al"s AUTOCLASS II
+     conceptual clustering system finds 3 classes in the data.
+   - Many, many more ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">data_url</span> <span class="o">=</span> <span class="s1">'https://s3.wasabisys.com/iguazio/data/function-marketplace-data/sklearn_classifier/iris_dataset.csv'</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">data_url</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sepal length (cm)</th>
+<th>sepal width (cm)</th>
+<th>petal length (cm)</th>
+<th>petal width (cm)</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>5.1</td>
+<td>3.5</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>4.9</td>
+<td>3.0</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>4.7</td>
+<td>3.2</td>
+<td>1.3</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4.6</td>
+<td>3.1</td>
+<td>1.5</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</div>
+<div class="section" id="importing-the-function">
+<h2><strong>Importing the function</strong><a class="headerlink" href="#importing-the-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="n">mlrun</span><span class="o">.</span><span class="n">set_environment</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">'function-marketplace'</span><span class="p">)</span>
+
+<span class="c1"># Importing the function from the hub</span>
+<span class="n">fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://sklearn_classifier"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:44:40,760 [info] loaded project function-marketplace from MLRun DB
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.kubejob.KubejobRuntime at 0x7f9bd28f8490&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="setup-sklearn-trainer-parameters">
+<h2><strong>Setup sklearn trainer parameters</strong><a class="headerlink" href="#setup-sklearn-trainer-parameters" title="Permalink to this headline">¶</a></h2>
+<p>the following task paramaters are common to all runs</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task_params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">#"name" : "sklearn classifier",</span>
+    <span class="s2">"params"</span> <span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"sample"</span>             <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"test_size"</span>          <span class="p">:</span> <span class="mf">0.30</span><span class="p">,</span>
+        <span class="s2">"train_val_split"</span>    <span class="p">:</span> <span class="mf">0.70</span><span class="p">,</span>
+        <span class="s2">"random_state"</span>       <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"n_jobs"</span>             <span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"plots_dest"</span>         <span class="p">:</span> <span class="s2">"plots-p"</span><span class="p">,</span>
+        <span class="s2">"models_dest"</span>        <span class="p">:</span> <span class="s1">'sklearn-clfmodel'</span><span class="p">}}</span>
+
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"sklearn.ensemble.RandomForestClassifier"</span><span class="p">,</span> 
+    <span class="s2">"sklearn.linear_model.LogisticRegression"</span><span class="p">,</span>
+    <span class="s2">"sklearn.ensemble.AdaBoostClassifier"</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="set-model-parameters-and-run-locally">
+<h2><strong>Set model parameters and run locally</strong><a class="headerlink" href="#set-model-parameters-and-run-locally" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>loop over a list of candidate models, update the task and run a local trainer for that model</p></li>
+<li><p>optionally customize some parameters for each model</p></li>
+<li><p>accumulate the resulting artifacts in a list of dicts for debugging and testing purposes</p></li>
+</ul>
+<p>please note that the following parameters have been chosen without regard to optimization and model tuning</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+    <span class="n">task_copy</span> <span class="o">=</span> <span class="n">task_params</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">task_copy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">"params"</span><span class="p">:{</span> <span class="s2">"model_pkg_class"</span> <span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                       <span class="s2">"label_column"</span>    <span class="p">:</span> <span class="s2">"label"</span><span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># customize specific model parameters</span>
+    <span class="k">if</span> <span class="s2">"RandomForestClassifier"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_max_depth"</span> <span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+
+    <span class="k">if</span> <span class="s2">"LogisticRegression"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_solver"</span> <span class="p">:</span> <span class="s2">"liblinear"</span><span class="p">})</span>
+    
+    <span class="k">if</span> <span class="s2">"AdaBoostClassifier"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_n_estimators"</span>  <span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                                    <span class="s2">"CLASS_learning_rate"</span> <span class="p">:</span> <span class="mf">0.01</span>
+                                   <span class="p">})</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">new_task</span><span class="p">(</span><span class="o">**</span><span class="n">task_copy</span><span class="p">),</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span>  <span class="p">:</span> <span class="n">data_url</span><span class="p">},</span>
+                    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">outputs</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:44:41,149 [info] starting run sklearn_ensemble_RandomForestClassifier uid=5410f6bc8d9a4273820a440134f0dc07 DB=http://mlrun-api:8080
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="5410f6bc8d9a4273820a440134f0dc07"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/5410f6bc8d9a4273820a440134f0dc07/overview" target="_blank">...34f0dc07</a></div></td>
+<td>0</td>
+<td>Oct 17 11:44:41</td>
+<td>completed</td>
+<td>sklearn_ensemble_RandomForestClassifier</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=</div><div class="dictlist">owner=dani</div><div class="dictlist">host=jupyter-dani-6bfbd76d96-zxx6f</div><div class="dictlist">class=sklearn.ensemble.RandomForestClassifier</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.ensemble.RandomForestClassifier</div><div class="dictlist">label_column=label</div><div class="dictlist">CLASS_max_depth=5</div></td>
+<td><div class="dictlist">accuracy=0.90625</div><div class="dictlist">test-error=0.09375</div><div class="dictlist">auc-micro=0.99462890625</div><div class="dictlist">auc-weighted=1.0</div><div class="dictlist">f1-score=0.886039886039886</div><div class="dictlist">precision_score=0.875</div><div class="dictlist">recall_score=0.9333333333333332</div></td>
+<td><div title="v3io:///projects/function-marketplace/artifacts/data/test_set.parquet">test_set</div><div class="artifact" onclick="expandPanel(this)" panename="result3bafa864" title="files/v3io/projects/function-marketplace/artifacts/model/plots/confusion-matrix.html">confusion-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="result3bafa864" title="files/v3io/projects/function-marketplace/artifacts/model/plots/feature-importances.html">feature-importances</div><div class="artifact" onclick="expandPanel(this)" panename="result3bafa864" title="files/v3io/projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html">precision-recall-multiclass</div><div class="artifact" onclick="expandPanel(this)" panename="result3bafa864" title="files/v3io/projects/function-marketplace/artifacts/model/plots/roc-multiclass.html">roc-multiclass</div><div title="v3io:///projects/function-marketplace/artifacts/model/">model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result3bafa864-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result3bafa864-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result3bafa864">×</span>
+</div>
+<iframe class="fileview" id="result3bafa864-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/5410f6bc8d9a4273820a440134f0dc07/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:44:44,151 [info] run executed, status=completed
+&gt; 2021-10-17 11:44:44,154 [info] starting run sklearn_linear_model_LogisticRegression uid=0326c1bd8f3d4f7a95719e6e51ff1483 DB=http://mlrun-api:8080
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="0326c1bd8f3d4f7a95719e6e51ff1483"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/0326c1bd8f3d4f7a95719e6e51ff1483/overview" target="_blank">...51ff1483</a></div></td>
+<td>0</td>
+<td>Oct 17 11:44:44</td>
+<td>completed</td>
+<td>sklearn_linear_model_LogisticRegression</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=</div><div class="dictlist">owner=dani</div><div class="dictlist">host=jupyter-dani-6bfbd76d96-zxx6f</div><div class="dictlist">class=sklearn.linear_model.LogisticRegression</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.linear_model.LogisticRegression</div><div class="dictlist">label_column=label</div><div class="dictlist">CLASS_solver=liblinear</div></td>
+<td><div class="dictlist">accuracy=0.875</div><div class="dictlist">test-error=0.125</div><div class="dictlist">auc-micro=0.97265625</div><div class="dictlist">auc-weighted=0.997004357298475</div><div class="dictlist">f1-score=0.8534798534798534</div><div class="dictlist">precision_score=0.8518518518518517</div><div class="dictlist">recall_score=0.9111111111111111</div></td>
+<td><div title="v3io:///projects/function-marketplace/artifacts/data/test_set.parquet">test_set</div><div class="artifact" onclick="expandPanel(this)" panename="result29c7da0f" title="files/v3io/projects/function-marketplace/artifacts/model/plots/confusion-matrix.html">confusion-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="result29c7da0f" title="files/v3io/projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html">precision-recall-multiclass</div><div class="artifact" onclick="expandPanel(this)" panename="result29c7da0f" title="files/v3io/projects/function-marketplace/artifacts/model/plots/roc-multiclass.html">roc-multiclass</div><div title="v3io:///projects/function-marketplace/artifacts/model/">model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result29c7da0f-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result29c7da0f-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result29c7da0f">×</span>
+</div>
+<iframe class="fileview" id="result29c7da0f-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/0326c1bd8f3d4f7a95719e6e51ff1483/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:44:45,759 [info] run executed, status=completed
+&gt; 2021-10-17 11:44:45,762 [info] starting run sklearn_ensemble_AdaBoostClassifier uid=d5386ba6222e41f8a9f46d96ba866bc0 DB=http://mlrun-api:8080
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="d5386ba6222e41f8a9f46d96ba866bc0"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/d5386ba6222e41f8a9f46d96ba866bc0/overview" target="_blank">...ba866bc0</a></div></td>
+<td>0</td>
+<td>Oct 17 11:44:45</td>
+<td>completed</td>
+<td>sklearn_ensemble_AdaBoostClassifier</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=</div><div class="dictlist">owner=dani</div><div class="dictlist">host=jupyter-dani-6bfbd76d96-zxx6f</div><div class="dictlist">class=sklearn.ensemble.AdaBoostClassifier</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.ensemble.AdaBoostClassifier</div><div class="dictlist">label_column=label</div><div class="dictlist">CLASS_n_estimators=200</div><div class="dictlist">CLASS_learning_rate=0.01</div></td>
+<td><div class="dictlist">accuracy=0.90625</div><div class="dictlist">test-error=0.09375</div><div class="dictlist">auc-micro=0.96044921875</div><div class="dictlist">auc-weighted=1.0</div><div class="dictlist">f1-score=0.886039886039886</div><div class="dictlist">precision_score=0.875</div><div class="dictlist">recall_score=0.9333333333333332</div></td>
+<td><div title="v3io:///projects/function-marketplace/artifacts/data/test_set.parquet">test_set</div><div class="artifact" onclick="expandPanel(this)" panename="result2a4365e3" title="files/v3io/projects/function-marketplace/artifacts/model/plots/confusion-matrix.html">confusion-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="result2a4365e3" title="files/v3io/projects/function-marketplace/artifacts/model/plots/feature-importances.html">feature-importances</div><div class="artifact" onclick="expandPanel(this)" panename="result2a4365e3" title="files/v3io/projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html">precision-recall-multiclass</div><div class="artifact" onclick="expandPanel(this)" panename="result2a4365e3" title="files/v3io/projects/function-marketplace/artifacts/model/plots/roc-multiclass.html">roc-multiclass</div><div title="v3io:///projects/function-marketplace/artifacts/model/">model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result2a4365e3-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result2a4365e3-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result2a4365e3">×</span>
+</div>
+<iframe class="fileview" id="result2a4365e3-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/d5386ba6222e41f8a9f46d96ba866bc0/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:44:48,144 [info] run executed, status=completed
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/49bd7e0daa68a23c70e1363c31e3e85489692dc65257a2863d2e398e3563171d.png" src="_images/49bd7e0daa68a23c70e1363c31e3e85489692dc65257a2863d2e398e3563171d.png"/>
+<img alt="_images/8cb23d23a93f569b8ab1048b8c6cf157a79a1ef3d2fb60d1479584357ae56fbf.png" src="_images/8cb23d23a93f569b8ab1048b8c6cf157a79a1ef3d2fb60d1479584357ae56fbf.png"/>
+<img alt="_images/330d3e1e52e16e3f4a9042dd4e6f3bea49a6b5ed6e8ab150372169aeda2cd35e.png" src="_images/330d3e1e52e16e3f4a9042dd4e6f3bea49a6b5ed6e8ab150372169aeda2cd35e.png"/>
+<img alt="_images/62a4b567a63318bcc95a399605d1c53de62598f7584b0d866c10e3e1e385ecaf.png" src="_images/62a4b567a63318bcc95a399605d1c53de62598f7584b0d866c10e3e1e385ecaf.png"/>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Figure size 432x288 with 0 Axes&gt;
+</pre></div>
+</div>
+<img alt="_images/bb42e59ea46b49090a27d0d8b57f06b8d73f483b93dcbe5b3a56bbdc975918f8.png" src="_images/bb42e59ea46b49090a27d0d8b57f06b8d73f483b93dcbe5b3a56bbdc975918f8.png"/>
+<img alt="_images/3e83dc929b3be38c0b24db1384c598994cb0e5266b8bbfc02f31aa7c256d8e1b.png" src="_images/3e83dc929b3be38c0b24db1384c598994cb0e5266b8bbfc02f31aa7c256d8e1b.png"/>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[{'sklearn_ensemble_RandomForestClassifier': {'accuracy': 0.90625,
+   'test-error': 0.09375,
+   'auc-micro': 0.99462890625,
+   'auc-weighted': 1.0,
+   'f1-score': 0.886039886039886,
+   'precision_score': 0.875,
+   'recall_score': 0.9333333333333332,
+   'test_set': 'store://artifacts/function-marketplace/sklearn_ensemble_RandomForestClassifier_test_set:5410f6bc8d9a4273820a440134f0dc07',
+   'confusion-matrix': 'v3io:///projects/function-marketplace/artifacts/model/plots/confusion-matrix.html',
+   'feature-importances': 'v3io:///projects/function-marketplace/artifacts/model/plots/feature-importances.html',
+   'precision-recall-multiclass': 'v3io:///projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html',
+   'roc-multiclass': 'v3io:///projects/function-marketplace/artifacts/model/plots/roc-multiclass.html',
+   'model': 'store://artifacts/function-marketplace/sklearn_ensemble_RandomForestClassifier_model:5410f6bc8d9a4273820a440134f0dc07'}},
+ {'sklearn_linear_model_LogisticRegression': {'accuracy': 0.875,
+   'test-error': 0.125,
+   'auc-micro': 0.97265625,
+   'auc-weighted': 0.997004357298475,
+   'f1-score': 0.8534798534798534,
+   'precision_score': 0.8518518518518517,
+   'recall_score': 0.9111111111111111,
+   'test_set': 'store://artifacts/function-marketplace/sklearn_linear_model_LogisticRegression_test_set:0326c1bd8f3d4f7a95719e6e51ff1483',
+   'confusion-matrix': 'v3io:///projects/function-marketplace/artifacts/model/plots/confusion-matrix.html',
+   'precision-recall-multiclass': 'v3io:///projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html',
+   'roc-multiclass': 'v3io:///projects/function-marketplace/artifacts/model/plots/roc-multiclass.html',
+   'model': 'store://artifacts/function-marketplace/sklearn_linear_model_LogisticRegression_model:0326c1bd8f3d4f7a95719e6e51ff1483'}},
+ {'sklearn_ensemble_AdaBoostClassifier': {'accuracy': 0.90625,
+   'test-error': 0.09375,
+   'auc-micro': 0.96044921875,
+   'auc-weighted': 1.0,
+   'f1-score': 0.886039886039886,
+   'precision_score': 0.875,
+   'recall_score': 0.9333333333333332,
+   'test_set': 'store://artifacts/function-marketplace/sklearn_ensemble_AdaBoostClassifier_test_set:d5386ba6222e41f8a9f46d96ba866bc0',
+   'confusion-matrix': 'v3io:///projects/function-marketplace/artifacts/model/plots/confusion-matrix.html',
+   'feature-importances': 'v3io:///projects/function-marketplace/artifacts/model/plots/feature-importances.html',
+   'precision-recall-multiclass': 'v3io:///projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html',
+   'roc-multiclass': 'v3io:///projects/function-marketplace/artifacts/model/plots/roc-multiclass.html',
+   'model': 'store://artifacts/function-marketplace/sklearn_ensemble_AdaBoostClassifier_model:d5386ba6222e41f8a9f46d96ba866bc0'}}]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="set-model-parameters-and-run-remotely">
+<h2><strong>Set model parameters and run remotely</strong><a class="headerlink" href="#set-model-parameters-and-run-remotely" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+    <span class="n">task_copy</span> <span class="o">=</span> <span class="n">task_params</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">task_copy</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">"params"</span><span class="p">:{</span> <span class="s2">"model_pkg_class"</span> <span class="p">:</span> <span class="n">model</span><span class="p">,</span>
+                       <span class="s2">"label_column"</span>    <span class="p">:</span> <span class="s2">"label"</span><span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># customize specific model parameters</span>
+    <span class="k">if</span> <span class="s2">"RandomForestClassifier"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_max_depth"</span> <span class="p">:</span> <span class="mi">5</span><span class="p">})</span>
+
+    <span class="k">if</span> <span class="s2">"LogisticRegression"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_solver"</span> <span class="p">:</span> <span class="s2">"liblinear"</span><span class="p">})</span>
+    
+    <span class="k">if</span> <span class="s2">"AdaBoostClassifier"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+        <span class="n">task_copy</span><span class="p">[</span><span class="s2">"params"</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">"CLASS_n_estimators"</span>  <span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                                    <span class="s2">"CLASS_learning_rate"</span> <span class="p">:</span> <span class="mf">0.01</span>
+                                   <span class="p">})</span>
+    
+    <span class="n">name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="s1">'_'</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">NewTask</span><span class="p">(</span><span class="o">**</span><span class="n">task_copy</span><span class="p">),</span>
+                    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span>  <span class="p">:</span> <span class="n">data_url</span><span class="p">},</span>
+                    <span class="n">local</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="n">output</span><span class="o">.</span><span class="n">outputs</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:44:48,897 [info] starting run sklearn_ensemble_RandomForestClassifier uid=753aec85957f402587d562cd8a61be80 DB=http://mlrun-api:8080
+&gt; 2021-10-17 11:44:49,037 [info] Job is running in the background, pod: sklearn-ensemble-randomforestclassifier-wqkk6
+&gt; 2021-10-17 11:44:58,008 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="753aec85957f402587d562cd8a61be80"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/753aec85957f402587d562cd8a61be80/overview" target="_blank">...8a61be80</a></div></td>
+<td>0</td>
+<td>Oct 17 11:44:55</td>
+<td>completed</td>
+<td>sklearn_ensemble_RandomForestClassifier</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=job</div><div class="dictlist">owner=dani</div><div class="dictlist">host=sklearn-ensemble-randomforestclassifier-wqkk6</div><div class="dictlist">class=sklearn.ensemble.RandomForestClassifier</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.ensemble.RandomForestClassifier</div><div class="dictlist">label_column=label</div><div class="dictlist">CLASS_max_depth=5</div></td>
+<td><div class="dictlist">accuracy=0.90625</div><div class="dictlist">test-error=0.09375</div><div class="dictlist">auc-micro=0.99267578125</div><div class="dictlist">auc-weighted=1.0</div><div class="dictlist">f1-score=0.886039886039886</div><div class="dictlist">precision_score=0.875</div><div class="dictlist">recall_score=0.9333333333333332</div></td>
+<td><div title="v3io:///projects/function-marketplace/artifacts/data/test_set.parquet">test_set</div><div class="artifact" onclick="expandPanel(this)" panename="resultfa48eb49" title="files/v3io/projects/function-marketplace/artifacts/model/plots/confusion-matrix.html">confusion-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="resultfa48eb49" title="files/v3io/projects/function-marketplace/artifacts/model/plots/feature-importances.html">feature-importances</div><div class="artifact" onclick="expandPanel(this)" panename="resultfa48eb49" title="files/v3io/projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html">precision-recall-multiclass</div><div class="artifact" onclick="expandPanel(this)" panename="resultfa48eb49" title="files/v3io/projects/function-marketplace/artifacts/model/plots/roc-multiclass.html">roc-multiclass</div><div title="v3io:///projects/function-marketplace/artifacts/model/">model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultfa48eb49-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultfa48eb49-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultfa48eb49">×</span>
+</div>
+<iframe class="fileview" id="resultfa48eb49-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/753aec85957f402587d562cd8a61be80/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:44:58,256 [info] run executed, status=completed
+&gt; 2021-10-17 11:44:58,257 [info] starting run sklearn_linear_model_LogisticRegression uid=c5714a4e2acb4b2e8c48a2ef77d9a05b DB=http://mlrun-api:8080
+&gt; 2021-10-17 11:44:58,607 [info] Job is running in the background, pod: sklearn-linear-model-logisticregression-zxfgw
+&gt; 2021-10-17 11:45:06,599 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="c5714a4e2acb4b2e8c48a2ef77d9a05b"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/c5714a4e2acb4b2e8c48a2ef77d9a05b/overview" target="_blank">...77d9a05b</a></div></td>
+<td>0</td>
+<td>Oct 17 11:45:04</td>
+<td>completed</td>
+<td>sklearn_linear_model_LogisticRegression</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=job</div><div class="dictlist">owner=dani</div><div class="dictlist">host=sklearn-linear-model-logisticregression-zxfgw</div><div class="dictlist">class=sklearn.linear_model.LogisticRegression</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.linear_model.LogisticRegression</div><div class="dictlist">label_column=label</div><div class="dictlist">CLASS_solver=liblinear</div></td>
+<td><div class="dictlist">accuracy=0.875</div><div class="dictlist">test-error=0.125</div><div class="dictlist">auc-micro=0.97265625</div><div class="dictlist">auc-weighted=0.997004357298475</div><div class="dictlist">f1-score=0.8534798534798534</div><div class="dictlist">precision_score=0.8518518518518517</div><div class="dictlist">recall_score=0.9111111111111111</div></td>
+<td><div title="v3io:///projects/function-marketplace/artifacts/data/test_set.parquet">test_set</div><div class="artifact" onclick="expandPanel(this)" panename="resultbef08456" title="files/v3io/projects/function-marketplace/artifacts/model/plots/confusion-matrix.html">confusion-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="resultbef08456" title="files/v3io/projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html">precision-recall-multiclass</div><div class="artifact" onclick="expandPanel(this)" panename="resultbef08456" title="files/v3io/projects/function-marketplace/artifacts/model/plots/roc-multiclass.html">roc-multiclass</div><div title="v3io:///projects/function-marketplace/artifacts/model/">model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultbef08456-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultbef08456-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultbef08456">×</span>
+</div>
+<iframe class="fileview" id="resultbef08456-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/c5714a4e2acb4b2e8c48a2ef77d9a05b/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:45:07,795 [info] run executed, status=completed
+&gt; 2021-10-17 11:45:07,797 [info] starting run sklearn_ensemble_AdaBoostClassifier uid=4b042898a9b94bb1bee72f788a163a10 DB=http://mlrun-api:8080
+&gt; 2021-10-17 11:45:07,926 [info] Job is running in the background, pod: sklearn-ensemble-adaboostclassifier-nphgz
+&gt; 2021-10-17 11:45:17,094 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>function-marketplace</td>
+<td><div title="4b042898a9b94bb1bee72f788a163a10"><a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/4b042898a9b94bb1bee72f788a163a10/overview" target="_blank">...8a163a10</a></div></td>
+<td>0</td>
+<td>Oct 17 11:45:14</td>
+<td>completed</td>
+<td>sklearn_ensemble_AdaBoostClassifier</td>
+<td><div class="dictlist">v3io_user=dani</div><div class="dictlist">kind=job</div><div class="dictlist">owner=dani</div><div class="dictlist">host=sklearn-ensemble-adaboostclassifier-nphgz</div><div class="dictlist">class=sklearn.ensemble.AdaBoostClassifier</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">dataset</div></td>
+<td><div class="dictlist">model_pkg_class=sklearn.ensemble.AdaBoostClassifier</div><div class="dictlist">label_column=label</div><div class="dictlist">CLASS_n_estimators=200</div><div class="dictlist">CLASS_learning_rate=0.01</div></td>
+<td><div class="dictlist">accuracy=0.90625</div><div class="dictlist">test-error=0.09375</div><div class="dictlist">auc-micro=0.96044921875</div><div class="dictlist">auc-weighted=1.0</div><div class="dictlist">f1-score=0.886039886039886</div><div class="dictlist">precision_score=0.875</div><div class="dictlist">recall_score=0.9333333333333332</div></td>
+<td><div title="v3io:///projects/function-marketplace/artifacts/data/test_set.parquet">test_set</div><div class="artifact" onclick="expandPanel(this)" panename="result86f4f28f" title="files/v3io/projects/function-marketplace/artifacts/model/plots/confusion-matrix.html">confusion-matrix</div><div class="artifact" onclick="expandPanel(this)" panename="result86f4f28f" title="files/v3io/projects/function-marketplace/artifacts/model/plots/feature-importances.html">feature-importances</div><div class="artifact" onclick="expandPanel(this)" panename="result86f4f28f" title="files/v3io/projects/function-marketplace/artifacts/model/plots/precision-recall-multiclass.html">precision-recall-multiclass</div><div class="artifact" onclick="expandPanel(this)" panename="result86f4f28f" title="files/v3io/projects/function-marketplace/artifacts/model/plots/roc-multiclass.html">roc-multiclass</div><div title="v3io:///projects/function-marketplace/artifacts/model/">model</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result86f4f28f-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result86f4f28f-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result86f4f28f">×</span>
+</div>
+<iframe class="fileview" id="result86f4f28f-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.dev39.lab.iguazeng.com/mlprojects/function-marketplace/jobs/monitor/4b042898a9b94bb1bee72f788a163a10/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-10-17 11:45:27,240 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="xref myst">Back to the top</span></p>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br/>
+</p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>

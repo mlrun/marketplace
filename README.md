@@ -1,3 +1,9 @@
+### Change log [2022-07-05 12:44:54]
+1. Item Updated: `sentiment_analysis_serving` (from version: `1.0.4` to `1.0.4`)
+2. Item Updated: `sklearn_classifier` (from version: `1.0.1` to `1.0.1`)
+3. Item Updated: `azureml_utils` (from version: `1.0.0` to `1.0.0`)
+4. New item created: `azureml_serving` (version: `1.0.0`)
+
 ### Change log [2022-06-07 11:04:44]
 1. Item Updated: `get_offline_features` (from version: `1.0.2` to `1.0.2`)
 
