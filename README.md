@@ -1,3 +1,11 @@
+### Change log [2022-08-28 14:08:57]
+1. Item Updated: `get_offline_features` (from version: `1.0.2` to `1.0.2`)
+2. Item Updated: `azureml_utils` (from version: `1.0.0` to `1.0.0`)
+3. Item Updated: `sentiment_analysis_serving` (from version: `1.0.4` to `1.0.4`)
+4. Item Updated: `auto_trainer` (from version: `1.0.9` to `1.0.9`)
+5. Item Updated: `sklearn_classifier` (from version: `1.0.1` to `1.0.1`)
+6. New item created: `azureml_serving` (version: `1.0.0`)
+
 ### Change log [2022-06-07 11:04:44]
 1. Item Updated: `get_offline_features` (from version: `1.0.2` to `1.0.2`)
 
