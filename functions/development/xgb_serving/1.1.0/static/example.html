@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Deploy a Serverless XGBoost Model Server</title>
+<link href="../../../_static/css/theme.css" rel="stylesheet"/>
+<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
+<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</link></link></link></link></head>
+<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+</div>
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<div class="topbar container-xl fixed-top">
+<div class="topbar-contents row">
+<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+<div class="col pl-md-4 topbar-main">
+<div class="dropdown-buttons-trigger">
+<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
+<div class="dropdown-buttons">
+<!-- ipynb file if we had a myst markdown file -->
+<!-- Download raw file -->
+<a class="dropdown-buttons" href="../src/xgb_serving.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
+<!-- Download PDF via print -->
+<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+</div>
+</div>
+<!-- Source interaction buttons -->
+<div class="dropdown-buttons-trigger">
+<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
+<div class="dropdown-buttons sourcebuttons">
+<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
+<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fxgb_serving_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
+<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/xgb_serving_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+</div>
+</div>
+<!-- Full screen (wrap in <a> to have style consistency -->
+<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
+<!-- Launch buttons -->
+</div>
+<!-- Table of contents -->
+<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+            </div>
+<nav id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#notebook-how-to-s">
+<strong>
+    notebook how-to’s
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#steps">
+<strong>
+    steps
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#define-a-new-function-and-its-dependencies">
+<strong>
+    define a new function and its dependencies
+   </strong>
+</a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#function-code">
+   Function Code
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-function-locally">
+   Test the function locally
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#deploy-our-serving-class-using-as-a-serverless-function">
+<strong>
+      deploy our serving class using as a serverless function
+     </strong>
+</a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#tests">
+   tests
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-our-model-server-using-http-request">
+<strong>
+      test our model server using HTTP request
+     </strong>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="row" id="main-content">
+<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<div>
+<div class="section" id="deploy-a-serverless-xgboost-model-server">
+<h1>Deploy a Serverless XGBoost Model Server<a class="headerlink" href="#deploy-a-serverless-xgboost-model-server" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils"/>
+<p>The following notebook demonstrates how to deploy an XGBoost model server (a.k.a <b>Nuclio-serving</b>)</p>
+<div class="section" id="notebook-how-to-s">
+<h2><strong>notebook how-to’s</strong><a class="headerlink" href="#notebook-how-to-s" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Write and test model serving class in a notebook.</p></li>
+<li><p>Deploy the model server function.</p></li>
+<li><p>Invoke and test the serving function.</p></li>
+</ul>
+<p><a id="top"></a></p>
+</div>
+<div class="section" id="steps">
+<h2><strong>steps</strong><a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<p><strong><span class="xref myst">define a new function and its dependencies</span></strong><br/>
+<strong><span class="xref myst">test the model serving class locally</span></strong><br/>
+<strong><span class="xref myst">deploy our serving class using as a serverless function</span></strong><br/>
+<strong><span class="xref myst">test our model server using HTTP request</span></strong><br/></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: ignore</span>
+<span class="kn">import</span> <span class="nn">nuclio</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="define-function"></a></p>
+</div>
+<div class="section" id="define-a-new-function-and-its-dependencies">
+<h2><strong>define a new function and its dependencies</strong><a class="headerlink" href="#define-a-new-function-and-its-dependencies" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">nuclio</span> config kind="nuclio:serving"
+<span class="o">%</span><span class="k">nuclio</span> env MODEL_CLASS=XGBoostModel
+
+<span class="o">%</span><span class="k">nuclio</span> config spec.build.baseImage = "mlrun/ml-models"
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>%nuclio: setting kind to 'nuclio:serving'
+%nuclio: setting 'MODEL_CLASS' environment variable
+%nuclio: setting spec.build.baseImage to 'mlrun/ml-models'
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="function-code">
+<h2>Function Code<a class="headerlink" href="#function-code" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># import kfserving</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">from</span> <span class="nn">cloudpickle</span> <span class="kn">import</span> <span class="n">load</span>
+
+<span class="c1">### Model Serving Class</span>
+
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="k">class</span> <span class="nc">XGBoostModel</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">runtimes</span><span class="o">.</span><span class="n">MLModelServer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">model_file</span><span class="p">,</span> <span class="n">extra_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s2">".pkl"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">model_file</span><span class="p">),</span> <span class="s2">"rb"</span><span class="p">))</span>
+  
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">feats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">body</span><span class="p">[</span><span class="s2">"instances"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">feats</span><span class="p">,</span> <span class="n">validate_features</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"Failed to predict </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following end-code annotation tells <code class="docutils literal notranslate"><span class="pre">nuclio</span></code> to stop parsing the notebook from this cell. <em><strong>Please do not remove this cell</strong></em>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="test-locally"></a></p>
+</div>
+<div class="section" id="test-the-function-locally">
+<h2>Test the function locally<a class="headerlink" href="#test-the-function-locally" title="Permalink to this headline">¶</a></h2>
+<p>The class above can be tested locally. Just instantiate the class, <code class="docutils literal notranslate"><span class="pre">.load()</span></code> will load the model to a local dir.</p>
+<blockquote>
+<div><p><strong>Verify there is a model file in the model_dir path (generated by the training notebook)</strong></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">mlconf</span>
+
+<span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span><span class="p">,</span> <span class="s2">"xgb/models"</span><span class="p">)</span>
+
+<span class="n">my_server</span> <span class="o">=</span> <span class="n">XGBoostModel</span><span class="p">(</span><span class="s2">"my-model"</span><span class="p">,</span> <span class="n">model_dir</span><span class="o">=</span><span class="n">model_dir</span><span class="p">)</span>
+<span class="n">my_server</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_PATH</span> <span class="o">=</span> <span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span> <span class="o">+</span> <span class="s2">"/xgb/classifier-data.csv"</span>
+<span class="n">MODEL_PATH</span> <span class="o">=</span> <span class="n">mlconf</span><span class="o">.</span><span class="n">artifact_path</span> <span class="o">+</span> <span class="s2">"/xgb/models/xgb_test"</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">xtest</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATA_PATH</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">.predict(body)</span></code> method to test the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">my_server</span><span class="o">.</span><span class="n">predict</span><span class="p">({</span><span class="s2">"instances"</span><span class="p">:</span><span class="n">xtest</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">10</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"predicted class:"</span><span class="p">,</span> <span class="n">preds</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>predicted class: [1, 0, 0, 0, 0, 0, 1, 1, 0, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="deploy"></a></p>
+<div class="section" id="deploy-our-serving-class-using-as-a-serverless-function">
+<h3><strong>deploy our serving class using as a serverless function</strong><a class="headerlink" href="#deploy-our-serving-class-using-as-a-serverless-function" title="Permalink to this headline">¶</a></h3>
+<p>in the following section we create a new model serving function which wraps our class , and specify model and other resources.</p>
+<p>the <code class="docutils literal notranslate"><span class="pre">models</span></code> dict store model names and the assosiated model <strong>dir</strong> URL (the URL can start with <code class="docutils literal notranslate"><span class="pre">S3://</span></code> and other blob store options), the faster way is to use a shared file volume, we use <code class="docutils literal notranslate"><span class="pre">.apply(mount_v3io())</span></code> to attach a v3io (iguazio data fabric) volume to our function. By default v3io will mount the current user home into the <code class="docutils literal notranslate"><span class="pre">\User</span></code> function path.</p>
+<p><strong>verify the model dir does contain a valid <code class="docutils literal notranslate"><span class="pre">model.bst</span></code> file</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">new_model_server</span><span class="p">,</span> <span class="n">mount_v3io</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span> <span class="o">=</span> <span class="n">new_model_server</span><span class="p">(</span><span class="s2">"xgb-serving"</span><span class="p">,</span>
+                      <span class="n">model_class</span><span class="o">=</span><span class="s2">"XGBoostModel"</span><span class="p">,</span>
+                      <span class="n">models</span><span class="o">=</span><span class="p">{</span><span class="s2">"xgb_serving_v2"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model_dir</span><span class="si">}</span><span class="s2">"</span><span class="p">})</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">"xgboost test data classification server"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"serving"</span><span class="p">,</span> <span class="s2">"ml"</span><span class="p">]</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"author"</span><span class="p">:</span> <span class="s2">"yaronh"</span><span class="p">,</span> <span class="s2">"framework"</span><span class="p">:</span> <span class="s2">"xgboost"</span><span class="p">}</span>
+
+<span class="n">fn</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">"function.yaml"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[mlrun] 2020-06-14 12:49:05,013 function spec saved to path: function.yaml
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.function.RemoteRuntime at 0x7f0218662f60&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tests">
+<h2>tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun.platforms.other</span> <span class="kn">import</span> <span class="n">auto_mount</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">auto_mount</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.runtimes.function.RemoteRuntime at 0x7f0218662f60&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">addr</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[mlrun] 2020-06-14 12:49:18,128 deploy started
+[nuclio] 2020-06-14 12:49:19,213 (info) Build complete
+[nuclio] 2020-06-14 12:49:27,347 (info) Function deploy complete
+[nuclio] 2020-06-14 12:49:27,354 done updating default-xgb-test, function address: 3.23.82.202:30104
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">addr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'http://3.23.82.202:30104'
+</pre></div>
+</div>
+</div>
+</div>
+<p><a id="test-model-server"></a></p>
+<div class="section" id="test-our-model-server-using-http-request">
+<h3><strong>test our model server using HTTP request</strong><a class="headerlink" href="#test-our-model-server-using-http-request" title="Permalink to this headline">¶</a></h3>
+<p>We invoke our model serving function using test data, the data vector is specified in the <code class="docutils literal notranslate"><span class="pre">instances</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># KFServing protocol event</span>
+<span class="n">event_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"instances"</span><span class="p">:</span> <span class="n">xtest</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">10</span><span class="p">,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">addr</span> <span class="o">+</span> <span class="s2">"/xgb_serving_v2/predict"</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">event_data</span><span class="p">))</span>
+<span class="n">resp</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'[1, 0, 0, 0, 0, 0, 1, 1, 0, 1]'
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">preds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 0, 0, 0, 0, 0, 1, 1, 0, 1]
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong><span class="xref myst">back to top</span></strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="prev-next-bottom">
+</div>
+</div>
+</div>
+<footer class="footer mt-5 mt-md-0">
+<div class="container">
+<p>
+        
+            © Copyright .<br>
+</br></p>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+</body>
+</html>
