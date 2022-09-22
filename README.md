@@ -1,3 +1,7 @@
+### Change log [2022-09-22 12:43:57]
+1. New item created: `batch_inference` (version: `1.1.0`)
+2. New item created: `hugging_face_serving` (version: `1.0.0`)
+
 ### Change log [2022-09-22 10:33:11]
 1. New item created: `batch_inference` (version: `1.1.0`)
 2. New item created: `hugging_face_serving` (version: `1.0.0`)
