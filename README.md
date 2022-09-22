@@ -1,3 +1,7 @@
+### Change log [2022-09-22 10:33:11]
+1. New item created: `batch_inference` (version: `1.1.0`)
+2. New item created: `hugging_face_serving` (version: `1.0.0`)
+
 ### Change log [2022-08-30 12:24:48]
 1. Item Updated: `load_dataset` (from version: `1.1.0` to `1.1.0`)
 2. Item Updated: `coxph_test` (from version: `1.1.0` to `1.1.0`)
