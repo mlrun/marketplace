@@ -1,3 +1,6 @@
+### Change log [2022-10-02 11:38:53]
+1. Item Updated: `sklearn_classifier_dask` (from version: `1.1.1` to `1.1.1`)
+
 ### Change log [2022-09-22 12:43:57]
 1. New item created: `batch_inference` (version: `1.1.0`)
 2. New item created: `hugging_face_serving` (version: `1.0.0`)
