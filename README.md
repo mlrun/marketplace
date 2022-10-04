@@ -1,3 +1,7 @@
+### Change log [2022-10-04 08:08:11]
+1. Item Updated: `batch_inference` (from version: `1.1.1` to `1.1.1`)
+2. Item Updated: `sklearn_classifier_dask` (from version: `1.1.1` to `1.1.1`)
+
 ### Change log [2022-10-03 12:59:15]
 1. Item Updated: `batch_inference` (from version: `1.1.1` to `1.1.1`)
 2. Item Updated: `sklearn_classifier_dask` (from version: `1.1.1` to `1.1.1`)
