@@ -1,3 +1,8 @@
+### Change log [2022-11-24 13:41:19]
+1. Item Updated: `sklearn_classifier` (from version: `1.1.0` to `1.1.0`)
+2. Item Hid: `sklearn_classifier`
+3. Item Hid: `sklearn_classifier`
+
 ### Change log [2022-11-24 11:26:30]
 1. Item Updated: `github_utils` (from version: `1.1.0` to `1.1.0`)
 2. Item Updated: `sklearn_classifier_dask` (from version: `1.1.1` to `1.1.1`)
