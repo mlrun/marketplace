@@ -1,3 +1,6 @@
+### Change log [2022-11-24 14:12:49]
+1. Item Updated: `sklearn_classifier` (from version: `1.1.0` to `1.1.0`)
+
 ### Change log [2022-11-24 13:41:19]
 1. Item Updated: `sklearn_classifier` (from version: `1.1.0` to `1.1.0`)
 2. Item Hid: `sklearn_classifier`
