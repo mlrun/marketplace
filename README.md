@@ -1,3 +1,6 @@
+### Change log [2022-11-30 14:31:29]
+1. Item Updated: `aggregate` (from version: `1.1.1` to `1.1.1`)
+
 ### Change log [2022-11-24 14:12:49]
 1. Item Updated: `sklearn_classifier` (from version: `1.1.0` to `1.1.0`)
 
