@@ -1,3 +1,8 @@
+### Change log [2023-01-18 11:54:31]
+1. Item Updated: `aggregate` (from version: `1.2.0` to `1.2.0`)
+2. New item created: `great_expectations` (version: `1.0.0`)
+3. Item Updated: `arc_to_parquet` (from version: `1.2.0` to `1.2.0`)
+
 ### Change log [2022-12-06 10:56:47]
 1. Item Updated: `batch_inference` (from version: `1.2.0` to `1.2.0`)
 2. Item Updated: `aggregate` (from version: `1.1.1` to `1.1.1`)
