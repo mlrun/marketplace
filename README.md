@@ -1,3 +1,33 @@
+### Change log [2023-01-31 10:03:10]
+1. Item Updated: `describe_dask` (from version: `1.1.0` to `1.1.0`)
+2. New item created: `great_expectations` (version: `1.0.0`)
+3. Item Updated: `feature_selection` (from version: `1.1.1` to `1.1.1`)
+4. Item Updated: `coxph_trainer` (from version: `1.1.0` to `1.1.0`)
+5. Item Updated: `xgb_custom` (from version: `1.1.0` to `1.1.0`)
+6. Item Updated: `aggregate` (from version: `1.2.0` to `1.2.0`)
+7. Item Updated: `xgb_test` (from version: `1.1.0` to `1.1.0`)
+8. Item Updated: `arc_to_parquet` (from version: `1.2.0` to `1.2.0`)
+9. Item Updated: `sklearn_classifier_dask` (from version: `1.1.1` to `1.1.1`)
+10. Item Updated: `test_classifier` (from version: `1.1.0` to `1.1.0`)
+11. Item Updated: `xgb_trainer` (from version: `1.1.0` to `1.1.0`)
+12. Item Updated: `sklearn_classifier` (from version: `1.1.0` to `1.1.0`)
+13. Item Hid: `describe_dask`
+14. Item Hid: `coxph_trainer`
+15. Item Hid: `xgb_custom`
+16. Item Hid: `xgb_test`
+17. Item Hid: `sklearn_classifier_dask`
+18. Item Hid: `test_classifier`
+19. Item Hid: `xgb_trainer`
+20. Item Hid: `sklearn_classifier`
+21. Item Hid: `describe_dask`
+22. Item Hid: `coxph_trainer`
+23. Item Hid: `xgb_custom`
+24. Item Hid: `xgb_test`
+25. Item Hid: `sklearn_classifier_dask`
+26. Item Hid: `test_classifier`
+27. Item Hid: `xgb_trainer`
+28. Item Hid: `sklearn_classifier`
+
 ### Change log [2022-12-06 10:56:47]
 1. Item Updated: `batch_inference` (from version: `1.2.0` to `1.2.0`)
 2. Item Updated: `aggregate` (from version: `1.1.1` to `1.1.1`)
