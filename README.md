@@ -1,33 +1,20 @@
-### Change log [2023-02-13 13:09:54]
-1. Item Updated: `describe_dask` (from version: `1.1.0` to `1.1.0`)
-2. New item created: `great_expectations` (version: `1.0.0`)
-3. Item Updated: `feature_selection` (from version: `1.1.1` to `1.1.1`)
-4. Item Updated: `coxph_trainer` (from version: `1.1.0` to `1.1.0`)
-5. Item Updated: `xgb_custom` (from version: `1.1.0` to `1.1.0`)
-6. Item Updated: `aggregate` (from version: `1.2.0` to `1.2.0`)
-7. Item Updated: `bert_embeddings` (from version: `1.1.1` to `1.1.1`)
-8. Item Updated: `xgb_test` (from version: `1.1.0` to `1.1.0`)
-9. Item Updated: `arc_to_parquet` (from version: `1.2.0` to `1.2.0`)
-10. Item Updated: `sklearn_classifier_dask` (from version: `1.1.1` to `1.1.1`)
-11. Item Updated: `test_classifier` (from version: `1.1.0` to `1.1.0`)
-12. Item Updated: `xgb_trainer` (from version: `1.1.0` to `1.1.0`)
-13. Item Updated: `sklearn_classifier` (from version: `1.1.0` to `1.1.0`)
-14. Item Hid: `describe_dask`
-15. Item Hid: `coxph_trainer`
-16. Item Hid: `xgb_custom`
-17. Item Hid: `xgb_test`
-18. Item Hid: `sklearn_classifier_dask`
-19. Item Hid: `test_classifier`
-20. Item Hid: `xgb_trainer`
-21. Item Hid: `sklearn_classifier`
-22. Item Hid: `describe_dask`
-23. Item Hid: `coxph_trainer`
-24. Item Hid: `xgb_custom`
-25. Item Hid: `xgb_test`
-26. Item Hid: `sklearn_classifier_dask`
-27. Item Hid: `test_classifier`
-28. Item Hid: `xgb_trainer`
-29. Item Hid: `sklearn_classifier`
+### Change log [2023-02-13 13:25:51]
+1. Item Hid: `describe_dask`
+2. Item Hid: `coxph_trainer`
+3. Item Hid: `xgb_custom`
+4. Item Hid: `xgb_test`
+5. Item Hid: `sklearn_classifier_dask`
+6. Item Hid: `test_classifier`
+7. Item Hid: `xgb_trainer`
+8. Item Hid: `sklearn_classifier`
+9. Item Hid: `describe_dask`
+10. Item Hid: `coxph_trainer`
+11. Item Hid: `xgb_custom`
+12. Item Hid: `xgb_test`
+13. Item Hid: `sklearn_classifier_dask`
+14. Item Hid: `test_classifier`
+15. Item Hid: `xgb_trainer`
+16. Item Hid: `sklearn_classifier`
 
 ### Change log [2023-02-06 15:37:08]
 1. Item Updated: `bert_embeddings` (from version: `1.1.1` to `1.1.1`)
