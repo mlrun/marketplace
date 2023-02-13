@@ -1,3 +1,21 @@
+### Change log [2023-02-13 13:05:39]
+1. Item Hid: `describe_dask`
+2. Item Hid: `coxph_trainer`
+3. Item Hid: `xgb_custom`
+4. Item Hid: `xgb_test`
+5. Item Hid: `sklearn_classifier_dask`
+6. Item Hid: `test_classifier`
+7. Item Hid: `xgb_trainer`
+8. Item Hid: `sklearn_classifier`
+9. Item Hid: `describe_dask`
+10. Item Hid: `coxph_trainer`
+11. Item Hid: `xgb_custom`
+12. Item Hid: `xgb_test`
+13. Item Hid: `sklearn_classifier_dask`
+14. Item Hid: `test_classifier`
+15. Item Hid: `xgb_trainer`
+16. Item Hid: `sklearn_classifier`
+
 ### Change log [2023-02-06 15:37:08]
 1. Item Updated: `bert_embeddings` (from version: `1.1.1` to `1.1.1`)
 2. Item Hid: `describe_dask`
