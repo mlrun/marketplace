@@ -1,3 +1,21 @@
+### Change log [2023-03-02 12:39:13]
+1. Item Hid: `coxph_trainer`
+2. Item Hid: `test_classifier`
+3. Item Hid: `describe_dask`
+4. Item Hid: `xgb_custom`
+5. Item Hid: `xgb_trainer`
+6. Item Hid: `sklearn_classifier_dask`
+7. Item Hid: `sklearn_classifier`
+8. Item Hid: `xgb_test`
+9. Item Hid: `coxph_trainer`
+10. Item Hid: `test_classifier`
+11. Item Hid: `describe_dask`
+12. Item Hid: `xgb_custom`
+13. Item Hid: `xgb_trainer`
+14. Item Hid: `sklearn_classifier_dask`
+15. Item Hid: `sklearn_classifier`
+16. Item Hid: `xgb_test`
+
 ### Change log [2023-02-13 13:25:51]
 1. Item Hid: `describe_dask`
 2. Item Hid: `coxph_trainer`
