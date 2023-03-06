@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>hugging_face_classifier_trainer package</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fhugging_face_classifier_trainer.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+<li>
+
+</li>
+</ul>
+</div>
+</div>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+<button aria-label="Download this page" class="headerbtn menu-dropdown__trigger">
+<i class="fas fa-download"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+
+</li>
+<li>
+<button class="headerbtn" data-placement="left" data-toggle="tooltip" onclick="printPdf(this)" title="Print to PDF">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+<label class="headerbtn headerbtn-page-toc" for="__page-toc">
+<span class="headerbtn__icon-container">
+<i class="fas fa-list"></i>
+</span>
+</label>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+    </div>
+<nav aria-label="Page" id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-hugging_face_classifier_trainer.hugging_face_classifier_trainer">
+   hugging_face_classifier_trainer.hugging_face_classifier_trainer module
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-hugging_face_classifier_trainer">
+   Module contents
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>hugging_face_classifier_trainer package</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-hugging_face_classifier_trainer.hugging_face_classifier_trainer">
+   hugging_face_classifier_trainer.hugging_face_classifier_trainer module
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-hugging_face_classifier_trainer">
+   Module contents
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<section id="hugging-face-classifier-trainer-package">
+<h1>hugging_face_classifier_trainer package<a class="headerlink" href="#hugging-face-classifier-trainer-package" title="Permalink to this headline">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-hugging_face_classifier_trainer.hugging_face_classifier_trainer">
+<span id="hugging-face-classifier-trainer-hugging-face-classifier-trainer-module"></span><h2>hugging_face_classifier_trainer.hugging_face_classifier_trainer module<a class="headerlink" href="#module-hugging_face_classifier_trainer.hugging_face_classifier_trainer" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hugging_face_classifier_trainer.hugging_face_classifier_trainer.</span></span><span class="sig-name descname"><span class="pre">HFORTOptimizerMLRunInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#HFORTOptimizerMLRunInterface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlrun.frameworks._common.</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Interface for adding MLRun features for tensorflow keras API.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.DEFAULT_CONTEXT_NAME">
+<span class="sig-name descname"><span class="pre">DEFAULT_CONTEXT_NAME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'mlrun-huggingface'</span></em><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.DEFAULT_CONTEXT_NAME" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.add_interface">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restoration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.frameworks._common.CommonTypes.MLRunInterfaceRestorationType</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#HFORTOptimizerMLRunInterface.add_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.add_interface" title="Permalink to this definition">#</a></dt>
+<dd><p>Enrich the object with this interface properties, methods and functions, so it will have this TensorFlow.Keras
+MLRun’s features.
+:param obj:                     The object to enrich his interface.
+:param restoration: Restoration information tuple as returned from ‘remove_interface’ in order to</p>
+<blockquote>
+<div><p>add the interface in a certain state.</p>
+</div></blockquote>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.enable_auto_logging">
+<span class="sig-name descname"><span class="pre">enable_auto_logging</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'model'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#HFORTOptimizerMLRunInterface.enable_auto_logging"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.enable_auto_logging" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.mlrun_optimize">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">mlrun_optimize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#HFORTOptimizerMLRunInterface.mlrun_optimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.mlrun_optimize" title="Permalink to this definition">#</a></dt>
+<dd><p>MLRun’s tf.keras.Model.fit wrapper. It will setup the optimizer when using horovod. The optimizer must be
+passed in a keyword argument and when using horovod, it must be passed as an Optimizer instance, not a string.</p>
+<p>raise MLRunInvalidArgumentError: In case the optimizer provided did not follow the instructions above.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hugging_face_classifier_trainer.hugging_face_classifier_trainer.</span></span><span class="sig-name descname"><span class="pre">HFTrainerMLRunInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#HFTrainerMLRunInterface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">mlrun.frameworks._common.</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Interface for adding MLRun features for tensorflow keras API.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface.DEFAULT_CONTEXT_NAME">
+<span class="sig-name descname"><span class="pre">DEFAULT_CONTEXT_NAME</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'mlrun-huggingface'</span></em><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface.DEFAULT_CONTEXT_NAME" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface.add_interface">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.Trainer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">restoration</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.frameworks._common.CommonTypes.MLRunInterfaceRestorationType</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#HFTrainerMLRunInterface.add_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface.add_interface" title="Permalink to this definition">#</a></dt>
+<dd><p>Enrich the object with this interface properties, methods and functions, so it will have this TensorFlow.Keras
+MLRuns features.
+:param obj:                     The object to enrich his interface.
+:param restoration: Restoration information tuple as returned from ‘remove_interface’ in order to</p>
+<blockquote>
+<div><p>add the interface in a certain state.</p>
+</div></blockquote>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface.mlrun_train">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">mlrun_train</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#HFTrainerMLRunInterface.mlrun_train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface.mlrun_train" title="Permalink to this definition">#</a></dt>
+<dd><p>MLRuns tf.keras.Model.fit wrapper. It will setup the optimizer when using horovod. The optimizer must be
+passed in a keyword argument and when using horovod, it must be passed as an Optimizer instance, not a string.</p>
+<p>raise MLRunInvalidArgumentError: In case the optimizer provided did not follow the instructions above.</p>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hugging_face_classifier_trainer.hugging_face_classifier_trainer.</span></span><span class="sig-name descname"><span class="pre">KWArgsPrefixes</span></span><a class="reference internal" href="hugging_face_classifier_trainer.html#KWArgsPrefixes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes.FIT">
+<span class="sig-name descname"><span class="pre">FIT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'FIT_'</span></em><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes.FIT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes.MODEL_CLASS">
+<span class="sig-name descname"><span class="pre">MODEL_CLASS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'CLASS_'</span></em><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes.MODEL_CLASS" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes.PREDICT">
+<span class="sig-name descname"><span class="pre">PREDICT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'PREDICT_'</span></em><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes.PREDICT" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes.TRAIN">
+<span class="sig-name descname"><span class="pre">TRAIN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">'TRAIN_'</span></em><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes.TRAIN" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">hugging_face_classifier_trainer.hugging_face_classifier_trainer.</span></span><span class="sig-name descname"><span class="pre">MLRunCallback</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#MLRunCallback"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">transformers.</span></code></p>
+<p>Callback for collecting logs during training / evaluation of the <cite>Trainer</cite> API.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_epoch_begin">
+<span class="sig-name descname"><span class="pre">on_epoch_begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainingArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerControl</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#MLRunCallback.on_epoch_begin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_epoch_begin" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_epoch_end">
+<span class="sig-name descname"><span class="pre">on_epoch_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainingArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerControl</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#MLRunCallback.on_epoch_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_epoch_end" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_evaluate">
+<span class="sig-name descname"><span class="pre">on_evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainingArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerControl</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#MLRunCallback.on_evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_evaluate" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_log">
+<span class="sig-name descname"><span class="pre">on_log</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainingArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerControl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#MLRunCallback.on_log"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_log" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_train_begin">
+<span class="sig-name descname"><span class="pre">on_train_begin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainingArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerControl</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#MLRunCallback.on_train_begin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_train_begin" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_train_end">
+<span class="sig-name descname"><span class="pre">on_train_end</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainingArguments</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">transformers.TrainerControl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">transformers.PreTrainedModel</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokenizer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">transformers.PreTrainedTokenizer</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#MLRunCallback.on_train_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_train_end" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.apply_mlrun">
+<span class="sig-prename descclassname"><span class="pre">hugging_face_classifier_trainer.hugging_face_classifier_trainer.</span></span><span class="sig-name descname"><span class="pre">apply_mlrun</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">huggingface_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.execution.MLClientCtx</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">auto_log</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#apply_mlrun"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.apply_mlrun" title="Permalink to this definition">#</a></dt>
+<dd><p>Wrap the given model with MLRun’s interface providing it with mlrun’s additional features.
+:param huggingface_object: The model to wrap. Can be loaded from the model path given as well.
+:param model_name:         The model name to use for storing the model artifact. Default: “model”.
+:param tag:                The model’s tag to log with.
+:param context:            MLRun context to work with. If no context is given it will be retrieved via</p>
+<blockquote>
+<div><p>‘mlrun.get_or_create_ctx(None)’</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>auto_log</strong> – Whether to enable MLRun’s auto logging. Default: True.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.optimize">
+<span class="sig-prename descclassname"><span class="pre">hugging_face_classifier_trainer.hugging_face_classifier_trainer.</span></span><span class="sig-name descname"><span class="pre">optimize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'optimized_model'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_dir</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'./optimized'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimization_level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#optimize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.optimize" title="Permalink to this definition">#</a></dt>
+<dd><p>Optimizing the transformer model using ONNX optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model_path</strong> – The path of the model to optimize.</p></li>
+<li><p><strong>model_name</strong> – Name of the optimized model.</p></li>
+<li><p><strong>target_dir</strong> – The directory to save the ONNX model.</p></li>
+<li><p><strong>optimization_level</strong> – Optimization level performed by ONNX Runtime of the loaded graph. (default is 1)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="hugging_face_classifier_trainer.hugging_face_classifier_trainer.train">
+<span class="sig-prename descclassname"><span class="pre">hugging_face_classifier_trainer.hugging_face_classifier_trainer.</span></span><span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hf_dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.datastore.base.DataItem</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_set</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.datastore.base.DataItem</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretrained_tokenizer</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pretrained_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_class</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'huggingface-model'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'labels'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_col</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'text'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_of_train_samples</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_test_split_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="hugging_face_classifier_trainer.html#train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#hugging_face_classifier_trainer.hugging_face_classifier_trainer.train" title="Permalink to this definition">#</a></dt>
+<dd><p>Training and evaluating a pretrained model with a pretrained tokenizer over a dataset.
+The dataset can be either be the name of the dataset that contains in the HuggingFace hub,
+or a URI or a FeatureVector</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>context</strong> – MLRun context</p></li>
+<li><p><strong>hf_dataset</strong> – The name of the dataset to get from the HuggingFace hub</p></li>
+<li><p><strong>dataset</strong> – The dataset to train the model on. Can be either a URI or a FeatureVector</p></li>
+<li><p><strong>test_set</strong> – The test set to train the model with.</p></li>
+<li><p><strong>drop_columns</strong> – The columns to drop from the dataset.</p></li>
+<li><p><strong>pretrained_tokenizer</strong> – The name of the pretrained tokenizer from the HuggingFace hub.</p></li>
+<li><p><strong>pretrained_model</strong> – The name of the pretrained model from the HuggingFace hub.</p></li>
+<li><p><strong>model_name</strong> – The model’s name to use for storing the model artifact, default to ‘model’</p></li>
+<li><p><strong>model_class</strong> – The class of the model, e.g. <cite>transformers.AutoModelForSequenceClassification</cite></p></li>
+<li><p><strong>label_name</strong> – The target label of the column in the dataset.</p></li>
+<li><p><strong>text_col</strong> – The input text column un the dataset.</p></li>
+<li><p><strong>num_of_train_samples</strong> – Max number of training samples, for debugging.</p></li>
+<li><p><strong>train_test_split_size</strong> – Should be between 0.0 and 1.0 and represent the proportion of the dataset to include
+in the test split.</p></li>
+<li><p><strong>metrics</strong> – List of different metrics for evaluate the model such as f1, accuracy etc.</p></li>
+<li><p><strong>random_state</strong> – Random state for train_test_split</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</section>
+<section id="module-hugging_face_classifier_trainer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-hugging_face_classifier_trainer" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
