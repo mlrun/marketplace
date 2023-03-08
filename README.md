@@ -1,3 +1,8 @@
+### Change log [2023-03-08 10:24:20]
+1. New item created: `validate_great_expectations` (version: `1.1.0`)
+2. Item Removed: `great_expectations`
+3. Item Removed: `great_expectations`
+
 ### Change log [2023-03-06 12:22:18]
 1. New item created: `hugging_face_classifier_trainer` (version: `0.0.1`)
 2. Item Hid: `coxph_trainer`
