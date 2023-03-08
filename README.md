@@ -1,3 +1,22 @@
+### Change log [2023-03-08 07:53:27]
+1. New item created: `validate_great_expectations` (version: `1.1.0`)
+2. Item Hid: `coxph_trainer`
+3. Item Hid: `test_classifier`
+4. Item Hid: `describe_dask`
+5. Item Hid: `xgb_custom`
+6. Item Hid: `xgb_trainer`
+7. Item Hid: `sklearn_classifier_dask`
+8. Item Hid: `sklearn_classifier`
+9. Item Hid: `xgb_test`
+10. Item Hid: `coxph_trainer`
+11. Item Hid: `test_classifier`
+12. Item Hid: `describe_dask`
+13. Item Hid: `xgb_custom`
+14. Item Hid: `xgb_trainer`
+15. Item Hid: `sklearn_classifier_dask`
+16. Item Hid: `sklearn_classifier`
+17. Item Hid: `xgb_test`
+
 ### Change log [2023-03-06 12:22:18]
 1. New item created: `hugging_face_classifier_trainer` (version: `0.0.1`)
 2. Item Hid: `coxph_trainer`
