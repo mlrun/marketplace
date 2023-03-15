@@ -1,3 +1,6 @@
+### Change log [2023-03-15 11:13:21]
+1. Item Updated: `onnx_utils` (from version: `1.1.1` to `1.1.1`)
+
 ### Change log [2023-03-08 11:17:21]
 1. New item created: `validate_great_expectations` (version: `1.1.0`)
 2. Item Removed: `great_expectations`
