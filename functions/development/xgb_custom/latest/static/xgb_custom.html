@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>xgb_custom.xgb_custom</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/xgb_custom/xgb_custom.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for xgb_custom.xgb_custom</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">randint</span><span class="p">,</span> <span class="n">randn</span><span class="p">,</span> <span class="n">seed</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">xgboost</span> <span class="kn">import</span> <span class="n">DMatrix</span><span class="p">,</span> <span class="n">train</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore</span> <span class="kn">import</span> <span class="n">DataItem</span>
+<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">PlotArtifact</span>
+<span class="kn">from</span> <span class="nn">mlrun.mlutils.data</span> <span class="kn">import</span> <span class="n">get_splits</span><span class="p">,</span> <span class="n">get_sample</span>
+
+<span class="kn">from</span> <span class="nn">cloudpickle</span> <span class="kn">import</span> <span class="n">dumps</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="p">(</span><span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Callable</span><span class="p">)</span>
+
+<span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1994</span><span class="p">)</span>
+
+<span class="c1">## UNCOMMENT THIS LINE TO TEST CALCULATED VALUES</span>
+<span class="n">DEBUG_ERROR</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># this will be added to the custom eval function--set it to some value like 999</span>
+
+
+<div class="viewcode-block" id="gen_outliers"><a class="viewcode-back" href="documentation.html#xgb_custom.xgb_custom.gen_outliers">[docs]</a><span class="k">def</span> <span class="nf">gen_outliers</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span> <span class="n">feats</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span>
+                 <span class="n">outs</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> <span class="n">omax</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span> <span class="n">labels_col</span><span class="o">=</span><span class="s2">"labels"</span><span class="p">,</span>
+                 <span class="n">header</span><span class="o">=</span><span class="p">[],</span> <span class="n">label_type</span><span class="o">=</span><span class="s2">"int32"</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">"xgb-outs"</span><span class="p">,</span>
+                 <span class="n">local_path</span><span class="o">=</span><span class="s2">"xgb_custom"</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""simulate data with outliers</span>
+
+<span class="sd">    :param context:    the function's execution context</span>
+<span class="sd">    :param nrows:      (4096) number of data points</span>
+<span class="sd">    :param feats:      (16) number of features</span>
+<span class="sd">    :param outs:       (64) number of outliers</span>
+<span class="sd">    :param omax:       (10_100) max value of outliers</span>
+<span class="sd">    :param labels_col: (labels) name of labels column</span>
+<span class="sd">    :param header:     () header for dataset, will default to</span>
+<span class="sd">                       `feat_`</span>
+<span class="sd">    :param label_type: (int32) data type for the label column</span>
+<span class="sd">    :param key:        key of datset in artifact store</span>
+<span class="sd">    :param local_path: path in artifact store where data will be</span>
+<span class="sd">                       serialized</span>
+<span class="sd">    """</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">nrows</span><span class="p">,</span> <span class="n">feats</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">nrows</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">outs</span><span class="p">):</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">+=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">omax</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">header</span><span class="p">:</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"feat_</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">feats</span><span class="p">)]</span>
+        <span class="n">header</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">labels_col</span><span class="p">)</span>
+
+    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">),</span>
+                        <span class="n">columns</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="n">labels_col</span><span class="p">:</span> <span class="n">label_type</span><span class="p">})</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">local_path</span><span class="o">=</span><span class="n">local_path</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="gradient"><a class="viewcode-back" href="documentation.html#xgb_custom.xgb_custom.gradient">[docs]</a><span class="k">def</span> <span class="nf">gradient</span><span class="p">(</span><span class="n">predt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">:</span> <span class="n">DMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""gradient of squared log error"""</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dtrain</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">predt</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">predt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="hessian"><a class="viewcode-back" href="documentation.html#xgb_custom.xgb_custom.hessian">[docs]</a><span class="k">def</span> <span class="nf">hessian</span><span class="p">(</span><span class="n">predt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">:</span> <span class="n">DMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""hessian of squared log error"""</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dtrain</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">((</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">predt</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">predt</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="squared_log"><a class="viewcode-back" href="documentation.html#xgb_custom.xgb_custom.squared_log">[docs]</a><span class="k">def</span> <span class="nf">squared_log</span><span class="p">(</span><span class="n">predt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">:</span> <span class="n">DMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+                                                             <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""squared log error objective</span>
+
+<span class="sd">    simplified version for RMSLE used as objective function</span>
+<span class="sd">    """</span>
+    <span class="n">predt</span><span class="p">[</span><span class="n">predt</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">1e-6</span>
+    <span class="n">grad</span> <span class="o">=</span> <span class="n">gradient</span><span class="p">(</span><span class="n">predt</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">)</span>
+    <span class="n">hess</span> <span class="o">=</span> <span class="n">hessian</span><span class="p">(</span><span class="n">predt</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">grad</span><span class="p">,</span> <span class="n">hess</span></div>
+
+<div class="viewcode-block" id="rmsle"><a class="viewcode-back" href="documentation.html#xgb_custom.xgb_custom.rmsle">[docs]</a><span class="k">def</span> <span class="nf">rmsle</span><span class="p">(</span><span class="n">predt</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">dtrain</span><span class="p">:</span> <span class="n">DMatrix</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">""" Root mean squared log error metric.</span>
+<span class="sd">    """</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dtrain</span><span class="o">.</span><span class="n">get_label</span><span class="p">()</span>
+    <span class="n">predt</span><span class="p">[</span><span class="n">predt</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">1e-6</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">predt</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">"my_rmsle"</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">elements</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span> <span class="o">+</span> <span class="n">DEBUG_ERROR</span></div>
+
+
+<div class="viewcode-block" id="learning_curves"><a class="viewcode-back" href="documentation.html#xgb_custom.xgb_custom.learning_curves">[docs]</a><span class="k">def</span> <span class="nf">learning_curves</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+        <span class="n">results</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">figsz</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+        <span class="n">plots_dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"plots"</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""plot xgb learning curves</span>
+
+<span class="sd">    this will also log a model's learning curves</span>
+<span class="sd">    """</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsz</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">"train"</span><span class="p">][</span><span class="s2">"my_rmsle"</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"train-my-rmsle"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s2">"valid"</span><span class="p">][</span><span class="s2">"my_rmsle"</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">"valid-my-rmsle"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"learning curves"</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span>
+        <span class="n">PlotArtifact</span><span class="p">(</span><span class="sa">f</span><span class="s2">"learning-curves"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()),</span>
+        <span class="n">local_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">plots_dest</span><span class="si">}</span><span class="s2">/learning-curves.html"</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="fit"><a class="viewcode-back" href="documentation.html#xgb_custom.xgb_custom.fit">[docs]</a><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+        <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+        <span class="n">num_boost_round</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">evals</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">DMatrix</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">obj</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">feval</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">maximize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">early_stopping_rounds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">evals_result</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="n">verbose_eval</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">xgb_model</span><span class="p">:</span> <span class="n">DataItem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">callbacks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="p">[],</span>
+        <span class="n">label_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"labels"</span><span class="p">,</span>
+        <span class="n">encode_cols</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+        <span class="n">sample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">test_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span>
+        <span class="n">valid_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.75</span><span class="p">,</span>
+        <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1994</span><span class="p">,</span>
+        <span class="n">models_dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"models"</span><span class="p">,</span>
+        <span class="n">plots_dest</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"plots"</span><span class="p">,</span>
+        <span class="n">file_ext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"csv"</span><span class="p">,</span>
+        <span class="n">test_set_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"test-set"</span><span class="p">,</span>
+        <span class="n">gpus</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""low level xgboost train api</span>
+
+<span class="sd">    for the xgboost `train` params see:</span>
+<span class="sd">    https://xgboost.readthedocs.io/en/latest/python/python_api.html#xgboost.train</span>
+
+<span class="sd">    Note:  the first parameter of xgboost's `train` method is a dict of parameters</span>
+<span class="sd">           supplied to the booster (engine).  To modify one of those simply</span>
+<span class="sd">           add a task parameter (when running you supply an mlrun NewTask) with the</span>
+<span class="sd">           prefix "XGB_". So for example, to set the 'tree_method' parameter to 'approx',</span>
+<span class="sd">           add {"XGB_tree_method":"approx"} to the task params key.</span>
+
+<span class="sd">    :param context:           the function context</span>
+<span class="sd">    :param dataset:           the full data set, train, valid and test will be extracted and</span>
+<span class="sd">                              each converted to a DMatrix for input to xgboost's `train`</span>
+<span class="sd">    :param label_column:      ground-truth (y) labels</span>
+<span class="sd">    :param encode_cols:       dictionary of names and prefixes for columns that are</span>
+<span class="sd">                              to hot be encoded.</span>
+<span class="sd">    :param sample:            Selects the first n rows, or select a sample</span>
+<span class="sd">                              starting from the first. If negative &lt;-1, select</span>
+<span class="sd">                              a random sample</span>
+<span class="sd">    :param test_size:         (0.05) test set size</span>
+<span class="sd">    :param valid_size:        (0.75) Once the test set has been removed the</span>
+<span class="sd">                              training set gets this proportion.</span>
+<span class="sd">    :param random_state:      (1) sklearn rng seed</span>
+<span class="sd">    :param models_dest:       destination subfolder for model artifacts</span>
+<span class="sd">    :param plots_dest:        destination subfolder for plot artifacts</span>
+<span class="sd">    :param file_ext:          format for test_set_key hold out data</span>
+<span class="sd">    :param test_set_key:      (test-set), key of held out data in artifact store</span>
+<span class="sd">    :param gpus:              (False), run on gpus</span>
+<span class="sd">    """</span>
+    <span class="n">raw</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">get_sample</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">sample</span><span class="p">,</span> <span class="n">label_column</span><span class="p">)</span>
+
+    <span class="c1"># hot-encode</span>
+    <span class="k">if</span> <span class="n">encode_cols</span><span class="p">:</span>
+        <span class="n">raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span>
+                             <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">encode_cols</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span>
+                             <span class="n">prefix</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">encode_cols</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span>
+                             <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># split the sample into train validate, test and calibration sets:</span>
+    <span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">),</span> <span class="p">(</span><span class="n">xvalid</span><span class="p">,</span> <span class="n">yvalid</span><span class="p">),</span> <span class="p">(</span><span class="n">xtest</span><span class="p">,</span> <span class="n">ytest</span><span class="p">)</span> <span class="o">=</span> \
+        <span class="n">get_splits</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">test_size</span><span class="p">,</span> <span class="n">valid_size</span><span class="p">,</span> <span class="n">random_state</span><span class="p">)</span>
+
+    <span class="c1"># save test data as regular dataframe as it may be used by other process</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="n">test_set_key</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">xtest</span><span class="p">,</span> <span class="n">ytest</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+                        <span class="nb">format</span><span class="o">=</span><span class="n">file_ext</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># convert to xgboost DMatrix (todo - dask, gpu)</span>
+    <span class="n">dtrain</span> <span class="o">=</span> <span class="n">DMatrix</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">ytrain</span><span class="p">)</span>
+    <span class="n">dvalid</span> <span class="o">=</span> <span class="n">DMatrix</span><span class="p">(</span><span class="n">xvalid</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">yvalid</span><span class="p">)</span>
+
+    <span class="n">boost_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"tree_method"</span><span class="p">:</span> <span class="s2">"gpu_hist"</span> <span class="k">if</span> <span class="n">gpus</span> <span class="k">else</span> <span class="s2">"hist"</span><span class="p">,</span>
+        <span class="s2">"seed"</span><span class="p">:</span> <span class="n">random_state</span><span class="p">,</span>
+        <span class="s2">"disable_default_eval_metric"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">"objective"</span><span class="p">:</span> <span class="s2">"reg:squaredlogerror"</span><span class="p">,</span>
+        <span class="s2">"eval_metric"</span><span class="p">:</span> <span class="s2">"rmsle"</span><span class="p">}</span>
+
+    <span class="c1"># enable user to customize `booster param` parameters</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">'XGB_'</span><span class="p">):</span>
+            <span class="n">boost_params</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">4</span><span class="p">:]]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="c1"># collect learning curves / training history</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="n">booster</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span>
+        <span class="n">boost_params</span><span class="p">,</span>
+        <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">,</span>
+        <span class="n">num_boost_round</span><span class="o">=</span><span class="n">num_boost_round</span><span class="p">,</span>
+        <span class="n">evals</span><span class="o">=</span><span class="p">[(</span><span class="n">dtrain</span><span class="p">,</span> <span class="s2">"train"</span><span class="p">),</span> <span class="p">(</span><span class="n">dvalid</span><span class="p">,</span> <span class="s2">"valid"</span><span class="p">)],</span>
+        <span class="n">evals_result</span><span class="o">=</span><span class="n">results</span><span class="p">,</span>
+        <span class="n">obj</span><span class="o">=</span><span class="n">squared_log</span><span class="p">,</span>
+        <span class="n">feval</span><span class="o">=</span><span class="n">rmsle</span><span class="p">,</span>
+        <span class="n">maximize</span><span class="o">=</span><span class="n">maximize</span><span class="p">,</span>
+        <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="n">early_stopping_rounds</span><span class="p">,</span>
+        <span class="n">verbose_eval</span><span class="o">=</span><span class="n">verbose_eval</span><span class="p">,</span>
+        <span class="c1"># xgb_model=xgb_model,</span>
+        <span class="c1"># callbacks: List[Callable] = []</span>
+    <span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span><span class="s2">"model"</span><span class="p">,</span>
+                      <span class="n">body</span><span class="o">=</span><span class="n">dumps</span><span class="p">(</span><span class="n">booster</span><span class="p">),</span>
+                      <span class="n">model_file</span><span class="o">=</span><span class="s2">"model.pkl"</span><span class="p">,</span>
+                      <span class="n">artifact_path</span><span class="o">=</span><span class="s1">'artifacts/'</span><span class="p">)</span>
+
+    <span class="n">learning_curves</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">results</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>

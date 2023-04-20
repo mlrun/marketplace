@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>validate_great_expectations.validate_great_expectations</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/validate_great_expectations/validate_great_expectations.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for validate_great_expectations.validate_great_expectations</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+
+<span class="kn">import</span> <span class="nn">mlrun</span>
+
+<span class="kn">from</span> <span class="nn">great_expectations.core.batch</span> <span class="kn">import</span> <span class="n">RuntimeBatchRequest</span>
+<span class="kn">from</span> <span class="nn">great_expectations.data_context</span> <span class="kn">import</span> <span class="n">BaseDataContext</span>
+<span class="kn">from</span> <span class="nn">great_expectations.data_context.types.base</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">DataContextConfig</span><span class="p">,</span>
+    <span class="n">FilesystemStoreBackendDefaults</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">great_expectations.checkpoint.types.checkpoint_result</span> <span class="kn">import</span> <span class="n">CheckpointResult</span>
+
+
+<div class="viewcode-block" id="get_default_datasource_config"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_default_datasource_config">[docs]</a><span class="k">def</span> <span class="nf">get_default_datasource_config</span><span class="p">(</span>
+    <span class="n">datasource_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data_connector_name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convenience function to get the default pandas datasource config</span>
+<span class="sd">    for use in validating expectations.</span>
+
+<span class="sd">    :param datasource_name:     Name of datasource.</span>
+<span class="sd">    :param data_connector_name: Name of data connector.</span>
+
+<span class="sd">    :returns: Configuration for default datasource.</span>
+<span class="sd">    """</span>
+    <span class="n">default_datasource_config</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">datasource_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="s2">"class_name"</span><span class="p">:</span> <span class="s2">"Datasource"</span><span class="p">,</span>
+        <span class="s2">"module_name"</span><span class="p">:</span> <span class="s2">"great_expectations.datasource"</span><span class="p">,</span>
+        <span class="s2">"execution_engine"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"module_name"</span><span class="p">:</span> <span class="s2">"great_expectations.execution_engine"</span><span class="p">,</span>
+            <span class="s2">"class_name"</span><span class="p">:</span> <span class="s2">"PandasExecutionEngine"</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="s2">"data_connectors"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">data_connector_name</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">"class_name"</span><span class="p">:</span> <span class="s2">"RuntimeDataConnector"</span><span class="p">,</span>
+                <span class="s2">"module_name"</span><span class="p">:</span> <span class="s2">"great_expectations.datasource.data_connector"</span><span class="p">,</span>
+                <span class="s2">"batch_identifiers"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"default_identifier_name"</span><span class="p">],</span>
+            <span class="p">},</span>
+        <span class="p">},</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">default_datasource_config</span></div>
+
+
+<div class="viewcode-block" id="get_default_checkpoint_config"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_default_checkpoint_config">[docs]</a><span class="k">def</span> <span class="nf">get_default_checkpoint_config</span><span class="p">(</span><span class="n">checkpoint_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convenience function to get the default checkpoint config for</span>
+<span class="sd">    use in validating expectations.</span>
+
+<span class="sd">    :param checkpoint_name: Name of checkpoint.</span>
+
+<span class="sd">    :returns: Configuration for default checkpoint.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s2">"name"</span><span class="p">:</span> <span class="n">checkpoint_name</span><span class="p">,</span>
+        <span class="s2">"config_version"</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="s2">"class_name"</span><span class="p">:</span> <span class="s2">"SimpleCheckpoint"</span><span class="p">,</span>
+        <span class="s2">"run_name_template"</span><span class="p">:</span> <span class="s2">"%Y%m</span><span class="si">%d</span><span class="s2">-%H%M%S-my-run-name-template"</span><span class="p">,</span>
+    <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="get_data_doc_path"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.get_data_doc_path">[docs]</a><span class="k">def</span> <span class="nf">get_data_doc_path</span><span class="p">(</span><span class="n">checkpoint_result</span><span class="p">:</span> <span class="n">CheckpointResult</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convenience function to get the path of the output</span>
+<span class="sd">    data doc from a checkpoint result.</span>
+
+<span class="sd">    :param checkpoint_result: Great Expectations checkpoint result.</span>
+
+<span class="sd">    :returns: Absolute path to new data doc.</span>
+<span class="sd">    """</span>
+    <span class="n">result_id</span> <span class="o">=</span> <span class="n">checkpoint_result</span><span class="o">.</span><span class="n">list_validation_result_identifiers</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">data_doc_path</span> <span class="o">=</span> <span class="n">checkpoint_result</span><span class="p">[</span><span class="s2">"run_results"</span><span class="p">][</span><span class="n">result_id</span><span class="p">][</span><span class="s2">"actions_results"</span><span class="p">][</span>
+        <span class="s2">"update_data_docs"</span>
+    <span class="p">][</span><span class="s2">"local_site"</span><span class="p">]</span>
+    <span class="n">data_doc_path</span> <span class="o">=</span> <span class="n">data_doc_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"file://"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data_doc_path</span></div>
+
+
+<div class="viewcode-block" id="validate_expectations"><a class="viewcode-back" href="documentation.html#validate_great_expectations.validate_great_expectations.validate_expectations">[docs]</a><span class="k">def</span> <span class="nf">validate_expectations</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">expectation_suite_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">data_asset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">datasource_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pandas_datasource"</span><span class="p">,</span>
+    <span class="n">data_connector_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"default_runtime_data_connector_name"</span><span class="p">,</span>
+    <span class="n">datasource_config</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_identifiers</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">root_directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">checkpoint_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">checkpoint_config</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Main function to validate an input dataset, datasource, data connector,</span>
+<span class="sd">    and expectation suite.</span>
+
+<span class="sd">    Runs the Great Expectation validation and logs</span>
+<span class="sd">    whether the validation was a success as well as the output page</span>
+<span class="sd">    of the data docs.</span>
+
+<span class="sd">    :param context:                MLRun context.</span>
+<span class="sd">    :param data:                   Data to validate. Can be local or remote link.</span>
+<span class="sd">    :param expectation_suite_name: Name of expectation suite to validate against.</span>
+<span class="sd">    :param data_asset_name:        Name of dataset in Great Expectations.</span>
+<span class="sd">    :param datasource_name:        Name of datasource to use for validation.</span>
+<span class="sd">    :param data_connector_name:    Name of data connector to use for validation.</span>
+<span class="sd">    :param datasource_config:      Full configuration for datasource. For use with custom</span>
+<span class="sd">                                   data sources other than the default pandas datasource.</span>
+<span class="sd">    :param batch_identifiers:      Custom metadata for identifying particular batches of</span>
+<span class="sd">                                   data. For use when not using the default batch identifiers.</span>
+<span class="sd">    :param root_directory:         Path to underlying Great Expectations project. Defaults to</span>
+<span class="sd">                                   MLRun project artifact path if not specified.</span>
+<span class="sd">    :param checkpoint_name:        Name of checkpoint to use for validation.</span>
+<span class="sd">    :param checkpoint_config:      Full configuration for checkpoint. For use with custome</span>
+<span class="sd">                                   checkpoint config other than the default.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Get data</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+
+    <span class="c1"># Use default root directory for project if not specified</span>
+    <span class="n">root_directory</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">root_directory</span>
+        <span class="k">if</span> <span class="n">root_directory</span>
+        <span class="k">else</span> <span class="sa">f</span><span class="s2">"/v3io/projects/</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">project</span><span class="si">}</span><span class="s2">/great_expectations"</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Load great expectations context</span>
+    <span class="n">ge_context</span> <span class="o">=</span> <span class="n">BaseDataContext</span><span class="p">(</span>
+        <span class="n">project_config</span><span class="o">=</span><span class="n">DataContextConfig</span><span class="p">(</span>
+            <span class="n">store_backend_defaults</span><span class="o">=</span><span class="n">FilesystemStoreBackendDefaults</span><span class="p">(</span>
+                <span class="n">root_directory</span><span class="o">=</span><span class="n">root_directory</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get expectation suite</span>
+    <span class="n">ge_context</span><span class="o">.</span><span class="n">get_expectation_suite</span><span class="p">(</span><span class="n">expectation_suite_name</span><span class="o">=</span><span class="n">expectation_suite_name</span><span class="p">)</span>
+
+    <span class="c1"># Add default data source if not specified</span>
+    <span class="n">datasource_config</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">datasource_config</span>
+        <span class="k">if</span> <span class="n">datasource_config</span>
+        <span class="k">else</span> <span class="n">get_default_datasource_config</span><span class="p">(</span><span class="n">datasource_name</span><span class="p">,</span> <span class="n">data_connector_name</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">ge_context</span><span class="o">.</span><span class="n">add_datasource</span><span class="p">(</span><span class="o">**</span><span class="n">datasource_config</span><span class="p">)</span>
+
+    <span class="c1"># Get data batch</span>
+    <span class="n">batch_identifiers</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">batch_identifiers</span>
+        <span class="k">if</span> <span class="n">batch_identifiers</span>
+        <span class="k">else</span> <span class="p">{</span><span class="s2">"default_identifier_name"</span><span class="p">:</span> <span class="s2">"default_identifier"</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">batch_request</span> <span class="o">=</span> <span class="n">RuntimeBatchRequest</span><span class="p">(</span>
+        <span class="n">datasource_name</span><span class="o">=</span><span class="n">datasource_name</span><span class="p">,</span>
+        <span class="n">data_connector_name</span><span class="o">=</span><span class="n">data_connector_name</span><span class="p">,</span>
+        <span class="n">data_asset_name</span><span class="o">=</span><span class="n">data_asset_name</span><span class="p">,</span>
+        <span class="n">runtime_parameters</span><span class="o">=</span><span class="p">{</span><span class="s2">"batch_data"</span><span class="p">:</span> <span class="n">df</span><span class="p">},</span>
+        <span class="n">batch_identifiers</span><span class="o">=</span><span class="n">batch_identifiers</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get validator</span>
+    <span class="n">validator</span> <span class="o">=</span> <span class="n">ge_context</span><span class="o">.</span><span class="n">get_validator</span><span class="p">(</span>
+        <span class="n">batch_request</span><span class="o">=</span><span class="n">batch_request</span><span class="p">,</span>
+        <span class="n">expectation_suite_name</span><span class="o">=</span><span class="n">expectation_suite_name</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Use default checkpoint name and config if not specified</span>
+    <span class="n">checkpoint_name</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">checkpoint_name</span> <span class="k">if</span> <span class="n">checkpoint_name</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">data_asset_name</span><span class="si">}</span><span class="s2">_checkpoint"</span>
+    <span class="p">)</span>
+    <span class="n">checkpoint_config</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">checkpoint_config</span>
+        <span class="k">if</span> <span class="n">checkpoint_config</span>
+        <span class="k">else</span> <span class="n">get_default_checkpoint_config</span><span class="p">(</span><span class="n">checkpoint_name</span><span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Add checkpoint</span>
+    <span class="n">ge_context</span><span class="o">.</span><span class="n">add_checkpoint</span><span class="p">(</span><span class="o">**</span><span class="n">checkpoint_config</span><span class="p">)</span>
+
+    <span class="c1"># Run expectation suite on checkpoint</span>
+    <span class="n">checkpoint_result</span> <span class="o">=</span> <span class="n">ge_context</span><span class="o">.</span><span class="n">run_checkpoint</span><span class="p">(</span>
+        <span class="n">checkpoint_name</span><span class="o">=</span><span class="n">checkpoint_name</span><span class="p">,</span>
+        <span class="n">validations</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s2">"batch_request"</span><span class="p">:</span> <span class="n">batch_request</span><span class="p">,</span>
+                <span class="s2">"expectation_suite_name"</span><span class="p">:</span> <span class="n">expectation_suite_name</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Log success</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="s2">"validated"</span><span class="p">,</span> <span class="n">checkpoint_result</span><span class="p">[</span><span class="s2">"success"</span><span class="p">])</span>
+
+    <span class="c1"># Log data doc</span>
+    <span class="n">data_doc_path</span> <span class="o">=</span> <span class="n">get_data_doc_path</span><span class="p">(</span><span class="n">checkpoint_result</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="s2">"validation_results"</span><span class="p">,</span> <span class="n">target_path</span><span class="o">=</span><span class="n">data_doc_path</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>

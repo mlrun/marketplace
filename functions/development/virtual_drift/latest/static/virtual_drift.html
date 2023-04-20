@@ -1,0 +1,346 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>virtual_drift.virtual_drift</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/virtual_drift/virtual_drift.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for virtual_drift.virtual_drift</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># Generated by nuclio.export.NuclioExporter</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">pickle</span>
+<span class="kn">import</span> <span class="nn">datetime</span>
+
+<span class="kn">import</span> <span class="nn">v3io_frames</span> <span class="k">as</span> <span class="nn">v3f</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">KBinsDiscretizer</span>
+
+
+<div class="viewcode-block" id="to_observations"><a class="viewcode-back" href="documentation.html#virtual_drift.virtual_drift.to_observations">[docs]</a><span class="k">def</span> <span class="nf">to_observations</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">t</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'_'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">val</span><span class="p">])</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">t</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">u</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'_'</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">val</span><span class="p">])</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">u</span><span class="o">.</span><span class="n">columns</span><span class="p">])</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="p">)</span>
+
+    <span class="n">joined_uniques</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+    <span class="n">joined_uniques</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"t"</span><span class="p">,</span> <span class="s2">"u"</span><span class="p">]</span>
+
+    <span class="n">t_obs</span> <span class="o">=</span> <span class="n">joined_uniques</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"t"</span><span class="p">]</span>
+    <span class="n">u_obs</span> <span class="o">=</span> <span class="n">joined_uniques</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"u"</span><span class="p">]</span>
+
+    <span class="n">t_pdf</span> <span class="o">=</span> <span class="n">t_obs</span> <span class="o">/</span> <span class="n">t_obs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">u_pdf</span> <span class="o">=</span> <span class="n">u_obs</span> <span class="o">/</span> <span class="n">u_obs</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">_t_pdf"</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">t_pdf</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"parquet"</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">_u_pdf"</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">u_pdf</span><span class="p">),</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"parquet"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">t_pdf</span><span class="p">,</span> <span class="n">u_pdf</span></div>
+
+
+<div class="viewcode-block" id="tvd"><a class="viewcode-back" href="documentation.html#virtual_drift.virtual_drift.tvd">[docs]</a><span class="k">def</span> <span class="nf">tvd</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">u</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span></div>
+
+
+<div class="viewcode-block" id="helinger"><a class="viewcode-back" href="documentation.html#virtual_drift.virtual_drift.helinger">[docs]</a><span class="k">def</span> <span class="nf">helinger</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">power</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">u</span><span class="p">),</span> <span class="mi">2</span><span class="p">))))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="kl_divergence"><a class="viewcode-back" href="documentation.html#virtual_drift.virtual_drift.kl_divergence">[docs]</a><span class="k">def</span> <span class="nf">kl_divergence</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="n">t_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">t</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">u</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="n">u_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">u</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">u</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">u</span> <span class="o">/</span> <span class="n">t</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">t_u</span> <span class="o">+</span> <span class="n">u_t</span></div>
+
+
+<div class="viewcode-block" id="all_metrics"><a class="viewcode-back" href="documentation.html#virtual_drift.virtual_drift.all_metrics">[docs]</a><span class="k">def</span> <span class="nf">all_metrics</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">tvd</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">),</span> <span class="n">helinger</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">),</span> <span class="n">kl_divergence</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="drift_magnitude"><a class="viewcode-back" href="documentation.html#virtual_drift.virtual_drift.drift_magnitude">[docs]</a><span class="k">def</span> <span class="nf">drift_magnitude</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">,</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">u</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
+    <span class="n">label_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">prediction_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">discretizers</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_bins</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">stream_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"some_stream"</span><span class="p">,</span>
+    <span class="n">results_tsdb_container</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"bigdata"</span><span class="p">,</span>
+    <span class="n">results_tsdb_table</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"concept_drift/drift_magnitude"</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Drift magnitude metrics</span>
+<span class="sd">       Computes drift magnitude metrics between base dataset t and dataset u.</span>
+<span class="sd">       Metrics:</span>
+<span class="sd">        - TVD (Total Variation Distance)</span>
+<span class="sd">        - Helinger</span>
+<span class="sd">        - KL Divergence</span>
+
+<span class="sd">    :param context: MLRun context</span>
+<span class="sd">    :param t: Base dataset for the drift metrics</span>
+<span class="sd">    :param u: Test dataset for the drift metrics</span>
+<span class="sd">    :param label_col: Label colum in t and u</span>
+<span class="sd">    :param prediction_col: Predictions column in t and u</span>
+<span class="sd">    :param discritizers: Dictionary of dicsritizers for the features if available</span>
+<span class="sd">                         (Created automatically if not provided)</span>
+<span class="sd">    :param n_bins: Number of bins to be used for histrogram creation from continuous variables</span>
+<span class="sd">    :param stream_name: Output stream to push metrics to</span>
+<span class="sd">    :param results_tsdb_container: TSDB table container to push metrics to</span>
+<span class="sd">    :param results_tsdb_table: TSDB table to push metrics to</span>
+<span class="sd">    """</span>
+
+    <span class="n">v3io_client</span> <span class="o">=</span> <span class="n">v3f</span><span class="o">.</span><span class="n">Client</span><span class="p">(</span><span class="s2">"framesd:8081"</span><span class="p">,</span> <span class="n">container</span><span class="o">=</span><span class="n">results_tsdb_container</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">v3io_client</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">"tsdb"</span><span class="p">,</span> <span class="n">results_tsdb_table</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="s2">"1/s"</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">v3io_client</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="s2">"tsdb"</span><span class="p">,</span> <span class="n">results_tsdb_table</span><span class="p">,</span> <span class="n">if_exists</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">"rate"</span><span class="p">:</span> <span class="s2">"1/s"</span><span class="p">}</span>
+        <span class="p">)</span>
+
+    <span class="n">df_t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+    <span class="n">df_u</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+
+    <span class="n">drop_columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">label_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">drop_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label_col</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">prediction_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">drop_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prediction_col</span><span class="p">)</span>
+
+    <span class="n">continuous_features</span> <span class="o">=</span> <span class="n">df_t</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">([</span><span class="s2">"float"</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">discretizers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">discretizers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">continuous_features</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Fitting discretizer for </span><span class="si">{</span><span class="n">feature</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="n">discretizer</span> <span class="o">=</span> <span class="n">KBinsDiscretizer</span><span class="p">(</span>
+                <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">,</span> <span class="n">encode</span><span class="o">=</span><span class="s2">"ordinal"</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s2">"uniform"</span>
+            <span class="p">)</span>
+
+            <span class="n">discretizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">continuous_features</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">discretizers</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">discretizer</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">discretizers_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_path</span><span class="si">}</span><span class="s2">/discritizer.pkl"</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">discretizers_path</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">discretizers</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="s2">"discritizers"</span><span class="p">,</span> <span class="n">target_path</span><span class="o">=</span><span class="n">discretizers_path</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Discretizing featuers"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">discretizer</span> <span class="ow">in</span> <span class="n">discretizers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">df_t</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">discretizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+            <span class="n">df_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">df_u</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">discretizer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
+            <span class="n">df_u</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">df_t</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_t</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"int"</span><span class="p">)</span>
+        <span class="n">df_u</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_u</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">"int"</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="s2">"t_discrete"</span><span class="p">,</span> <span class="n">df_t</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"parquet"</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="s2">"u_discrete"</span><span class="p">,</span> <span class="n">df_u</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"parquet"</span><span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Compute prior metrics"</span><span class="p">)</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">t_prior</span><span class="p">,</span> <span class="n">u_prior</span> <span class="o">=</span> <span class="n">to_observations</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">,</span>
+        <span class="n">df_t</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="n">df_u</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
+        <span class="s2">"features"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">"prior_tvd"</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s2">"prior_helinger"</span><span class="p">],</span> <span class="n">results</span><span class="p">[</span><span class="s2">"prior_kld"</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_metrics</span><span class="p">(</span>
+        <span class="n">t_prior</span><span class="p">,</span> <span class="n">u_prior</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">prediction_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Compute prediction metrics"</span><span class="p">)</span>
+        <span class="n">t_predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">prediction_col</span><span class="p">])</span>
+        <span class="n">u_predictions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_u</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">prediction_col</span><span class="p">])</span>
+        <span class="n">t_class</span><span class="p">,</span> <span class="n">u_class</span> <span class="o">=</span> <span class="n">to_observations</span><span class="p">(</span>
+            <span class="n">context</span><span class="p">,</span> <span class="n">t_predictions</span><span class="p">,</span> <span class="n">u_predictions</span><span class="p">,</span> <span class="s2">"prediction"</span>
+        <span class="p">)</span>
+        <span class="p">(</span>
+            <span class="n">results</span><span class="p">[</span><span class="s2">"prediction_shift_tvd"</span><span class="p">],</span>
+            <span class="n">results</span><span class="p">[</span><span class="s2">"prediction_shift_helinger"</span><span class="p">],</span>
+            <span class="n">results</span><span class="p">[</span><span class="s2">"prediction_shift_kld"</span><span class="p">],</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">all_metrics</span><span class="p">(</span><span class="n">t_class</span><span class="p">,</span> <span class="n">u_class</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">label_col</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Compute class metrics"</span><span class="p">)</span>
+        <span class="n">t_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_t</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">label_col</span><span class="p">])</span>
+        <span class="n">u_labels</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df_u</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">label_col</span><span class="p">])</span>
+        <span class="n">t_class</span><span class="p">,</span> <span class="n">u_class</span> <span class="o">=</span> <span class="n">to_observations</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">t_labels</span><span class="p">,</span> <span class="n">u_labels</span><span class="p">,</span> <span class="s2">"class"</span><span class="p">)</span>
+        <span class="p">(</span>
+            <span class="n">results</span><span class="p">[</span><span class="s2">"class_shift_tvd"</span><span class="p">],</span>
+            <span class="n">results</span><span class="p">[</span><span class="s2">"class_shift_helinger"</span><span class="p">],</span>
+            <span class="n">results</span><span class="p">[</span><span class="s2">"class_shift_kld"</span><span class="p">],</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="n">all_metrics</span><span class="p">(</span><span class="n">t_class</span><span class="p">,</span> <span class="n">u_class</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">):</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+    <span class="n">now</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()))</span>
+    <span class="n">now</span>
+
+    <span class="n">results</span><span class="p">[</span><span class="s2">"timestamp"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="nb">str</span><span class="p">((</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">())))</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Timestamp: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">'timestamp'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">results</span><span class="p">[</span><span class="s2">"stream"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stream_name</span>
+    <span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">())],</span> <span class="n">columns</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="p">)</span>
+    <span class="n">results_df</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s2">"timestamp"</span><span class="p">,</span> <span class="s2">"stream"</span><span class="p">])</span>
+    <span class="n">v3io_client</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"tsdb"</span><span class="p">,</span> <span class="n">results_tsdb_table</span><span class="p">,</span> <span class="n">dfs</span><span class="o">=</span><span class="n">results_df</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
