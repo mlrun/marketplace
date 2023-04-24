@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>feature_selection.feature_selection</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/feature_selection/feature_selection.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for feature_selection.feature_selection</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">mlrun.api.schemas</span>
+<span class="kn">import</span> <span class="nn">mlrun.feature_store</span> <span class="k">as</span> <span class="nn">fs</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">PlotArtifact</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore.targets</span> <span class="kn">import</span> <span class="n">ParquetTarget</span>
+<span class="c1"># MLRun utils</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils.helpers</span> <span class="kn">import</span> <span class="n">create_class</span>
+<span class="c1"># Feature selection strategies</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="kn">import</span> <span class="n">SelectFromModel</span><span class="p">,</span> <span class="n">SelectKBest</span>
+<span class="c1"># Scale feature scoresgit st</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="c1"># SKLearn estimators list</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">all_estimators</span>
+
+<span class="n">DEFAULT_STAT_FILTERS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"f_classif"</span><span class="p">,</span> <span class="s2">"mutual_info_classif"</span><span class="p">,</span> <span class="s2">"chi2"</span><span class="p">,</span> <span class="s2">"f_regression"</span><span class="p">]</span>
+<span class="n">DEFAULT_MODEL_FILTERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"LinearSVC"</span><span class="p">:</span> <span class="s2">"LinearSVC"</span><span class="p">,</span>
+    <span class="s2">"LogisticRegression"</span><span class="p">:</span> <span class="s2">"LogisticRegression"</span><span class="p">,</span>
+    <span class="s2">"ExtraTreesClassifier"</span><span class="p">:</span> <span class="s2">"ExtraTreesClassifier"</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">_clear_current_figure</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Clear matplotlib current figure.</span>
+<span class="sd">    """</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="show_values_on_bars"><a class="viewcode-back" href="documentation.html#feature_selection.feature_selection.show_values_on_bars">[docs]</a><span class="k">def</span> <span class="nf">show_values_on_bars</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">h_v</span><span class="o">=</span><span class="s2">"v"</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mf">0.4</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_show_on_single_plot</span><span class="p">(</span><span class="n">ax_</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">h_v</span> <span class="o">==</span> <span class="s2">"v"</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax_</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+                <span class="n">_x</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="n">_y</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">())</span>
+                <span class="n">ax_</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">h_v</span> <span class="o">==</span> <span class="s2">"h"</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">ax_</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+                <span class="n">_x</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">+</span> <span class="nb">float</span><span class="p">(</span><span class="n">space</span><span class="p">)</span>
+                <span class="n">_y</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">())</span>
+                <span class="n">ax_</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"left"</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">ndenumerate</span><span class="p">(</span><span class="n">axs</span><span class="p">):</span>
+            <span class="n">_show_on_single_plot</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_show_on_single_plot</span><span class="p">(</span><span class="n">axs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="plot_stat"><a class="viewcode-back" href="documentation.html#feature_selection.feature_selection.plot_stat">[docs]</a><span class="k">def</span> <span class="nf">plot_stat</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">,</span> <span class="n">stat_df</span><span class="p">):</span>
+    <span class="n">_clear_current_figure</span><span class="p">()</span>
+
+    <span class="c1"># Add chart</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
+    <span class="n">stat_chart</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">stat_name</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="s2">"index"</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">stat_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">stat_name</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">stat_chart</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="mi">5</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">(),</span>
+            <span class="n">p</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.55</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span>
+            <span class="s2">"</span><span class="si">{:1.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">width</span><span class="p">),</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span>
+            <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span>
+        <span class="n">PlotArtifact</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()),</span>
+        <span class="n">local_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"plots"</span><span class="p">,</span> <span class="s2">"feature_selection"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2">.html"</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">_clear_current_figure</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="feature_selection"><a class="viewcode-back" href="documentation.html#feature_selection.feature_selection.feature_selection">[docs]</a><span class="k">def</span> <span class="nf">feature_selection</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">,</span>
+    <span class="n">df_artifact</span><span class="p">,</span>
+    <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">min_votes</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">label_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">stat_filters</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_filters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_scaled_scores</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">sample_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">output_vector_name</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">ignore_type_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">is_feature_vector</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Applies selected feature selection statistical functions or models on our 'df_artifact'.</span>
+
+<span class="sd">    Each statistical function or model will vote for it's best K selected features.</span>
+<span class="sd">    If a feature has &gt;= 'min_votes' votes, it will be selected.</span>
+
+<span class="sd">    :param context:             the function context.</span>
+<span class="sd">    :param df_artifact:         dataframe to pass as input.</span>
+<span class="sd">    :param k:                   number of top features to select from each statistical</span>
+<span class="sd">                                function or model.</span>
+<span class="sd">    :param min_votes:           minimal number of votes (from a model or by statistical</span>
+<span class="sd">                                function) needed for a feature to be selected.</span>
+<span class="sd">                                Can be specified by percentage of votes or absolute</span>
+<span class="sd">                                number of votes.</span>
+<span class="sd">    :param label_column:        ground-truth (y) labels.</span>
+<span class="sd">    :param stat_filters:        statistical functions to apply to the features</span>
+<span class="sd">                                (from sklearn.feature_selection).</span>
+<span class="sd">    :param model_filters:       models to use for feature evaluation, can be specified by</span>
+<span class="sd">                                model name (ex. LinearSVC), formalized json (contains 'CLASS',</span>
+<span class="sd">                                'FIT', 'META') or a path to such json file.</span>
+<span class="sd">    :param max_scaled_scores:   produce feature scores table scaled with max_scaler.</span>
+<span class="sd">    :param sample_ratio:        percentage of the dataset the user whishes to compute the feature selection process on.</span>
+<span class="sd">    :param output_vector_name:  creates a new feature vector containing only the identifies features.</span>
+<span class="sd">    :param ignore_type_errors:  skips datatypes that are neither float nor int within the feature vector.</span>
+<span class="sd">    :param is_feature_vector:   bool stating if the data is passed as a feature vector.</span>
+<span class="sd">    """</span>
+    <span class="n">stat_filters</span> <span class="o">=</span> <span class="n">stat_filters</span> <span class="ow">or</span> <span class="n">DEFAULT_STAT_FILTERS</span>
+    <span class="n">model_filters</span> <span class="o">=</span> <span class="n">model_filters</span> <span class="ow">or</span> <span class="n">DEFAULT_MODEL_FILTERS</span>
+    <span class="c1"># Check if df.meta is valid, if it is, look for a feature vector</span>
+    <span class="k">if</span> <span class="n">df_artifact</span><span class="o">.</span><span class="n">meta</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">df_artifact</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">schemas</span><span class="o">.</span><span class="n">ObjectKind</span><span class="o">.</span><span class="n">feature_vector</span><span class="p">:</span>
+            <span class="n">is_feature_vector</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># Look inside meta.spec.label_feature to identify the label_column if the user did not specify it</span>
+    <span class="k">if</span> <span class="n">label_column</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_feature_vector</span><span class="p">:</span>
+            <span class="n">label_column</span> <span class="o">=</span> <span class="n">df_artifact</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">label_feature</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"No label_column was given, please add a label_column."</span><span class="p">)</span>
+
+    <span class="c1"># Use the feature vector as dataframe</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_artifact</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+
+    <span class="c1"># Ensure k is not bigger than the total number of features</span>
+    <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"K cannot be bigger than the total number of features (</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">). Please choose a smaller K."</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"K cannot be smaller than 1. Please choose a bigger K."</span><span class="p">)</span>
+
+    <span class="c1"># Create a sample dataframe of the original feature vector</span>
+    <span class="k">if</span> <span class="n">sample_ratio</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">label_column</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="n">sample_ratio</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+    <span class="c1"># Set feature vector and labels</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">label_column</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">df</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">object</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span> <span class="ow">and</span> <span class="n">ignore_type_errors</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s1">'object'</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2"> are neither float or int."</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Create selected statistical estimators</span>
+    <span class="n">stat_functions_list</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">stat_name</span><span class="p">:</span> <span class="n">SelectKBest</span><span class="p">(</span>
+            <span class="n">score_func</span><span class="o">=</span><span class="n">create_class</span><span class="p">(</span><span class="sa">f</span><span class="s2">"sklearn.feature_selection.</span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2">"</span><span class="p">),</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">stat_name</span> <span class="ow">in</span> <span class="n">stat_filters</span>
+    <span class="p">}</span>
+    <span class="n">requires_abs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"chi2"</span><span class="p">]</span>
+
+    <span class="c1"># Run statistic filters</span>
+    <span class="n">selected_features_agg</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">stats_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+    <span class="k">for</span> <span class="n">stat_name</span><span class="p">,</span> <span class="n">stat_func</span> <span class="ow">in</span> <span class="n">stat_functions_list</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="k">if</span> <span class="n">stat_name</span> <span class="ow">in</span> <span class="n">requires_abs</span> <span class="k">else</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+            <span class="n">stat</span> <span class="o">=</span> <span class="n">stat_func</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">*</span><span class="n">params</span><span class="p">)</span>
+
+            <span class="c1"># Collect stat function results</span>
+            <span class="n">stat_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+                <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">stat_name</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">stat</span><span class="o">.</span><span class="n">scores_</span>
+            <span class="p">)</span>
+            <span class="n">plot_stat</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">,</span> <span class="n">stat_df</span><span class="p">)</span>
+            <span class="n">stats_df</span> <span class="o">=</span> <span class="n">stats_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stat_df</span><span class="p">)</span>
+
+            <span class="c1"># Select K Best features</span>
+            <span class="n">selected_features</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">stat_func</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span>
+            <span class="n">selected_features_agg</span><span class="p">[</span><span class="n">stat_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">selected_features</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Couldn't calculate </span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2"> because of: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Create models from class name / json file / json params</span>
+    <span class="n">all_sklearn_estimators</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">all_estimators</span><span class="p">())</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_filters</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="p">{}</span>
+    <span class="n">selected_models</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">model_filters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="s2">".json"</span> <span class="ow">in</span> <span class="n">model</span><span class="p">:</span>
+            <span class="n">current_model</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">))</span>
+            <span class="n">classifier_class</span> <span class="o">=</span> <span class="n">create_class</span><span class="p">(</span><span class="n">current_model</span><span class="p">[</span><span class="s2">"META"</span><span class="p">][</span><span class="s2">"class"</span><span class="p">])</span>
+            <span class="n">selected_models</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">classifier_class</span><span class="p">(</span><span class="o">**</span><span class="n">current_model</span><span class="p">[</span><span class="s2">"CLASS"</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">all_sklearn_estimators</span><span class="p">:</span>
+            <span class="n">selected_models</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">all_sklearn_estimators</span><span class="p">[</span><span class="n">model_name</span><span class="p">]()</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">current_model</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+                <span class="n">classifier_class</span> <span class="o">=</span> <span class="n">create_class</span><span class="p">(</span><span class="n">current_model</span><span class="p">[</span><span class="s2">"META"</span><span class="p">][</span><span class="s2">"class"</span><span class="p">])</span>
+                <span class="n">selected_models</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">classifier_class</span><span class="p">(</span><span class="o">**</span><span class="n">current_model</span><span class="p">[</span><span class="s2">"CLASS"</span><span class="p">])</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"unable to load </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2"> because of: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Run model filters</span>
+    <span class="n">models_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">selected_models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s2">"LogisticRegression"</span><span class="p">:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">set_params</span><span class="p">(</span><span class="n">solver</span><span class="o">=</span><span class="s2">"liblinear"</span><span class="p">)</span>
+
+        <span class="c1"># Train model and get feature importance</span>
+        <span class="n">select_from_model</span> <span class="o">=</span> <span class="n">SelectFromModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">feature_idx</span> <span class="o">=</span> <span class="n">select_from_model</span><span class="o">.</span><span class="n">get_support</span><span class="p">()</span>
+        <span class="n">feature_names</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">feature_idx</span><span class="p">]</span>
+        <span class="n">selected_features_agg</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_names</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+        <span class="c1"># Collect model feature importance</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">select_from_model</span><span class="o">.</span><span class="n">estimator_</span><span class="p">,</span> <span class="s2">"coef_"</span><span class="p">):</span>
+            <span class="n">stat_df</span> <span class="o">=</span> <span class="n">select_from_model</span><span class="o">.</span><span class="n">estimator_</span><span class="o">.</span><span class="n">coef_</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">select_from_model</span><span class="o">.</span><span class="n">estimator_</span><span class="p">,</span> <span class="s2">"feature_importances_"</span><span class="p">):</span>
+            <span class="n">stat_df</span> <span class="o">=</span> <span class="n">select_from_model</span><span class="o">.</span><span class="n">estimator_</span><span class="o">.</span><span class="n">feature_importances_</span>
+
+        <span class="n">stat_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">model_name</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="n">stat_df</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">models_df</span> <span class="o">=</span> <span class="n">models_df</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">stat_df</span><span class="p">)</span>
+
+        <span class="n">plot_stat</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">stat_df</span><span class="p">)</span>
+
+    <span class="c1"># Create feature_scores DF with stat &amp; model filters scores</span>
+    <span class="n">result_matrix_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">stats_df</span><span class="p">,</span> <span class="n">models_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="s2">"feature_scores"</span><span class="p">,</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">result_matrix_df</span><span class="p">,</span>
+        <span class="n">local_path</span><span class="o">=</span><span class="s2">"feature_scores.parquet"</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">"parquet"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">max_scaled_scores</span><span class="p">:</span>
+        <span class="n">normalized_df</span> <span class="o">=</span> <span class="n">result_matrix_df</span><span class="o">.</span><span class="n">replace</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">min_max_scaler</span> <span class="o">=</span> <span class="n">MinMaxScaler</span><span class="p">()</span>
+        <span class="n">normalized_df</span> <span class="o">=</span> <span class="n">min_max_scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">normalized_df</span><span class="p">)</span>
+        <span class="n">normalized_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">normalized_df</span><span class="p">,</span>
+            <span class="n">columns</span><span class="o">=</span><span class="n">result_matrix_df</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+            <span class="n">index</span><span class="o">=</span><span class="n">result_matrix_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span>
+            <span class="n">key</span><span class="o">=</span><span class="s2">"max_scaled_scores_feature_scores"</span><span class="p">,</span>
+            <span class="n">df</span><span class="o">=</span><span class="n">normalized_df</span><span class="p">,</span>
+            <span class="n">local_path</span><span class="o">=</span><span class="s2">"max_scaled_scores_feature_scores.parquet"</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="s2">"parquet"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Create feature count DataFrame</span>
+    <span class="k">for</span> <span class="n">test_name</span> <span class="ow">in</span> <span class="n">selected_features_agg</span><span class="p">:</span>
+        <span class="n">result_matrix_df</span><span class="p">[</span><span class="n">test_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">selected_features_agg</span><span class="p">[</span><span class="n">test_name</span><span class="p">]</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span>
+        <span class="p">]</span>
+    <span class="n">result_matrix_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s2">"num_votes"</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_matrix_df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="s2">"selected_features_count"</span><span class="p">,</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">result_matrix_df</span><span class="p">,</span>
+        <span class="n">local_path</span><span class="o">=</span><span class="s2">"selected_features_count.parquet"</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">"parquet"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># How many votes are needed for a feature to be selected?</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">min_votes</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">votes_needed</span> <span class="o">=</span> <span class="n">min_votes</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">num_filters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">stat_filters</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">model_filters</span><span class="p">)</span>
+        <span class="n">votes_needed</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">num_filters</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">min_votes</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">0</span><span class="p">)))</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"votes needed to be selected: </span><span class="si">{</span><span class="n">votes_needed</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Create final feature dataframe</span>
+    <span class="n">selected_features</span> <span class="o">=</span> <span class="n">result_matrix_df</span><span class="p">[</span>
+        <span class="n">result_matrix_df</span><span class="o">.</span><span class="n">num_votes</span> <span class="o">&gt;=</span> <span class="n">votes_needed</span>
+    <span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">good_feature_df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">selected_features</span><span class="p">]</span>
+    <span class="n">final_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">good_feature_df</span><span class="p">,</span> <span class="n">y</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="s2">"selected_features"</span><span class="p">,</span>
+        <span class="n">df</span><span class="o">=</span><span class="n">final_df</span><span class="p">,</span>
+        <span class="n">local_path</span><span class="o">=</span><span class="s2">"selected_features.parquet"</span><span class="p">,</span>
+        <span class="nb">format</span><span class="o">=</span><span class="s2">"parquet"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Creating a new feature vector containing only the identified top features</span>
+    <span class="k">if</span> <span class="n">is_feature_vector</span> <span class="ow">and</span> <span class="n">df_artifact</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">features</span> <span class="ow">and</span> <span class="n">output_vector_name</span><span class="p">:</span>
+        <span class="c1"># Selecting the top K features from our top feature dataframe</span>
+        <span class="n">selected_features</span> <span class="o">=</span> <span class="n">result_matrix_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+
+        <span class="c1"># Match the selected feature names to the FS Feature annotations</span>
+        <span class="n">matched_selections</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">feature</span>
+            <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">df_artifact</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">features</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">selected</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">selected_features</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">feature</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">selected</span><span class="p">)</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Defining our new feature vector</span>
+        <span class="n">top_features_fv</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">FeatureVector</span><span class="p">(</span>
+            <span class="n">output_vector_name</span><span class="p">,</span>
+            <span class="n">matched_selections</span><span class="p">,</span>
+            <span class="n">label_feature</span><span class="o">=</span><span class="s2">"labels.label"</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"feature vector composed strictly of our top features"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Saving</span>
+        <span class="n">top_features_fv</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">fs</span><span class="o">.</span><span class="n">get_offline_features</span><span class="p">(</span><span class="n">top_features_fv</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">ParquetTarget</span><span class="p">())</span>
+
+        <span class="c1"># Logging our new feature vector URI</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="s2">"top_features_vector"</span><span class="p">,</span> <span class="n">top_features_fv</span><span class="o">.</span><span class="n">uri</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>

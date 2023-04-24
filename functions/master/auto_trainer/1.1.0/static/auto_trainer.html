@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>auto_trainer.auto_trainer</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/auto_trainer/auto_trainer.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for auto_trainer.auto_trainer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore</span> <span class="kn">import</span> <span class="n">DataItem</span>
+<span class="kn">from</span> <span class="nn">mlrun.frameworks.auto_mlrun</span> <span class="kn">import</span> <span class="n">AutoMLRun</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">feature_store</span> <span class="k">as</span> <span class="n">fs</span>
+<span class="kn">from</span> <span class="nn">mlrun.api.schemas</span> <span class="kn">import</span> <span class="n">ObjectKind</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils.helpers</span> <span class="kn">import</span> <span class="n">create_class</span><span class="p">,</span> <span class="n">create_function</span>
+
+<span class="n">PathType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="KWArgsPrefixes"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.KWArgsPrefixes">[docs]</a><span class="k">class</span> <span class="nc">KWArgsPrefixes</span><span class="p">:</span>
+    <span class="n">MODEL_CLASS</span> <span class="o">=</span> <span class="s2">"CLASS_"</span>
+    <span class="n">FIT</span> <span class="o">=</span> <span class="s2">"FIT_"</span>
+    <span class="n">TRAIN</span> <span class="o">=</span> <span class="s2">"TRAIN_"</span>
+    <span class="n">PREDICT</span> <span class="o">=</span> <span class="s2">"PREDICT_"</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_sub_dict_by_prefix</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">prefix_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Collect all the keys from the given dict that starts with the given prefix and creates a new dictionary with these</span>
+<span class="sd">    keys.</span>
+
+<span class="sd">    :param src:         The source dict to extract the values from.</span>
+<span class="sd">    :param prefix_key:  Only keys with this prefix will be returned. The keys in the result dict will be without this</span>
+<span class="sd">                        prefix.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">prefix_key</span><span class="p">,</span> <span class="s2">""</span><span class="p">):</span> <span class="n">val</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix_key</span><span class="p">)</span>
+    <span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">_get_dataframe</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">label_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Getting the DataFrame of the dataset and drop the columns accordingly.</span>
+
+<span class="sd">    :param context:         MLRun context.</span>
+<span class="sd">    :param dataset:         The dataset to train the model on.</span>
+<span class="sd">                            Can be either a list of lists, dict, URI or a FeatureVector.</span>
+<span class="sd">    :param label_columns:   The target label(s) of the column(s) in the dataset. for Regression or</span>
+<span class="sd">                            Classification tasks.</span>
+<span class="sd">    :param drop_columns:    str/int or a list of strings/ints that represent the column names/indices to drop.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="c1"># Checking if drop_columns provided by integer type:</span>
+        <span class="k">if</span> <span class="n">drop_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+                <span class="nb">isinstance</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">drop_columns</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">"drop_columns must be an integer/list of integers if not provided with a URI/FeatureVector dataset"</span>
+                <span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">label_columns</span>
+
+    <span class="k">if</span> <span class="n">dataset</span><span class="o">.</span><span class="n">meta</span> <span class="ow">and</span> <span class="n">dataset</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="n">ObjectKind</span><span class="o">.</span><span class="n">feature_vector</span><span class="p">:</span>
+        <span class="c1"># feature-vector case:</span>
+        <span class="n">label_columns</span> <span class="o">=</span> <span class="n">label_columns</span> <span class="ow">or</span> <span class="n">dataset</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">label_column</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_offline_features</span><span class="p">(</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"label columns: </span><span class="si">{</span><span class="n">label_columns</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># simple URL case:</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">drop_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="n">dataset</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">drop_columns</span><span class="p">):</span>
+                <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">"not all of the columns to drop in the dataset, drop columns process skipped"</span>
+                <span class="p">)</span>
+    <span class="k">return</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">label_columns</span>
+
+
+<div class="viewcode-block" id="train"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.train">[docs]</a><span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"model"</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">label_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">sample_set</span><span class="p">:</span> <span class="n">DataItem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">test_set</span><span class="p">:</span> <span class="n">DataItem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">train_test_split_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Training the given model on the given dataset.</span>
+
+<span class="sd">    :param context:                 MLRun context</span>
+<span class="sd">    :param dataset:                 The dataset to train the model on. Can be either a URI or a FeatureVector</span>
+<span class="sd">    :param drop_columns:            str or a list of strings that represent the columns to drop</span>
+<span class="sd">    :param model_class:             The class of the model, e.g. `sklearn.linear_model.LogisticRegression`</span>
+<span class="sd">    :param model_name:              The model's name to use for storing the model artifact, default to 'model'</span>
+<span class="sd">    :param tag:                     The model's tag to log with</span>
+<span class="sd">    :param label_columns:           The target label(s) of the column(s) in the dataset. for Regression or</span>
+<span class="sd">                                    Classification tasks</span>
+<span class="sd">    :param sample_set:              A sample set of inputs for the model for logging its stats along the model in favour</span>
+<span class="sd">                                    of model monitoring. Can be either a URI or a FeatureVector</span>
+<span class="sd">    :param test_set:                The test set to train the model with</span>
+<span class="sd">    :param train_test_split_size:   Should be between 0.0 and 1.0 and represent the proportion of the dataset to include</span>
+<span class="sd">                                    in the test split. The size of the Training set is set to the complement of this</span>
+<span class="sd">                                    value. Default = 0.2</span>
+<span class="sd">    :param random_state:            Random state for `train_test_split`</span>
+<span class="sd">    """</span>
+    <span class="c1"># Validate inputs:</span>
+    <span class="c1"># Check if exactly one of them is supplied:</span>
+    <span class="k">if</span> <span class="n">test_set</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">train_test_split_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">"test_set or train_test_split_size are not provided, setting train_test_split_size to 0.2"</span>
+            <span class="p">)</span>
+            <span class="n">train_test_split_size</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+    <span class="k">elif</span> <span class="n">train_test_split_size</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">"test_set provided, ignoring given train_test_split_size value"</span>
+        <span class="p">)</span>
+        <span class="n">train_test_split_size</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Get DataFrame by URL or by FeatureVector:</span>
+    <span class="n">dataset</span><span class="p">,</span> <span class="n">label_columns</span> <span class="o">=</span> <span class="n">_get_dataframe</span><span class="p">(</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+        <span class="n">label_columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">,</span>
+        <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Getting the sample set:</span>
+    <span class="k">if</span> <span class="n">sample_set</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Sample set not given, using the whole training set as the sample set"</span>
+        <span class="p">)</span>
+        <span class="n">sample_set</span> <span class="o">=</span> <span class="n">dataset</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sample_set</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_dataframe</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">dataset</span><span class="o">=</span><span class="n">sample_set</span><span class="p">,</span>
+            <span class="n">label_columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">,</span>
+            <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Parsing kwargs:</span>
+    <span class="c1"># TODO: Use in xgb or lgbm train function.</span>
+    <span class="n">train_kwargs</span> <span class="o">=</span> <span class="n">_get_sub_dict_by_prefix</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">prefix_key</span><span class="o">=</span><span class="n">KWArgsPrefixes</span><span class="o">.</span><span class="n">TRAIN</span>
+    <span class="p">)</span>
+    <span class="n">fit_kwargs</span> <span class="o">=</span> <span class="n">_get_sub_dict_by_prefix</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">prefix_key</span><span class="o">=</span><span class="n">KWArgsPrefixes</span><span class="o">.</span><span class="n">FIT</span>
+    <span class="p">)</span>
+    <span class="n">model_class_kwargs</span> <span class="o">=</span> <span class="n">_get_sub_dict_by_prefix</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">prefix_key</span><span class="o">=</span><span class="n">KWArgsPrefixes</span><span class="o">.</span><span class="n">MODEL_CLASS</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Check if model or function:</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model_class</span><span class="p">,</span> <span class="s2">"train"</span><span class="p">):</span>
+        <span class="c1"># TODO: Need to call: model(), afterwards to start the train function.</span>
+        <span class="c1"># model = create_function(f"{model_class}.train")</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Creating model instance:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">create_class</span><span class="p">(</span><span class="n">model_class</span><span class="p">)(</span><span class="o">**</span><span class="n">model_class_kwargs</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">label_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">label_columns</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">train_test_split_size</span><span class="p">:</span>
+        <span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="n">train_test_split_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+        <span class="n">test_set</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">drop_columns</span><span class="p">:</span>
+            <span class="n">test_set</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">test_set</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">label_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">test_set</span><span class="p">[</span><span class="n">label_columns</span><span class="p">]</span>
+
+    <span class="n">AutoMLRun</span><span class="o">.</span><span class="n">apply_mlrun</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span>
+        <span class="n">sample_set</span><span class="o">=</span><span class="n">sample_set</span><span class="p">,</span>
+        <span class="n">y_columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">,</span>
+        <span class="n">test_set</span><span class="o">=</span><span class="n">test_set</span><span class="p">,</span>
+        <span class="n">x_test</span><span class="o">=</span><span class="n">x_test</span><span class="p">,</span>
+        <span class="n">y_test</span><span class="o">=</span><span class="n">y_test</span><span class="p">,</span>
+        <span class="n">artifacts</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">artifacts</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"training '</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="o">**</span><span class="n">fit_kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="evaluate"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.evaluate">[docs]</a><span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">label_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Evaluating a model. Artifacts generated by the MLHandler.</span>
+
+<span class="sd">    :param context:                 MLRun context.</span>
+<span class="sd">    :param model:                   The model Store path.</span>
+<span class="sd">    :param dataset:                 The dataset to evaluate the model on. Can be either a URI or a FeatureVector.</span>
+<span class="sd">    :param drop_columns:            str or a list of strings that represent the columns to drop.</span>
+<span class="sd">    :param label_columns:           The target label(s) of the column(s) in the dataset. for Regression or</span>
+<span class="sd">                                    Classification tasks.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Get dataset by URL or by FeatureVector:</span>
+    <span class="n">dataset</span><span class="p">,</span> <span class="n">label_columns</span> <span class="o">=</span> <span class="n">_get_dataframe</span><span class="p">(</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+        <span class="n">label_columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">,</span>
+        <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Parsing label_columns:</span>
+    <span class="n">parsed_label_columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">label_columns</span><span class="p">:</span>
+        <span class="n">label_columns</span> <span class="o">=</span> <span class="n">label_columns</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label_columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">label_columns</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">lc</span> <span class="ow">in</span> <span class="n">label_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">feature_separator</span> <span class="ow">in</span> <span class="n">lc</span><span class="p">:</span>
+                <span class="n">feature_set_name</span><span class="p">,</span> <span class="n">label_name</span><span class="p">,</span> <span class="n">alias</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">common</span><span class="o">.</span><span class="n">parse_feature_string</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span>
+                <span class="n">parsed_label_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">alias</span> <span class="ow">or</span> <span class="n">label_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parsed_label_columns</span><span class="p">:</span>
+            <span class="n">label_columns</span> <span class="o">=</span> <span class="n">parsed_label_columns</span>
+
+    <span class="c1"># Parsing kwargs:</span>
+    <span class="n">predict_kwargs</span> <span class="o">=</span> <span class="n">_get_sub_dict_by_prefix</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">prefix_key</span><span class="o">=</span><span class="n">KWArgsPrefixes</span><span class="o">.</span><span class="n">PREDICT</span>
+    <span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">label_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">label_columns</span><span class="p">]</span>
+
+    <span class="c1"># Loading the model and predicting:</span>
+    <span class="n">model_handler</span> <span class="o">=</span> <span class="n">AutoMLRun</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">AutoMLRun</span><span class="o">.</span><span class="n">apply_mlrun</span><span class="p">(</span><span class="n">model_handler</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"evaluating '</span><span class="si">{</span><span class="n">model_handler</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+    <span class="n">model_handler</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">predict_kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="predict"><a class="viewcode-back" href="documentation.html#auto_trainer.auto_trainer.predict">[docs]</a><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">label_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">result_set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Predicting dataset by a model.</span>
+
+<span class="sd">    :param context:                 MLRun context.</span>
+<span class="sd">    :param model:                   The model Store path.</span>
+<span class="sd">    :param dataset:                 The dataset to predict the model on. Can be either a URI, a FeatureVector or a</span>
+<span class="sd">                                    sample in a shape of a list/dict.</span>
+<span class="sd">                                    When passing a sample, pass the dataset as a field in `params` instead of `inputs`.</span>
+<span class="sd">    :param drop_columns:            str/int or a list of strings/ints that represent the column names/indices to drop.</span>
+<span class="sd">                                    When the dataset is a list/dict this parameter should be represented by integers.</span>
+<span class="sd">    :param label_columns:           The target label(s) of the column(s) in the dataset. for Regression or</span>
+<span class="sd">                                    Classification tasks.</span>
+<span class="sd">    :param result_set:              The db key to set name of the prediction result and the filename.</span>
+<span class="sd">                                    Default to 'prediction'.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Get dataset by URL or by FeatureVector:</span>
+    <span class="n">dataset</span><span class="p">,</span> <span class="n">label_columns</span> <span class="o">=</span> <span class="n">_get_dataframe</span><span class="p">(</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+        <span class="n">label_columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">,</span>
+        <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Parsing kwargs:</span>
+    <span class="n">predict_kwargs</span> <span class="o">=</span> <span class="n">_get_sub_dict_by_prefix</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">prefix_key</span><span class="o">=</span><span class="n">KWArgsPrefixes</span><span class="o">.</span><span class="n">PREDICT</span>
+    <span class="p">)</span>
+
+    <span class="c1"># loading the model, and getting the model handler:</span>
+    <span class="n">model_handler</span> <span class="o">=</span> <span class="n">AutoMLRun</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="c1"># Dropping label columns if necessary:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">label_columns</span><span class="p">:</span>
+        <span class="n">label_columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">label_columns</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">label_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">label_columns</span><span class="p">]</span>
+
+    <span class="c1"># Predicting:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"making prediction by '</span><span class="si">{</span><span class="n">model_handler</span><span class="o">.</span><span class="n">model_name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_handler</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="o">**</span><span class="n">predict_kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Preparing and validating label columns for the dataframe of the prediction result:</span>
+    <span class="n">num_predicted</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">num_predicted</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_columns</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">num_predicted</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">label_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"predicted labels"</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label_columns</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="sa">f</span><span class="s2">"predicted_label_</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">label_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+                    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_predicted</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_columns</span><span class="p">))</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">num_predicted</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_columns</span><span class="p">):</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"number of predicted labels: </span><span class="si">{</span><span class="n">num_predicted</span><span class="si">}</span><span class="s2"> is smaller than number of label columns: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">label_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span>
+
+    <span class="n">artifact_name</span> <span class="o">=</span> <span class="n">result_set</span> <span class="ow">or</span> <span class="s1">'prediction'</span>
+    <span class="n">labels_inside_df</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">label_columns</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">labels_inside_df</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The labels: </span><span class="si">{</span><span class="n">labels_inside_df</span><span class="si">}</span><span class="s2"> are already existed in the dataframe"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span>
+    <span class="n">pred_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">dataset</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="n">artifact_name</span><span class="p">,</span> <span class="n">pred_df</span><span class="p">,</span> <span class="n">db_key</span><span class="o">=</span><span class="n">result_set</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>

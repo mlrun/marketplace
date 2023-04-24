@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>snowflake_dask.snowflake_dask</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/snowflake_dask/snowflake_dask.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for snowflake_dask.snowflake_dask</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="sd">"""Snowflake Dask - Ingest Snaowflake data with Dask"""</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">from</span> <span class="nn">mlrun.execution</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">import</span> <span class="nn">snowflake.connector</span> <span class="k">as</span> <span class="nn">snow</span>
+<span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">dask.dataframe</span> <span class="kn">import</span> <span class="n">from_delayed</span>
+<span class="kn">from</span> <span class="nn">dask</span> <span class="kn">import</span> <span class="n">delayed</span>
+<span class="kn">from</span> <span class="nn">dask</span> <span class="kn">import</span> <span class="n">dataframe</span> <span class="k">as</span> <span class="n">dd</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.backends</span> <span class="kn">import</span> <span class="n">default_backend</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives</span> <span class="kn">import</span> <span class="n">serialization</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+
+<span class="nd">@delayed</span>
+<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">batch</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">"""A delayed load one batch."""</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"BATCHING"</span><span class="p">)</span>
+        <span class="n">df_</span> <span class="o">=</span> <span class="n">batch</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">df_</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Failed on </span><span class="si">{</span><span class="n">batch</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span>
+
+<div class="viewcode-block" id="load_results"><a class="viewcode-back" href="documentation.html#snowflake_dask.snowflake_dask.load_results">[docs]</a><span class="k">def</span> <span class="nf">load_results</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+                 <span class="n">dask_client</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">connection_info</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">parquet_out_dir</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">publish_name</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="w">    </span><span class="sd">"""Snowflake Dask - Ingest Snowflake data with Dask</span>
+
+<span class="sd">    :param context:           the function context</span>
+<span class="sd">    :param dask_client:       dask cluster function name</span>
+<span class="sd">    :param connection_info:   Snowflake database connection info (this will be in a secret later)</span>
+<span class="sd">    :param query:             query to for Snowflake</span>
+<span class="sd">    :param parquet_out_dir:   directory path for the output parquet files</span>
+<span class="sd">                              (default None, not write out)</span>
+<span class="sd">    :param publish_name:      name of the dask dataframe to publish to the dask cluster</span>
+<span class="sd">                              (default None, not publish)</span>
+
+<span class="sd">    """</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="s1">'snawflake-dask-cluster'</span><span class="p">)</span>
+    <span class="n">sf_password</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="s1">'sfPassword'</span><span class="p">)</span>
+    <span class="n">pk_path</span> <span class="o">=</span>  <span class="n">context</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="s1">'pkPath'</span><span class="p">)</span>
+    <span class="n">pk_password</span> <span class="o">=</span>  <span class="n">context</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="s1">'pkPassword'</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pk_path</span> <span class="ow">and</span> <span class="n">pk_password</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pk_path</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">key</span><span class="p">:</span>
+            <span class="n">p_key</span><span class="o">=</span> <span class="n">serialization</span><span class="o">.</span><span class="n">load_pem_private_key</span><span class="p">(</span>
+                <span class="n">key</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
+                <span class="n">password</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">pk_password</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+                <span class="n">backend</span><span class="o">=</span><span class="n">default_backend</span><span class="p">()</span>
+            <span class="p">)</span>
+        <span class="n">pkb</span> <span class="o">=</span> <span class="n">p_key</span><span class="o">.</span><span class="n">private_bytes</span><span class="p">(</span>
+            <span class="n">encoding</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">Encoding</span><span class="o">.</span><span class="n">DER</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">PrivateFormat</span><span class="o">.</span><span class="n">PKCS8</span>
+            <span class="p">,</span><span class="n">encryption_algorithm</span><span class="o">=</span><span class="n">serialization</span><span class="o">.</span><span class="n">NoEncryption</span><span class="p">()</span>
+        <span class="p">)</span>
+        <span class="n">connection_info</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">'password'</span><span class="p">,</span> <span class="s1">'No password found'</span><span class="p">)</span>
+        <span class="n">connection_info</span><span class="p">[</span><span class="s1">'private_key'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pkb</span>
+    <span class="k">elif</span> <span class="n">sf_password</span><span class="p">:</span>
+        <span class="n">connection_info</span><span class="p">[</span><span class="s1">'password'</span><span class="p">]</span> <span class="o">=</span> <span class="n">sf_password</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Please set up the secret for Snowflake in your project!</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># setup dask client from the MLRun dask cluster function</span>
+    <span class="k">if</span> <span class="n">dask_client</span><span class="p">:</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="n">dask_client</span><span class="p">)</span><span class="o">.</span><span class="n">client</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Existing dask client === &gt;&gt;&gt; </span><span class="si">{</span><span class="n">client</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">()</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'</span><span class="se">\n</span><span class="s1">Newly created dask client === &gt;&gt;&gt; </span><span class="si">{</span><span class="n">client</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">snow</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="o">**</span><span class="n">connection_info</span><span class="p">)</span>
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">batches</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">get_result_batches</span><span class="p">()</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'batches len === </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">batches</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+    <span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">batches</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">batch</span><span class="o">.</span><span class="n">rowcount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span>
+            <span class="n">dfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">ddf</span> <span class="o">=</span> <span class="n">from_delayed</span><span class="p">(</span><span class="n">dfs</span><span class="p">)</span>
+
+    <span class="c1"># materialize the query results set for some sample compute</span>
+
+    <span class="n">ddf_describe</span> <span class="o">=</span> <span class="n">ddf</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'query  === &gt;&gt;&gt; </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'ddf  === &gt;&gt;&gt; </span><span class="si">{</span><span class="n">ddf</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="s1">'number of rows'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ddf</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_dataset</span><span class="p">(</span><span class="s2">"ddf_describe"</span><span class="p">,</span> <span class="n">df</span><span class="o">=</span><span class="n">ddf_describe</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">publish_name</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="s1">'data_set_name'</span><span class="p">,</span> <span class="n">publish_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">client</span><span class="o">.</span><span class="n">list_datasets</span><span class="p">():</span>
+            <span class="n">ddf</span><span class="o">.</span><span class="n">persist</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">publish_name</span><span class="p">)</span>
+            <span class="n">client</span><span class="o">.</span><span class="n">publish_dataset</span><span class="p">(</span><span class="n">publish_name</span><span class="o">=</span><span class="n">ddf</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">parquet_out_dir</span><span class="p">:</span>
+        <span class="n">dd</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">ddf</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">parquet_out_dir</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="s1">'parquet directory'</span><span class="p">,</span> <span class="n">parquet_out_dir</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
