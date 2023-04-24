@@ -1,0 +1,617 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>model_monitoring_batch.model_monitoring_batch</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/model_monitoring_batch/model_monitoring_batch.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for model_monitoring_batch.model_monitoring_batch</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">v3io</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">get_run_db</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">store_manager</span>
+<span class="kn">from</span> <span class="nn">mlrun.data_types.infer</span> <span class="kn">import</span> <span class="n">DFDataInfer</span><span class="p">,</span> <span class="n">InferOptions</span>
+<span class="kn">from</span> <span class="nn">mlrun.run</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils</span> <span class="kn">import</span> <span class="n">logger</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils.model_monitoring</span> <span class="kn">import</span> <span class="n">EndpointType</span><span class="p">,</span> <span class="n">parse_model_endpoint_store_prefix</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils.v3io_clients</span> <span class="kn">import</span> <span class="n">get_v3io_client</span><span class="p">,</span> <span class="n">get_frames_client</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">KBinsDiscretizer</span>
+
+<span class="n">TIME_FORMAT</span> <span class="o">=</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">%z"</span>
+
+
+<div class="viewcode-block" id="TotalVarianceDistance"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.TotalVarianceDistance">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">TotalVarianceDistance</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Provides a symmetric drift distance between two periods t and u</span>
+<span class="sd">    Z - vector of random variables</span>
+<span class="sd">    Pt - Probability distribution over time span t</span>
+<span class="sd">    """</span>
+
+    <span class="n">distrib_t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">distrib_u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+<div class="viewcode-block" id="TotalVarianceDistance.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.TotalVarianceDistance.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span><span class="p">))</span> <span class="o">/</span> <span class="mi">2</span></div></div>
+
+
+<div class="viewcode-block" id="HellingerDistance"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.HellingerDistance">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HellingerDistance</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Hellinger distance is an f divergence measure, similar to the Kullback-Leibler (KL) divergence.</span>
+<span class="sd">    However, unlike KL Divergence the Hellinger divergence is symmetric and bounded over a probability space.</span>
+<span class="sd">    """</span>
+
+    <span class="n">distrib_t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">distrib_u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+<div class="viewcode-block" id="HellingerDistance.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.HellingerDistance.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+            <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="KullbackLeiblerDivergence"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.KullbackLeiblerDivergence">[docs]</a><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">KullbackLeiblerDivergence</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    KL Divergence (or relative entropy) is a measure of how one probability distribution differs from another.</span>
+<span class="sd">    It is an asymmetric measure (thus it's not a metric) and it doesn't satisfy the triangle inequality.</span>
+<span class="sd">    KL Divergence of 0, indicates two identical distributions.</span>
+<span class="sd">    """</span>
+
+    <span class="n">distrib_t</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="n">distrib_u</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+
+<div class="viewcode-block" id="KullbackLeiblerDivergence.compute"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.KullbackLeiblerDivergence.compute">[docs]</a>    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capping</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kld_scaling</span><span class="o">=</span><span class="mf">0.0001</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="n">t_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span><span class="p">)</span>
+                <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span>
+                    <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span><span class="p">,</span> <span class="n">kld_scaling</span><span class="p">)</span>
+                <span class="p">),</span>
+                <span class="mi">0</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">u_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span><span class="p">)</span>
+                <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">distrib_u</span>
+                    <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">distrib_t</span><span class="p">,</span> <span class="n">kld_scaling</span><span class="p">)</span>
+                <span class="p">),</span>
+                <span class="mi">0</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">t_u</span> <span class="o">+</span> <span class="n">u_t</span>
+        <span class="k">if</span> <span class="n">capping</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">capping</span> <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="nb">float</span><span class="p">(</span><span class="s2">"inf"</span><span class="p">)</span> <span class="k">else</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">result</span></div></div>
+
+
+<div class="viewcode-block" id="VirtualDrift"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift">[docs]</a><span class="k">class</span> <span class="nc">VirtualDrift</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">prediction_col</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">label_col</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">feature_weights</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">inf_capping</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prediction_col</span> <span class="o">=</span> <span class="n">prediction_col</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_col</span> <span class="o">=</span> <span class="n">label_col</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_weights</span> <span class="o">=</span> <span class="n">feature_weights</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">capping</span> <span class="o">=</span> <span class="n">inf_capping</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">discretizers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">KBinsDiscretizer</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"tvd"</span><span class="p">:</span> <span class="n">TotalVarianceDistance</span><span class="p">,</span>
+            <span class="s2">"hellinger"</span><span class="p">:</span> <span class="n">HellingerDistance</span><span class="p">,</span>
+            <span class="s2">"kld"</span><span class="p">:</span> <span class="n">KullbackLeiblerDivergence</span><span class="p">,</span>
+        <span class="p">}</span>
+
+<div class="viewcode-block" id="VirtualDrift.dict_to_histogram"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.dict_to_histogram">[docs]</a>    <span class="k">def</span> <span class="nf">dict_to_histogram</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">histogram_dict</span><span class="p">):</span>
+        <span class="n">histograms</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">stats</span> <span class="ow">in</span> <span class="n">histogram_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">histograms</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s2">"hist"</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Get features value counts</span>
+        <span class="n">histograms</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">hist</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">feature</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">feature</span><span class="p">,</span> <span class="n">hist</span> <span class="ow">in</span> <span class="n">histograms</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="p">],</span>
+            <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># To Distribution</span>
+        <span class="n">histograms</span> <span class="o">=</span> <span class="n">histograms</span> <span class="o">/</span> <span class="n">histograms</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">histograms</span></div>
+
+<div class="viewcode-block" id="VirtualDrift.compute_metrics_over_df"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.compute_metrics_over_df">[docs]</a>    <span class="k">def</span> <span class="nf">compute_metrics_over_df</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_histogram</span><span class="p">,</span> <span class="n">latest_histogram</span><span class="p">):</span>
+        <span class="n">drift_measures</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">metric_name</span><span class="p">,</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">drift_measures</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">feature</span><span class="p">:</span> <span class="n">metric</span><span class="p">(</span>
+                    <span class="n">base_histogram</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">],</span> <span class="n">latest_histogram</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">feature</span><span class="p">]</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">base_histogram</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="n">drift_measures</span></div>
+
+<div class="viewcode-block" id="VirtualDrift.compute_drift_from_histograms"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.VirtualDrift.compute_drift_from_histograms">[docs]</a>    <span class="k">def</span> <span class="nf">compute_drift_from_histograms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature_stats</span><span class="p">,</span> <span class="n">current_stats</span><span class="p">):</span>
+        <span class="c1"># Process histogram dictionaries to Dataframe of the histograms</span>
+        <span class="c1"># with Feature histogram as cols</span>
+        <span class="n">base_histogram</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_to_histogram</span><span class="p">(</span><span class="n">feature_stats</span><span class="p">)</span>
+        <span class="n">latest_histogram</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_to_histogram</span><span class="p">(</span><span class="n">current_stats</span><span class="p">)</span>
+
+        <span class="c1"># Verify all the features exist between datasets</span>
+        <span class="n">base_features</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">base_histogram</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+        <span class="n">latest_features</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">latest_histogram</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+        <span class="n">features_common</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">base_features</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">latest_features</span><span class="p">))</span>
+        <span class="n">feature_difference</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">base_features</span> <span class="o">^</span> <span class="n">latest_features</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">features_common</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"No common features found: </span><span class="si">{</span><span class="n">base_features</span><span class="si">}</span><span class="s2"> &lt;&gt; </span><span class="si">{</span><span class="n">latest_features</span><span class="si">}</span><span class="s2">"</span>
+            <span class="p">)</span>
+
+        <span class="n">base_histogram</span> <span class="o">=</span> <span class="n">base_histogram</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+            <span class="n">feature_difference</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"ignore"</span>
+        <span class="p">)</span>
+        <span class="n">latest_histogram</span> <span class="o">=</span> <span class="n">latest_histogram</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+            <span class="n">feature_difference</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="s2">"ignore"</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Compute the drift per feature</span>
+        <span class="n">features_drift_measures</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_metrics_over_df</span><span class="p">(</span>
+            <span class="n">base_histogram</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">features_common</span><span class="p">],</span>
+            <span class="n">latest_histogram</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="n">features_common</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Compute total drift measures for features</span>
+        <span class="k">for</span> <span class="n">metric_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">feature_values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">features_drift_measures</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">features_drift_measures</span><span class="p">[</span><span class="n">metric_name</span><span class="p">][</span><span class="s2">"total_sum"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">feature_values</span><span class="p">)</span>
+            <span class="n">features_drift_measures</span><span class="p">[</span><span class="n">metric_name</span><span class="p">][</span><span class="s2">"total_mean"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">feature_values</span><span class="p">)</span>
+
+            <span class="c1"># Add weighted mean by given feature weights if provided</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_weights</span><span class="p">:</span>
+                <span class="n">features_drift_measures</span><span class="p">[</span><span class="n">metric_name</span><span class="p">][</span><span class="s2">"total_weighted_mean"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span>
+                    <span class="n">feature_values</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_weights</span>
+                <span class="p">)</span>
+
+        <span class="n">drift_result</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">features_common</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">features_drift_measures</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">drift_result</span><span class="p">[</span><span class="n">feature</span><span class="p">][</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span>
+                <span class="nb">sum</span> <span class="o">=</span> <span class="n">features_drift_measures</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="s2">"total_sum"</span><span class="p">]</span>
+                <span class="n">mean</span> <span class="o">=</span> <span class="n">features_drift_measures</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="s2">"total_mean"</span><span class="p">]</span>
+                <span class="n">drift_result</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">_sum"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span>
+                <span class="n">drift_result</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">_mean"</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_weights</span><span class="p">:</span>
+                    <span class="n">metric_measure</span> <span class="o">=</span> <span class="n">features_drift_measures</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span>
+                    <span class="n">weighted_mean</span> <span class="o">=</span> <span class="n">metric_measure</span><span class="p">[</span><span class="s2">"total_weighted_mean"</span><span class="p">]</span>
+                    <span class="n">drift_result</span><span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">_weighted_mean"</span><span class="p">]</span> <span class="o">=</span> <span class="n">weighted_mean</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_col</span><span class="p">:</span>
+            <span class="n">label_drift_measures</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_metrics_over_df</span><span class="p">(</span>
+                <span class="n">base_histogram</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_col</span><span class="p">],</span>
+                <span class="n">latest_histogram</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_col</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">label_drift_measures</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">drift_result</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">label_col</span><span class="p">][</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prediction_col</span><span class="p">:</span>
+            <span class="n">prediction_drift_measures</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_metrics_over_df</span><span class="p">(</span>
+                <span class="n">base_histogram</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prediction_col</span><span class="p">],</span>
+                <span class="n">latest_histogram</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prediction_col</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">prediction_drift_measures</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">drift_result</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">prediction_col</span><span class="p">][</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">drift_result</span></div></div>
+
+
+<div class="viewcode-block" id="BatchProcessor"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor">[docs]</a><span class="k">class</span> <span class="nc">BatchProcessor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">model_monitoring_access_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">v3io_access_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">context</span> <span class="o">=</span> <span class="n">context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">project</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span> <span class="o">=</span> <span class="n">v3io_access_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_monitoring_access_key</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">model_monitoring_access_key</span> <span class="ow">or</span> <span class="n">v3io_access_key</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">virtual_drift</span> <span class="o">=</span> <span class="n">VirtualDrift</span><span class="p">(</span><span class="n">inf_capping</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+        <span class="n">template</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_endpoint_monitoring</span><span class="o">.</span><span class="n">store_prefixes</span><span class="o">.</span><span class="n">default</span>
+
+        <span class="n">kv_path</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"endpoints"</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span> <span class="o">=</span> <span class="n">parse_model_endpoint_store_prefix</span><span class="p">(</span><span class="n">kv_path</span><span class="p">)</span>
+
+        <span class="n">tsdb_path</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"events"</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span> <span class="o">=</span> <span class="n">parse_model_endpoint_store_prefix</span><span class="p">(</span>
+            <span class="n">tsdb_path</span>
+        <span class="p">)</span>
+
+        <span class="n">stream_path</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"log_stream"</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_container</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stream_path</span> <span class="o">=</span> <span class="n">parse_model_endpoint_store_prefix</span><span class="p">(</span>
+            <span class="n">stream_path</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parquet_path</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_endpoint_monitoring</span><span class="o">.</span><span class="n">store_prefixes</span><span class="o">.</span><span class="n">user_space</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"parquet"</span>
+        <span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">"Initializing BatchProcessor"</span><span class="p">,</span>
+            <span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">,</span>
+            <span class="n">model_monitoring_access_key_initalized</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">model_monitoring_access_key</span><span class="p">),</span>
+            <span class="n">v3io_access_key_initialized</span><span class="o">=</span><span class="nb">bool</span><span class="p">(</span><span class="n">v3io_access_key</span><span class="p">),</span>
+            <span class="n">parquet_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parquet_path</span><span class="p">,</span>
+            <span class="n">kv_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+            <span class="n">kv_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+            <span class="n">tsdb_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="p">,</span>
+            <span class="n">tsdb_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span><span class="p">,</span>
+            <span class="n">stream_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_container</span><span class="p">,</span>
+            <span class="n">stream_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_path</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_possible_drift_threshold</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">model_endpoint_monitoring</span><span class="o">.</span><span class="n">drift_thresholds</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">possible_drift</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_drift_detected_threshold</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">model_endpoint_monitoring</span><span class="o">.</span><span class="n">drift_thresholds</span><span class="o">.</span><span class="n">default</span><span class="o">.</span><span class="n">drift_detected</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">db</span> <span class="o">=</span> <span class="n">get_run_db</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v3io</span> <span class="o">=</span> <span class="n">get_v3io_client</span><span class="p">(</span><span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">frames</span> <span class="o">=</span> <span class="n">get_frames_client</span><span class="p">(</span>
+            <span class="n">address</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">v3io_framesd</span><span class="p">,</span>
+            <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="p">,</span>
+            <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="BatchProcessor.post_init"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.post_init">[docs]</a>    <span class="k">def</span> <span class="nf">post_init</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v3io</span><span class="o">.</span><span class="n">create_stream</span><span class="p">(</span>
+            <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_container</span><span class="p">,</span>
+            <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_path</span><span class="p">,</span>
+            <span class="n">shard_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">raise_for_status</span><span class="o">=</span><span class="n">v3io</span><span class="o">.</span><span class="n">dataplane</span><span class="o">.</span><span class="n">RaiseForStatus</span><span class="o">.</span><span class="n">never</span><span class="p">,</span>
+            <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span> <span class="ow">and</span> <span class="s2">"ResourceInUse"</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">body</span><span class="p">)):</span>
+            <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">([</span><span class="mi">409</span><span class="p">,</span> <span class="mi">204</span><span class="p">,</span> <span class="mi">403</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="BatchProcessor.run"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">endpoints</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">list_model_endpoints</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"Failed to list endpoints"</span><span class="p">,</span> <span class="n">exc</span><span class="o">=</span><span class="n">e</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">active_endpoints</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">endpoint</span> <span class="ow">in</span> <span class="n">endpoints</span><span class="o">.</span><span class="n">endpoints</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">active</span><span class="p">:</span>
+                <span class="n">active_endpoints</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">endpoint</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">uid</span><span class="p">)</span>
+
+        <span class="n">store</span><span class="p">,</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">store_manager</span><span class="o">.</span><span class="n">get_or_create_store</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parquet_path</span><span class="p">)</span>
+        <span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parquet_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">sub</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="n">store</span><span class="o">.</span><span class="n">get_filesystem</span><span class="p">(</span><span class="n">silent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">fs</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">sub</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">sub</span><span class="si">}</span><span class="s2"> does not exist"</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">for</span> <span class="n">endpoint_dir</span> <span class="ow">in</span> <span class="n">fs</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">sub</span><span class="p">):</span>
+            <span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">endpoint_dir</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"="</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">endpoint_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">active_endpoints</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">last_year</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_created_dir</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">endpoint_dir</span><span class="p">)</span>
+                <span class="n">last_month</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_created_dir</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">last_year</span><span class="p">)</span>
+                <span class="n">last_day</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_created_dir</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">last_month</span><span class="p">)</span>
+                <span class="n">last_hour</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_last_created_dir</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">last_day</span><span class="p">)</span>
+
+                <span class="n">full_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prefix</span><span class="si">}{</span><span class="n">last_hour</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Now processing </span><span class="si">{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+                <span class="n">endpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">db</span><span class="o">.</span><span class="n">get_model_endpoint</span><span class="p">(</span>
+                    <span class="n">project</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">project</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">endpoint_type</span> <span class="o">==</span> <span class="n">EndpointType</span><span class="o">.</span><span class="n">ROUTER</span><span class="p">:</span>
+                    <span class="c1"># endpoint.status.feature_stats is None</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">endpoint_id</span><span class="si">}</span><span class="s2"> is router skipping"</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">full_path</span><span class="p">)</span>
+                <span class="n">timestamp</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"timestamp"</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+                <span class="n">named_features_df</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"named_features"</span><span class="p">])</span>
+                <span class="n">named_features_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">named_features_df</span><span class="p">)</span>
+
+                <span class="n">current_stats</span> <span class="o">=</span> <span class="n">DFDataInfer</span><span class="o">.</span><span class="n">get_stats</span><span class="p">(</span>
+                    <span class="n">df</span><span class="o">=</span><span class="n">named_features_df</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">InferOptions</span><span class="o">.</span><span class="n">Histogram</span>
+                <span class="p">)</span>
+
+                <span class="n">drift_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">virtual_drift</span><span class="o">.</span><span class="n">compute_drift_from_histograms</span><span class="p">(</span>
+                    <span class="n">feature_stats</span><span class="o">=</span><span class="n">endpoint</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">feature_stats</span><span class="p">,</span>
+                    <span class="n">current_stats</span><span class="o">=</span><span class="n">current_stats</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Drift result"</span><span class="p">,</span> <span class="n">drift_result</span><span class="o">=</span><span class="n">drift_result</span><span class="p">)</span>
+
+                <span class="n">drift_status</span><span class="p">,</span> <span class="n">drift_measure</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_for_drift</span><span class="p">(</span>
+                    <span class="n">drift_result</span><span class="o">=</span><span class="n">drift_result</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="n">endpoint</span>
+                <span class="p">)</span>
+
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">"Drift status"</span><span class="p">,</span>
+                    <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+                    <span class="n">drift_status</span><span class="o">=</span><span class="n">drift_status</span><span class="p">,</span>
+                    <span class="n">drift_measure</span><span class="o">=</span><span class="n">drift_measure</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">drift_status</span> <span class="o">==</span> <span class="s2">"POSSIBLE_DRIFT"</span> <span class="ow">or</span> <span class="n">drift_status</span> <span class="o">==</span> <span class="s2">"DRIFT_DETECTED"</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">v3io</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">put_records</span><span class="p">(</span>
+                        <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_container</span><span class="p">,</span>
+                        <span class="n">stream_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_path</span><span class="p">,</span>
+                        <span class="n">records</span><span class="o">=</span><span class="p">[</span>
+                            <span class="p">{</span>
+                                <span class="s2">"data"</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span>
+                                    <span class="p">{</span>
+                                        <span class="s2">"endpoint_id"</span><span class="p">:</span> <span class="n">endpoint_id</span><span class="p">,</span>
+                                        <span class="s2">"drift_status"</span><span class="p">:</span> <span class="n">drift_status</span><span class="p">,</span>
+                                        <span class="s2">"drift_measure"</span><span class="p">:</span> <span class="n">drift_measure</span><span class="p">,</span>
+                                        <span class="s2">"drift_per_feature"</span><span class="p">:</span> <span class="p">{</span><span class="o">**</span><span class="n">drift_result</span><span class="p">},</span>
+                                    <span class="p">}</span>
+                                <span class="p">)</span>
+                            <span class="p">}</span>
+                        <span class="p">],</span>
+                    <span class="p">)</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">v3io</span><span class="o">.</span><span class="n">kv</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                    <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+                    <span class="n">table_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+                    <span class="n">key</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+                    <span class="n">attributes</span><span class="o">=</span><span class="p">{</span>
+                        <span class="s2">"current_stats"</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">current_stats</span><span class="p">),</span>
+                        <span class="s2">"drift_measures"</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">drift_result</span><span class="p">),</span>
+                        <span class="s2">"drift_status"</span><span class="p">:</span> <span class="n">drift_status</span><span class="p">,</span>
+                    <span class="p">},</span>
+                <span class="p">)</span>
+
+                <span class="n">tsdb_drift_measures</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">"endpoint_id"</span><span class="p">:</span> <span class="n">endpoint_id</span><span class="p">,</span>
+                    <span class="s2">"timestamp"</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">TIME_FORMAT</span><span class="p">),</span>
+                    <span class="s2">"record_type"</span><span class="p">:</span> <span class="s2">"drift_measures"</span><span class="p">,</span>
+                    <span class="s2">"tvd_mean"</span><span class="p">:</span> <span class="n">drift_result</span><span class="p">[</span><span class="s2">"tvd_mean"</span><span class="p">],</span>
+                    <span class="s2">"kld_mean"</span><span class="p">:</span> <span class="n">drift_result</span><span class="p">[</span><span class="s2">"kld_mean"</span><span class="p">],</span>
+                    <span class="s2">"hellinger_mean"</span><span class="p">:</span> <span class="n">drift_result</span><span class="p">[</span><span class="s2">"hellinger_mean"</span><span class="p">],</span>
+                <span class="p">}</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">frames</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                    <span class="n">backend</span><span class="o">=</span><span class="s2">"tsdb"</span><span class="p">,</span>
+                    <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span><span class="p">,</span>
+                    <span class="n">dfs</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">([</span><span class="n">tsdb_drift_measures</span><span class="p">]),</span>
+                    <span class="n">index_cols</span><span class="o">=</span><span class="p">[</span><span class="s2">"timestamp"</span><span class="p">,</span> <span class="s2">"endpoint_id"</span><span class="p">,</span> <span class="s2">"record_type"</span><span class="p">],</span>
+                <span class="p">)</span>
+
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Done updating drift measures </span><span class="si">{</span><span class="n">full_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Exception for endpoint </span><span class="si">{</span><span class="n">endpoint_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">exception</span> <span class="o">=</span> <span class="n">e</span></div>
+
+<div class="viewcode-block" id="BatchProcessor.check_for_drift"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.check_for_drift">[docs]</a>    <span class="k">def</span> <span class="nf">check_for_drift</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">drift_result</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">):</span>
+        <span class="n">tvd_mean</span> <span class="o">=</span> <span class="n">drift_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"tvd_mean"</span><span class="p">)</span>
+        <span class="n">hellinger_mean</span> <span class="o">=</span> <span class="n">drift_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hellinger_mean"</span><span class="p">)</span>
+
+        <span class="n">drift_mean</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">if</span> <span class="n">tvd_mean</span> <span class="ow">and</span> <span class="n">hellinger_mean</span><span class="p">:</span>
+            <span class="n">drift_mean</span> <span class="o">=</span> <span class="p">(</span><span class="n">tvd_mean</span> <span class="o">+</span> <span class="n">hellinger_mean</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="n">monitor_configuration</span> <span class="o">=</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">monitor_configuration</span> <span class="ow">or</span> <span class="p">{}</span>
+
+        <span class="n">possible_drift</span> <span class="o">=</span> <span class="n">monitor_configuration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">"possible_drift"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_possible_drift_threshold</span>
+        <span class="p">)</span>
+        <span class="n">drift_detected</span> <span class="o">=</span> <span class="n">monitor_configuration</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">"possible_drift"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_drift_detected_threshold</span>
+        <span class="p">)</span>
+
+        <span class="n">drift_status</span> <span class="o">=</span> <span class="s2">"NO_DRIFT"</span>
+        <span class="k">if</span> <span class="n">drift_mean</span> <span class="o">&gt;=</span> <span class="n">drift_detected</span><span class="p">:</span>
+            <span class="n">drift_status</span> <span class="o">=</span> <span class="s2">"DRIFT_DETECTED"</span>
+        <span class="k">elif</span> <span class="n">drift_mean</span> <span class="o">&gt;=</span> <span class="n">possible_drift</span><span class="p">:</span>
+            <span class="n">drift_status</span> <span class="o">=</span> <span class="s2">"POSSIBLE_DRIFT"</span>
+
+        <span class="k">return</span> <span class="n">drift_status</span><span class="p">,</span> <span class="n">drift_mean</span></div>
+
+<div class="viewcode-block" id="BatchProcessor.get_last_created_dir"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.BatchProcessor.get_last_created_dir">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_last_created_dir</span><span class="p">(</span><span class="n">fs</span><span class="p">,</span> <span class="n">endpoint_dir</span><span class="p">):</span>
+        <span class="n">dirs</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">ls</span><span class="p">(</span><span class="n">endpoint_dir</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span>
+        <span class="n">last_dir</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dirs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">k</span><span class="p">:</span> <span class="n">k</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"="</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">last_dir</span></div></div>
+
+
+<div class="viewcode-block" id="handler"><a class="viewcode-back" href="documentation.html#model_monitoring_batch.model_monitoring_batch.handler">[docs]</a><span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">):</span>
+    <span class="n">batch_processor</span> <span class="o">=</span> <span class="n">BatchProcessor</span><span class="p">(</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">project</span><span class="p">,</span>
+        <span class="n">model_monitoring_access_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"MODEL_MONITORING_ACCESS_KEY"</span><span class="p">),</span>
+        <span class="n">v3io_access_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"V3IO_ACCESS_KEY"</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="n">batch_processor</span><span class="o">.</span><span class="n">post_init</span><span class="p">()</span>
+    <span class="n">batch_processor</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">batch_processor</span><span class="o">.</span><span class="n">exception</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">batch_processor</span><span class="o">.</span><span class="n">exception</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>

@@ -4,18 +4,21 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
 <title>XGBoost trainer</title>
-<link href="../../../_static/css/theme.css" rel="stylesheet"/>
-<link href="../../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet"/>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
 <link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
 <link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
 <link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
 <link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/sphinx-book-theme.5f77b4aec8189eecf79907ce328c390d.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/mystnb.css" rel="stylesheet" type="text/css">
-<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css"/>
-<link as="script" href="../../../_static/js/index.1c5a1a01449ed65a7b51.js" rel="preload"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
 <script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
 <script src="../../../_static/jquery.js"></script>
 <script src="../../../_static/underscore.js"></script>
@@ -24,53 +27,199 @@
 <script>let toggleHintHide = 'Click to hide';</script>
 <script>let toggleOpenOnPrint = 'true';</script>
 <script src="../../../_static/togglebutton.js"></script>
-<script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-<script src="../../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
 <link href="genindex.html" rel="index" title="Index">
-<link href="search.html" rel="search" title="Search"/>
+<link href="search.html" rel="search" title="Search">
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <meta content="en" name="docsearch:language"/>
-</link></link></link></link></head>
-<body data-offset="80" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
 <div class="container-fluid" id="banner"></div>
 <div class="container-xl">
 <div class="row">
-<div class="col-12 col-md-2 bd-sidebar site-navigation show single-page" id="site-navigation">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
 </div>
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-<div class="topbar container-xl fixed-top">
-<div class="topbar-contents row">
-<div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-<div class="col pl-md-4 topbar-main">
-<div class="dropdown-buttons-trigger">
-<button aria-label="Download this page" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fas fa-download"></i></button>
-<div class="dropdown-buttons">
-<!-- ipynb file if we had a myst markdown file -->
-<!-- Download raw file -->
-<a class="dropdown-buttons" href="../src/xgb_trainer.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Download source file" type="button">.ipynb</button></a>
-<!-- Download PDF via print -->
-<button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" id="download-print" onclick="window.print()" title="Print to PDF" type="button">.pdf</button>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fxgb_trainer_example.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/edit/master/docs/xgb_trainer_example.ipynb" title="Edit this page">
+<span class="headerbtn__icon-container">
+<i class="fas fa-pencil-alt"></i>
+</span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+</li>
+</ul>
 </div>
 </div>
-<!-- Source interaction buttons -->
-<div class="dropdown-buttons-trigger">
-<button aria-label="Connect with source repository" class="btn btn-secondary topbarbtn" id="dropdown-buttons-trigger"><i class="fab fa-github"></i></button>
-<div class="dropdown-buttons sourcebuttons">
-<a class="repository-button" href="https://github.com/mlrun/marketplace"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Source repository" type="button"><i class="fab fa-github"></i>repository</button></a>
-<a class="issues-button" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fxgb_trainer_example.html&amp;body=Your%20issue%20content%20here."><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Open an issue" type="button"><i class="fas fa-lightbulb"></i>open issue</button></a>
-<a class="edit-button" href="https://github.com/mlrun/marketplace/edit/master/docs/xgb_trainer_example.ipynb"><button class="btn btn-secondary topbarbtn" data-placement="left" data-toggle="tooltip" title="Edit this page" type="button"><i class="fas fa-pencil-alt"></i>suggest edit</button></a>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+<button aria-label="Download this page" class="headerbtn menu-dropdown__trigger">
+<i class="fas fa-download"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="../src/xgb_trainer.ipynb" title="Download source file">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file"></i>
+</span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+</li>
+<li>
+<button class="headerbtn" data-placement="left" data-toggle="tooltip" onclick="printPdf(this)" title="Print to PDF">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
 </div>
 </div>
-<!-- Full screen (wrap in <a> to have style consistency -->
-<a class="full-screen-button"><button aria-label="Fullscreen mode" class="btn btn-secondary topbarbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode" type="button"><i class="fas fa-expand"></i></button></a>
-<!-- Launch buttons -->
+<label class="headerbtn headerbtn-page-toc" for="__page-toc">
+<span class="headerbtn__icon-container">
+<i class="fas fa-list"></i>
+</span>
+</label>
+</div>
 </div>
 <!-- Table of contents -->
-<div class="d-none d-md-block col-md-2 bd-toc show">
+<div class="col-md-3 bd-toc show noprint">
 <div class="tocsection onthispage pt-5 pb-3">
 <i class="fas fa-list"></i> Contents
-            </div>
-<nav id="bd-toc-nav">
+    </div>
+<nav aria-label="Page" id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#steps">
+   Steps
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#data-exploration">
+<strong>
+      Data Exploration
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-the-function">
+<strong>
+      Importing the function
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setup-xgboost-parameters">
+<strong>
+      Setup XGBoost parameters
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-the-function-locally">
+<strong>
+      Running the function locally
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#getting-the-model">
+<strong>
+      Getting the model
+     </strong>
+</a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#some-plotting">
+<strong>
+      Some plotting
+     </strong>
+</a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry">
+<a class="reference internal nav-link" href="#display-the-probability-calibration">
+       Display the probability calibration
+      </a>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-the-function-remotely">
+<strong>
+      Running the function remotely
+     </strong>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>XGBoost trainer</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry">
 <a class="reference internal nav-link" href="#steps">
@@ -140,11 +289,10 @@
 </div>
 </div>
 </div>
-<div class="row" id="main-content">
-<div class="col-12 col-md-9 pl-md-3 pr-md-0">
+<main id="main-content" role="main">
 <div>
-<div class="section" id="xgboost-trainer">
-<h1>XGBoost trainer<a class="headerlink" href="#xgboost-trainer" title="Permalink to this headline">¶</a></h1>
+<section id="xgboost-trainer">
+<h1>XGBoost trainer<a class="headerlink" href="#xgboost-trainer" title="Permalink to this headline">#</a></h1>
 <p>This notebook function handles training and logging of xgboost models <strong>only</strong>, exposing both the sklearn and low level api”s.<br/>
 More information about XGBoost - <a class="reference external" href="https://en.wikipedia.org/wiki/XGBoost">here</a></p>
 <p>Multiple model types that can be estimated using the XGBoost Scikit-Learn API. <br/>
@@ -160,8 +308,8 @@ one of “classifier”, “regressor”,
 “rf_regressor”<br/>
 <strong>param xgb_params:</strong> class init parameters</p>
 </div></blockquote>
-<div class="section" id="steps">
-<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">¶</a></h2>
+<section id="steps">
+<h2>Steps<a class="headerlink" href="#steps" title="Permalink to this headline">#</a></h2>
 <ol class="arabic simple">
 <li><p><span class="xref myst">Data Exploration</span></p></li>
 <li><p><span class="xref myst">Importing the function</span></p></li>
@@ -171,8 +319,8 @@ one of “classifier”, “regressor”,
 <li><p><span class="xref myst">Some plotting</span></p></li>
 <li><p><span class="xref myst">Running the function remotely</span></p></li>
 </ol>
-<div class="section" id="data-exploration">
-<h3><strong>Data Exploration</strong><a class="headerlink" href="#data-exploration" title="Permalink to this headline">¶</a></h3>
+<section id="data-exploration">
+<h3><strong>Data Exploration</strong><a class="headerlink" href="#data-exploration" title="Permalink to this headline">#</a></h3>
 <p>To generate the dataset we used the “gen_class_data” function from the hub,
 which wraps scikit-learn’s <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html#sklearn-datasets-make-classification">make_classification</a>.<br/>
 See the link for a description of all parameters.</p>
@@ -289,9 +437,9 @@ Number of instances labeled 0 : 4992
 </table>
 </div></div></div>
 </div>
-</div>
-<div class="section" id="importing-the-function">
-<h3><strong>Importing the function</strong><a class="headerlink" href="#importing-the-function" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="importing-the-function">
+<h3><strong>Importing the function</strong><a class="headerlink" href="#importing-the-function" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
@@ -315,9 +463,9 @@ Number of instances labeled 0 : 4992
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="setup-xgboost-parameters">
-<h3><strong>Setup XGBoost parameters</strong><a class="headerlink" href="#setup-xgboost-parameters" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="setup-xgboost-parameters">
+<h3><strong>Setup XGBoost parameters</strong><a class="headerlink" href="#setup-xgboost-parameters" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">task_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"model_type"</span><span class="p">:</span> <span class="s2">"classifier"</span><span class="p">,</span>
@@ -330,9 +478,9 @@ Number of instances labeled 0 : 4992
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="running-the-function-locally">
-<h3><strong>Running the function locally</strong><a class="headerlink" href="#running-the-function-locally" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="running-the-function-locally">
+<h3><strong>Running the function locally</strong><a class="headerlink" href="#running-the-function-locally" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_run</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">params</span> <span class="o">=</span> <span class="n">task_params</span><span class="p">,</span>    
@@ -549,9 +697,9 @@ function closePanel(el) {
 <img alt="_images/377cb3e393b0de62a00d15f0e77d97ee12647bacc3715f8160a32f1d9470e261.png" src="_images/377cb3e393b0de62a00d15f0e77d97ee12647bacc3715f8160a32f1d9470e261.png"/>
 </div>
 </div>
-</div>
-<div class="section" id="getting-the-model">
-<h3><strong>Getting the model</strong><a class="headerlink" href="#getting-the-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="getting-the-model">
+<h3><strong>Getting the model</strong><a class="headerlink" href="#getting-the-model" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">get_model</span>
@@ -575,11 +723,11 @@ function closePanel(el) {
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="some-plotting">
-<h3><strong>Some plotting</strong><a class="headerlink" href="#some-plotting" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="display-the-probability-calibration">
-<h4>Display the probability calibration<a class="headerlink" href="#display-the-probability-calibration" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="some-plotting">
+<h3><strong>Some plotting</strong><a class="headerlink" href="#some-plotting" title="Permalink to this headline">#</a></h3>
+<section id="display-the-probability-calibration">
+<h4>Display the probability calibration<a class="headerlink" href="#display-the-probability-calibration" title="Permalink to this headline">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s1">'probability-calibration'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -604,10 +752,10 @@ function closePanel(el) {
 <img src="data:image/png;base64,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" title="feature-importances"/>
 </div></div>
 </div>
-</div>
-</div>
-<div class="section" id="running-the-function-remotely">
-<h3><strong>Running the function remotely</strong><a class="headerlink" href="#running-the-function-remotely" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="running-the-function-remotely">
+<h3><strong>Running the function remotely</strong><a class="headerlink" href="#running-the-function-remotely" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">build</span><span class="o">.</span><span class="n">commands</span><span class="o">=</span><span class="p">[</span><span class="s1">'pip install xgboost==1.3.1'</span><span class="p">]</span>
@@ -862,25 +1010,29 @@ function closePanel(el) {
 </div>
 </div>
 <p><span class="xref myst">Back to the top</span></p>
+</section>
+</section>
+</section>
 </div>
-</div>
-</div>
-</div>
-<div class="prev-next-bottom">
-</div>
-</div>
-</div>
-<footer class="footer mt-5 mt-md-0">
-<div class="container">
-<p>
-        
-            © Copyright .<br>
-</br></p>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
 </div>
 </footer>
-</main>
 </div>
 </div>
-<script src="../../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br>
+</br></p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 </body>
 </html>

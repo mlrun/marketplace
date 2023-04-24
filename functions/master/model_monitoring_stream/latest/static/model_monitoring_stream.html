@@ -1,0 +1,908 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>model_monitoring_stream.model_monitoring_stream</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/model_monitoring_stream/model_monitoring_stream.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for model_monitoring_stream.model_monitoring_stream</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">v3io</span>
+<span class="kn">from</span> <span class="nn">mlrun.config</span> <span class="kn">import</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">mlrun.run</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils.model_monitoring</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">parse_model_endpoint_store_prefix</span><span class="p">,</span>
+    <span class="n">create_model_endpoint_id</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils.v3io_clients</span> <span class="kn">import</span> <span class="n">get_v3io_client</span><span class="p">,</span> <span class="n">get_frames_client</span>
+<span class="kn">from</span> <span class="nn">nuclio</span> <span class="kn">import</span> <span class="n">Event</span>
+<span class="kn">from</span> <span class="nn">storey</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">FieldAggregator</span><span class="p">,</span>
+    <span class="n">NoopDriver</span><span class="p">,</span>
+    <span class="n">Table</span><span class="p">,</span>
+    <span class="n">Map</span><span class="p">,</span>
+    <span class="n">MapClass</span><span class="p">,</span>
+    <span class="n">AggregateByKey</span><span class="p">,</span>
+    <span class="n">build_flow</span><span class="p">,</span>
+    <span class="n">Filter</span><span class="p">,</span>
+    <span class="n">FlatMap</span><span class="p">,</span>
+    <span class="n">TSDBTarget</span><span class="p">,</span>
+    <span class="n">ParquetTarget</span><span class="p">,</span>
+    <span class="n">SyncEmitSource</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">storey.dtypes</span> <span class="kn">import</span> <span class="n">SlidingWindows</span>
+<span class="kn">from</span> <span class="nn">storey.steps</span> <span class="kn">import</span> <span class="n">SampleWindow</span>
+<span class="c1"># Constants</span>
+<span class="kn">from</span> <span class="nn">v3io.dataplane</span> <span class="kn">import</span> <span class="n">RaiseForStatus</span>
+
+<span class="n">ISO_8061_UTC</span> <span class="o">=</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">%z"</span>
+<span class="n">FUNCTION_URI</span> <span class="o">=</span> <span class="s2">"function_uri"</span>
+<span class="n">MODEL</span> <span class="o">=</span> <span class="s2">"model"</span>
+<span class="n">VERSION</span> <span class="o">=</span> <span class="s2">"version"</span>
+<span class="n">VERSIONED_MODEL</span> <span class="o">=</span> <span class="s2">"versioned_model"</span>
+<span class="n">MODEL_CLASS</span> <span class="o">=</span> <span class="s2">"model_class"</span>
+<span class="n">TIMESTAMP</span> <span class="o">=</span> <span class="s2">"timestamp"</span>
+<span class="n">ENDPOINT_ID</span> <span class="o">=</span> <span class="s2">"endpoint_id"</span>
+<span class="n">REQUEST_ID</span> <span class="o">=</span> <span class="s2">"request_id"</span>
+<span class="n">LABELS</span> <span class="o">=</span> <span class="s2">"labels"</span>
+<span class="n">UNPACKED_LABELS</span> <span class="o">=</span> <span class="s2">"unpacked_labels"</span>
+<span class="n">LATENCY_AVG_5M</span> <span class="o">=</span> <span class="s2">"latency_avg_5m"</span>
+<span class="n">LATENCY_AVG_1H</span> <span class="o">=</span> <span class="s2">"latency_avg_1h"</span>
+<span class="n">PREDICTIONS_PER_SECOND</span> <span class="o">=</span> <span class="s2">"predictions_per_second"</span>
+<span class="n">PREDICTIONS_COUNT_5M</span> <span class="o">=</span> <span class="s2">"predictions_count_5m"</span>
+<span class="n">PREDICTIONS_COUNT_1H</span> <span class="o">=</span> <span class="s2">"predictions_count_1h"</span>
+<span class="n">FIRST_REQUEST</span> <span class="o">=</span> <span class="s2">"first_request"</span>
+<span class="n">LAST_REQUEST</span> <span class="o">=</span> <span class="s2">"last_request"</span>
+<span class="n">ERROR_COUNT</span> <span class="o">=</span> <span class="s2">"error_count"</span>
+<span class="n">ENTITIES</span> <span class="o">=</span> <span class="s2">"entities"</span>
+<span class="n">FEATURE_NAMES</span> <span class="o">=</span> <span class="s2">"feature_names"</span>
+<span class="n">LABEL_COLUMNS</span> <span class="o">=</span> <span class="s2">"label_columns"</span>
+<span class="n">LATENCY</span> <span class="o">=</span> <span class="s2">"latency"</span>
+<span class="n">RECORD_TYPE</span> <span class="o">=</span> <span class="s2">"record_type"</span>
+<span class="n">FEATURES</span> <span class="o">=</span> <span class="s2">"features"</span>
+<span class="n">PREDICTION</span> <span class="o">=</span> <span class="s2">"prediction"</span>
+<span class="n">PREDICTIONS</span> <span class="o">=</span> <span class="s2">"predictions"</span>
+<span class="n">NAMED_FEATURES</span> <span class="o">=</span> <span class="s2">"named_features"</span>
+<span class="n">NAMED_PREDICTIONS</span> <span class="o">=</span> <span class="s2">"named_predictions"</span>
+<span class="n">BASE_METRICS</span> <span class="o">=</span> <span class="s2">"base_metrics"</span>
+<span class="n">CUSTOM_METRICS</span> <span class="o">=</span> <span class="s2">"custom_metrics"</span>
+<span class="n">ENDPOINT_FEATURES</span> <span class="o">=</span> <span class="s2">"endpoint_features"</span>
+<span class="n">METRICS</span> <span class="o">=</span> <span class="s2">"metrics"</span>
+<span class="n">BATCH_TIMESTAMP</span> <span class="o">=</span> <span class="s2">"batch_timestamp"</span>
+<span class="n">TIME_FORMAT</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S.</span><span class="si">%f</span><span class="s2">"</span>  <span class="c1"># ISO 8061</span>
+
+
+<span class="c1"># Stream processing code</span>
+<div class="viewcode-block" id="EventStreamProcessor"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.EventStreamProcessor">[docs]</a><span class="k">class</span> <span class="nc">EventStreamProcessor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">sample_window</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">tsdb_batching_max_events</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">tsdb_batching_timeout_secs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span>  <span class="c1"># Default 5 minutes</span>
+        <span class="n">parquet_batching_max_events</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10_000</span><span class="p">,</span>
+        <span class="n">parquet_batching_timeout_secs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span><span class="p">,</span>  <span class="c1"># Default 1 hour</span>
+        <span class="n">aggregate_count_windows</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">aggregate_count_period</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"30s"</span><span class="p">,</span>
+        <span class="n">aggregate_avg_windows</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">aggregate_avg_period</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"30s"</span><span class="p">,</span>
+        <span class="n">v3io_access_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">v3io_framesd</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">v3io_api</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">project</span> <span class="o">=</span> <span class="n">project</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_window</span> <span class="o">=</span> <span class="n">sample_window</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tsdb_batching_max_events</span> <span class="o">=</span> <span class="n">tsdb_batching_max_events</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tsdb_batching_timeout_secs</span> <span class="o">=</span> <span class="n">tsdb_batching_timeout_secs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parquet_batching_max_events</span> <span class="o">=</span> <span class="n">parquet_batching_max_events</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parquet_batching_timeout_secs</span> <span class="o">=</span> <span class="n">parquet_batching_timeout_secs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_count_windows</span> <span class="o">=</span> <span class="n">aggregate_count_windows</span> <span class="ow">or</span> <span class="p">[</span><span class="s2">"5m"</span><span class="p">,</span> <span class="s2">"1h"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_count_period</span> <span class="o">=</span> <span class="n">aggregate_count_period</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_avg_windows</span> <span class="o">=</span> <span class="n">aggregate_avg_windows</span> <span class="ow">or</span> <span class="p">[</span><span class="s2">"5m"</span><span class="p">,</span> <span class="s2">"1h"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_avg_period</span> <span class="o">=</span> <span class="n">aggregate_avg_period</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">v3io_framesd</span> <span class="o">=</span> <span class="n">v3io_framesd</span> <span class="ow">or</span> <span class="n">config</span><span class="o">.</span><span class="n">v3io_framesd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v3io_api</span> <span class="o">=</span> <span class="n">v3io_api</span> <span class="ow">or</span> <span class="n">config</span><span class="o">.</span><span class="n">v3io_api</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span> <span class="o">=</span> <span class="n">v3io_access_key</span> <span class="ow">or</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"V3IO_ACCESS_KEY"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_monitoring_access_key</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"MODEL_MONITORING_ACCESS_KEY"</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span>
+        <span class="p">)</span>
+
+        <span class="n">template</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_endpoint_monitoring</span><span class="o">.</span><span class="n">store_prefixes</span><span class="o">.</span><span class="n">default</span>
+
+        <span class="n">kv_path</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"endpoints"</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span> <span class="o">=</span> <span class="n">parse_model_endpoint_store_prefix</span><span class="p">(</span><span class="n">kv_path</span><span class="p">)</span>
+
+        <span class="n">tsdb_path</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"events"</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span> <span class="o">=</span> <span class="n">parse_model_endpoint_store_prefix</span><span class="p">(</span>
+            <span class="n">tsdb_path</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span><span class="si">}</span><span class="s2">"</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parquet_path</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_endpoint_monitoring</span><span class="o">.</span><span class="n">store_prefixes</span><span class="o">.</span><span class="n">user_space</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"parquet"</span>
+        <span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">"V3IO Configuration"</span><span class="p">,</span>
+            <span class="n">v3io_access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+            <span class="n">model_monitoring_access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_monitoring_access_key</span><span class="p">,</span>
+            <span class="n">default_store_prefix</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">model_endpoint_monitoring</span><span class="o">.</span><span class="n">store_prefixes</span><span class="o">.</span><span class="n">default</span><span class="p">,</span>
+            <span class="n">user_space_store_prefix</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">model_endpoint_monitoring</span><span class="o">.</span><span class="n">store_prefixes</span><span class="o">.</span><span class="n">user_space</span><span class="p">,</span>
+            <span class="n">v3io_api</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_api</span><span class="p">,</span>
+            <span class="n">v3io_framesd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_framesd</span><span class="p">,</span>
+            <span class="n">kv_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+            <span class="n">kv_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+            <span class="n">tsdb_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="p">,</span>
+            <span class="n">tsdb_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span><span class="p">,</span>
+            <span class="n">parquet_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parquet_path</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kv_keys</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">FUNCTION_URI</span><span class="p">,</span>
+            <span class="n">MODEL</span><span class="p">,</span>
+            <span class="n">MODEL_CLASS</span><span class="p">,</span>
+            <span class="n">TIMESTAMP</span><span class="p">,</span>
+            <span class="n">ENDPOINT_ID</span><span class="p">,</span>
+            <span class="n">LABELS</span><span class="p">,</span>
+            <span class="n">UNPACKED_LABELS</span><span class="p">,</span>
+            <span class="n">LATENCY_AVG_5M</span><span class="p">,</span>
+            <span class="n">LATENCY_AVG_1H</span><span class="p">,</span>
+            <span class="n">PREDICTIONS_PER_SECOND</span><span class="p">,</span>
+            <span class="n">PREDICTIONS_COUNT_5M</span><span class="p">,</span>
+            <span class="n">PREDICTIONS_COUNT_1H</span><span class="p">,</span>
+            <span class="n">FIRST_REQUEST</span><span class="p">,</span>
+            <span class="n">LAST_REQUEST</span><span class="p">,</span>
+            <span class="n">ERROR_COUNT</span><span class="p">,</span>
+        <span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_flow</span> <span class="o">=</span> <span class="n">build_flow</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">SyncEmitSource</span><span class="p">(),</span>
+                <span class="n">ProcessEndpointEvent</span><span class="p">(</span>
+                    <span class="n">kv_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+                    <span class="n">kv_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+                    <span class="n">v3io_access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">FilterNotNone</span><span class="p">(),</span>
+                <span class="n">FlatMap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">),</span>
+                <span class="n">MapFeatureNames</span><span class="p">(</span>
+                    <span class="n">kv_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+                    <span class="n">kv_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+                    <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="c1"># Branch 1: Aggregate events, count averages and update TSDB and KV</span>
+                <span class="p">[</span>
+                    <span class="n">AggregateByKey</span><span class="p">(</span>
+                        <span class="n">aggregates</span><span class="o">=</span><span class="p">[</span>
+                            <span class="n">FieldAggregator</span><span class="p">(</span>
+                                <span class="n">PREDICTIONS</span><span class="p">,</span>
+                                <span class="n">ENDPOINT_ID</span><span class="p">,</span>
+                                <span class="p">[</span><span class="s2">"count"</span><span class="p">],</span>
+                                <span class="n">SlidingWindows</span><span class="p">(</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_count_windows</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_count_period</span><span class="p">,</span>
+                                <span class="p">),</span>
+                            <span class="p">),</span>
+                            <span class="n">FieldAggregator</span><span class="p">(</span>
+                                <span class="n">LATENCY</span><span class="p">,</span>
+                                <span class="n">LATENCY</span><span class="p">,</span>
+                                <span class="p">[</span><span class="s2">"avg"</span><span class="p">],</span>
+                                <span class="n">SlidingWindows</span><span class="p">(</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_avg_windows</span><span class="p">,</span>
+                                    <span class="bp">self</span><span class="o">.</span><span class="n">aggregate_avg_period</span><span class="p">,</span>
+                                <span class="p">),</span>
+                            <span class="p">),</span>
+                        <span class="p">],</span>
+                        <span class="n">table</span><span class="o">=</span><span class="n">Table</span><span class="p">(</span><span class="s2">"notable"</span><span class="p">,</span> <span class="n">NoopDriver</span><span class="p">()),</span>
+                    <span class="p">),</span>
+                    <span class="n">SampleWindow</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">sample_window</span>
+                    <span class="p">),</span>  <span class="c1"># Add required gap between event to apply sampling</span>
+                    <span class="n">Map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">compute_predictions_per_second</span><span class="p">),</span>
+                    <span class="c1"># Branch 1.1: Updated KV</span>
+                    <span class="p">[</span>
+                        <span class="n">Map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_before_kv</span><span class="p">),</span>
+                        <span class="n">WriteToKV</span><span class="p">(</span><span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">),</span>
+                        <span class="n">InferSchema</span><span class="p">(</span>
+                            <span class="n">v3io_access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+                            <span class="n">v3io_framesd</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_framesd</span><span class="p">,</span>
+                            <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+                            <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+                        <span class="p">),</span>
+                    <span class="p">],</span>
+                    <span class="c1"># Branch 1.2: Update TSDB</span>
+                    <span class="p">[</span>
+                        <span class="c1"># Map the event into taggable fields, add record type to each field</span>
+                        <span class="n">Map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_before_events_tsdb</span><span class="p">),</span>
+                        <span class="p">[</span>
+                            <span class="n">FilterKeys</span><span class="p">(</span><span class="n">BASE_METRICS</span><span class="p">),</span>
+                            <span class="n">UnpackValues</span><span class="p">(</span><span class="n">BASE_METRICS</span><span class="p">),</span>
+                            <span class="n">TSDBTarget</span><span class="p">(</span>
+                                <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span><span class="p">,</span>
+                                <span class="n">rate</span><span class="o">=</span><span class="s2">"10/m"</span><span class="p">,</span>
+                                <span class="n">time_col</span><span class="o">=</span><span class="n">TIMESTAMP</span><span class="p">,</span>
+                                <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="p">,</span>
+                                <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+                                <span class="n">v3io_frames</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_framesd</span><span class="p">,</span>
+                                <span class="n">index_cols</span><span class="o">=</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">,</span> <span class="n">RECORD_TYPE</span><span class="p">],</span>
+                                <span class="c1"># Settings for _Batching</span>
+                                <span class="n">max_events</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_batching_max_events</span><span class="p">,</span>
+                                <span class="n">timeout_secs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_batching_timeout_secs</span><span class="p">,</span>
+                                <span class="n">key</span><span class="o">=</span><span class="n">ENDPOINT_ID</span><span class="p">,</span>
+                            <span class="p">),</span>
+                        <span class="p">],</span>
+                        <span class="p">[</span>
+                            <span class="n">FilterKeys</span><span class="p">(</span><span class="n">ENDPOINT_FEATURES</span><span class="p">),</span>
+                            <span class="n">UnpackValues</span><span class="p">(</span><span class="n">ENDPOINT_FEATURES</span><span class="p">),</span>
+                            <span class="n">TSDBTarget</span><span class="p">(</span>
+                                <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span><span class="p">,</span>
+                                <span class="n">rate</span><span class="o">=</span><span class="s2">"10/m"</span><span class="p">,</span>
+                                <span class="n">time_col</span><span class="o">=</span><span class="n">TIMESTAMP</span><span class="p">,</span>
+                                <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="p">,</span>
+                                <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+                                <span class="n">v3io_frames</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_framesd</span><span class="p">,</span>
+                                <span class="n">index_cols</span><span class="o">=</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">,</span> <span class="n">RECORD_TYPE</span><span class="p">],</span>
+                                <span class="c1"># Settings for _Batching</span>
+                                <span class="n">max_events</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_batching_max_events</span><span class="p">,</span>
+                                <span class="n">timeout_secs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_batching_timeout_secs</span><span class="p">,</span>
+                                <span class="n">key</span><span class="o">=</span><span class="n">ENDPOINT_ID</span><span class="p">,</span>
+                            <span class="p">),</span>
+                        <span class="p">],</span>
+                        <span class="p">[</span>
+                            <span class="n">FilterKeys</span><span class="p">(</span><span class="n">CUSTOM_METRICS</span><span class="p">),</span>
+                            <span class="n">FilterNotNone</span><span class="p">(),</span>
+                            <span class="n">UnpackValues</span><span class="p">(</span><span class="n">CUSTOM_METRICS</span><span class="p">),</span>
+                            <span class="n">TSDBTarget</span><span class="p">(</span>
+                                <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_path</span><span class="p">,</span>
+                                <span class="n">rate</span><span class="o">=</span><span class="s2">"10/m"</span><span class="p">,</span>
+                                <span class="n">time_col</span><span class="o">=</span><span class="n">TIMESTAMP</span><span class="p">,</span>
+                                <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_container</span><span class="p">,</span>
+                                <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+                                <span class="n">v3io_frames</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_framesd</span><span class="p">,</span>
+                                <span class="n">index_cols</span><span class="o">=</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">,</span> <span class="n">RECORD_TYPE</span><span class="p">],</span>
+                                <span class="c1"># Settings for _Batching</span>
+                                <span class="n">max_events</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_batching_max_events</span><span class="p">,</span>
+                                <span class="n">timeout_secs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">tsdb_batching_timeout_secs</span><span class="p">,</span>
+                                <span class="n">key</span><span class="o">=</span><span class="n">ENDPOINT_ID</span><span class="p">,</span>
+                            <span class="p">),</span>
+                        <span class="p">],</span>
+                    <span class="p">],</span>
+                <span class="p">],</span>
+                <span class="c1"># Branch 2: Batch events, write to parquet</span>
+                <span class="p">[</span>
+                    <span class="n">Map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">process_before_parquet</span><span class="p">),</span>
+                    <span class="n">ParquetTarget</span><span class="p">(</span>
+                        <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parquet_path</span><span class="p">,</span>
+                        <span class="n">partition_cols</span><span class="o">=</span><span class="p">[</span><span class="s2">"$key"</span><span class="p">,</span> <span class="s2">"$year"</span><span class="p">,</span> <span class="s2">"$month"</span><span class="p">,</span> <span class="s2">"$day"</span><span class="p">,</span> <span class="s2">"$hour"</span><span class="p">],</span>
+                        <span class="n">infer_columns_from_data</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="c1"># Settings for _Batching</span>
+                        <span class="n">max_events</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parquet_batching_max_events</span><span class="p">,</span>
+                        <span class="n">timeout_secs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parquet_batching_timeout_secs</span><span class="p">,</span>
+                        <span class="c1"># Settings for v3io storage</span>
+                        <span class="n">storage_options</span><span class="o">=</span><span class="p">{</span>
+                            <span class="s2">"v3io_api"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">v3io_api</span><span class="p">,</span>
+                            <span class="s2">"v3io_access_key"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_monitoring_access_key</span><span class="p">,</span>
+                        <span class="p">},</span>
+                    <span class="p">),</span>
+                <span class="p">],</span>
+            <span class="p">]</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
+<div class="viewcode-block" id="EventStreamProcessor.consume"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.EventStreamProcessor.consume">[docs]</a>    <span class="k">def</span> <span class="nf">consume</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="s2">"headers"</span> <span class="ow">in</span> <span class="n">event</span> <span class="ow">and</span> <span class="s2">"values"</span> <span class="ow">in</span> <span class="n">event</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">values</span> <span class="ow">in</span> <span class="n">event</span><span class="p">[</span><span class="s2">"values"</span><span class="p">]:</span>
+                <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s2">"headers"</span><span class="p">],</span> <span class="n">values</span><span class="p">)})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">enriched</span> <span class="ow">in</span> <span class="nb">map</span><span class="p">(</span><span class="n">enrich_even_details</span><span class="p">,</span> <span class="n">events</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">enriched</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_flow</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span>
+                    <span class="n">enriched</span><span class="p">,</span>
+                    <span class="n">key</span><span class="o">=</span><span class="n">enriched</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">],</span>
+                    <span class="n">event_time</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">enriched</span><span class="p">[</span><span class="s2">"when"</span><span class="p">],</span> <span class="n">ISO_8061_UTC</span><span class="p">),</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="EventStreamProcessor.compute_predictions_per_second"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.EventStreamProcessor.compute_predictions_per_second">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">compute_predictions_per_second</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">event</span><span class="p">[</span><span class="n">PREDICTIONS_PER_SECOND</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="n">PREDICTIONS_COUNT_5M</span><span class="p">])</span> <span class="o">/</span> <span class="mi">600</span>
+        <span class="k">return</span> <span class="n">event</span></div>
+
+<div class="viewcode-block" id="EventStreamProcessor.process_before_kv"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.EventStreamProcessor.process_before_kv">[docs]</a>    <span class="k">def</span> <span class="nf">process_before_kv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="c1"># Filter relevant keys</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_kv_keys</span><span class="p">}</span>
+        <span class="c1"># Unpack labels dictionary</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">e</span><span class="p">,</span> <span class="o">**</span><span class="n">e</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">UNPACKED_LABELS</span><span class="p">,</span> <span class="p">{})}</span>
+        <span class="c1"># Write labels to kv as json string to be presentable later</span>
+        <span class="n">e</span><span class="p">[</span><span class="n">LABELS</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">e</span><span class="p">[</span><span class="n">LABELS</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">e</span></div>
+
+<div class="viewcode-block" id="EventStreamProcessor.process_before_events_tsdb"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.EventStreamProcessor.process_before_events_tsdb">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">process_before_events_tsdb</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="n">base_fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">TIMESTAMP</span><span class="p">,</span> <span class="n">ENDPOINT_ID</span><span class="p">]</span>
+
+        <span class="n">base_event</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">base_fields</span><span class="p">}</span>
+        <span class="n">base_event</span><span class="p">[</span><span class="n">TIMESTAMP</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span>
+            <span class="n">base_event</span><span class="p">[</span><span class="n">TIMESTAMP</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="n">TIME_FORMAT</span>
+        <span class="p">)</span>
+
+        <span class="n">base_metrics</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">RECORD_TYPE</span><span class="p">:</span> <span class="n">BASE_METRICS</span><span class="p">,</span>
+            <span class="n">PREDICTIONS_PER_SECOND</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="n">PREDICTIONS_PER_SECOND</span><span class="p">],</span>
+            <span class="n">PREDICTIONS_COUNT_5M</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="n">PREDICTIONS_COUNT_5M</span><span class="p">],</span>
+            <span class="n">PREDICTIONS_COUNT_1H</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="n">PREDICTIONS_COUNT_1H</span><span class="p">],</span>
+            <span class="n">LATENCY_AVG_5M</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="n">LATENCY_AVG_5M</span><span class="p">],</span>
+            <span class="n">LATENCY_AVG_1H</span><span class="p">:</span> <span class="n">event</span><span class="p">[</span><span class="n">LATENCY_AVG_1H</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">base_event</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">endpoint_features</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">RECORD_TYPE</span><span class="p">:</span> <span class="n">ENDPOINT_FEATURES</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">event</span><span class="p">[</span><span class="n">NAMED_PREDICTIONS</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">event</span><span class="p">[</span><span class="n">NAMED_FEATURES</span><span class="p">],</span>
+            <span class="o">**</span><span class="n">base_event</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">processed</span> <span class="o">=</span> <span class="p">{</span><span class="n">BASE_METRICS</span><span class="p">:</span> <span class="n">base_metrics</span><span class="p">,</span> <span class="n">ENDPOINT_FEATURES</span><span class="p">:</span> <span class="n">endpoint_features</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">event</span><span class="p">[</span><span class="n">METRICS</span><span class="p">]:</span>
+            <span class="n">processed</span><span class="p">[</span><span class="n">CUSTOM_METRICS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="n">RECORD_TYPE</span><span class="p">:</span> <span class="n">CUSTOM_METRICS</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">event</span><span class="p">[</span><span class="n">METRICS</span><span class="p">],</span>
+                <span class="o">**</span><span class="n">base_event</span><span class="p">,</span>
+            <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">processed</span></div>
+
+<div class="viewcode-block" id="EventStreamProcessor.process_before_parquet"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.EventStreamProcessor.process_before_parquet">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">process_before_parquet</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">def</span> <span class="nf">set_none_if_empty</span><span class="p">(</span><span class="n">_event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">_event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+                    <span class="n">_event</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">def</span> <span class="nf">drop_if_exists</span><span class="p">(</span><span class="n">_event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="n">_event</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">unpack_if_exists</span><span class="p">(</span><span class="n">_event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">_event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">_event</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">event</span><span class="p">}</span>
+
+        <span class="n">drop_if_exists</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="p">[</span><span class="n">UNPACKED_LABELS</span><span class="p">,</span> <span class="n">FEATURES</span><span class="p">])</span>
+        <span class="n">unpack_if_exists</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="p">[</span><span class="n">ENTITIES</span><span class="p">])</span>
+        <span class="n">set_none_if_empty</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="p">[</span><span class="n">LABELS</span><span class="p">,</span> <span class="n">METRICS</span><span class="p">,</span> <span class="n">ENTITIES</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">event</span></div></div>
+
+
+<div class="viewcode-block" id="ProcessEndpointEvent"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.ProcessEndpointEvent">[docs]</a><span class="k">class</span> <span class="nc">ProcessEndpointEvent</span><span class="p">(</span><span class="n">MapClass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kv_container</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kv_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">v3io_access_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">kv_container</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">kv_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">v3io_access_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">first_request</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_request</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_count</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">endpoints</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<div class="viewcode-block" id="ProcessEndpointEvent.do"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.ProcessEndpointEvent.do">[docs]</a>    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="n">function_uri</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="n">FUNCTION_URI</span><span class="p">]</span>
+        <span class="n">versioned_model</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="n">VERSIONED_MODEL</span><span class="p">]</span>
+        <span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">]</span>
+
+        <span class="c1"># In case this process fails, resume state from existing record</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resume_state</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">)</span>
+
+        <span class="c1"># Handle errors coming from stream</span>
+        <span class="n">found_errors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_errors</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">found_errors</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Validate event fields</span>
+        <span class="n">model_class</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"model_class"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"class"</span><span class="p">)</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"when"</span><span class="p">)</span>
+        <span class="n">request_id</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"request"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span>
+        <span class="n">latency</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"microsec"</span><span class="p">)</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"request"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"inputs"</span><span class="p">)</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"resp"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"outputs"</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">is_not_none</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">,</span> <span class="p">[</span><span class="s2">"when"</span><span class="p">],):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">if</span> <span class="n">endpoint_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_request</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">first_request</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">timestamp</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_request</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">timestamp</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">is_not_none</span><span class="p">,</span> <span class="n">request_id</span><span class="p">,</span> <span class="p">[</span><span class="s2">"request"</span><span class="p">,</span> <span class="s2">"id"</span><span class="p">],):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">is_not_none</span><span class="p">,</span> <span class="n">latency</span><span class="p">,</span> <span class="p">[</span><span class="s2">"microsec"</span><span class="p">],):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span>
+            <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">is_not_none</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="p">[</span><span class="s2">"request"</span><span class="p">,</span> <span class="s2">"inputs"</span><span class="p">],</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span>
+            <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">is_not_none</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="p">[</span><span class="s2">"resp"</span><span class="p">,</span> <span class="s2">"outputs"</span><span class="p">],</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">unpacked_labels</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">"_</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">LABELS</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+        <span class="c1"># Separate each model invocation into sub events</span>
+        <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_valid</span><span class="p">(</span>
+                <span class="n">endpoint_id</span><span class="p">,</span>
+                <span class="n">is_list_of_numerics</span><span class="p">,</span>
+                <span class="n">feature</span><span class="p">,</span>
+                <span class="p">[</span><span class="s2">"request"</span><span class="p">,</span> <span class="s2">"inputs"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"[</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">]"</span><span class="p">],</span>
+            <span class="p">):</span>
+                <span class="k">return</span> <span class="kc">None</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">prediction</span> <span class="o">=</span> <span class="p">[</span><span class="n">prediction</span><span class="p">]</span>
+
+            <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="n">FUNCTION_URI</span><span class="p">:</span> <span class="n">function_uri</span><span class="p">,</span>
+                    <span class="n">MODEL</span><span class="p">:</span> <span class="n">versioned_model</span><span class="p">,</span>
+                    <span class="n">MODEL_CLASS</span><span class="p">:</span> <span class="n">model_class</span><span class="p">,</span>
+                    <span class="n">TIMESTAMP</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">,</span>
+                    <span class="n">ENDPOINT_ID</span><span class="p">:</span> <span class="n">endpoint_id</span><span class="p">,</span>
+                    <span class="n">REQUEST_ID</span><span class="p">:</span> <span class="n">request_id</span><span class="p">,</span>
+                    <span class="n">LATENCY</span><span class="p">:</span> <span class="n">latency</span><span class="p">,</span>
+                    <span class="n">FEATURES</span><span class="p">:</span> <span class="n">feature</span><span class="p">,</span>
+                    <span class="n">PREDICTION</span><span class="p">:</span> <span class="n">prediction</span><span class="p">,</span>
+                    <span class="n">FIRST_REQUEST</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_request</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">],</span>
+                    <span class="n">LAST_REQUEST</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_request</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">],</span>
+                    <span class="n">ERROR_COUNT</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">error_count</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">],</span>
+                    <span class="n">LABELS</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">LABELS</span><span class="p">,</span> <span class="p">{}),</span>
+                    <span class="n">METRICS</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">METRICS</span><span class="p">,</span> <span class="p">{}),</span>
+                    <span class="n">ENTITIES</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"request"</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ENTITIES</span><span class="p">,</span> <span class="p">{}),</span>
+                    <span class="n">UNPACKED_LABELS</span><span class="p">:</span> <span class="n">unpacked_labels</span><span class="p">,</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">events</span></div>
+
+<div class="viewcode-block" id="ProcessEndpointEvent.resume_state"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.ProcessEndpointEvent.resume_state">[docs]</a>    <span class="k">def</span> <span class="nf">resume_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">):</span>
+        <span class="c1"># Make sure process is resumable, if process fails for any reason, be able to pick things up close to where we</span>
+        <span class="c1"># left them</span>
+        <span class="k">if</span> <span class="n">endpoint_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">endpoints</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Trying to resume state"</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">)</span>
+            <span class="n">endpoint_record</span> <span class="o">=</span> <span class="n">get_endpoint_record</span><span class="p">(</span>
+                <span class="n">kv_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+                <span class="n">kv_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+                <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+                <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">endpoint_record</span><span class="p">:</span>
+                <span class="n">first_request</span> <span class="o">=</span> <span class="n">endpoint_record</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FIRST_REQUEST</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">first_request</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">first_request</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">first_request</span>
+                <span class="n">error_count</span> <span class="o">=</span> <span class="n">endpoint_record</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ERROR_COUNT</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">error_count</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">error_count</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">error_count</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">endpoints</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ProcessEndpointEvent.is_valid"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.ProcessEndpointEvent.is_valid">[docs]</a>    <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">validation_function</span><span class="p">,</span> <span class="n">field</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">dict_path</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">validation_function</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">dict_path</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">error_count</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="ProcessEndpointEvent.handle_errors"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.ProcessEndpointEvent.handle_errors">[docs]</a>    <span class="k">def</span> <span class="nf">handle_errors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">"error"</span> <span class="ow">in</span> <span class="n">event</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">error_count</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">return</span> <span class="kc">False</span></div></div>
+
+
+<div class="viewcode-block" id="enrich_even_details"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.enrich_even_details">[docs]</a><span class="k">def</span> <span class="nf">enrich_even_details</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="n">function_uri</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FUNCTION_URI</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_not_none</span><span class="p">(</span><span class="n">function_uri</span><span class="p">,</span> <span class="p">[</span><span class="n">FUNCTION_URI</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">MODEL</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_not_none</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="p">[</span><span class="n">MODEL</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="n">version</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">VERSION</span><span class="p">)</span>
+    <span class="n">versioned_model</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span> <span class="k">if</span> <span class="n">version</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">:latest"</span>
+
+    <span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">create_model_endpoint_id</span><span class="p">(</span>
+        <span class="n">function_uri</span><span class="o">=</span><span class="n">function_uri</span><span class="p">,</span> <span class="n">versioned_model</span><span class="o">=</span><span class="n">versioned_model</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">endpoint_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">endpoint_id</span><span class="p">)</span>
+
+    <span class="n">event</span><span class="p">[</span><span class="n">VERSIONED_MODEL</span><span class="p">]</span> <span class="o">=</span> <span class="n">versioned_model</span>
+    <span class="n">event</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">]</span> <span class="o">=</span> <span class="n">endpoint_id</span>
+
+    <span class="k">return</span> <span class="n">event</span></div>
+
+
+<div class="viewcode-block" id="is_not_none"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.is_not_none">[docs]</a><span class="k">def</span> <span class="nf">is_not_none</span><span class="p">(</span><span class="n">field</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">dict_path</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+    <span class="k">if</span> <span class="n">field</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Expected event field is missing: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> [Event -&gt; </span><span class="si">{</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dict_path</span><span class="p">)</span><span class="si">}</span><span class="s2">]"</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="is_list_of_numerics"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.is_list_of_numerics">[docs]</a><span class="k">def</span> <span class="nf">is_list_of_numerics</span><span class="p">(</span>
+    <span class="n">field</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">]],</span> <span class="n">dict_path</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<span class="p">):</span>
+    <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">field</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Expected event field is missing: </span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> [Event -&gt; </span><span class="si">{</span><span class="s1">''</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dict_path</span><span class="p">)</span><span class="si">}</span><span class="s2">]"</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="FilterNotNone"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.FilterNotNone">[docs]</a><span class="k">class</span> <span class="nc">FilterNotNone</span><span class="p">(</span><span class="n">Filter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">fn</span><span class="o">=</span><span class="k">lambda</span> <span class="n">event</span><span class="p">:</span> <span class="n">event</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FilterKeys"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.FilterKeys">[docs]</a><span class="k">class</span> <span class="nc">FilterKeys</span><span class="p">(</span><span class="n">MapClass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FilterKeys.do"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.FilterKeys.do">[docs]</a>    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">new_event</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">event</span><span class="p">:</span>
+                <span class="n">new_event</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">new_event</span> <span class="k">if</span> <span class="n">new_event</span> <span class="k">else</span> <span class="kc">None</span></div></div>
+
+
+<div class="viewcode-block" id="UnpackValues"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.UnpackValues">[docs]</a><span class="k">class</span> <span class="nc">UnpackValues</span><span class="p">(</span><span class="n">MapClass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys_to_unpack</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+<div class="viewcode-block" id="UnpackValues.do"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.UnpackValues.do">[docs]</a>    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="n">unpacked</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">keys_to_unpack</span><span class="p">:</span>
+                <span class="n">unpacked</span> <span class="o">=</span> <span class="p">{</span><span class="o">**</span><span class="n">unpacked</span><span class="p">,</span> <span class="o">**</span><span class="n">event</span><span class="p">[</span><span class="n">key</span><span class="p">]}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">unpacked</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">unpacked</span></div></div>
+
+
+<div class="viewcode-block" id="MapFeatureNames"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.MapFeatureNames">[docs]</a><span class="k">class</span> <span class="nc">MapFeatureNames</span><span class="p">(</span><span class="n">MapClass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">kv_container</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kv_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">access_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span> <span class="o">=</span> <span class="n">kv_container</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span> <span class="o">=</span> <span class="n">kv_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">access_key</span> <span class="o">=</span> <span class="n">access_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label_columns</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="MapFeatureNames.do"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.MapFeatureNames.do">[docs]</a>    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="n">endpoint_id</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">endpoint_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">:</span>
+            <span class="n">endpoint_record</span> <span class="o">=</span> <span class="n">get_endpoint_record</span><span class="p">(</span>
+                <span class="n">kv_container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+                <span class="n">kv_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+                <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+                <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">access_key</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">feature_names</span> <span class="o">=</span> <span class="n">endpoint_record</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">FEATURE_NAMES</span><span class="p">)</span>
+            <span class="n">feature_names</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)</span> <span class="k">if</span> <span class="n">feature_names</span> <span class="k">else</span> <span class="kc">None</span>
+
+            <span class="n">label_columns</span> <span class="o">=</span> <span class="n">endpoint_record</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">LABEL_COLUMNS</span><span class="p">)</span>
+            <span class="n">label_columns</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">label_columns</span><span class="p">)</span> <span class="k">if</span> <span class="n">label_columns</span> <span class="k">else</span> <span class="kc">None</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">feature_names</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Feature names are not initialized, they will be automatically generated"</span><span class="p">,</span>
+                    <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"f</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="n">FEATURES</span><span class="p">])]</span>
+                <span class="n">get_v3io_client</span><span class="p">()</span><span class="o">.</span><span class="n">kv</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                    <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+                    <span class="n">table_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+                    <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">access_key</span><span class="p">,</span>
+                    <span class="n">key</span><span class="o">=</span><span class="n">event</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">],</span>
+                    <span class="n">attributes</span><span class="o">=</span><span class="p">{</span><span class="n">FEATURE_NAMES</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">feature_names</span><span class="p">)},</span>
+                    <span class="n">raise_for_status</span><span class="o">=</span><span class="n">RaiseForStatus</span><span class="o">.</span><span class="n">always</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">label_columns</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"label column names are not initialized, they will be automatically generated"</span><span class="p">,</span>
+                    <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">label_columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"p</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="n">PREDICTION</span><span class="p">])]</span>
+                <span class="n">get_v3io_client</span><span class="p">()</span><span class="o">.</span><span class="n">kv</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+                    <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_container</span><span class="p">,</span>
+                    <span class="n">table_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kv_path</span><span class="p">,</span>
+                    <span class="n">access_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">access_key</span><span class="p">,</span>
+                    <span class="n">key</span><span class="o">=</span><span class="n">event</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">],</span>
+                    <span class="n">attributes</span><span class="o">=</span><span class="p">{</span><span class="n">LABEL_COLUMNS</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">label_columns</span><span class="p">)},</span>
+                    <span class="n">raise_for_status</span><span class="o">=</span><span class="n">RaiseForStatus</span><span class="o">.</span><span class="n">always</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">label_columns</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_columns</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">feature_names</span>
+
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">"Label columns"</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">label_columns</span><span class="o">=</span><span class="n">label_columns</span>
+            <span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">"Feature names"</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span> <span class="n">feature_names</span><span class="o">=</span><span class="n">feature_names</span>
+            <span class="p">)</span>
+
+        <span class="n">feature_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span>
+        <span class="n">features</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="n">FEATURES</span><span class="p">]</span>
+        <span class="n">event</span><span class="p">[</span><span class="n">NAMED_FEATURES</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">feature</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
+        <span class="p">}</span>
+
+        <span class="n">label_columns</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">label_columns</span><span class="p">[</span><span class="n">endpoint_id</span><span class="p">]</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="n">event</span><span class="p">[</span><span class="n">PREDICTION</span><span class="p">]</span>
+        <span class="n">event</span><span class="p">[</span><span class="n">NAMED_PREDICTIONS</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">name</span><span class="p">:</span> <span class="n">prediction</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">prediction</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">label_columns</span><span class="p">,</span> <span class="n">prediction</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Mapped event"</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="n">event</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">event</span></div></div>
+
+
+<div class="viewcode-block" id="WriteToKV"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.WriteToKV">[docs]</a><span class="k">class</span> <span class="nc">WriteToKV</span><span class="p">(</span><span class="n">MapClass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">container</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">container</span> <span class="o">=</span> <span class="n">container</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+
+<div class="viewcode-block" id="WriteToKV.do"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.WriteToKV.do">[docs]</a>    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="n">get_v3io_client</span><span class="p">()</span><span class="o">.</span><span class="n">kv</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+            <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="p">,</span>
+            <span class="n">table_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span>
+            <span class="n">key</span><span class="o">=</span><span class="n">event</span><span class="p">[</span><span class="n">ENDPOINT_ID</span><span class="p">],</span>
+            <span class="n">attributes</span><span class="o">=</span><span class="n">event</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">event</span></div></div>
+
+
+<div class="viewcode-block" id="InferSchema"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.InferSchema">[docs]</a><span class="k">class</span> <span class="nc">InferSchema</span><span class="p">(</span><span class="n">MapClass</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">v3io_access_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">v3io_framesd</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">container</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">table</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">container</span> <span class="o">=</span> <span class="n">container</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span> <span class="o">=</span> <span class="n">v3io_access_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">v3io_framesd</span> <span class="o">=</span> <span class="n">v3io_framesd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">table</span> <span class="o">=</span> <span class="n">table</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+<div class="viewcode-block" id="InferSchema.do"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.InferSchema.do">[docs]</a>    <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">):</span>
+        <span class="n">key_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">key_set</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">key_set</span><span class="p">)</span>
+            <span class="n">get_frames_client</span><span class="p">(</span>
+                <span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_access_key</span><span class="p">,</span>
+                <span class="n">container</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="p">,</span>
+                <span class="n">address</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">v3io_framesd</span><span class="p">,</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">backend</span><span class="o">=</span><span class="s2">"kv"</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="s2">"infer_schema"</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="s2">"Found new keys, inferred schema"</span><span class="p">,</span> <span class="n">table</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">,</span> <span class="n">event</span><span class="o">=</span><span class="n">event</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">event</span></div></div>
+
+
+<div class="viewcode-block" id="get_endpoint_record"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.get_endpoint_record">[docs]</a><span class="k">def</span> <span class="nf">get_endpoint_record</span><span class="p">(</span>
+    <span class="n">kv_container</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kv_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">endpoint_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">access_key</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Grabbing endpoint data"</span><span class="p">,</span>
+        <span class="n">container</span><span class="o">=</span><span class="n">kv_container</span><span class="p">,</span>
+        <span class="n">table_path</span><span class="o">=</span><span class="n">kv_path</span><span class="p">,</span>
+        <span class="n">key</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">endpoint_record</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">get_v3io_client</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">kv</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="n">container</span><span class="o">=</span><span class="n">kv_container</span><span class="p">,</span>
+                <span class="n">table_path</span><span class="o">=</span><span class="n">kv_path</span><span class="p">,</span>
+                <span class="n">key</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+                <span class="n">access_key</span><span class="o">=</span><span class="n">access_key</span><span class="p">,</span>
+                <span class="n">raise_for_status</span><span class="o">=</span><span class="n">v3io</span><span class="o">.</span><span class="n">dataplane</span><span class="o">.</span><span class="n">RaiseForStatus</span><span class="o">.</span><span class="n">always</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">item</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">endpoint_record</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="init_context"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.init_context">[docs]</a><span class="k">def</span> <span class="nf">init_context</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">):</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Initializing EventStreamProcessor"</span><span class="p">)</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"MODEL_MONITORING_PARAMETERS"</span><span class="p">)</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span> <span class="k">if</span> <span class="n">parameters</span> <span class="k">else</span> <span class="p">{}</span>
+    <span class="n">stream_processor</span> <span class="o">=</span> <span class="n">EventStreamProcessor</span><span class="p">(</span><span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s2">"stream_processor"</span><span class="p">,</span> <span class="n">stream_processor</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="handler"><a class="viewcode-back" href="documentation.html#model_monitoring_stream.model_monitoring_stream.handler">[docs]</a><span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Event</span><span class="p">):</span>
+    <span class="n">event_body</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">event_body</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">stream_processor</span><span class="o">.</span><span class="n">consume</span><span class="p">(</span><span class="n">event_body</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>

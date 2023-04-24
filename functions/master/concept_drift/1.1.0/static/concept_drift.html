@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>concept_drift.concept_drift</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/concept_drift/concept_drift.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for concept_drift.concept_drift</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="c1"># Generated by nuclio.export.NuclioExporter</span>
+
+<span class="kn">import</span> <span class="nn">skmultiflow.drift_detection</span>  <span class="c1"># We will grab our PH, DDM, EDDM algorithms from here</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">cloudpickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
+
+<span class="kn">from</span> <span class="nn">nuclio.triggers</span> <span class="kn">import</span> <span class="n">V3IOStreamTrigger</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">DataItem</span><span class="p">,</span> <span class="n">import_function</span><span class="p">,</span> <span class="n">mlconf</span><span class="p">,</span> <span class="n">MLClientCtx</span><span class="p">,</span> <span class="n">mount_v3io</span>
+
+<span class="kn">import</span> <span class="nn">random</span>
+
+
+<div class="viewcode-block" id="concept_drift_deployer"><a class="viewcode-back" href="documentation.html#concept_drift.concept_drift.concept_drift_deployer">[docs]</a><span class="k">def</span> <span class="nf">concept_drift_deployer</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">base_dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">input_stream</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">consumer_group</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_stream</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_tsdb</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">tsdb_batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+    <span class="n">models</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"ddm"</span><span class="p">,</span> <span class="s2">"eddm"</span><span class="p">,</span> <span class="s2">"pagehinkley"</span><span class="p">],</span>
+    <span class="n">models_dest</span><span class="o">=</span><span class="s2">"models"</span><span class="p">,</span>
+    <span class="n">pagehinkley_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">ddm_warning_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">ddm_out_control_level</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">label_col</span><span class="o">=</span><span class="s2">"label"</span><span class="p">,</span>
+    <span class="n">prediction_col</span><span class="o">=</span><span class="s2">"prediction"</span><span class="p">,</span>
+    <span class="n">hub_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">mlconf</span><span class="o">.</span><span class="n">hub_url</span><span class="p">,</span>
+    <span class="n">fn_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"master"</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Deploy a streaming Concept Drift detector on a labeled stream</span>
+<span class="sd">       This function is the Deployment step for the Streaming Concept Drift Detector.</span>
+<span class="sd">       It will load the selected drift detectors and initialize them with the</span>
+<span class="sd">       base_dataset's statistics.  Then it will deploy the concept_drift_streaming</span>
+<span class="sd">       function and pass the models to it for streaming concept-drift detection on top</span>
+<span class="sd">       of a labeled stream.</span>
+
+<span class="sd">    :param context:         MLRun context</span>
+<span class="sd">    :param base_dataset:    Dataset containing label_col and prediction_col to initialize the detectors</span>
+<span class="sd">    :param input_stream:    labeled stream to track.</span>
+<span class="sd">                            Should contain label_col and prediction_col</span>
+<span class="sd">    :param output_stream:   Output stream to push the detector's alerts</span>
+<span class="sd">    :param output_tsdb:     Output TSDB table to allow analysis and display</span>
+<span class="sd">    :param tsdb_batch_size: Batch size of alerts to buffer before pushing to the TSDB</span>
+<span class="sd">    :param callbacks:       Additional rest endpoints to send the alert data to</span>
+<span class="sd">    :param models:          List of the detectors to deploy</span>
+<span class="sd">                            Defaults to ['ddm', 'eddm', 'pagehinkley'].</span>
+<span class="sd">    :param models_dest:     Location for saving the detectors</span>
+<span class="sd">                            Defaults to 'models' (in relation to artifact_path).</span>
+<span class="sd">    :param pagehinkley_threshold:  Drift level threshold for PH detector Defaults to 10.</span>
+<span class="sd">    :param ddm_warning_level:      Warning level alert for DDM detector Defaults to 2.</span>
+<span class="sd">    :param ddm_out_control_level:  Drift level alert for DDM detector Defaults to 3.</span>
+<span class="sd">    :param label_col:       Label column to be used on base_dataset and input_stream</span>
+<span class="sd">                            Defaults to 'label'.</span>
+<span class="sd">    :param prediction_col:  Prediction column to be used on base_dataset and input_stream</span>
+<span class="sd">                            Defaults to 'prediction'.</span>
+<span class="sd">    :param hub_url:         hub_url in case the default is not used, concept_drift_streaming will be loaded</span>
+<span class="sd">                            by this url</span>
+<span class="sd">                            Defaults to mlconf.hub_url.</span>
+<span class="sd">    :param fn_tag:          hub tag to use</span>
+<span class="sd">                            Defaults to 'master'</span>
+<span class="sd">    """</span>
+
+    <span class="n">mlconf</span><span class="o">.</span><span class="n">dbpath</span> <span class="o">=</span> <span class="n">mlconf</span><span class="o">.</span><span class="n">dbpath</span> <span class="ow">or</span> <span class="s2">"http://mlrun-api:8080"</span>
+    <span class="n">mlconf</span><span class="o">.</span><span class="n">hub_url</span> <span class="o">=</span> <span class="n">hub_url</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">import_function</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="sa">f</span><span class="s2">"hub://concept_drift_streaming:</span><span class="si">{</span><span class="n">fn_tag</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loading base dataset"</span><span class="p">)</span>
+    <span class="n">base_df</span> <span class="o">=</span> <span class="n">base_dataset</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+    <span class="n">error_stream</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+        <span class="n">base_df</span><span class="p">[</span><span class="n">prediction_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">base_df</span><span class="p">[</span><span class="n">label_col</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span>
+    <span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Creating models"</span><span class="p">)</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"models"</span><span class="p">,</span> <span class="s2">"pagehinkley, ddm, eddm"</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">","</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"eddm"</span><span class="p">:</span> <span class="n">skmultiflow</span><span class="o">.</span><span class="n">drift_detection</span><span class="o">.</span><span class="n">EDDM</span><span class="p">(),</span>
+        <span class="s2">"pagehinkley"</span><span class="p">:</span> <span class="n">skmultiflow</span><span class="o">.</span><span class="n">drift_detection</span><span class="o">.</span><span class="n">PageHinkley</span><span class="p">(</span>
+            <span class="n">min_instances</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">error_stream</span><span class="p">),</span> <span class="n">threshold</span><span class="o">=</span><span class="n">pagehinkley_threshold</span>
+        <span class="p">),</span>
+        <span class="s2">"ddm"</span><span class="p">:</span> <span class="n">skmultiflow</span><span class="o">.</span><span class="n">drift_detection</span><span class="o">.</span><span class="n">DDM</span><span class="p">(</span>
+            <span class="n">min_num_instances</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">error_stream</span><span class="p">),</span>
+            <span class="n">warning_level</span><span class="o">=</span><span class="n">ddm_warning_level</span><span class="p">,</span>
+            <span class="n">out_control_level</span><span class="o">=</span><span class="n">ddm_out_control_level</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">}</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Streaming data to models"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">error_stream</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">add_element</span><span class="p">(</span><span class="n">error_stream</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Logging ready models"</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="n">model_file</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.pkl"</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_concept_drift"</span><span class="p">,</span>
+            <span class="n">body</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s2">"framework"</span><span class="p">:</span> <span class="s2">"skmultiflow"</span><span class="p">,</span> <span class="s2">"workflow"</span><span class="p">:</span> <span class="s2">"concept-drift"</span><span class="p">},</span>
+            <span class="n">model_file</span><span class="o">=</span><span class="n">model_file</span><span class="p">,</span>
+            <span class="n">model_dir</span><span class="o">=</span><span class="n">models_dest</span><span class="p">,</span>
+            <span class="n">tag</span><span class="o">=</span><span class="s2">"latest"</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">fn</span><span class="o">.</span><span class="n">set_envs</span><span class="p">(</span>
+            <span class="p">{</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_model_path"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">context</span><span class="o">.</span><span class="n">artifact_path</span><span class="p">,</span> <span class="n">models_dest</span><span class="p">,</span> <span class="n">model_file</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Deploying Concept Drift Streaming function"</span><span class="p">)</span>
+    <span class="n">fn</span><span class="o">.</span><span class="n">set_envs</span><span class="p">(</span>
+        <span class="p">{</span>
+            <span class="s2">"label_col"</span><span class="p">:</span> <span class="n">label_col</span><span class="p">,</span>
+            <span class="s2">"prediction_col"</span><span class="p">:</span> <span class="n">prediction_col</span><span class="p">,</span>
+            <span class="s2">"drift_stream"</span><span class="p">:</span> <span class="n">output_stream</span><span class="p">,</span>
+            <span class="s2">"tsdb_table"</span><span class="p">:</span> <span class="n">output_tsdb</span><span class="p">,</span>
+            <span class="s2">"pagehinkley_threshold"</span><span class="p">:</span> <span class="n">pagehinkley_threshold</span><span class="p">,</span>
+            <span class="s2">"ddm_warning_level"</span><span class="p">:</span> <span class="n">ddm_warning_level</span><span class="p">,</span>
+            <span class="s2">"ddm_out_control"</span><span class="p">:</span> <span class="n">ddm_out_control_level</span><span class="p">,</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">fn</span><span class="o">.</span><span class="n">add_v3io_stream_trigger</span><span class="p">(</span><span class="n">stream_path</span> <span class="o">=</span> <span class="n">input_stream</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">'stream'</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">consumer_group</span><span class="p">)</span>
+    <span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_v3io</span><span class="p">())</span>
+    <span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">project</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
