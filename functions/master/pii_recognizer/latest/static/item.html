@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/languages/yaml.min.js"></script>
+    <title>Source</title>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body style="background-color:darkgray; margin: 0 0 0 0;">
+    <pre style="margin: 0 1em;">
+        <code class="yaml">
+apiVersion: v1
+categories: 
+  - machine-learning
+  - data-preparation
+description: This function is used to recognize PII in a directory of text files
+doc: ''
+example: pii_recognizer.ipynb
+generationDate: 2023-08-15:10-24
+hidden: false
+icon: ''
+labels:
+  author: pgw
+maintainers: []
+marketplaceType: ''
+mlrunVersion: 1.4.0
+name: pii-recognizer
+platformVersion: 3.5.3
+spec:
+  filename: pii_recognizer.py
+  handler: recognize_pii
+  image: mlrun/mlrun
+  kind: job
+  requirements:
+   - nltk
+   - pandas
+   - presidio-anonymizer
+   - presidio-analyzer
+   - torch
+   - flair@git+https://github.com/flairNLP/flair.git@d4ed67bf663e4066517f00397412510d90043653
+   - st-annotated-text
+   - https://huggingface.co/beki/en_spacy_pii_distilbert/resolve/main/en_spacy_pii_distilbert-any-py3-none-any.whl
+url: ''
+version: 0.0.1
+
+        </code>
+    </pre>
+</body>
+</html>
