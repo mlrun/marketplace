@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>question_answering.question_answering</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/question_answering/question_answering.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for question_answering.question_answering</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">transformers</span>
+<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+
+<span class="k">def</span> <span class="nf">_get_prompt_template</span><span class="p">(</span>
+    <span class="n">text_wrapper</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">questions_wrapper</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">questions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">answer_preamble</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="c1"># Validate and build the text wrapper:</span>
+    <span class="n">text_wrapper</span> <span class="o">=</span> <span class="n">text_wrapper</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="s2">"Given the following text:</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"-----</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"</span><span class="si">{}</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"-----"</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">text_wrapper</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"The `text_wrapper` must include one placeholder '</span><span class="si">{}</span><span class="s2">' for the text."</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Validate and build the question wrapper:</span>
+    <span class="n">questions_wrapper</span> <span class="o">=</span> <span class="n">questions_wrapper</span> <span class="ow">or</span> <span class="s2">"Answer the questions:</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span>
+    <span class="k">if</span> <span class="n">questions_wrapper</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"The `questions_wrapper` must include one placeholder '</span><span class="si">{}</span><span class="s2">' for the text."</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Validate and parse the questions:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Please include at least one question."</span><span class="p">)</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">question</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Validate and build the answer wrapper:</span>
+    <span class="n">answer_preamble</span> <span class="o">=</span> <span class="n">answer_preamble</span> <span class="ow">or</span> <span class="s2">"Answer:"</span>
+    <span class="k">if</span> <span class="n">answer_preamble</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The `answer_preamble` must not have a placeholder '</span><span class="si">{}</span><span class="s2">'."</span><span class="p">)</span>
+
+    <span class="c1"># Construct the template:</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">text_wrapper</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">questions_wrapper</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">answer_preamble</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="s2">"1. "</span>  <span class="c1"># Addition for better answers in general.</span>
+    <span class="p">),</span> <span class="n">answer_preamble</span>
+
+
+<div class="viewcode-block" id="answer_questions"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.answer_questions">[docs]</a><span class="k">def</span> <span class="nf">answer_questions</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">input_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">questions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="n">tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">text_wrapper</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">questions_wrapper</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">answer_preamble</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">generation_config</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">questions_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_answering_tryouts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Answer questions with context to the given text files by a pretrained LLM model.</span>
+
+<span class="sd">    :param context:                 MLRun context.</span>
+<span class="sd">    :param input_path:              A path to a directory of text files or a path to a text file to ask questions about.</span>
+<span class="sd">    :param model:                   The pre-trained model to use for asking questions.</span>
+<span class="sd">    :param questions:               The questions to ask.</span>
+<span class="sd">    :param tokenizer:               The pre-trained tokenizer to use. Defaulted to the model given.</span>
+<span class="sd">    :param model_kwargs:            Keyword arguments to pass regarding the loading of the model in HuggingFace's</span>
+<span class="sd">                                    `pipeline` function.</span>
+<span class="sd">    :param text_wrapper:            A wrapper for the text part. Will be added at the start of the prompt. Must have a</span>
+<span class="sd">                                    placeholder ('{}') for the questions.</span>
+<span class="sd">    :param questions_wrapper:       A wrapper for the questions received. Will be added after the text placeholder in</span>
+<span class="sd">                                    the prompt template. Must have a placeholder ('{}') for the questions.</span>
+<span class="sd">    :param answer_preamble:         A prefix for the answer part. Will be added at the end of the prompt template.</span>
+<span class="sd">    :param generation_config:       HuggingFace's `GenerationConfig` keyword arguments to pass to the `generate` method.</span>
+<span class="sd">    :param questions_columns:       Columns to use for the dataframe returned.</span>
+<span class="sd">    :param model_answering_tryouts: Amount of inferring to do per text before raising an error due to missing or empty</span>
+<span class="sd">                                    answers.</span>
+
+<span class="sd">    :returns: A tuple of:</span>
+
+<span class="sd">              * A dataframe dataset of the questions answers.</span>
+<span class="sd">              * A dictionary of errored files that were not inferred or were not answered properly.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Get the prompt template:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Creating prompt template"</span><span class="p">)</span>
+    <span class="n">prompt_template</span><span class="p">,</span> <span class="n">answer_preamble</span> <span class="o">=</span> <span class="n">_get_prompt_template</span><span class="p">(</span>
+        <span class="n">text_wrapper</span><span class="o">=</span><span class="n">text_wrapper</span><span class="p">,</span>
+        <span class="n">questions_wrapper</span><span class="o">=</span><span class="n">questions_wrapper</span><span class="p">,</span>
+        <span class="n">questions</span><span class="o">=</span><span class="n">questions</span><span class="p">,</span>
+        <span class="n">answer_preamble</span><span class="o">=</span><span class="n">answer_preamble</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prompt template created:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">prompt_template</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Get the questions columns:</span>
+    <span class="n">questions_columns</span> <span class="o">=</span> <span class="n">questions_columns</span> <span class="ow">or</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">"q</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions_columns</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The provided questions columns length (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">) "</span>
+            <span class="sa">f</span><span class="s2">"does not match the questions amount (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Prepare the dataframe and errors to be returned:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"text_file"</span><span class="p">,</span> <span class="o">*</span><span class="n">questions_columns</span><span class="p">])</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Load the tokenizer:</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">tokenizer</span> <span class="ow">or</span> <span class="n">model</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading tokenizer: </span><span class="si">{</span><span class="n">tokenizer</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Tokenizer loaded"</span><span class="p">)</span>
+
+    <span class="c1"># Load the generation config:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loading generation configuration"</span><span class="p">)</span>
+    <span class="n">generation_config</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">GenerationConfig</span><span class="p">(</span><span class="o">**</span><span class="p">(</span><span class="n">generation_config</span> <span class="ow">or</span> <span class="p">{}))</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Generation configuration loaded."</span><span class="p">)</span>
+
+    <span class="c1"># Load the model and tokenizer into a pipeline object:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading model '</span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2">' and tokenizer into a pipeline"</span><span class="p">)</span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+        <span class="n">task</span><span class="o">=</span><span class="s2">"text-generation"</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+        <span class="n">trust_remote_code</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">model_kwargs</span><span class="o">=</span><span class="n">model_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Model loaded, pipeline created"</span><span class="p">)</span>
+
+    <span class="c1"># Go over the audio files and infer through the model:</span>
+    <span class="k">if</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">input_path</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_path</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text_files_directory</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+        <span class="n">input_path</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">text_files_directory</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">"*.*"</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">text_file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+        <span class="n">tqdm</span><span class="p">(</span>
+            <span class="n">input_path</span><span class="p">,</span>
+            <span class="n">desc</span><span class="o">=</span><span class="s2">"Generating answers"</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">"file"</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Read the text:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">text_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+                <span class="n">text</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="c1"># For each text, try multiple times as the llm might experience zero answers:</span>
+            <span class="n">tryout</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">tryout</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">model_answering_tryouts</span><span class="p">):</span>
+                <span class="c1"># Infer through the llm:</span>
+                <span class="n">sequences</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+                    <span class="n">prompt_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">text</span><span class="p">),</span>
+                    <span class="n">generation_config</span><span class="o">=</span><span class="n">generation_config</span><span class="p">,</span>
+                    <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                    <span class="n">eos_token_id</span><span class="o">=</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token_id</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="c1"># Validate the answers:</span>
+                <span class="n">answers</span> <span class="o">=</span> <span class="n">sequences</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">answer_preamble</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="mi">1</span>
+                <span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">answers</span> <span class="o">=</span> <span class="n">answers</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">answer</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span> <span class="k">for</span> <span class="n">answer</span> <span class="ow">in</span> <span class="n">answers</span>
+                <span class="p">]</span>  <span class="c1"># Without the questions index prefix 'i. '</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">answer</span> <span class="ow">in</span> <span class="n">answers</span><span class="p">):</span>
+                    <span class="k">continue</span>
+                <span class="c1"># Note in the dataframe:</span>
+                <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">text_file</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">text_files_directory</span><span class="p">)),</span>
+                    <span class="o">*</span><span class="n">answers</span><span class="p">,</span>
+                <span class="p">]</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">tryout</span> <span class="o">==</span> <span class="n">model_answering_tryouts</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"The LLM did not answer correctly - one or more answers are missing: </span><span class="si">{</span><span class="n">answers</span><span class="si">}</span><span class="s2">"</span>
+                <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+            <span class="c1"># Collect the exception:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error in file: '</span><span class="si">{</span><span class="n">text_file</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+            <span class="n">errors</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">text_file</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">errors</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
