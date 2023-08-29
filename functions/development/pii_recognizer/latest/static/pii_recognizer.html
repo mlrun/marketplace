@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>pii_recognizer.pii_recognizer</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/pii_recognizer/pii_recognizer.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for pii_recognizer.pii_recognizer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">annotated_text.util</span> <span class="k">as</span> <span class="nn">at_util</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">nltk</span>
+<span class="kn">import</span> <span class="nn">presidio_analyzer</span> <span class="k">as</span> <span class="nn">pa</span>
+<span class="kn">import</span> <span class="nn">presidio_anonymizer</span> <span class="k">as</span> <span class="nn">pre_anoymizer</span>
+<span class="kn">from</span> <span class="nn">presidio_anonymizer.entities</span> <span class="kn">import</span> <span class="n">OperatorConfig</span>
+<span class="kn">from</span> <span class="nn">tqdm.auto</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">flair</span> <span class="k">as</span> <span class="nn">fl</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Flair is not installed"</span><span class="p">)</span>
+
+<span class="c1"># There is a conflict between Rust-based tokenizers' parallel processing</span>
+<span class="c1"># and Python's fork operations during multiprocessing. To avoid this, we need</span>
+<span class="c1"># the following two lines</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"TOKENIZERS_PARALLELISM"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"false"</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">"pii-recognizer"</span><span class="p">)</span>
+
+
+<span class="c1"># Add the constant classes of Models and Entities to govern the whole package</span>
+<div class="viewcode-block" id="Models"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.Models">[docs]</a><span class="k">class</span> <span class="nc">Models</span><span class="p">:</span>
+    <span class="n">WHOLE</span> <span class="o">=</span> <span class="s2">"whole"</span>
+    <span class="n">PATTERN</span> <span class="o">=</span> <span class="s2">"pattern"</span>
+    <span class="n">SPACY</span> <span class="o">=</span> <span class="s2">"spacy"</span>
+    <span class="n">FLAIR</span> <span class="o">=</span> <span class="s2">"flair"</span></div>
+
+
+<div class="viewcode-block" id="Entities"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.Entities">[docs]</a><span class="k">class</span> <span class="nc">Entities</span><span class="p">:</span>
+    <span class="n">CREDIT_CARD</span> <span class="o">=</span> <span class="s2">"CREDIT_CARD"</span>
+    <span class="n">SSN</span> <span class="o">=</span> <span class="s2">"SSN"</span>
+    <span class="n">PHONE</span> <span class="o">=</span> <span class="s2">"PHONE"</span>
+    <span class="n">EMAIL</span> <span class="o">=</span> <span class="s2">"EMAIL"</span>
+    <span class="n">LOCATION</span> <span class="o">=</span> <span class="s2">"LOCATION"</span>
+    <span class="n">PERSON</span> <span class="o">=</span> <span class="s2">"PERSON"</span>
+    <span class="n">NRP</span> <span class="o">=</span> <span class="s2">"NRP"</span>
+    <span class="n">ORGANIZATION</span> <span class="o">=</span> <span class="s2">"ORGANIZATION"</span>
+    <span class="n">DATE_TIME</span> <span class="o">=</span> <span class="s2">"DATE_TIME"</span>
+    <span class="n">GPE</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"GPE"</span><span class="p">,)</span>
+    <span class="n">MAC_ADDRESS</span> <span class="o">=</span> <span class="s2">"MAC_ADDRESS"</span>
+    <span class="n">US_BANK_NUMBER</span> <span class="o">=</span> <span class="s2">"US_BANK_NUMBER"</span>
+    <span class="n">IMEI</span> <span class="o">=</span> <span class="s2">"IMEI"</span>
+    <span class="n">TITLE</span> <span class="o">=</span> <span class="s2">"TITLE"</span>
+    <span class="n">LICENSE_PLATE</span> <span class="o">=</span> <span class="s2">"LICENSE_PLATE"</span>
+    <span class="n">US_PASSPORT</span> <span class="o">=</span> <span class="s2">"US_PASSPORT"</span>
+    <span class="n">CURRENCY</span> <span class="o">=</span> <span class="s2">"CURRENCY"</span>
+    <span class="n">ROUTING_NUMBER</span> <span class="o">=</span> <span class="s2">"ROUTING_NUMBER"</span>
+    <span class="n">US_ITIN</span> <span class="o">=</span> <span class="s2">"US_ITIN"</span>
+    <span class="n">US_BANK_NUMBER</span> <span class="o">=</span> <span class="s2">"US_BANK_NUMBER"</span>
+    <span class="n">US_DRIVER_LICENSE</span> <span class="o">=</span> <span class="s2">"US_DRIVER_LICENSE"</span>
+    <span class="n">AGE</span> <span class="o">=</span> <span class="s2">"AGE"</span>
+    <span class="n">PASSWORD</span> <span class="o">=</span> <span class="s2">"PASSWORD"</span>
+    <span class="n">SWIFT_CODE</span> <span class="o">=</span> <span class="s2">"SWIFT_CODE"</span></div>
+
+
+<div class="viewcode-block" id="PatternRecognizerFactory"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.PatternRecognizerFactory">[docs]</a><span class="k">class</span> <span class="nc">PatternRecognizerFactory</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Factory for creating pattern recognizers, it can be extended in the future to</span>
+<span class="sd">    add more regex pattern for different entities. For the pattern recognizer to work,</span>
+<span class="sd">    we need construct a list of regex patterns for each entity.</span>
+<span class="sd">    """</span>
+
+    <span class="n">RECOGNIZABLE_ENTITIES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"CREDIT_CARD"</span><span class="p">:</span> <span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span><span class="s2">"CREDIT_CARD"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\b(?:\d[ -]*?){13,16}\b"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
+        <span class="s2">"SSN"</span><span class="p">:</span> <span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span><span class="s2">"SSN"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\b\d</span><span class="si">{3}</span><span class="s2">-?\d</span><span class="si">{2}</span><span class="s2">-?\d</span><span class="si">{4}</span><span class="s2">\b"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
+        <span class="s2">"PHONE"</span><span class="p">:</span> <span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span><span class="s2">"PHONE"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\(?\d</span><span class="si">{3}</span><span class="s2">\)?[-.\s]?\d</span><span class="si">{3}</span><span class="s2">[-.\s]?\d</span><span class="si">{4}</span><span class="s2">"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
+        <span class="s2">"EMAIL"</span><span class="p">:</span> <span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">Pattern</span><span class="p">(</span><span class="s2">"EMAIL"</span><span class="p">,</span> <span class="sa">r</span><span class="s2">"\S+@\S+"</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span>
+    <span class="p">}</span>
+
+    <span class="c1"># create a list of pattern recognizers</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_create_pattern_recognizer</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        For each entity, create a list of patterns to recognize it</span>
+
+<span class="sd">        :param cls: PatternRecognizerFactory class</span>
+
+<span class="sd">        :returns: List of pattern recognizers</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Entities to recognize and their regex patterns</span>
+
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">PatternRecognizer</span><span class="p">(</span><span class="n">supported_entity</span><span class="o">=</span><span class="n">entity</span><span class="p">,</span> <span class="n">patterns</span><span class="o">=</span><span class="n">pattern</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">entity</span><span class="p">,</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">RECOGNIZABLE_ENTITIES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="CustomSpacyRecognizer"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.CustomSpacyRecognizer">[docs]</a><span class="k">class</span> <span class="nc">CustomSpacyRecognizer</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">LocalRecognizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Custom Spacy Recognizer from Presidio Analyzer trained on Privy data.</span>
+<span class="sd">    The privy data is generated using this https://github.com/pixie-io/pixie/tree/main/src/datagen/pii/privy</span>
+<span class="sd">    It can be used to recognize custom entities, Since we want to use Presidio's Registries to generate AnalyzerEngine,</span>
+<span class="sd">    it inherits from Presidio Analyzer's LocalRecognizer class.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Entities to recognize</span>
+
+    <span class="n">RECOGNIZABLE_ENTITIES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"LOCATION"</span><span class="p">,</span>
+        <span class="s2">"PERSON"</span><span class="p">,</span>
+        <span class="s2">"NRP"</span><span class="p">,</span>
+        <span class="s2">"ORGANIZATION"</span><span class="p">,</span>
+        <span class="s2">"DATE_TIME"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Default explanation for this recognizer</span>
+
+    <span class="n">_DEFAULT_EXPLANATION</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">"Identified as </span><span class="si">{}</span><span class="s2"> by Spacy's Named Entity Recognition (Privy-trained)"</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Label groups to check</span>
+
+    <span class="n">_DEFAULT_CHECK_LABEL_GROUPS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">({</span><span class="s2">"LOCATION"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"LOC"</span><span class="p">,</span> <span class="s2">"LOCATION"</span><span class="p">,</span> <span class="s2">"STREET_ADDRESS"</span><span class="p">,</span> <span class="s2">"COORDINATE"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"PERSON"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"PER"</span><span class="p">,</span> <span class="s2">"PERSON"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"NRP"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"NORP"</span><span class="p">,</span> <span class="s2">"NRP"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"ORGANIZATION"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"ORG"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"DATE_TIME"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"DATE_TIME"</span><span class="p">}),</span>
+    <span class="p">]</span>
+
+    <span class="c1"># pretrained model for this recognizer</span>
+
+    <span class="n">_DEFAULT_MODEL_LANGUAGES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"en"</span><span class="p">:</span> <span class="s2">"beki/en_spacy_pii_distilbert"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">_DEFAULT_PRESIDIO_EQUIVALENCES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"PER"</span><span class="p">:</span> <span class="s2">"PERSON"</span><span class="p">,</span>
+        <span class="s2">"LOC"</span><span class="p">:</span> <span class="s2">"LOCATION"</span><span class="p">,</span>
+        <span class="s2">"ORG"</span><span class="p">:</span> <span class="s2">"ORGANIZATION"</span><span class="p">,</span>
+        <span class="s2">"NROP"</span><span class="p">:</span> <span class="s2">"NRP"</span><span class="p">,</span>
+        <span class="s2">"DATE_TIME"</span><span class="p">:</span> <span class="s2">"DATE_TIME"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">supported_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">,</span>
+        <span class="n">supported_entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">check_label_groups</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Set</span><span class="p">,</span> <span class="n">Set</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ner_strength</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize Spacy Recognizer.</span>
+
+<span class="sd">        :param supported_language: Language to use, default is English</span>
+<span class="sd">        :param supported_entities: Entities to use for recognition</span>
+<span class="sd">        :param check_label_groups: Label groups to check for the entities</span>
+<span class="sd">        :param context:            Context to use if any</span>
+<span class="sd">        :param ner_strength:       Default confidence for NER prediction</span>
+
+<span class="sd">        :returns: SpacyRecognizer object</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Default confidence for NER prediction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ner_strength</span> <span class="o">=</span> <span class="n">ner_strength</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_label_groups</span> <span class="o">=</span> <span class="n">check_label_groups</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_CHECK_LABEL_GROUPS</span>
+        <span class="n">supported_entities</span> <span class="o">=</span> <span class="n">supported_entities</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">RECOGNIZABLE_ENTITIES</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">supported_entities</span><span class="o">=</span><span class="n">supported_entities</span><span class="p">,</span>
+            <span class="n">supported_language</span><span class="o">=</span><span class="n">supported_language</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># get the presidio explanation for the result</span>
+
+    <span class="k">def</span> <span class="nf">_build_spacy_explanation</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">original_score</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">explanation</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalysisExplanation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Create explanation for why this result was detected.</span>
+
+<span class="sd">        :param original_score: Score given by this recognizer</span>
+<span class="sd">        :param explanation:    Explanation string</span>
+
+<span class="sd">        :returns: Presidio AnalysisExplanation object</span>
+<span class="sd">        """</span>
+        <span class="n">explanation</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalysisExplanation</span><span class="p">(</span>
+            <span class="n">recognizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="n">original_score</span><span class="o">=</span><span class="n">original_score</span><span class="p">,</span>
+            <span class="n">textual_explanation</span><span class="o">=</span><span class="n">explanation</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">explanation</span>
+
+    <span class="c1"># main method for the recognizer</span>
+<div class="viewcode-block" id="CustomSpacyRecognizer.analyze"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.CustomSpacyRecognizer.analyze">[docs]</a>    <span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">nlp_artifacts</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>  <span class="c1"># noqa D102</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Analyze text using Spacy.</span>
+
+<span class="sd">        :param text:          Text to analyze</span>
+<span class="sd">        :param entities:      Entities to analyze</span>
+<span class="sd">        :param nlp_artifacts: NLP artifacts to use</span>
+
+<span class="sd">        :returns: List of Presidio RecognizerResult objects</span>
+<span class="sd">        """</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nlp_artifacts</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Skipping SpaCy, nlp artifacts not provided..."</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">results</span>
+
+        <span class="n">ner_entities</span> <span class="o">=</span> <span class="n">nlp_artifacts</span><span class="o">.</span><span class="n">entities</span>
+
+        <span class="c1"># recognize the supported entities</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">entity</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_entities</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">ner_entities</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_label</span><span class="p">(</span><span class="n">entity</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_label_groups</span><span class="p">):</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># string of the explanation saying the entity is recognized by spacy</span>
+                <span class="n">textual_explanation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_EXPLANATION</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span>
+                <span class="n">explanation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_spacy_explanation</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">ner_strength</span><span class="p">,</span> <span class="n">textual_explanation</span>
+                <span class="p">)</span>
+
+                <span class="c1"># create the standard result with the entity, start, end, score, and explanation</span>
+                <span class="n">spacy_result</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">(</span>
+                    <span class="n">entity_type</span><span class="o">=</span><span class="n">entity</span><span class="p">,</span>
+                    <span class="n">start</span><span class="o">=</span><span class="n">ent</span><span class="o">.</span><span class="n">start_char</span><span class="p">,</span>
+                    <span class="n">end</span><span class="o">=</span><span class="n">ent</span><span class="o">.</span><span class="n">end_char</span><span class="p">,</span>
+                    <span class="n">score</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ner_strength</span><span class="p">,</span>
+                    <span class="n">analysis_explanation</span><span class="o">=</span><span class="n">explanation</span><span class="p">,</span>
+                    <span class="n">recognition_metadata</span><span class="o">=</span><span class="p">{</span>
+                        <span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="o">.</span><span class="n">RECOGNIZER_NAME_KEY</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+                    <span class="p">},</span>
+                <span class="p">)</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">spacy_result</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">results</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__check_label</span><span class="p">(</span>
+        <span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">check_label_groups</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Set</span><span class="p">,</span> <span class="n">Set</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Check if the label is in the label group.</span>
+
+<span class="sd">        :param entity:             Entity to check</span>
+<span class="sd">        :param label:              Label to check</span>
+<span class="sd">        :param check_label_groups: Label groups to check</span>
+
+<span class="sd">        :returns: True if the label is in the label group, False otherwise</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="n">entity</span> <span class="ow">in</span> <span class="n">egrp</span> <span class="ow">and</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">lgrp</span> <span class="k">for</span> <span class="n">egrp</span><span class="p">,</span> <span class="n">lgrp</span> <span class="ow">in</span> <span class="n">check_label_groups</span>
+        <span class="p">)</span></div>
+
+
+<span class="c1"># Class to use Flair with Presidio as an external recognizer.</span>
+<div class="viewcode-block" id="FlairRecognizer"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.FlairRecognizer">[docs]</a><span class="k">class</span> <span class="nc">FlairRecognizer</span><span class="p">(</span><span class="n">pa</span><span class="o">.</span><span class="n">EntityRecognizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Wrapper for a flair model, if needed to be used within Presidio Analyzer.</span>
+<span class="sd">    This is to make sure the recognizer can be registered with Presidio registry.</span>
+<span class="sd">    """</span>
+
+    <span class="n">RECOGNIZABLE_ENTITIES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"LOCATION"</span><span class="p">,</span>
+        <span class="s2">"PERSON"</span><span class="p">,</span>
+        <span class="s2">"NRP"</span><span class="p">,</span>
+        <span class="s2">"GPE"</span><span class="p">,</span>
+        <span class="s2">"ORGANIZATION"</span><span class="p">,</span>
+        <span class="s2">"MAC_ADDRESS"</span><span class="p">,</span>
+        <span class="s2">"US_BANK_NUMBER"</span><span class="p">,</span>
+        <span class="s2">"IMEI"</span><span class="p">,</span>
+        <span class="s2">"TITLE"</span><span class="p">,</span>
+        <span class="s2">"LICENSE_PLATE"</span><span class="p">,</span>
+        <span class="s2">"US_PASSPORT"</span><span class="p">,</span>
+        <span class="s2">"CURRENCY"</span><span class="p">,</span>
+        <span class="s2">"ROUTING_NUMBER"</span><span class="p">,</span>
+        <span class="s2">"US_ITIN"</span><span class="p">,</span>
+        <span class="s2">"US_BANK_NUMBER"</span><span class="p">,</span>
+        <span class="s2">"US_DRIVER_LICENSE"</span><span class="p">,</span>
+        <span class="s2">"AGE"</span><span class="p">,</span>
+        <span class="s2">"PASSWORD"</span><span class="p">,</span>
+        <span class="s2">"SWIFT_CODE"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="c1"># This is used to construct the explanation for the result</span>
+
+    <span class="n">_DEFAULT_EXPLANATION</span> <span class="o">=</span> <span class="s2">"Identified as </span><span class="si">{}</span><span class="s2"> by Flair's Named Entity Recognition"</span>
+
+    <span class="n">_DEFAULT_CHECK_LABEL_GROUPS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">({</span><span class="s2">"LOCATION"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"LOC"</span><span class="p">,</span> <span class="s2">"LOCATION"</span><span class="p">,</span> <span class="s2">"STREET_ADDRESS"</span><span class="p">,</span> <span class="s2">"COORDINATE"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"PERSON"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"PER"</span><span class="p">,</span> <span class="s2">"PERSON"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"NRP"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"NORP"</span><span class="p">,</span> <span class="s2">"NRP"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"GPE"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"GPE"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"ORGANIZATION"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"ORG"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"MAC_ADDRESS"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"MAC_ADDRESS"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"US_BANK_NUMBER"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"US_BANK_NUMBER"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"IMEI"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"IMEI"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"TITLE"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"TITLE"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"LICENSE_PLATE"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"LICENSE_PLATE"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"US_PASSPORT"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"US_PASSPORT"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"CURRENCY"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"CURRENCY"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"ROUTING_NUMBER"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"ROUTING_NUMBER"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"AGE"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"AGE"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"CURRENCY"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"CURRENCY"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"SWIFT_CODE"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"SWIFT_CODE"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"US_ITIN"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"US_ITIN"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"US_BANK_NUMBER"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"US_BANK_NUMBER"</span><span class="p">}),</span>
+        <span class="p">({</span><span class="s2">"US_DRIVER_LICENSE"</span><span class="p">},</span> <span class="p">{</span><span class="s2">"US_DRIVER_LICENSE"</span><span class="p">}),</span>
+    <span class="p">]</span>
+
+    <span class="n">_DEFAULT_MODEL_LANGUAGES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"en"</span><span class="p">:</span> <span class="s2">"beki/flair-pii-distilbert"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="n">_DEFAULT_PRESIDIO_EQUIVALENCES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"PER"</span><span class="p">:</span> <span class="s2">"PERSON"</span><span class="p">,</span>
+        <span class="s2">"LOC"</span><span class="p">:</span> <span class="s2">"LOCATION"</span><span class="p">,</span>
+        <span class="s2">"ORG"</span><span class="p">:</span> <span class="s2">"ORGANIZATION"</span><span class="p">,</span>
+        <span class="s2">"NROP"</span><span class="p">:</span> <span class="s2">"NRP"</span><span class="p">,</span>
+        <span class="s2">"URL"</span><span class="p">:</span> <span class="s2">"URL"</span><span class="p">,</span>
+        <span class="s2">"US_ITIN"</span><span class="p">:</span> <span class="s2">"US_ITIN"</span><span class="p">,</span>
+        <span class="s2">"US_PASSPORT"</span><span class="p">:</span> <span class="s2">"US_PASSPORT"</span><span class="p">,</span>
+        <span class="s2">"IBAN_CODE"</span><span class="p">:</span> <span class="s2">"IBAN_CODE"</span><span class="p">,</span>
+        <span class="s2">"IP_ADDRESS"</span><span class="p">:</span> <span class="s2">"IP_ADDRESS"</span><span class="p">,</span>
+        <span class="s2">"EMAIL_ADDRESS"</span><span class="p">:</span> <span class="s2">"EMAIL"</span><span class="p">,</span>
+        <span class="s2">"US_DRIVER_LICENSE"</span><span class="p">:</span> <span class="s2">"US_DRIVER_LICENSE"</span><span class="p">,</span>
+        <span class="s2">"US_BANK_NUMBER"</span><span class="p">:</span> <span class="s2">"US_BANK_NUMBER"</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">supported_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">,</span>
+        <span class="n">supported_entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">check_label_groups</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Set</span><span class="p">,</span> <span class="n">Set</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the FlairRecognizer.</span>
+
+<span class="sd">        :param supported_language: Language to use</span>
+<span class="sd">        :param supported_entities: Entities to use</span>
+<span class="sd">        :param check_label_groups: Label groups to check</span>
+
+<span class="sd">        :returns: FlairRecognizer object</span>
+
+<span class="sd">        """</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_label_groups</span> <span class="o">=</span> <span class="n">check_label_groups</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_CHECK_LABEL_GROUPS</span>
+
+        <span class="n">supported_entities</span> <span class="o">=</span> <span class="n">supported_entities</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">RECOGNIZABLE_ENTITIES</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">fl</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">SequenceTagger</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_MODEL_LANGUAGES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">supported_language</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">supported_entities</span><span class="o">=</span><span class="n">supported_entities</span><span class="p">,</span>
+            <span class="n">supported_language</span><span class="o">=</span><span class="n">supported_language</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"Flair Analytics"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># main method for the recognizer</span>
+<div class="viewcode-block" id="FlairRecognizer.analyze"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.FlairRecognizer.analyze">[docs]</a>    <span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">nlp_artifacts</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">nlp_engine</span><span class="o">.</span><span class="n">NlpArtifacts</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Analyze text and return the results.</span>
+
+<span class="sd">        :param text:          The text for analysis.</span>
+<span class="sd">        :param entities:      The list of entities to recognize.</span>
+<span class="sd">        :param nlp_artifacts: Not used by this recognizer but needed for the interface.</span>
+<span class="sd">        :param language:      Text language. Supported languages in MODEL_LANGUAGES</span>
+
+<span class="sd">        :returns: The list of Presidio RecognizerResult constructed from the recognized Flair detections.</span>
+<span class="sd">        """</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">sentences</span> <span class="o">=</span> <span class="n">fl</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Sentence</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+
+        <span class="c1"># If there are no specific list of entities, we will look for all of it.</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">entities</span><span class="p">:</span>
+            <span class="n">entities</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_entities</span>
+
+        <span class="c1"># Go over the entities and check if they are in the supported entities list.</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">entity</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supported_entities</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># Go over the sentences and check if the entity is in the sentence.</span>
+            <span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">sentences</span><span class="o">.</span><span class="n">get_spans</span><span class="p">(</span><span class="s2">"ner"</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__check_label</span><span class="p">(</span>
+                    <span class="n">entity</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">check_label_groups</span>
+                <span class="p">):</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># If the entity is in the sentence, we will add it to the results.</span>
+                <span class="n">textual_explanation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_EXPLANATION</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">ent</span><span class="o">.</span><span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Build the explanation for the result</span>
+                <span class="n">explanation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_flair_explanation</span><span class="p">(</span>
+                    <span class="nb">round</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">score</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">textual_explanation</span>
+                <span class="p">)</span>
+
+                <span class="n">flair_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_to_recognizer_result</span><span class="p">(</span><span class="n">ent</span><span class="p">,</span> <span class="n">explanation</span><span class="p">)</span>
+
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">flair_result</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">results</span></div>
+
+    <span class="k">def</span> <span class="nf">_convert_to_recognizer_result</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">entity</span><span class="p">:</span> <span class="n">fl</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Span</span><span class="p">,</span> <span class="n">explanation</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert Flair result to Presidio RecognizerResult.</span>
+
+<span class="sd">        :param entity:      Flair entity of Span</span>
+<span class="sd">        :param explanation: Presidio AnalysisExplanation</span>
+
+<span class="sd">        :returns: Presidio RecognizerResult</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Convert the entity type to Presidio entity type</span>
+        <span class="n">entity_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_PRESIDIO_EQUIVALENCES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span> <span class="n">entity</span><span class="o">.</span><span class="n">tag</span><span class="p">)</span>
+
+        <span class="c1"># Convert the score to Presidio score</span>
+        <span class="n">flair_score</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">entity</span><span class="o">.</span><span class="n">score</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Create the Presidio RecognizerResult from the Flair entity</span>
+        <span class="n">flair_results</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">(</span>
+            <span class="n">entity_type</span><span class="o">=</span><span class="n">entity_type</span><span class="p">,</span>
+            <span class="n">start</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">start_position</span><span class="p">,</span>
+            <span class="n">end</span><span class="o">=</span><span class="n">entity</span><span class="o">.</span><span class="n">end_position</span><span class="p">,</span>
+            <span class="n">score</span><span class="o">=</span><span class="n">flair_score</span><span class="p">,</span>
+            <span class="n">analysis_explanation</span><span class="o">=</span><span class="n">explanation</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">flair_results</span>
+
+    <span class="k">def</span> <span class="nf">_build_flair_explanation</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">original_score</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">explanation</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalysisExplanation</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Create explanation for why this result was detected.</span>
+
+<span class="sd">        :param original_score: Score given by this recognizer</span>
+<span class="sd">        :param explanation:    Explanation string</span>
+
+<span class="sd">        :returns: Presidio AnalysisExplanation</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Create the Presidio AnalysisExplanation for the result</span>
+        <span class="n">explanation</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalysisExplanation</span><span class="p">(</span>
+            <span class="n">recognizer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="n">original_score</span><span class="o">=</span><span class="n">original_score</span><span class="p">,</span>
+            <span class="n">textual_explanation</span><span class="o">=</span><span class="n">explanation</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">explanation</span>
+
+    <span class="c1"># sanity check of the entity and label before recognition</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__check_label</span><span class="p">(</span>
+        <span class="n">entity</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">check_label_groups</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Set</span><span class="p">,</span> <span class="n">Set</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">any</span><span class="p">(</span>
+            <span class="n">entity</span> <span class="ow">in</span> <span class="n">egrp</span> <span class="ow">and</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">lgrp</span> <span class="k">for</span> <span class="n">egrp</span><span class="p">,</span> <span class="n">lgrp</span> <span class="ow">in</span> <span class="n">check_label_groups</span>
+        <span class="p">)</span></div>
+
+
+<span class="c1"># get the analyzer engine based on the model</span>
+<span class="k">def</span> <span class="nf">_get_analyzer_engine</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalyzerEngine</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return pa.AnalyzerEngine.</span>
+
+<span class="sd">    :param model: The model to use. Can be "spacy", "flair", "pattern" or "whole".</span>
+<span class="sd">    :param entities: The list of entities to use.</span>
+
+<span class="sd">    :returns: pa.AnalyzerEngine</span>
+<span class="sd">    """</span>
+    <span class="c1"># recognizer registry that can store multiple recognizers</span>
+    <span class="n">registry</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">RecognizerRegistry</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">model</span> <span class="o">==</span> <span class="n">Models</span><span class="o">.</span><span class="n">SPACY</span><span class="p">:</span>
+        <span class="c1"># custom spacy recognizer</span>
+        <span class="n">spacy_recognizer</span> <span class="o">=</span> <span class="n">CustomSpacyRecognizer</span><span class="p">()</span>
+        <span class="c1"># add the custom build spacy recognizer</span>
+        <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">spacy_recognizer</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="n">Models</span><span class="o">.</span><span class="n">FLAIR</span><span class="p">:</span>
+        <span class="c1"># pre-trained flair recognizer</span>
+        <span class="n">flair_recognizer</span> <span class="o">=</span> <span class="n">FlairRecognizer</span><span class="p">()</span>
+        <span class="c1"># add the custom build flair recognizer</span>
+        <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">flair_recognizer</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="n">Models</span><span class="o">.</span><span class="n">PATTERN</span><span class="p">:</span>
+        <span class="c1"># add the pattern recognizer</span>
+        <span class="n">pattern_recognizer_factory</span> <span class="o">=</span> <span class="n">PatternRecognizerFactory</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">recognizer</span> <span class="ow">in</span> <span class="n">pattern_recognizer_factory</span><span class="o">.</span><span class="n">_create_pattern_recognizer</span><span class="p">():</span>
+            <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">recognizer</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model</span> <span class="o">==</span> <span class="n">Models</span><span class="o">.</span><span class="n">WHOLE</span><span class="p">:</span>
+        <span class="n">spacy_recognizer</span> <span class="o">=</span> <span class="n">CustomSpacyRecognizer</span><span class="p">()</span>
+        <span class="n">flair_recognizer</span> <span class="o">=</span> <span class="n">FlairRecognizer</span><span class="p">()</span>
+        <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">spacy_recognizer</span><span class="p">)</span>
+        <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">flair_recognizer</span><span class="p">)</span>
+        <span class="c1"># add the pattern recognizer</span>
+        <span class="n">pattern_recognizer_factory</span> <span class="o">=</span> <span class="n">PatternRecognizerFactory</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">recognizer</span> <span class="ow">in</span> <span class="n">pattern_recognizer_factory</span><span class="o">.</span><span class="n">_create_pattern_recognizer</span><span class="p">():</span>
+            <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">recognizer</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">model</span> <span class="ow">and</span> <span class="n">entities</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">CustomSpacyRecognizer</span><span class="o">.</span><span class="n">RECOGNIZABLE_ENTITIES</span><span class="p">:</span>
+            <span class="n">spacy_recognizer</span> <span class="o">=</span> <span class="n">CustomSpacyRecognizer</span><span class="p">()</span>
+            <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">spacy_recognizer</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">FlairRecognizer</span><span class="o">.</span><span class="n">RECOGNIZABLE_ENTITIES</span><span class="p">:</span>
+            <span class="n">flair_recognizer</span> <span class="o">=</span> <span class="n">FlairRecognizer</span><span class="p">()</span>
+            <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">flair_recognizer</span><span class="p">)</span>
+        <span class="c1"># add the pattern recognizer</span>
+        <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">entities</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">PatternRecognizerFactory</span><span class="o">.</span><span class="n">RECOGNIZABLE_ENTITIES</span><span class="o">.</span><span class="n">keys</span><span class="p">())):</span>
+            <span class="n">pattern_recognizer_factory</span> <span class="o">=</span> <span class="n">PatternRecognizerFactory</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">recognizer</span> <span class="ow">in</span> <span class="n">pattern_recognizer_factory</span><span class="o">.</span><span class="n">_create_pattern_recognizer</span><span class="p">():</span>
+                <span class="n">registry</span><span class="o">.</span><span class="n">add_recognizer</span><span class="p">(</span><span class="n">recognizer</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"argument of model and entities can not be None at the same time"</span>
+        <span class="p">)</span>
+    <span class="n">analyzer</span> <span class="o">=</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalyzerEngine</span><span class="p">(</span>
+        <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">,</span>
+        <span class="n">supported_languages</span><span class="o">=</span><span class="p">[</span><span class="s2">"en"</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="n">supported_entities</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">get_supported_entities</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">entities</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">item</span> <span class="ow">in</span> <span class="n">supported_entities</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">):</span>
+        <span class="n">not_supported_entities</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">entities</span> <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">supported_entities</span>
+        <span class="p">]</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The current model </span><span class="si">{</span><span class="n">model</span><span class="si">}</span><span class="s2"> doesn't support the following entities: </span><span class="si">{</span><span class="n">not_supported_entities</span><span class="si">}</span><span class="s2">. "</span>
+            <span class="sa">f</span><span class="s2">"Supported entities are: </span><span class="si">{</span><span class="n">supported_entities</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">analyzer</span>
+
+
+<span class="k">def</span> <span class="nf">_get_anonymizer_engine</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pre_anoymizer</span><span class="o">.</span><span class="n">AnonymizerEngine</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Return AnonymizerEngine.</span>
+
+<span class="sd">    :returns: The AnonymizerEngine.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pre_anoymizer</span><span class="o">.</span><span class="n">AnonymizerEngine</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_anonymize</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">analyze_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span>
+    <span class="n">entity_operator_map</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">is_full_text</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Anonymize identified input using Presidio Abonymizer.</span>
+
+<span class="sd">    :param text:                The text for analysis.</span>
+<span class="sd">    :param analyze_results:     The list of Presidio RecognizerResult constructed from</span>
+<span class="sd">    :param entity_operator_map: The entity_operator_map is a dictionary that maps entity to operator name and operator params.</span>
+<span class="sd">    :param is_full_text:        Whether the text is full text or not.</span>
+
+<span class="sd">    :returns: The anonymized text.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">""</span>
+
+    <span class="n">anonymizer_engine</span> <span class="o">=</span> <span class="n">_get_anonymizer_engine</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">entity_operator_map</span><span class="p">:</span>
+        <span class="n">operators</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Create OperatorConfig based on the entity_operator_map</span>
+        <span class="n">operators</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">entity</span><span class="p">:</span> <span class="n">OperatorConfig</span><span class="p">(</span><span class="n">operator_name</span><span class="p">,</span> <span class="n">operator_params</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">entity</span><span class="p">,</span> <span class="p">(</span><span class="n">operator_name</span><span class="p">,</span> <span class="n">operator_params</span><span class="p">)</span> <span class="ow">in</span> <span class="n">entity_operator_map</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">is_full_text</span><span class="p">:</span>
+        <span class="c1"># Anonymize the entire text</span>
+        <span class="k">return</span> <span class="n">anonymizer_engine</span><span class="o">.</span><span class="n">anonymize</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span> <span class="n">analyzer_results</span><span class="o">=</span><span class="n">analyze_results</span><span class="p">,</span> <span class="n">operators</span><span class="o">=</span><span class="n">operators</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">text</span>
+    <span class="c1"># Tokenize the text to sentences</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">anonymized_sentences</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_idx</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># Find the sentence that has pii entity</span>
+    <span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+        <span class="n">start_idx</span> <span class="o">=</span> <span class="n">current_idx</span>
+        <span class="n">end_idx</span> <span class="o">=</span> <span class="n">start_idx</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+
+        <span class="c1"># Get the entities that are in the sentence, update hte start_idx and end_idx</span>
+        <span class="n">sentence_results</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">(</span>
+                <span class="n">result</span><span class="o">.</span><span class="n">entity_type</span><span class="p">,</span>
+                <span class="n">start</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_idx</span><span class="p">,</span>
+                <span class="n">end</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">start_idx</span><span class="p">,</span>
+                <span class="n">score</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">score</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">analyze_results</span>
+            <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;=</span> <span class="n">start_idx</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="n">end_idx</span>
+        <span class="p">]</span>
+
+        <span class="c1"># If PII is detected</span>
+        <span class="k">if</span> <span class="n">sentence_results</span><span class="p">:</span>
+            <span class="n">anonymized_sentence</span> <span class="o">=</span> <span class="n">anonymizer_engine</span><span class="o">.</span><span class="n">anonymize</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">sentence</span><span class="p">,</span> <span class="n">analyzer_results</span><span class="o">=</span><span class="n">sentence_results</span><span class="p">,</span> <span class="n">operators</span><span class="o">=</span><span class="n">operators</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">text</span>
+            <span class="n">anonymized_sentences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">anonymized_sentence</span><span class="p">)</span>
+
+        <span class="n">current_idx</span> <span class="o">=</span> <span class="n">end_idx</span>
+
+    <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">anonymized_sentences</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_tokens</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">analyze_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the full tokens or only contains the entities that can form a sentence.</span>
+
+<span class="sd">    :param text:            The text for analysis.</span>
+<span class="sd">    :param analyze_results: The list of Presidio RecognizerResult constructed from</span>
+<span class="sd">    :param is_full:         Whether return full tokens or just the tokens that only contains the entities that can form a sentence.</span>
+
+<span class="sd">    :returns: The tokens.</span>
+<span class="sd">    """</span>
+
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># sort by start index</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">analyze_results</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">res</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[:</span> <span class="n">res</span><span class="o">.</span><span class="n">start</span><span class="p">])</span>
+
+        <span class="c1"># append entity text and entity type</span>
+        <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">text</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">start</span> <span class="p">:</span> <span class="n">res</span><span class="o">.</span><span class="n">end</span><span class="p">],</span> <span class="n">res</span><span class="o">.</span><span class="n">entity_type</span><span class="p">))</span>
+
+        <span class="c1"># if another entity coming i.e. we're not at the last results element,</span>
+        <span class="c1"># add text up to next entity</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">end</span> <span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">])</span>
+        <span class="c1"># if no more entities coming, add all remaining text</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">end</span> <span class="p">:])</span>
+
+    <span class="c1"># get the tokens that only contains the entities that can form a sentence</span>
+    <span class="n">part_annontated_tokens</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_full</span><span class="p">:</span>
+        <span class="n">last_end_sentence</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">item</span> <span class="ow">in</span> <span class="n">token</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"."</span><span class="p">,</span> <span class="s2">"!"</span><span class="p">,</span> <span class="s2">"?"</span><span class="p">])</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span>
+                <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">tuple</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">[</span><span class="n">last_end_sentence</span><span class="p">:</span><span class="n">i</span><span class="p">]</span>
+            <span class="p">):</span>
+                <span class="n">part_annontated_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="n">last_end_sentence</span><span class="p">:</span><span class="n">i</span><span class="p">])</span>
+                <span class="n">last_end_sentence</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">return</span> <span class="n">part_annontated_tokens</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+
+
+<span class="k">def</span> <span class="nf">_annotate</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">st_analyze_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Annotate identified input using Presidio Anonymizer.</span>
+
+<span class="sd">    :param text:               The text for analysis.</span>
+<span class="sd">    :param st_analyze_results: The list of Presidio RecognizerResult constructed from analysis.</span>
+<span class="sd">    :param is_full_html:       Whether generate full html or not.</span>
+
+<span class="sd">    :returns: The list of tokens with the identified entities.</span>
+
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">_get_tokens</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">st_analyze_results</span><span class="p">,</span> <span class="n">is_full_html</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_process</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">pa</span><span class="o">.</span><span class="n">AnalyzerEngine</span><span class="p">,</span>
+    <span class="n">score_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">entities_operator_map</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">is_full_text</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Process the text of str using the model.</span>
+
+<span class="sd">    :param txt:                   Text to process</span>
+<span class="sd">    :param model:                 Model to use for processing</span>
+<span class="sd">    :param entities:              Entities to recognize</span>
+<span class="sd">    :param entities_operator_map: The entity_operator_map is a dictionary that maps entity to operator name and operator params.</span>
+<span class="sd">    :param score_threshold:       The score threshold to use for recognition</span>
+<span class="sd">    :param is_full_text:          Whether to return the full text or just the annotated text</span>
+
+<span class="sd">    :returns: A tuple of:</span>
+
+<span class="sd">              * the anonymized text</span>
+<span class="sd">              * the list of Presidio RecognizerResult constructed from analysis</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># get the analyzer engine</span>
+
+    <span class="n">analyzer</span> <span class="o">=</span> <span class="n">model</span>
+
+    <span class="c1"># analyze the text that can be used for anonymization</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">analyzer</span><span class="o">.</span><span class="n">analyze</span><span class="p">(</span>
+        <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+        <span class="n">language</span><span class="o">=</span><span class="s2">"en"</span><span class="p">,</span>
+        <span class="n">entities</span><span class="o">=</span><span class="n">entities</span><span class="p">,</span>
+        <span class="n">score_threshold</span><span class="o">=</span><span class="n">score_threshold</span><span class="p">,</span>
+        <span class="n">return_decision_process</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># anonymize the text, replace the pii entities with the labels</span>
+    <span class="n">anonymized_text</span> <span class="o">=</span> <span class="n">_anonymize</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">entities_operator_map</span><span class="p">,</span> <span class="n">is_full_text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">anonymized_text</span><span class="p">,</span> <span class="n">results</span>
+
+
+<span class="k">def</span> <span class="nf">_get_single_html</span><span class="p">(</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate the html for a single txt file.</span>
+
+<span class="sd">    :param text:         The text for analysis.</span>
+<span class="sd">    :param results:      The list of Presidio RecognizerResult constructed from analysis.</span>
+<span class="sd">    :param is_full_html: Whether generate full html or not.</span>
+
+<span class="sd">    :returns: The html string for a single txt file.</span>
+<span class="sd">    """</span>
+    <span class="c1"># convert the results to tokens to generate the html</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">_annotate</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">results</span><span class="p">,</span> <span class="n">is_full_html</span><span class="p">)</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">at_util</span><span class="o">.</span><span class="n">get_annotated_html</span><span class="p">(</span><span class="o">*</span><span class="n">tokens</span><span class="p">)</span>
+
+    <span class="c1"># avoid the error during rendering of the \n in the html</span>
+    <span class="n">backslash_char</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">"</span>
+
+    <span class="n">html_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"&lt;p&gt;</span><span class="si">{</span><span class="n">html</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'</span><span class="si">{backslash_char}</span><span class="s1">n'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;br&gt;'</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/p&gt;"</span>
+
+    <span class="k">return</span> <span class="n">html_str</span>
+
+
+<span class="k">def</span> <span class="nf">_get_single_json</span><span class="p">(</span><span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pa</span><span class="o">.</span><span class="n">RecognizerResult</span><span class="p">],</span> <span class="n">is_full_report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate the json for a single txt file.</span>
+
+<span class="sd">    :param results:        The list of Presidio RecognizerResult constructed from analysis.</span>
+<span class="sd">    :param is_full_report: Whether generate full json or not.</span>
+
+<span class="sd">    :returns: The json string for a single txt file.</span>
+<span class="sd">    """</span>
+    <span class="c1"># generate the stats report if needed</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_full_report</span><span class="p">:</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># add the simplify stats logic here</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+            <span class="n">item</span><span class="o">.</span><span class="n">analysis_explanation</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stats</span> <span class="o">=</span> <span class="n">results</span>
+
+    <span class="k">return</span> <span class="n">stats</span>
+
+
+<span class="k">def</span> <span class="nf">_get_all_html</span><span class="p">(</span>
+    <span class="n">txt_content</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">res_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">is_full_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate the html for all txt files.</span>
+
+<span class="sd">    :param txt_content:  The dictionary of txt file name and content.</span>
+<span class="sd">    :param res_dict:     The dictionary of txt file name and the list of Presidio RecognizerResult constructed from analysis.</span>
+<span class="sd">    :param is_full_html: Whether generate full html or not.</span>
+
+<span class="sd">    :returns: The html string for all txt files.</span>
+
+<span class="sd">    """</span>
+    <span class="c1"># These are placeholder for the html string</span>
+    <span class="n">html_index</span> <span class="o">=</span> <span class="s2">"&lt;html&gt;&lt;head&gt;&lt;title&gt;Highlighted Pii Entities&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Highlighted Pii Entities&lt;/h1&gt;&lt;ul&gt;"</span>
+    <span class="n">html_content</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="k">for</span> <span class="n">txt_file</span><span class="p">,</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">res_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="n">txt_content</span><span class="p">[</span><span class="n">txt_file</span><span class="p">]</span>
+        <span class="n">html_index</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"&lt;li&gt;&lt;a href='#</span><span class="si">{</span><span class="n">txt_file</span><span class="si">}</span><span class="s2">'&gt;</span><span class="si">{</span><span class="n">txt_file</span><span class="si">}</span><span class="s2">&lt;/a&gt;&lt;/li&gt;"</span>
+        <span class="n">html_content</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"&lt;li&gt;&lt;h2&gt;</span><span class="si">{</span><span class="n">txt_file</span><span class="si">}</span><span class="s2">&lt;/h2&gt;&lt;p&gt;</span><span class="si">{</span><span class="n">_get_single_html</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span><span class="w"> </span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">is_full_html</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/p&gt;&lt;/li&gt;"</span>
+    <span class="n">html_index</span> <span class="o">+=</span> <span class="s2">"&lt;/ul&gt;"</span>
+    <span class="n">html_res</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">html_index</span><span class="si">}{</span><span class="n">html_content</span><span class="si">}</span><span class="s2">&lt;/body&gt;&lt;/html&gt;"</span>
+
+    <span class="k">return</span> <span class="n">html_res</span>
+
+
+<span class="k">def</span> <span class="nf">_get_all_rpt</span><span class="p">(</span><span class="n">res_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">is_full_report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Generate the stats report for all txt files.</span>
+
+<span class="sd">    :param res_dict:       The dictionary of txt file name and the list of Presidio RecognizerResult constructed from analysis.</span>
+<span class="sd">    :param is_full_report: Whether generate full report or not.</span>
+
+<span class="sd">    :returns: The stats report for all txt files.</span>
+<span class="sd">    """</span>
+    <span class="c1"># These are placeholder for the json report</span>
+    <span class="n">stats_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">txt_file</span><span class="p">,</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">res_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">new_stats</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">_get_single_json</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">is_full_report</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">is_full_report</span><span class="p">:</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">analysis_explanation</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">analysis_explanation</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+                <span class="n">new_stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">tmp_dict</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+                <span class="n">tmp_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"analysis_explanation"</span><span class="p">)</span>
+                <span class="n">tmp_dict</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"recognition_metadata"</span><span class="p">)</span>
+                <span class="n">new_stats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp_dict</span><span class="p">)</span>
+        <span class="n">stats_dict</span><span class="p">[</span><span class="n">txt_file</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_stats</span>
+    <span class="k">return</span> <span class="n">stats_dict</span>
+
+
+<div class="viewcode-block" id="recognize_pii"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.recognize_pii">[docs]</a><span class="k">def</span> <span class="nf">recognize_pii</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">input_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
+    <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">html_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">score_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span>
+        <span class="nb">str</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># List of entities to recognize, default is recognizing all</span>
+    <span class="n">entity_operator_map</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">generate_json</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">generate_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_full_text</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_full_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_full_report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Walk through the input path, recognize PII in text and store the anonymized text in the output path. Generate the html with different colors for each entity, json report of the explaination.</span>
+
+<span class="sd">    :param context:              The MLRun context. this is needed for log the artifacts.</span>
+<span class="sd">    :param input_path:           The input path of the text files needs to be analyzied.</span>
+<span class="sd">    :param output_path:          The output path to store the anonymized text.</span>
+<span class="sd">    :param output_suffix:        The surfix of output key for the anonymized text. for example if the input file is pii.txt, the output key is anoymized, the output file name will be pii_anonymized.txt.</span>
+<span class="sd">    :param html_key:             The html key for the artifact.</span>
+<span class="sd">    :param score_threshold:      The score threshold to mark the recognition as trusted.</span>
+<span class="sd">    :param entities:             The list of entities to recognize.</span>
+<span class="sd">    :param entity_operator_map:  The map of entity to operator (mask, redact, replace, keep, hash, and its params)</span>
+<span class="sd">    :param model:                The model to use. Can be "spacy", "flair", "pattern" or "whole".</span>
+<span class="sd">    :param generate_json:        Whether to generate the json report of the explaination.</span>
+<span class="sd">    :param generate_html:        Whether to generate the html report of the explaination.</span>
+<span class="sd">    :param is_full_text:         Whether to return the full text or only the masked text.</span>
+<span class="sd">    :param is_full_html:         Whether to return the full html or just the annotated text</span>
+<span class="sd">    :param is_full_report:       Whether to return the full report or just the score and start, end index</span>
+
+<span class="sd">    :returns: A tuple of:</span>
+
+<span class="sd">              * Path to the output directory</span>
+<span class="sd">              * The json report of the explaination (if generate_json is True)</span>
+<span class="sd">              * A dictionary of errors files that were not processed</span>
+
+<span class="sd">    """</span>
+
+    <span class="c1"># Set output directory</span>
+    <span class="k">if</span> <span class="n">output_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">output_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+
+    <span class="c1"># Create the output directory:</span>
+    <span class="n">output_directory</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">output_directory</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">output_directory</span><span class="o">.</span><span class="n">mkdir</span><span class="p">()</span>
+
+    <span class="n">txt_files_directory</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">input_path</span><span class="p">)</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">res_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">txt_content</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Load the model:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">analyzer</span> <span class="o">=</span> <span class="n">_get_analyzer_engine</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">errors</span><span class="p">[</span><span class="s2">"model"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error when get the model: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Model loaded"</span><span class="p">)</span>
+    <span class="c1"># Go over the text files in the input path, analyze and anonymize them:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">txt_file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+        <span class="n">tqdm</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span><span class="n">txt_files_directory</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.txt"</span><span class="p">)),</span>
+            <span class="n">desc</span><span class="o">=</span><span class="s2">"Processing files"</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">"file"</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Load the str from the text file</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">txt_file</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+            <span class="n">txt_content</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">txt_file</span><span class="p">)]</span> <span class="o">=</span> <span class="n">text</span>
+            <span class="c1"># Process the text to recoginze the pii entities in it</span>
+            <span class="n">anonymized_text</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">_process</span><span class="p">(</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">analyzer</span><span class="p">,</span>
+                <span class="n">entities</span><span class="o">=</span><span class="n">entities</span><span class="p">,</span>
+                <span class="n">entities_operator_map</span><span class="o">=</span><span class="n">entity_operator_map</span><span class="p">,</span>
+                <span class="n">score_threshold</span><span class="o">=</span><span class="n">score_threshold</span><span class="p">,</span>
+                <span class="n">is_full_text</span><span class="o">=</span><span class="n">is_full_text</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">res_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">txt_file</span><span class="p">)]</span> <span class="o">=</span> <span class="n">results</span>
+            <span class="c1"># Store the anonymized text in the output path</span>
+            <span class="n">output_file</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">output_directory</span>
+                <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">txt_file</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">txt_files_directory</span><span class="p">))</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">.txt"</span>
+            <span class="p">)</span>
+            <span class="n">output_file</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">anonymized_text</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">errors</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">txt_file</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error processing </span><span class="si">{</span><span class="n">txt_file</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">generate_html</span><span class="p">:</span>
+        <span class="c1"># Generate the html report</span>
+        <span class="n">html_res</span> <span class="o">=</span> <span class="n">_get_all_html</span><span class="p">(</span><span class="n">txt_content</span><span class="p">,</span> <span class="n">res_dict</span><span class="p">,</span> <span class="n">is_full_html</span><span class="p">)</span>
+        <span class="c1"># Store the html report in the context</span>
+        <span class="n">arti_html</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">Artifact</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="n">html_res</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"html"</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">html_key</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">arti_html</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">generate_json</span><span class="p">:</span>
+        <span class="c1"># Generate the json report</span>
+        <span class="n">json_res</span> <span class="o">=</span> <span class="n">_get_all_rpt</span><span class="p">(</span><span class="n">res_dict</span><span class="p">,</span> <span class="n">is_full_report</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">json_res</span><span class="p">,</span> <span class="n">errors</span>
+    <span class="k">return</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">errors</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
