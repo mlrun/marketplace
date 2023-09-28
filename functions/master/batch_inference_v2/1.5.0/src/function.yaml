@@ -7,9 +7,9 @@ metadata:
   labels:
     author: eyald
   categories:
-  - Utils
-  - Data Analysis
-  - Monitoring
+  - utils
+  - data-analysis
+  - monitoring
 spec:
   command: ''
   args: []
