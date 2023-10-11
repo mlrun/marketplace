@@ -134,7 +134,9 @@
 <span class="kn">import</span> <span class="nn">pathlib</span>
 <span class="kn">import</span> <span class="nn">tempfile</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span><span class="p">,</span> <span class="n">cpu_count</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Set</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span> <span class="nn">annotated_text.util</span> <span class="k">as</span> <span class="nn">at_util</span>
@@ -965,7 +967,6 @@
     <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
     <span class="n">input_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">output_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">output_suffix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">html_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">score_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span>
@@ -985,7 +986,6 @@
 <span class="sd">    :param context:              The MLRun context. this is needed for log the artifacts.</span>
 <span class="sd">    :param input_path:           The input path of the text files needs to be analyzied.</span>
 <span class="sd">    :param output_path:          The output path to store the anonymized text.</span>
-<span class="sd">    :param output_suffix:        The surfix of output key for the anonymized text. for example if the input file is pii.txt, the output key is anoymized, the output file name will be pii_anonymized.txt.</span>
 <span class="sd">    :param html_key:             The html key for the artifact.</span>
 <span class="sd">    :param score_threshold:      The score threshold to mark the recognition as trusted.</span>
 <span class="sd">    :param entities:             The list of entities to recognize.</span>
@@ -1038,6 +1038,8 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Load the str from the text file</span>
             <span class="n">text</span> <span class="o">=</span> <span class="n">txt_file</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+            <span class="c1"># TODO maybe the encoding issue if from this function call of tqdm.read_text()</span>
+            <span class="c1"># Need to fix it later</span>
             <span class="n">txt_content</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">txt_file</span><span class="p">)]</span> <span class="o">=</span> <span class="n">text</span>
             <span class="c1"># Process the text to recoginze the pii entities in it</span>
             <span class="n">anonymized_text</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">_process</span><span class="p">(</span>
@@ -1072,6 +1074,148 @@
         <span class="n">json_res</span> <span class="o">=</span> <span class="n">_get_all_rpt</span><span class="p">(</span><span class="n">res_dict</span><span class="p">,</span> <span class="n">is_full_report</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">json_res</span><span class="p">,</span> <span class="n">errors</span>
     <span class="k">return</span> <span class="n">output_path</span><span class="p">,</span> <span class="n">errors</span></div>
+
+
+<span class="k">def</span> <span class="nf">_recognize_pii_one_file</span><span class="p">(</span>
+    <span class="n">input_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">output_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">score_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span>
+        <span class="nb">str</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>  <span class="c1"># List of entities to recognize, default is recognizing all</span>
+    <span class="n">entity_operator_map</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">is_full_text</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Recognize PII in text and store the anonymized text in the output path. Generate the html with different colors for each entity, json report of the explaination.</span>
+<span class="sd">    :param input_file:           The input path of the text files needs to be analyzied.</span>
+<span class="sd">    :param output_file:          The output path to store the anonymized text.</span>
+<span class="sd">    :param score_threshold:      The score threshold to mark the recognition as trusted.</span>
+<span class="sd">    :param entities:             The list of entities to recognize.</span>
+<span class="sd">    :param entity_operator_map:  The map of entity to operator (mask, redact, replace, keep, hash, and its params)</span>
+<span class="sd">    :param model:                The model to use. Can be "spacy", "flair", "pattern" or "whole".</span>
+<span class="sd">    :param is_full_text:         Whether to return the full text or only the masked text.</span>
+
+<span class="sd">    :returns: A tuple of:</span>
+<span class="sd">        * A dictionary of the text content of the input file</span>
+<span class="sd">        * A dictionary of the results of the explaination</span>
+<span class="sd">        * A dictionary of errors files that were not processed</span>
+<span class="sd">    """</span>
+
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">res_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">txt_content</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="c1"># Load the model:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">analyzer</span> <span class="o">=</span> <span class="n">_get_analyzer_engine</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">entities</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">errors</span><span class="p">[</span><span class="s2">"model"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error when get the model: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Model loaded"</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Load the str from the text file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">txt_content</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">input_file</span><span class="p">)]</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="c1"># Process the text to recoginze the pii entities in it</span>
+        <span class="n">anonymized_text</span><span class="p">,</span> <span class="n">results</span> <span class="o">=</span> <span class="n">_process</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="n">text</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">analyzer</span><span class="p">,</span>
+            <span class="n">entities</span><span class="o">=</span><span class="n">entities</span><span class="p">,</span>
+            <span class="n">entities_operator_map</span><span class="o">=</span><span class="n">entity_operator_map</span><span class="p">,</span>
+            <span class="n">score_threshold</span><span class="o">=</span><span class="n">score_threshold</span><span class="p">,</span>
+            <span class="n">is_full_text</span><span class="o">=</span><span class="n">is_full_text</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">res_dict</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">input_file</span><span class="p">)]</span> <span class="o">=</span> <span class="n">results</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">anonymized_text</span><span class="p">)</span>
+
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">errors</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">txt_file</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error processing </span><span class="si">{</span><span class="n">txt_file</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res_dict</span><span class="p">,</span> <span class="n">txt_content</span><span class="p">,</span> <span class="n">errors</span>
+
+
+<div class="viewcode-block" id="recognize_pii_parallel"><a class="viewcode-back" href="documentation.html#pii_recognizer.pii_recognizer.recognize_pii_parallel">[docs]</a><span class="k">def</span> <span class="nf">recognize_pii_parallel</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">config_input_output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">score_threshold</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">html_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">entities</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">entity_operator_map</span><span class="p">:</span> <span class="n">Dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">generate_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">generate_json</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_full_html</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_full_text</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">is_full_report</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_processes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Doing a fan-in and fan-out pattern using mutiple processes for cpu node, Since our model is mixed with rule_based and NLP model based. Both Spacy and Flair do not support the cuda GPU natively. For now, we can use all the cores that a CPU offers.</span>
+<span class="sd">    :param context:             The MLRun context. this is needed</span>
+<span class="sd">    :param config_input_output  csv file which have the input file path and output file path</span>
+<span class="sd">    :param score_threshold:     The threshold of the score to recognize the entities</span>
+<span class="sd">    :param html_key:            The key of the html report in the context</span>
+<span class="sd">    :entities                   List of entities to recognize, default is recognizing all</span>
+<span class="sd">    :entity_operator_map        The map of the entities and the operator to use. For example, {"PERSON": "replace", "LOCATION": "mask"}</span>
+<span class="sd">    :param model                The model to use. Can be "spacy", "flair", "pattern" or "whole".</span>
+<span class="sd">    :param generate_html:       Whether to generate the html report</span>
+<span class="sd">    :param generate_json:       Whether to generate the json report</span>
+<span class="sd">    :param is_full_html:        Whether to generate the full html report</span>
+<span class="sd">    :param is_full_text:        Whether to generate the full text in the html report</span>
+<span class="sd">    :param is_full_report:      Whether to generate the full json report</span>
+<span class="sd">    :param num_process          The number of process to run in parallel</span>
+
+<span class="sd">    :returns: A tuple of:</span>
+<span class="sd">        * A json report of the result explaination</span>
+<span class="sd">        * A dictionary of errors files that were not processed</span>
+
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">num_processes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">num_processes</span> <span class="o">=</span> <span class="n">cpu_count</span><span class="p">()</span>
+
+    <span class="c1"># Read the CSV into a DataFrame</span>
+    <span class="n">config_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">config_input_output</span><span class="p">)</span>
+
+    <span class="c1"># Convert DataFrame rows into a list of tuples, each tuple is arguments for `_recognize_pii_one_file`</span>
+    <span class="n">tasks</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span>
+            <span class="n">row</span><span class="p">[</span><span class="s2">"input_file"</span><span class="p">],</span>
+            <span class="n">row</span><span class="p">[</span><span class="s2">"output_file"</span><span class="p">],</span>
+            <span class="n">score_threshold</span><span class="p">,</span>
+            <span class="n">entities</span><span class="p">,</span>
+            <span class="n">entity_operator_map</span><span class="p">,</span>
+            <span class="n">model</span><span class="p">,</span>
+            <span class="n">is_full_text</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">config_df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()</span>
+    <span class="p">]</span>
+    <span class="c1"># Create a pool of processes and distribute the tasks</span>
+    <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="n">num_processes</span><span class="p">)</span> <span class="k">as</span> <span class="n">pool</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="n">_recognize_pii_one_file</span><span class="p">,</span> <span class="n">tasks</span><span class="p">)</span>
+    <span class="c1"># Get the results</span>
+    <span class="n">res_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">txt_content</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+        <span class="n">res_dict</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">txt_content</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">errors</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">generate_html</span><span class="p">:</span>
+        <span class="c1"># Generate the html report</span>
+        <span class="n">html_res</span> <span class="o">=</span> <span class="n">_get_all_html</span><span class="p">(</span><span class="n">txt_content</span><span class="p">,</span> <span class="n">res_dict</span><span class="p">,</span> <span class="n">is_full_html</span><span class="p">)</span>
+        <span class="c1"># Store the html report in the context</span>
+        <span class="n">arti_html</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">Artifact</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="n">html_res</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">"html"</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">html_key</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">arti_html</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">generate_json</span><span class="p">:</span>
+        <span class="c1"># Generate the json report</span>
+        <span class="n">json_res</span> <span class="o">=</span> <span class="n">_get_all_rpt</span><span class="p">(</span><span class="n">res_dict</span><span class="p">,</span> <span class="n">is_full_report</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">json_res</span><span class="p">,</span> <span class="n">errors</span>
+    <span class="k">return</span> <span class="n">errors</span></div>
 </pre></div>
 </div>
 </main>
