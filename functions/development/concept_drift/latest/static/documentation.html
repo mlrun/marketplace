@@ -137,7 +137,7 @@
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-concept_drift.concept_drift">
+<a class="reference internal nav-link" href="#concept-drift-concept-drift-module">
    concept_drift.concept_drift module
   </a>
 </li>
@@ -169,7 +169,7 @@
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-concept_drift.concept_drift">
+<a class="reference internal nav-link" href="#concept-drift-concept-drift-module">
    concept_drift.concept_drift module
   </a>
 </li>
@@ -190,50 +190,8 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
 </section>
-<section id="module-concept_drift.concept_drift">
-<span id="concept-drift-concept-drift-module"></span><h2>concept_drift.concept_drift module<a class="headerlink" href="#module-concept_drift.concept_drift" title="Permalink to this headline">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="concept_drift.concept_drift.concept_drift_deployer">
-<span class="sig-prename descclassname"><span class="pre">concept_drift.concept_drift.</span></span><span class="sig-name descname"><span class="pre">concept_drift_deployer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.datastore.base.DataItem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">input_stream</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">consumer_group</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_stream</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_tsdb</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tsdb_batch_size</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">callbacks</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">['ddm',</span> <span class="pre">'eddm',</span> <span class="pre">'pagehinkley']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">models_dest</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'models'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pagehinkley_threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddm_warning_level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ddm_out_control_level</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'label'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prediction_col</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'prediction'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hub_url</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'https://raw.githubusercontent.com/mlrun/functions/{tag}/{name}/function.yaml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fn_tag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'master'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="concept_drift.html#concept_drift_deployer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#concept_drift.concept_drift.concept_drift_deployer" title="Permalink to this definition">#</a></dt>
-<dd><dl class="simple">
-<dt>Deploy a streaming Concept Drift detector on a labeled stream</dt><dd><p>This function is the Deployment step for the Streaming Concept Drift Detector.
-It will load the selected drift detectors and initialize them with the
-base_dataset’s statistics.  Then it will deploy the concept_drift_streaming
-function and pass the models to it for streaming concept-drift detection on top
-of a labeled stream.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> – MLRun context</p></li>
-<li><p><strong>base_dataset</strong> – Dataset containing label_col and prediction_col to initialize the detectors</p></li>
-<li><p><strong>input_stream</strong> – labeled stream to track.
-Should contain label_col and prediction_col</p></li>
-<li><p><strong>output_stream</strong> – Output stream to push the detector’s alerts</p></li>
-<li><p><strong>output_tsdb</strong> – Output TSDB table to allow analysis and display</p></li>
-<li><p><strong>tsdb_batch_size</strong> – Batch size of alerts to buffer before pushing to the TSDB</p></li>
-<li><p><strong>callbacks</strong> – Additional rest endpoints to send the alert data to</p></li>
-<li><p><strong>models</strong> – List of the detectors to deploy
-Defaults to [‘ddm’, ‘eddm’, ‘pagehinkley’].</p></li>
-<li><p><strong>models_dest</strong> – Location for saving the detectors
-Defaults to ‘models’ (in relation to artifact_path).</p></li>
-<li><p><strong>pagehinkley_threshold</strong> – Drift level threshold for PH detector Defaults to 10.</p></li>
-<li><p><strong>ddm_warning_level</strong> – Warning level alert for DDM detector Defaults to 2.</p></li>
-<li><p><strong>ddm_out_control_level</strong> – Drift level alert for DDM detector Defaults to 3.</p></li>
-<li><p><strong>label_col</strong> – Label column to be used on base_dataset and input_stream
-Defaults to ‘label’.</p></li>
-<li><p><strong>prediction_col</strong> – Prediction column to be used on base_dataset and input_stream
-Defaults to ‘prediction’.</p></li>
-<li><p><strong>hub_url</strong> – hub_url in case the default is not used, concept_drift_streaming will be loaded
-by this url
-Defaults to mlconf.hub_url.</p></li>
-<li><p><strong>fn_tag</strong> – hub tag to use
-Defaults to ‘master’</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<section id="concept-drift-concept-drift-module">
+<h2>concept_drift.concept_drift module<a class="headerlink" href="#concept-drift-concept-drift-module" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="module-concept_drift">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-concept_drift" title="Permalink to this headline">#</a></h2>

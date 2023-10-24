@@ -1,1 +1,1 @@
-{"kind": ["job", "serving", "dask", "nuclio:serving", "nuclio"], "categories": ["model-serving", "model-training", "etl", "data-validation", "machine-learning", "feature-store", "model-testing", "utils", "data-preparation", "data-analysis", "monitoring"]}
+{"kind": ["nuclio:serving", "serving", "nuclio", "dask", "job"], "categories": ["model-testing", "monitoring", "etl", "data-validation", "model-serving", "data-preparation", "feature-store", "machine-learning", "data-analysis", "model-training", "utils"]}
