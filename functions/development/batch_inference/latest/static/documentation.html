@@ -137,7 +137,7 @@
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-batch_inference.batch_inference">
+<a class="reference internal nav-link" href="#batch-inference-batch-inference-module">
    batch_inference.batch_inference module
   </a>
 </li>
@@ -169,7 +169,7 @@
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-batch_inference.batch_inference">
+<a class="reference internal nav-link" href="#batch-inference-batch-inference-module">
    batch_inference.batch_inference module
   </a>
 </li>
@@ -190,50 +190,8 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
 </section>
-<section id="module-batch_inference.batch_inference">
-<span id="batch-inference-batch-inference-module"></span><h2>batch_inference.batch_inference module<a class="headerlink" href="#module-batch_inference.batch_inference" title="Permalink to this headline">#</a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="batch_inference.batch_inference.infer">
-<span class="sig-prename descclassname"><span class="pre">batch_inference.batch_inference.</span></span><span class="sig-name descname"><span class="pre">infer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.datastore.base.DataItem</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">,</span> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_columns</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_result_set</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">result_set_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'prediction'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">perform_drift_analysis</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">bool</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_set</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">mlrun.datastore.base.DataItem</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.frame.DataFrame</span><span class="p"><span class="pre">,</span> </span><span class="pre">pandas.core.series.Series</span><span class="p"><span class="pre">,</span> </span><span class="pre">numpy.ndarray</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drift_threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">possible_drift_threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inf_capping</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">10.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">artifacts_tag</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">predict_kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="batch_inference.html#infer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#batch_inference.batch_inference.infer" title="Permalink to this definition">#</a></dt>
-<dd><p>Perform a prediction on a given dataset with the given model. Can perform drift analysis between the sample set
-statistics stored in the model to the current input data. The drift rule is the value per-feature mean of the TVD
-and Hellinger scores according to the thresholds configures here.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> – MLRun context.</p></li>
-<li><p><strong>model</strong> – The model Store path.</p></li>
-<li><p><strong>dataset</strong> – The dataset to infer through the model. Can be passed in <cite>inputs</cite> as either a
-Dataset artifact / Feature vector URI. Or, in <cite>parameters</cite> as a list, dictionary or
-numpy array.</p></li>
-<li><p><strong>drop_columns</strong> – A string / integer or a list of strings / integers that represent the column names
-/ indices to drop. When the dataset is a list or a numpy array this parameter must
-be represented by integers.</p></li>
-<li><p><strong>label_columns</strong> – The target label(s) of the column(s) in the dataset for Regression or
-Classification tasks. The label column can be accessed from the model object, or
-the feature vector provided if available.</p></li>
-<li><p><strong>feature_columns</strong> – List of feature columns that will be used to build the dataframe when dataset is
-from type list or numpy array.</p></li>
-<li><p><strong>log_result_set</strong> – Whether to log the result set - a DataFrame of the given inputs concatenated with
-the predictions. Defaulted to True.</p></li>
-<li><p><strong>result_set_name</strong> – The db key to set name of the prediction result and the filename. Defaulted to
-‘prediction’.</p></li>
-<li><p><strong>batch_id</strong> – The ID of the given batch (inference dataset). If <cite>None</cite>, it will be generated.
-Will be logged as a result of the run.</p></li>
-<li><p><strong>perform_drift_analysis</strong> – Whether to perform drift analysis between the sample set of the model object to the
-dataset given. By default, None, which means it will perform drift analysis if the
-model has a sample set statistics. Perform drift analysis will produce a data drift
-table artifact.</p></li>
-<li><p><strong>sample_set</strong> – A sample dataset to give to compare the inputs in the drift analysis. The default
-chosen sample set will always be the one who is set in the model artifact itself.</p></li>
-<li><p><strong>drift_threshold</strong> – The threshold of which to mark drifts. Defaulted to 0.7.</p></li>
-<li><p><strong>possible_drift_threshold</strong> – The threshold of which to mark possible drifts. Defaulted to 0.5.</p></li>
-<li><p><strong>inf_capping</strong> – The value to set for when it reached infinity. Defaulted to 10.0.</p></li>
-<li><p><strong>artifacts_tag</strong> – Tag to use for all the artifacts resulted from the function.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
+<section id="batch-inference-batch-inference-module">
+<h2>batch_inference.batch_inference module<a class="headerlink" href="#batch-inference-batch-inference-module" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="module-batch_inference">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-batch_inference" title="Permalink to this headline">#</a></h2>
