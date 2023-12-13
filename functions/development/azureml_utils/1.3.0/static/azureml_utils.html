@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>azureml_utils.azureml_utils</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/azureml_utils/azureml_utils.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for azureml_utils.azureml_utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">MLClientCtx</span><span class="p">,</span> <span class="n">DataItem</span><span class="p">,</span> <span class="n">get_dataitem</span>
+<span class="kn">import</span> <span class="nn">mlrun.feature_store</span> <span class="k">as</span> <span class="nn">f_store</span>
+<span class="kn">import</span> <span class="nn">mlrun.datastore</span>
+<span class="kn">import</span> <span class="nn">mlrun.utils</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore.targets</span> <span class="kn">import</span> <span class="n">ParquetTarget</span>
+
+<span class="kn">from</span> <span class="nn">azureml.core.authentication</span> <span class="kn">import</span> <span class="n">ServicePrincipalAuthentication</span>
+<span class="kn">from</span> <span class="nn">azureml.core.workspace</span> <span class="kn">import</span> <span class="n">Workspace</span>
+<span class="kn">from</span> <span class="nn">azureml.core.experiment</span> <span class="kn">import</span> <span class="n">Experiment</span>
+<span class="kn">from</span> <span class="nn">azureml.core.dataset</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">azureml.core.model</span> <span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span> <span class="nn">azureml.core.compute</span> <span class="kn">import</span> <span class="n">ComputeTarget</span><span class="p">,</span> <span class="n">AmlCompute</span>
+<span class="kn">from</span> <span class="nn">azureml.core.compute_target</span> <span class="kn">import</span> <span class="n">ComputeTargetException</span>
+<span class="kn">from</span> <span class="nn">azureml.core.script_run</span> <span class="kn">import</span> <span class="n">ScriptRun</span>
+
+<span class="kn">from</span> <span class="nn">azureml.train.automl</span> <span class="kn">import</span> <span class="n">AutoMLConfig</span>
+<span class="kn">from</span> <span class="nn">azureml.train.automl.run</span> <span class="kn">import</span> <span class="n">AutoMLRun</span>
+
+
+<span class="k">def</span> <span class="nf">_env_or_secret</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">context</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_load_workspace</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Workspace</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Loading AzureML Workspace with Azure secrets.</span>
+
+<span class="sd">    :param context: MLRun context.</span>
+<span class="sd">    :returns:       AzureML Workspace</span>
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s2">"_azure_workspace"</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">context</span><span class="o">.</span><span class="n">_azure_workspace</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loading AzureML Workspace"</span><span class="p">)</span>
+    <span class="c1"># Azure service authentication:</span>
+    <span class="n">service_authentication</span> <span class="o">=</span> <span class="n">ServicePrincipalAuthentication</span><span class="p">(</span>
+        <span class="n">tenant_id</span><span class="o">=</span><span class="n">_env_or_secret</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s2">"AZURE_TENANT_ID"</span><span class="p">),</span>
+        <span class="n">service_principal_id</span><span class="o">=</span><span class="n">_env_or_secret</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s2">"AZURE_SERVICE_PRINCIPAL_ID"</span><span class="p">),</span>
+        <span class="n">service_principal_password</span><span class="o">=</span><span class="n">_env_or_secret</span><span class="p">(</span>
+            <span class="n">context</span><span class="p">,</span> <span class="s2">"AZURE_SERVICE_PRINCIPAL_PASSWORD"</span>
+        <span class="p">),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Loading Azure workspace:</span>
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">Workspace</span><span class="p">(</span>
+        <span class="n">subscription_id</span><span class="o">=</span><span class="n">_env_or_secret</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s2">"AZURE_SUBSCRIPTION_ID"</span><span class="p">),</span>
+        <span class="n">resource_group</span><span class="o">=</span><span class="n">_env_or_secret</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s2">"AZURE_RESOURCE_GROUP"</span><span class="p">),</span>
+        <span class="n">workspace_name</span><span class="o">=</span><span class="n">_env_or_secret</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="s2">"AZURE_WORKSPACE_NAME"</span><span class="p">),</span>
+        <span class="n">auth</span><span class="o">=</span><span class="n">service_authentication</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">_azure_workspace</span> <span class="o">=</span> <span class="n">workspace</span>
+    <span class="k">return</span> <span class="n">workspace</span>
+
+
+<span class="k">def</span> <span class="nf">_init_experiment</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Workspace</span><span class="p">,</span> <span class="n">Experiment</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Initialize workspace and experiment in Azure ML. Uses Service</span>
+<span class="sd">    Principal authentication via environment variables.</span>
+
+<span class="sd">    :param context:         MLRun context.</span>
+<span class="sd">    :param experiment_name: Name of experiment to create in Azure ML.</span>
+<span class="sd">    :returns:               Azure ML Workspace and Experiment.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Initialize experiment via Service Principal Authentication:</span>
+    <span class="c1"># https://docs.microsoft.com/en-us/azure/machine-learning/how-to-setup-authentication#use-service-principal-authentication</span>
+
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">_load_workspace</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Initializing AzureML experiment </span><span class="si">{</span><span class="n">experiment_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="c1"># Creating experiment:</span>
+    <span class="n">experiment</span> <span class="o">=</span> <span class="n">Experiment</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">experiment_name</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">workspace</span><span class="p">,</span> <span class="n">experiment</span>
+
+
+<div class="viewcode-block" id="init_compute"><a class="viewcode-back" href="documentation.html#azureml_utils.azureml_utils.init_compute">[docs]</a><span class="k">def</span> <span class="nf">init_compute</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">cpu_cluster_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">vm_size</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"STANDARD_D2_V2"</span><span class="p">,</span>
+    <span class="n">max_nodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ComputeTarget</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Initialize Azure ML compute target to run experiment. Checks for</span>
+<span class="sd">    existing compute target and creates new if does not exist.</span>
+
+<span class="sd">    :param context:          MLRun context.</span>
+<span class="sd">    :param cpu_cluster_name: Name of Azure ML compute target. Created if does not exist.</span>
+<span class="sd">    :param vm_size:          Azure machine type for compute target.</span>
+<span class="sd">    :param max_nodes:        Maximum number of concurrent compute targets.</span>
+<span class="sd">    :returns:                Azure ML Compute Target.</span>
+<span class="sd">    """</span>
+
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">_load_workspace</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Initializing AzureML compute target </span><span class="si">{</span><span class="n">cpu_cluster_name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Verify that cluster does not exist already:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">compute_target</span> <span class="o">=</span> <span class="n">ComputeTarget</span><span class="p">(</span><span class="n">workspace</span><span class="o">=</span><span class="n">workspace</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">cpu_cluster_name</span><span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Found existing cluster, will use it."</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">ComputeTargetException</span><span class="p">:</span>
+        <span class="n">compute_config</span> <span class="o">=</span> <span class="n">AmlCompute</span><span class="o">.</span><span class="n">provisioning_configuration</span><span class="p">(</span>
+            <span class="n">vm_size</span><span class="o">=</span><span class="n">vm_size</span><span class="p">,</span> <span class="n">max_nodes</span><span class="o">=</span><span class="n">max_nodes</span>
+        <span class="p">)</span>
+        <span class="n">compute_target</span> <span class="o">=</span> <span class="n">ComputeTarget</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">workspace</span><span class="p">,</span> <span class="n">cpu_cluster_name</span><span class="p">,</span> <span class="n">compute_config</span>
+        <span class="p">)</span>
+
+    <span class="n">compute_target</span><span class="o">.</span><span class="n">wait_for_completion</span><span class="p">(</span><span class="n">show_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">compute_target</span></div>
+
+
+<div class="viewcode-block" id="register_dataset"><a class="viewcode-back" href="documentation.html#azureml_utils.azureml_utils.register_dataset">[docs]</a><span class="k">def</span> <span class="nf">register_dataset</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">dataset_description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">create_new_version</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Register dataset object (can be also an Iguazio FeatureVector) in Azure ML.</span>
+<span class="sd">    Uploads parquet file to Azure blob storage and registers</span>
+<span class="sd">    that file as a dataset in Azure ML.</span>
+
+<span class="sd">    :param context:               MLRun context.</span>
+<span class="sd">    :param dataset_name:          Name of Azure dataset to register.</span>
+<span class="sd">    :param dataset_description:   Description of Azure dataset to register.</span>
+<span class="sd">    :param data:                  MLRun FeatureVector or dataset object to upload.</span>
+<span class="sd">    :param create_new_version:    Register Azure dataset as new version. Must be used when</span>
+<span class="sd">                                  modifying dataset schema.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># test for Azure storage connection environment variable or secret:</span>
+    <span class="k">assert</span> <span class="n">_env_or_secret</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">,</span> <span class="s2">"AZURE_STORAGE_CONNECTION_STRING"</span>
+    <span class="p">),</span> <span class="s2">"AZURE_STORAGE_CONNECTION_STRING secret not set"</span>
+
+    <span class="c1"># Connect to AzureML experiment and datastore:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Connecting to AzureML experiment default datastore"</span><span class="p">)</span>
+
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">_load_workspace</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">datastore</span> <span class="o">=</span> <span class="n">workspace</span><span class="o">.</span><span class="n">get_default_datastore</span><span class="p">()</span>
+
+    <span class="c1"># Azure blob path (default datastore for workspace):</span>
+    <span class="n">blob_path</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"az://</span><span class="si">{</span><span class="n">datastore</span><span class="o">.</span><span class="n">container_name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="n">store_uri_prefix</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">datastore</span><span class="o">.</span><span class="n">parse_store_uri</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">artifact_url</span><span class="p">)</span>
+    <span class="n">feature_vector_case</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">StorePrefix</span><span class="o">.</span><span class="n">FeatureVector</span> <span class="o">==</span> <span class="n">store_uri_prefix</span>
+    <span class="c1"># Retrieve data source as dataframe:</span>
+    <span class="k">if</span> <span class="n">feature_vector_case</span><span class="p">:</span>
+        <span class="c1"># FeatureVector case:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Retrieving feature vector and uploading to Azure blob storage: </span><span class="si">{</span><span class="n">blob_path</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+        <span class="n">f_store</span><span class="o">.</span><span class="n">get_offline_features</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">ParquetTarget</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">blob_path</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">blob_path</span> <span class="o">+=</span> <span class="n">data</span><span class="o">.</span><span class="n">suffix</span>
+        <span class="c1"># DataItem case:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Retrieving feature vector and uploading to Azure blob storage: </span><span class="si">{</span><span class="n">blob_path</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+        <span class="n">data_in_bytes</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="n">get_dataitem</span><span class="p">(</span><span class="n">blob_path</span><span class="p">)</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">data_in_bytes</span><span class="p">)</span>
+
+    <span class="c1"># Register dataset in AzureML:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Registering dataset </span><span class="si">{</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2"> in Azure ML"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">".parquet"</span> <span class="ow">or</span> <span class="n">feature_vector_case</span><span class="p">:</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">Tabular</span><span class="o">.</span><span class="n">from_parquet_files</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="p">(</span><span class="n">datastore</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2">.parquet"</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"OpenSSL version must be 1.1. Overriding the OpenSSL version to 1.1"</span>
+        <span class="p">)</span>
+        <span class="c1"># OpenSSL version must be 1.1</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"CLR_OPENSSL_VERSION_OVERRIDE"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"1.1"</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">Tabular</span><span class="o">.</span><span class="n">from_delimited_files</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="p">(</span><span class="n">datastore</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">dataset_name</span><span class="si">}{</span><span class="n">data</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s2">"</span><span class="p">),</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+
+    <span class="n">dataset</span><span class="o">.</span><span class="n">register</span><span class="p">(</span>
+        <span class="n">workspace</span><span class="o">=</span><span class="n">workspace</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="n">dataset_name</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">dataset_description</span><span class="p">,</span>
+        <span class="n">create_new_version</span><span class="o">=</span><span class="n">create_new_version</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Output registered dataset name in Azure:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="s2">"dataset_blob_path"</span><span class="p">,</span> <span class="n">blob_path</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="download_model"><a class="viewcode-back" href="documentation.html#azureml_utils.azureml_utils.download_model">[docs]</a><span class="k">def</span> <span class="nf">download_model</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model_version</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"."</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Download trained model from Azure ML to local filesystem.</span>
+
+<span class="sd">    :param context:       MLRun context.</span>
+<span class="sd">    :param model_name:    Name of trained and registered model.</span>
+<span class="sd">    :param model_version: Version of model to download.</span>
+<span class="sd">    :param target_dir:    Target directory to download model.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Loading workspace if not provided:</span>
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">_load_workspace</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Downloading model </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">model_version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">version</span><span class="o">=</span><span class="n">model_version</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">target_dir</span><span class="o">=</span><span class="n">target_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="upload_model"><a class="viewcode-back" href="documentation.html#azureml_utils.azureml_utils.upload_model">[docs]</a><span class="k">def</span> <span class="nf">upload_model</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model_description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_tags</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Upload pre-trained model from local filesystem to Azure ML.</span>
+<span class="sd">    :param context:           MLRun context.</span>
+<span class="sd">    :param model_name:        Name of trained and registered model.</span>
+<span class="sd">    :param model_path:        Path to file on local filesystem.</span>
+<span class="sd">    :param model_description: Description of models.</span>
+<span class="sd">    :param model_tags:        KV pairs of model tags.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Loading workspace if not provided:</span>
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">_load_workspace</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Upload model </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">Model</span><span class="o">.</span><span class="n">register</span><span class="p">(</span>
+        <span class="n">workspace</span><span class="o">=</span><span class="n">workspace</span><span class="p">,</span>
+        <span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="n">model_description</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="n">model_tags</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_top_n_runs</span><span class="p">(</span>
+    <span class="n">remote_run</span><span class="p">:</span> <span class="n">AutoMLRun</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">primary_metric</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"accuracy"</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ScriptRun</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get top N complete runs from experiment sorted by primary metric.</span>
+
+<span class="sd">    :param remote_run:     Azure ML Run.</span>
+<span class="sd">    :param n:              Number of top runs to return.</span>
+<span class="sd">    :param primary_metric: Metric to sort by.</span>
+
+<span class="sd">    :returns:              List of top N runs sorted by primary metric.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Collect all models:</span>
+    <span class="n">complete_runs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">run</span>
+        <span class="k">for</span> <span class="n">run</span> <span class="ow">in</span> <span class="n">remote_run</span><span class="o">.</span><span class="n">get_children</span><span class="p">(</span><span class="n">status</span><span class="o">=</span><span class="s2">"Completed"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">s</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">id</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"setup"</span><span class="p">,</span> <span class="s2">"worker"</span><span class="p">])</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Checking that the required number of runs are done:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">complete_runs</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Expected </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> runs but only received </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">complete_runs</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Sorting by the primary metric:</span>
+    <span class="n">sorted_runs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+        <span class="n">complete_runs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">run</span><span class="p">:</span> <span class="n">run</span><span class="o">.</span><span class="n">get_metrics</span><span class="p">()[</span><span class="n">primary_metric</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">sorted_runs</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_get_model_hp</span><span class="p">(</span>
+    <span class="n">run</span><span class="p">:</span> <span class="n">ScriptRun</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get hyper-parameters of trained AzureML model.</span>
+<span class="sd">    Combine the hyper-parameters of the data transformation and training to a dictionary.</span>
+<span class="sd">    The prefix of the dictionary keys corresponds to 'data transformation' and 'training'.</span>
+
+<span class="sd">    :param run: Run object of AzureML trained model.</span>
+
+<span class="sd">    :returns:    A dictionary as described in the docstring.</span>
+<span class="sd">    """</span>
+
+    <span class="n">spec_field</span> <span class="o">=</span> <span class="s2">"pipeline_spec"</span>
+    <span class="k">if</span> <span class="n">spec_field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">properties</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+    <span class="n">spec_string</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">properties</span><span class="p">[</span><span class="n">spec_field</span><span class="p">]</span>
+    <span class="n">spec_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">spec_string</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="s2">"objects"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">spec_dict</span><span class="p">:</span>
+        <span class="c1"># No hyper-params</span>
+        <span class="k">return</span> <span class="p">{}</span>
+    <span class="n">hp_dicts</span> <span class="o">=</span> <span class="n">spec_dict</span><span class="p">[</span><span class="s2">"objects"</span><span class="p">]</span>
+    <span class="c1"># after training there are two hyper-parameters dicts inside the run object:</span>
+    <span class="k">assert</span> <span class="p">(</span>
+        <span class="nb">len</span><span class="p">(</span><span class="n">hp_dicts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="p">),</span> <span class="s2">"after training there are two hyper-parameters dicts inside the run object"</span>
+    <span class="n">result_dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">dict_keys</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="s2">"data_trans_class_name"</span><span class="p">,</span> <span class="s2">"data_trans_module"</span><span class="p">,</span> <span class="s2">"data_trans_spec_class"</span><span class="p">],</span>
+        <span class="p">[</span>
+            <span class="s2">"train_class_name"</span><span class="p">,</span>
+            <span class="s2">"train_module"</span><span class="p">,</span>
+            <span class="s2">"train_param_kwargs_C"</span><span class="p">,</span>
+            <span class="s2">"train_param_kwargs_class_weight"</span><span class="p">,</span>
+            <span class="s2">"train_spec_class"</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">]</span>
+
+    <span class="c1"># creating hyper-params dict with key prefixes for each part:</span>
+    <span class="n">kwargs_prefix</span> <span class="o">=</span> <span class="s2">"param_kwargs"</span>
+    <span class="k">for</span> <span class="n">d</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">keys</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">hp_dicts</span><span class="p">,</span> <span class="p">[</span><span class="s2">"data_trans"</span><span class="p">,</span> <span class="s2">"train"</span><span class="p">],</span> <span class="n">dict_keys</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">kwargs_prefix</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">kwargs_prefix</span><span class="p">][</span>
+                    <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">kwargs_prefix</span><span class="si">}</span><span class="s2">_"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">result_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="n">result_dict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="s2">""</span>
+
+    <span class="k">return</span> <span class="n">result_dict</span>
+
+
+<div class="viewcode-block" id="submit_training_job"><a class="viewcode-back" href="documentation.html#azureml_utils.azureml_utils.submit_training_job">[docs]</a><span class="k">def</span> <span class="nf">submit_training_job</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">experiment</span><span class="p">:</span> <span class="n">Experiment</span><span class="p">,</span>
+    <span class="n">compute_target</span><span class="p">:</span> <span class="n">ComputeTarget</span><span class="p">,</span>
+    <span class="n">register_model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">registered_dataset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">automl_settings</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">training_set</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">label_column_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">''</span><span class="p">,</span>
+    <span class="n">save_n_models</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="n">show_output</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Submit training job to Azure AutoML and download trained model</span>
+<span class="sd">    when completed. Uses previously registered dataset for training.</span>
+
+<span class="sd">    :param context:                 MLRun context.</span>
+<span class="sd">    :param experiment:              Azure experiment.</span>
+<span class="sd">    :param compute_target:          Azure compute target.</span>
+<span class="sd">    :param register_model_name:     Name of model to register in Azure.</span>
+<span class="sd">    :param registered_dataset_name: Name of dataset registered in Azure ML.</span>
+<span class="sd">    :param label_column_name:       Name of target column in dataset.</span>
+<span class="sd">    :param automl_settings:         JSON string of all Azure AutoML settings.</span>
+<span class="sd">    :param training_set:            Training set to log with model. For model</span>
+<span class="sd">                                    monitoring integration.</span>
+<span class="sd">    :param show_output:             Displaying Azure logs.</span>
+<span class="sd">    :param save_n_models:           How many of the top performing models to log.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Loading workspace if not provided:</span>
+    <span class="n">workspace</span> <span class="o">=</span> <span class="n">_load_workspace</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="c1"># Setup experiment:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Setting up experiment parameters"</span><span class="p">)</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">get_by_name</span><span class="p">(</span><span class="n">workspace</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">registered_dataset_name</span><span class="p">)</span>
+
+    <span class="c1"># Get training set to log with model:</span>
+    <span class="n">feature_vector</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">store_uri_prefix</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">datastore</span><span class="o">.</span><span class="n">parse_store_uri</span><span class="p">(</span><span class="n">training_set</span><span class="o">.</span><span class="n">artifact_url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">StorePrefix</span><span class="o">.</span><span class="n">FeatureVector</span> <span class="o">==</span> <span class="n">store_uri_prefix</span><span class="p">:</span>
+        <span class="n">feature_vector</span> <span class="o">=</span> <span class="n">training_set</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span>
+        <span class="n">label_column_name</span> <span class="o">=</span> <span class="n">label_column_name</span> <span class="ow">or</span> <span class="n">training_set</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">label_column</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'label column name: </span><span class="si">{</span><span class="n">label_column_name</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+        <span class="n">training_set</span> <span class="o">=</span> <span class="n">f_store</span><span class="o">.</span><span class="n">get_offline_features</span><span class="p">(</span><span class="n">feature_vector</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">training_set</span> <span class="o">=</span> <span class="n">training_set</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+
+    <span class="n">automl_config</span> <span class="o">=</span> <span class="n">AutoMLConfig</span><span class="p">(</span>
+        <span class="n">compute_target</span><span class="o">=</span><span class="n">compute_target</span><span class="p">,</span>
+        <span class="n">training_data</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+        <span class="n">verbosity</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>
+        <span class="n">label_column_name</span><span class="o">=</span><span class="n">label_column_name</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">automl_settings</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Run experiment on AzureML:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Submitting and running experiment"</span><span class="p">)</span>
+    <span class="n">remote_run</span> <span class="o">=</span> <span class="n">experiment</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">automl_config</span><span class="p">)</span>
+    <span class="n">remote_run</span><span class="o">.</span><span class="n">wait_for_completion</span><span class="p">(</span><span class="n">show_output</span><span class="o">=</span><span class="n">show_output</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">show_output</span><span class="p">:</span>
+        <span class="c1"># Azure log ending row:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="s1">'*'</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">92</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="c1"># Get top N runs to log:</span>
+    <span class="n">top_runs</span> <span class="o">=</span> <span class="n">_get_top_n_runs</span><span class="p">(</span>
+        <span class="n">remote_run</span><span class="o">=</span><span class="n">remote_run</span><span class="p">,</span>
+        <span class="n">n</span><span class="o">=</span><span class="n">save_n_models</span><span class="p">,</span>
+        <span class="n">primary_metric</span><span class="o">=</span><span class="n">automl_settings</span><span class="p">[</span><span class="s2">"primary_metric"</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Register, download, and log models:</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">run</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_runs</span><span class="p">):</span>
+        <span class="c1"># Register model:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Registering model"</span><span class="p">)</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">register_model</span><span class="p">(</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">register_model_name</span><span class="p">,</span> <span class="n">model_path</span><span class="o">=</span><span class="s2">"outputs/model.pkl"</span>
+        <span class="p">)</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Registered model with name '</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">', id '</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">', version '</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">'"</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Download model locally:</span>
+        <span class="n">download_model</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">register_model_name</span><span class="p">,</span>
+            <span class="n">model_version</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">version</span><span class="p">,</span>
+            <span class="n">target_dir</span><span class="o">=</span><span class="sa">f</span><span class="s2">"./</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">metrics</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span> <span class="n">val</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">run</span><span class="o">.</span><span class="n">get_metrics</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="k">del</span> <span class="n">metrics</span><span class="p">[</span><span class="s2">"confusion_matrix"</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">metrics</span><span class="p">[</span><span class="s2">"accuracy_table"</span><span class="p">]</span>
+
+        <span class="c1"># Collect model hyper-parameters:</span>
+        <span class="n">model_hp_dict</span> <span class="o">=</span> <span class="n">_get_model_hp</span><span class="p">(</span><span class="n">run</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">context</span><span class="o">.</span><span class="n">get_child_context</span><span class="p">(</span><span class="o">**</span><span class="n">model_hp_dict</span><span class="p">)</span> <span class="k">as</span> <span class="n">child</span><span class="p">:</span>
+            <span class="n">model_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"model_</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">model_hp_dict</span><span class="p">[</span><span class="s1">'data_trans_class_name'</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">model_hp_dict</span><span class="p">[</span><span class="s1">'train_class_name'</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
+            <span class="c1"># Log model:</span>
+            <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Logging </span><span class="si">{</span><span class="n">model_key</span><span class="si">}</span><span class="s2"> model to MLRun"</span>
+            <span class="p">)</span>
+            <span class="n">child</span><span class="o">.</span><span class="n">log_results</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+            <span class="n">child</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+                <span class="s2">"model"</span><span class="p">,</span>
+                <span class="n">db_key</span><span class="o">=</span><span class="n">model_key</span><span class="p">,</span>
+                <span class="n">artifact_path</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">artifact_subpath</span><span class="p">(</span><span class="s2">"models"</span><span class="p">),</span>
+                <span class="n">metrics</span><span class="o">=</span><span class="n">metrics</span><span class="p">,</span>
+                <span class="n">model_file</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">/model.pkl"</span><span class="p">,</span>
+                <span class="n">training_set</span><span class="o">=</span><span class="n">training_set</span><span class="p">,</span>
+                <span class="n">label_column</span><span class="o">=</span><span class="n">label_column_name</span><span class="p">,</span>
+                <span class="n">feature_vector</span><span class="o">=</span><span class="n">feature_vector</span><span class="p">,</span>
+                <span class="n">framework</span><span class="o">=</span><span class="s2">"AzureML"</span><span class="p">,</span>
+                <span class="n">algorithm</span><span class="o">=</span><span class="n">model_hp_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"train_class_name"</span><span class="p">),</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># This also logs the model:</span>
+                <span class="n">child</span><span class="o">.</span><span class="n">mark_as_best</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="train"><a class="viewcode-back" href="documentation.html#azureml_utils.azureml_utils.train">[docs]</a><span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
+    <span class="c1"># MlRun</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+    <span class="c1"># Init experiment and compute</span>
+    <span class="n">experiment_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">cpu_cluster_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">vm_size</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"STANDARD_D2_V2"</span><span class="p">,</span>
+    <span class="n">max_nodes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="c1"># Register dataset</span>
+    <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">dataset_description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">create_new_version</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">label_column_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="c1"># Submit training job</span>
+    <span class="n">register_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">save_n_models</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">log_azure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">automl_settings</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Whole training flow for Azure AutoML. Registers dataset/feature vector,</span>
+<span class="sd">    submits training job to Azure AutoML, and downloads trained model</span>
+<span class="sd">    when completed.</span>
+
+<span class="sd">    :param context:             MLRun context.</span>
+
+<span class="sd">    :param dataset:             MLRun FeatureVector or dataset URI to upload. Will drop</span>
+<span class="sd">                                index before uploading when it is a FeatureVector.</span>
+
+<span class="sd">    :param experiment_name:     Name of experiment to create in Azure ML.</span>
+<span class="sd">    :param cpu_cluster_name:    Name of Azure ML compute target. Created if does not exist.</span>
+<span class="sd">    :param vm_size:             Azure machine type for compute target.</span>
+<span class="sd">    :param max_nodes:           Maximum number of concurrent compute targets.</span>
+
+<span class="sd">    :param dataset_name:        Name of Azure dataset to register.</span>
+<span class="sd">    :param dataset_description: Description of Azure dataset to register.</span>
+
+<span class="sd">    :param create_new_version:  Register Azure dataset as new version. Must be used when</span>
+<span class="sd">                                modifying dataset schema.</span>
+<span class="sd">    :param label_column_name:   Target column in dataset.</span>
+
+<span class="sd">    :param register_model_name: Name of model to register in Azure.</span>
+<span class="sd">    :param save_n_models:       How many of the top performing models to log.</span>
+<span class="sd">    :param log_azure:           Displaying Azure logs.</span>
+<span class="sd">    :param automl_settings:     JSON string of all Azure AutoML settings.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">automl_settings</span><span class="p">:</span>
+        <span class="n">automl_settings</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"classification"</span><span class="p">,</span>
+            <span class="s2">"debug_log"</span><span class="p">:</span> <span class="s2">"automl_errors.log"</span><span class="p">,</span>
+            <span class="c1"># "experiment_exit_score": 0.9,</span>
+            <span class="s2">"enable_early_stopping"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"allowed_models"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"LogisticRegression"</span><span class="p">,</span> <span class="s2">"SGD"</span><span class="p">,</span> <span class="s2">"SVM"</span><span class="p">],</span>
+            <span class="s2">"iterations"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s2">"iteration_timeout_minutes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"max_concurrent_iterations"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"max_cores_per_iteration"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"n_cross_validations"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">"primary_metric"</span><span class="p">:</span> <span class="s2">"accuracy"</span><span class="p">,</span>
+            <span class="s2">"featurization"</span><span class="p">:</span> <span class="s2">"off"</span><span class="p">,</span>
+            <span class="s2">"model_explainability"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"enable_voting_ensemble"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"enable_stack_ensemble"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="p">}</span>
+
+    <span class="c1"># Init experiment and compute</span>
+    <span class="n">workspace</span><span class="p">,</span> <span class="n">experiment</span> <span class="o">=</span> <span class="n">_init_experiment</span><span class="p">(</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="n">experiment_name</span><span class="o">=</span><span class="n">experiment_name</span>
+    <span class="p">)</span>
+
+    <span class="n">compute_target</span> <span class="o">=</span> <span class="n">init_compute</span><span class="p">(</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">cpu_cluster_name</span><span class="o">=</span><span class="n">cpu_cluster_name</span><span class="p">,</span>
+        <span class="n">vm_size</span><span class="o">=</span><span class="n">vm_size</span><span class="p">,</span>
+        <span class="n">max_nodes</span><span class="o">=</span><span class="n">max_nodes</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Register dataset</span>
+    <span class="n">register_dataset</span><span class="p">(</span>
+        <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+        <span class="n">dataset_name</span><span class="o">=</span><span class="n">dataset_name</span><span class="p">,</span>
+        <span class="n">dataset_description</span><span class="o">=</span><span class="n">dataset_description</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+        <span class="n">create_new_version</span><span class="o">=</span><span class="n">create_new_version</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Submit training job</span>
+    <span class="n">submit_training_job</span><span class="p">(</span>
+        <span class="n">context</span><span class="p">,</span>
+        <span class="n">experiment</span><span class="o">=</span><span class="n">experiment</span><span class="p">,</span>
+        <span class="n">compute_target</span><span class="o">=</span><span class="n">compute_target</span><span class="p">,</span>
+        <span class="n">register_model_name</span><span class="o">=</span><span class="n">register_model_name</span><span class="p">,</span>
+        <span class="n">registered_dataset_name</span><span class="o">=</span><span class="n">dataset_name</span><span class="p">,</span>
+        <span class="n">label_column_name</span><span class="o">=</span><span class="n">label_column_name</span><span class="p">,</span>
+        <span class="n">automl_settings</span><span class="o">=</span><span class="n">automl_settings</span><span class="p">,</span>
+        <span class="n">training_set</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+        <span class="n">show_output</span><span class="o">=</span><span class="n">log_azure</span><span class="p">,</span>
+        <span class="n">save_n_models</span><span class="o">=</span><span class="n">save_n_models</span><span class="p">,</span>
+    <span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
