@@ -1,0 +1,1730 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>AzureML AutoML Demo</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fazureml_utils_example.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/edit/master/docs/azureml_utils_example.ipynb" title="Edit this page">
+<span class="headerbtn__icon-container">
+<i class="fas fa-pencil-alt"></i>
+</span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+<button aria-label="Download this page" class="headerbtn menu-dropdown__trigger">
+<i class="fas fa-download"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="../src/azureml_utils.ipynb" title="Download source file">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file"></i>
+</span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+</li>
+<li>
+<button class="headerbtn" data-placement="left" data-toggle="tooltip" onclick="printPdf(this)" title="Print to PDF">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+<label class="headerbtn headerbtn-page-toc" for="__page-toc">
+<span class="headerbtn__icon-container">
+<i class="fas fa-list"></i>
+</span>
+</label>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+    </div>
+<nav aria-label="Page" id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setup-mlrun-project">
+   1. Setup MLRun Project
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#preparing-dataset-iris">
+   2. Preparing Dataset (Iris)
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submit-azure-automl-training-job">
+   3. Submit Azure AutoML Training Job
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submit-azure-secrets">
+     Submit Azure Secrets
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#import-azureml-utils-from-marketplace">
+     Import
+     <code class="docutils literal notranslate">
+<span class="pre">
+       azureml_utils
+      </span>
+</code>
+     from marketplace
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#automl-configuration-run-parameters">
+     Automl configuration &amp; run parameters
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-azure-automl-train">
+     Run Azure AutoML train:
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#deploy-model-serving">
+   4. Deploy Model Serving
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-the-live-model-serving-function">
+   5. Using the Live Model-Serving Function
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#clean-up">
+   6. Clean up
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>AzureML AutoML Demo</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#setup-mlrun-project">
+   1. Setup MLRun Project
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#preparing-dataset-iris">
+   2. Preparing Dataset (Iris)
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submit-azure-automl-training-job">
+   3. Submit Azure AutoML Training Job
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submit-azure-secrets">
+     Submit Azure Secrets
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#import-azureml-utils-from-marketplace">
+     Import
+     <code class="docutils literal notranslate">
+<span class="pre">
+       azureml_utils
+      </span>
+</code>
+     from marketplace
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#automl-configuration-run-parameters">
+     Automl configuration &amp; run parameters
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#run-azure-automl-train">
+     Run Azure AutoML train:
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#deploy-model-serving">
+   4. Deploy Model Serving
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#using-the-live-model-serving-function">
+   5. Using the Live Model-Serving Function
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#clean-up">
+   6. Clean up
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<section id="azureml-automl-demo">
+<h1>AzureML AutoML Demo<a class="headerlink" href="#azureml-automl-demo" title="Permalink to this headline">#</a></h1>
+<p>MLRun function for using Azure AutoML, Including the following handlers:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">init_experiment</span></code> -     Initialize workspace and experiment in Azure ML.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">init_compute</span></code> -        Initialize Azure ML compute target to run experiment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">register_dataset</span></code> -    Register dataset object (can be also an Iguazio FeatureVector) in Azure ML.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">download_model</span></code> -      Download trained model from Azure ML to local filesystem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upload_model</span></code> -        Upload pre-trained model from local filesystem to Azure ML.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">submit_training_job</span></code> - Submit training job to Azure AutoML and download trained model when completed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">automl_train</span></code> -        Whole training flow for Azure AutoML:
+- Initializing workspace and experiment in Azure ML
+- Registers dataset/feature vector,
+- submits training job
+- downloads trained model</p></li>
+</ol>
+<section id="setup-mlrun-project">
+<h2>1. Setup MLRun Project<a class="headerlink" href="#setup-mlrun-project" title="Permalink to this headline">#</a></h2>
+<p>Creating MLRun project</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-02-02 18:28:06,840 [warning] Failed resolving version info. Ignoring and using defaults
+&gt; 2022-02-02 18:28:11,379 [warning] Server or client version is unstable. Assuming compatible: {'server_version': '0.0.0+unstable', 'client_version': '0.0.0+unstable'}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the MLRun project object</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s1">'azureml'</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"./"</span><span class="p">,</span> <span class="n">user_project</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-02-02 18:28:11,423 [info] loaded project azureml from MLRun DB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="preparing-dataset-iris">
+<h2>2. Preparing Dataset (Iris)<a class="headerlink" href="#preparing-dataset-iris" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Preparing training URI for the MLRun function</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATA_URL</span> <span class="o">=</span> <span class="s2">"https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv"</span>
+
+<span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">DATA_URL</span><span class="p">)</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>sepal length (cm)</th>
+<th>sepal width (cm)</th>
+<th>petal length (cm)</th>
+<th>petal width (cm)</th>
+<th>label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>5.1</td>
+<td>3.5</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>1</th>
+<td>4.9</td>
+<td>3.0</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>2</th>
+<td>4.7</td>
+<td>3.2</td>
+<td>1.3</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>3</th>
+<td>4.6</td>
+<td>3.1</td>
+<td>1.5</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+<tr>
+<th>4</th>
+<td>5.0</td>
+<td>3.6</td>
+<td>1.4</td>
+<td>0.2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="submit-azure-automl-training-job">
+<h2>3. Submit Azure AutoML Training Job<a class="headerlink" href="#submit-azure-automl-training-job" title="Permalink to this headline">#</a></h2>
+<section id="submit-azure-secrets">
+<h3>Submit Azure Secrets<a class="headerlink" href="#submit-azure-secrets" title="Permalink to this headline">#</a></h3>
+<p>For more information about working with secrets see:  <a class="reference external" href="https://docs.mlrun.org/en/latest/secrets.html">MLRun docs: Working with secrets</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">project</span><span class="o">.</span><span class="n">set_secrets</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="s2">"env"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-azureml-utils-from-marketplace">
+<h3>Import <code class="docutils literal notranslate"><span class="pre">azureml_utils</span></code> from marketplace<a class="headerlink" href="#import-azureml-utils-from-marketplace" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">azureml_fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s1">'hub://azureml_utils'</span><span class="p">)</span>
+<span class="n">azureml_fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="automl-configuration-run-parameters">
+<h3>Automl configuration &amp; run parameters<a class="headerlink" href="#automl-configuration-run-parameters" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">automl_settings</span></code> object is the setup for Azure AutoML. It holds the <code class="docutils literal notranslate"><span class="pre">task</span></code> type, number of  models to train - <code class="docutils literal notranslate"><span class="pre">iterations</span></code>, the desired metric - <code class="docutils literal notranslate"><span class="pre">primary</span> <span class="pre">metric</span></code>, the allowed types of models <code class="docutils literal notranslate"><span class="pre">allowed_models</span></code> and more.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">params</span></code> are the parameters for the MLRun function, such as experiment (<code class="docutils literal notranslate"><span class="pre">experiment_name</span></code>) and cpu cluster (<code class="docutils literal notranslate"><span class="pre">cpu_cluster_name</span></code>) names in AzureML, dataset properties for registration, target label for training - <code class="docutils literal notranslate"><span class="pre">label_column_name</span></code>, number of models to download <code class="docutils literal notranslate"><span class="pre">save_n_models</span></code> and more.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">label_column_name</span> <span class="o">=</span> <span class="s1">'label'</span> <span class="c1"># target label</span>
+
+<span class="c1"># Configure automl settings:</span>
+<span class="n">automl_settings</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"task"</span><span class="p">:</span> <span class="s1">'classification'</span><span class="p">,</span>
+            <span class="s2">"debug_log"</span><span class="p">:</span> <span class="s1">'automl_errors.log'</span><span class="p">,</span>
+<span class="c1">#             "experiment_exit_score" : 0.9,</span>
+            <span class="s2">"enable_early_stopping"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"allowed_models"</span><span class="p">:</span> <span class="p">[</span><span class="s1">'LogisticRegression'</span><span class="p">,</span> <span class="s1">'SGD'</span><span class="p">,</span> <span class="s1">'SVM'</span><span class="p">],</span>
+            <span class="s2">"iterations"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">"iteration_timeout_minutes"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"max_concurrent_iterations"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"max_cores_per_iteration"</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s2">"n_cross_validations"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="s2">"primary_metric"</span><span class="p">:</span> <span class="s1">'accuracy'</span><span class="p">,</span>
+            <span class="s2">"featurization"</span><span class="p">:</span> <span class="s1">'off'</span><span class="p">,</span>
+            <span class="s2">"model_explainability"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"enable_voting_ensemble"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"enable_stack_ensemble"</span><span class="p">:</span> <span class="kc">False</span>
+        <span class="p">}</span>
+
+<span class="c1"># Setting params to azure_run function:</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"experiment_name"</span><span class="p">:</span> <span class="s1">'azure-automl-test'</span><span class="p">,</span>
+    <span class="s2">"cpu_cluster_name"</span><span class="p">:</span> <span class="s1">'azureml-cpu'</span><span class="p">,</span>
+    <span class="s2">"dataset_name"</span><span class="p">:</span> <span class="s1">'iris'</span><span class="p">,</span>
+    <span class="s2">"dataset_description"</span><span class="p">:</span> <span class="s1">'iris training data'</span><span class="p">,</span>
+    <span class="s2">"label_column_name"</span><span class="p">:</span> <span class="n">label_column_name</span><span class="p">,</span>
+    <span class="s2">"create_new_version"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="s2">"register_model_name"</span><span class="p">:</span> <span class="s2">"iris-model"</span><span class="p">,</span>
+    <span class="s2">"save_n_models"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s2">"automl_settings"</span><span class="p">:</span> <span class="n">automl_settings</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-azure-automl-train">
+<h3>Run Azure AutoML train:<a class="headerlink" href="#run-azure-automl-train" title="Permalink to this headline">#</a></h3>
+<p>This MLRun function will perform the following:</p>
+<ul class="simple">
+<li><p>Initialize workspace and experiment in your AzureML</p></li>
+<li><p>Register the dataset/feature vector to Iguazio and to AzureML.</p></li>
+<li><p>Submit the training job to AzureML and print the live training results fro each model</p></li>
+<li><p>Generate the top trained models.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">azureml_run</span> <span class="o">=</span> <span class="n">azureml_fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"train"</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span><span class="p">:</span> <span class="n">DATA_URL</span><span class="p">},</span>
+    <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-02-02 18:28:11,740 [info] Function is not deployed and auto_build flag is set, starting deploy...
+&gt; 2022-02-02 18:28:11,932 [info] Started building image: .mlrun/func-azureml-yonatan-azureml-utils:latest
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image manifest python:3.7.9-slim  
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image python:3.7.9-slim from registry index.docker.io 
+<span class="-Color -Color-Cyan">INFO</span>[0000] Built cross stage deps: map[]                
+<span class="-Color -Color-Cyan">INFO</span>[0000] Retrieving image manifest python:3.7.9-slim  
+<span class="-Color -Color-Cyan">INFO</span>[0000] Returning cached image manifest              
+<span class="-Color -Color-Cyan">INFO</span>[0000] Executing 0 build triggers                   
+<span class="-Color -Color-Cyan">INFO</span>[0000] Unpacking rootfs as cmd RUN python -m pip install pip==21.2.4 requires it. 
+<span class="-Color -Color-Cyan">INFO</span>[0002] RUN python -m pip install pip==21.2.4        
+<span class="-Color -Color-Cyan">INFO</span>[0002] Taking snapshot of full filesystem...        
+<span class="-Color -Color-Cyan">INFO</span>[0003] cmd: /bin/sh                                 
+<span class="-Color -Color-Cyan">INFO</span>[0003] args: [-c python -m pip install pip==21.2.4] 
+<span class="-Color -Color-Cyan">INFO</span>[0003] Running: [/bin/sh -c python -m pip install pip==21.2.4] 
+Collecting pip==21.2.4
+  Downloading pip-21.2.4-py3-none-any.whl (1.6 MB)
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 21.0.1
+    Uninstalling pip-21.0.1:
+      Successfully uninstalled pip-21.0.1
+Successfully installed pip-21.2.4
+<span class="-Color -Color-Cyan">INFO</span>[0006] Taking snapshot of full filesystem...        
+<span class="-Color -Color-Cyan">INFO</span>[0006] RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends git 
+<span class="-Color -Color-Cyan">INFO</span>[0006] cmd: /bin/sh                                 
+<span class="-Color -Color-Cyan">INFO</span>[0006] args: [-c apt-get update &amp;&amp; apt-get install -y --no-install-recommends git] 
+<span class="-Color -Color-Cyan">INFO</span>[0006] Running: [/bin/sh -c apt-get update &amp;&amp; apt-get install -y --no-install-recommends git] 
+Get:1 http://security.debian.org/debian-security buster/updates InRelease [65.4 kB]
+Get:2 http://deb.debian.org/debian buster InRelease [122 kB]
+Get:3 http://deb.debian.org/debian buster-updates InRelease [51.9 kB]
+Get:4 http://security.debian.org/debian-security buster/updates/main amd64 Packages [314 kB]
+Get:5 http://deb.debian.org/debian buster/main amd64 Packages [7906 kB]
+Get:6 http://deb.debian.org/debian buster-updates/main amd64 Packages [8792 B]
+Fetched 8468 kB in 2s (5347 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  git-man libcurl3-gnutls liberror-perl libgdbm-compat4 libgssapi-krb5-2
+  libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2
+  libldap-common libnghttp2-14 libpcre2-8-0 libperl5.28 libpsl5 librtmp1
+  libsasl2-2 libsasl2-modules-db libssh2-1 perl perl-modules-5.28
+Suggested packages:
+  gettext-base git-daemon-run | git-daemon-sysvinit git-doc git-el git-email
+  git-gui gitk gitweb git-cvs git-mediawiki git-svn krb5-doc krb5-user
+  sensible-utils perl-doc libterm-readline-gnu-perl
+  | libterm-readline-perl-perl make libb-debug-perl liblocale-codes-perl
+Recommended packages:
+  patch less ssh-client krb5-locales publicsuffix libsasl2-modules
+The following NEW packages will be installed:
+  git git-man libcurl3-gnutls liberror-perl libgdbm-compat4 libgssapi-krb5-2
+  libk5crypto3 libkeyutils1 libkrb5-3 libkrb5support0 libldap-2.4-2
+  libldap-common libnghttp2-14 libpcre2-8-0 libperl5.28 libpsl5 librtmp1
+  libsasl2-2 libsasl2-modules-db libssh2-1 perl perl-modules-5.28
+0 upgraded, 22 newly installed, 0 to remove and 16 not upgraded.
+Need to get 16.4 MB of archives.
+After this operation, 90.1 MB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian buster/main amd64 perl-modules-5.28 all 5.28.1-6+deb10u1 [2873 kB]
+Get:2 http://deb.debian.org/debian buster/main amd64 libgdbm-compat4 amd64 1.18.1-4 [44.1 kB]
+Get:3 http://deb.debian.org/debian buster/main amd64 libperl5.28 amd64 5.28.1-6+deb10u1 [3894 kB]
+Get:4 http://deb.debian.org/debian buster/main amd64 perl amd64 5.28.1-6+deb10u1 [204 kB]
+Get:5 http://deb.debian.org/debian buster/main amd64 libkeyutils1 amd64 1.6-6 [15.0 kB]
+Get:6 http://deb.debian.org/debian buster/main amd64 libkrb5support0 amd64 1.17-3+deb10u3 [65.8 kB]
+Get:7 http://deb.debian.org/debian buster/main amd64 libk5crypto3 amd64 1.17-3+deb10u3 [122 kB]
+Get:8 http://deb.debian.org/debian buster/main amd64 libkrb5-3 amd64 1.17-3+deb10u3 [370 kB]
+Get:9 http://deb.debian.org/debian buster/main amd64 libgssapi-krb5-2 amd64 1.17-3+deb10u3 [158 kB]
+Get:10 http://deb.debian.org/debian buster/main amd64 libsasl2-modules-db amd64 2.1.27+dfsg-1+deb10u1 [69.1 kB]
+Get:11 http://deb.debian.org/debian buster/main amd64 libsasl2-2 amd64 2.1.27+dfsg-1+deb10u1 [106 kB]
+Get:12 http://deb.debian.org/debian buster/main amd64 libldap-common all 2.4.47+dfsg-3+deb10u6 [90.0 kB]
+Get:13 http://deb.debian.org/debian buster/main amd64 libldap-2.4-2 amd64 2.4.47+dfsg-3+deb10u6 [224 kB]
+Get:14 http://deb.debian.org/debian buster/main amd64 libnghttp2-14 amd64 1.36.0-2+deb10u1 [85.0 kB]
+Get:15 http://deb.debian.org/debian buster/main amd64 libpsl5 amd64 0.20.2-2 [53.7 kB]
+Get:16 http://deb.debian.org/debian buster/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2 [60.5 kB]
+Get:17 http://deb.debian.org/debian buster/main amd64 libssh2-1 amd64 1.8.0-2.1 [140 kB]
+Get:18 http://deb.debian.org/debian buster/main amd64 libcurl3-gnutls amd64 7.64.0-4+deb10u2 [330 kB]
+Get:19 http://deb.debian.org/debian buster/main amd64 libpcre2-8-0 amd64 10.32-5 [213 kB]
+Get:20 http://deb.debian.org/debian buster/main amd64 liberror-perl all 0.17027-2 [30.9 kB]
+Get:21 http://deb.debian.org/debian buster/main amd64 git-man all 1:2.20.1-2+deb10u3 [1620 kB]
+Get:22 http://deb.debian.org/debian buster/main amd64 git amd64 1:2.20.1-2+deb10u3 [5633 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 16.4 MB in 0s (62.3 MB/s)
+Selecting previously unselected package perl-modules-5.28.
+(Reading database ... 6840 files and directories currently installed.)
+Preparing to unpack .../00-perl-modules-5.28_5.28.1-6+deb10u1_all.deb ...
+Unpacking perl-modules-5.28 (5.28.1-6+deb10u1) ...
+Selecting previously unselected package libgdbm-compat4:amd64.
+Preparing to unpack .../01-libgdbm-compat4_1.18.1-4_amd64.deb ...
+Unpacking libgdbm-compat4:amd64 (1.18.1-4) ...
+Selecting previously unselected package libperl5.28:amd64.
+Preparing to unpack .../02-libperl5.28_5.28.1-6+deb10u1_amd64.deb ...
+Unpacking libperl5.28:amd64 (5.28.1-6+deb10u1) ...
+Selecting previously unselected package perl.
+Preparing to unpack .../03-perl_5.28.1-6+deb10u1_amd64.deb ...
+Unpacking perl (5.28.1-6+deb10u1) ...
+Selecting previously unselected package libkeyutils1:amd64.
+Preparing to unpack .../04-libkeyutils1_1.6-6_amd64.deb ...
+Unpacking libkeyutils1:amd64 (1.6-6) ...
+Selecting previously unselected package libkrb5support0:amd64.
+Preparing to unpack .../05-libkrb5support0_1.17-3+deb10u3_amd64.deb ...
+Unpacking libkrb5support0:amd64 (1.17-3+deb10u3) ...
+Selecting previously unselected package libk5crypto3:amd64.
+Preparing to unpack .../06-libk5crypto3_1.17-3+deb10u3_amd64.deb ...
+Unpacking libk5crypto3:amd64 (1.17-3+deb10u3) ...
+Selecting previously unselected package libkrb5-3:amd64.
+Preparing to unpack .../07-libkrb5-3_1.17-3+deb10u3_amd64.deb ...
+Unpacking libkrb5-3:amd64 (1.17-3+deb10u3) ...
+Selecting previously unselected package libgssapi-krb5-2:amd64.
+Preparing to unpack .../08-libgssapi-krb5-2_1.17-3+deb10u3_amd64.deb ...
+Unpacking libgssapi-krb5-2:amd64 (1.17-3+deb10u3) ...
+Selecting previously unselected package libsasl2-modules-db:amd64.
+Preparing to unpack .../09-libsasl2-modules-db_2.1.27+dfsg-1+deb10u1_amd64.deb ...
+Unpacking libsasl2-modules-db:amd64 (2.1.27+dfsg-1+deb10u1) ...
+Selecting previously unselected package libsasl2-2:amd64.
+Preparing to unpack .../10-libsasl2-2_2.1.27+dfsg-1+deb10u1_amd64.deb ...
+Unpacking libsasl2-2:amd64 (2.1.27+dfsg-1+deb10u1) ...
+Selecting previously unselected package libldap-common.
+Preparing to unpack .../11-libldap-common_2.4.47+dfsg-3+deb10u6_all.deb ...
+Unpacking libldap-common (2.4.47+dfsg-3+deb10u6) ...
+Selecting previously unselected package libldap-2.4-2:amd64.
+Preparing to unpack .../12-libldap-2.4-2_2.4.47+dfsg-3+deb10u6_amd64.deb ...
+Unpacking libldap-2.4-2:amd64 (2.4.47+dfsg-3+deb10u6) ...
+Selecting previously unselected package libnghttp2-14:amd64.
+Preparing to unpack .../13-libnghttp2-14_1.36.0-2+deb10u1_amd64.deb ...
+Unpacking libnghttp2-14:amd64 (1.36.0-2+deb10u1) ...
+Selecting previously unselected package libpsl5:amd64.
+Preparing to unpack .../14-libpsl5_0.20.2-2_amd64.deb ...
+Unpacking libpsl5:amd64 (0.20.2-2) ...
+Selecting previously unselected package librtmp1:amd64.
+Preparing to unpack .../15-librtmp1_2.4+20151223.gitfa8646d.1-2_amd64.deb ...
+Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2) ...
+Selecting previously unselected package libssh2-1:amd64.
+Preparing to unpack .../16-libssh2-1_1.8.0-2.1_amd64.deb ...
+Unpacking libssh2-1:amd64 (1.8.0-2.1) ...
+Selecting previously unselected package libcurl3-gnutls:amd64.
+Preparing to unpack .../17-libcurl3-gnutls_7.64.0-4+deb10u2_amd64.deb ...
+Unpacking libcurl3-gnutls:amd64 (7.64.0-4+deb10u2) ...
+Selecting previously unselected package libpcre2-8-0:amd64.
+Preparing to unpack .../18-libpcre2-8-0_10.32-5_amd64.deb ...
+Unpacking libpcre2-8-0:amd64 (10.32-5) ...
+Selecting previously unselected package liberror-perl.
+Preparing to unpack .../19-liberror-perl_0.17027-2_all.deb ...
+Unpacking liberror-perl (0.17027-2) ...
+Selecting previously unselected package git-man.
+Preparing to unpack .../20-git-man_1%3a2.20.1-2+deb10u3_all.deb ...
+Unpacking git-man (1:2.20.1-2+deb10u3) ...
+Selecting previously unselected package git.
+Preparing to unpack .../21-git_1%3a2.20.1-2+deb10u3_amd64.deb ...
+Unpacking git (1:2.20.1-2+deb10u3) ...
+Setting up perl-modules-5.28 (5.28.1-6+deb10u1) ...
+Setting up libkeyutils1:amd64 (1.6-6) ...
+Setting up libpsl5:amd64 (0.20.2-2) ...
+Setting up libnghttp2-14:amd64 (1.36.0-2+deb10u1) ...
+Setting up libldap-common (2.4.47+dfsg-3+deb10u6) ...
+Setting up libkrb5support0:amd64 (1.17-3+deb10u3) ...
+Setting up libsasl2-modules-db:amd64 (2.1.27+dfsg-1+deb10u1) ...
+Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2) ...
+Setting up libgdbm-compat4:amd64 (1.18.1-4) ...
+Setting up libpcre2-8-0:amd64 (10.32-5) ...
+Setting up libk5crypto3:amd64 (1.17-3+deb10u3) ...
+Setting up libsasl2-2:amd64 (2.1.27+dfsg-1+deb10u1) ...
+Setting up libperl5.28:amd64 (5.28.1-6+deb10u1) ...
+Setting up git-man (1:2.20.1-2+deb10u3) ...
+Setting up libssh2-1:amd64 (1.8.0-2.1) ...
+Setting up libkrb5-3:amd64 (1.17-3+deb10u3) ...
+Setting up libldap-2.4-2:amd64 (2.4.47+dfsg-3+deb10u6) ...
+Setting up perl (5.28.1-6+deb10u1) ...
+Setting up libgssapi-krb5-2:amd64 (1.17-3+deb10u3) ...
+Setting up libcurl3-gnutls:amd64 (7.64.0-4+deb10u2) ...
+Setting up liberror-perl (0.17027-2) ...
+Setting up git (1:2.20.1-2+deb10u3) ...
+Processing triggers for libc-bin (2.28-10) ...
+<span class="-Color -Color-Cyan">INFO</span>[0012] Taking snapshot of full filesystem...        
+<span class="-Color -Color-Cyan">INFO</span>[0015] RUN python -m pip install azureml-core==1.33.0 azureml-train-automl-client==1.33.0 
+<span class="-Color -Color-Cyan">INFO</span>[0015] cmd: /bin/sh                                 
+<span class="-Color -Color-Cyan">INFO</span>[0015] args: [-c python -m pip install azureml-core==1.33.0 azureml-train-automl-client==1.33.0] 
+<span class="-Color -Color-Cyan">INFO</span>[0015] Running: [/bin/sh -c python -m pip install azureml-core==1.33.0 azureml-train-automl-client==1.33.0] 
+Collecting azureml-core==1.33.0
+  Downloading azureml_core-1.33.0-py3-none-any.whl (2.2 MB)
+Collecting azureml-train-automl-client==1.33.0
+  Downloading azureml_train_automl_client-1.33.0-py3-none-any.whl (128 kB)
+Collecting pytz
+  Downloading pytz-2021.3-py2.py3-none-any.whl (503 kB)
+Collecting urllib3&lt;=1.26.5,&gt;=1.23
+  Downloading urllib3-1.26.5-py2.py3-none-any.whl (138 kB)
+Collecting pathspec&lt;1.0.0
+  Downloading pathspec-0.9.0-py2.py3-none-any.whl (31 kB)
+Collecting azure-mgmt-containerregistry&gt;=2.0.0
+  Downloading azure_mgmt_containerregistry-9.0.0-py3-none-any.whl (937 kB)
+Collecting contextlib2&lt;1.0.0
+  Downloading contextlib2-0.6.0.post1-py2.py3-none-any.whl (9.8 kB)
+Collecting SecretStorage&lt;4.0.0
+  Downloading SecretStorage-3.3.1-py3-none-any.whl (15 kB)
+Collecting backports.tempfile
+  Downloading backports.tempfile-1.0-py2.py3-none-any.whl (4.4 kB)
+Collecting docker&lt;5.0.0
+  Downloading docker-4.4.4-py2.py3-none-any.whl (147 kB)
+Collecting msrestazure&lt;=0.6.4,&gt;=0.4.33
+  Downloading msrestazure-0.6.4-py2.py3-none-any.whl (40 kB)
+Collecting cryptography!=1.9,!=2.0.*,!=2.1.*,!=2.2.*,&lt;4.0.0
+  Downloading cryptography-3.4.8-cp36-abi3-manylinux_2_24_x86_64.whl (3.0 MB)
+Collecting msrest&lt;1.0.0,&gt;=0.5.1
+  Downloading msrest-0.6.21-py2.py3-none-any.whl (85 kB)
+Collecting requests&lt;3.0.0,&gt;=2.19.1
+  Downloading requests-2.27.1-py2.py3-none-any.whl (63 kB)
+Collecting adal&lt;=1.2.7,&gt;=1.2.0
+  Downloading adal-1.2.7-py2.py3-none-any.whl (55 kB)
+Collecting jsonpickle&lt;3.0.0
+  Downloading jsonpickle-2.1.0-py2.py3-none-any.whl (38 kB)
+Collecting azure-common&lt;2.0.0,&gt;=1.1.12
+  Downloading azure_common-1.1.27-py2.py3-none-any.whl (12 kB)
+Collecting python-dateutil&lt;3.0.0,&gt;=2.7.3
+  Downloading python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+Collecting PyJWT&lt;3.0.0
+  Downloading PyJWT-2.3.0-py3-none-any.whl (16 kB)
+Collecting azure-mgmt-authorization&lt;1.0.0,&gt;=0.40.0
+  Downloading azure_mgmt_authorization-0.61.0-py2.py3-none-any.whl (94 kB)
+Collecting pyopenssl&lt;21.0.0
+  Downloading pyOpenSSL-20.0.1-py2.py3-none-any.whl (54 kB)
+Collecting jmespath&lt;1.0.0
+  Downloading jmespath-0.10.0-py2.py3-none-any.whl (24 kB)
+Collecting ndg-httpsclient&lt;=0.5.1
+  Downloading ndg_httpsclient-0.5.1-py3-none-any.whl (34 kB)
+Collecting azure-mgmt-storage&lt;16.0.0,&gt;=1.5.0
+  Downloading azure_mgmt_storage-11.2.0-py2.py3-none-any.whl (547 kB)
+Collecting azure-mgmt-keyvault&lt;10.0.0,&gt;=0.40.0
+  Downloading azure_mgmt_keyvault-9.3.0-py2.py3-none-any.whl (412 kB)
+Collecting ruamel.yaml&lt;0.17.5,&gt;=0.15.35
+  Downloading ruamel.yaml-0.17.4-py3-none-any.whl (101 kB)
+Collecting azure-graphrbac&lt;1.0.0,&gt;=0.40.0
+  Downloading azure_graphrbac-0.61.1-py2.py3-none-any.whl (141 kB)
+Collecting azure-mgmt-resource&lt;15.0.0,&gt;=1.2.1
+  Downloading azure_mgmt_resource-13.0.0-py2.py3-none-any.whl (1.3 MB)
+Collecting azureml-dataset-runtime~=1.33.0
+  Downloading azureml_dataset_runtime-1.33.0-py3-none-any.whl (3.5 kB)
+Collecting azureml-telemetry~=1.33.0
+  Downloading azureml_telemetry-1.33.0-py3-none-any.whl (30 kB)
+Collecting azureml-automl-core~=1.33.0
+  Downloading azureml_automl_core-1.33.1-py3-none-any.whl (214 kB)
+Collecting azure-mgmt-core&lt;2.0.0,&gt;=1.3.0
+  Downloading azure_mgmt_core-1.3.0-py2.py3-none-any.whl (25 kB)
+Collecting azure-core&lt;2.0.0,&gt;=1.15.0
+  Downloading azure_core-1.21.1-py2.py3-none-any.whl (178 kB)
+Collecting six&gt;=1.11.0
+  Downloading six-1.16.0-py2.py3-none-any.whl (11 kB)
+Collecting pyarrow&lt;4.0.0,&gt;=0.17.0
+  Downloading pyarrow-3.0.0-cp37-cp37m-manylinux2014_x86_64.whl (20.7 MB)
+Collecting azureml-dataprep&lt;2.21.0a,&gt;=2.20.0a
+  Downloading azureml_dataprep-2.20.1-py3-none-any.whl (39.4 MB)
+Collecting numpy!=1.19.3
+  Downloading numpy-1.21.5-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (15.7 MB)
+Collecting azure-identity&lt;1.5.0,&gt;=1.2.0
+  Downloading azure_identity-1.4.1-py2.py3-none-any.whl (86 kB)
+Collecting dotnetcore2&lt;3.0.0,&gt;=2.1.14
+  Downloading dotnetcore2-2.1.23-py3-none-manylinux1_x86_64.whl (29.3 MB)
+Collecting azureml-dataprep-native&lt;39.0.0,&gt;=38.0.0
+  Downloading azureml_dataprep_native-38.0.0-cp37-cp37m-manylinux1_x86_64.whl (1.3 MB)
+Collecting azureml-dataprep-rslex&lt;1.19.0a,&gt;=1.18.0dev0
+  Downloading azureml_dataprep_rslex-1.18.2-cp37-cp37m-manylinux1_x86_64.whl (10.4 MB)
+Collecting cloudpickle&lt;2.0.0,&gt;=1.1.0
+  Downloading cloudpickle-1.6.0-py3-none-any.whl (23 kB)
+Collecting msal-extensions~=0.2.2
+  Downloading msal_extensions-0.2.2-py2.py3-none-any.whl (15 kB)
+Collecting msal&lt;2.0.0,&gt;=1.3.0
+  Downloading msal-1.16.0-py2.py3-none-any.whl (78 kB)
+Collecting applicationinsights
+  Downloading applicationinsights-0.11.10-py2.py3-none-any.whl (55 kB)
+Collecting cffi&gt;=1.12
+  Downloading cffi-1.15.0-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (427 kB)
+Collecting pycparser
+  Downloading pycparser-2.21-py2.py3-none-any.whl (118 kB)
+Collecting websocket-client&gt;=0.32.0
+  Downloading websocket_client-1.2.3-py3-none-any.whl (53 kB)
+Collecting distro&gt;=1.2.0
+  Downloading distro-1.6.0-py2.py3-none-any.whl (19 kB)
+Collecting importlib-metadata
+  Downloading importlib_metadata-4.10.1-py3-none-any.whl (17 kB)
+Collecting portalocker~=1.0
+  Downloading portalocker-1.7.1-py2.py3-none-any.whl (10 kB)
+Collecting requests-oauthlib&gt;=0.5.0
+  Downloading requests_oauthlib-1.3.1-py2.py3-none-any.whl (23 kB)
+Collecting isodate&gt;=0.6.0
+  Downloading isodate-0.6.1-py2.py3-none-any.whl (41 kB)
+Collecting certifi&gt;=2017.4.17
+  Downloading certifi-2021.10.8-py2.py3-none-any.whl (149 kB)
+Collecting pyasn1&gt;=0.1.1
+  Downloading pyasn1-0.4.8-py2.py3-none-any.whl (77 kB)
+Collecting charset-normalizer~=2.0.0
+  Downloading charset_normalizer-2.0.11-py3-none-any.whl (39 kB)
+Collecting idna&lt;4,&gt;=2.5
+  Downloading idna-3.3-py3-none-any.whl (61 kB)
+Collecting oauthlib&gt;=3.0.0
+  Downloading oauthlib-3.2.0-py3-none-any.whl (151 kB)
+Collecting ruamel.yaml.clib&gt;=0.1.2
+  Downloading ruamel.yaml.clib-0.2.6-cp37-cp37m-manylinux1_x86_64.whl (546 kB)
+Collecting jeepney&gt;=0.6
+  Downloading jeepney-0.7.1-py3-none-any.whl (54 kB)
+Collecting backports.weakref
+  Downloading backports.weakref-1.0.post1-py2.py3-none-any.whl (5.2 kB)
+Collecting zipp&gt;=0.5
+  Downloading zipp-3.7.0-py3-none-any.whl (5.3 kB)
+Collecting typing-extensions&gt;=3.6.4
+  Downloading typing_extensions-4.0.1-py3-none-any.whl (22 kB)
+Installing collected packages: pycparser, urllib3, idna, charset-normalizer, cffi, certifi, six, requests, PyJWT, oauthlib, cryptography, requests-oauthlib, python-dateutil, isodate, zipp, typing-extensions, portalocker, msrest, msal, azure-core, adal, websocket-client, ruamel.yaml.clib, pyopenssl, pyasn1, msrestazure, msal-extensions, jeepney, importlib-metadata, distro, backports.weakref, azure-mgmt-core, azure-common, SecretStorage, ruamel.yaml, pytz, pathspec, numpy, ndg-httpsclient, jsonpickle, jmespath, dotnetcore2, docker, contextlib2, cloudpickle, backports.tempfile, azureml-dataprep-rslex, azureml-dataprep-native, azure-mgmt-storage, azure-mgmt-resource, azure-mgmt-keyvault, azure-mgmt-containerregistry, azure-mgmt-authorization, azure-identity, azure-graphrbac, pyarrow, azureml-dataprep, azureml-core, applicationinsights, azureml-telemetry, azureml-dataset-runtime, azureml-automl-core, azureml-train-automl-client
+Successfully installed PyJWT-2.3.0 SecretStorage-3.3.1 adal-1.2.7 applicationinsights-0.11.10 azure-common-1.1.27 azure-core-1.21.1 azure-graphrbac-0.61.1 azure-identity-1.4.1 azure-mgmt-authorization-0.61.0 azure-mgmt-containerregistry-9.0.0 azure-mgmt-core-1.3.0 azure-mgmt-keyvault-9.3.0 azure-mgmt-resource-13.0.0 azure-mgmt-storage-11.2.0 azureml-automl-core-1.33.1 azureml-core-1.33.0 azureml-dataprep-2.20.1 azureml-dataprep-native-38.0.0 azureml-dataprep-rslex-1.18.2 azureml-dataset-runtime-1.33.0 azureml-telemetry-1.33.0 azureml-train-automl-client-1.33.0 backports.tempfile-1.0 backports.weakref-1.0.post1 certifi-2021.10.8 cffi-1.15.0 charset-normalizer-2.0.11 cloudpickle-1.6.0 contextlib2-0.6.0.post1 cryptography-3.4.8 distro-1.6.0 docker-4.4.4 dotnetcore2-2.1.23 idna-3.3 importlib-metadata-4.10.1 isodate-0.6.1 jeepney-0.7.1 jmespath-0.10.0 jsonpickle-2.1.0 msal-1.16.0 msal-extensions-0.2.2 msrest-0.6.21 msrestazure-0.6.4 ndg-httpsclient-0.5.1 numpy-1.21.5 oauthlib-3.2.0 pathspec-0.9.0 portalocker-1.7.1 pyarrow-3.0.0 pyasn1-0.4.8 pycparser-2.21 pyopenssl-20.0.1 python-dateutil-2.8.2 pytz-2021.3 requests-2.27.1 requests-oauthlib-1.3.1 ruamel.yaml-0.17.4 ruamel.yaml.clib-0.2.6 six-1.16.0 typing-extensions-4.0.1 urllib3-1.26.5 websocket-client-1.2.3 zipp-3.7.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 21.2.4; however, version 22.0.2 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+<span class="-Color -Color-Cyan">INFO</span>[0040] Taking snapshot of full filesystem...        
+<span class="-Color -Color-Cyan">INFO</span>[0059] RUN python -m pip install "mlrun[complete] @ git+https://github.com/mlrun/mlrun@development" 
+<span class="-Color -Color-Cyan">INFO</span>[0059] cmd: /bin/sh                                 
+<span class="-Color -Color-Cyan">INFO</span>[0059] args: [-c python -m pip install "mlrun[complete] @ git+https://github.com/mlrun/mlrun@development"] 
+<span class="-Color -Color-Cyan">INFO</span>[0059] Running: [/bin/sh -c python -m pip install "mlrun[complete] @ git+https://github.com/mlrun/mlrun@development"] 
+Collecting mlrun[complete]@ git+https://github.com/mlrun/mlrun@development
+  Cloning https://github.com/mlrun/mlrun (to revision development) to /tmp/pip-install-yegk19ip/mlrun_b9fdf6ee5c8c4e2d9de3a37d0807b6c5
+  Running command git clone -q https://github.com/mlrun/mlrun /tmp/pip-install-yegk19ip/mlrun_b9fdf6ee5c8c4e2d9de3a37d0807b6c5
+  Resolved https://github.com/mlrun/mlrun to commit 832a07b11f3198b844d30b4a80db12a45c6e8948
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status 'done'
+Collecting pymysql~=1.0
+  Downloading PyMySQL-1.0.2-py3-none-any.whl (43 kB)
+Requirement already satisfied: pyarrow&lt;6,&gt;=1 in /usr/local/lib/python3.7/site-packages (from mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (3.0.0)
+Collecting fsspec~=2021.8.1
+  Downloading fsspec-2021.8.1-py3-none-any.whl (119 kB)
+Collecting v3io~=0.5.13
+  Downloading v3io-0.5.15-py3-none-any.whl (49 kB)
+Collecting ipykernel~=5.0
+  Downloading ipykernel-5.5.6-py3-none-any.whl (121 kB)
+Collecting click~=7.0
+  Downloading click-7.1.2-py2.py3-none-any.whl (82 kB)
+Collecting sqlalchemy~=1.3
+  Downloading SQLAlchemy-1.4.31-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.6 MB)
+Collecting dask~=2021.11.2
+  Downloading dask-2021.11.2-py3-none-any.whl (1.0 MB)
+Collecting distributed~=2021.11.2
+  Downloading distributed-2021.11.2-py3-none-any.whl (802 kB)
+Collecting chardet&lt;4.0,&gt;=3.0.2
+  Downloading chardet-3.0.4-py2.py3-none-any.whl (133 kB)
+Collecting nuclio-jupyter~=0.8.22
+  Downloading nuclio_jupyter-0.8.22-py3-none-any.whl (49 kB)
+Collecting pydantic~=1.5
+  Downloading pydantic-1.9.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.9 MB)
+Collecting v3iofs~=0.1.7
+  Downloading v3iofs-0.1.10-py3-none-any.whl (13 kB)
+Collecting kfp~=1.8.0
+  Downloading kfp-1.8.11.tar.gz (298 kB)
+Collecting pandas~=1.2
+  Downloading pandas-1.3.5-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (11.3 MB)
+Collecting pyyaml~=5.1
+  Downloading PyYAML-5.4.1-cp37-cp37m-manylinux1_x86_64.whl (636 kB)
+Collecting orjson&lt;3.4,&gt;=3
+  Downloading orjson-3.3.1-cp37-cp37m-manylinux2014_x86_64.whl (208 kB)
+Collecting inflection~=0.5.0
+  Downloading inflection-0.5.1-py2.py3-none-any.whl (9.5 kB)
+Collecting aiohttp~=3.8
+  Downloading aiohttp-3.8.1-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.1 MB)
+Collecting humanfriendly~=8.2
+  Downloading humanfriendly-8.2-py2.py3-none-any.whl (86 kB)
+Collecting ipython~=7.0
+  Downloading ipython-7.31.1-py3-none-any.whl (792 kB)
+Collecting fastapi~=0.67.0
+  Downloading fastapi-0.67.0-py3-none-any.whl (51 kB)
+Requirement already satisfied: requests~=2.22 in /usr/local/lib/python3.7/site-packages (from mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (2.27.1)
+Collecting tabulate~=0.8.6
+  Downloading tabulate-0.8.9-py3-none-any.whl (25 kB)
+Collecting nest-asyncio~=1.0
+  Downloading nest_asyncio-1.5.4-py3-none-any.whl (5.1 kB)
+Collecting storey~=0.10.4
+  Downloading storey-0.10.4-py3-none-any.whl (116 kB)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.25.4 in /usr/local/lib/python3.7/site-packages (from mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.26.5)
+Collecting GitPython~=3.0
+  Downloading GitPython-3.1.26-py3-none-any.whl (180 kB)
+Collecting mergedeep~=1.3
+  Downloading mergedeep-1.3.4-py3-none-any.whl (6.4 kB)
+Collecting semver~=2.13
+  Downloading semver-2.13.0-py2.py3-none-any.whl (12 kB)
+Collecting cryptography&lt;3.4,~=3.0
+  Downloading cryptography-3.3.2-cp36-abi3-manylinux2010_x86_64.whl (2.6 MB)
+Collecting v3io-frames~=0.10.2
+  Downloading v3io_frames-0.10.2-py3-none-any.whl (35 kB)
+Collecting deepdiff~=5.0
+  Downloading deepdiff-5.7.0-py3-none-any.whl (68 kB)
+Requirement already satisfied: numpy&lt;1.22.0,&gt;=1.16.5 in /usr/local/lib/python3.7/site-packages (from mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.21.5)
+Collecting python-dotenv~=0.17.0
+  Downloading python_dotenv-0.17.1-py2.py3-none-any.whl (18 kB)
+Collecting alembic&lt;1.6.0,~=1.4
+  Downloading alembic-1.5.8-py2.py3-none-any.whl (159 kB)
+Collecting kubernetes~=12.0
+  Downloading kubernetes-12.0.1-py2.py3-none-any.whl (1.7 MB)
+Collecting google-auth&lt;2.0dev,&gt;=1.25.0
+  Downloading google_auth-1.35.0-py2.py3-none-any.whl (152 kB)
+Collecting azure-identity~=1.5
+  Downloading azure_identity-1.7.1-py2.py3-none-any.whl (129 kB)
+Collecting aiobotocore~=1.4.0
+  Downloading aiobotocore-1.4.2.tar.gz (52 kB)
+Collecting boto3&lt;1.17.107,~=1.9
+  Downloading boto3-1.17.106-py2.py3-none-any.whl (131 kB)
+Collecting azure-keyvault-secrets~=4.2
+  Downloading azure_keyvault_secrets-4.3.0-py2.py3-none-any.whl (233 kB)
+Collecting s3fs~=2021.8.1
+  Downloading s3fs-2021.8.1-py3-none-any.whl (26 kB)
+Collecting plotly~=5.4
+  Downloading plotly-5.5.0-py2.py3-none-any.whl (26.5 MB)
+Collecting botocore&lt;1.20.107,&gt;=1.20.106
+  Downloading botocore-1.20.106-py2.py3-none-any.whl (7.7 MB)
+Collecting adlfs~=2021.8.1
+  Downloading adlfs-2021.8.2.tar.gz (38 kB)
+Collecting gcsfs~=2021.8.1
+  Downloading gcsfs-2021.8.1-py2.py3-none-any.whl (23 kB)
+Collecting azure-storage-blob~=12.0
+  Downloading azure_storage_blob-12.9.0-py2.py3-none-any.whl (356 kB)
+Requirement already satisfied: azure-core&gt;=1.7.0 in /usr/local/lib/python3.7/site-packages (from adlfs~=2021.8.1-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.21.1)
+Collecting azure-datalake-store&lt;0.1,&gt;=0.0.46
+  Downloading azure_datalake_store-0.0.52-py2.py3-none-any.whl (61 kB)
+Collecting wrapt&gt;=1.10.10
+  Downloading wrapt-1.13.3-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (79 kB)
+Collecting aioitertools&gt;=0.5.1
+  Downloading aioitertools-0.8.0-py3-none-any.whl (21 kB)
+Collecting frozenlist&gt;=1.1.1
+  Downloading frozenlist-1.3.0-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (144 kB)
+Collecting yarl&lt;2.0,&gt;=1.0
+  Downloading yarl-1.7.2-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (271 kB)
+Collecting multidict&lt;7.0,&gt;=4.5
+  Downloading multidict-6.0.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (94 kB)
+Collecting aiosignal&gt;=1.1.2
+  Downloading aiosignal-1.2.0-py3-none-any.whl (8.2 kB)
+Requirement already satisfied: typing-extensions&gt;=3.7.4 in /usr/local/lib/python3.7/site-packages (from aiohttp~=3.8-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (4.0.1)
+Collecting async-timeout&lt;5.0,&gt;=4.0.0a3
+  Downloading async_timeout-4.0.2-py3-none-any.whl (5.8 kB)
+Collecting asynctest==0.13.0
+  Downloading asynctest-0.13.0-py3-none-any.whl (26 kB)
+Collecting attrs&gt;=17.3.0
+  Downloading attrs-21.4.0-py2.py3-none-any.whl (60 kB)
+Requirement already satisfied: charset-normalizer&lt;3.0,&gt;=2.0 in /usr/local/lib/python3.7/site-packages (from aiohttp~=3.8-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (2.0.11)
+Collecting Mako
+  Downloading Mako-1.1.6-py2.py3-none-any.whl (75 kB)
+Collecting python-editor&gt;=0.3
+  Downloading python_editor-1.0.4-py3-none-any.whl (4.9 kB)
+Requirement already satisfied: python-dateutil in /usr/local/lib/python3.7/site-packages (from alembic&lt;1.6.0,~=1.4-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (2.8.2)
+Requirement already satisfied: six&gt;=1.11.0 in /usr/local/lib/python3.7/site-packages (from azure-core&gt;=1.7.0-&gt;adlfs~=2021.8.1-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.16.0)
+Requirement already satisfied: cffi in /usr/local/lib/python3.7/site-packages (from azure-datalake-store&lt;0.1,&gt;=0.0.46-&gt;adlfs~=2021.8.1-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.15.0)
+Requirement already satisfied: adal&gt;=0.4.2 in /usr/local/lib/python3.7/site-packages (from azure-datalake-store&lt;0.1,&gt;=0.0.46-&gt;adlfs~=2021.8.1-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.2.7)
+Requirement already satisfied: PyJWT&lt;3,&gt;=1.0.0 in /usr/local/lib/python3.7/site-packages (from adal&gt;=0.4.2-&gt;azure-datalake-store&lt;0.1,&gt;=0.0.46-&gt;adlfs~=2021.8.1-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (2.3.0)
+Requirement already satisfied: msal&lt;2.0.0,&gt;=1.12.0 in /usr/local/lib/python3.7/site-packages (from azure-identity~=1.5-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.16.0)
+Collecting msal-extensions~=0.3.0
+  Downloading msal_extensions-0.3.1-py2.py3-none-any.whl (18 kB)
+Requirement already satisfied: azure-common~=1.1 in /usr/local/lib/python3.7/site-packages (from azure-keyvault-secrets~=4.2-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.1.27)
+Requirement already satisfied: msrest&gt;=0.6.21 in /usr/local/lib/python3.7/site-packages (from azure-keyvault-secrets~=4.2-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (0.6.21)
+Requirement already satisfied: jmespath&lt;1.0.0,&gt;=0.7.1 in /usr/local/lib/python3.7/site-packages (from boto3&lt;1.17.107,~=1.9-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (0.10.0)
+Collecting s3transfer&lt;0.5.0,&gt;=0.4.0
+  Downloading s3transfer-0.4.2-py2.py3-none-any.whl (79 kB)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.7/site-packages (from cffi-&gt;azure-datalake-store&lt;0.1,&gt;=0.0.46-&gt;adlfs~=2021.8.1-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (2.21)
+Collecting partd&gt;=0.3.10
+  Downloading partd-1.2.0-py3-none-any.whl (19 kB)
+Collecting toolz&gt;=0.8.2
+  Downloading toolz-0.11.2-py3-none-any.whl (55 kB)
+Requirement already satisfied: cloudpickle&gt;=1.1.1 in /usr/local/lib/python3.7/site-packages (from dask~=2021.11.2-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.6.0)
+Collecting packaging&gt;=20.0
+  Downloading packaging-21.3-py3-none-any.whl (40 kB)
+Collecting ordered-set==4.0.2
+  Downloading ordered-set-4.0.2.tar.gz (10 kB)
+Collecting tornado&gt;=5
+  Downloading tornado-6.1-cp37-cp37m-manylinux2010_x86_64.whl (428 kB)
+Collecting msgpack&gt;=0.6.0
+  Downloading msgpack-1.0.3-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (299 kB)
+Collecting zict&gt;=0.1.3
+  Downloading zict-2.0.0-py3-none-any.whl (10 kB)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.7/site-packages (from distributed~=2021.11.2-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (53.0.0)
+Collecting psutil&gt;=5.0
+  Downloading psutil-5.9.0-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (280 kB)
+Collecting jinja2
+  Downloading Jinja2-3.0.3-py3-none-any.whl (133 kB)
+Collecting tblib&gt;=1.6.0
+  Downloading tblib-1.7.0-py2.py3-none-any.whl (12 kB)
+Collecting sortedcontainers!=2.0.0,!=2.0.1
+  Downloading sortedcontainers-2.4.0-py2.py3-none-any.whl (29 kB)
+Collecting starlette==0.14.2
+  Downloading starlette-0.14.2-py3-none-any.whl (60 kB)
+Collecting decorator
+  Downloading decorator-5.1.1-py3-none-any.whl (9.1 kB)
+Collecting google-auth-oauthlib
+  Downloading google_auth_oauthlib-0.4.6-py2.py3-none-any.whl (18 kB)
+Collecting gitdb&lt;5,&gt;=4.0.1
+  Downloading gitdb-4.0.9-py3-none-any.whl (63 kB)
+Collecting smmap&lt;6,&gt;=3.0.1
+  Downloading smmap-5.0.0-py3-none-any.whl (24 kB)
+Collecting pyasn1-modules&gt;=0.2.1
+  Downloading pyasn1_modules-0.2.8-py2.py3-none-any.whl (155 kB)
+Collecting rsa&lt;5,&gt;=3.1.4
+  Downloading rsa-4.8-py3-none-any.whl (39 kB)
+Collecting cachetools&lt;5.0,&gt;=2.0.0
+  Downloading cachetools-4.2.4-py3-none-any.whl (10 kB)
+Collecting jupyter-client
+  Downloading jupyter_client-7.1.2-py3-none-any.whl (130 kB)
+Collecting ipython-genutils
+  Downloading ipython_genutils-0.2.0-py2.py3-none-any.whl (26 kB)
+Collecting traitlets&gt;=4.1.0
+  Downloading traitlets-5.1.1-py3-none-any.whl (102 kB)
+Collecting prompt-toolkit!=3.0.0,!=3.0.1,&lt;3.1.0,&gt;=2.0.0
+  Downloading prompt_toolkit-3.0.26-py3-none-any.whl (375 kB)
+Collecting jedi&gt;=0.16
+  Downloading jedi-0.18.1-py2.py3-none-any.whl (1.6 MB)
+Collecting matplotlib-inline
+  Downloading matplotlib_inline-0.1.3-py3-none-any.whl (8.2 kB)
+Collecting pickleshare
+  Downloading pickleshare-0.7.5-py2.py3-none-any.whl (6.9 kB)
+Collecting pygments
+  Downloading Pygments-2.11.2-py3-none-any.whl (1.1 MB)
+Collecting backcall
+  Downloading backcall-0.2.0-py2.py3-none-any.whl (11 kB)
+Collecting pexpect&gt;4.3
+  Downloading pexpect-4.8.0-py2.py3-none-any.whl (59 kB)
+Collecting parso&lt;0.9.0,&gt;=0.8.0
+  Downloading parso-0.8.3-py2.py3-none-any.whl (100 kB)
+Collecting absl-py&lt;2,&gt;=0.9
+  Downloading absl_py-1.0.0-py3-none-any.whl (126 kB)
+Collecting google-cloud-storage&lt;2,&gt;=1.20.0
+  Downloading google_cloud_storage-1.44.0-py2.py3-none-any.whl (106 kB)
+Collecting google-api-python-client&lt;2,&gt;=1.7.8
+  Downloading google_api_python_client-1.12.10-py2.py3-none-any.whl (61 kB)
+Collecting requests-toolbelt&lt;1,&gt;=0.8.0
+  Downloading requests_toolbelt-0.9.1-py2.py3-none-any.whl (54 kB)
+Collecting cloudpickle&gt;=1.1.1
+  Downloading cloudpickle-2.0.0-py3-none-any.whl (25 kB)
+Collecting kfp-server-api&lt;2.0.0,&gt;=1.1.2
+  Downloading kfp-server-api-1.7.1.tar.gz (52 kB)
+Collecting jsonschema&lt;4,&gt;=3.0.1
+  Downloading jsonschema-3.2.0-py2.py3-none-any.whl (56 kB)
+Collecting Deprecated&lt;2,&gt;=1.2.7
+  Downloading Deprecated-1.2.13-py2.py3-none-any.whl (9.6 kB)
+Collecting strip-hints&lt;1,&gt;=0.1.8
+  Downloading strip-hints-0.1.10.tar.gz (29 kB)
+Collecting docstring-parser&lt;1,&gt;=0.7.3
+  Downloading docstring_parser-0.13.tar.gz (23 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status 'done'
+Collecting kfp-pipeline-spec&lt;0.2.0,&gt;=0.1.13
+  Downloading kfp_pipeline_spec-0.1.13-py3-none-any.whl (18 kB)
+Collecting fire&lt;1,&gt;=0.3.1
+  Downloading fire-0.4.0.tar.gz (87 kB)
+Collecting protobuf&lt;4,&gt;=3.13.0
+  Downloading protobuf-3.19.4-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.1 MB)
+Collecting uritemplate&lt;4,&gt;=3.0.1
+  Downloading uritemplate-3.0.1-py2.py3-none-any.whl (15 kB)
+Collecting typer&lt;1.0,&gt;=0.3.2
+  Downloading typer-0.4.0-py3-none-any.whl (27 kB)
+Collecting typing-extensions&gt;=3.7.4
+  Downloading typing_extensions-3.10.0.2-py3-none-any.whl (26 kB)
+Collecting termcolor
+  Downloading termcolor-1.1.0.tar.gz (3.9 kB)
+Collecting httplib2&lt;1dev,&gt;=0.15.0
+  Downloading httplib2-0.20.2-py3-none-any.whl (96 kB)
+Collecting google-api-core&lt;3dev,&gt;=1.21.0
+  Downloading google_api_core-2.4.0-py2.py3-none-any.whl (111 kB)
+Collecting google-auth-httplib2&gt;=0.0.3
+  Downloading google_auth_httplib2-0.1.0-py2.py3-none-any.whl (9.3 kB)
+Collecting googleapis-common-protos&lt;2.0dev,&gt;=1.52.0
+  Downloading googleapis_common_protos-1.54.0-py2.py3-none-any.whl (207 kB)
+Collecting google-cloud-core&lt;3.0dev,&gt;=1.6.0
+  Downloading google_cloud_core-2.2.2-py2.py3-none-any.whl (29 kB)
+Collecting google-resumable-media&lt;3.0dev,&gt;=1.3.0
+  Downloading google_resumable_media-2.1.0-py2.py3-none-any.whl (75 kB)
+Collecting google-crc32c&lt;2.0dev,&gt;=1.0
+  Downloading google_crc32c-1.3.0-cp37-cp37m-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (38 kB)
+Collecting pyparsing!=3.0.0,!=3.0.1,!=3.0.2,!=3.0.3,&lt;4,&gt;=2.4.2
+  Downloading pyparsing-3.0.7-py3-none-any.whl (98 kB)
+Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.7/site-packages (from jsonschema&lt;4,&gt;=3.0.1-&gt;kfp~=1.8.0-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (4.10.1)
+Collecting pyrsistent&gt;=0.14.0
+  Downloading pyrsistent-0.18.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (117 kB)
+Requirement already satisfied: certifi in /usr/local/lib/python3.7/site-packages (from kfp-server-api&lt;2.0.0,&gt;=1.1.2-&gt;kfp~=1.8.0-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (2021.10.8)
+Requirement already satisfied: requests-oauthlib in /usr/local/lib/python3.7/site-packages (from kubernetes~=12.0-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.3.1)
+Requirement already satisfied: websocket-client!=0.40.0,!=0.41.*,!=0.42.*,&gt;=0.32.0 in /usr/local/lib/python3.7/site-packages (from kubernetes~=12.0-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.2.3)
+Requirement already satisfied: portalocker&lt;3,&gt;=1.0 in /usr/local/lib/python3.7/site-packages (from msal-extensions~=0.3.0-&gt;azure-identity~=1.5-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (1.7.1)
+Requirement already satisfied: isodate&gt;=0.6.0 in /usr/local/lib/python3.7/site-packages (from msrest&gt;=0.6.21-&gt;azure-keyvault-secrets~=4.2-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (0.6.1)
+Collecting notebook&gt;=5.2.0
+  Downloading notebook-6.4.8-py3-none-any.whl (9.9 MB)
+Collecting nbconvert&gt;=5.4
+  Downloading nbconvert-6.4.1-py3-none-any.whl (557 kB)
+Collecting nbformat&gt;=4.4
+  Downloading nbformat-5.1.3-py3-none-any.whl (178 kB)
+Collecting mistune&lt;2,&gt;=0.8.1
+  Downloading mistune-0.8.4-py2.py3-none-any.whl (16 kB)
+Collecting defusedxml
+  Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+Collecting nbclient&lt;0.6.0,&gt;=0.5.0
+  Downloading nbclient-0.5.10-py3-none-any.whl (69 kB)
+Collecting jupyter-core
+  Downloading jupyter_core-4.9.1-py3-none-any.whl (86 kB)
+Collecting testpath
+  Downloading testpath-0.5.0-py3-none-any.whl (84 kB)
+Collecting pandocfilters&gt;=1.4.1
+  Downloading pandocfilters-1.5.0-py2.py3-none-any.whl (8.7 kB)
+Collecting bleach
+  Downloading bleach-4.1.0-py2.py3-none-any.whl (157 kB)
+Collecting jupyterlab-pygments
+  Downloading jupyterlab_pygments-0.1.2-py2.py3-none-any.whl (4.6 kB)
+Collecting entrypoints&gt;=0.2.2
+  Downloading entrypoints-0.3-py2.py3-none-any.whl (11 kB)
+Collecting MarkupSafe&gt;=2.0
+  Downloading MarkupSafe-2.0.1-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (31 kB)
+Collecting pyzmq&gt;=13
+  Downloading pyzmq-22.3.0-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.whl (1.1 MB)
+Collecting terminado&gt;=0.8.3
+  Downloading terminado-0.13.1-py3-none-any.whl (14 kB)
+Collecting argon2-cffi
+  Downloading argon2_cffi-21.3.0-py3-none-any.whl (14 kB)
+Collecting Send2Trash&gt;=1.8.0
+  Downloading Send2Trash-1.8.0-py3-none-any.whl (18 kB)
+Collecting prometheus-client
+  Downloading prometheus_client-0.13.1-py3-none-any.whl (57 kB)
+Requirement already satisfied: pytz&gt;=2017.3 in /usr/local/lib/python3.7/site-packages (from pandas~=1.2-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (2021.3)
+Collecting locket
+  Downloading locket-0.2.1-py2.py3-none-any.whl (4.1 kB)
+Collecting ptyprocess&gt;=0.5
+  Downloading ptyprocess-0.7.0-py2.py3-none-any.whl (13 kB)
+Collecting tenacity&gt;=6.2.0
+  Downloading tenacity-8.0.1-py3-none-any.whl (24 kB)
+Collecting wcwidth
+  Downloading wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Requirement already satisfied: pyasn1&lt;0.5.0,&gt;=0.4.6 in /usr/local/lib/python3.7/site-packages (from pyasn1-modules&gt;=0.2.1-&gt;google-auth&lt;2.0dev,&gt;=1.25.0-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (0.4.8)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/local/lib/python3.7/site-packages (from requests~=2.22-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (3.3)
+Requirement already satisfied: oauthlib&gt;=3.0.0 in /usr/local/lib/python3.7/site-packages (from requests-oauthlib-&gt;kubernetes~=12.0-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (3.2.0)
+Collecting greenlet!=0.4.17
+  Downloading greenlet-1.1.2-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (150 kB)
+Collecting grpcio-tools&lt;1.42,&gt;1.34.0
+  Downloading grpcio_tools-1.41.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.4 MB)
+Collecting grpcio&lt;1.42,&gt;1.34.0
+  Downloading grpcio-1.41.1-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.9 MB)
+Requirement already satisfied: wheel in /usr/local/lib/python3.7/site-packages (from strip-hints&lt;1,&gt;=0.1.8-&gt;kfp~=1.8.0-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (0.36.2)
+Collecting ujson&gt;=3.0.0
+  Downloading ujson-5.1.0-cp37-cp37m-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (43 kB)
+Collecting future&gt;=0.18.2
+  Downloading future-0.18.2.tar.gz (829 kB)
+Collecting heapdict
+  Downloading HeapDict-1.0.1-py3-none-any.whl (3.9 kB)
+Collecting argon2-cffi-bindings
+  Downloading argon2_cffi_bindings-21.2.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (86 kB)
+Collecting webencodings
+  Downloading webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+Requirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.7/site-packages (from importlib-metadata-&gt;jsonschema&lt;4,&gt;=3.0.1-&gt;kfp~=1.8.0-&gt;mlrun[complete]@ git+https://github.com/mlrun/mlrun@development) (3.7.0)
+Building wheels for collected packages: adlfs, aiobotocore, ordered-set, kfp, docstring-parser, fire, kfp-server-api, strip-hints, future, mlrun, termcolor
+  Building wheel for adlfs (setup.py): started
+  Building wheel for adlfs (setup.py): finished with status 'done'
+  Created wheel for adlfs: filename=adlfs-2021.8.2-py3-none-any.whl size=21466 sha256=d3076fc23e1d05f49958ba450b9913a80c23c755d3347327d1d2150656fa3185
+  Stored in directory: /root/.cache/pip/wheels/0d/88/1d/e06072abb7fb4d59b5cf94e194e53017dfa2dc47af4dec88b7
+  Building wheel for aiobotocore (setup.py): started
+  Building wheel for aiobotocore (setup.py): finished with status 'done'
+  Created wheel for aiobotocore: filename=aiobotocore-1.4.2-py3-none-any.whl size=49910 sha256=d630bfe25d72229a76e207cb2de8dd29839368673c27edc12229b314660a7e69
+  Stored in directory: /root/.cache/pip/wheels/33/e7/d9/b297a9aa9c43d56bc2463e6e2771655ff638f30b30f0b61fcb
+  Building wheel for ordered-set (setup.py): started
+  Building wheel for ordered-set (setup.py): finished with status 'done'
+  Created wheel for ordered-set: filename=ordered_set-4.0.2-py2.py3-none-any.whl size=8210 sha256=d0a6fcb9c69107866ca516cb90c3a6a1c0dd00c2f55e981d69b476e92fe85c0a
+  Stored in directory: /root/.cache/pip/wheels/73/2b/f6/26e9f84153c25050fe7c09e88f8e32a6be3c7034a38c418319
+  Building wheel for kfp (setup.py): started
+  Building wheel for kfp (setup.py): finished with status 'done'
+  Created wheel for kfp: filename=kfp-1.8.11-py3-none-any.whl size=414450 sha256=62bc86dbc4fbb6d431756182a297f87d5d9f08edfb8c2bab347b81fe0654cad3
+  Stored in directory: /root/.cache/pip/wheels/85/1e/ee/a14b49663bddf9e72d1c269cbe53970167bfabb53cadbbea3a
+  Building wheel for docstring-parser (PEP 517): started
+  Building wheel for docstring-parser (PEP 517): finished with status 'done'
+  Created wheel for docstring-parser: filename=docstring_parser-0.13-py3-none-any.whl size=31866 sha256=6ab7172ddcc24d27d93d31af6438a00053464e76585907654ec90dfb3ecf1886
+  Stored in directory: /root/.cache/pip/wheels/bd/88/3c/d1aa049309f7945178cac9fbe6561a86424f432da57c18ca0f
+  Building wheel for fire (setup.py): started
+  Building wheel for fire (setup.py): finished with status 'done'
+  Created wheel for fire: filename=fire-0.4.0-py2.py3-none-any.whl size=115928 sha256=6704c4bed4908d06fbe2e61f97718607c4ef9dee5a573d09acf9882e6e620757
+  Stored in directory: /root/.cache/pip/wheels/8a/67/fb/2e8a12fa16661b9d5af1f654bd199366799740a85c64981226
+  Building wheel for kfp-server-api (setup.py): started
+  Building wheel for kfp-server-api (setup.py): finished with status 'done'
+  Created wheel for kfp-server-api: filename=kfp_server_api-1.7.1-py3-none-any.whl size=92618 sha256=b156a487ea471572b7c0d0dc85826bb5f6554ce5d097c3d16cdd75e36a93100a
+  Stored in directory: /root/.cache/pip/wheels/68/3f/d5/734c0278dd6c8969cef359edcf059505a61452c5eb0e2760e1
+  Building wheel for strip-hints (setup.py): started
+  Building wheel for strip-hints (setup.py): finished with status 'done'
+  Created wheel for strip-hints: filename=strip_hints-0.1.10-py2.py3-none-any.whl size=22279 sha256=ebdf8455bb18636c3ffe99dc1ffe7262298094e000e46a15df3ef1b809e3770f
+  Stored in directory: /root/.cache/pip/wheels/5e/14/c3/6e44e9b2545f2d570b03f5b6d38c00b7534aa8abb376978363
+  Building wheel for future (setup.py): started
+  Building wheel for future (setup.py): finished with status 'done'
+  Created wheel for future: filename=future-0.18.2-py3-none-any.whl size=491059 sha256=b71c260b8cae9faa06e701eb03743481d68f427d7ed0886bddf8eec6fab17927
+  Stored in directory: /root/.cache/pip/wheels/56/b0/fe/4410d17b32f1f0c3cf54cdfb2bc04d7b4b8f4ae377e2229ba0
+  Building wheel for mlrun (PEP 517): started
+  Building wheel for mlrun (PEP 517): finished with status 'done'
+  Created wheel for mlrun: filename=mlrun-0.0.0+unstable-py3-none-any.whl size=799835 sha256=a37564dbf60ba19531146c0404fa02216cea4492894cbafd9738bb199ce45775
+  Stored in directory: /tmp/pip-ephem-wheel-cache-xz3ex0pi/wheels/cd/42/82/13965317128ea26acc3fb21b24cc254077454998599db6f161
+  Building wheel for termcolor (setup.py): started
+  Building wheel for termcolor (setup.py): finished with status 'done'
+  Created wheel for termcolor: filename=termcolor-1.1.0-py3-none-any.whl size=4829 sha256=09ed568b0b6ea586b107bc3decf5a736c95331052246548b5a560c69a88e9414
+  Stored in directory: /root/.cache/pip/wheels/3f/e3/ec/8a8336ff196023622fbcb36de0c5a5c218cbb24111d1d4c7f2
+Successfully built adlfs aiobotocore ordered-set kfp docstring-parser fire kfp-server-api strip-hints future mlrun termcolor
+Installing collected packages: typing-extensions, traitlets, pyrsistent, attrs, wcwidth, tornado, rsa, pyzmq, pyparsing, pyasn1-modules, ptyprocess, protobuf, parso, nest-asyncio, jupyter-core, jsonschema, ipython-genutils, entrypoints, cachetools, webencodings, pygments, prompt-toolkit, pickleshare, pexpect, packaging, nbformat, matplotlib-inline, MarkupSafe, jupyter-client, jedi, googleapis-common-protos, google-auth, decorator, cryptography, backcall, ujson, toolz, testpath, pandocfilters, nbclient, multidict, mistune, locket, jupyterlab-pygments, jinja2, ipython, httplib2, grpcio, google-crc32c, google-api-core, future, frozenlist, defusedxml, botocore, bleach, argon2-cffi-bindings, yarl, wrapt, v3io, uritemplate, terminado, termcolor, smmap, Send2Trash, s3transfer, pyyaml, prometheus-client, partd, pandas, nbconvert, ipykernel, heapdict, grpcio-tools, greenlet, google-resumable-media, google-cloud-core, google-auth-httplib2, fsspec, cloudpickle, click, asynctest, async-timeout, argon2-cffi, aiosignal, zict, v3iofs, v3io-frames, typer, tblib, tabulate, strip-hints, starlette, sqlalchemy, sortedcontainers, requests-toolbelt, python-editor, pydantic, psutil, ordered-set, notebook, msgpack, msal-extensions, Mako, kubernetes, kfp-server-api, kfp-pipeline-spec, google-cloud-storage, google-api-python-client, gitdb, fire, docstring-parser, Deprecated, dask, boto3, aioitertools, aiohttp, absl-py, tenacity, storey, semver, python-dotenv, pymysql, orjson, nuclio-jupyter, mergedeep, kfp, inflection, humanfriendly, google-auth-oauthlib, GitPython, fastapi, distributed, deepdiff, chardet, azure-storage-blob, azure-identity, azure-datalake-store, alembic, aiobotocore, s3fs, plotly, mlrun, gcsfs, azure-keyvault-secrets, adlfs
+  Attempting uninstall: typing-extensions
+    Found existing installation: typing-extensions 4.0.1
+    Uninstalling typing-extensions-4.0.1:
+      Successfully uninstalled typing-extensions-4.0.1
+  Attempting uninstall: cryptography
+    Found existing installation: cryptography 3.4.8
+    Uninstalling cryptography-3.4.8:
+      Successfully uninstalled cryptography-3.4.8
+  Attempting uninstall: cloudpickle
+    Found existing installation: cloudpickle 1.6.0
+    Uninstalling cloudpickle-1.6.0:
+      Successfully uninstalled cloudpickle-1.6.0
+  Attempting uninstall: msal-extensions
+    Found existing installation: msal-extensions 0.2.2
+    Uninstalling msal-extensions-0.2.2:
+      Successfully uninstalled msal-extensions-0.2.2
+  Attempting uninstall: azure-identity
+    Found existing installation: azure-identity 1.4.1
+    Uninstalling azure-identity-1.4.1:
+      Successfully uninstalled azure-identity-1.4.1
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+azureml-dataprep 2.20.1 requires azure-identity&lt;1.5.0,&gt;=1.2.0, but you have azure-identity 1.7.1 which is incompatible.
+azureml-dataprep 2.20.1 requires cloudpickle&lt;2.0.0,&gt;=1.1.0, but you have cloudpickle 2.0.0 which is incompatible.
+Successfully installed Deprecated-1.2.13 GitPython-3.1.26 Mako-1.1.6 MarkupSafe-2.0.1 Send2Trash-1.8.0 absl-py-1.0.0 adlfs-2021.8.2 aiobotocore-1.4.2 aiohttp-3.8.1 aioitertools-0.8.0 aiosignal-1.2.0 alembic-1.5.8 argon2-cffi-21.3.0 argon2-cffi-bindings-21.2.0 async-timeout-4.0.2 asynctest-0.13.0 attrs-21.4.0 azure-datalake-store-0.0.52 azure-identity-1.7.1 azure-keyvault-secrets-4.3.0 azure-storage-blob-12.9.0 backcall-0.2.0 bleach-4.1.0 boto3-1.17.106 botocore-1.20.106 cachetools-4.2.4 chardet-3.0.4 click-7.1.2 cloudpickle-2.0.0 cryptography-3.3.2 dask-2021.11.2 decorator-5.1.1 deepdiff-5.7.0 defusedxml-0.7.1 distributed-2021.11.2 docstring-parser-0.13 entrypoints-0.3 fastapi-0.67.0 fire-0.4.0 frozenlist-1.3.0 fsspec-2021.8.1 future-0.18.2 gcsfs-2021.8.1 gitdb-4.0.9 google-api-core-2.4.0 google-api-python-client-1.12.10 google-auth-1.35.0 google-auth-httplib2-0.1.0 google-auth-oauthlib-0.4.6 google-cloud-core-2.2.2 google-cloud-storage-1.44.0 google-crc32c-1.3.0 google-resumable-media-2.1.0 googleapis-common-protos-1.54.0 greenlet-1.1.2 grpcio-1.41.1 grpcio-tools-1.41.1 heapdict-1.0.1 httplib2-0.20.2 humanfriendly-8.2 inflection-0.5.1 ipykernel-5.5.6 ipython-7.31.1 ipython-genutils-0.2.0 jedi-0.18.1 jinja2-3.0.3 jsonschema-3.2.0 jupyter-client-7.1.2 jupyter-core-4.9.1 jupyterlab-pygments-0.1.2 kfp-1.8.11 kfp-pipeline-spec-0.1.13 kfp-server-api-1.7.1 kubernetes-12.0.1 locket-0.2.1 matplotlib-inline-0.1.3 mergedeep-1.3.4 mistune-0.8.4 mlrun-0.0.0+unstable msal-extensions-0.3.1 msgpack-1.0.3 multidict-6.0.2 nbclient-0.5.10 nbconvert-6.4.1 nbformat-5.1.3 nest-asyncio-1.5.4 notebook-6.4.8 nuclio-jupyter-0.8.22 ordered-set-4.0.2 orjson-3.3.1 packaging-21.3 pandas-1.3.5 pandocfilters-1.5.0 parso-0.8.3 partd-1.2.0 pexpect-4.8.0 pickleshare-0.7.5 plotly-5.5.0 prometheus-client-0.13.1 prompt-toolkit-3.0.26 protobuf-3.19.4 psutil-5.9.0 ptyprocess-0.7.0 pyasn1-modules-0.2.8 pydantic-1.9.0 pygments-2.11.2 pymysql-1.0.2 pyparsing-3.0.7 pyrsistent-0.18.1 python-dotenv-0.17.1 python-editor-1.0.4 pyyaml-5.4.1 pyzmq-22.3.0 requests-toolbelt-0.9.1 rsa-4.8 s3fs-2021.8.1 s3transfer-0.4.2 semver-2.13.0 smmap-5.0.0 sortedcontainers-2.4.0 sqlalchemy-1.4.31 starlette-0.14.2 storey-0.10.4 strip-hints-0.1.10 tabulate-0.8.9 tblib-1.7.0 tenacity-8.0.1 termcolor-1.1.0 terminado-0.13.1 testpath-0.5.0 toolz-0.11.2 tornado-6.1 traitlets-5.1.1 typer-0.4.0 typing-extensions-3.10.0.2 ujson-5.1.0 uritemplate-3.0.1 v3io-0.5.15 v3io-frames-0.10.2 v3iofs-0.1.10 wcwidth-0.2.5 webencodings-0.5.1 wrapt-1.13.3 yarl-1.7.2 zict-2.0.0
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+WARNING: You are using pip version 21.2.4; however, version 22.0.2 is available.
+You should consider upgrading via the '/usr/local/bin/python -m pip install --upgrade pip' command.
+<span class="-Color -Color-Cyan">INFO</span>[0128] Taking snapshot of full filesystem...        
+<span class="-Color -Color-Cyan">INFO</span>[0148] Pushing image to docker-registry.default-tenant.app.yh41.iguazio-cd1.com/mlrun/func-azureml-yonatan-azureml-utils:latest 
+<span class="-Color -Color-Cyan">INFO</span>[0153] Pushed image to 1 destinations               
+&gt; 2022-02-02 18:30:56,789 [info] starting run azureml-utils-train uid=48dbbe26a2a34b5baaec5ca8aba3de5e DB=http://mlrun-api:8080
+&gt; 2022-02-02 18:30:56,988 [info] Job is running in the background, pod: azureml-utils-train-7pp86
+&gt; 2022-02-02 18:31:30,311 [warning] Failed resolving version info. Ignoring and using defaults
+&gt; 2022-02-02 18:31:32,893 [warning] Server or client version is unstable. Assuming compatible: {'server_version': '0.0.0+unstable', 'client_version': '0.0.0+unstable'}
+Failure while loading azureml_run_type_providers. Failed to load entrypoint automl = azureml.train.automl.run:AutoMLRun._from_run_dto with exception (cloudpickle 2.0.0 (/usr/local/lib/python3.7/site-packages), Requirement.parse('cloudpickle&lt;2.0.0,&gt;=1.1.0'), {'azureml-dataprep'}).
+&gt; 2022-02-02 18:31:34,680 [info] Loading AzureML Workspace
+&gt; 2022-02-02 18:31:36,956 [info] Initializing AzureML experiment azure-automl-test
+&gt; 2022-02-02 18:31:40,005 [info] Initializing AzureML compute target azureml-cpu
+&gt; 2022-02-02 18:31:40,206 [info] Found existing cluster, will use it.
+Succeeded
+AmlCompute wait for completion finished
+
+Minimum number of nodes requested have been provisioned
+&gt; 2022-02-02 18:31:40,322 [info] Connecting to AzureML experiment default datastore
+&gt; 2022-02-02 18:31:41,624 [info] Retrieving feature vector and uploading to Azure blob storage: az://azureml-blobstore-27f8977b-4946-4ca0-bdc5-5a685d2fe8d7/iris.csv
+&gt; 2022-02-02 18:31:41,912 [info] Registering dataset iris in Azure ML
+&gt; 2022-02-02 18:31:41,912 [info] OpenSSL version must be 1.1. Overriding the OpenSSL version to 1.1
+&gt; 2022-02-02 18:31:49,558 [info] Setting up experiment parameters
+&gt; 2022-02-02 18:31:49,812 [info] Submitting and running experiment
+Submitting remote run.
+Parent Run ID: AutoML_35c51a81-98fd-44fb-aa23-3192c3aca08d
+https://ml.azure.com/runs/AutoML_35c51a81-98fd-44fb-aa23-3192c3aca08d?wsid=/subscriptions/8d81bc0b-6abd-4395-be83-000251d9fdbe/resourcegroups/nick/workspaces/NickAzureML&amp;tid=af053911-a8b7-450d-9f58-0c08567d4769
+
+Current status: ModelSelection. Beginning model selection.
+
+****************************************************************************************************
+DATA GUARDRAILS: 
+
+TYPE:         Class balancing detection
+STATUS:       PASSED
+DESCRIPTION:  Your inputs were analyzed, and all classes are balanced in your training data.
+              Learn more about imbalanced data: https://aka.ms/AutomatedMLImbalancedData
+
+****************************************************************************************************
+
+****************************************************************************************************
+ITERATION: The iteration being evaluated.
+PIPELINE: A summary description of the pipeline being evaluated.
+DURATION: Time taken for the current iteration.
+METRIC: The result of computing score on the fitted pipeline.
+BEST: The best observed score thus far.
+****************************************************************************************************
+
+ ITERATION   PIPELINE                                       DURATION      METRIC      BEST
+         0   RobustScaler LogisticRegression                0:00:21       0.9667    0.9667
+         1   StandardScalerWrapper SVM                      0:00:18       0.9533    0.9667
+         2   StandardScalerWrapper LogisticRegression       0:00:22       0.9733    0.9733
+         3   MaxAbsScaler LogisticRegression                0:00:22       0.9533    0.9733
+         4   MaxAbsScaler LogisticRegression                0:00:21       0.9733    0.9733
+
+********************************************************************************************
+
+&gt; 2022-02-02 18:38:28,144 [info] Registering model
+&gt; 2022-02-02 18:38:29,495 [info] Registered model with name 'iris-model', id 'iris-model:178', version '178'
+&gt; 2022-02-02 18:38:29,495 [info] Downloading model iris-model:178
+&gt; 2022-02-02 18:38:34,083 [info] Logging model_1_standardscaler_logisticregression model to MLRun
+&gt; 2022-02-02 18:38:34,621 [info] Registering model
+&gt; 2022-02-02 18:38:35,519 [info] Registered model with name 'iris-model', id 'iris-model:179', version '179'
+&gt; 2022-02-02 18:38:35,519 [info] Downloading model iris-model:179
+&gt; 2022-02-02 18:38:39,972 [info] Logging model_2_maxabsscaler_logisticregression model to MLRun
+&gt; 2022-02-02 18:38:40,317 [info] Registering model
+&gt; 2022-02-02 18:38:41,087 [info] Registered model with name 'iris-model', id 'iris-model:180', version '180'
+&gt; 2022-02-02 18:38:41,087 [info] Downloading model iris-model:180
+&gt; 2022-02-02 18:38:46,299 [info] Logging model_3_robustscaler_logisticregression model to MLRun
+&gt; 2022-02-02 18:38:47,615 [info] run executed, status=completed
+final state: completed
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>azureml-yonatan</td>
+<td><div title="48dbbe26a2a34b5baaec5ca8aba3de5e"><a href="https://dashboard.default-tenant.app.yh41.iguazio-cd1.com/mlprojects/azureml-yonatan/jobs/monitor/48dbbe26a2a34b5baaec5ca8aba3de5e/overview" target="_blank">...aba3de5e</a></div></td>
+<td>0</td>
+<td>Feb 02 18:31:32</td>
+<td>completed</td>
+<td>azureml-utils-train</td>
+<td><div class="dictlist">v3io_user=yonatan</div><div class="dictlist">kind=job</div><div class="dictlist">owner=yonatan</div><div class="dictlist">host=azureml-utils-train-7pp86</div></td>
+<td><div title="https://s3.wasabisys.com/iguazio/data/iris/iris_dataset.csv">dataset</div></td>
+<td><div class="dictlist">experiment_name=azure-automl-test</div><div class="dictlist">cpu_cluster_name=azureml-cpu</div><div class="dictlist">dataset_name=iris</div><div class="dictlist">dataset_description=iris training data</div><div class="dictlist">label_column_name=label</div><div class="dictlist">create_new_version=True</div><div class="dictlist">register_model_name=iris-model</div><div class="dictlist">save_n_models=3</div><div class="dictlist">automl_settings={'task': 'classification', 'debug_log': 'automl_errors.log', 'enable_early_stopping': False, 'allowed_models': ['LogisticRegression', 'SGD', 'SVM'], 'iterations': 5, 'iteration_timeout_minutes': 2, 'max_concurrent_iterations': 2, 'max_cores_per_iteration': -1, 'n_cross_validations': 5, 'primary_metric': 'accuracy', 'featurization': 'off', 'model_explainability': False, 'enable_voting_ensemble': False, 'enable_stack_ensemble': False}</div></td>
+<td><div class="dictlist">dataset_blob_path=az://azureml-blobstore-27f8977b-4946-4ca0-bdc5-5a685d2fe8d7/iris.csv</div><div class="dictlist">best_iteration=1</div><div class="dictlist">auc_macro=0.9973298059964726</div><div class="dictlist">auc_micro=0.9979999999999999</div><div class="dictlist">norm_macro_recall=0.9594444444444443</div><div class="dictlist">balanced_accuracy=0.9729629629629629</div><div class="dictlist">f1_score_macro=0.9721779225097302</div><div class="dictlist">weighted_accuracy=0.9739694654594448</div><div class="dictlist">average_precision_score_weighted=0.9953861693861693</div><div class="dictlist">f1_score_weighted=0.9730901151988108</div><div class="dictlist">precision_score_micro=0.9733333333333334</div><div class="dictlist">matthews_correlation=0.9613232982405628</div><div class="dictlist">recall_score_macro=0.9729629629629629</div><div class="dictlist">precision_score_weighted=0.9767380952380952</div><div class="dictlist">recall_score_micro=0.9733333333333334</div><div class="dictlist">precision_score_macro=0.9754761904761905</div><div class="dictlist">average_precision_score_macro=0.9954059829059829</div><div class="dictlist">accuracy=0.9733333333333334</div><div class="dictlist">auc_weighted=0.9972857142857142</div><div class="dictlist">recall_score_weighted=0.9733333333333334</div><div class="dictlist">f1_score_micro=0.9733333333333334</div><div class="dictlist">average_precision_score_micro=0.9962096994520057</div><div class="dictlist">log_loss=0.07548089806904337</div></td>
+<td><div title="v3io:///projects/azureml-yonatan/artifacts/models/1/">model</div><div class="artifact" onclick="expandPanel(this)" panename="result5dc425e4" title="files/v3io/projects/azureml-yonatan/artifacts/iteration_results.csv">iteration_results</div><div class="artifact" onclick="expandPanel(this)" panename="result5dc425e4" title="files/v3io/projects/azureml-yonatan/artifacts/parallel_coordinates.html">parallel_coordinates</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result5dc425e4-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result5dc425e4-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result5dc425e4">×</span>
+</div>
+<iframe class="fileview" id="result5dc425e4-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods  or <a href="https://dashboard.default-tenant.app.yh41.iguazio-cd1.com/mlprojects/azureml-yonatan/jobs/monitor/48dbbe26a2a34b5baaec5ca8aba3de5e/overview" target="_blank">click here</a> to open in UI</b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-02-02 18:38:48,608 [info] run executed, status=completed
+</pre></div>
+</div>
+</div>
+</div>
+<p>View the run result: (more details in the UI)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">azureml_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s1">'iteration_results'</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>state</th>
+<th>iter</th>
+<th>param.data_trans_class_name</th>
+<th>param.data_trans_module</th>
+<th>param.data_trans_spec_class</th>
+<th>param.train_class_name</th>
+<th>param.train_module</th>
+<th>param.train_param_kwargs_C</th>
+<th>param.train_param_kwargs_class_weight</th>
+<th>param.train_spec_class</th>
+<th>...</th>
+<th>output.precision_score_weighted</th>
+<th>output.recall_score_micro</th>
+<th>output.precision_score_macro</th>
+<th>output.average_precision_score_macro</th>
+<th>output.accuracy</th>
+<th>output.auc_weighted</th>
+<th>output.recall_score_weighted</th>
+<th>output.f1_score_micro</th>
+<th>output.average_precision_score_micro</th>
+<th>output.log_loss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>completed</td>
+<td>1</td>
+<td>StandardScaler</td>
+<td>sklearn.preprocessing</td>
+<td>preproc</td>
+<td>LogisticRegression</td>
+<td>sklearn.linear_model</td>
+<td>16.768329</td>
+<td>NaN</td>
+<td>sklearn</td>
+<td>...</td>
+<td>0.976738</td>
+<td>0.973333</td>
+<td>0.975476</td>
+<td>0.995406</td>
+<td>0.973333</td>
+<td>0.997286</td>
+<td>0.973333</td>
+<td>0.973333</td>
+<td>0.996210</td>
+<td>0.075481</td>
+</tr>
+<tr>
+<th>1</th>
+<td>completed</td>
+<td>2</td>
+<td>MaxAbsScaler</td>
+<td>sklearn.preprocessing</td>
+<td>preproc</td>
+<td>LogisticRegression</td>
+<td>sklearn.linear_model</td>
+<td>719.685673</td>
+<td>NaN</td>
+<td>sklearn</td>
+<td>...</td>
+<td>0.976738</td>
+<td>0.973333</td>
+<td>0.975476</td>
+<td>0.995227</td>
+<td>0.973333</td>
+<td>0.997286</td>
+<td>0.973333</td>
+<td>0.973333</td>
+<td>0.996211</td>
+<td>0.072493</td>
+</tr>
+<tr>
+<th>2</th>
+<td>completed</td>
+<td>3</td>
+<td>RobustScaler</td>
+<td>sklearn.preprocessing</td>
+<td>preproc</td>
+<td>LogisticRegression</td>
+<td>sklearn.linear_model</td>
+<td>1048.113134</td>
+<td>balanced</td>
+<td>sklearn</td>
+<td>...</td>
+<td>0.968359</td>
+<td>0.966667</td>
+<td>0.966410</td>
+<td>0.994217</td>
+<td>0.966667</td>
+<td>0.996598</td>
+<td>0.966667</td>
+<td>0.966667</td>
+<td>0.995595</td>
+<td>0.086160</td>
+</tr>
+</tbody>
+</table>
+<p>3 rows × 31 columns</p>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="deploy-model-serving">
+<h2>4. Deploy Model Serving<a class="headerlink" href="#deploy-model-serving" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importing serving function from marketplace:</span>
+<span class="n">serving_fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">new_function</span><span class="p">(</span><span class="s2">"serving"</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"serving"</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="s2">"yhaviv/mlrun:dev"</span><span class="p">)</span>
+<span class="n">serving_fn</span><span class="o">.</span><span class="n">with_code</span><span class="p">(</span><span class="n">body</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>
+<span class="n">serving_fn</span><span class="o">.</span><span class="n">with_requirements</span><span class="p">(</span><span class="s2">"./requirements.txt"</span><span class="p">)</span>
+
+<span class="c1"># Set the real-time pipeline topology</span>
+<span class="n">serving_fn</span><span class="o">.</span><span class="n">set_topology</span><span class="p">(</span>
+    <span class="s1">'router'</span><span class="p">,</span>
+    <span class="s1">'mlrun.serving.routers.VotingEnsemble'</span>
+<span class="p">)</span>
+
+<span class="c1"># Add the trained models:</span>
+<span class="n">artifacts</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_run_db</span><span class="p">()</span><span class="o">.</span><span class="n">list_artifacts</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="s1">'algorithm'</span><span class="p">]</span><span class="si">}{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="p">:</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="s1">'db_key'</span><span class="p">]</span><span class="si">}</span><span class="s2">#</span><span class="si">{</span><span class="n">model</span><span class="p">[</span><span class="s1">'iter'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
+          <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">artifacts</span><span class="p">)</span> <span class="k">if</span> <span class="n">model</span><span class="p">[</span><span class="s2">"kind"</span><span class="p">]</span><span class="o">==</span><span class="s2">"model"</span><span class="p">}</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">serving_fn</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span>
+        <span class="n">name</span><span class="p">,</span>
+        <span class="n">class_name</span><span class="o">=</span><span class="s2">"mlrun.frameworks.sklearn.PickleModelServer"</span><span class="p">,</span>
+        <span class="n">model_path</span><span class="o">=</span><span class="n">project</span><span class="o">.</span><span class="n">get_artifact_uri</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+<span class="n">serving_fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/c0f81135bd698ac922e9ba61cadf04c6e39974dbd5ac9a1cf873894bf193d023.svg" src="_images/c0f81135bd698ac922e9ba61cadf04c6e39974dbd5ac9a1cf873894bf193d023.svg"/></div>
+</div>
+<p>Building and Deploying the Serving Function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">function_address</span> <span class="o">=</span> <span class="n">serving_fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2022-02-02 18:38:48,785 [info] Starting remote function deploy
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="using-the-live-model-serving-function">
+<h2>5. Using the Live Model-Serving Function<a class="headerlink" href="#using-the-live-model-serving-function" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s1">'The address for the function is </span><span class="si">{</span><span class="n">function_address</span><span class="si">}</span><span class="s1"> </span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+
+<span class="o">!</span>curl<span class="w"> </span><span class="nv">$function_address</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Data for testing:</span>
+<span class="n">source_df</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">DATA_URL</span><span class="p">)</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+<span class="n">test_vector</span> <span class="o">=</span> <span class="n">source_df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'label'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+<span class="n">test_vector</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After deploying the serving function with the required model we can make prediction:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">serving_fn</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="sa">f</span><span class="s1">'/v2/models/infer'</span><span class="p">,</span> <span class="p">{</span><span class="s2">"inputs"</span><span class="p">:</span> <span class="n">test_vector</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="clean-up">
+<h2>6. Clean up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<p>For cleaning up AzureML resources see:
+https://docs.microsoft.com/en-us/azure/machine-learning/tutorial-auto-train-models#clean-up-resources</p>
+</section>
+</section>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
