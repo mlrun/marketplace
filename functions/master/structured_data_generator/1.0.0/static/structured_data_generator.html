@@ -1,0 +1,282 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>structured_data_generator.structured_data_generator</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/structured_data_generator/structured_data_generator.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for structured_data_generator.structured_data_generator</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="kn">import</span> <span class="nn">ast</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">tqdm</span>
+<span class="kn">from</span> <span class="nn">langchain.chat_models</span> <span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+
+<span class="k">def</span> <span class="nf">_set_openai_secrets</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="s2">"OPENAI_API_KEY"</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="s2">"OPENAI_API_BASE"</span>
+    <span class="c1"># Check if the key is already in the environment variables:</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span> <span class="ow">and</span> <span class="n">base</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="c1"># Check if mlrun is installed:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">mlrun</span>
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"One or more of the OpenAI required environment variables ('</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">', '</span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">') are missing."</span>
+            <span class="sa">f</span><span class="s2">"Please set them as environment variables or install mlrun (`pip install mlrun`)"</span>
+            <span class="sa">f</span><span class="s2">"and set them as project secrets using `projecy.set_secrets`."</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check if the key is in the secrets:</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_context</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"context"</span><span class="p">)</span>
+    <span class="n">openai_key</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">openai_base</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">get_secret</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="c1"># If the key is not in the secrets, return False:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">openai_key</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Could not find OpenAI API key in the environment variables or secrets,"</span>
+            <span class="sa">f</span><span class="s2">" please set it as: </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">."</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">openai_base</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">EnvironmentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Could not find OpenAI API base in the environment variables or secrets,"</span>
+            <span class="sa">f</span><span class="s2">" please set it as: </span><span class="si">{</span><span class="n">base</span><span class="si">}</span><span class="s2">."</span>
+        <span class="p">)</span>
+    <span class="c1"># If the key is in the secrets, set it in the environment variables and return True:</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">openai_key</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="n">base</span><span class="p">]</span> <span class="o">=</span> <span class="n">openai_base</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+
+<div class="viewcode-block" id="generate_data"><a class="viewcode-back" href="documentation.html#structured_data_generator.structured_data_generator.generate_data">[docs]</a><span class="k">def</span> <span class="nf">generate_data</span><span class="p">(</span>
+    <span class="n">fields</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+    <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"gpt-3.5-turbo"</span><span class="p">,</span>
+    <span class="n">language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"en"</span><span class="p">,</span>
+    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Structured data of elements according to the given parameters.</span>
+<span class="sd">    The data can be later logged as a structured file with MLRun's `returns` parameter.</span>
+
+<span class="sd">    :param fields: A list of fields to randomly generate.</span>
+<span class="sd">    :param amount: The number of variants to generate.</span>
+<span class="sd">    :param model_name: The name of the model to use for conversation generation.</span>
+<span class="sd">                       You should choose one of GPT-4 or GPT-3.5 from the list here: https://platform.openai.com/docs/models.</span>
+<span class="sd">                       Default: 'gpt-3.5-turbo'.</span>
+<span class="sd">    :param language: The language to use for the generated conversation text.</span>
+<span class="sd">    :param chunk_size: Number of samples generated at each GPT query.</span>
+<span class="sd">    """</span>
+    <span class="n">instructions</span> <span class="o">=</span> <span class="s2">""</span>
+    <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span>
+        <span class="c1"># Split the field to key and instruction:</span>
+        <span class="k">if</span> <span class="s2">":"</span> <span class="ow">in</span> <span class="n">field</span><span class="p">:</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">instruction</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">instruction</span> <span class="o">=</span> <span class="n">field</span><span class="p">,</span> <span class="s2">"no special instruction"</span>
+        <span class="c1"># Replace spaces with underscores for the key to be used as a json key:</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span> <span class="s2">"_"</span><span class="p">)</span>
+        <span class="n">instructions</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"* </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">instruction</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+
+    <span class="c1"># Create the prompt structure:</span>
+    <span class="n">prompt_structure</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"generate the following values </span><span class="si">{</span><span class="n">amount</span><span class="si">}</span><span class="s2"> times randomly, in an order that creates a json table.</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"Use the following keys and instructions (example: 'key: instruction or no special instruction'): "</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">instructions</span><span class="si">}</span><span class="s2">.</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"Please generate the values in </span><span class="si">{</span><span class="n">language</span><span class="si">}</span><span class="s2"> language. </span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"Make sure the names of the keys are the same as the given field name.</span><span class="se">\n</span><span class="s2">"</span>
+        <span class="sa">f</span><span class="s2">"Please return only the json format without any introduction and ending"</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Set the OpenAI secrets:</span>
+    <span class="n">_set_openai_secrets</span><span class="p">()</span>
+
+    <span class="c1"># Load the OpenAI model using langchain:</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+
+    <span class="c1"># Start generating data:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="o">.</span><span class="n">tqdm</span><span class="p">(</span><span class="nb">range</span><span class="p">((</span><span class="n">amount</span> <span class="o">//</span> <span class="n">chunk_size</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Generating"</span><span class="p">):</span>
+        <span class="c1"># We try to generate the data 3 times, if we fail we raise an error:</span>
+        <span class="k">for</span> <span class="n">tryout</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+            <span class="c1"># If the amount wanted is bigger than the chunk size, we generate a chunk of data in the size of the chunk</span>
+            <span class="c1"># and decrease the amount by the chunk size.</span>
+            <span class="c1"># otherwise we generate a chunk of data in the size of the amount:</span>
+            <span class="k">if</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="n">chunk_size</span><span class="p">:</span>
+                <span class="n">current_chunk_size</span> <span class="o">=</span> <span class="n">chunk_size</span>
+                <span class="n">amount</span> <span class="o">-=</span> <span class="n">chunk_size</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_chunk_size</span> <span class="o">=</span> <span class="n">amount</span>
+
+            <span class="c1"># Create the prompt:</span>
+            <span class="n">prompt</span> <span class="o">=</span> <span class="n">prompt_structure</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="n">amount</span><span class="o">=</span><span class="n">current_chunk_size</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Generate a chunk of data:</span>
+            <span class="n">chunk_data</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">prompt</span><span class="p">)</span>
+
+            <span class="c1"># Validate the response for correct python `list` structure</span>
+            <span class="n">chunk_data</span> <span class="o">=</span> <span class="n">chunk_data</span><span class="p">[</span><span class="n">chunk_data</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">"["</span><span class="p">)</span> <span class="p">:</span> <span class="n">chunk_data</span><span class="o">.</span><span class="n">rfind</span><span class="p">(</span><span class="s2">"]"</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">chunk_data</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"["</span><span class="p">)</span> <span class="o">!=</span> <span class="n">chunk_data</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"]"</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">"Failed to get proper json format from model, number of '[' doesn't match number of ']'."</span>
+                <span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">chunk_data</span> <span class="o">=</span> <span class="n">ast</span><span class="o">.</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">chunk_data</span><span class="p">)</span>
+            <span class="n">data</span> <span class="o">+=</span> <span class="n">chunk_data</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">tryout</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Could not generate a proper json format for the given fields, using given model: </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">."</span>
+                <span class="sa">f</span><span class="s2">" Hint: Gpt-4 works best for most scenarios."</span>
+            <span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
