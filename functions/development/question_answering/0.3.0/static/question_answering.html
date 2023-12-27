@@ -1,0 +1,876 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>question_answering.question_answering</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/question_answering/question_answering.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for question_answering.question_answering</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="kn">import</span> <span class="nn">enum</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">transformers</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="c1"># Get the global logger:</span>
+<span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_check_mlrun_and_open_mpi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">"mlrun.MLClientCtx"</span><span class="p">,</span> <span class="s2">"mpi4py.MPI.Intracomm"</span><span class="p">]:</span>
+    <span class="k">global</span> <span class="n">_LOGGER</span>
+
+    <span class="n">is_mpi</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">mlrun</span>
+
+        <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"mlrun"</span><span class="p">)</span>
+        <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+        <span class="n">is_mpi</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">,</span> <span class="s2">"job"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"mpijob"</span>
+
+        <span class="k">if</span> <span class="n">is_mpi</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+
+                <span class="k">return</span> <span class="n">context</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+            <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">mpi4py_not_found</span><span class="p">:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">"To distribute the function using MLRun's 'mpijob' you need to have `mpi4py` package in your "</span>
+                    <span class="s2">"interpreter. Please run `pip install mpi4py` and make sure you have open-mpi."</span>
+                <span class="p">)</span>
+                <span class="k">raise</span> <span class="n">mpi4py_not_found</span>
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">module_not_found</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_mpi</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">module_not_found</span>
+    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.open_mpi_handler">[docs]</a><span class="k">def</span> <span class="nf">open_mpi_handler</span><span class="p">(</span>
+    <span class="n">worker_inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">):</span>
+    <span class="k">global</span> <span class="n">_LOGGER</span>
+
+    <span class="c1"># Check for MLRun and OpenMPI availability:</span>
+    <span class="n">context</span><span class="p">,</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">_check_mlrun_and_open_mpi</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">comm</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># Get the open mpi environment properties:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+            <span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+
+            <span class="c1"># Give the correct chunk of the workers inputs:</span>
+            <span class="k">for</span> <span class="n">worker_input</span> <span class="ow">in</span> <span class="n">worker_inputs</span><span class="p">:</span>
+                <span class="n">input_argument</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">worker_input</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">input_argument</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">_get_text_files</span><span class="p">(</span>
+                        <span class="n">data_path</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+                    <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">"Cannot split the input '</span><span class="si">{</span><span class="n">worker_input</span><span class="si">}</span><span class="s2">' of length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2"> workers. "</span>
+                        <span class="sa">f</span><span class="s2">"Please reduce the amount of workers for this input."</span>
+                    <span class="p">)</span>
+                <span class="n">even_chunk_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span> <span class="o">//</span> <span class="n">size</span>
+                <span class="n">chunk_start</span> <span class="o">=</span> <span class="n">rank</span> <span class="o">*</span> <span class="n">even_chunk_size</span>
+                <span class="n">chunk_end</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="p">(</span><span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">even_chunk_size</span>
+                    <span class="k">if</span> <span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">size</span>
+                    <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Rank #</span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s2">: Processing input chunk of '</span><span class="si">{</span><span class="n">worker_input</span><span class="si">}</span><span class="s2">' "</span>
+                    <span class="sa">f</span><span class="s2">"from index </span><span class="si">{</span><span class="n">chunk_start</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">chunk_end</span><span class="si">}</span><span class="s2">."</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">input_argument</span><span class="p">[</span><span class="n">chunk_start</span><span class="p">:</span><span class="n">chunk_end</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">input_argument</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">chunk_start</span><span class="p">:</span><span class="n">chunk_end</span><span class="p">:,</span> <span class="p">:]</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">worker_input</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_argument</span>
+
+            <span class="c1"># Set the root worker only arguments:</span>
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">root_worker_inputs</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">root_worker_inputs</span><span class="p">)</span>
+
+            <span class="c1"># Run the worker:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">handler</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Send the output to the root rank (rank #0):</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Join the outputs:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Collecting data from workers to root worker."</span><span class="p">)</span>
+                <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">objs</span><span class="o">=</span><span class="p">[</span><span class="n">df</span> <span class="k">for</span> <span class="n">df</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">output</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">errors_dictionary</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">ior</span><span class="p">,</span> <span class="p">[</span><span class="n">err</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">output</span><span class="p">],</span> <span class="p">{})</span>
+                <span class="k">return</span> <span class="n">dataframe</span><span class="p">,</span> <span class="n">errors_dictionary</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+<div class="viewcode-block" id="answer_questions"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.answer_questions">[docs]</a><span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="k">def</span> <span class="nf">answer_questions</span><span class="p">(</span>
+    <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">questions</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]],</span>
+    <span class="n">device_map</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">auto_gptq_exllama_max_input_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tokenizer_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tokenizer_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">text_wrapper</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">questions_wrapper</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">generation_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">questions_config</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">questions_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Answer questions with a context to the given text files contents by a pretrained LLM model. Each text file will have</span>
+<span class="sd">    the following prompt built:</span>
+
+<span class="sd">    start of `text_wrapper`</span>
+<span class="sd">    &lt;text file content&gt;</span>
+<span class="sd">    end of `text_wrapper`</span>
+
+<span class="sd">    start of `questions_wrapper`</span>
+<span class="sd">    1. &lt;questions[0]&gt;</span>
+<span class="sd">    2. &lt;questions[1]&gt;</span>
+<span class="sd">    ...</span>
+<span class="sd">    n. &lt;questions[n-1]&gt;</span>
+<span class="sd">    end of `questions_wrapper`</span>
+
+<span class="sd">    :param data_path:                          A path to a directory of text files or a path to a text file to ask</span>
+<span class="sd">                                               questions about.</span>
+<span class="sd">    :param model_name:                         The pre-trained model name from the huggingface hub to use for asking</span>
+<span class="sd">                                               questions.</span>
+<span class="sd">    :param questions:                          The questions to ask.</span>
+<span class="sd">                                               A list of lists of questions to ask per text file, and devided</span>
+<span class="sd">                                               by question groups, the groups can be dtermained by size (in order to</span>
+<span class="sd">                                               avoid large inputs to the llm) or by questioning method</span>
+<span class="sd">                                               (regular or poll like questioning).</span>
+<span class="sd">    :param device_map:                         A map to use for loading the model on multiple devices.</span>
+<span class="sd">    :param model_kwargs:                       Keyword arguments to pass for loading the model using HuggingFace's</span>
+<span class="sd">                                               `transformers.AutoModelForCausalLM.from_pretrained` function.</span>
+<span class="sd">    :param auto_gptq_exllama_max_input_length: For AutoGPTQ models to set and extend the model's input buffer size.</span>
+<span class="sd">    :param tokenizer_name:                     The tokenizer name from the huggingface hub to use. If not given, the</span>
+<span class="sd">                                               model name will be used.</span>
+<span class="sd">    :param tokenizer_kwargs:                   Keyword arguments to pass for loading the tokenizer using HuggingFace's</span>
+<span class="sd">                                               `transformers.AutoTokenizer.from_pretrained` function.</span>
+<span class="sd">    :param text_wrapper:                       A wrapper for the file's text. Will be added at the start of the prompt.</span>
+<span class="sd">                                               Must have a placeholder ('{}') for the text of the file.</span>
+<span class="sd">    :param questions_wrapper:                  A wrapper for the questions received. Will be added after the text</span>
+<span class="sd">                                               wrapper in the prompt template. Must have a placeholder ('{}') for the</span>
+<span class="sd">                                               questions.</span>
+<span class="sd">    :param generation_config:                  HuggingFace's `GenerationConfig` keyword arguments to pass to the</span>
+<span class="sd">                                               `generate` method.</span>
+<span class="sd">    :param questions_config:                   A dictionary or list of dictionaries containing specific ways to answer</span>
+<span class="sd">                                               questions (using a poll for example), each dictionary in the list is for</span>
+<span class="sd">                                               corresponding question group and determines the question asking method</span>
+<span class="sd">                                               for said group.</span>
+<span class="sd">    :param batch_size:                         Batch size for inference.</span>
+<span class="sd">    :param questions_columns:                  Columns to use for the dataframe returned.</span>
+<span class="sd">    :param verbose:                            Whether to present logs of a progress bar and errors. Default: True.</span>
+
+
+<span class="sd">    :returns: A tuple of:</span>
+
+<span class="sd">              * A dataframe dataset of the questions answers.</span>
+<span class="sd">              * A dictionary of errored files that were not inferred or were not answered properly.</span>
+<span class="sd">    """</span>
+    <span class="k">global</span> <span class="n">_LOGGER</span>
+
+    <span class="c1"># Set configs to empty dict if not given:</span>
+    <span class="k">if</span> <span class="n">generation_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">generation_config</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="n">questions_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">questions_config</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Get the input text files to question:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Collecting text files."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">data_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+        <span class="n">text_files</span> <span class="o">=</span> <span class="n">_get_text_files</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="n">data_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text_files</span> <span class="o">=</span> <span class="n">data_path</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Collected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> text files."</span><span class="p">)</span>
+
+    <span class="c1"># Get the prompt template:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Creating prompt template."</span><span class="p">)</span>
+
+    <span class="c1"># Organize questions as a list of list, and count number of sub-lists for future use</span>
+    <span class="n">number_of_question_groups</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">questions</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="n">_to_group_list</span><span class="p">(</span>
+        <span class="n">argument_value</span><span class="o">=</span><span class="n">questions</span><span class="p">,</span>
+        <span class="n">argument_name</span><span class="o">=</span><span class="s2">"questions"</span><span class="p">,</span>
+        <span class="n">length</span><span class="o">=</span><span class="n">number_of_question_groups</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Organize prompt parts at proper length</span>
+    <span class="n">text_wrapper</span> <span class="o">=</span> <span class="n">_to_group_list</span><span class="p">(</span>
+        <span class="n">argument_value</span><span class="o">=</span><span class="n">text_wrapper</span><span class="p">,</span>
+        <span class="n">argument_name</span><span class="o">=</span><span class="s2">"text_wrapper"</span><span class="p">,</span>
+        <span class="n">length</span><span class="o">=</span><span class="n">number_of_question_groups</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">questions_wrapper</span> <span class="o">=</span> <span class="n">_to_group_list</span><span class="p">(</span>
+        <span class="n">argument_value</span><span class="o">=</span><span class="n">questions_wrapper</span><span class="p">,</span>
+        <span class="n">argument_name</span><span class="o">=</span><span class="s2">"questions_wrapper"</span><span class="p">,</span>
+        <span class="n">length</span><span class="o">=</span><span class="n">number_of_question_groups</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create a list of prompt according to given parts and questions</span>
+    <span class="n">prompt_template</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="n">questions</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">questions</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">questions</span><span class="p">]</span>
+
+    <span class="c1"># Build all prompts</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_question_groups</span><span class="p">):</span>
+        <span class="n">prompt_template</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">_get_prompt_template</span><span class="p">(</span>
+                <span class="n">text_wrapper</span><span class="o">=</span><span class="n">text_wrapper</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">questions_wrapper</span><span class="o">=</span><span class="n">questions_wrapper</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">questions</span><span class="o">=</span><span class="n">questions</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prompt template created:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">prompt_template</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Get the total amount of questions:</span>
+    <span class="n">questions_amount</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">len</span><span class="p">(</span><span class="n">sublist</span><span class="p">)</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">questions</span><span class="p">])</span>
+
+    <span class="c1"># Get the questions columns:</span>
+    <span class="n">questions_columns</span> <span class="o">=</span> <span class="n">questions_columns</span> <span class="ow">or</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">"q</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">questions_amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Check if we have the correct amount of questions columns:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions_columns</span><span class="p">)</span> <span class="o">!=</span> <span class="n">questions_amount</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The provided questions columns length (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questions_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">) "</span>
+            <span class="sa">f</span><span class="s2">"does not match the questions amount (</span><span class="si">{</span><span class="n">questions_amount</span><span class="si">}</span><span class="s2">)"</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Load the generation config:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loading generation configuration."</span><span class="p">)</span>
+    <span class="n">generation_config</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">transformers</span><span class="o">.</span><span class="n">GenerationConfig</span><span class="p">(</span><span class="o">**</span><span class="p">(</span><span class="n">cfg</span> <span class="ow">or</span> <span class="p">{}))</span>
+        <span class="k">for</span> <span class="n">cfg</span> <span class="ow">in</span> <span class="n">_to_group_list</span><span class="p">(</span>
+            <span class="n">argument_value</span><span class="o">=</span><span class="n">generation_config</span><span class="p">,</span>
+            <span class="n">argument_name</span><span class="o">=</span><span class="s2">"generation_config"</span><span class="p">,</span>
+            <span class="n">length</span><span class="o">=</span><span class="n">number_of_question_groups</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Generation configuration loaded: </span><span class="si">{</span><span class="n">generation_config</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Load the model and tokenizer into a pipeline object:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading model '</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+    <span class="n">generation_pipeline</span> <span class="o">=</span> <span class="n">_get_generation_pipeline</span><span class="p">(</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">device_map</span><span class="o">=</span><span class="n">device_map</span><span class="p">,</span>
+        <span class="n">tokenizer_name</span><span class="o">=</span><span class="n">tokenizer_name</span> <span class="ow">or</span> <span class="n">model_name</span><span class="p">,</span>
+        <span class="n">model_kwargs</span><span class="o">=</span><span class="n">model_kwargs</span> <span class="ow">or</span> <span class="p">{},</span>
+        <span class="n">tokenizer_kwargs</span><span class="o">=</span><span class="n">tokenizer_kwargs</span> <span class="ow">or</span> <span class="p">{},</span>
+        <span class="n">auto_gptq_exllama_max_input_length</span><span class="o">=</span><span class="n">auto_gptq_exllama_max_input_length</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Model loaded."</span><span class="p">)</span>
+
+    <span class="c1"># Prepare the successes dataframe and errors dictionary to be returned:</span>
+    <span class="n">successes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Split the files into batches:</span>
+    <span class="n">file_batches</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">text_files</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">batch_size</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">text_files</span><span class="p">)</span>
+        <span class="k">else</span> <span class="n">text_files</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text_files</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="n">questions_config</span> <span class="o">=</span> <span class="n">_to_group_list</span><span class="p">(</span>
+        <span class="n">argument_value</span><span class="o">=</span><span class="n">questions_config</span><span class="p">,</span>
+        <span class="n">argument_name</span><span class="o">=</span><span class="s2">"questions_config"</span><span class="p">,</span>
+        <span class="n">length</span><span class="o">=</span><span class="n">number_of_question_groups</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create a list of question handlers according to given configs</span>
+    <span class="n">handlers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">cfg</span> <span class="ow">in</span> <span class="n">questions_config</span><span class="p">:</span>
+        <span class="n">question_type</span> <span class="o">=</span> <span class="n">cfg</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"type"</span><span class="p">,</span> <span class="s2">"default"</span><span class="p">)</span>
+        <span class="n">handlers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">QUESTION_MAPPING</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">question_type</span><span class="p">)(</span><span class="o">**</span><span class="n">cfg</span><span class="p">))</span>
+
+    <span class="c1"># Go over the batches of text files and question them:</span>
+    <span class="k">for</span> <span class="n">file_batch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">file_batches</span><span class="p">,</span>
+        <span class="n">desc</span><span class="o">=</span><span class="s2">"Generating answers"</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="sa">f</span><span class="s2">"file (batch of </span><span class="si">{</span><span class="n">batch_size</span><span class="si">}</span><span class="s2">)"</span><span class="p">,</span>
+        <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">total_answers</span> <span class="o">=</span> <span class="p">[[]</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">)]</span>
+
+            <span class="c1"># Go over all question group per batch of documents</span>
+            <span class="k">for</span> <span class="n">question_group</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_question_groups</span><span class="p">):</span>
+                <span class="n">current_questions_amount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">[</span><span class="n">question_group</span><span class="p">])</span>
+
+                <span class="c1"># Read batch (read the text from the text files):</span>
+                <span class="n">batched_input</span> <span class="o">=</span> <span class="n">_read_file_batch</span><span class="p">(</span>
+                    <span class="n">file_batch</span><span class="o">=</span><span class="n">file_batch</span><span class="p">,</span>
+                    <span class="n">prompt_template</span><span class="o">=</span><span class="n">prompt_template</span><span class="p">[</span><span class="n">question_group</span><span class="p">],</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Answer the questions with each question handler:</span>
+                <span class="n">batched_answers</span> <span class="o">=</span> <span class="n">handlers</span><span class="p">[</span><span class="n">question_group</span><span class="p">]</span><span class="o">.</span><span class="n">answer</span><span class="p">(</span>
+                    <span class="n">questions_amount</span><span class="o">=</span><span class="n">current_questions_amount</span><span class="p">,</span>
+                    <span class="n">batched_input</span><span class="o">=</span><span class="n">batched_input</span><span class="p">,</span>
+                    <span class="n">generation_pipeline</span><span class="o">=</span><span class="n">generation_pipeline</span><span class="p">,</span>
+                    <span class="n">generation_config</span><span class="o">=</span><span class="n">generation_config</span><span class="p">[</span><span class="n">question_group</span><span class="p">],</span>
+                <span class="p">)</span>
+
+                <span class="c1"># Put the answers in the correct place in the total answers list according to the place in the batch:</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+                    <span class="n">total_answers</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">batched_answers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+            <span class="c1"># Collect the answers and attach the file name:</span>
+            <span class="n">successes</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="p">[</span><span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="o">*</span><span class="n">answers</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">file</span><span class="p">,</span> <span class="n">answers</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">file_batch</span><span class="p">,</span> <span class="n">total_answers</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+            <span class="c1"># Note the exception as error in the dictionary:</span>
+            <span class="n">batch_file_names</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">file</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">file_batch</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">_LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Error in batch '</span><span class="si">{</span><span class="n">batch_file_names</span><span class="si">}</span><span class="s2">': </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+                <span class="p">)</span>
+            <span class="n">errors</span><span class="p">[</span><span class="n">batch_file_names</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+    <span class="c1"># Construct the answers dataframe:</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"text_file"</span><span class="p">,</span>
+        <span class="o">*</span><span class="n">questions_columns</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Create a data frame of answers by files</span>
+    <span class="n">successes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">successes</span><span class="p">,</span>
+        <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Print the head of the produced dataframe and return:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Done (</span><span class="si">{</span><span class="n">successes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text_files</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"Answers summary:</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">successes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">successes</span><span class="p">,</span> <span class="n">errors</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_text_files</span><span class="p">(</span>
+    <span class="n">data_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]:</span>
+
+    <span class="c1"># Check if the path is of a directory or a file:</span>
+    <span class="k">if</span> <span class="n">data_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+
+        <span class="c1"># Get all files inside the directory:</span>
+        <span class="n">text_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.*"</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">data_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">text_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_path</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Unrecognized data path. The parameter `data_path` must be either a directory path or a file path. "</span>
+            <span class="sa">f</span><span class="s2">"Given: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">text_files</span>
+
+
+<span class="k">def</span> <span class="nf">_get_prompt_template</span><span class="p">(</span>
+    <span class="n">text_wrapper</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">questions_wrapper</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">questions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+    <span class="c1"># Validate and build the text wrapper:</span>
+    <span class="n">text_wrapper</span> <span class="o">=</span> <span class="n">text_wrapper</span> <span class="ow">or</span> <span class="p">(</span>
+        <span class="s2">"Given the following text:</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"-----</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"</span><span class="si">{}</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"-----"</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">text_wrapper</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"The `text_wrapper` must include one placeholder '</span><span class="si">{}</span><span class="s2">' for the text of the file to be asked about."</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Validate and build the question wrapper:</span>
+    <span class="n">questions_wrapper</span> <span class="o">=</span> <span class="n">questions_wrapper</span> <span class="ow">or</span> <span class="s2">"Answer the questions:</span><span class="se">\n</span><span class="s2">"</span> <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span>
+    <span class="k">if</span> <span class="n">questions_wrapper</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2">"</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"The `questions_wrapper` must include one placeholder '</span><span class="si">{}</span><span class="s2">' for the list of questions."</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Validate and parse the questions:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Please include at least one question."</span><span class="p">)</span>
+    <span class="n">questions</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+        <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">. </span><span class="si">{</span><span class="n">question</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">question</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">questions</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Construct the template:</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">text_wrapper</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">questions_wrapper</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+
+
+<span class="k">def</span> <span class="nf">_get_generation_pipeline</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">device_map</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span>
+    <span class="n">tokenizer_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">tokenizer_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">auto_gptq_exllama_max_input_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="c1"># Load the model:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+        <span class="n">model_name</span><span class="p">,</span> <span class="n">device_map</span><span class="o">=</span><span class="n">device_map</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kwargs</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Set exllama max input length if provided:</span>
+    <span class="c1"># This changes the model's context size.</span>
+    <span class="k">if</span> <span class="n">auto_gptq_exllama_max_input_length</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">auto_gptq</span> <span class="kn">import</span> <span class="n">exllama_set_max_input_length</span>
+
+        <span class="n">model</span> <span class="o">=</span> <span class="n">exllama_set_max_input_length</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">max_input_length</span><span class="o">=</span><span class="n">auto_gptq_exllama_max_input_length</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Load the tokenizer:</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+        <span class="n">tokenizer_name</span><span class="p">,</span> <span class="o">**</span><span class="n">tokenizer_kwargs</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Initialize a generation pipline and return:</span>
+    <span class="n">pipe</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+        <span class="n">task</span><span class="o">=</span><span class="s2">"text-generation"</span><span class="p">,</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">pipe</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">eos_token_id</span>
+    <span class="k">return</span> <span class="n">pipe</span>
+
+
+<span class="k">def</span> <span class="nf">_read_file_batch</span><span class="p">(</span>
+    <span class="n">file_batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
+    <span class="n">prompt_template</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Go over all files and read in usable format</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">file_batch</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prompt_template</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="n">batch</span>
+
+
+<span class="k">def</span> <span class="nf">_to_group_list</span><span class="p">(</span><span class="n">argument_value</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">argument_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+
+    <span class="c1"># Check if is list, turn to list if not</span>
+    <span class="n">argument_value</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">argument_value</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argument_value</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="k">else</span> <span class="p">[</span><span class="n">argument_value</span><span class="p">]</span>
+    <span class="p">)</span>
+    <span class="n">list_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">argument_value</span><span class="p">)</span>
+
+    <span class="c1"># If not a list, or is a list of len 1 we duplicate for correct length</span>
+    <span class="c1"># If list in wrong length throw an error</span>
+    <span class="k">if</span> <span class="n">list_len</span> <span class="o">!=</span> <span class="n">length</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">list_len</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">argument_value</span> <span class="o">*</span> <span class="n">length</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The argument value of '</span><span class="si">{</span><span class="n">argument_name</span><span class="si">}</span><span class="s2">' is not equal to the length of the given questions - </span><span class="si">{</span><span class="n">length</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">argument_value</span>
+
+
+<div class="viewcode-block" id="QuestionHandler"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.QuestionHandler">[docs]</a><span class="k">class</span> <span class="nc">QuestionHandler</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A class for handling questions answering for a given question type.</span>
+<span class="sd">    This class is used as a base class for all question types, and for default question type (regular question</span>
+<span class="sd">    answering without any special handling).</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="QuestionHandler.ConfigKeys"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.QuestionHandler.ConfigKeys">[docs]</a>    <span class="k">class</span> <span class="nc">ConfigKeys</span><span class="p">:</span>
+        <span class="k">pass</span></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_get_answers</span><span class="p">(</span><span class="n">generated_text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">questions_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+        <span class="c1"># Clear answer start (part before numbers):</span>
+        <span class="c1"># TODO find better way to verify, for list of questions this is redundant for example</span>
+        <span class="k">if</span> <span class="s2">"1."</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">generated_text</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"Answer 1. is missing from the generated text: '</span><span class="si">{</span><span class="n">generated_text</span><span class="si">}</span><span class="s2">'"</span>
+            <span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">generated_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"1."</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Start extracting the answers:</span>
+        <span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">questions_amount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># If it's the last answer to look for, take the rest of the text:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">questions_amount</span><span class="p">:</span>
+                <span class="n">answer_i</span> <span class="o">=</span> <span class="n">text</span>
+            <span class="c1"># Verify there is a question number in the text:</span>
+            <span class="k">elif</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">."</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Answer </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">. is missing from the generated text: '</span><span class="si">{</span><span class="n">generated_text</span><span class="si">}</span><span class="s2">'"</span>
+                <span class="p">)</span>
+            <span class="c1"># Take i's answer:</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">answer_i</span><span class="p">,</span> <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">."</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># Collect the answer removing redundant spaces:</span>
+            <span class="n">answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">answer_i</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">answers</span>
+
+    <span class="k">def</span> <span class="nf">_infer_questions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">questions_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">batched_input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">generation_pipeline</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">,</span>
+        <span class="n">generation_config</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">GenerationConfig</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+
+        <span class="c1"># Infer through the llm:</span>
+        <span class="n">batched_output</span> <span class="o">=</span> <span class="n">generation_pipeline</span><span class="p">(</span>
+            <span class="n">batched_input</span><span class="p">,</span>
+            <span class="n">generation_config</span><span class="o">=</span><span class="n">generation_config</span><span class="p">,</span>
+            <span class="n">eos_token_id</span><span class="o">=</span><span class="n">generation_pipeline</span><span class="o">.</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">eos_token_id</span><span class="p">,</span>
+            <span class="n">return_full_text</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">num_return_sequences</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Process the outputs to get the answers:</span>
+        <span class="n">batched_answers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">batched_output</span><span class="p">:</span>
+            <span class="c1"># Get the generated answers:</span>
+            <span class="n">answers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_answers</span><span class="p">(</span>
+                <span class="n">generated_text</span><span class="o">=</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">"generated_text"</span><span class="p">],</span>
+                <span class="n">questions_amount</span><span class="o">=</span><span class="n">questions_amount</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Collect the processed answers:</span>
+            <span class="n">batched_answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">batched_answers</span>
+
+<div class="viewcode-block" id="QuestionHandler.answer"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.QuestionHandler.answer">[docs]</a>    <span class="k">def</span> <span class="nf">answer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">questions_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">batched_input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">generation_pipeline</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">,</span>
+        <span class="n">generation_config</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">GenerationConfig</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Answer questions with a context to the given text files contents by a pretrained LLM model in given pipeline.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_infer_questions</span><span class="p">(</span>
+            <span class="n">questions_amount</span><span class="o">=</span><span class="n">questions_amount</span><span class="p">,</span>
+            <span class="n">batched_input</span><span class="o">=</span><span class="n">batched_input</span><span class="p">,</span>
+            <span class="n">generation_pipeline</span><span class="o">=</span><span class="n">generation_pipeline</span><span class="p">,</span>
+            <span class="n">generation_config</span><span class="o">=</span><span class="n">generation_config</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PollQuestionHandler"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.PollQuestionHandler">[docs]</a><span class="k">class</span> <span class="nc">PollQuestionHandler</span><span class="p">(</span><span class="n">QuestionHandler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Static class to hold all the possible poll question configurations options keys</span>
+<span class="sd">    """</span>
+
+<div class="viewcode-block" id="PollQuestionHandler.ConfigKeys"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.PollQuestionHandler.ConfigKeys">[docs]</a>    <span class="k">class</span> <span class="nc">ConfigKeys</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        A class for handling questions answering for poll type questions.</span>
+<span class="sd">        These type of question are answered by asking the same question multiple times</span>
+<span class="sd">        and choosing the most common answer or the average answer.</span>
+<span class="sd">        """</span>
+
+        <span class="c1">#: The number of times to ask the same question.</span>
+        <span class="n">POLL_COUNT</span> <span class="o">=</span> <span class="s2">"poll_count"</span>
+
+        <span class="c1">#: The strategy to use for choosing the answer from the poll.</span>
+        <span class="n">POLL_STRATEGY</span> <span class="o">=</span> <span class="s2">"poll_strategy"</span></div>
+
+<div class="viewcode-block" id="PollQuestionHandler.Strategy"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.PollQuestionHandler.Strategy">[docs]</a>    <span class="k">class</span> <span class="nc">Strategy</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">Enum</span><span class="p">):</span>
+        <span class="c1">#: The most common answer strategy.</span>
+        <span class="n">MOST_COMMON</span> <span class="o">=</span> <span class="s2">"most_common"</span>
+
+        <span class="c1">#: The average answer strategy.</span>
+        <span class="n">AVERAGE</span> <span class="o">=</span> <span class="s2">"average"</span>
+
+<div class="viewcode-block" id="PollQuestionHandler.Strategy.most_common"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.PollQuestionHandler.Strategy.most_common">[docs]</a>        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">most_common</span><span class="p">(</span><span class="n">answers</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">"""</span>
+<span class="sd">            Calculate the most common answer for a given list of answers.</span>
+<span class="sd">            """</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">answers</span><span class="p">)</span>
+            <span class="n">most_common</span> <span class="o">=</span> <span class="n">count</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">most_common</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="PollQuestionHandler.Strategy.average"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.PollQuestionHandler.Strategy.average">[docs]</a>        <span class="nd">@staticmethod</span>
+        <span class="k">def</span> <span class="nf">average</span><span class="p">(</span><span class="n">answers</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">"""</span>
+<span class="sd">            Calculate the average answer for a given list of answers.</span>
+<span class="sd">            """</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">answers</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s2">"Cannot perform poll with average answer strategy of non numeric values,"</span>
+                    <span class="s2">" please change the question to give numeric data, or choose 'most_common' as strategy."</span>
+                <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">numeric_values</span> <span class="o">=</span> <span class="n">answers</span>
+            <span class="n">avg</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">numeric_values</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">numeric_values</span><span class="p">)</span>
+
+            <span class="c1"># Round to the closest integer and return corresponding value</span>
+            <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">avg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="PollQuestionHandler.Strategy.do"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.PollQuestionHandler.Strategy.do">[docs]</a>        <span class="k">def</span> <span class="nf">do</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">answers</span><span class="p">):</span>
+<span class="w">            </span><span class="sd">"""</span>
+<span class="sd">            Perform the strategy.</span>
+<span class="sd">            """</span>
+            <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">)(</span><span class="n">answers</span><span class="p">)</span></div></div>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">poll_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">poll_strategy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"most_common"</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poll_count</span> <span class="o">=</span> <span class="n">poll_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">poll_strategy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Strategy</span><span class="p">(</span><span class="n">poll_strategy</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PollQuestionHandler.answer"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.PollQuestionHandler.answer">[docs]</a>    <span class="k">def</span> <span class="nf">answer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">questions_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">batched_input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">generation_pipeline</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">,</span>
+        <span class="n">generation_config</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">GenerationConfig</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Answer questions with a context to the given text files contents by a pretrained LLM model in given pipeline.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_answer_poll_questions</span><span class="p">(</span>
+            <span class="n">questions_amount</span><span class="o">=</span><span class="n">questions_amount</span><span class="p">,</span>
+            <span class="n">batched_input</span><span class="o">=</span><span class="n">batched_input</span><span class="p">,</span>
+            <span class="n">generation_pipeline</span><span class="o">=</span><span class="n">generation_pipeline</span><span class="p">,</span>
+            <span class="n">generation_config</span><span class="o">=</span><span class="n">generation_config</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_answer_poll_questions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">questions_amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">batched_input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">generation_pipeline</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">,</span>
+        <span class="n">generation_config</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">GenerationConfig</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+        <span class="n">votes</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Run the poll for each question</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_count</span><span class="p">):</span>
+            <span class="n">batched_answers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_infer_questions</span><span class="p">(</span>
+                <span class="n">questions_amount</span><span class="o">=</span><span class="n">questions_amount</span><span class="p">,</span>
+                <span class="n">batched_input</span><span class="o">=</span><span class="n">batched_input</span><span class="p">,</span>
+                <span class="n">generation_pipeline</span><span class="o">=</span><span class="n">generation_pipeline</span><span class="p">,</span>
+                <span class="n">generation_config</span><span class="o">=</span><span class="n">generation_config</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">votes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">batched_answers</span><span class="p">)</span>
+        <span class="n">answers</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Collect the answers according to the poll strategy</span>
+        <span class="c1"># Average strategy works for numeric values only</span>
+        <span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">votes</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+            <span class="n">batched_answers</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">question</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">questions_amount</span><span class="p">):</span>
+                <span class="c1"># Create a list of all answers to relevant question</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">votes</span><span class="p">[</span><span class="n">voter</span><span class="p">][</span><span class="n">batch</span><span class="p">][</span><span class="n">question</span><span class="p">]</span> <span class="k">for</span> <span class="n">voter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_count</span><span class="p">)</span>
+                <span class="p">]</span>
+                <span class="n">answer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">poll_strategy</span><span class="o">.</span><span class="n">do</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+                <span class="n">batched_answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+            <span class="n">answers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">batched_answers</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">answers</span></div>
+
+
+<span class="c1"># Holds names of QuestionHandles</span>
+<div class="viewcode-block" id="QuestionTypes"><a class="viewcode-back" href="documentation.html#question_answering.question_answering.QuestionTypes">[docs]</a><span class="k">class</span> <span class="nc">QuestionTypes</span><span class="p">:</span>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="s2">"default"</span>
+    <span class="n">POLL</span> <span class="o">=</span> <span class="s2">"poll"</span></div>
+
+
+<span class="c1"># Maps question types to their handlers</span>
+<span class="n">QUESTION_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="n">QuestionTypes</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">:</span> <span class="n">QuestionHandler</span><span class="p">,</span>
+    <span class="n">QuestionTypes</span><span class="o">.</span><span class="n">POLL</span><span class="p">:</span> <span class="n">PollQuestionHandler</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
