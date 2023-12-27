@@ -1,0 +1,536 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>translate.translate</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/translate/translate.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for translate.translate</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">transformers</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="c1"># Get the global logger:</span>
+<span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_check_mlrun_and_open_mpi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">"mlrun.MLClientCtx"</span><span class="p">,</span> <span class="s2">"mpi4py.MPI.Intracomm"</span><span class="p">]:</span>
+    <span class="n">is_mpi</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">mlrun</span>
+
+        <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"mlrun"</span><span class="p">)</span>
+        <span class="n">is_mpi</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">,</span> <span class="s2">"job"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"mpijob"</span>
+
+        <span class="k">if</span> <span class="n">is_mpi</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+
+                <span class="k">return</span> <span class="n">context</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+            <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">mpi4py_not_found</span><span class="p">:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">"To distribute the function using MLRun's 'mpijob' you need to have `mpi4py` package in your "</span>
+                    <span class="s2">"interpreter. Please run `pip install mpi4py` and make sure you have open-mpi."</span>
+                <span class="p">)</span>
+                <span class="k">raise</span> <span class="n">mpi4py_not_found</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">context</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">module_not_found</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_mpi</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">module_not_found</span>
+    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#translate.translate.open_mpi_handler">[docs]</a><span class="k">def</span> <span class="nf">open_mpi_handler</span><span class="p">(</span>
+    <span class="n">worker_inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">):</span>
+    <span class="k">global</span> <span class="n">_LOGGER</span>
+
+    <span class="c1"># Check for MLRun and OpenMPI availability:</span>
+    <span class="n">context</span><span class="p">,</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">_check_mlrun_and_open_mpi</span><span class="p">()</span>
+
+    <span class="c1"># Check if MLRun is available, set the global logger to MLRun's:</span>
+    <span class="k">if</span> <span class="n">context</span><span class="p">:</span>
+        <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">comm</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># Get the open mpi environment properties:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+            <span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+
+            <span class="c1"># Give the correct chunk of the workers inputs:</span>
+            <span class="k">for</span> <span class="n">worker_input</span> <span class="ow">in</span> <span class="n">worker_inputs</span><span class="p">:</span>
+                <span class="n">input_argument</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">worker_input</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">input_argument</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">_get_text_files</span><span class="p">(</span>
+                        <span class="n">data_path</span><span class="o">=</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+                    <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">"Cannot split the input '</span><span class="si">{</span><span class="n">worker_input</span><span class="si">}</span><span class="s2">' of length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2"> workers. "</span>
+                        <span class="sa">f</span><span class="s2">"Please reduce the amount of workers for this input."</span>
+                    <span class="p">)</span>
+                <span class="n">even_chunk_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span> <span class="o">//</span> <span class="n">size</span>
+                <span class="n">chunk_start</span> <span class="o">=</span> <span class="n">rank</span> <span class="o">*</span> <span class="n">even_chunk_size</span>
+                <span class="n">chunk_end</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="p">(</span><span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">even_chunk_size</span>
+                    <span class="k">if</span> <span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">size</span>
+                    <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Rank #</span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s2">: Processing input chunk of '</span><span class="si">{</span><span class="n">worker_input</span><span class="si">}</span><span class="s2">' "</span>
+                    <span class="sa">f</span><span class="s2">"from index </span><span class="si">{</span><span class="n">chunk_start</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">chunk_end</span><span class="si">}</span><span class="s2">."</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">input_argument</span><span class="p">[</span><span class="n">chunk_start</span><span class="p">:</span><span class="n">chunk_end</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">input_argument</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">chunk_start</span><span class="p">:</span><span class="n">chunk_end</span><span class="p">:,</span> <span class="p">:]</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">worker_input</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_argument</span>
+
+            <span class="c1"># Set the root worker only arguments:</span>
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">root_worker_inputs</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">root_worker_inputs</span><span class="p">)</span>
+
+            <span class="c1"># Run the worker:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">handler</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Send the output to the root rank (rank #0):</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="c1"># Join the outputs:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Collecting data from workers to root worker."</span><span class="p">)</span>
+                <span class="n">output_directory</span> <span class="o">=</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">objs</span><span class="o">=</span><span class="p">[</span><span class="n">df</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">output</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">errors_dictionary</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span>
+                    <span class="n">operator</span><span class="o">.</span><span class="n">ior</span><span class="p">,</span> <span class="p">[</span><span class="n">err</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">output</span><span class="p">],</span> <span class="p">{}</span>
+                <span class="p">)</span>
+                <span class="k">return</span> <span class="n">output_directory</span><span class="p">,</span> <span class="n">dataframe</span><span class="p">,</span> <span class="n">errors_dictionary</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+<div class="viewcode-block" id="translate"><a class="viewcode-back" href="documentation.html#translate.translate.translate">[docs]</a><span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="k">def</span> <span class="nf">translate</span><span class="p">(</span>
+    <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
+    <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">source_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">target_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">translation_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Translate text files using a transformer model from Huggingface's hub according to the source and target languages</span>
+<span class="sd">    given (or using the directly provided model name). The end result is a directory of translated text files and a</span>
+<span class="sd">    dataframe containing the following columns:</span>
+
+<span class="sd">    * text_file - The text file path.</span>
+<span class="sd">    * translation_file - The translation text file name in the output directory.</span>
+
+<span class="sd">    :param data_path:          A directory of text files or a single file or a list of files to translate.</span>
+<span class="sd">    :param output_directory:   Directory where the translated files will be saved.</span>
+<span class="sd">    :param model_name:         The name of a model to load. If None, the model name is constructed using the source and</span>
+<span class="sd">                               target languages parameters.</span>
+<span class="sd">    :param source_language:    The source language code (e.g., 'en' for English).</span>
+<span class="sd">    :param target_language:    The target language code (e.g., 'en' for English).</span>
+<span class="sd">    :param model_kwargs:       Keyword arguments to pass regarding the loading of the model in HuggingFace's `pipeline`</span>
+<span class="sd">                               function.</span>
+<span class="sd">    :param device:             The device index for transformers. Default will prefer cuda if available.</span>
+<span class="sd">    :param batch_size:         The number of batches to use in translation. The files are translated one by one, but the</span>
+<span class="sd">                               sentences can be batched.</span>
+<span class="sd">    :param translation_kwargs: Additional keyword arguments to pass to a `transformers.TranslationPipeline` when doing</span>
+<span class="sd">                               the translation inference. Notice the batch size here is being added automatically.</span>
+<span class="sd">    :param verbose:            Whether to present logs of a progress bar and errors. Default: True.</span>
+
+<span class="sd">    :returns: A tuple of:</span>
+
+<span class="sd">              * Path to the output directory.</span>
+<span class="sd">              * A dataframe dataset of the translated file names.</span>
+<span class="sd">              * A dictionary of errored files that were not translated.</span>
+<span class="sd">    """</span>
+    <span class="k">global</span> <span class="n">_LOGGER</span>
+
+    <span class="c1"># Get the input text files to translate:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Collecting text files."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">data_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+        <span class="n">text_files</span> <span class="o">=</span> <span class="n">_get_text_files</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="n">data_path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text_files</span> <span class="o">=</span> <span class="n">data_path</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Collected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> text files."</span><span class="p">)</span>
+
+    <span class="c1"># Get the translation pipeline:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading model - using device '</span><span class="si">{</span><span class="n">device</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
+    <span class="n">translation_pipeline</span><span class="p">,</span> <span class="n">model_name</span> <span class="o">=</span> <span class="n">_get_translation_pipeline</span><span class="p">(</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">source_language</span><span class="o">=</span><span class="n">source_language</span><span class="p">,</span>
+        <span class="n">target_language</span><span class="o">=</span><span class="n">target_language</span><span class="p">,</span>
+        <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+        <span class="n">model_kwargs</span><span class="o">=</span><span class="n">model_kwargs</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span> <span class="k">if</span> <span class="n">batch_size</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Model '</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">' was loaded successfully."</span><span class="p">)</span>
+
+    <span class="c1"># Prepare the successes dataframe and errors dictionary to be returned:</span>
+    <span class="n">successes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Create the output directory:</span>
+    <span class="n">output_directory</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">output_directory</span><span class="p">)</span>
+    <span class="n">output_directory</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Prepare the translation keyword arguments:</span>
+    <span class="n">translation_kwargs</span> <span class="o">=</span> <span class="n">translation_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+
+    <span class="c1"># Go over the audio files and transcribe:</span>
+    <span class="k">for</span> <span class="n">text_file</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">text_files</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s2">"Translating"</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s2">"file"</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span>
+    <span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Translate:</span>
+            <span class="n">translation</span> <span class="o">=</span> <span class="n">_translate</span><span class="p">(</span>
+                <span class="n">text_file</span><span class="o">=</span><span class="n">text_file</span><span class="p">,</span>
+                <span class="n">translation_pipeline</span><span class="o">=</span><span class="n">translation_pipeline</span><span class="p">,</span>
+                <span class="n">translation_kwargs</span><span class="o">=</span><span class="n">translation_kwargs</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Write the transcription to file:</span>
+            <span class="n">translation_file</span> <span class="o">=</span> <span class="n">_save_to_file</span><span class="p">(</span>
+                <span class="n">translation</span><span class="o">=</span><span class="n">translation</span><span class="p">,</span>
+                <span class="n">file_name</span><span class="o">=</span><span class="n">text_file</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span>
+                <span class="n">output_directory</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Note as a success in the list:</span>
+            <span class="n">successes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">text_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">translation_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+            <span class="c1"># Note the exception as error in the dictionary:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">_LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error in file: '</span><span class="si">{</span><span class="n">text_file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+            <span class="n">errors</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">text_file</span><span class="o">.</span><span class="n">name</span><span class="p">)]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span>
+            <span class="k">continue</span>
+
+    <span class="c1"># Construct the translations dataframe:</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"text_file"</span><span class="p">,</span>
+        <span class="s2">"translation_file"</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">successes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">successes</span><span class="p">,</span>
+        <span class="n">columns</span><span class="o">=</span><span class="n">columns</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Print the head of the produced dataframe and return:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Done (</span><span class="si">{</span><span class="n">successes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">text_files</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"Translations summary:</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">successes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_directory</span><span class="p">),</span> <span class="n">successes</span><span class="p">,</span> <span class="n">errors</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_text_files</span><span class="p">(</span>
+    <span class="n">data_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]:</span>
+    <span class="c1"># Check if the path is of a directory or a file:</span>
+    <span class="k">if</span> <span class="n">data_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="c1"># Get all files inside the directory:</span>
+        <span class="n">text_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.*"</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">data_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">text_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_path</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Unrecognized data path. The parameter `data_path` must be either a directory path or a file path. "</span>
+            <span class="sa">f</span><span class="s2">"Given: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">text_files</span>
+
+
+<span class="k">def</span> <span class="nf">_get_translation_pipeline</span><span class="p">(</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">source_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">target_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">transformers</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="c1"># Construct the model name - if model name is provided (not None) then we take it, otherwise we check both source</span>
+    <span class="c1"># and target were provided to construct the model name:</span>
+    <span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">source_language</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">target_language</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">"No model name were given and missing source and / or target languages. In order to translate you must "</span>
+            <span class="s2">"pass a `model_name` or both `source_language` and `target_language`."</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">model_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"Helsinki-NLP/opus-mt-</span><span class="si">{</span><span class="n">source_language</span><span class="si">}</span><span class="s2">-</span><span class="si">{</span><span class="n">target_language</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="c1"># Initialize the translation pipeline:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">translation_pipeline</span> <span class="o">=</span> <span class="n">transformers</span><span class="o">.</span><span class="n">pipeline</span><span class="p">(</span>
+            <span class="n">task</span><span class="o">=</span><span class="s2">"translation"</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">tokenizer</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+            <span class="n">model_kwargs</span><span class="o">=</span><span class="n">model_kwargs</span><span class="p">,</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">load_exception</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="s2">"is not a valid model identifier listed on 'https://huggingface.co/models'"</span>
+            <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">load_exception</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="n">source_language</span>
+        <span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">"The model '</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">' is not a valid model identifier. "</span>
+                <span class="sa">f</span><span class="s2">"The parameters `source_language` and `target_language` are used to construct a Helsinki model for "</span>
+                <span class="sa">f</span><span class="s2">"text to text generation, but the model created from the given languages does not exist. "</span>
+                <span class="sa">f</span><span class="s2">"You may check language identifiers at "</span>
+                <span class="sa">f</span><span class="s2">"https://developers.google.com/admin-sdk/directory/v1/languages, and if the error was not fixed, one "</span>
+                <span class="sa">f</span><span class="s2">"or more language code might be with 3 letters and needs to be found online. "</span>
+                <span class="sa">f</span><span class="s2">"Remember, you can always choose a model directly from the Huggingface hub by using the `model_name` "</span>
+                <span class="sa">f</span><span class="s2">"parameter."</span>
+            <span class="p">)</span> <span class="kn">from</span> <span class="nn">load_exception</span>
+        <span class="k">raise</span> <span class="n">load_exception</span>
+
+    <span class="k">return</span> <span class="n">translation_pipeline</span><span class="p">,</span> <span class="n">model_name</span>
+
+
+<span class="k">def</span> <span class="nf">_translate</span><span class="p">(</span>
+    <span class="n">text_file</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span>
+    <span class="n">translation_pipeline</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">,</span>
+    <span class="n">translation_kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="c1"># Read the text from file:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">text_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># Split to paragraphs and each paragraph to sentences:</span>
+    <span class="n">paragraphs</span> <span class="o">=</span> <span class="p">[</span><span class="n">paragraph</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)</span> <span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)]</span>
+
+    <span class="c1"># Discover the newline indexes to restore the file to its structure post translation:</span>
+    <span class="n">newlines_indexes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">paragraphs</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">newlines_indexes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">newlines_indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">paragraph</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">newlines_indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newlines_indexes</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">paragraph</span><span class="p">))</span>
+
+    <span class="c1"># Prepare the batches (each sentence from the paragraphs). Notice we add a dot not only to restore the sentence</span>
+    <span class="c1"># structure but to ignore empty strings as it will ruin the translation:</span>
+    <span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s2">."</span> <span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">paragraphs</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">paragraph</span><span class="p">]</span>
+
+    <span class="c1"># Translate the sentences:</span>
+    <span class="n">translations</span> <span class="o">=</span> <span class="n">translation_pipeline</span><span class="p">(</span><span class="n">sentences</span><span class="p">,</span> <span class="o">**</span><span class="n">translation_kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Restructure the full text from the sentences:</span>
+    <span class="n">translated_text</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">newline_index</span> <span class="o">=</span> <span class="n">newlines_indexes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">newlines_indexes</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">translation</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">translations</span><span class="p">):</span>
+        <span class="c1"># Get the translation:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">translation</span><span class="p">[</span><span class="s2">"translation_text"</span><span class="p">]</span>
+        <span class="c1"># Validate if it was an empty sentence before:</span>
+        <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">"."</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span>
+        <span class="c1"># Check if needed to insert a newline:</span>
+        <span class="k">if</span> <span class="n">newline_index</span> <span class="ow">and</span> <span class="n">newline_index</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="n">newline_index</span> <span class="o">=</span> <span class="n">newlines_indexes</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="k">if</span> <span class="n">newlines_indexes</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="c1"># Collect it:</span>
+        <span class="n">translated_text</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">translated_text</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">translated_text</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">translated_text</span>
+
+
+<span class="k">def</span> <span class="nf">_save_to_file</span><span class="p">(</span>
+    <span class="n">translation</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">output_directory</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+    <span class="c1"># Prepare the file full path (checking for no duplications):</span>
+    <span class="n">translation_file</span> <span class="o">=</span> <span class="n">output_directory</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">.txt"</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">while</span> <span class="n">translation_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">translation_file</span> <span class="o">=</span> <span class="n">output_directory</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.txt"</span>
+
+    <span class="c1"># Make sure all directories are created:</span>
+    <span class="n">translation_file</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Write to file:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">translation_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+        <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">translation</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">translation_file</span>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
