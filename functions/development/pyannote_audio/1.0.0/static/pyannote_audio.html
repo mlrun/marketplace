@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>speech_diarization.speech_diarization</title>
+<title>pyannote_audio.pyannote_audio</title>
 <!-- Loaded before other Sphinx assets -->
 <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
@@ -84,7 +84,7 @@
 </a>
 </li>
 <li>
-<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/speech_diarization/speech_diarization.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/pyannote_audio/pyannote_audio.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
 <span class="headerbtn__icon-container">
 <i class="fas fa-lightbulb"></i>
 </span>
@@ -113,7 +113,7 @@
 </div>
 <main id="main-content" role="main">
 <div>
-<h1>Source code for speech_diarization.speech_diarization</h1><div class="highlight"><pre>
+<h1>Source code for pyannote_audio.pyannote_audio</h1><div class="highlight"><pre>
 <span></span><span class="c1"># Copyright 2023 Iguazio</span>
 <span class="c1">#</span>
 <span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
@@ -174,7 +174,7 @@
     <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
 
 
-<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#speech_diarization.speech_diarization.open_mpi_handler">[docs]</a><span class="k">def</span> <span class="nf">open_mpi_handler</span><span class="p">(</span>
+<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#pyannote_audio.pyannote_audio.open_mpi_handler">[docs]</a><span class="k">def</span> <span class="nf">open_mpi_handler</span><span class="p">(</span>
     <span class="n">worker_inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">):</span>
     <span class="k">global</span> <span class="n">_LOGGER</span>
@@ -251,7 +251,7 @@
     <span class="k">return</span> <span class="n">decorator</span></div>
 
 
-<div class="viewcode-block" id="diarize"><a class="viewcode-back" href="documentation.html#speech_diarization.speech_diarization.diarize">[docs]</a><span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<div class="viewcode-block" id="diarize"><a class="viewcode-back" href="documentation.html#pyannote_audio.pyannote_audio.diarize">[docs]</a><span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
 <span class="k">def</span> <span class="nf">diarize</span><span class="p">(</span>
     <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span>
     <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"pyannote/speaker-diarization-3.0"</span><span class="p">,</span>
