@@ -17,33 +17,34 @@
         <code class="yaml">
 apiVersion: v1
 categories:
-- machine-learning
-- Data Preparation
-- Data Generation
-- GenAI
-description: GenAI approach of generating structured data according to a given schema
+  - Deep Learning
+  - Huggingface
+  - Audio
+description: pyannote's speech diarization of audio files
 doc: ''
-example: structured_data_generator.ipynb
-generationDate: 2023-12-14:10-50
+example: pyannote_audio.ipynb
+generationDate: 2023-12-03:14-30
 hidden: false
 icon: ''
 labels:
-  author: zeevr
+  author: guyl
 maintainers: []
 marketplaceType: ''
 mlrunVersion: 1.5.2
-name: structured_data_generator
-platformVersion: 3.5.0
+name: pyannote-audio
+platformVersion: 3.5.3
 spec:
-  filename: structured_data_generator.py
-  handler: generate_data
-  image: mlrun/mlrun
+  filename: pyannote_audio.py
+  handler: diarize
+  image: mlrun/mlrun-gpu
   kind: job
   requirements:
-    - langchain
+    - pyannote.audio
+    - pyannote.core
+    - torchaudio
     - tqdm
 url: ''
-version: 1.3.0
+version: 1.0.0
 
         </code>
     </pre>
