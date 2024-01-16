@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Transcribe tutorial</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Ftranscribe_example.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/edit/master/docs/transcribe_example.ipynb" title="Edit this page">
+<span class="headerbtn__icon-container">
+<i class="fas fa-pencil-alt"></i>
+</span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+<button aria-label="Download this page" class="headerbtn menu-dropdown__trigger">
+<i class="fas fa-download"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="../src/transcribe.ipynb" title="Download source file">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file"></i>
+</span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+</li>
+<li>
+<button class="headerbtn" data-placement="left" data-toggle="tooltip" onclick="printPdf(this)" title="Print to PDF">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+<label class="headerbtn headerbtn-page-toc" for="__page-toc">
+<span class="headerbtn__icon-container">
+<i class="fas fa-list"></i>
+</span>
+</label>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+    </div>
+<nav aria-label="Page" id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-the-transcribe-function-from-hub">
+   Importing the transcribe function from hub
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-transcribe">
+   Running transcribe
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Transcribe tutorial</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#importing-the-transcribe-function-from-hub">
+   Importing the transcribe function from hub
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#running-transcribe">
+   Running transcribe
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<section id="transcribe-tutorial">
+<h1>Transcribe tutorial<a class="headerlink" href="#transcribe-tutorial" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="importing-the-transcribe-function-from-hub">
+<h2>Importing the transcribe function from hub<a class="headerlink" href="#importing-the-transcribe-function-from-hub" title="Permalink to this headline">#</a></h2>
+<p>To import the function directly from hub, use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">transcribe_fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"hub://transcribe"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artifact_path</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transcribe_fn</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s2">"function.yaml"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="running-transcribe">
+<h2>Running transcribe<a class="headerlink" href="#running-transcribe" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transcribe_run</span> <span class="o">=</span> <span class="n">transcribe_fn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"transcribe"</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model_name"</span><span class="p">:</span> <span class="s2">"tiny"</span><span class="p">,</span>
+        <span class="s2">"input_path"</span><span class="p">:</span> <span class="s2">"./data"</span><span class="p">,</span>
+        <span class="s2">"decoding_options"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"fp16"</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span>
+        <span class="s2">"output_directory"</span><span class="p">:</span> <span class="s2">"./output"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">returns</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">"transcriptions: path"</span><span class="p">,</span>
+        <span class="s2">"transcriptions_df: dataset"</span><span class="p">,</span>
+        <span class="p">{</span><span class="s2">"key"</span><span class="p">:</span> <span class="s2">"transcriptions_errors"</span><span class="p">,</span> <span class="s2">"artifact_type"</span><span class="p">:</span> <span class="s2">"file"</span><span class="p">,</span> <span class="s2">"file_format"</span><span class="p">:</span> <span class="s2">"yaml"</span><span class="p">},</span>
+    <span class="p">],</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-07-16 17:14:01,968 [info] Storing function: {'name': 'transcribe-transcribe', 'uid': 'd1384cb679bc4c178b0195d964b628a8', 'db': None}
+&gt; 2023-07-16 17:14:01,969 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:01,969 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+&gt; 2023-07-16 17:14:01,970 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:01,970 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+&gt; 2023-07-16 17:14:01,972 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:01,972 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+&gt; 2023-07-16 17:14:09,804 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:09,805 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+&gt; 2023-07-16 17:14:09,805 [info] Loading whisper model: 'tiny'
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The 'nopython' keyword argument was not supplied to the 'numba.jit' decorator. The implicit default value for this argument is currently False, but it will be changed to True in Numba 0.59.0. See https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-object-mode-fall-back-behaviour-when-using-jit for details.
+IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-07-16 17:14:10,374 [info] Model loaded.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transcribing:  67%|██████▋   | 2/3 [00:02&lt;00:01,  1.04s/file]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-07-16 17:14:12,556 [warning] Error in file: '/Users/Yonatan_Shelach/projects/functions/transcribe/data/error_file.txt'
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Transcribing: 100%|██████████| 3/3 [00:02&lt;00:00,  1.39file/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-07-16 17:14:12,566 [info] Done:
+      audio_file transcription_file language     length  rate_of_speech
+0  speech_01.mp3      speech_01.txt       en   2.011333        3.480278
+1  speech_02.mp3      speech_02.txt       en  20.793500        2.548873
+&gt; 2023-07-16 17:14:12,596 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:12,597 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+&gt; 2023-07-16 17:14:12,659 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:12,660 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+&gt; 2023-07-16 17:14:12,671 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:12,672 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-07-16 17:14:12,707 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:12,707 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+&gt; 2023-07-16 17:14:12,708 [warning] Could not detect path to API server, not connected to API server!
+&gt; 2023-07-16 17:14:12,708 [warning] MLRUN_DBPATH is not set. Set this environment variable to the URL of the API server in order to connect
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+  console.log(el.title);
+
+  document.querySelector(panelName + "-title").innerHTML = el.title
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (el.title.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", el.title);
+  oReq.send();
+
+
+  //iframe.src = el.title;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>state</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+<th>artifacts</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default</td>
+<td><div title="d1384cb679bc4c178b0195d964b628a8">...b628a8</div></td>
+<td>0</td>
+<td>Jul 16 14:14:01</td>
+<td>completed</td>
+<td>transcribe-transcribe</td>
+<td><div class="dictlist">kind=</div><div class="dictlist">owner=Yonatan_Shelach</div><div class="dictlist">host=M-QWXQJK77Q0</div></td>
+<td></td>
+<td><div class="dictlist">model_name=tiny</div><div class="dictlist">audio_files_directory=./data</div><div class="dictlist">decoding_options={'fp16': False}</div><div class="dictlist">output_directory=./output</div></td>
+<td></td>
+<td><div title="/var/folders/xj/f2mp2b75749cr74wj4wvcnm00000gp/T/tmpip3nl1vs/transcribe-transcribe/0/transcriptions.zip">transcriptions</div><div title="/var/folders/xj/f2mp2b75749cr74wj4wvcnm00000gp/T/tmpip3nl1vs/transcribe-transcribe/0/transcriptions_df.parquet">transcriptions_df</div><div title="/var/folders/xj/f2mp2b75749cr74wj4wvcnm00000gp/T/tmpip3nl1vs/transcribe-transcribe/0/transcriptions_errors.yaml">transcriptions_errors</div></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="resultbf9845e1-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="resultbf9845e1-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="resultbf9845e1">×</span>
+</div>
+<iframe class="fileview" id="resultbf9845e1-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods </b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-07-16 17:14:12,721 [info] Run execution finished: {'status': 'completed', 'name': 'transcribe-transcribe'}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transcribe_run</span><span class="o">.</span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'transcriptions': 'store://artifacts/default/transcribe-transcribe_transcriptions:d1384cb679bc4c178b0195d964b628a8',
+ 'transcriptions_df': 'store://artifacts/default/transcribe-transcribe_transcriptions_df:d1384cb679bc4c178b0195d964b628a8',
+ 'transcriptions_errors': 'store://artifacts/default/transcribe-transcribe_transcriptions_errors:d1384cb679bc4c178b0195d964b628a8'}
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Notice</strong>: If connected to mlrun server, you can simply use:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">transcribe_run</span><span class="o">.</span><span class="n">artifact</span><span class="p">(</span><span class="s2">"transcriptions_df"</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">artifact_path</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"/</span><span class="si">{</span><span class="n">transcribe_run</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">transcribe_run</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">iteration</span><span class="si">}</span><span class="s2">/"</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_dataitem</span><span class="p">(</span><span class="n">artifact_path</span> <span class="o">+</span> <span class="s2">"transcriptions_df.parquet"</span><span class="p">)</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>audio_file</th>
+<th>transcription_file</th>
+<th>language</th>
+<th>length</th>
+<th>rate_of_speech</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td>speech_01.mp3</td>
+<td>speech_01.txt</td>
+<td>en</td>
+<td>2.011333</td>
+<td>3.480278</td>
+</tr>
+<tr>
+<th>1</th>
+<td>speech_02.mp3</td>
+<td>speech_02.txt</td>
+<td>en</td>
+<td>20.793500</td>
+<td>2.548873</td>
+</tr>
+</tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
