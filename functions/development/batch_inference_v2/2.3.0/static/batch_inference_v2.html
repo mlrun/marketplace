@@ -1,0 +1,416 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>batch_inference_v2.batch_inference_v2</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/batch_inference_v2/batch_inference_v2.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for batch_inference_v2.batch_inference_v2</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2023 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="kn">import</span> <span class="n">signature</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">mlrun</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">mlrun.model_monitoring.api</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunNotFoundError</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Please update your `mlrun` version to &gt;=1.5.0 or use an "</span>
+        <span class="sa">f</span><span class="s2">"older version of the batch inference function."</span>
+    <span class="p">)</span>
+
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">mlrun.frameworks.auto_mlrun</span> <span class="kn">import</span> <span class="n">AutoMLRun</span>
+
+
+<span class="k">def</span> <span class="nf">_prepare_result_set</span><span class="p">(</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">label_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">y_pred</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Set default label column names and validate given names to prepare the result set - a concatenation of the inputs</span>
+<span class="sd">    (x) and the model predictions (y_pred).</span>
+
+<span class="sd">    :param x:             The inputs.</span>
+<span class="sd">    :param label_columns: A list of strings representing the target column names to add to the predictions. Default name</span>
+<span class="sd">                          will be used in case the list is empty (predicted_label_{i}).</span>
+<span class="sd">    :param y_pred:        The model predictions on the inputs.</span>
+
+<span class="sd">    :returns: The result set.</span>
+
+<span class="sd">    raises MLRunInvalidArgumentError: If the labels columns amount do not match the outputs or if one of the label</span>
+<span class="sd">                                       column already exists in the dataset.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Prepare default target columns names if not provided:</span>
+    <span class="n">prediction_columns_amount</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_columns</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Add default label column names:</span>
+        <span class="k">if</span> <span class="n">prediction_columns_amount</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">label_columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"predicted_label"</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">label_columns</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">"predicted_label_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">prediction_columns_amount</span><span class="p">)</span>
+            <span class="p">]</span>
+
+    <span class="c1"># Validate the label columns:</span>
+    <span class="k">if</span> <span class="n">prediction_columns_amount</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label_columns</span><span class="p">):</span>
+        <span class="c1"># No equality between provided label column names and outputs amount:</span>
+        <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunInvalidArgumentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The number of predicted labels: </span><span class="si">{</span><span class="n">prediction_columns_amount</span><span class="si">}</span><span class="s2"> "</span>
+            <span class="sa">f</span><span class="s2">"is not equal to the given label columns: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">label_columns</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+    <span class="n">common_labels</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">label_columns</span><span class="p">)</span> <span class="o">&amp;</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">common_labels</span><span class="p">:</span>
+        <span class="c1"># Label column exist in the original inputs:</span>
+        <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunInvalidArgumentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The labels: </span><span class="si">{</span><span class="n">common_labels</span><span class="si">}</span><span class="s2"> are already existed in the given dataset."</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">index</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_parse_record_results_kwarg</span><span class="p">(</span>
+    <span class="n">last_in_batch_set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check if `last_in_batch_set` is provided and expected as a parameter.</span>
+<span class="sd">    Return it as a dictionary.</span>
+<span class="sd">    """</span>
+    <span class="n">kwarg</span> <span class="o">=</span> <span class="s2">"last_in_batch_set"</span>
+    <span class="k">if</span> <span class="n">last_in_batch_set</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">signature</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">model_monitoring</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">record_results</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">kwarg</span><span class="p">)</span>
+        <span class="ow">is</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunInvalidArgumentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Unexpected parameter `</span><span class="si">{</span><span class="n">kwarg</span><span class="si">}</span><span class="s2">` for function: "</span>
+            <span class="s2">"`mlrun.model_monitoring.api.record_results`. "</span>
+            <span class="s2">"Please make sure that you are using `mlrun&gt;=1.6.0` version."</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="n">kwarg</span><span class="p">:</span> <span class="n">last_in_batch_set</span><span class="p">}</span>
+
+
+<div class="viewcode-block" id="infer"><a class="viewcode-back" href="documentation.html#batch_inference_v2.batch_inference_v2.infer">[docs]</a><span class="k">def</span> <span class="nf">infer</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">model_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">],</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">label_columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature_columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">log_result_set</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">result_set_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"prediction"</span><span class="p">,</span>
+    <span class="n">batch_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">artifacts_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="c1"># Drift analysis parameters</span>
+    <span class="n">perform_drift_analysis</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">trigger_monitoring_job</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">batch_image_job</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"mlrun/mlrun"</span><span class="p">,</span>
+    <span class="n">endpoint_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="c1"># The following model endpoint parameters are relevant only if:</span>
+    <span class="c1"># perform drift analysis is not disabled</span>
+    <span class="c1"># a new model endpoint record is going to be generated</span>
+    <span class="n">model_endpoint_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"batch-infer"</span><span class="p">,</span>
+    <span class="n">model_endpoint_drift_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">model_endpoint_possible_drift_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">model_endpoint_sample_set</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">last_in_batch_set</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">predict_kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Perform a prediction on a given dataset with the given model. Please make sure that you have already logged the model</span>
+<span class="sd">    under the current project.</span>
+<span class="sd">    Can perform drift analysis between the sample set statistics stored in the model to the current input data. The</span>
+<span class="sd">    drift rule is the value per-feature mean of the TVD and Hellinger scores according to the thresholds configures</span>
+<span class="sd">    here. When performing drift analysis, this function either uses an existing model endpoint record or creates</span>
+<span class="sd">    a new one.</span>
+<span class="sd">    At the moment, this function is supported for `mlrun&gt;=1.5.0` versions.</span>
+
+<span class="sd">    :param context:                                 MLRun context.</span>
+<span class="sd">    :param dataset:                                 The dataset to infer through the model. Provided as an input (DataItem)</span>
+<span class="sd">                                                    that represents Dataset artifact / Feature vector URI.</span>
+<span class="sd">                                                    If using MLRun SDK, `dataset` can also be provided as a list, dictionary or</span>
+<span class="sd">                                                    numpy array.</span>
+<span class="sd">    :param model_path:                              Model store uri (should start with store://). Provided as an input (DataItem).</span>
+<span class="sd">                                                    If using MLRun SDK, `model_path` can also be provided as a parameter (string).</span>
+<span class="sd">                                                    To generate a valid model store URI, please log the model before running this function.</span>
+<span class="sd">                                                    If `endpoint_id` of existing model endpoint is provided, make sure</span>
+<span class="sd">                                                    that it has a similar model store path, otherwise the drift analysis</span>
+<span class="sd">                                                    won't be triggered.</span>
+<span class="sd">    :param drop_columns:                            A string / integer or a list of strings / integers that represent the column names</span>
+<span class="sd">                                                    / indices to drop. When the dataset is a list or a numpy array this parameter must</span>
+<span class="sd">                                                    be represented by integers.</span>
+<span class="sd">    :param label_columns:                           The target label(s) of the column(s) in the dataset for Regression or</span>
+<span class="sd">                                                    Classification tasks. The label column can be accessed from the model object, or</span>
+<span class="sd">                                                    the feature vector provided if available.</span>
+<span class="sd">    :param feature_columns:                         List of feature columns that will be used to build the dataframe when dataset is</span>
+<span class="sd">                                                    from type list or numpy array.</span>
+<span class="sd">    :param log_result_set:                          Whether to log the result set - a DataFrame of the given inputs concatenated with</span>
+<span class="sd">                                                    the predictions. Defaulted to True.</span>
+<span class="sd">    :param result_set_name:                         The db key to set name of the prediction result and the filename. Defaulted to</span>
+<span class="sd">                                                    'prediction'.</span>
+<span class="sd">    :param batch_id:                                The ID of the given batch (inference dataset). If `None`, it will be generated.</span>
+<span class="sd">                                                    Will be logged as a result of the run.</span>
+<span class="sd">    :param artifacts_tag:                           Tag to use for all the artifacts resulted from the function (result set and</span>
+<span class="sd">                                                    model monitoring artifacts)</span>
+<span class="sd">    :param perform_drift_analysis:                  Whether to perform drift analysis between the sample set of the model object to the</span>
+<span class="sd">                                                    dataset given. By default, None, which means it will perform drift analysis if the</span>
+<span class="sd">                                                    model already has feature stats that are considered as a reference sample set.</span>
+<span class="sd">                                                    Performing drift analysis on a new endpoint id will generate a new model endpoint</span>
+<span class="sd">                                                    record. Please note that in order to trigger the drift analysis job, you need to</span>
+<span class="sd">                                                    set `trigger_monitoring_job=True`. Otherwise, the drift analysis will be triggered</span>
+<span class="sd">                                                    only as part the scheduled monitoring job (if exist in the current project) or</span>
+<span class="sd">                                                    if triggered manually by the user.</span>
+<span class="sd">    :param trigger_monitoring_job:                  Whether to trigger the batch drift analysis after the infer job.</span>
+<span class="sd">    :param batch_image_job:                         The image that will be used to register the monitoring batch job if not exist.</span>
+<span class="sd">                                                    By default, the image is mlrun/mlrun.</span>
+<span class="sd">    :param endpoint_id:                             Model endpoint unique ID. If `perform_drift_analysis` was set, the endpoint_id</span>
+<span class="sd">                                                    will be used either to perform the analysis on existing model endpoint or to</span>
+<span class="sd">                                                    generate a new model endpoint record.</span>
+<span class="sd">    :param model_endpoint_name:                     If a new model endpoint is generated, the model name will be presented under this</span>
+<span class="sd">                                                    endpoint.</span>
+<span class="sd">    :param model_endpoint_drift_threshold:          The threshold of which to mark drifts. Defaulted to 0.7.</span>
+<span class="sd">    :param model_endpoint_possible_drift_threshold: The threshold of which to mark possible drifts. Defaulted to 0.5.</span>
+<span class="sd">    :param model_endpoint_sample_set:               A sample dataset to give to compare the inputs in the drift analysis.</span>
+<span class="sd">                                                    Can be provided as an input (DataItem) or as a parameter (e.g. string, list, DataFrame).</span>
+<span class="sd">                                                    The default chosen sample set will always be the one who is set in the model artifact itself.</span>
+<span class="sd">    :param last_in_batch_set:                       Relevant only when `perform_drift_analysis` is `True`.</span>
+<span class="sd">                                                    This flag can (and should only) be used when the model endpoint does not have</span>
+<span class="sd">                                                    model-monitoring set.</span>
+<span class="sd">                                                    If set to `True` (the default), this flag marks the current monitoring window</span>
+<span class="sd">                                                    (on this monitoring endpoint) as completed - the data inferred so far is assumed</span>
+<span class="sd">                                                    to be the complete data for this monitoring window.</span>
+<span class="sd">                                                    You may want to set this flag to `False` if you want to record multiple results in</span>
+<span class="sd">                                                    close time proximity ("batch set"). In this case, set this flag to `False` on all</span>
+<span class="sd">                                                    but the last batch in the set.</span>
+<span class="sd">    raises MLRunInvalidArgumentError: if both `model_path` and `endpoint_id` are not provided, or if `last_in_batch_set` is</span>
+<span class="sd">                                      provided for an unsupported `mlrun` version.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Loading the model:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading model..."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">):</span>
+        <span class="n">model_path</span> <span class="o">=</span> <span class="n">model_path</span><span class="o">.</span><span class="n">artifact_url</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">datastore</span><span class="o">.</span><span class="n">is_store_uri</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunInvalidArgumentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The provided model path (</span><span class="si">{</span><span class="n">model_path</span><span class="si">}</span><span class="s2">) is invalid - should start with `store://`. "</span>
+            <span class="sa">f</span><span class="s2">"Please make sure that you have logged the model using `project.log_model()` "</span>
+            <span class="sa">f</span><span class="s2">"which generates a unique store uri for the logged model."</span>
+        <span class="p">)</span>
+    <span class="n">model_handler</span> <span class="o">=</span> <span class="n">AutoMLRun</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">label_columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">label_columns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">model_handler</span><span class="o">.</span><span class="n">_model_artifact</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">outputs</span>
+        <span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">feature_columns</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">feature_columns</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="nb">input</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="nb">input</span> <span class="ow">in</span> <span class="n">model_handler</span><span class="o">.</span><span class="n">_model_artifact</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">inputs</span>
+        <span class="p">]</span>
+
+    <span class="c1"># Get dataset by object, URL or by FeatureVector:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading data..."</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">label_columns</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">model_monitoring</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">read_dataset_as_dataframe</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+        <span class="n">feature_columns</span><span class="o">=</span><span class="n">feature_columns</span><span class="p">,</span>
+        <span class="n">label_columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">,</span>
+        <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Predict:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calculating prediction..."</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model_handler</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">predict_kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Prepare the result set:</span>
+    <span class="n">result_set</span> <span class="o">=</span> <span class="n">_prepare_result_set</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">label_columns</span><span class="o">=</span><span class="n">label_columns</span><span class="p">,</span> <span class="n">y_pred</span><span class="o">=</span><span class="n">y_pred</span><span class="p">)</span>
+
+    <span class="c1"># Check for logging the result set:</span>
+    <span class="k">if</span> <span class="n">log_result_set</span><span class="p">:</span>
+        <span class="n">mlrun</span><span class="o">.</span><span class="n">model_monitoring</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">result_set_name</span><span class="o">=</span><span class="n">result_set_name</span><span class="p">,</span>
+            <span class="n">result_set</span><span class="o">=</span><span class="n">result_set</span><span class="p">,</span>
+            <span class="n">artifacts_tag</span><span class="o">=</span><span class="n">artifacts_tag</span><span class="p">,</span>
+            <span class="n">batch_id</span><span class="o">=</span><span class="n">batch_id</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check for performing drift analysis</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">perform_drift_analysis</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="ow">and</span> <span class="n">model_handler</span><span class="o">.</span><span class="n">_model_artifact</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">feature_stats</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="n">perform_drift_analysis</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">perform_drift_analysis</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Performing drift analysis..."</span><span class="p">)</span>
+        <span class="c1"># Get the sample set statistics (either from the sample set or from the statistics logged with the model)</span>
+        <span class="n">sample_set_statistics</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">model_monitoring</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get_sample_set_statistics</span><span class="p">(</span>
+            <span class="n">sample_set</span><span class="o">=</span><span class="n">model_endpoint_sample_set</span><span class="p">,</span>
+            <span class="n">model_artifact_feature_stats</span><span class="o">=</span><span class="n">model_handler</span><span class="o">.</span><span class="n">_model_artifact</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">feature_stats</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">mlrun</span><span class="o">.</span><span class="n">model_monitoring</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">record_results</span><span class="p">(</span>
+            <span class="n">project</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">project</span><span class="p">,</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">endpoint_id</span><span class="o">=</span><span class="n">endpoint_id</span><span class="p">,</span>
+            <span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span>
+            <span class="n">model_endpoint_name</span><span class="o">=</span><span class="n">model_endpoint_name</span><span class="p">,</span>
+            <span class="n">infer_results_df</span><span class="o">=</span><span class="n">result_set</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+            <span class="n">sample_set_statistics</span><span class="o">=</span><span class="n">sample_set_statistics</span><span class="p">,</span>
+            <span class="n">drift_threshold</span><span class="o">=</span><span class="n">model_endpoint_drift_threshold</span><span class="p">,</span>
+            <span class="n">possible_drift_threshold</span><span class="o">=</span><span class="n">model_endpoint_possible_drift_threshold</span><span class="p">,</span>
+            <span class="n">artifacts_tag</span><span class="o">=</span><span class="n">artifacts_tag</span><span class="p">,</span>
+            <span class="n">trigger_monitoring_job</span><span class="o">=</span><span class="n">trigger_monitoring_job</span><span class="p">,</span>
+            <span class="n">default_batch_image</span><span class="o">=</span><span class="n">batch_image_job</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">_parse_record_results_kwarg</span><span class="p">(</span><span class="n">last_in_batch_set</span><span class="o">=</span><span class="n">last_in_batch_set</span><span class="p">),</span>
+        <span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
