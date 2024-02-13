@@ -815,9 +815,6 @@ for $n$ features and metric rule $M(x_S,x_I)=\frac{H(x_S,x_I)+TVD(x_S,x_I)}{2}$,
 <span class="n">batch_inference_function</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_function</span><span class="p">(</span><span class="s1">'hub://batch_inference_v2'</span><span class="p">)</span>
 <span class="c1"># you can import the function from the current directory as well: </span>
 <span class="c1"># batch_inference_function = mlrun.import_function("function.yaml")</span>
-
-<span class="c1"># Set the desired artifact path:</span>
-<span class="n">artifact_path</span> <span class="o">=</span> <span class="s2">"./"</span>
 </pre></div>
 </div>
 </div>
@@ -833,23 +830,18 @@ for $n$ features and metric rule $M(x_S,x_I)=\frac{H(x_S,x_I)+TVD(x_S,x_I)}{2}$,
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Generate data:</span>
 <span class="n">generate_data_run</span> <span class="o">=</span> <span class="n">demo_function</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="n">handler</span><span class="o">=</span><span class="s2">"generate_data"</span><span class="p">,</span>
-    <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span>
     <span class="n">returns</span><span class="o">=</span><span class="p">[</span><span class="s2">"training_set : dataset"</span><span class="p">,</span> <span class="s2">"prediction_set : dataset"</span><span class="p">],</span>
-    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># 2. Train a model:</span>
 <span class="n">train_run</span> <span class="o">=</span> <span class="n">demo_function</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="n">handler</span><span class="o">=</span><span class="s2">"train"</span><span class="p">,</span>
-    <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"training_set"</span><span class="p">:</span> <span class="n">generate_data_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">"training_set"</span><span class="p">]},</span>
-    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
 <span class="c1"># 3. Perform batch prediction:</span>
 <span class="n">batch_inference_run</span> <span class="o">=</span> <span class="n">batch_inference_function</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
     <span class="n">handler</span><span class="o">=</span><span class="s2">"infer"</span><span class="p">,</span>
-    <span class="n">artifact_path</span><span class="o">=</span><span class="n">artifact_path</span><span class="p">,</span>
     <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"dataset"</span><span class="p">:</span> <span class="n">generate_data_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">"prediction_set"</span><span class="p">]},</span>
     <span class="n">params</span><span class="o">=</span><span class="p">{</span>
         <span class="s2">"model_path"</span><span class="p">:</span> <span class="n">train_run</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="s2">"model"</span><span class="p">],</span>
@@ -859,7 +851,6 @@ for $n$ features and metric rule $M(x_S,x_I)=\frac{H(x_S,x_I)+TVD(x_S,x_I)}{2}$,
         <span class="s2">"model_endpoint_drift_threshold"</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span>
         <span class="s2">"model_endpoint_possible_drift_threshold"</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 </pre></div>
 </div>
