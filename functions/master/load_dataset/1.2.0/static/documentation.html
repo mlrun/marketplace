@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
-<title>snowflake_dask package</title>
+<title>load_dataset package</title>
 <!-- Loaded before other Sphinx assets -->
 <link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
 <link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
@@ -84,7 +84,7 @@
 </a>
 </li>
 <li>
-<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fsnowflake_dask.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fload_dataset.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
 <span class="headerbtn__icon-container">
 <i class="fas fa-lightbulb"></i>
 </span>
@@ -137,12 +137,12 @@
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-snowflake_dask.snowflake_dask">
-   snowflake_dask.snowflake_dask module
+<a class="reference internal nav-link" href="#module-load_dataset.load_dataset">
+   load_dataset.load_dataset module
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-snowflake_dask">
+<a class="reference internal nav-link" href="#module-load_dataset">
    Module contents
   </a>
 </li>
@@ -154,7 +154,7 @@
 <div class="col pl-md-3 pl-lg-5 content-container">
 <!-- Table of contents that is only displayed when printing the page -->
 <div class="onlyprint" id="jb-print-docs-body">
-<h1>snowflake_dask package</h1>
+<h1>load_dataset package</h1>
 <!-- Table of contents -->
 <div id="print-main-content">
 <div id="jb-print-toc">
@@ -169,12 +169,12 @@
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-snowflake_dask.snowflake_dask">
-   snowflake_dask.snowflake_dask module
+<a class="reference internal nav-link" href="#module-load_dataset.load_dataset">
+   load_dataset.load_dataset module
   </a>
 </li>
 <li class="toc-h2 nav-item toc-entry">
-<a class="reference internal nav-link" href="#module-snowflake_dask">
+<a class="reference internal nav-link" href="#module-load_dataset">
    Module contents
   </a>
 </li>
@@ -185,41 +185,49 @@
 </div>
 <main id="main-content" role="main">
 <div>
-<section id="snowflake-dask-package">
-<h1>snowflake_dask package<a class="headerlink" href="#snowflake-dask-package" title="Permalink to this headline">#</a></h1>
+<section id="load-dataset-package">
+<h1>load_dataset package<a class="headerlink" href="#load-dataset-package" title="Permalink to this headline">#</a></h1>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
 </section>
-<section id="module-snowflake_dask.snowflake_dask">
-<span id="snowflake-dask-snowflake-dask-module"></span><h2>snowflake_dask.snowflake_dask module<a class="headerlink" href="#module-snowflake_dask.snowflake_dask" title="Permalink to this headline">#</a></h2>
-<p>Snowflake Dask - Ingest Snaowflake data with Dask</p>
+<section id="module-load_dataset.load_dataset">
+<span id="load-dataset-load-dataset-module"></span><h2>load_dataset.load_dataset module<a class="headerlink" href="#module-load_dataset.load_dataset" title="Permalink to this headline">#</a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="snowflake_dask.snowflake_dask.load">
-<span class="sig-prename descclassname"><span class="pre">snowflake_dask.snowflake_dask.</span></span><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#snowflake_dask.snowflake_dask.load" title="Permalink to this definition">#</a></dt>
-<dd><p>A delayed load one batch.</p>
-</dd></dl>
-<dl class="py function">
-<dt class="sig sig-object py" id="snowflake_dask.snowflake_dask.load_results">
-<span class="sig-prename descclassname"><span class="pre">snowflake_dask.snowflake_dask.</span></span><span class="sig-name descname"><span class="pre">load_results</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dask_client</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">connection_info</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parquet_out_dir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">publish_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="snowflake_dask.html#load_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#snowflake_dask.snowflake_dask.load_results" title="Permalink to this definition">#</a></dt>
-<dd><p>Snowflake Dask - Ingest Snowflake data with Dask</p>
+<dt class="sig sig-object py" id="load_dataset.load_dataset.load_dataset">
+<span class="sig-prename descclassname"><span class="pre">load_dataset.load_dataset.</span></span><span class="sig-name descname"><span class="pre">load_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">mlrun.execution.MLClientCtx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_ext</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'parquet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span> → <span class="pre">None</span><a class="reference internal" href="load_dataset.html#load_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#load_dataset.load_dataset.load_dataset" title="Permalink to this definition">#</a></dt>
+<dd><p>Loads a scikit-learn toy dataset for classification or regression</p>
+<p>The following datasets are available (‘name’ : desription):</p>
+<blockquote>
+<div><p>‘boston’          : boston house-prices dataset (regression)
+‘iris’            : iris dataset (classification)
+‘diabetes’        : diabetes dataset (regression)
+‘digits’          : digits dataset (classification)
+‘linnerud’        : linnerud dataset (multivariate regression)
+‘wine’            : wine dataset (classification)
+‘breast_cancer’   : breast cancer wisconsin dataset (classification)</p>
+</div></blockquote>
+<p>The scikit-learn functions return a data bunch including the following items:
+- data              the features matrix
+- target            the ground truth labels
+- DESCR             a description of the dataset
+- feature_names     header for data</p>
+<p>The features (and their names) are stored with the target labels in a DataFrame.</p>
+<p>For further details see <a class="reference external" href="https://scikit-learn.org/stable/datasets/index.html#toy-datasets">https://scikit-learn.org/stable/datasets/index.html#toy-datasets</a></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>context</strong> – the function context</p></li>
-<li><p><strong>dask_client</strong> – dask cluster function name</p></li>
-<li><p><strong>connection_info</strong> – Snowflake database connection info (this will be in a secret later)</p></li>
-<li><p><strong>query</strong> – query to for Snowflake</p></li>
-<li><p><strong>parquet_out_dir</strong> – directory path for the output parquet files
-(default None, not write out)</p></li>
-<li><p><strong>publish_name</strong> – name of the dask dataframe to publish to the dask cluster
-(default None, not publish)</p></li>
+<li><p><strong>context</strong> – function execution context</p></li>
+<li><p><strong>dataset</strong> – name of the dataset to load</p></li>
+<li><p><strong>name</strong> – artifact name (defaults to dataset)</p></li>
+<li><p><strong>file_ext</strong> – output file_ext: parquet or csv</p></li>
+<li><p><strong>params</strong> – params of the sklearn load_data method</p></li>
 </ul>
 </dd>
 </dl>
 </dd></dl>
 </section>
-<section id="module-snowflake_dask">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-snowflake_dask" title="Permalink to this headline">#</a></h2>
+<section id="module-load_dataset">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-load_dataset" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 </div>
