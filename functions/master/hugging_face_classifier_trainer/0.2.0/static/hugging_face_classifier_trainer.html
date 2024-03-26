@@ -1,0 +1,972 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>hugging_face_classifier_trainer.hugging_face_classifier_trainer</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/hugging_face_classifier_trainer/hugging_face_classifier_trainer.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for hugging_face_classifier_trainer.hugging_face_classifier_trainer</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">mlrun.datastore</span>
+<span class="kn">import</span> <span class="nn">mlrun.utils</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">transformers</span>
+<span class="kn">from</span> <span class="nn">datasets</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">load_dataset</span><span class="p">,</span> <span class="n">load_metric</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">MLClientCtx</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">feature_store</span> <span class="k">as</span> <span class="n">fs</span>
+<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">Artifact</span><span class="p">,</span> <span class="n">PlotlyArtifact</span>
+<span class="kn">from</span> <span class="nn">mlrun.datastore</span> <span class="kn">import</span> <span class="n">DataItem</span>
+<span class="kn">from</span> <span class="nn">mlrun.frameworks._common</span> <span class="kn">import</span> <span class="n">CommonTypes</span><span class="p">,</span> <span class="n">MLRunInterface</span>
+<span class="kn">from</span> <span class="nn">mlrun.utils</span> <span class="kn">import</span> <span class="n">create_class</span>
+<span class="kn">from</span> <span class="nn">plotly</span> <span class="kn">import</span> <span class="n">graph_objects</span> <span class="k">as</span> <span class="n">go</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AutoTokenizer</span><span class="p">,</span>
+    <span class="n">DataCollatorWithPadding</span><span class="p">,</span>
+    <span class="n">EvalPrediction</span><span class="p">,</span>
+    <span class="n">PreTrainedModel</span><span class="p">,</span>
+    <span class="n">PreTrainedTokenizer</span><span class="p">,</span>
+    <span class="n">Trainer</span><span class="p">,</span>
+    <span class="n">TrainerCallback</span><span class="p">,</span>
+    <span class="n">TrainerControl</span><span class="p">,</span>
+    <span class="n">TrainerState</span><span class="p">,</span>
+    <span class="n">TrainingArguments</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1"># ----------------------from MLRUN--------------------------------</span>
+<div class="viewcode-block" id="HFORTOptimizerMLRunInterface"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface">[docs]</a><span class="k">class</span> <span class="nc">HFORTOptimizerMLRunInterface</span><span class="p">(</span><span class="n">MLRunInterface</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Interface for adding MLRun features for tensorflow keras API.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># MLRun's context default name:</span>
+    <span class="n">DEFAULT_CONTEXT_NAME</span> <span class="o">=</span> <span class="s2">"mlrun-huggingface"</span>
+
+    <span class="c1"># Attributes to be inserted so the MLRun interface will be fully enabled.</span>
+    <span class="n">_PROPERTIES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"_auto_log"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="s2">"_context"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"_model_name"</span><span class="p">:</span> <span class="s2">"model"</span><span class="p">,</span>
+        <span class="s2">"_tag"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="s2">"_labels"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="s2">"_extra_data"</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">_METHODS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"enable_auto_logging"</span><span class="p">]</span>
+    <span class="c1"># Attributes to replace so the MLRun interface will be fully enabled.</span>
+    <span class="n">_REPLACED_METHODS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"optimize"</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="HFORTOptimizerMLRunInterface.add_interface"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.add_interface">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">add_interface</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">obj</span><span class="p">,</span>
+        <span class="n">restoration</span><span class="p">:</span> <span class="n">CommonTypes</span><span class="o">.</span><span class="n">MLRunInterfaceRestorationType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Enrich the object with this interface properties, methods and functions, so it will have this TensorFlow.Keras</span>
+<span class="sd">        MLRun's features.</span>
+<span class="sd">        :param obj:                     The object to enrich his interface.</span>
+<span class="sd">        :param restoration: Restoration information tuple as returned from 'remove_interface' in order to</span>
+<span class="sd">                                        add the interface in a certain state.</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">HFORTOptimizerMLRunInterface</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="n">add_interface</span><span class="p">(</span>
+            <span class="n">obj</span><span class="o">=</span><span class="n">obj</span><span class="p">,</span> <span class="n">restoration</span><span class="o">=</span><span class="n">restoration</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="HFORTOptimizerMLRunInterface.mlrun_optimize"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.mlrun_optimize">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">mlrun_optimize</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        MLRun's tf.keras.Model.fit wrapper. It will setup the optimizer when using horovod. The optimizer must be</span>
+<span class="sd">        passed in a keyword argument and when using horovod, it must be passed as an Optimizer instance, not a string.</span>
+
+<span class="sd">        raise MLRunInvalidArgumentError: In case the optimizer provided did not follow the instructions above.</span>
+<span class="sd">        """</span>
+
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">save_dir</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_get_function_argument</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">optimize</span><span class="p">,</span>
+                <span class="n">argument_name</span><span class="o">=</span><span class="s2">"save_dir"</span><span class="p">,</span>
+                <span class="n">passed_args</span><span class="o">=</span><span class="n">args</span><span class="p">,</span>
+                <span class="n">passed_kwargs</span><span class="o">=</span><span class="n">kwargs</span><span class="p">,</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="c1"># Call the original optimize method:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_optimize</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_log</span><span class="p">:</span>
+                <span class="c1"># Log the onnx model:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+                    <span class="n">key</span><span class="o">=</span><span class="s2">"model"</span><span class="p">,</span>
+                    <span class="n">db_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">,</span>
+                    <span class="n">model_file</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">save_dir</span><span class="si">}</span><span class="s2">/model_optimized.onnx"</span><span class="p">,</span>
+                    <span class="n">tag</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_tag</span><span class="p">,</span>
+                    <span class="n">framework</span><span class="o">=</span><span class="s2">"ONNX"</span><span class="p">,</span>
+                    <span class="n">labels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="p">,</span>
+                    <span class="n">extra_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_extra_data</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span></div>
+
+<div class="viewcode-block" id="HFORTOptimizerMLRunInterface.enable_auto_logging"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFORTOptimizerMLRunInterface.enable_auto_logging">[docs]</a>    <span class="k">def</span> <span class="nf">enable_auto_logging</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"model"</span><span class="p">,</span>
+        <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">labels</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">extra_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auto_log</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="n">context</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span> <span class="o">=</span> <span class="n">model_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tag</span> <span class="o">=</span> <span class="n">tag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extra_data</span> <span class="o">=</span> <span class="n">extra_data</span></div></div>
+
+
+<div class="viewcode-block" id="HFTrainerMLRunInterface"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface">[docs]</a><span class="k">class</span> <span class="nc">HFTrainerMLRunInterface</span><span class="p">(</span><span class="n">MLRunInterface</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Interface for adding MLRun features for tensorflow keras API.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># MLRuns context default name:</span>
+    <span class="n">DEFAULT_CONTEXT_NAME</span> <span class="o">=</span> <span class="s2">"mlrun-huggingface"</span>
+
+    <span class="c1"># Attributes to replace so the MLRun interface will be fully enabled.</span>
+    <span class="n">_REPLACED_METHODS</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"train"</span><span class="p">,</span>
+        <span class="c1"># "evaluate"</span>
+    <span class="p">]</span>
+
+<div class="viewcode-block" id="HFTrainerMLRunInterface.add_interface"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface.add_interface">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">add_interface</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">obj</span><span class="p">:</span> <span class="n">Trainer</span><span class="p">,</span>
+        <span class="n">restoration</span><span class="p">:</span> <span class="n">CommonTypes</span><span class="o">.</span><span class="n">MLRunInterfaceRestorationType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Enrich the object with this interface properties, methods and functions, so it will have this TensorFlow.Keras</span>
+<span class="sd">        MLRuns features.</span>
+<span class="sd">        :param obj:                     The object to enrich his interface.</span>
+<span class="sd">        :param restoration: Restoration information tuple as returned from 'remove_interface' in order to</span>
+<span class="sd">                                        add the interface in a certain state.</span>
+<span class="sd">        """</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">HFTrainerMLRunInterface</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="n">add_interface</span><span class="p">(</span>
+            <span class="n">obj</span><span class="o">=</span><span class="n">obj</span><span class="p">,</span> <span class="n">restoration</span><span class="o">=</span><span class="n">restoration</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="HFTrainerMLRunInterface.mlrun_train"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.HFTrainerMLRunInterface.mlrun_train">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">mlrun_train</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        MLRuns tf.keras.Model.fit wrapper. It will setup the optimizer when using horovod. The optimizer must be</span>
+<span class="sd">        passed in a keyword argument and when using horovod, it must be passed as an Optimizer instance, not a string.</span>
+
+<span class="sd">        raise MLRunInvalidArgumentError: In case the optimizer provided did not follow the instructions above.</span>
+<span class="sd">        """</span>
+
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="n">Trainer</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># Restore the evaluation method as `train` will use it:</span>
+            <span class="c1"># cls._restore_attribute(obj=self, attribute_name="evaluate")</span>
+
+            <span class="c1"># Call the original fit method:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">original_train</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Replace the evaluation method again:</span>
+            <span class="c1"># cls._replace_function(obj=self, function_name="evaluate")</span>
+
+            <span class="k">return</span> <span class="n">result</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span></div></div>
+
+
+<div class="viewcode-block" id="MLRunCallback"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback">[docs]</a><span class="k">class</span> <span class="nc">MLRunCallback</span><span class="p">(</span><span class="n">TrainerCallback</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Callback for collecting logs during training / evaluation of the `Trainer` API.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"model"</span><span class="p">,</span>
+        <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="n">labels</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">extra_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1"># Store the configurations:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">context</span>
+            <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="s2">"./mlrun-huggingface"</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span> <span class="o">=</span> <span class="n">model_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tag</span> <span class="o">=</span> <span class="n">tag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_labels</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extra_data</span> <span class="o">=</span> <span class="n">extra_data</span> <span class="k">if</span> <span class="n">extra_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">{}</span>
+
+        <span class="c1"># Set up the logging mode:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_training</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_steps</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_metric_scores</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Artifact</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+
+<div class="viewcode-block" id="MLRunCallback.on_epoch_begin"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_epoch_begin">[docs]</a>    <span class="k">def</span> <span class="nf">on_epoch_begin</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">TrainingArguments</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">TrainerState</span><span class="p">,</span>
+        <span class="n">control</span><span class="p">:</span> <span class="n">TrainerControl</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_steps</span><span class="o">.</span><span class="n">append</span><span class="p">([])</span></div>
+
+<div class="viewcode-block" id="MLRunCallback.on_epoch_end"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_epoch_end">[docs]</a>    <span class="k">def</span> <span class="nf">on_epoch_end</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">TrainingArguments</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">TrainerState</span><span class="p">,</span>
+        <span class="n">control</span><span class="p">:</span> <span class="n">TrainerControl</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_metrics</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="MLRunCallback.on_log"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_log">[docs]</a>    <span class="k">def</span> <span class="nf">on_log</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">TrainingArguments</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">TrainerState</span><span class="p">,</span>
+        <span class="n">control</span><span class="p">:</span> <span class="n">TrainerControl</span><span class="p">,</span>
+        <span class="n">logs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">recent_logs</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">log_history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="n">recent_logs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"epoch"</span><span class="p">)</span>
+        <span class="n">current_step</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">recent_logs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"step"</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">current_step</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_steps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_step</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">metric_name</span><span class="p">,</span> <span class="n">metric_score</span> <span class="ow">in</span> <span class="n">recent_logs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">metric_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"train_"</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">metric_name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"train_"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metric_scores</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_metric_scores</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">metric_score</span><span class="p">]</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">metric_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metric_scores</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_metric_scores</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_metric_scores</span><span class="p">[</span><span class="n">metric_name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metric_score</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLRunCallback.on_train_begin"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_train_begin">[docs]</a>    <span class="k">def</span> <span class="nf">on_train_begin</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">TrainingArguments</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">TrainerState</span><span class="p">,</span>
+        <span class="n">control</span><span class="p">:</span> <span class="n">TrainerControl</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_training</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="MLRunCallback.on_train_end"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_train_end">[docs]</a>    <span class="k">def</span> <span class="nf">on_train_end</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">TrainingArguments</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">TrainerState</span><span class="p">,</span>
+        <span class="n">control</span><span class="p">:</span> <span class="n">TrainerControl</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">PreTrainedModel</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">:</span> <span class="n">PreTrainedTokenizer</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_metrics</span><span class="p">()</span>
+
+        <span class="n">temp_directory</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
+
+        <span class="c1"># Save and log the tokenizer:</span>
+        <span class="k">if</span> <span class="n">tokenizer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Save tokenizer:</span>
+            <span class="n">tokenizer_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_directory</span><span class="p">,</span> <span class="s2">"tokenizer"</span><span class="p">)</span>
+            <span class="n">tokenizer</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="n">save_directory</span><span class="o">=</span><span class="n">tokenizer_dir</span><span class="p">)</span>
+            <span class="c1"># Zip the tokenizer directory:</span>
+            <span class="n">tokenizer_zip</span> <span class="o">=</span> <span class="n">shutil</span><span class="o">.</span><span class="n">make_archive</span><span class="p">(</span>
+                <span class="n">base_name</span><span class="o">=</span><span class="s2">"tokenizer"</span><span class="p">,</span>
+                <span class="nb">format</span><span class="o">=</span><span class="s2">"zip"</span><span class="p">,</span>
+                <span class="n">root_dir</span><span class="o">=</span><span class="n">tokenizer_dir</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="c1"># Log the zip file:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span><span class="p">[</span><span class="s2">"tokenizer"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span>
+                <span class="n">item</span><span class="o">=</span><span class="s2">"tokenizer"</span><span class="p">,</span> <span class="n">local_path</span><span class="o">=</span><span class="n">tokenizer_zip</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Save the model:</span>
+        <span class="n">model_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">temp_directory</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">)</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">save_pretrained</span><span class="p">(</span><span class="n">save_directory</span><span class="o">=</span><span class="n">model_dir</span><span class="p">)</span>
+
+        <span class="c1"># Zip the model directory:</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">make_archive</span><span class="p">(</span>
+            <span class="n">base_name</span><span class="o">=</span><span class="s2">"model"</span><span class="p">,</span>
+            <span class="nb">format</span><span class="o">=</span><span class="s2">"zip"</span><span class="p">,</span>
+            <span class="n">root_dir</span><span class="o">=</span><span class="n">model_dir</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Log the model:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">log_model</span><span class="p">(</span>
+            <span class="n">key</span><span class="o">=</span><span class="s2">"model"</span><span class="p">,</span>
+            <span class="n">db_key</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">,</span>
+            <span class="n">model_file</span><span class="o">=</span><span class="s2">"model.zip"</span><span class="p">,</span>
+            <span class="n">tag</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_tag</span><span class="p">,</span>
+            <span class="n">framework</span><span class="o">=</span><span class="s2">"Hugging Face"</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_labels</span><span class="p">,</span>
+            <span class="n">extra_data</span><span class="o">=</span><span class="p">{</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">_extra_data</span><span class="p">},</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="MLRunCallback.on_evaluate"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.MLRunCallback.on_evaluate">[docs]</a>    <span class="k">def</span> <span class="nf">on_evaluate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">args</span><span class="p">:</span> <span class="n">TrainingArguments</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="n">TrainerState</span><span class="p">,</span>
+        <span class="n">control</span><span class="p">:</span> <span class="n">TrainerControl</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_metrics</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_training</span><span class="p">:</span>
+            <span class="k">return</span></div>
+
+        <span class="c1"># TODO: Update the model object</span>
+
+    <span class="k">def</span> <span class="nf">_log_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">metric_name</span><span class="p">,</span> <span class="n">metric_scores</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_metric_scores</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">log_result</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">metric_scores</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">metric_scores</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_log_metric_plot</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">scores</span><span class="o">=</span><span class="n">metric_scores</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">commit</span><span class="p">(</span><span class="n">completed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_log_metric_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scores</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]):</span>
+        <span class="c1"># Initialize a plotly figure:</span>
+        <span class="n">metric_figure</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+
+        <span class="c1"># Add titles:</span>
+        <span class="n">metric_figure</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">"_"</span><span class="p">,</span> <span class="s2">" "</span><span class="p">),</span>
+            <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">"Samples"</span><span class="p">,</span>
+            <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">"Scores"</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Draw:</span>
+        <span class="n">metric_figure</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span>
+            <span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">scores</span><span class="p">)),</span> <span class="n">y</span><span class="o">=</span><span class="n">scores</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"lines"</span><span class="p">)</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Create the plotly artifact:</span>
+        <span class="n">artifact_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_plot"</span>
+        <span class="n">artifact</span> <span class="o">=</span> <span class="n">PlotlyArtifact</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">artifact_name</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="n">metric_figure</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_artifacts</span><span class="p">[</span><span class="n">artifact_name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span><span class="n">artifact</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_apply_mlrun_on_trainer</span><span class="p">(</span>
+    <span class="n">trainer</span><span class="p">:</span> <span class="n">transformers</span><span class="o">.</span><span class="n">Trainer</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">auto_log</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">extra_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="c1"># Get parameters defaults:</span>
+    <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="n">HFTrainerMLRunInterface</span><span class="o">.</span><span class="n">DEFAULT_CONTEXT_NAME</span><span class="p">)</span>
+
+    <span class="n">HFTrainerMLRunInterface</span><span class="o">.</span><span class="n">add_interface</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">trainer</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">auto_log</span><span class="p">:</span>
+        <span class="n">trainer</span><span class="o">.</span><span class="n">add_callback</span><span class="p">(</span>
+            <span class="n">MLRunCallback</span><span class="p">(</span>
+                <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+                <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+                <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span>
+                <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+                <span class="n">extra_data</span><span class="o">=</span><span class="n">extra_data</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_apply_mlrun_on_optimizer</span><span class="p">(</span>
+    <span class="n">optimizer</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">auto_log</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">extra_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="c1"># Get parameters defaults:</span>
+    <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span>
+            <span class="n">HFORTOptimizerMLRunInterface</span><span class="o">.</span><span class="n">DEFAULT_CONTEXT_NAME</span>
+        <span class="p">)</span>
+
+    <span class="n">HFORTOptimizerMLRunInterface</span><span class="o">.</span><span class="n">add_interface</span><span class="p">(</span><span class="n">obj</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">auto_log</span><span class="p">:</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">enable_auto_logging</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+            <span class="n">extra_data</span><span class="o">=</span><span class="n">extra_data</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="apply_mlrun"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.apply_mlrun">[docs]</a><span class="k">def</span> <span class="nf">apply_mlrun</span><span class="p">(</span>
+    <span class="n">huggingface_object</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">auto_log</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">extra_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Wrap the given model with MLRun's interface providing it with mlrun's additional features.</span>
+<span class="sd">    :param huggingface_object: The model to wrap. Can be loaded from the model path given as well.</span>
+<span class="sd">    :param model_name:         The model name to use for storing the model artifact. Default: "model".</span>
+<span class="sd">    :param tag:                The model's tag to log with.</span>
+<span class="sd">    :param context:            MLRun context to work with. If no context is given it will be retrieved via</span>
+<span class="sd">                               'mlrun.get_or_create_ctx(None)'</span>
+<span class="sd">    :param auto_log:           Whether to enable MLRun's auto logging. Default: True.</span>
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">huggingface_object</span><span class="p">,</span> <span class="n">transformers</span><span class="o">.</span><span class="n">Trainer</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_apply_mlrun_on_trainer</span><span class="p">(</span>
+            <span class="n">trainer</span><span class="o">=</span><span class="n">huggingface_object</span><span class="p">,</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">auto_log</span><span class="o">=</span><span class="n">auto_log</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+            <span class="n">extra_data</span><span class="o">=</span><span class="n">extra_data</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">optimum.onnxruntime</span> <span class="k">as</span> <span class="nn">optimum_ort</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">huggingface_object</span><span class="p">,</span> <span class="n">optimum_ort</span><span class="o">.</span><span class="n">ORTOptimizer</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_apply_mlrun_on_optimizer</span><span class="p">(</span>
+            <span class="n">optimizer</span><span class="o">=</span><span class="n">huggingface_object</span><span class="p">,</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">auto_log</span><span class="o">=</span><span class="n">auto_log</span><span class="p">,</span>
+            <span class="n">labels</span><span class="o">=</span><span class="n">labels</span><span class="p">,</span>
+            <span class="n">extra_data</span><span class="o">=</span><span class="n">extra_data</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunInvalidArgumentError</span></div>
+
+
+<span class="c1"># ---------------------- from auto_trainer--------------------------------</span>
+<div class="viewcode-block" id="KWArgsPrefixes"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.KWArgsPrefixes">[docs]</a><span class="k">class</span> <span class="nc">KWArgsPrefixes</span><span class="p">:</span>
+    <span class="n">MODEL_CLASS</span> <span class="o">=</span> <span class="s2">"CLASS_"</span>
+    <span class="n">FIT</span> <span class="o">=</span> <span class="s2">"FIT_"</span>
+    <span class="n">TRAIN</span> <span class="o">=</span> <span class="s2">"TRAIN_"</span>
+    <span class="n">PREDICT</span> <span class="o">=</span> <span class="s2">"PREDICT_"</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_sub_dict_by_prefix</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">prefix_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Collect all the keys from the given dict that starts with the given prefix and creates a new dictionary with these</span>
+<span class="sd">    keys.</span>
+
+<span class="sd">    :param src:         The source dict to extract the values from.</span>
+<span class="sd">    :param prefix_key:  Only keys with this prefix will be returned. The keys in the result dict will be without this</span>
+<span class="sd">                        prefix.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">prefix_key</span><span class="p">,</span> <span class="s2">""</span><span class="p">):</span> <span class="n">val</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">prefix_key</span><span class="p">)</span>
+    <span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">_get_dataframe</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span><span class="p">,</span>
+    <span class="n">label_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Getting the DataFrame of the dataset and drop the columns accordingly.</span>
+
+<span class="sd">    :param context:         MLRun context.</span>
+<span class="sd">    :param dataset:         The dataset to train the model on.</span>
+<span class="sd">                            Can be either a list of lists, dict, URI or a FeatureVector.</span>
+<span class="sd">    :param label_columns:   The target label(s) of the column(s) in the dataset. for Regression or</span>
+<span class="sd">                            Classification tasks.</span>
+<span class="sd">    :param drop_columns:    str/int or a list of strings/ints that represent the column names/indices to drop.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+        <span class="c1"># Checking if drop_columns provided by integer type:</span>
+        <span class="k">if</span> <span class="n">drop_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span>
+                <span class="nb">isinstance</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">drop_columns</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">"drop_columns must be an integer/list of integers if not provided with a URI/FeatureVector dataset"</span>
+                <span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">label_columns</span>
+
+    <span class="n">store_uri_prefix</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">datastore</span><span class="o">.</span><span class="n">parse_store_uri</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">artifact_url</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">StorePrefix</span><span class="o">.</span><span class="n">FeatureVector</span> <span class="o">==</span> <span class="n">store_uri_prefix</span><span class="p">:</span>
+        <span class="c1"># feature-vector case:</span>
+        <span class="n">label_columns</span> <span class="o">=</span> <span class="n">label_columns</span> <span class="ow">or</span> <span class="n">dataset</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">label_column</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">get_offline_features</span><span class="p">(</span>
+            <span class="n">dataset</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">()</span>
+
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"label columns: </span><span class="si">{</span><span class="n">label_columns</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># simple URL case:</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">as_df</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">drop_columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">col</span> <span class="ow">in</span> <span class="n">dataset</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">drop_columns</span><span class="p">):</span>
+                <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">"not all of the columns to drop in the dataset, drop columns process skipped"</span>
+                <span class="p">)</span>
+    <span class="k">return</span> <span class="n">dataset</span><span class="p">,</span> <span class="n">label_columns</span>
+
+
+<span class="c1"># ---------------------- Hugging Face Trainer --------------------------------</span>
+
+
+<span class="k">def</span> <span class="nf">_create_compute_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">EvalPrediction</span><span class="p">],</span> <span class="n">Dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    This function create and returns a function that will be used to compute metrics at evaluation.</span>
+<span class="sd">    :param metrics: List of different metrics for evaluate the model such as f1, accuracy etc.</span>
+
+<span class="sd">    :returns: Function that will be used to compute metrics at evaluation.</span>
+<span class="sd">             Must take a [`EvalPrediction`] and return a dictionary string to metric values.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="nf">_compute_metrics</span><span class="p">(</span><span class="n">eval_pred</span><span class="p">):</span>
+        <span class="n">logits</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">eval_pred</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">metric_dict_results</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
+            <span class="n">load_met</span> <span class="o">=</span> <span class="n">load_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+            <span class="n">metric_res</span> <span class="o">=</span> <span class="n">load_met</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">predictions</span><span class="o">=</span><span class="n">predictions</span><span class="p">,</span> <span class="n">references</span><span class="o">=</span><span class="n">labels</span><span class="p">)[</span>
+                <span class="n">metric</span>
+            <span class="p">]</span>
+            <span class="n">metric_dict_results</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">metric_res</span>
+
+        <span class="k">return</span> <span class="n">metric_dict_results</span>
+
+    <span class="k">return</span> <span class="n">_compute_metrics</span>
+
+
+<span class="k">def</span> <span class="nf">_edit_columns</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">rename_columns</span><span class="p">:</span> <span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Drop and renames that columns of the given dataset</span>
+<span class="sd">    :param dataset:         Dataset to process</span>
+<span class="sd">    :param drop_columns:    The columns to drop from the dataset.</span>
+<span class="sd">    :param rename_columns:  Dict of columns ro rename : {&lt;old_name&gt;: &lt;new_name&gt;, ...}</span>
+
+<span class="sd">    :returns: The dataset after the desired process</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">drop_columns</span><span class="p">:</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">remove_columns</span><span class="p">(</span><span class="n">drop_columns</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rename_columns</span><span class="p">:</span>
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="n">rename_columns</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dataset</span>
+
+
+<span class="k">def</span> <span class="nf">_prepare_dataset</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">dataset_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">label_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">num_of_train_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">train_test_split_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Dataset</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Loading the dataset and editing the columns</span>
+
+<span class="sd">    :param context:                 MLRun contex</span>
+<span class="sd">    :param dataset_name:            The name of the dataset to get from the HuggingFace hub</span>
+<span class="sd">    :param label_name:              The target label of the column in the dataset.</span>
+<span class="sd">    :param drop_columns:            The columns to drop from the dataset.</span>
+<span class="sd">    :param num_of_train_samples:    Max number of training samples, for debugging.</span>
+<span class="sd">    :param train_test_split_size:   Should be between 0.0 and 1.0 and represent the proportion of the dataset to include</span>
+<span class="sd">                                    in the test split.</span>
+<span class="sd">    :param random_state:            Random state for train_test_split</span>
+
+<span class="sd">    """</span>
+
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">"Loading and editing </span><span class="si">{</span><span class="n">dataset_name</span><span class="si">}</span><span class="s2"> dataset from Hugging Face hub"</span>
+    <span class="p">)</span>
+    <span class="n">rename_cols</span> <span class="o">=</span> <span class="p">{</span><span class="n">label_name</span><span class="p">:</span> <span class="s2">"labels"</span><span class="p">}</span>
+
+    <span class="c1"># Loading and editing dataset:</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">load_dataset</span><span class="p">(</span><span class="n">dataset_name</span><span class="p">)</span>
+
+    <span class="c1"># train set</span>
+    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">"train"</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">num_of_train_samples</span><span class="p">:</span>
+        <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_of_train_samples</span><span class="p">))</span>
+        <span class="p">)</span>
+    <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">_edit_columns</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">,</span> <span class="n">drop_columns</span><span class="p">,</span> <span class="n">rename_cols</span><span class="p">)</span>
+
+    <span class="c1"># test set</span>
+    <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">"test"</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">train_test_split_size</span> <span class="ow">or</span> <span class="n">num_of_train_samples</span><span class="p">:</span>
+        <span class="n">train_test_split_size</span> <span class="o">=</span> <span class="n">train_test_split_size</span> <span class="ow">or</span> <span class="mf">0.2</span>
+        <span class="n">num_of_test_samples</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">train_dataset</span><span class="o">.</span><span class="n">num_rows</span> <span class="o">*</span> <span class="n">train_test_split_size</span><span class="p">)</span>
+            <span class="o">//</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">train_test_split_size</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span><span class="o">.</span><span class="n">select</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">num_of_test_samples</span><span class="p">))</span>
+        <span class="p">)</span>
+    <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">_edit_columns</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">,</span> <span class="n">drop_columns</span><span class="p">,</span> <span class="n">rename_cols</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span>
+
+
+<div class="viewcode-block" id="train"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.train">[docs]</a><span class="k">def</span> <span class="nf">train</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">hf_dataset</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dataset</span><span class="p">:</span> <span class="n">DataItem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">test_set</span><span class="p">:</span> <span class="n">DataItem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">drop_columns</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">pretrained_tokenizer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">pretrained_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"huggingface-model"</span><span class="p">,</span>
+    <span class="n">label_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"labels"</span><span class="p">,</span>
+    <span class="n">text_col</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"text"</span><span class="p">,</span>
+    <span class="n">num_of_train_samples</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">train_test_split_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Training and evaluating a pretrained model with a pretrained tokenizer over a dataset.</span>
+<span class="sd">    The dataset can be either be the name of the dataset that contains in the HuggingFace hub,</span>
+<span class="sd">    or a URI or a FeatureVector</span>
+
+<span class="sd">    :param context:                 MLRun context</span>
+<span class="sd">    :param hf_dataset:              The name of the dataset to get from the HuggingFace hub</span>
+<span class="sd">    :param dataset:                 The dataset to train the model on. Can be either a URI or a FeatureVector</span>
+<span class="sd">    :param test_set:                The test set to train the model with.</span>
+<span class="sd">    :param drop_columns:            The columns to drop from the dataset.</span>
+<span class="sd">    :param pretrained_tokenizer:    The name of the pretrained tokenizer from the HuggingFace hub.</span>
+<span class="sd">    :param pretrained_model:        The name of the pretrained model from the HuggingFace hub.</span>
+<span class="sd">    :param model_name:              The model's name to use for storing the model artifact, default to 'model'</span>
+<span class="sd">    :param model_class:             The class of the model, e.g. `transformers.AutoModelForSequenceClassification`</span>
+<span class="sd">    :param label_name:              The target label of the column in the dataset.</span>
+<span class="sd">    :param text_col:                The input text column un the dataset.</span>
+<span class="sd">    :param num_of_train_samples:    Max number of training samples, for debugging.</span>
+<span class="sd">    :param train_test_split_size:   Should be between 0.0 and 1.0 and represent the proportion of the dataset to include</span>
+<span class="sd">                                    in the test split.</span>
+<span class="sd">    :param metrics:                 List of different metrics for evaluate the model such as f1, accuracy etc.</span>
+<span class="sd">    :param random_state:            Random state for train_test_split</span>
+<span class="sd">    """</span>
+
+    <span class="k">if</span> <span class="n">train_test_split_size</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">test_set</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">"'train_test_split_size' is not provided, setting train_test_split_size to 0.2"</span>
+        <span class="p">)</span>
+        <span class="n">train_test_split_size</span> <span class="o">=</span> <span class="mf">0.2</span>
+
+    <span class="c1"># Creating tokenizer:</span>
+    <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">AutoTokenizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">pretrained_tokenizer</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">preprocess_function</span><span class="p">(</span><span class="n">examples</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">tokenizer</span><span class="p">(</span><span class="n">examples</span><span class="p">[</span><span class="n">text_col</span><span class="p">],</span> <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># prepare data for training</span>
+    <span class="k">if</span> <span class="n">hf_dataset</span><span class="p">:</span>
+        <span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">_prepare_dataset</span><span class="p">(</span>
+            <span class="n">context</span><span class="p">,</span>
+            <span class="n">hf_dataset</span><span class="p">,</span>
+            <span class="n">label_name</span><span class="p">,</span>
+            <span class="n">drop_columns</span><span class="p">,</span>
+            <span class="n">num_of_train_samples</span><span class="p">,</span>
+            <span class="n">train_test_split_size</span><span class="p">,</span>
+            <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">dataset</span><span class="p">:</span>
+        <span class="c1"># Get DataFrame by URL or by FeatureVector:</span>
+        <span class="n">train_dataset</span><span class="p">,</span> <span class="n">label_name</span> <span class="o">=</span> <span class="n">_get_dataframe</span><span class="p">(</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+            <span class="n">dataset</span><span class="o">=</span><span class="n">dataset</span><span class="p">,</span>
+            <span class="n">label_columns</span><span class="o">=</span><span class="n">label_name</span><span class="p">,</span>
+            <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">test_set</span><span class="p">:</span>
+            <span class="n">test_dataset</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_dataframe</span><span class="p">(</span>
+                <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>
+                <span class="n">dataset</span><span class="o">=</span><span class="n">test_set</span><span class="p">,</span>
+                <span class="n">label_columns</span><span class="o">=</span><span class="n">label_name</span><span class="p">,</span>
+                <span class="n">drop_columns</span><span class="o">=</span><span class="n">drop_columns</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">train_dataset</span><span class="p">,</span> <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+                <span class="n">train_dataset</span><span class="p">,</span>
+                <span class="n">test_size</span><span class="o">=</span><span class="n">train_test_split_size</span><span class="p">,</span>
+                <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="n">train_dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">train_dataset</span><span class="p">)</span>
+        <span class="n">test_dataset</span> <span class="o">=</span> <span class="n">Dataset</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">test_dataset</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunInvalidArgumentError</span><span class="p">(</span>
+            <span class="s2">"Training data was not provided. A training dataset is mandatory for training."</span>
+            <span class="s2">" Please provide a training set using one of the arguments 'hf_dataset' or 'dataset'."</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Mapping datasets with the tokenizer:</span>
+    <span class="n">tokenized_train</span> <span class="o">=</span> <span class="n">train_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">preprocess_function</span><span class="p">,</span> <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">tokenized_test</span> <span class="o">=</span> <span class="n">test_dataset</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">preprocess_function</span><span class="p">,</span> <span class="n">batched</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Creating data collator for batching:</span>
+    <span class="n">data_collator</span> <span class="o">=</span> <span class="n">DataCollatorWithPadding</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">)</span>
+
+    <span class="c1"># Parsing kwargs:</span>
+    <span class="n">train_kwargs</span> <span class="o">=</span> <span class="n">_get_sub_dict_by_prefix</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">prefix_key</span><span class="o">=</span><span class="n">KWArgsPrefixes</span><span class="o">.</span><span class="n">TRAIN</span>
+    <span class="p">)</span>
+    <span class="n">model_class_kwargs</span> <span class="o">=</span> <span class="n">_get_sub_dict_by_prefix</span><span class="p">(</span>
+        <span class="n">src</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">prefix_key</span><span class="o">=</span><span class="n">KWArgsPrefixes</span><span class="o">.</span><span class="n">MODEL_CLASS</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Loading our pretrained model:</span>
+    <span class="n">model_class_kwargs</span><span class="p">[</span><span class="s2">"pretrained_model_name_or_path"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">model_class_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"pretrained_model_name_or_path"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">pretrained_model</span>
+    <span class="p">)</span>
+    <span class="n">train_kwargs</span><span class="p">[</span><span class="s2">"hub_token"</span><span class="p">]</span> <span class="o">=</span> <span class="n">train_kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"hub_token"</span><span class="p">)</span> <span class="ow">or</span> <span class="n">pretrained_tokenizer</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">model_class_kwargs</span><span class="p">[</span><span class="s2">"pretrained_model_name_or_path"</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunRuntimeError</span><span class="p">(</span>
+            <span class="s2">"Must provide pretrained_model name as "</span>
+            <span class="s2">"function argument or in extra params"</span>
+        <span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">create_class</span><span class="p">(</span><span class="n">model_class</span><span class="p">)</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="o">**</span><span class="n">model_class_kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Preparing training arguments:</span>
+    <span class="n">training_args</span> <span class="o">=</span> <span class="n">TrainingArguments</span><span class="p">(</span>
+        <span class="o">**</span><span class="n">train_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">compute_metrics</span> <span class="o">=</span> <span class="n">_create_compute_metrics</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span> <span class="k">if</span> <span class="n">metrics</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">trainer</span> <span class="o">=</span> <span class="n">Trainer</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">args</span><span class="o">=</span><span class="n">training_args</span><span class="p">,</span>
+        <span class="n">train_dataset</span><span class="o">=</span><span class="n">tokenized_train</span><span class="p">,</span>
+        <span class="n">eval_dataset</span><span class="o">=</span><span class="n">tokenized_test</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="o">=</span><span class="n">tokenizer</span><span class="p">,</span>
+        <span class="n">data_collator</span><span class="o">=</span><span class="n">data_collator</span><span class="p">,</span>
+        <span class="n">compute_metrics</span><span class="o">=</span><span class="n">compute_metrics</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">apply_mlrun</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+
+    <span class="c1"># Apply training with evaluation:</span>
+    <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"training '</span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+    <span class="n">trainer</span><span class="o">.</span><span class="n">train</span><span class="p">()</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_model_dir</span><span class="p">(</span><span class="n">model_uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">model_file</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">artifacts</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">model_uri</span><span class="p">)</span>
+    <span class="n">model_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
+    <span class="c1"># Unzip the Model:</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">model_file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_file</span><span class="p">:</span>
+        <span class="n">zip_file</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">model_dir</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model_dir</span>
+
+
+<div class="viewcode-block" id="optimize"><a class="viewcode-back" href="documentation.html#hugging_face_classifier_trainer.hugging_face_classifier_trainer.optimize">[docs]</a><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span>
+    <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"optimized_model"</span><span class="p">,</span>
+    <span class="n">target_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"./optimized"</span><span class="p">,</span>
+    <span class="n">optimization_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Optimizing the transformer model using ONNX optimization.</span>
+
+
+<span class="sd">    :param model_path:          The path of the model to optimize.</span>
+<span class="sd">    :param model_name:          Name of the optimized model.</span>
+<span class="sd">    :param target_dir:          The directory to save the ONNX model.</span>
+<span class="sd">    :param optimization_level:  Optimization level performed by ONNX Runtime of the loaded graph. (default is 1)</span>
+<span class="sd">    """</span>
+    <span class="c1"># We import these in the function scope so ONNX won't be mandatory for the other handlers:</span>
+    <span class="kn">from</span> <span class="nn">optimum.onnxruntime</span> <span class="kn">import</span> <span class="n">ORTModelForSequenceClassification</span><span class="p">,</span> <span class="n">ORTOptimizer</span>
+    <span class="kn">from</span> <span class="nn">optimum.onnxruntime.configuration</span> <span class="kn">import</span> <span class="n">OptimizationConfig</span>
+
+    <span class="n">model_dir</span> <span class="o">=</span> <span class="n">_get_model_dir</span><span class="p">(</span><span class="n">model_uri</span><span class="o">=</span><span class="n">model_path</span><span class="p">)</span>
+    <span class="c1"># Creating configuration for optimization step:</span>
+    <span class="n">optimization_config</span> <span class="o">=</span> <span class="n">OptimizationConfig</span><span class="p">(</span><span class="n">optimization_level</span><span class="o">=</span><span class="n">optimization_level</span><span class="p">)</span>
+
+    <span class="c1"># Converting our pretrained model to an ONNX-Runtime model:</span>
+    <span class="n">ort_model</span> <span class="o">=</span> <span class="n">ORTModelForSequenceClassification</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+        <span class="n">model_dir</span><span class="p">,</span> <span class="n">from_transformers</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Creating an ONNX-Runtime optimizer from ONNX model:</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">ORTOptimizer</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="n">ort_model</span><span class="p">)</span>
+
+    <span class="n">apply_mlrun</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+    <span class="c1"># Optimizing and saving the ONNX model:</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">save_dir</span><span class="o">=</span><span class="n">target_dir</span><span class="p">,</span> <span class="n">optimization_config</span><span class="o">=</span><span class="n">optimization_config</span><span class="p">)</span></div>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
