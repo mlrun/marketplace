@@ -8,7 +8,7 @@ metadata:
     author: zeevr
   categories:
   - machine-learning
-  - Data Preparation
+  - data-preparation
   - Data Generation
   - GenAI
 spec:
