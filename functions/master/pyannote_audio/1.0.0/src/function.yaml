@@ -7,7 +7,7 @@ metadata:
   labels:
     author: guyl
   categories:
-  - Deep Learning
+  - deep-learning
   - Huggingface
   - Audio
 spec:
