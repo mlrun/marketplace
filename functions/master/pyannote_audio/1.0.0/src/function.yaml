@@ -8,7 +8,7 @@ metadata:
     author: guyl
   categories:
   - deep-learning
-  - Huggingface
+  - huggingface
   - Audio
 spec:
   command: ''
