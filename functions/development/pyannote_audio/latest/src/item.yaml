@@ -2,7 +2,7 @@ apiVersion: v1
 categories:
 - deep-learning
 - huggingface
-- Audio
+- audio
 description: pyannote's speech diarization of audio files
 doc: ''
 example: pyannote_audio.ipynb

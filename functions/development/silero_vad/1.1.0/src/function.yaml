@@ -9,7 +9,7 @@ metadata:
   categories:
   - deep-learning
   - PyTorch
-  - Audio
+  - audio
 spec:
   command: ''
   args: []
