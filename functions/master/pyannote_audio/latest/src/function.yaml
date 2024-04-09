@@ -9,7 +9,7 @@ metadata:
   categories:
   - deep-learning
   - huggingface
-  - Audio
+  - audio
 spec:
   command: ''
   args: []

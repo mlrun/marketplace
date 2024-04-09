@@ -2,7 +2,7 @@ apiVersion: v1
 categories:
 - deep-learning
 - PyTorch
-- Audio
+- audio
 description: Silero VAD (Voice Activity Detection) functions.
 doc: ''
 example: silero_vad.ipynb
