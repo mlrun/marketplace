@@ -1,0 +1,904 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Question Answering</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fquestion_answering_example.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/edit/master/docs/question_answering_example.ipynb" title="Edit this page">
+<span class="headerbtn__icon-container">
+<i class="fas fa-pencil-alt"></i>
+</span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+<button aria-label="Download this page" class="headerbtn menu-dropdown__trigger">
+<i class="fas fa-download"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="../src/question_answering.ipynb" title="Download source file">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file"></i>
+</span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+</li>
+<li>
+<button class="headerbtn" data-placement="left" data-toggle="tooltip" onclick="printPdf(this)" title="Print to PDF">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+<label class="headerbtn headerbtn-page-toc" for="__page-toc">
+<span class="headerbtn__icon-container">
+<i class="fas fa-list"></i>
+</span>
+</label>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+    </div>
+<nav aria-label="Page" id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#short-description-and-explenation">
+   Short description and explenation
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#requirements">
+   Requirements
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#demo-1">
+   Demo 1
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#import-the-function-import-mlrun-set-project-and-import-function">
+     (1.) Import the function (import mlrun, set project and import function)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#usage">
+     (2.) Usage
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#review-results">
+     (3.) Review results
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#demo-2">
+   Demo 2
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id1">
+     (1.) Import the function (import mlrun, set project and import function)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id2">
+     (2.) Usage
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id3">
+     (3.) Review results
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#demo-3">
+   Demo 3
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id4">
+     (1.) Import the function (import mlrun, set project and import function)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id5">
+     (2.) Usage
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id6">
+     (3.) Review results
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Question Answering</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#short-description-and-explenation">
+   Short description and explenation
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#background">
+   Background
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#requirements">
+   Requirements
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#documentation">
+   Documentation
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#demo-1">
+   Demo 1
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#import-the-function-import-mlrun-set-project-and-import-function">
+     (1.) Import the function (import mlrun, set project and import function)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#usage">
+     (2.) Usage
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#review-results">
+     (3.) Review results
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#demo-2">
+   Demo 2
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id1">
+     (1.) Import the function (import mlrun, set project and import function)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id2">
+     (2.) Usage
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id3">
+     (3.) Review results
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#demo-3">
+   Demo 3
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id4">
+     (1.) Import the function (import mlrun, set project and import function)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id5">
+     (2.) Usage
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#id6">
+     (3.) Review results
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<section id="question-answering">
+<h1>Question Answering<a class="headerlink" href="#question-answering" title="Permalink to this headline">#</a></h1>
+<section id="short-description-and-explenation">
+<h2>Short description and explenation<a class="headerlink" href="#short-description-and-explenation" title="Permalink to this headline">#</a></h2>
+<p>This function enables ad-hoc question answering over documents by ingesting text into a language model and returning formatted responses.<br/>
+It accepts:<br/></p>
+<ul class="simple">
+<li><p>A language model<br/></p></li>
+<li><p>Text files with content<br/></p></li>
+<li><p>Questions to answer<br/></p></li>
+<li><p>More inputs can be given for configuration <br/></p></li>
+</ul>
+<p>The model processes the files to build understanding. Questions posed are then answered in one of two modes:</p>
+<p>Default mode: <br/>
+The model directly answers each question using its own capabilities.</p>
+<p>Poll mode: <br/>
+Additional models are included to separately answer each question. An aggregation algorithm determines the best response through consensus between models.<br/>
+Two options exist for consensus methodology:<br/></p>
+<p>Average Answer: <br/>
+Each model’s answer is scored. The response with the average highest score amongst models is selected. Useful for numeric or ranked responses.</p>
+<p>Most Common Answer:<br/> The answer that occurs most frequently across models is selected. Useful for textual responses to avoid outliers.</p>
+<p>Using multiple models via the poll mode provides accuracy improvements for questions lacking definitive answers, as it refines responses through an ensemble process. <br/></p>
+</section>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
+<p>At the core, advanced natural language processing (NLP) models called foundation models are being leveraged to read and comprehend the input text files. <br/>
+Specifically, models such as GPT-3 or Codex from Anthropic are used as the base language model.</p>
+<p>When documents are fed into the function, the background process invokes these models to ingest and digest the information.<br/></p>
+<p>This provides the knowledge base for the models to then offer informed answers tailored to any queries about the documents.<br/>
+The parameters controlling model size and computation time provide tradeoffs between cost, speed, and sophistication of comprehension.</p>
+<p>Additionally, the poll option expands on a single model by sampling responses from a number of models as mentioned above. <br/></p>
+</section>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">transformers</span></code> <br/>
+<code class="docutils literal notranslate"><span class="pre">torch</span></code> <br/>
+<code class="docutils literal notranslate"><span class="pre">tqdm</span></code> <br/></p>
+</section>
+<section id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">data_path</span></code>:  A path to a directory of text files or a path to a text file to ask questions about. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">model_name</span></code>: The pre-trained model name from the huggingface hub to use for answering questions. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">questions</span></code>: The questions to ask. A list of lists of questions to ask per text file, and devided <br/>
+by question groups, the groups can be determained by size (in order to <br/>
+avoid large inputs to the llm) or by questioning method (regular or poll like questioning). <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">device_map</span></code>: A map to use for loading the model on multiple devices. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">model_kwargs</span></code>: Keyword arguments to pass for loading the model using HuggingFace’s <br/>
+<em>transformers.AutoModelForCausalLM.from_pretrained</em> function. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">auto_gptq_exllama_max_input_length</span></code>: For AutoGPTQ models to set and extend the model’s input buffer size. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">tokenizer_name</span></code>: The tokenizer name from the huggingface hub to use. If not given, the given model name will be used. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">tokenizer_kwargs</span></code>: Keyword arguments to pass for loading the tokenizer using HuggingFace’s <br/>
+<em>transformers.AutoTokenizer.from_pretrained</em> function. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">text_wrapper</span></code>: Must have a placeholder (‘{}’) for the text of the file. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">questions_wrapper</span></code>: A wrapper for the questions received. Will be added after the text wrapper in the prompt template. <br/>
+Must have a placeholder (‘{}’) for the questions. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">generation_config</span></code>: HuggingFace’s <em>GenerationConfig</em> keyword arguments to pass to the <em>generate</em> method. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">questions_config</span></code>: A dictionary or list of dictionaries containing specific ways to answer questions (using a poll for example), <br/>
+each dictionary in the list is for corresponding question group and determines the question asking method <br/>
+for said group. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">batch_size</span></code>: Batch size for inference. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">questions_columns</span></code>: Columns to use for the dataframe returned. <br/></p>
+<p><code class="docutils literal notranslate"><span class="pre">verbose</span></code>: Whether to present logs of a progress bar and errors. Default: True. <br/></p>
+</section>
+<section id="demo-1">
+<h2>Demo 1<a class="headerlink" href="#demo-1" title="Permalink to this headline">#</a></h2>
+<p>This is a short and simple example to show the basic use of the function.</p>
+<section id="import-the-function-import-mlrun-set-project-and-import-function">
+<h3>(1.) Import the function (import mlrun, set project and import function)<a class="headerlink" href="#import-the-function-import-mlrun-set-project-and-import-function" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">transformers</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">project</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"call-center-demo-1"</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">=</span><span class="s2">"./"</span><span class="p">,</span>
+    <span class="n">user_project</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"default_image"</span><span class="p">:</span> <span class="s2">"mlrun/mlrun"</span><span class="p">,</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">set_function</span><span class="p">(</span>
+    <span class="s2">"question-answering.py"</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"question-answering"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"job"</span><span class="p">,</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"answer_questions"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">project</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We create a text file that the model can be asked about</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_make_data_dir_for_test</span><span class="p">():</span>
+    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+    <span class="c1"># The information the model will need in order to answer our question</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="s2">"The apple is red."</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">data_dir</span> <span class="o">+</span> <span class="s2">"/test_data.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data_dir</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="usage">
+<h3>(2.) Usage<a class="headerlink" href="#usage" title="Permalink to this headline">#</a></h3>
+<p>Then we set where to take the path to the text file we want to ask about, the questions, and column name for the answer table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_path</span> <span class="o">=</span> <span class="n">_make_data_dir_for_test</span><span class="p">()</span>
+<span class="c1"># The question for the model to answer</span>
+<span class="n">question</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"What is the color of the apple?"</span><span class="p">]</span>
+<span class="c1"># The column of the answer in the data frame returned by the function</span>
+<span class="n">column_name</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"color"</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we run the function with all the parameters we prepered earlier</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">demo1_run</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"answer_questions"</span><span class="p">,</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model"</span><span class="p">:</span> <span class="s2">"distilgpt2"</span><span class="p">,</span>
+        <span class="s2">"input_path"</span><span class="p">:</span> <span class="n">input_path</span><span class="p">,</span>
+        <span class="s2">"questions"</span><span class="p">:</span> <span class="n">question</span><span class="p">,</span>
+        <span class="s2">"questions_columns"</span><span class="p">:</span> <span class="n">column_name</span><span class="p">,</span>
+        <span class="s2">"generation_config"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">"do_sample"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"temperature"</span><span class="p">:</span> <span class="mf">0.8</span><span class="p">,</span>
+            <span class="s2">"top_p"</span><span class="p">:</span> <span class="mf">0.9</span><span class="p">,</span>
+            <span class="s2">"early_stopping"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"max_new_tokens"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">},</span>
+    <span class="n">returns</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">"question_answering_df: dataset"</span><span class="p">,</span>
+        <span class="s2">"question_answering_errors: result"</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">artifact_path</span><span class="o">=</span><span class="s2">"./"</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="review-results">
+<h3>(3.) Review results<a class="headerlink" href="#review-results" title="Permalink to this headline">#</a></h3>
+<p>and after the run is finished we can take a look and see our answer</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">demo1_run</span><span class="o">.</span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="demo-2">
+<h2>Demo 2<a class="headerlink" href="#demo-2" title="Permalink to this headline">#</a></h2>
+<p>This is a much larger example, we will show how we use this function to analyze a number of calls between agents and customer of a internet company (all the data is generated by Iguazio). <br/>
+For something like this, we recomend using a strong model, and putting some time into making the prompts.</p>
+<section id="id1">
+<h3>(1.) Import the function (import mlrun, set project and import function)<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">BitsAndBytesConfig</span><span class="p">,</span> <span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-12-18 10:18:37,490 [warning] Client version with higher version than server version isn't supported, align your client to the server version: {'parsed_server_version': Version(major=1, minor=5, patch=2, prerelease='rc1', build='track'), 'parsed_client_version': Version(major=1, minor=6, patch=0, prerelease='rc11', build=None)}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">project</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"call-center-demo-2"</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">=</span><span class="s2">"./"</span><span class="p">,</span>
+    <span class="n">user_project</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"default_image"</span><span class="p">:</span> <span class="s2">"mlrun/mlrun"</span><span class="p">,</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-12-18 10:18:51,651 [info] Project loaded successfully: {'project_name': 'call-center-demo-zeev55'}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">set_function</span><span class="p">(</span>
+    <span class="s2">"question-answering.py"</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"question-answering"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"job"</span><span class="p">,</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"answer_questions"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">project</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.projects.project.MlrunProject at 0x7f8bc5b0a370&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id2">
+<h3>(2.) Usage<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>This example is a bit more complicated as we mentioned, we give the model a list of questions, for some of them we give the model a list of answers to choose from.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">QUESTIONS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"1. Write a long summary of the text, focus on the topic (max 50 words)."</span><span class="p">,</span>
+    <span class="s2">"2. Was the Client's concern addressed, (choose only one) [Yes, No]?"</span><span class="p">,</span>
+    <span class="p">]</span>
+
+<span class="n">qa_questions_columns</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="s2">"Summary"</span><span class="p">,</span>
+                        <span class="s2">"is_fixed"</span><span class="p">,</span>
+                        <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another thing we give the model this time is answer examples (one/few shot answering), this can be done to show the model how you want the answer to be structured or caculated. <br/></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For every file we ask about, the model will be presented with this example of a call and how we want the answers.</span>
+<span class="n">DEMO_CALL</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"Agent: Good afternoon, you've reached [Internet Service Provider] customer support. I'm Megan. How can I assist "</span>
+    <span class="s2">"you today?</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Customer: Hello, Megan. This is Lisa. I've noticed some billing discrepancies on my last statement.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Agent: Thank you, Lisa. Let me pull up your account. I see the billing discrepancies you mentioned. It appears "</span>
+    <span class="s2">"there was an error in the charges. I apologize for the inconvenience.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Customer: Thank you for acknowledging the issue, Megan. Can you please help me get it resolved?</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Agent: Absolutely, Lisa. I've made note of the discrepancies, and I'll escalate this to our billing department "</span>
+    <span class="s2">"for investigation and correction. You should see the adjustments on your next statement.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Customer: That sounds good, Megan. I appreciate your help.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Agent: Not a problem, Lisa. Have a wonderful day, and we'll get this sorted out for you.</span><span class="se">\n</span><span class="s2">"</span>
+<span class="p">)</span>
+
+<span class="n">DEMO_ANSWERS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"1. The customer, contacted the call center regarding billing discrepancies on her statement. The agent, "</span>
+    <span class="s2">"acknowledged the issue, assured The customer it would be resolved, and escalated it to the billing department for "</span>
+    <span class="s2">"correction.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"2. Yes.</span><span class="se">\n</span><span class="s2">"</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we need to wrap it all nicely to be given to the model as a single prompt, this is done with a text wrapper, and a question wrapper. <br/>
+both of them will be concatenated inside the function with the questions and passed to the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The wrappers are built according to the model's convensions to improve result</span>
+<span class="n">TEXT_WRAPPER</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"&lt;|im_start|&gt;system: You are an AI assistant that answers questions accurately and shortly&lt;|im_end|&gt;</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"&lt;|im_start|&gt;user: Given the following text:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">DEMO_CALL</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"answer the questions as accurately as you can:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">QUESTIONS</span><span class="si">}</span><span class="s2">&lt;|im_end|&gt;</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"&lt;|im_start|&gt;assistant:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">DEMO_ANSWERS</span><span class="si">}</span><span class="s2">&lt;|im_end|&gt;</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"&lt;|im_start|&gt;user: Given the following text:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span>
+<span class="p">)</span> 
+<span class="n">QUESTIONS_WRAPPER</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">" answer the given questions as accurately as you can, do not write more answers the questions:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"</span><span class="si">{}</span><span class="s2">&lt;|im_end|&gt;</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"&lt;|im_start|&gt;assistant:</span><span class="se">\n</span><span class="s2">"</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The last few parameters we need to set are the model we will use, the input lenth (no available for all models) and the batch size. <br/>
+The batch size determains how many files we want procced at each epoch, and the larger we go the faster the proccess will be, as long as our memory is sufficient.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># We like this version of mistral's model, which is small and fast but also gives great results</span>
+<span class="n">qa_model</span> <span class="o">=</span> <span class="s2">"TheBloke/Mistral-7B-OpenOrca-GPTQ"</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finnaly, we run the function with all the parameters we prepared.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Question answering:</span>
+<span class="n">demo2_run</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="s2">"question-answering"</span><span class="p">,</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"answer_questions"</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"data_path"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"./calls"</span><span class="p">)},</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model_name"</span><span class="p">:</span> <span class="n">qa_model</span><span class="p">,</span>
+        <span class="s2">"device_map"</span><span class="p">:</span> <span class="s2">"auto"</span><span class="p">,</span>
+        <span class="s2">"text_wrapper"</span><span class="p">:</span><span class="n">TEXT_WRAPPER</span><span class="p">,</span>
+        <span class="s2">"questions"</span><span class="p">:</span> <span class="n">QUESTIONS</span><span class="p">,</span>
+        <span class="s2">"questions_wrapper"</span><span class="p">:</span> <span class="n">QUESTIONS_WRAPPER</span><span class="p">,</span>
+        <span class="s2">"questions_columns"</span><span class="p">:</span> <span class="n">qa_questions_columns</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="n">returns</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">"question_answering_df: dataset"</span><span class="p">,</span>
+        <span class="s2">"question_answering_errors: result"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h3>(3.) Review results<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">demo2_run</span><span class="o">.</span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="demo-3">
+<h2>Demo 3<a class="headerlink" href="#demo-3" title="Permalink to this headline">#</a></h2>
+<p>This is also a large example, in this case we use another option of the function to ask questions in the form of a poll.</p>
+<section id="id4">
+<h3>(1.) Import the function (import mlrun, set project and import function)<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">AutoModelForCausalLM</span><span class="p">,</span> <span class="n">AutoTokenizer</span><span class="p">,</span> <span class="n">BitsAndBytesConfig</span><span class="p">,</span> <span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-12-18 10:18:37,490 [warning] Client version with higher version than server version isn't supported, align your client to the server version: {'parsed_server_version': Version(major=1, minor=5, patch=2, prerelease='rc1', build='track'), 'parsed_client_version': Version(major=1, minor=6, patch=0, prerelease='rc11', build=None)}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">project</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"call-center-demo-3"</span><span class="p">,</span>
+    <span class="n">context</span><span class="o">=</span><span class="s2">"./"</span><span class="p">,</span>
+    <span class="n">user_project</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"default_image"</span><span class="p">:</span> <span class="s2">"mlrun/mlrun"</span><span class="p">,</span>
+    <span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2023-12-18 10:18:51,651 [info] Project loaded successfully: {'project_name': 'call-center-demo-zeev55'}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">set_function</span><span class="p">(</span>
+    <span class="s2">"question-answering.py"</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"question-answering"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"job"</span><span class="p">,</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"answer_questions"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">project</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.projects.project.MlrunProject at 0x7f8bc5b0a370&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>(2.) Usage<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>Like in the second demo, we make a list of questions for the function to answer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># These questions are harder to answer, as there is no right answer.</span>
+<span class="c1"># So we want it to be at least consistent, for that we use the poll option.</span>
+<span class="n">QUESTIONS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">"1. Rate the agent's level of empathy (The ability to understand and share the feelings of others) on a scale of 1-5."</span><span class="p">,</span>
+    <span class="s2">"2. Rate the agent's level of professionalism (Conducting oneself in a way that is appropriate for the workplace) on a scale of 1-5."</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">qa_questions_columns</span> <span class="o">=</span> <span class="p">[</span>
+                        <span class="s2">"empathy"</span><span class="p">,</span>
+                        <span class="s2">"professionalism"</span><span class="p">,</span>
+
+                        <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Another thing we give the model this time is answer examples (one/few shot answering), this can be done to show the model how you want the answer to be structured or caculated. <br/>
+So for every file we ask about, the model will be presented with this example of a call and how we want the answers.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For every file we ask about, the model will be presented with this example of a call and how we want the answers.</span>
+<span class="n">DEMO_CALL</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"Agent: Good afternoon, you've reached [Internet Service Provider] customer support. I'm Megan. How can I assist "</span>
+    <span class="s2">"you today?</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Customer: Hello, Megan. This is Lisa. I've noticed some billing discrepancies on my last statement.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Agent: Thank you, Lisa. Let me pull up your account. I see the billing discrepancies you mentioned. It appears "</span>
+    <span class="s2">"there was an error in the charges. I apologize for the inconvenience.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Customer: Thank you for acknowledging the issue, Megan. Can you please help me get it resolved?</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Agent: Absolutely, Lisa. I've made note of the discrepancies, and I'll escalate this to our billing department "</span>
+    <span class="s2">"for investigation and correction. You should see the adjustments on your next statement.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Customer: That sounds good, Megan. I appreciate your help.</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"Agent: Not a problem, Lisa. Have a wonderful day, and we'll get this sorted out for you.</span><span class="se">\n</span><span class="s2">"</span>
+<span class="p">)</span>
+
+
+<span class="n">DEMO_ANSWERS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">"1. 4</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"2. 5</span><span class="se">\n</span><span class="s2">"</span>
+
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we need to wrap it all nicely to be given to the model as a single prompt, this is done with a text wrapper, and a question wrapper. <br/>
+both of them will be concatenated inside the function with the questions and passed to the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TEXT_WRAPPER</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="sa">f</span><span class="s2">"&lt;|im_start|&gt;system: You are an AI assistant that answers questions accurately and shortly&lt;|im_end|&gt;</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"&lt;|im_start|&gt;user: Given the following text:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">DEMO_CALL</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"answer the questions as accurately as you can:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">QUESTIONS</span><span class="si">}</span><span class="s2">&lt;|im_end|&gt;</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"&lt;|im_start|&gt;assistant:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">DEMO_ANSWERS</span><span class="si">}</span><span class="s2">&lt;|im_end|&gt;</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="sa">f</span><span class="s2">"&lt;|im_start|&gt;user: Given the following text:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"</span><span class="si">{}</span><span class="s2">"</span>
+<span class="p">)</span> 
+
+<span class="n">QUESTIONS_WRAPPER</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">" answer the given questions as accurately as you can, do not write more answers the questions:</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"</span><span class="si">{}</span><span class="s2">&lt;|im_end|&gt;</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="s2">"&lt;|im_start|&gt;assistant:</span><span class="se">\n</span><span class="s2">"</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The config is for the second questioning method, we cal “poll”, and in which we need to choose how many voting models we want participating,<br/>
+and in what way we want do decide the result, we currentlly support <code class="docutils literal notranslate"><span class="pre">average</span></code> and <code class="docutils literal notranslate"><span class="pre">most_common</span></code> as show here.<br/></p>
+<p>*An explenation about both questioning methods can be found in the begginig of this notebook</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">questions_config</span> <span class="o">=</span> 
+    <span class="p">{</span>
+        <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"poll"</span><span class="p">,</span>
+        <span class="s2">"poll_count"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="c1"># How many 'voters'</span>
+        <span class="s2">"poll_strategy"</span><span class="p">:</span> <span class="s2">"most_common"</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">qa_model</span> <span class="o">=</span> <span class="s2">"TheBloke/Mistral-7B-OpenOrca-GPTQ"</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finnaly, we run the function with all the parameters we prepared.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Question answering:</span>
+<span class="n">demo3_run</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+    <span class="n">function</span><span class="o">=</span><span class="s2">"question-answering"</span><span class="p">,</span>
+    <span class="n">local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">handler</span><span class="o">=</span><span class="s2">"answer_questions"</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"data_path"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s2">"./calls"</span><span class="p">)},</span>
+    <span class="n">params</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"model_name"</span><span class="p">:</span> <span class="n">qa_model</span><span class="p">,</span>
+        <span class="s2">"device_map"</span><span class="p">:</span> <span class="s2">"auto"</span><span class="p">,</span>
+        <span class="s2">"text_wrapper"</span><span class="p">:</span><span class="n">TEXT_WRAPPER</span><span class="p">,</span>
+        <span class="s2">"questions"</span><span class="p">:</span> <span class="n">QUESTIONS</span><span class="p">,</span>
+        <span class="s2">"questions_wrapper"</span><span class="p">:</span> <span class="n">QUESTIONS_WRAPPER</span><span class="p">,</span>
+        <span class="s2">"questions_columns"</span><span class="p">:</span> <span class="n">qa_questions_columns</span><span class="p">,</span>
+        <span class="s2">"questions_config"</span><span class="p">:</span> <span class="n">questions_config</span><span class="p">,</span> <span class="c1"># This time we add 'questions_config'</span>
+    <span class="p">},</span>
+    <span class="n">returns</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">"question_answering_df: dataset"</span><span class="p">,</span>
+        <span class="s2">"question_answering_errors: result"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>(3.) Review results<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">demo3_run</span><span class="o">.</span><span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br>
+</br></p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
