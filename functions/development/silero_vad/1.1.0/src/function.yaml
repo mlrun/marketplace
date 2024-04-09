@@ -8,7 +8,7 @@ metadata:
     author: guyl
   categories:
   - deep-learning
-  - PyTorch
+  - pytorch
   - audio
 spec:
   command: ''
