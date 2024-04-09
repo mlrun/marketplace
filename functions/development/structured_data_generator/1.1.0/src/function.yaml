@@ -9,7 +9,7 @@ metadata:
   categories:
   - machine-learning
   - data-preparation
-  - Data Generation
+  - data-generation
   - GenAI
 spec:
   command: ''
