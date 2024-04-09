@@ -1,0 +1,481 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>silero_vad package</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Fsilero_vad.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+<li>
+
+</li>
+</ul>
+</div>
+</div>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+<button aria-label="Download this page" class="headerbtn menu-dropdown__trigger">
+<i class="fas fa-download"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+
+</li>
+<li>
+<button class="headerbtn" data-placement="left" data-toggle="tooltip" onclick="printPdf(this)" title="Print to PDF">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+<label class="headerbtn headerbtn-page-toc" for="__page-toc">
+<span class="headerbtn__icon-container">
+<i class="fas fa-list"></i>
+</span>
+</label>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+    </div>
+<nav aria-label="Page" id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-silero_vad.silero_vad">
+   silero_vad.silero_vad module
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-silero_vad">
+   Module contents
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>silero_vad package</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-silero_vad.silero_vad">
+   silero_vad.silero_vad module
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#module-silero_vad">
+   Module contents
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<section id="silero-vad-package">
+<h1>silero_vad package<a class="headerlink" href="#silero-vad-package" title="Permalink to this headline">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="module-silero_vad.silero_vad">
+<span id="silero-vad-silero-vad-module"></span><h2>silero_vad.silero_vad module<a class="headerlink" href="#module-silero_vad.silero_vad" title="Permalink to this headline">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.BaseTask">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">silero_vad.silero_vad.</span></span><span class="sig-name descname"><span class="pre">BaseTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#BaseTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.BaseTask" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A base class for a task to complete after VAD.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.BaseTask.audio_file">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">audio_file</span></span><em class="property"><span class="pre">:</span> <span class="pre">pathlib.Path</span></em><a class="headerlink" href="#silero_vad.silero_vad.BaseTask.audio_file" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the audio file of the task.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The audio file of the task.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.BaseTask.do_task">
+<span class="sig-name descname"><span class="pre">do_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speech_timestamps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#BaseTask.do_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.BaseTask.do_task" title="Permalink to this definition">#</a></dt>
+<dd><p>Do the task on the given speech timestamps. The base task will simply save the speech timestamps as the result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>speech_timestamps</strong> – The speech timestamps to do the task on as outputted from the VAD.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.BaseTask.get_result">
+<span class="sig-name descname"><span class="pre">get_result</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">list</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="silero_vad.html#BaseTask.get_result"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.BaseTask.get_result" title="Permalink to this definition">#</a></dt>
+<dd><p>Get the result of the task. A tuple of the audio file name and the result.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The result of the task.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.BaseTask.to_tuple">
+<span class="sig-name descname"><span class="pre">to_tuple</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="silero_vad.html#BaseTask.to_tuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.BaseTask.to_tuple" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The converted task.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.SpeechDiarizationTask">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">silero_vad.silero_vad.</span></span><span class="sig-name descname"><span class="pre">SpeechDiarizationTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speaker_labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#SpeechDiarizationTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.SpeechDiarizationTask" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#silero_vad.silero_vad.BaseTask" title="silero_vad.silero_vad.BaseTask"><code class="xref py py-class docutils literal notranslate"><span class="pre">silero_vad.silero_vad.BaseTask</span></code></a></p>
+<p>A speech diarization task. The task will diarize the VAD speech timestamps into speakers.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.SpeechDiarizationTask.do_task">
+<span class="sig-name descname"><span class="pre">do_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">speech_timestamps</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#SpeechDiarizationTask.do_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.SpeechDiarizationTask.do_task" title="Permalink to this definition">#</a></dt>
+<dd><p>Do the task on the given speech timestamps. The task will diarize the VAD speech timestamps into speakers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>speech_timestamps</strong> – The speech timestamps per channel to do the task on as outputted from the VAD.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.SpeechDiarizationTask.to_tuple">
+<span class="sig-name descname"><span class="pre">to_tuple</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> → <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="silero_vad.html#SpeechDiarizationTask.to_tuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.SpeechDiarizationTask.to_tuple" title="Permalink to this definition">#</a></dt>
+<dd><p>Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The converted task.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.TaskCreator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">silero_vad.silero_vad.</span></span><span class="sig-name descname"><span class="pre">TaskCreator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Type</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#silero_vad.silero_vad.BaseTask" title="silero_vad.silero_vad.BaseTask"><span class="pre">silero_vad.silero_vad.BaseTask</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task_kwargs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#TaskCreator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.TaskCreator" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A task creator to create different tasks to run after the VAD.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.TaskCreator.create_task">
+<span class="sig-name descname"><span class="pre">create_task</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> → <a class="reference internal" href="#silero_vad.silero_vad.BaseTask" title="silero_vad.silero_vad.BaseTask"><span class="pre">silero_vad.silero_vad.BaseTask</span></a><a class="reference internal" href="silero_vad.html#TaskCreator.create_task"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.TaskCreator.create_task" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a task with the given audio file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>audio_file</strong> – The audio file to assign to the task.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created task.</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.TaskCreator.from_tuple">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_tuple</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">task_tuple</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> → <a class="reference internal" href="#silero_vad.silero_vad.BaseTask" title="silero_vad.silero_vad.BaseTask"><span class="pre">silero_vad.silero_vad.BaseTask</span></a><a class="reference internal" href="silero_vad.html#TaskCreator.from_tuple"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.TaskCreator.from_tuple" title="Permalink to this definition">#</a></dt>
+<dd><p>Create a task from a tuple of the audio file name and the task kwargs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>task_tuple</strong> – The task tuple to create the task from.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The created task.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.VoiceActivityDetector">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">silero_vad.silero_vad.</span></span><span class="sig-name descname"><span class="pre">VoiceActivityDetector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">use_onnx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_onnx_cpu</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">16000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_speech_duration_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_speech_duration_s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_silence_duration_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size_samples</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speech_pad_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_seconds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_channel</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#VoiceActivityDetector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.VoiceActivityDetector" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>A voice activity detection wrapper for the silero VAD model - <a class="reference external" href="https://github.com/snakers4/silero-vad">https://github.com/snakers4/silero-vad</a>.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.VoiceActivityDetector.detect_voice">
+<span class="sig-name descname"><span class="pre">detect_voice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">audio_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> → <span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><a class="reference internal" href="silero_vad.html#VoiceActivityDetector.detect_voice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.VoiceActivityDetector.detect_voice" title="Permalink to this definition">#</a></dt>
+<dd><p>Infer the audio through the VAD model and return the speech timestamps.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>audio_file</strong> – The audio file to infer.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>The speech timestamps in the audio. A list of timestamps where each timestamp is a dictionary with the
+following keys:</p>
+<ul class="simple">
+<li><p>”start”: The start sample index of the speech in the audio.</p></li>
+<li><p>”end”:   The end sample index of the speech in the audio.</p></li>
+</ul>
+<p>If <cite>per_channel</cite> is True, a list of timestamps per channel will be returned.</p>
+</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.VoiceActivityDetector.load">
+<span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">force_reload</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#VoiceActivityDetector.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.VoiceActivityDetector.load" title="Permalink to this definition">#</a></dt>
+<dd><p>Load the VAD model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>force_reload</strong> – Whether to force reload the model even if it was already loaded. Default is True.</p>
+</dd>
+</dl>
+</dd></dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.detect_voice">
+<span class="sig-prename descclassname"><span class="pre">silero_vad.silero_vad.</span></span><span class="sig-name descname"><span class="pre">detect_voice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_onnx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_onnx_cpu</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">16000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_speech_duration_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_speech_duration_s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_silence_duration_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size_samples</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speech_pad_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_seconds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_channel</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multiprocessing</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#detect_voice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.detect_voice" title="Permalink to this definition">#</a></dt>
+<dd><p>Perform voice activity detection on given audio files using the silero VAD model -
+<a class="reference external" href="https://github.com/snakers4/silero-vad">https://github.com/snakers4/silero-vad</a>. The end result is a dictionary with the file names as keys and their
+VAD timestamps dictionaries as value.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">"file_1.wav"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">"start"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mi">16000</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"start"</span><span class="p">:</span> <span class="mi">16000</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mi">32000</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"start"</span><span class="p">:</span> <span class="mi">32000</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mi">48000</span><span class="p">},</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="s2">"file_2.wav"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">"start"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mi">16000</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"start"</span><span class="p">:</span> <span class="mi">16000</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mi">32000</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">"start"</span><span class="p">:</span> <span class="mi">32000</span><span class="p">,</span> <span class="s2">"end"</span><span class="p">:</span> <span class="mi">48000</span><span class="p">},</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_path</strong> – The path to the audio files to diarize. Can be a path to a single file, a path to a
+directory or a list of paths to files.</p></li>
+<li><p><strong>use_onnx</strong> – Whether to use ONNX for inference. Default is True.</p></li>
+<li><p><strong>force_onnx_cpu</strong> – Whether to force ONNX to use CPU for inference. Default is True.</p></li>
+<li><p><strong>threshold</strong> – Speech threshold. Silero VAD outputs speech probabilities for each audio chunk,
+probabilities ABOVE this value are considered as SPEECH. It is better to tune
+this parameter for each dataset separately, but “lazy” 0.5 is pretty good for
+most datasets.</p></li>
+<li><p><strong>sampling_rate</strong> – Currently, silero VAD models support 8000 and 16000 sample rates.</p></li>
+<li><p><strong>min_speech_duration_ms</strong> – Final speech chunks shorter min_speech_duration_ms are thrown out.</p></li>
+<li><p><strong>max_speech_duration_s</strong> – Maximum duration of speech chunks in seconds. Chunks longer than
+<cite>max_speech_duration_s</cite> will be split at the timestamp of the last silence that
+lasts more than 100ms (if any), to prevent aggressive cutting. Otherwise, they will
+be split aggressively just before max_speech_duration_s.</p></li>
+<li><p><strong>min_silence_duration_ms</strong> – In the end of each speech chunk wait for min_silence_duration_ms before separating
+it.</p></li>
+<li><p><strong>window_size_samples</strong> – <p>Audio chunks of window_size_samples size are fed to the silero VAD model.</p>
+<p>WARNING! Silero VAD models were trained using 512, 1024, 1536 samples for 16000
+sample rate and 256, 512, 768 samples for 8000 sample rate. Values other than
+these may affect model performance!</p>
+</p></li>
+<li><p><strong>speech_pad_ms</strong> – Final speech chunks are padded by speech_pad_ms each side.</p></li>
+<li><p><strong>return_seconds</strong> – Whether return timestamps in seconds. False means to return timestamps in samples
+(default - False).</p></li>
+<li><p><strong>per_channel</strong> – Whether to return timestamps per channel (default - False). This will run VAD on
+each channel separately and return a list of timestamps per channel.</p></li>
+<li><p><strong>use_multiprocessing</strong> – The number of workers to use for multiprocessing. If 0, no multiprocessing will
+be used. Default is 0.</p></li>
+<li><p><strong>verbose</strong> – Verbosity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="silero_vad.silero_vad.diarize">
+<span class="sig-prename descclassname"><span class="pre">silero_vad.silero_vad.</span></span><span class="sig-name descname"><span class="pre">diarize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">,</span> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_onnx</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_onnx_cpu</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sampling_rate</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">16000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_speech_duration_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">250</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_speech_duration_s</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_silence_duration_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window_size_samples</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speech_pad_ms</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">30</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speaker_labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_multiprocessing</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="silero_vad.html#diarize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#silero_vad.silero_vad.diarize" title="Permalink to this definition">#</a></dt>
+<dd><p>Perform speech diarization on given audio files using the silero VAD model - <a class="reference external" href="https://github.com/snakers4/silero-vad">https://github.com/snakers4/silero-vad</a>.
+The speech diarization is performed per channel so that each channel in the audio belong to a different speaker. The
+end result is a dictionary with the file names as keys and their diarization as value. A diarization is a list
+of tuples: (start, end, speaker_label).</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">"file_1.wav"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"speaker_0"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">"speaker_1"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s2">"speaker_0"</span><span class="p">),</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="s2">"file_2.wav"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s2">"speaker_0"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">"speaker_1"</span><span class="p">),</span>
+        <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s2">"speaker_0"</span><span class="p">),</span>
+        <span class="o">...</span>
+    <span class="p">],</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_path</strong> – The path to the audio files to diarize. Can be a path to a single file, a path to a
+directory or a list of paths to files.</p></li>
+<li><p><strong>use_onnx</strong> – Whether to use ONNX for inference. Default is True.</p></li>
+<li><p><strong>force_onnx_cpu</strong> – Whether to force ONNX to use CPU for inference. Default is True.</p></li>
+<li><p><strong>threshold</strong> – Speech threshold. Silero VAD outputs speech probabilities for each audio chunk,
+probabilities ABOVE this value are considered as SPEECH. It is better to tune
+this parameter for each dataset separately, but “lazy” 0.5 is pretty good for
+most datasets.</p></li>
+<li><p><strong>sampling_rate</strong> – Currently, silero VAD models support 8000 and 16000 sample rates.</p></li>
+<li><p><strong>min_speech_duration_ms</strong> – Final speech chunks shorter min_speech_duration_ms are thrown out.</p></li>
+<li><p><strong>max_speech_duration_s</strong> – Maximum duration of speech chunks in seconds. Chunks longer than
+<cite>max_speech_duration_s</cite> will be split at the timestamp of the last silence that
+lasts more than 100ms (if any), to prevent aggressive cutting. Otherwise, they will
+be split aggressively just before max_speech_duration_s.</p></li>
+<li><p><strong>min_silence_duration_ms</strong> – In the end of each speech chunk wait for min_silence_duration_ms before separating
+it.</p></li>
+<li><p><strong>window_size_samples</strong> – <p>Audio chunks of window_size_samples size are fed to the silero VAD model.</p>
+<p>WARNING! Silero VAD models were trained using 512, 1024, 1536 samples for 16000
+sample rate and 256, 512, 768 samples for 8000 sample rate. Values other than
+these may affect model performance!</p>
+</p></li>
+<li><p><strong>speech_pad_ms</strong> – Final speech chunks are padded by speech_pad_ms each side.</p></li>
+<li><p><strong>speaker_labels</strong> – The speaker labels to use for the diarization. If not given, the speakers will be
+named “speaker_0”, “speaker_1”, etc.</p></li>
+<li><p><strong>use_multiprocessing</strong> – The number of workers to use for multiprocessing. If 0, no multiprocessing will
+be used. Default is 0.</p></li>
+<li><p><strong>verbose</strong> – Verbosity.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+</section>
+<section id="module-silero_vad">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-silero_vad" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
