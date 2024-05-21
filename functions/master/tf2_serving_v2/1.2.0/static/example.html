@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="Docutils 0.17.1: http://docutils.sourceforge.net/" name="generator"/>
+<title>Image Classification Model - Serving Function</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="./" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="genindex.html" rel="index" title="Index">
+<link href="search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2Ftf2_serving_v2_example.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/edit/master/docs/tf2_serving_v2_example.ipynb" title="Edit this page">
+<span class="headerbtn__icon-container">
+<i class="fas fa-pencil-alt"></i>
+</span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="menu-dropdown menu-dropdown-download-buttons">
+<button aria-label="Download this page" class="headerbtn menu-dropdown__trigger">
+<i class="fas fa-download"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="../src/tf2_serving_v2.ipynb" title="Download source file">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file"></i>
+</span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+</li>
+<li>
+<button class="headerbtn" data-placement="left" data-toggle="tooltip" onclick="printPdf(this)" title="Print to PDF">
+<span class="headerbtn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
+</div>
+</div>
+<label class="headerbtn headerbtn-page-toc" for="__page-toc">
+<span class="headerbtn__icon-container">
+<i class="fas fa-list"></i>
+</span>
+</label>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+<div class="tocsection onthispage pt-5 pb-3">
+<i class="fas fa-list"></i> Contents
+    </div>
+<nav aria-label="Page" id="bd-toc-nav">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#define-nuclio-function">
+   Define Nuclio Function
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#install-dependencies-and-set-config">
+     Install dependencies and set config
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#function-code">
+   Function Code
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#model-serving-class">
+     Model Serving Class
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-function-locally">
+   Test the function locally
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#define-test-parameters">
+     Define test parameters
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#define-function-specifications">
+     Define Function specifications
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#deploy-the-serving-function-to-the-cluster">
+   Deploy the serving function to the cluster
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-deployed-function-on-the-cluster">
+   Test the deployed function on the cluster
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-deployed-function-with-url">
+     Test the deployed function (with URL)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-deployed-function-with-jpeg-image">
+     Test the deployed function (with Jpeg Image)
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Image Classification Model - Serving Function</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#define-nuclio-function">
+   Define Nuclio Function
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#install-dependencies-and-set-config">
+     Install dependencies and set config
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#function-code">
+   Function Code
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#model-serving-class">
+     Model Serving Class
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-function-locally">
+   Test the function locally
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#define-test-parameters">
+     Define test parameters
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#define-function-specifications">
+     Define Function specifications
+    </a>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#deploy-the-serving-function-to-the-cluster">
+   Deploy the serving function to the cluster
+  </a>
+</li>
+<li class="toc-h2 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-deployed-function-on-the-cluster">
+   Test the deployed function on the cluster
+  </a>
+<ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-deployed-function-with-url">
+     Test the deployed function (with URL)
+    </a>
+</li>
+<li class="toc-h3 nav-item toc-entry">
+<a class="reference internal nav-link" href="#test-the-deployed-function-with-jpeg-image">
+     Test the deployed function (with Jpeg Image)
+    </a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<section id="image-classification-model-serving-function">
+<h1>Image Classification Model - Serving Function<a class="headerlink" href="#image-classification-model-serving-function" title="Permalink to this headline">#</a></h1>
+<p>This notebook demonstrates how to deploy a Tensorflow model using MLRun &amp; Nuclio.</p>
+<p><strong>In this notebook you will:</strong></p>
+<ul class="simple">
+<li><p>Write a Tensorflow-Model class to load and predict on the incoming data</p></li>
+<li><p>Deploy the model as a serverless function</p></li>
+<li><p>Invoke the serving endpoint with data as:</p>
+<ul>
+<li><p>URLs to images hosted on S3</p></li>
+<li><p>Direct image send</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Steps:</strong></p>
+<ul class="simple">
+<li><p><span class="xref myst">Define Nuclio function</span></p>
+<ul>
+<li><p><span class="xref myst">Install dependencies and set config</span></p></li>
+<li><p><span class="xref myst">Model serving class</span></p></li>
+</ul>
+</li>
+<li><p><span class="xref myst">Deploy the serving function to the cluster</span></p></li>
+<li><p><span class="xref myst">Define test parameters</span></p></li>
+<li><p><span class="xref myst">Test the deployed function on the cluster</span></p></li>
+</ul>
+<section id="define-nuclio-function">
+<h2>Define Nuclio Function<a class="headerlink" href="#define-nuclio-function" title="Permalink to this headline">#</a></h2>
+<p>To use the magic commands for deploying this jupyter notebook as a nuclio function we must first import nuclio<br/>
+Since we do not want to import nuclio in the actual function, the comment annotation <code class="docutils literal notranslate"><span class="pre">nuclio:</span> <span class="pre">ignore</span></code> is used. This marks the cell for nuclio, telling it to ignore the cell’s values when building the function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: ignore</span>
+<span class="kn">import</span> <span class="nn">nuclio</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The history saving thread hit an unexpected error (DatabaseError('database disk image is malformed')).History will not be written to the database.
+</pre></div>
+</div>
+</div>
+</div>
+<section id="install-dependencies-and-set-config">
+<h3>Install dependencies and set config<a class="headerlink" href="#install-dependencies-and-set-config" title="Permalink to this headline">#</a></h3>
+<blockquote>
+<div><p>Note: Since tensorflow is being pulled from the baseimage it is not directly installed as a build command.
+If it is not installed on your system please uninstall and install using the line: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tensorflow</span></code></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">nuclio</span> config kind="serving"
+
+<span class="c1"># tensorflow 2 use the default serving image (or the mlrun/ml-models for a faster build)</span>
+
+<span class="o">%</span><span class="k">nuclio</span> config spec.build.baseImage = "mlrun/mlrun"
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>%nuclio: setting kind to 'serving'
+%nuclio: setting spec.build.baseImage to 'mlrun/mlrun'
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since we are using packages which are not surely installed on our baseimage, or want to verify that a specific version of the package will be installed we use the <code class="docutils literal notranslate"><span class="pre">%nuclio</span> <span class="pre">cmd</span></code> annotation.</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">%nuclio</span> <span class="pre">cmd</span></code> works both locally and during deployment by default, but can be set with <code class="docutils literal notranslate"><span class="pre">-c</span></code> flag to only run the commands while deploying or <code class="docutils literal notranslate"><span class="pre">-l</span></code> to set the variable for the local environment only.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">nuclio</span> cmd -c
+pip install tensorflow&gt;=2.1
+pip install requests pillow
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="function-code">
+<h2>Function Code<a class="headerlink" href="#function-code" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing</span> <span class="kn">import</span> <span class="n">image</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing.image</span> <span class="kn">import</span> <span class="n">load_img</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">environ</span><span class="p">,</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">import</span> <span class="nn">mlrun</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-01-29 23:47:50,165 [warning] Failed resolving version info. Ignoring and using defaults
+&gt; 2021-01-29 23:47:51,342 [warning] Unable to parse server or client version. Assuming compatible: {'server_version': '0.6.0-rc9', 'client_version': 'unstable'}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="model-serving-class">
+<h3>Model Serving Class<a class="headerlink" href="#model-serving-class" title="Permalink to this headline">#</a></h3>
+<p>We define the <code class="docutils literal notranslate"><span class="pre">TFModel</span></code> class which we will use to define data handling and prediction of our model.</p>
+<p>The class should consist of:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">__init__(name,</span> <span class="pre">model_dir)</span></code> - Setup the internal parameters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">load(self)</span></code> - How to load the model and broadcast it’s ready for prediction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">preprocess(self,</span> <span class="pre">body)</span></code> - How to handle the incoming event, forming the request to an <code class="docutils literal notranslate"><span class="pre">{'instances':</span> <span class="pre">[&lt;samples&gt;]}</span></code> dictionary as requested by the protocol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">predict(self,</span> <span class="pre">data)</span></code> - Receives and <code class="docutils literal notranslate"><span class="pre">{'instances':</span> <span class="pre">[&lt;samples&gt;]}</span></code> and returns the model’s prediction as a list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">postprocess(self,</span> <span class="pre">data)</span></code> - Does any additional processing needed on the predictions.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TFModel</span><span class="p">(</span><span class="n">mlrun</span><span class="o">.</span><span class="n">serving</span><span class="o">.</span><span class="n">V2ModelServer</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">IMAGE_WIDTH</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'IMAGE_WIDTH'</span><span class="p">,</span> <span class="s1">'128'</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">IMAGE_HEIGHT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'IMAGE_HEIGHT'</span><span class="p">,</span> <span class="s1">'128'</span><span class="p">))</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s1">'classes_map'</span><span class="p">],</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="n">model_file</span><span class="p">,</span> <span class="n">extra_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="s1">'.h5'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="n">model_file</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">operation</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'inputs'</span><span class="p">:</span> <span class="p">[]}</span>
+            <span class="n">inputs</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'inputs'</span><span class="p">,</span> <span class="p">[])</span>
+            <span class="k">for</span> <span class="n">byte_image</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">byte_image</span><span class="p">)</span>
+                <span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">IMAGE_WIDTH</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">IMAGE_HEIGHT</span><span class="p">))</span>
+
+                <span class="c1"># Load image</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">img_to_array</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">output</span><span class="p">[</span><span class="s1">'inputs'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            
+            <span class="c1"># Format inputs list</span>
+            <span class="n">output</span><span class="p">[</span><span class="s1">'inputs'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="s1">'inputs'</span><span class="p">])]</span>
+            <span class="k">return</span> <span class="n">output</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s1">'received: </span><span class="si">{</span><span class="n">body</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+            
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="n">images</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'inputs'</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="c1"># Predict</span>
+        <span class="n">predicted_probability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+
+        <span class="c1"># return prediction</span>
+        <span class="k">return</span> <span class="n">predicted_probability</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To let our nuclio builder know that our function code ends at this point we will use the comment annotation <code class="docutils literal notranslate"><span class="pre">nuclio:</span> <span class="pre">end-code</span></code>.</p>
+<p>Any new cell from now on will be treated as if a <code class="docutils literal notranslate"><span class="pre">nuclio:</span> <span class="pre">ignore</span></code> comment was set, and will not be added to the funcion.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># nuclio: end-code</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="test-the-function-locally">
+<h2>Test the function locally<a class="headerlink" href="#test-the-function-locally" title="Permalink to this headline">#</a></h2>
+<p>Make sure your local TF / Keras version is the same as pulled in the nuclio image for accurate testing</p>
+<p>Set the served models and their file paths using: <code class="docutils literal notranslate"><span class="pre">SERVING_MODEL_&lt;name&gt;</span> <span class="pre">=</span> <span class="pre">&lt;model</span> <span class="pre">file</span> <span class="pre">path&gt;</span></code></p>
+<blockquote>
+<div><p>Note: this notebook assumes the model and categories are under <b>/User/mlrun/examples/</b></p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="define-test-parameters">
+<h3>Define test parameters<a class="headerlink" href="#define-test-parameters" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Testing event</span>
+<span class="n">cat_image_url</span> <span class="o">=</span> <span class="s1">'https://s3.amazonaws.com/iguazio-sample-data/images/catanddog/cat.102.jpg'</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cat_image_url</span><span class="p">)</span>
+<span class="n">cat_image</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">cat_image</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Test image:'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Test image:
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f01b9643350&gt;
+</pre></div>
+</div>
+<img alt="_images/cd2de2ed0d1841d97e37ee5a2c7a1f70e7e7ba5a4dc5416e11e1af47c1b99e03.png" src="_images/cd2de2ed0d1841d97e37ee5a2c7a1f70e7e7ba5a4dc5416e11e1af47c1b99e03.png"/>
+</div>
+</div>
+</section>
+<section id="define-function-specifications">
+<h3>Define Function specifications<a class="headerlink" href="#define-function-specifications" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">mlconf</span>
+
+<span class="c1"># Specific model variables</span>
+<span class="n">function_envs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'IMAGE_HEIGHT'</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span>
+    <span class="s1">'IMAGE_WIDTH'</span><span class="p">:</span> <span class="mi">224</span><span class="p">,</span>
+    <span class="s1">'classes_map'</span><span class="p">:</span> <span class="s1">'/Userv3io/projects/cat-and-dog-servers/artifacts/categories_map.json'</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="deploy-the-serving-function-to-the-cluster">
+<h2>Deploy the serving function to the cluster<a class="headerlink" href="#deploy-the-serving-function-to-the-cluster" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">code_to_function</span><span class="p">,</span> <span class="n">mount_v3io</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup the model server function</span>
+
+<span class="n">fn</span> <span class="o">=</span> <span class="n">code_to_function</span><span class="p">(</span><span class="s1">'tf2-serving-v2'</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"serving"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">spec</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">"tf2 image classification server v2"</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'serving'</span><span class="p">,</span> <span class="s1">'dl'</span><span class="p">]</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'author'</span><span class="p">:</span> <span class="s1">'yaronh'</span><span class="p">}</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">"function.yaml"</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">set_envs</span><span class="p">(</span><span class="n">function_envs</span><span class="p">)</span>
+<span class="n">fn</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="s2">"model"</span><span class="p">,</span>
+             <span class="n">model_path</span><span class="o">=</span><span class="s2">"/User/mlrun_repos/demos/image-classification-with-distributed-training/pipe/52f2145e-7a54-4137-8c7b-b6c20cc8b1fd/tfmodels/model.h5"</span><span class="p">,</span>
+             <span class="n">class_name</span><span class="o">=</span><span class="s2">"TFModel"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-01-29 23:47:54,881 [info] function spec saved to path: function.yaml
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.serving.states.TaskState at 0x7f01b86cbd90&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s2">"V3IO_HOME"</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">mlrun</span> <span class="kn">import</span> <span class="n">mount_v3io</span>
+    <span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_v3io</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># is you set up mlrun using the instructions at</span>
+    <span class="c1"># https://github.com/mlrun/mlrun/blob/master/hack/local/README.md</span>
+    <span class="kn">from</span> <span class="nn">mlrun.platforms</span> <span class="kn">import</span> <span class="n">mount_pvc</span>
+    <span class="n">fn</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">mount_pvc</span><span class="p">(</span><span class="s1">'nfsvol'</span><span class="p">,</span> <span class="s1">'nfsvol'</span><span class="p">,</span> <span class="s1">'/home/joyan/data'</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Deploy the model server</span>
+<span class="n">addr</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">'cat-and-dog-servers'</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2021-01-29 23:47:54,893 [info] Starting remote function deploy
+2021-01-29 23:47:55  (info) Deploying function
+2021-01-29 23:47:55  (info) Building
+2021-01-29 23:47:55  (info) Staging files and preparing base images
+2021-01-29 23:47:56  (info) Building processor image
+2021-01-29 23:47:57  (info) Build complete
+2021-01-29 23:48:07  (info) Function deploy complete
+&gt; 2021-01-29 23:48:08,029 [info] function deployed, address=default-tenant.app.us-sales30-demo.iguazio-cd2.com:31946
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="test-the-deployed-function-on-the-cluster">
+<h2>Test the deployed function on the cluster<a class="headerlink" href="#test-the-deployed-function-on-the-cluster" title="Permalink to this headline">#</a></h2>
+<section id="test-the-deployed-function-with-url">
+<h3>Test the deployed function (with URL)<a class="headerlink" href="#test-the-deployed-function-with-url" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">"data_url"</span> <span class="p">:</span> <span class="n">cat_image_url</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">'/v2/models/model/predict'</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'id': '38224902-a688-4985-9424-578ff9ccb4a5',
+ 'model_name': 'model',
+ 'outputs': [0.0]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="test-the-deployed-function-with-jpeg-image">
+<h3>Test the deployed function (with Jpeg Image)<a class="headerlink" href="#test-the-deployed-function-with-jpeg-image" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fn</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">'/v2/models/model/predict'</span><span class="p">,</span>
+          <span class="n">body</span><span class="o">=</span><span class="n">cat_image</span><span class="p">,</span>
+          <span class="n">headers</span><span class="o">=</span><span class="p">{</span><span class="s1">'Content-type'</span><span class="p">:</span> <span class="s1">'image/jpeg'</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'id': '246c00fc-225c-44ec-b221-4e6c99f7bc5d',
+ 'model_name': 'model',
+ 'outputs': [0.0]}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
