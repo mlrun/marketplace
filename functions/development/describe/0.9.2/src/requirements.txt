@@ -1,4 +1,4 @@
-scikit-learn~=1.0.2
+scikit-learn~=1.5.1
 plotly~=5.6.0
 pytest~=7.0.1
 mlrun~=1.0.0
