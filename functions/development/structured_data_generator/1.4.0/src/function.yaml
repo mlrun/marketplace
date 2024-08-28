@@ -10,7 +10,7 @@ metadata:
   - machine-learning
   - data-preparation
   - data-generation
-  - genai
+  - GenAI
 spec:
   command: ''
   args: []
