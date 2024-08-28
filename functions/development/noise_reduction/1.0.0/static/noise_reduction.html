@@ -1,0 +1,765 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>noise_reduction.noise_reduction</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/noise_reduction/noise_reduction.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for noise_reduction.noise_reduction</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">librosa</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">wavfile</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+
+<span class="c1">#: The value to send into multiprocessing queues to stop the process:</span>
+<span class="n">_MULTIPROCESSING_STOP_MARK</span> <span class="o">=</span> <span class="s2">"STOP"</span>
+
+<span class="c1"># Get the global logger:</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">mlrun</span>
+
+    <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="s2">"noise_reduce"</span><span class="p">)</span><span class="o">.</span><span class="n">logger</span>
+<span class="k">except</span> <span class="ne">ModuleNotFoundError</span><span class="p">:</span>
+    <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="ReduceNoiseBase"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoiseBase">[docs]</a><span class="k">class</span> <span class="nc">ReduceNoiseBase</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Base class for noise reduction.</span>
+<span class="sd">    This class is aimed to be inherited by specific noise reduction algorithms.</span>
+<span class="sd">    You must implement the following methods:</span>
+<span class="sd">    - clean_audio:  The method to clean the audio, where the noise reduction algorithm is implemented.</span>
+<span class="sd">    - save_audio:   The method to save the audio to a file.</span>
+<span class="sd">    - load_audio:   The method to load the audio from a file.</span>
+
+<span class="sd">    After implementing the above methods, you can use the reduce_noise method to reduce noise from audio files.</span>
+<span class="sd">    """</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">silence_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">target_directory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">silence_threshold</span> <span class="o">=</span> <span class="n">silence_threshold</span>
+
+<div class="viewcode-block" id="ReduceNoiseBase.reduce_noise"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoiseBase.reduce_noise">[docs]</a>    <span class="k">def</span> <span class="nf">reduce_noise</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Reduce noise from the given audio file.</span>
+
+<span class="sd">        :param audio_file:  The audio file to reduce noise from.</span>
+
+<span class="sd">        :returns: A tuple of:</span>
+<span class="sd">         - a boolean indicating whether an error occurred</span>
+<span class="sd">         - a tuple of:</span>
+<span class="sd">            - audio file name</span>
+<span class="sd">            - target path in case of success / error message in case of failure.</span>
+<span class="sd">        """</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Reducing noise from </span><span class="si">{</span><span class="n">audio_file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+
+            <span class="c1"># Load audio data:</span>
+            <span class="n">audio</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load_audio</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">audio_file</span><span class="p">))</span>
+
+            <span class="c1"># Perform noise reduction:</span>
+            <span class="n">reduced_noise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clean_audio</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">audio</span><span class="p">)</span>
+
+            <span class="c1"># Remove silence from the audio if necessary:</span>
+            <span class="n">reduced_noise</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_silence</span><span class="p">(</span><span class="n">audio</span><span class="o">=</span><span class="n">reduced_noise</span><span class="p">)</span>
+
+            <span class="c1"># Prepare target path:</span>
+            <span class="n">target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">update_to_wav_suffix</span><span class="p">(</span><span class="n">audio_file</span><span class="o">=</span><span class="n">audio_file</span><span class="p">)</span>
+
+            <span class="c1"># Save file:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">save_audio</span><span class="p">(</span>
+                <span class="n">audio</span><span class="o">=</span><span class="n">reduced_noise</span><span class="p">,</span>
+                <span class="n">target_path</span><span class="o">=</span><span class="n">target_path</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saved cleaned audio file to </span><span class="si">{</span><span class="n">target_path</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="p">(</span><span class="n">audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">target_path</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+                <span class="n">_LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Failed to reduce noise from </span><span class="si">{</span><span class="n">audio_file</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+                <span class="n">_LOGGER</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: </span><span class="si">{</span><span class="n">exception</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="c1"># Collect the error:</span>
+            <span class="k">return</span> <span class="kc">True</span><span class="p">,</span> <span class="p">(</span><span class="n">audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="ReduceNoiseBase.clean_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoiseBase.clean_audio">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">clean_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Clean the audio from noise. Here you should implement the noise reduction algorithm.</span>
+
+<span class="sd">        :param data:    The audio data to clean.</span>
+
+<span class="sd">        :returns: The cleaned audio.</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ReduceNoiseBase.save_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoiseBase.save_audio">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">save_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">target_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Save the audio to a file.</span>
+
+<span class="sd">        :param audio:       The audio to save.</span>
+<span class="sd">        :param target_path: The target path to save the audio to.</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ReduceNoiseBase.load_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoiseBase.load_audio">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">load_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Load the audio from a file.</span>
+
+<span class="sd">        :param file:    The file to load the audio from.</span>
+
+<span class="sd">        :returns: A tuple of:</span>
+<span class="sd">            - the audio data</span>
+<span class="sd">            - the sample rate</span>
+<span class="sd">        """</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ReduceNoiseBase.update_to_wav_suffix"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoiseBase.update_to_wav_suffix">[docs]</a>    <span class="k">def</span> <span class="nf">update_to_wav_suffix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+        <span class="n">target_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">target_directory</span> <span class="o">/</span> <span class="n">audio_file</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="n">target_path</span><span class="o">.</span><span class="n">suffix</span> <span class="o">!=</span> <span class="s2">".wav"</span><span class="p">:</span>
+            <span class="n">old_suffix</span> <span class="o">=</span> <span class="n">target_path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">target_path</span> <span class="o">=</span> <span class="n">target_path</span><span class="o">.</span><span class="n">with_stem</span><span class="p">(</span><span class="n">target_path</span><span class="o">.</span><span class="n">stem</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">"_</span><span class="si">{</span><span class="n">old_suffix</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">target_path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s2">".wav"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">target_path</span></div>
+
+<div class="viewcode-block" id="ReduceNoiseBase.remove_silence"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoiseBase.remove_silence">[docs]</a>    <span class="k">def</span> <span class="nf">remove_silence</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">audio</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Remove silence sections from the audio.</span>
+
+<span class="sd">        :param audio:   The audio to remove silence from.</span>
+
+<span class="sd">        :returns: The audio without silence.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">silence_threshold</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">audio</span>
+
+        <span class="c1"># Get the indices of the non-silent frames:</span>
+        <span class="n">non_silent_indices</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+            <span class="n">y</span><span class="o">=</span><span class="n">audio</span><span class="p">,</span>
+            <span class="n">top_db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">silence_threshold</span><span class="p">,</span>
+            <span class="n">frame_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+            <span class="n">hop_length</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Get the non-silent audio:</span>
+        <span class="n">non_silent_audio</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">audio</span><span class="p">[:,</span> <span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span> <span class="k">for</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="ow">in</span> <span class="n">non_silent_indices</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">non_silent_audio</span></div></div>
+
+
+<div class="viewcode-block" id="ReduceNoise"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoise">[docs]</a><span class="k">class</span> <span class="nc">ReduceNoise</span><span class="p">(</span><span class="n">ReduceNoiseBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">silence_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
+        <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">channel</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">target_directory</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">silence_threshold</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">=</span> <span class="n">duration</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">channel</span> <span class="o">=</span> <span class="n">channel</span>
+
+<div class="viewcode-block" id="ReduceNoise.save_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoise.save_audio">[docs]</a>    <span class="k">def</span> <span class="nf">save_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">target_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+        <span class="c1"># If the audio has more than one channel, transpose it in order to save it:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">audio</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="n">wavfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+            <span class="n">filename</span><span class="o">=</span><span class="n">target_path</span><span class="p">,</span>
+            <span class="n">rate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">audio</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="ReduceNoise.load_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoise.load_audio">[docs]</a>    <span class="k">def</span> <span class="nf">load_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+            <span class="n">path</span><span class="o">=</span><span class="n">file</span><span class="p">,</span>
+            <span class="n">sr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">,</span>
+            <span class="n">mono</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># keep channels separate</span>
+            <span class="n">duration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">duration</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># set sample rate:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sr</span><span class="p">)</span>
+
+        <span class="c1"># convert to int with scaling for 16-bit integer</span>
+        <span class="n">data</span> <span class="o">*=</span> <span class="mi">32767</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>  <span class="c1"># re-scaling</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>  <span class="c1"># change data type</span>
+
+        <span class="c1"># select channel</span>
+        <span class="n">data_to_reduce</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">data</span>
+        <span class="k">return</span> <span class="n">data_to_reduce</span></div>
+
+<div class="viewcode-block" id="ReduceNoise.clean_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.ReduceNoise.clean_audio">[docs]</a>    <span class="k">def</span> <span class="nf">clean_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">noisereduce</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">"Please install noisereduce package"</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
+        <span class="n">reduced_noise</span> <span class="o">=</span> <span class="n">noisereduce</span><span class="o">.</span><span class="n">reduce_noise</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">)</span>
+
+        <span class="c1"># add channel back after noise reduction</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># putting the channel back in the data</span>
+            <span class="n">data</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">]</span> <span class="o">=</span> <span class="n">reduced_noise</span>
+            <span class="c1"># updating the data to save</span>
+            <span class="n">reduced_noise</span> <span class="o">=</span> <span class="n">data</span>
+
+        <span class="k">return</span> <span class="n">reduced_noise</span></div></div>
+
+
+<div class="viewcode-block" id="DFN"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.DFN">[docs]</a><span class="k">class</span> <span class="nc">DFN</span><span class="p">(</span><span class="n">ReduceNoiseBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">target_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">silence_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pad</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">atten_lim_db</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">target_directory</span><span class="p">,</span> <span class="n">verbose</span><span class="p">,</span> <span class="n">silence_threshold</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad</span> <span class="o">=</span> <span class="n">pad</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">atten_lim_db</span> <span class="o">=</span> <span class="n">atten_lim_db</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+        <span class="c1"># import required packages</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">df.enhance</span> <span class="kn">import</span> <span class="n">init_df</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">"Please install deepfilternet packages"</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">verbose</span><span class="p">:</span>
+            <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loading DeepFilterNet2 model."</span><span class="p">)</span>
+
+        <span class="c1"># Load the model:</span>
+        <span class="n">model</span><span class="p">,</span> <span class="n">df_state</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">init_df</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df_state</span> <span class="o">=</span> <span class="n">df_state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">df_state</span><span class="o">.</span><span class="n">sr</span><span class="p">()</span>
+
+<div class="viewcode-block" id="DFN.save_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.DFN.save_audio">[docs]</a>    <span class="k">def</span> <span class="nf">save_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">target_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">df.enhance</span> <span class="kn">import</span> <span class="n">save_audio</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">"Please install deepfilternet package"</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="n">save_audio</span><span class="p">(</span>
+            <span class="n">file</span><span class="o">=</span><span class="n">target_path</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">audio</span><span class="o">=</span><span class="n">audio</span><span class="p">,</span>
+            <span class="n">sr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">,</span>
+            <span class="n">output_dir</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_directory</span><span class="p">),</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="DFN.load_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.DFN.load_audio">[docs]</a>    <span class="k">def</span> <span class="nf">load_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">df.enhance</span> <span class="kn">import</span> <span class="n">load_audio</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">"Please install deepfilternet package"</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="n">audio</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">load_audio</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="n">file</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">audio</span></div>
+
+<div class="viewcode-block" id="DFN.clean_audio"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.DFN.clean_audio">[docs]</a>    <span class="k">def</span> <span class="nf">clean_audio</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">df.enhance</span> <span class="kn">import</span> <span class="n">enhance</span>
+        <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">"Please install deepfilternet package"</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">e</span>
+        <span class="k">return</span> <span class="n">enhance</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
+            <span class="n">df_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">df_state</span><span class="p">,</span>
+            <span class="n">audio</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+            <span class="n">pad</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">pad</span><span class="p">,</span>
+            <span class="n">atten_lim_db</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">atten_lim_db</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_multiprocessing_complete_tasks</span><span class="p">(</span>
+    <span class="n">noise_reduce_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">ReduceNoiseBase</span><span class="p">],</span>
+    <span class="n">noise_reduce_arguments</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">tasks_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span>
+    <span class="n">results_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Complete the tasks in the given queue and put the results in the given results queue. The function will stop when</span>
+<span class="sd">    the given tasks queue will receive the stop mark. It is aimed to be used with multiprocessing as a process.</span>
+
+<span class="sd">    :param noise_reduce_type:       The noise reduce type to use.</span>
+<span class="sd">    :param noise_reduce_arguments:  The noisereduce initialization kwargs.</span>
+<span class="sd">    :param tasks_queue:             A queue to get the tasks from.</span>
+<span class="sd">    :param results_queue:           A queue to put the results in.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Initialize the reduce noise object</span>
+    <span class="n">noise_reducer</span> <span class="o">=</span> <span class="n">noise_reduce_type</span><span class="p">(</span><span class="o">**</span><span class="n">noise_reduce_arguments</span><span class="p">)</span>
+
+    <span class="c1"># Start listening to the tasks queue:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Get the audio_file:</span>
+        <span class="n">audio_file</span> <span class="o">=</span> <span class="n">tasks_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">audio_file</span> <span class="o">==</span> <span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">audio_file</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">audio_file</span><span class="p">)</span>
+        <span class="c1"># Apply noise reduction and collect the result:</span>
+        <span class="n">results_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">noise_reducer</span><span class="o">.</span><span class="n">reduce_noise</span><span class="p">(</span><span class="n">audio_file</span><span class="o">=</span><span class="n">audio_file</span><span class="p">))</span>
+
+    <span class="c1"># Mark the end of the tasks:</span>
+    <span class="n">results_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="reduce_noise_dfn"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.reduce_noise_dfn">[docs]</a><span class="k">def</span> <span class="nf">reduce_noise_dfn</span><span class="p">(</span>
+    <span class="n">audio_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">pad</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">atten_lim_db</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">silence_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_multiprocessing</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Reduce noise from audio files using DeepFilterNet.</span>
+<span class="sd">    For more information about the noise reduction algorithm see:</span>
+<span class="sd">    https://github.com/Rikorose/DeepFilterNet</span>
+<span class="sd">    Notice that the saved files are in wav format, even if the original files are in other format.</span>
+
+<span class="sd">    :param audio_source:        path to audio file or directory of audio files</span>
+<span class="sd">    :param target_directory:    path to target directory to save cleaned audio files</span>
+<span class="sd">    :param pad:                 whether to pad the audio file with zeros before cleaning</span>
+<span class="sd">    :param atten_lim_db:        maximum attenuation in dB</span>
+<span class="sd">    :param silence_threshold:   the threshold to remove silence from the audio, in dB. If None, no silence removal is</span>
+<span class="sd">                                performed.</span>
+<span class="sd">    :param use_multiprocessing: Number of processes to use for cleaning the audio files.</span>
+<span class="sd">                                If 0, no multiprocessing is used.</span>
+<span class="sd">    :param verbose:             verbosity level. If True, display progress bar and logs.</span>
+<span class="sd">    :param kwargs:              additional arguments to pass to torchaudio.load(). For more information see:</span>
+<span class="sd">                                https://pytorch.org/audio/stable/generated/torchaudio.load.html</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Reducing noise from audio files."</span><span class="p">)</span>
+
+    <span class="c1"># create target directory:</span>
+    <span class="n">target_directory</span> <span class="o">=</span> <span class="n">_create_target_directory</span><span class="p">(</span><span class="n">target_directory</span><span class="p">)</span>
+
+    <span class="c1"># get audio files:</span>
+    <span class="n">audio_files</span> <span class="o">=</span> <span class="n">_get_audio_files</span><span class="p">(</span><span class="n">audio_source</span><span class="p">)</span>
+
+    <span class="n">noise_reduce_arguments</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"target_directory"</span><span class="p">:</span> <span class="n">target_directory</span><span class="p">,</span>
+        <span class="s2">"pad"</span><span class="p">:</span> <span class="n">pad</span><span class="p">,</span>
+        <span class="s2">"atten_lim_db"</span><span class="p">:</span> <span class="n">atten_lim_db</span><span class="p">,</span>
+        <span class="s2">"silence_threshold"</span><span class="p">:</span> <span class="n">silence_threshold</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">use_multiprocessing</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">_parallel_run</span><span class="p">(</span>
+            <span class="n">noise_reduce_type</span><span class="o">=</span><span class="n">DFN</span><span class="p">,</span>
+            <span class="n">noise_reduce_arguments</span><span class="o">=</span><span class="n">noise_reduce_arguments</span><span class="p">,</span>
+            <span class="n">n_workers</span><span class="o">=</span><span class="n">use_multiprocessing</span><span class="p">,</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Noise-reduction"</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span>
+            <span class="n">noise_reduce_type</span><span class="o">=</span><span class="n">DFN</span><span class="p">,</span>
+            <span class="n">noise_reduce_arguments</span><span class="o">=</span><span class="n">noise_reduce_arguments</span><span class="p">,</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Noise-reduction"</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_process_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="reduce_noise"><a class="viewcode-back" href="documentation.html#noise_reduction.noise_reduction.reduce_noise">[docs]</a><span class="k">def</span> <span class="nf">reduce_noise</span><span class="p">(</span>
+    <span class="n">audio_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">,</span>
+    <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">channel</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">silence_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_multiprocessing</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Reduce noise from audio file or directory containing audio files.</span>
+<span class="sd">    The audio files must be in .wav format.</span>
+<span class="sd">    The cleaned audio files will be saved in the target_directory.</span>
+<span class="sd">    For information about the noise reduction algorithm see:</span>
+<span class="sd">    https://github.com/timsainb/noisereduce</span>
+<span class="sd">    Notice that the saved files are in wav format, even if the original files are in other format.</span>
+
+<span class="sd">    :param audio_source:        path to audio file or directory containing audio files</span>
+<span class="sd">    :param target_directory:    path to directory to save the cleaned audio files.</span>
+<span class="sd">    :param sample_rate:         Number of samples in one second in the audio file.</span>
+<span class="sd">                                Pass `None` to keep the original sample rate.</span>
+<span class="sd">    :param duration:            Duration of the audio file to clean in seconds.</span>
+<span class="sd">                                Pass `None` to keep the original duration.</span>
+<span class="sd">    :param channel:             Channel to clean. Pass the number of the channel to clean.</span>
+<span class="sd">                                To clean all channels pass None.</span>
+<span class="sd">    :param silence_threshold:   The threshold to remove silence from the audio, in dB.</span>
+<span class="sd">                                If None, no silence removal is performed.</span>
+<span class="sd">    :param use_multiprocessing: Number of processes to use for cleaning the audio files.</span>
+<span class="sd">                                If 0, no multiprocessing is used.</span>
+<span class="sd">    :param verbose:             Verbosity level. If True, display progress bar.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Reducing noise from audio files."</span><span class="p">)</span>
+
+    <span class="c1"># create target directory:</span>
+    <span class="n">target_directory</span> <span class="o">=</span> <span class="n">_create_target_directory</span><span class="p">(</span><span class="n">target_directory</span><span class="p">)</span>
+
+    <span class="c1"># get audio files:</span>
+    <span class="n">audio_files</span> <span class="o">=</span> <span class="n">_get_audio_files</span><span class="p">(</span><span class="n">audio_source</span><span class="p">)</span>
+
+    <span class="c1"># Create the reduce noise object:</span>
+    <span class="n">noise_reduce_arguments</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">"target_directory"</span><span class="p">:</span> <span class="n">target_directory</span><span class="p">,</span>
+        <span class="s2">"sample_rate"</span><span class="p">:</span> <span class="n">sample_rate</span><span class="p">,</span>
+        <span class="s2">"duration"</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span>
+        <span class="s2">"channel"</span><span class="p">:</span> <span class="n">channel</span><span class="p">,</span>
+        <span class="s2">"silence_threshold"</span><span class="p">:</span> <span class="n">silence_threshold</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">use_multiprocessing</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">_parallel_run</span><span class="p">(</span>
+            <span class="n">noise_reduce_type</span><span class="o">=</span><span class="n">ReduceNoise</span><span class="p">,</span>
+            <span class="n">noise_reduce_arguments</span><span class="o">=</span><span class="n">noise_reduce_arguments</span><span class="p">,</span>
+            <span class="n">n_workers</span><span class="o">=</span><span class="n">use_multiprocessing</span><span class="p">,</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Noise-reduction"</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span>
+            <span class="n">noise_reduce_type</span><span class="o">=</span><span class="n">ReduceNoise</span><span class="p">,</span>
+            <span class="n">noise_reduce_arguments</span><span class="o">=</span><span class="n">noise_reduce_arguments</span><span class="p">,</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Noise-reduction"</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_process_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">verbose</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_create_target_directory</span><span class="p">(</span><span class="n">target_directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">target_directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">target_directory</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">target_directory</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+        <span class="n">target_directory</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">target_directory</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_audio_files</span><span class="p">(</span><span class="n">audio_source</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">audio_source</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">audio_source</span><span class="p">)</span>
+    <span class="n">audio_files</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">audio_source</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="n">audio_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">audio_source</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.*"</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">audio_source</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">audio_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">audio_source</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"audio_source must be a file or a directory, got </span><span class="si">{</span><span class="n">audio_source</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">audio_files</span>
+
+
+<span class="k">def</span> <span class="nf">_parallel_run</span><span class="p">(</span>
+    <span class="n">noise_reduce_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">ReduceNoiseBase</span><span class="p">],</span>
+    <span class="n">noise_reduce_arguments</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Run multiple noise reduce workers with multiprocessing to complete the tasks that will be created on the provided</span>
+<span class="sd">    files using the given task creator.</span>
+
+<span class="sd">    :param noise_reduce_type:   The noise reduce type to use.</span>
+<span class="sd">    :param n_workers:           The number of workers to use.</span>
+<span class="sd">    :param audio_files:         The audio files to use.</span>
+<span class="sd">    :param description:         The description to use for the progress bar.</span>
+<span class="sd">    :param verbose:             Verbosity.</span>
+
+<span class="sd">    :returns: The collected results.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Check the number of workers:</span>
+    <span class="k">if</span> <span class="n">n_workers</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">):</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The number of workers (</span><span class="si">{</span><span class="n">n_workers</span><span class="si">}</span><span class="s2">) is larger than the number of audio files (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">)</span><span class="si">}</span><span class="s2">). "</span>
+            <span class="sa">f</span><span class="s2">"Setting the number of workers to </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
+        <span class="p">)</span>
+        <span class="n">n_workers</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">)</span>
+
+    <span class="c1"># Initialize the multiprocessing queues:</span>
+    <span class="n">tasks_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">results_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># Initialize the multiprocessing processes:</span>
+    <span class="n">task_completion_processes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Process</span><span class="p">(</span>
+            <span class="n">target</span><span class="o">=</span><span class="n">_multiprocessing_complete_tasks</span><span class="p">,</span>
+            <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span>
+                <span class="s2">"noise_reduce_type"</span><span class="p">:</span> <span class="n">noise_reduce_type</span><span class="p">,</span>
+                <span class="s2">"noise_reduce_arguments"</span><span class="p">:</span> <span class="n">noise_reduce_arguments</span><span class="p">,</span>
+                <span class="s2">"tasks_queue"</span><span class="p">:</span> <span class="n">tasks_queue</span><span class="p">,</span>
+                <span class="s2">"results_queue"</span><span class="p">:</span> <span class="n">results_queue</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_workers</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Start the multiprocessing processes:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">task_completion_processes</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="c1"># Put the tasks in the queue:</span>
+    <span class="k">for</span> <span class="n">audio_file</span> <span class="ow">in</span> <span class="n">audio_files</span><span class="p">:</span>
+        <span class="c1"># tasks_queue.put(task_creator.create_task(audio_file=audio_file).to_tuple())</span>
+        <span class="n">tasks_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">audio_file</span><span class="p">)</span>
+
+    <span class="c1"># Put the stop marks in the queue:</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_workers</span><span class="p">):</span>
+        <span class="n">tasks_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">)</span>
+
+    <span class="c1"># Collect the results:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stop_marks_counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">desc</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="s2">"file"</span><span class="p">,</span>
+        <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">),</span>
+        <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">,</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">progressbar</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Get a result from the queue:</span>
+            <span class="n">result</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">results_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">:</span>
+                <span class="n">stop_marks_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">stop_marks_counter</span> <span class="o">==</span> <span class="n">n_workers</span><span class="p">:</span>
+                    <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Collect the result:</span>
+                <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                <span class="n">progressbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Wait for the processes to finish:</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">task_completion_processes</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+
+<span class="k">def</span> <span class="nf">_run</span><span class="p">(</span>
+    <span class="n">noise_reduce_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">ReduceNoiseBase</span><span class="p">],</span>
+    <span class="n">noise_reduce_arguments</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+    <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Run the noise reduce algorithm on the given audio files and collect the results.</span>
+
+<span class="sd">    :param noise_reduce_type:       The noise reduce type to use.</span>
+<span class="sd">    :param noise_reduce_arguments:  The noisereduce initialization kwargs.</span>
+<span class="sd">    :param audio_files:             The audio files to use.</span>
+<span class="sd">    :param description:             The description to use for the progress bar.</span>
+<span class="sd">    :param verbose:                 Verbosity.</span>
+
+<span class="sd">    :returns: The collected results.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Create the reduce noise object:</span>
+    <span class="n">noise_reducer</span> <span class="o">=</span> <span class="n">noise_reduce_type</span><span class="p">(</span><span class="o">**</span><span class="n">noise_reduce_arguments</span><span class="p">)</span>
+
+    <span class="c1"># Run the noise reduce algorithm on the audio files and collect the results:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">audio_file</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+        <span class="n">audio_files</span><span class="p">,</span>
+        <span class="n">desc</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+        <span class="n">unit</span><span class="o">=</span><span class="s2">"file"</span><span class="p">,</span>
+        <span class="n">total</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">),</span>
+        <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">noise_reducer</span><span class="o">.</span><span class="n">reduce_noise</span><span class="p">(</span><span class="n">audio_file</span><span class="o">=</span><span class="n">audio_file</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+
+<span class="k">def</span> <span class="nf">_process_results</span><span class="p">(</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Process the results of the tasks.</span>
+
+<span class="sd">    :param results: The results to process.</span>
+<span class="sd">    :param verbose: Verbosity.</span>
+
+<span class="sd">    :returns: The processed results as a tuple of successes and errors.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Summarizing the results."</span><span class="p">)</span>
+    <span class="n">successes</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">is_error</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_error</span><span class="p">:</span>
+            <span class="n">errors</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">successes</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Done (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">successes</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">successes</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">successes</span><span class="p">,</span> <span class="n">errors</span>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>
