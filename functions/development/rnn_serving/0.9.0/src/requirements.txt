@@ -1,4 +1,0 @@
-mlrun
-keras
-tensorflow
-wget

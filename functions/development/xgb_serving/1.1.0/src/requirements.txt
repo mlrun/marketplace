@@ -1,8 +1,0 @@
-mlrun
-pandas
-xgboost
-cloudpickle
-pygit2
-scikit-learn
-scikit-plot
-seaborn
