@@ -1,0 +1,1604 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>transcribe.transcribe</title>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" rel="stylesheet" type="text/css">
+<link href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" rel="stylesheet" type="text/css">
+<link href="../../../_static/togglebutton.css" rel="stylesheet" type="text/css">
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf" rel="preload"/>
+<script src="../../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+<script data-url_root="../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+<script src="../../../_static/jquery.js"></script>
+<script src="../../../_static/underscore.js"></script>
+<script src="../../../_static/doctools.js"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<link href="../../genindex.html" rel="index" title="Index">
+<link href="../../search.html" rel="search" title="Search">
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+<!-- Google Analytics -->
+</link></link></link></link></link></link></head>
+<body data-offset="60" data-spy="scroll" data-target="#bd-toc-nav">
+<!-- Checkboxes to toggle the left sidebar -->
+<input aria-label="Toggle navigation sidebar" class="sidebar-toggle" id="__navigation" name="__navigation" type="checkbox"/>
+<label class="overlay overlay-navbar" for="__navigation">
+<div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input aria-label="Toggle in-page Table of Contents" class="sidebar-toggle" id="__page-toc" name="__page-toc" type="checkbox"/>
+<label class="overlay overlay-pagetoc" for="__page-toc">
+<div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+<div class="container-fluid" id="banner"></div>
+<div class="container-xl">
+<div class="row">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint single-page" id="site-navigation">
+</div>
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+<div class="header-article row sticky-top noprint">
+<div class="col py-1 d-flex header-article-main">
+<div class="header-article__left">
+</div>
+<div class="header-article__right">
+<button class="headerbtn" data-placement="bottom" data-toggle="tooltip" onclick="toggleFullScreen()" title="Fullscreen mode">
+<span class="headerbtn__icon-container">
+<i class="fas fa-expand"></i>
+</span>
+</button>
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+<button aria-label="Source repositories" class="headerbtn menu-dropdown__trigger">
+<i class="fab fa-github"></i>
+</button>
+<div class="menu-dropdown__content">
+<ul>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace" title="Source repository">
+<span class="headerbtn__icon-container">
+<i class="fab fa-github"></i>
+</span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+</li>
+<li>
+<a class="headerbtn" data-placement="left" data-toggle="tooltip" href="https://github.com/mlrun/marketplace/issues/new?title=Issue%20on%20page%20%2F_modules/transcribe/transcribe.html&amp;body=Your%20issue%20content%20here." title="Open an issue">
+<span class="headerbtn__icon-container">
+<i class="fas fa-lightbulb"></i>
+</span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+</div>
+</div>
+<div class="article row">
+<div class="col pl-md-3 pl-lg-5 content-container">
+<!-- Table of contents that is only displayed when printing the page -->
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<main id="main-content" role="main">
+<div>
+<h1>Source code for transcribe.transcribe</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#   http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">operator</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">reduce</span><span class="p">,</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span><span class="p">,</span> <span class="n">Queue</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Generator</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torchaudio</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">AutomaticSpeechRecognitionPipeline</span><span class="p">,</span>
+    <span class="n">AutoModelForCausalLM</span><span class="p">,</span>
+    <span class="n">pipeline</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">transformers.utils</span> <span class="kn">import</span> <span class="n">is_flash_attn_2_available</span>
+
+
+<div class="viewcode-block" id="BaseTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask">[docs]</a><span class="k">class</span> <span class="nc">BaseTask</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A task to write the transcription to file.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">transcription_output</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">text_file</span><span class="p">:</span> <span class="n">Path</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the task.</span>
+
+<span class="sd">        :param audio_file:           Path to the audio file that was transcribed.</span>
+<span class="sd">        :param transcription_output: The transcription output from the pipeline. String means an exception was raised.</span>
+<span class="sd">        :param text_file:            Path to the text file to write the transcription to.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Store the parameters:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span> <span class="o">=</span> <span class="n">audio_file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span> <span class="o">=</span> <span class="n">transcription_output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span> <span class="o">=</span> <span class="n">text_file</span>
+
+        <span class="c1"># Prepare the error variable:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_error</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="BaseTask.do_task"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.do_task">[docs]</a>    <span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Try to perform the task storing an error if occurred.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span>
+            <span class="k">return</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_do_task</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_error</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="BaseTask.is_failed"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.is_failed">[docs]</a>    <span class="k">def</span> <span class="nf">is_failed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Check if the task failed.</span>
+
+<span class="sd">        :returns: Whether the task failed.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="BaseTask.get_result"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.get_result">[docs]</a>    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Get the result of the task. If the task failed, the error will be returned, otherwise, the result will be the</span>
+<span class="sd">        text file name.</span>
+
+<span class="sd">        :returns: The task's result.</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_failed</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_error</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="o">.</span><span class="n">name</span></div>
+
+<div class="viewcode-block" id="BaseTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BaseTask.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
+
+<span class="sd">        :returns: The converted task.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="p">{</span>
+            <span class="s2">"audio_file"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_file</span><span class="p">,</span>
+            <span class="s2">"transcription_output"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">,</span>
+            <span class="s2">"text_file"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Perform the task - write the transcription to the stored file path.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Checking for no duplications:</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="o">.</span><span class="n">parent</span>
+                <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="o">.</span><span class="n">stem</span><span class="o">.</span><span class="n">rsplit</span><span class="p">(</span><span class="s1">'_'</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="si">}{</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="o">.</span><span class="n">suffix</span><span class="si">}</span><span class="s2">"</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Make sure all directories are created:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Write to file:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_file</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fp</span><span class="p">:</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">[</span><span class="s2">"text"</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="SpeechDiarizationTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask">[docs]</a><span class="k">class</span> <span class="nc">SpeechDiarizationTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A task to write the transcription to file with respect to a given speech diarization.</span>
+<span class="sd">    """</span>
+
+    <span class="k">class</span> <span class="nc">_DiarizationSegment</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        A speech diarization segment.</span>
+<span class="sd">        """</span>
+
+        <span class="n">start</span><span class="p">:</span> <span class="nb">float</span>
+        <span class="n">end</span><span class="p">:</span> <span class="nb">float</span>
+        <span class="n">speaker</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">class</span> <span class="nc">_WordTimestamp</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        A word with its start and end timestamps.</span>
+<span class="sd">        """</span>
+
+        <span class="n">start</span><span class="p">:</span> <span class="nb">float</span>
+        <span class="n">end</span><span class="p">:</span> <span class="nb">float</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">transcription_output</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+        <span class="n">text_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">speech_diarization</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the task.</span>
+
+<span class="sd">        :param audio_file:           Path to the audio file that was transcribed.</span>
+<span class="sd">        :param transcription_output: The transcription output from the pipeline.</span>
+<span class="sd">        :param text_file:            Path to the text file to write the transcription to.</span>
+<span class="sd">        :param speech_diarization:   A speech diarization as a list of tuples: (start, end, speaker).</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">audio_file</span><span class="o">=</span><span class="n">audio_file</span><span class="p">,</span>
+            <span class="n">transcription_output</span><span class="o">=</span><span class="n">transcription_output</span><span class="p">,</span>
+            <span class="n">text_file</span><span class="o">=</span><span class="n">text_file</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span> <span class="o">=</span> <span class="n">speech_diarization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">SpeechDiarizationTask</span><span class="o">.</span><span class="n">_DiarizationSegment</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">=</span> <span class="mi">0</span>
+
+<div class="viewcode-block" id="SpeechDiarizationTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationTask.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
+
+<span class="sd">        :returns: The converted task.</span>
+<span class="sd">        """</span>
+        <span class="n">task_class</span><span class="p">,</span> <span class="n">task_kwargs</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">to_tuple</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">task_class</span><span class="p">,</span> <span class="p">{</span>
+            <span class="o">**</span><span class="n">task_kwargs</span><span class="p">,</span>
+            <span class="s2">"speech_diarization"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span><span class="p">,</span>
+        <span class="p">}</span></div>
+
+    <span class="k">def</span> <span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Perform the task - write the transcription to the stored file path with respect to the given speech diarization.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Check if a speech diarization is given, if not, just write the transcription to file:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_do_task</span><span class="p">()</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Cast the chunks to word timestamps tuples:</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">SpeechDiarizationTask</span><span class="o">.</span><span class="n">_WordTimestamp</span><span class="p">(</span>
+                <span class="n">start</span><span class="o">=</span><span class="n">chunk</span><span class="p">[</span><span class="s2">"timestamp"</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                <span class="n">end</span><span class="o">=</span><span class="n">chunk</span><span class="p">[</span><span class="s2">"timestamp"</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                <span class="n">text</span><span class="o">=</span><span class="n">chunk</span><span class="p">[</span><span class="s2">"text"</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">[</span><span class="s2">"chunks"</span><span class="p">]</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Cast speech diarization to segments tuples:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">SpeechDiarizationTask</span><span class="o">.</span><span class="n">_DiarizationSegment</span><span class="p">(</span><span class="o">*</span><span class="n">segment</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">segment</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Try to match the Whisper model predicted timestamps to the closest diarization segment (closest diarization</span>
+        <span class="c1"># segment will be the most overlapping with the word, and if there is no overlap, the closest segment to the</span>
+        <span class="c1"># word):</span>
+        <span class="n">speaker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span><span class="p">]</span><span class="o">.</span><span class="n">speaker</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">speaker</span><span class="si">}</span><span class="s2">:"</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="c1"># Get the next diarization segment:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_get_next_segment</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="n">word</span><span class="p">)</span>
+            <span class="c1"># Check if the segment is of the same speaker:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span><span class="p">]</span><span class="o">.</span><span class="n">speaker</span> <span class="o">==</span> <span class="n">speaker</span><span class="p">:</span>
+                <span class="c1"># Collect the word:</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Append a newline and update the new speaker:</span>
+                <span class="n">speaker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span><span class="p">]</span><span class="o">.</span><span class="n">speaker</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">speaker</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">word</span><span class="o">.</span><span class="n">text</span><span class="si">}</span><span class="s2">"</span>
+
+        <span class="c1"># Update the transcription output with the new text to write it to file:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_do_task</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_next_segment</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">word</span><span class="p">:</span> <span class="n">_WordTimestamp</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Get the next diarization segment the given word falls into. The `self._last_chosen_index` will be updated</span>
+<span class="sd">        accordingly.</span>
+
+<span class="sd">        :param word: The word timestamp to match to the next segment.</span>
+<span class="sd">        """</span>
+        <span class="c1"># If the last chosen segment is the last segment, return it:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="c1"># Get the last chosen diarization segment:</span>
+        <span class="n">last_chosen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span><span class="p">]</span>
+
+        <span class="c1"># None value may appear if the word is the last word in the audio file, or it was split during inference. In</span>
+        <span class="c1"># that case, we'll set the last segment:</span>
+        <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">return</span>
+
+        <span class="c1"># If the word ends before the last chosen segment:</span>
+        <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;=</span> <span class="n">last_chosen</span><span class="o">.</span><span class="n">start</span><span class="p">:</span>
+            <span class="c1"># Then it is still the closest segment</span>
+            <span class="k">return</span>
+
+        <span class="c1"># We check if it ends inside the last chosen segment:</span>
+        <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="n">last_chosen</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="c1"># Then it still is the closest segment</span>
+            <span class="k">return</span>
+
+        <span class="c1"># The word ends after the segment, we need to collect all next segments up until the word ends before them:</span>
+        <span class="n">possible_segments</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+                <span class="n">possible_segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="n">possible_segments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Check for the most overlapping option:</span>
+        <span class="n">best_overlap</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">most_overlapping_segment_index</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">possible_segments</span><span class="p">:</span>
+            <span class="c1"># If the word starts before segment:</span>
+            <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">start</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">:</span>
+                <span class="c1"># If it ends before the segment, there is an overlap from the start of the segment to the end of the</span>
+                <span class="c1"># word:</span>
+                <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+                    <span class="n">overlap</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># The word is wrapping the segment, the overlap is the segment's length:</span>
+                    <span class="n">overlap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span>
+            <span class="c1"># The word starts in segment, check if the word ends in it:</span>
+            <span class="k">elif</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+                <span class="c1"># The overlap is the word's length:</span>
+                <span class="n">overlap</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">word</span><span class="o">.</span><span class="n">start</span>
+            <span class="c1"># The word start in segment but ends after it, the overlap is from the word's start to the segment's end:</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">overlap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">word</span><span class="o">.</span><span class="n">start</span>
+            <span class="c1"># Check for new best overlap:</span>
+            <span class="k">if</span> <span class="n">overlap</span> <span class="o">&gt;</span> <span class="n">best_overlap</span><span class="p">:</span>
+                <span class="n">best_overlap</span> <span class="o">=</span> <span class="n">overlap</span>
+                <span class="n">most_overlapping_segment_index</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">if</span> <span class="n">most_overlapping_segment_index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">=</span> <span class="n">most_overlapping_segment_index</span>
+            <span class="k">return</span>
+
+        <span class="c1"># If there is no overlapping segment, return the closest segment:</span>
+        <span class="n">best_distance</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">closest_segment_index</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">possible_segments</span><span class="p">:</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">word</span><span class="o">.</span><span class="n">start</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span>
+                <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">start</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">end</span>
+                <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_segments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">start</span> <span class="o">-</span> <span class="n">word</span><span class="o">.</span><span class="n">end</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="n">best_distance</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">best_distance</span><span class="p">:</span>
+                <span class="n">best_distance</span> <span class="o">=</span> <span class="n">distance</span>
+                <span class="n">closest_segment_index</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_last_chosen_index</span> <span class="o">=</span> <span class="n">closest_segment_index</span></div>
+
+
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask">[docs]</a><span class="k">class</span> <span class="nc">SpeechDiarizationPerChannelTask</span><span class="p">(</span><span class="n">BaseTask</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A task to write the transcription to file with respect to a given speech diarization per channel.</span>
+<span class="sd">    """</span>
+
+    <span class="k">class</span> <span class="nc">_WordTimestamp</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        A word with its start and end timestamps and speaker label (channel the word was taken from).</span>
+<span class="sd">        """</span>
+
+        <span class="n">start</span><span class="p">:</span> <span class="nb">float</span>
+        <span class="n">end</span><span class="p">:</span> <span class="nb">float</span>
+        <span class="n">speaker</span><span class="p">:</span> <span class="nb">str</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">text_file</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the task.</span>
+
+<span class="sd">        :param audio_file: Path to the audio file that was transcribed.</span>
+<span class="sd">        :param text_file:  Path to the text file to write the transcription to.</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">audio_file</span><span class="o">=</span><span class="n">audio_file</span><span class="p">,</span> <span class="n">transcription_output</span><span class="o">=</span><span class="p">{},</span> <span class="n">text_file</span><span class="o">=</span><span class="n">text_file</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output_channels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">transcription_output_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Get the transcription output channels.</span>
+
+<span class="sd">        :returns: The transcription output channels.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output_channels</span>
+
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.do_task"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.do_task">[docs]</a>    <span class="k">def</span> <span class="nf">do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Try to perform the task storing an error if occurred.</span>
+<span class="sd">        """</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">channel_output</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output_channels</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">channel_output</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output_channels</span>
+                <span class="k">return</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">do_task</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SpeechDiarizationPerChannelTask.to_tuple"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationPerChannelTask.to_tuple">[docs]</a>    <span class="k">def</span> <span class="nf">to_tuple</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).</span>
+
+<span class="sd">        :returns: The converted task.</span>
+<span class="sd">        """</span>
+        <span class="n">task_class</span><span class="p">,</span> <span class="n">task_kwargs</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">to_tuple</span><span class="p">()</span>
+        <span class="n">task_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"transcription_output"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">task_class</span><span class="p">,</span> <span class="n">task_kwargs</span></div>
+
+    <span class="k">def</span> <span class="nf">_do_task</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Perform the task - write the transcription to the stored file path with respect to the given speech diarization</span>
+<span class="sd">        per channel.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Cast the chunks to word timestamps tuples:</span>
+        <span class="n">words_per_channel</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span>
+                <span class="n">SpeechDiarizationPerChannelTask</span><span class="o">.</span><span class="n">_WordTimestamp</span><span class="p">(</span>
+                    <span class="n">start</span><span class="o">=</span><span class="n">chunk</span><span class="p">[</span><span class="s2">"timestamp"</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                    <span class="n">end</span><span class="o">=</span><span class="n">chunk</span><span class="p">[</span><span class="s2">"timestamp"</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="n">speaker</span><span class="o">=</span><span class="n">speaker</span><span class="p">,</span>
+                    <span class="n">text</span><span class="o">=</span><span class="n">chunk</span><span class="p">[</span><span class="s2">"text"</span><span class="p">],</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">output</span><span class="p">[</span><span class="s2">"chunks"</span><span class="p">]</span>
+            <span class="p">]</span>
+            <span class="k">for</span> <span class="n">speaker</span><span class="p">,</span> <span class="n">output</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output_channels</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Merge and sort the words per channel by their start time:</span>
+        <span class="n">words</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="o">*</span><span class="n">words_per_channel</span><span class="p">)</span>
+        <span class="n">words</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+        <span class="c1"># Write the transcription to file:</span>
+        <span class="n">current_speaker</span> <span class="o">=</span> <span class="n">words</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">speaker</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">current_speaker</span><span class="si">}</span><span class="s2">:"</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">:</span>
+            <span class="c1"># Check if the word's speaker is different from the current one:</span>
+            <span class="k">if</span> <span class="n">word</span><span class="o">.</span><span class="n">speaker</span> <span class="o">!=</span> <span class="n">current_speaker</span><span class="p">:</span>
+                <span class="c1"># Append a newline and update the new speaker:</span>
+                <span class="n">current_speaker</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">speaker</span>
+                <span class="n">text</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="si">{</span><span class="n">current_speaker</span><span class="si">}</span><span class="s2">:"</span>
+            <span class="c1"># Collect the word:</span>
+            <span class="n">text</span> <span class="o">+=</span> <span class="n">word</span><span class="o">.</span><span class="n">text</span>
+
+        <span class="c1"># Update the transcription output with the new text to write it to file:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_output</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_do_task</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="BatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor">[docs]</a><span class="k">class</span> <span class="nc">BatchProcessor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A batch processor to process batches of transcriptions. The batch processor is creating tasks and is aimed to be</span>
+<span class="sd">    working along the transcriber. It can be used with multiprocessing queue or run the tasks directly using the</span>
+<span class="sd">    associated methods.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">output_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the batch processor.</span>
+
+<span class="sd">        :param audio_files:      The list of all audio files to transcribe.</span>
+<span class="sd">        :param output_directory: The output directory to write the transcriptions to.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Store the parameters:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span> <span class="o">=</span> <span class="n">audio_files</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_output_directory</span> <span class="o">=</span> <span class="n">output_directory</span>
+
+        <span class="c1"># Prepare the batching variables:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="BatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.process_batch">[docs]</a>    <span class="k">def</span> <span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
+<span class="sd">        processor.</span>
+
+<span class="sd">        :param batch: The batch of transcriptions to process.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Get the relevant files belongs to the given batch:</span>
+        <span class="n">current_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_current_files</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">))</span>
+
+        <span class="c1"># Build the diarization tasks:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">BaseTask</span><span class="p">(</span>
+                    <span class="n">audio_file</span><span class="o">=</span><span class="n">file</span><span class="p">,</span>
+                    <span class="n">transcription_output</span><span class="o">=</span><span class="n">batch</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">text_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_directory</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">file</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">current_files</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="BatchProcessor.get_tasks"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_tasks">[docs]</a>    <span class="k">def</span> <span class="nf">get_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">BaseTask</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Get the tasks to perform.</span>
+
+<span class="sd">        :returns: The tasks to perform.</span>
+<span class="sd">        """</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">tasks</span></div>
+
+<div class="viewcode-block" id="BatchProcessor.do_tasks"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.do_tasks">[docs]</a>    <span class="k">def</span> <span class="nf">do_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Perform the tasks. Should be used if no multiprocessing queue is given to a transcriber.</span>
+<span class="sd">        """</span>
+        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">():</span>
+            <span class="n">task</span><span class="o">.</span><span class="n">do_task</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">task</span><span class="o">.</span><span class="n">is_failed</span><span class="p">(),</span> <span class="n">task</span><span class="o">.</span><span class="n">get_result</span><span class="p">()))</span></div>
+
+<div class="viewcode-block" id="BatchProcessor.get_results"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.BatchProcessor.get_results">[docs]</a>    <span class="k">def</span> <span class="nf">get_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Get the results of the tasks. The stored results are then cleared.</span>
+
+<span class="sd">        :returns: The results of the tasks.</span>
+<span class="sd">        """</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_results</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+    <span class="k">def</span> <span class="nf">_get_current_files</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Get the current files to process.</span>
+
+<span class="sd">        :param batch_size: The batch size to progress the current file index.</span>
+
+<span class="sd">        :returns: The current files to process.</span>
+<span class="sd">        """</span>
+        <span class="n">end_index</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span> <span class="o">+</span> <span class="n">batch_size</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span> <span class="o">+</span> <span class="n">batch_size</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span><span class="p">)</span>
+            <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">current_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span> <span class="p">:</span> <span class="n">end_index</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span> <span class="o">=</span> <span class="n">end_index</span>
+        <span class="k">return</span> <span class="n">current_files</span></div>
+
+
+<div class="viewcode-block" id="SpeechDiarizationBatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor">[docs]</a><span class="k">class</span> <span class="nc">SpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A batch processor to process batches of transcriptions with respect to a given speech diarization. The batch</span>
+<span class="sd">    processor is creating tasks and is aimed to be working along the transcriber. It can be used with multiprocessing</span>
+<span class="sd">    queue or run the tasks directly using the associated methods.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">output_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">speech_diarization</span><span class="p">:</span> <span class="nb">dict</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the batch processor.</span>
+
+<span class="sd">        :param audio_files:        The list of all audio files to transcribe.</span>
+<span class="sd">        :param output_directory:   The output directory to write the transcriptions to.</span>
+<span class="sd">        :param speech_diarization: A speech diarization dictionary to pass along with each processed batch.</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span> <span class="n">output_directory</span><span class="o">=</span><span class="n">output_directory</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span> <span class="o">=</span> <span class="n">speech_diarization</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span> <span class="o">=</span> <span class="n">audio_files</span>
+
+<div class="viewcode-block" id="SpeechDiarizationBatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.SpeechDiarizationBatchProcessor.process_batch">[docs]</a>    <span class="k">def</span> <span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
+<span class="sd">        processor.</span>
+
+<span class="sd">        :param batch: The batch of transcriptions to process.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Get the relevant files belongs to the given batch:</span>
+        <span class="n">current_files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_current_files</span><span class="p">(</span><span class="n">batch_size</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">))</span>
+
+        <span class="c1"># Build the diarization tasks:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">SpeechDiarizationTask</span><span class="p">(</span>
+                    <span class="n">audio_file</span><span class="o">=</span><span class="n">file</span><span class="p">,</span>
+                    <span class="n">transcription_output</span><span class="o">=</span><span class="n">batch</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">text_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_directory</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">file</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span>
+                    <span class="n">speech_diarization</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_speech_diarization</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">file</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">current_files</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor">[docs]</a><span class="k">class</span> <span class="nc">PerChannelSpeechDiarizationBatchProcessor</span><span class="p">(</span><span class="n">BatchProcessor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A batch processor to process batches of transcriptions per channel. The batch processor is creating tasks with the</span>
+<span class="sd">    selected amount of channels given and is aimed to be working along the transcriber. It can be used with</span>
+<span class="sd">    multiprocessing queue or run the tasks directly using the associated methods.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
+        <span class="n">output_directory</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span>
+        <span class="n">n_channels</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">speakers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the batch processor.</span>
+
+<span class="sd">        :param audio_files:      The list of all audio files to transcribe.</span>
+<span class="sd">        :param output_directory: The output directory to write the transcriptions to.</span>
+<span class="sd">        :param n_channels:       The number of channels in each audio file to transcribe.</span>
+<span class="sd">        :param speakers:         The speakers labels to use for each channel.</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span> <span class="n">output_directory</span><span class="o">=</span><span class="n">output_directory</span><span class="p">)</span>
+
+        <span class="c1"># Store the parameters:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_channels</span> <span class="o">=</span> <span class="n">n_channels</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_speakers</span> <span class="o">=</span> <span class="n">speakers</span>
+
+        <span class="c1"># Prepare a channel buffer to store the channels until the current task created is fully covered:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="p">:</span> <span class="n">SpeechDiarizationPerChannelTask</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="PerChannelSpeechDiarizationBatchProcessor.process_batch"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.PerChannelSpeechDiarizationBatchProcessor.process_batch">[docs]</a>    <span class="k">def</span> <span class="nf">process_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Process a batch of transcriptions. Tasks related to the given batch will be created and stored in the batch</span>
+<span class="sd">        processor.</span>
+
+<span class="sd">        :param batch: The batch of transcriptions to process.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Go over the batch and create the tasks:</span>
+        <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">batch</span><span class="p">:</span>
+            <span class="c1"># Check if there is a task in process:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="p">:</span>
+                <span class="c1"># Create a new task:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span> <span class="o">=</span> <span class="n">SpeechDiarizationPerChannelTask</span><span class="p">(</span>
+                    <span class="n">audio_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span><span class="p">],</span>
+                    <span class="n">text_file</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_output_directory</span>
+                    <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_audio_files</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span><span class="p">]</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">.txt"</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="c1"># Get the channel's speaker:</span>
+            <span class="n">speaker</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_speakers</span><span class="p">[</span>
+                <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="o">.</span><span class="n">transcription_output_channels</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="c1"># Collect the channel into the processed task:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="o">.</span><span class="n">transcription_output_channels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">speaker</span><span class="p">,</span> <span class="n">output</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="c1"># Check if the task is fully covered (all channels are collected):</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="o">.</span><span class="n">transcription_output_channels</span><span class="p">)</span>
+                <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_channels</span>
+            <span class="p">):</span>
+                <span class="c1"># Collect the task and reset the task in process:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_tasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_current_file_index</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_task_in_process</span> <span class="o">=</span> <span class="kc">None</span></div></div>
+
+
+<div class="viewcode-block" id="Transcriber"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber">[docs]</a><span class="k">class</span> <span class="nc">Transcriber</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A transcription wrapper for the Huggingface's ASR pipeline -</span>
+<span class="sd">    https://huggingface.co/transformers/main_classes/pipelines.html#transformers.AutomaticSpeechRecognitionPipeline to</span>
+<span class="sd">    use with OpenAI's Whisper models - https://huggingface.co/openai.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">use_flash_attention_2</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">use_better_transformers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">assistant_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">max_new_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
+        <span class="n">chunk_length_s</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="n">spoken_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">translate_to_english</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">return_timestamps</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"word"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">per_channel_transcription</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Initialize the transcriber.</span>
+
+<span class="sd">        :param model_name:                The model name to use. Should be a model from the OpenAI's Whisper models for</span>
+<span class="sd">                                          best results (for example "tiny", "base", "large", etc.).</span>
+<span class="sd">        :param device:                    The device to use for inference. If not given, will use GPU if available.</span>
+<span class="sd">        :param use_flash_attention_2:     Whether to use the Flash Attention 2 implementation. It can be used only with</span>
+<span class="sd">                                          one of the following GPUs: Nvidia H series and Nvidia A series. T4 support</span>
+<span class="sd">                                          will be available soon.</span>
+
+<span class="sd">                                          Note: If both `use_flash_attention_2` and</span>
+<span class="sd">                                          `use_better_transformers` are `None`, the optimization will be chosen</span>
+<span class="sd">                                          automatically according to the available resources.</span>
+
+<span class="sd">        :param use_better_transformers:   Whether to use the Better Transformers library to further optimize the model.</span>
+<span class="sd">                                          Should be used for all use cases that do not support flash attention 2.</span>
+
+<span class="sd">                                          Note: If both `use_flash_attention_2` and `use_better_transformers` are</span>
+<span class="sd">                                          `None`, the optimization will be chosen automatically according to the</span>
+<span class="sd">                                          available resources.</span>
+<span class="sd">       :param assistant_model:           The assistant model name to use for inference. Notice that the optimizations</span>
+<span class="sd">                                          (flash attention 2 and better transformers) will be applied for the assistant</span>
+<span class="sd">                                          as well. Should be a model from Huggingface's distil-whisper (see here for</span>
+<span class="sd">                                          more information: https://github.com/huggingface/distil-whisper).</span>
+<span class="sd">        :param max_new_tokens:            The maximum number of new tokens to generate. This is used to limit the</span>
+<span class="sd">                                          generation length. Default is 128 tokens.</span>
+<span class="sd">        :param chunk_length_s:            The audio chunk to split the audio to (in seconds). Default is 30 seconds.</span>
+<span class="sd">        :param batch_size:                The batch size to use for inference. Default is 2.</span>
+<span class="sd">        :param spoken_language:           Aim whisper to know what language is spoken. If None, it will try to detect it</span>
+<span class="sd">                                          for each chunk.</span>
+<span class="sd">        :param translate_to_english:      Whether to translate the transcriptions to English. Default is False.</span>
+<span class="sd">        :param return_timestamps:         Whether to return the timestamps of the words. If "word", will return the</span>
+<span class="sd">                                          timestamps of each word. If True will return the timestamps of each chunk.</span>
+<span class="sd">                                          Default is False. Aimed to be used for speech diarization.</span>
+<span class="sd">        :param per_channel_transcription: Whether to do per channel transcription. If needed to run per channel</span>
+<span class="sd">                                          transcription, pass the number of channels expected for each audio file here.</span>
+<span class="sd">                                          0 means regular transcription (merge channels).</span>
+
+<span class="sd">                                          Note: If `per_channel_transcription` is not 0, `batch_size` must be treated to</span>
+<span class="sd">                                          be the number of channels and not audio files. Aimed to be used for per</span>
+<span class="sd">                                          channel speech diarization.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Store loading parameters:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span> <span class="o">=</span> <span class="n">model_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="o">=</span> <span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_flash_attention_2</span> <span class="o">=</span> <span class="n">use_flash_attention_2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_use_better_transformers</span> <span class="o">=</span> <span class="n">use_better_transformers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_max_new_tokens</span> <span class="o">=</span> <span class="n">max_new_tokens</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_chunk_length_s</span> <span class="o">=</span> <span class="n">chunk_length_s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span> <span class="o">=</span> <span class="n">batch_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_return_timestamps</span> <span class="o">=</span> <span class="n">return_timestamps</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_per_channel_transcription</span> <span class="o">=</span> <span class="n">per_channel_transcription</span>
+
+        <span class="c1"># Store generation parameters:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_assistant_model</span> <span class="o">=</span> <span class="n">assistant_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_spoken_language</span> <span class="o">=</span> <span class="n">spoken_language</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_translate_to_english</span> <span class="o">=</span> <span class="n">translate_to_english</span>
+
+        <span class="c1"># Prepare the transcription objects:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_pipeline</span><span class="p">:</span> <span class="n">AutomaticSpeechRecognitionPipeline</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Transcriber.load"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.load">[docs]</a>    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Load the transcriber. Must be called before transcribing.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Set the device and data type to use (prefer GPU if available):</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_device</span> <span class="ow">or</span> <span class="s2">"cuda"</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">"cpu"</span>
+        <span class="p">)</span>
+        <span class="n">torch_dtype</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">float16</span> <span class="k">if</span> <span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">float32</span>
+
+        <span class="c1"># Choose the optimization to use (in case the user did not specify any):</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_use_flash_attention_2</span> <span class="ow">is</span> <span class="kc">None</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_better_transformers</span> <span class="ow">is</span> <span class="kc">None</span>
+        <span class="p">):</span>
+            <span class="c1"># Prefer to use flash attention 2 if available and cuda device is supported (see GPU names to architecture</span>
+            <span class="c1"># here: https://en.wikipedia.org/wiki/List_of_Nvidia_graphics_processing_units#Tesla):</span>
+            <span class="k">if</span> <span class="n">device</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">"cuda"</span> <span class="ow">and</span> <span class="n">is_flash_attn_2_available</span><span class="p">():</span>
+                <span class="n">cuda_device_name</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_properties</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span>
+                    <span class="n">cuda_device_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">gpu_name</span><span class="p">)</span>
+                    <span class="k">for</span> <span class="n">gpu_name</span> <span class="ow">in</span> <span class="p">[</span>
+                        <span class="s2">"NVIDIA A"</span><span class="p">,</span>  <span class="c1"># For Ampere architecture (e.g. A10, A30, A100)</span>
+                        <span class="s2">"NVIDIA H"</span><span class="p">,</span>  <span class="c1"># For Hopper architecture (e.g. H100)</span>
+                        <span class="s2">"NVIDIA L"</span><span class="p">,</span>  <span class="c1"># For Ada Lovelace architecture (e.g. L4, L40)</span>
+                        <span class="s2">"NVIDIA RTX 30"</span><span class="p">,</span>  <span class="c1"># For Ada Lovelace architecture (RTX 30 series)</span>
+                        <span class="s2">"NVIDIA RTX 40"</span><span class="p">,</span>  <span class="c1"># For Ada Lovelace architecture (RTX 40 series)</span>
+                        <span class="s2">"NVIDIA RTX 50"</span><span class="p">,</span>  <span class="c1"># For Ada Lovelace architecture (RTX 50 series)</span>
+                        <span class="c1"># Will be supported soon according to FlashAttention GitHub repo:</span>
+                        <span class="c1"># https://github.com/Dao-AILab/flash-attention?tab=readme-ov-file#installation-and-features</span>
+                        <span class="c1"># "NVIDIA T4",  # For Turing architecture (only T4)</span>
+                        <span class="c1"># "NVIDIA RTX 20",  # For Turing architecture (RTX 20 series)</span>
+                    <span class="p">]</span>
+                <span class="p">):</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_use_flash_attention_2</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_use_better_transformers</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_use_better_transformers</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="c1"># Build the optimizations kwargs:</span>
+        <span class="n">model_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"low_cpu_mem_usage"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"use_safetensors"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_flash_attention_2</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_LOGGER</span><span class="p">:</span>
+                <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">"Using FlashAttention2 optimization - make sure the `flash-attn` package is installed via "</span>
+                    <span class="s2">"`pip install -U flash-attn --no-build-isolation`"</span>
+                <span class="p">)</span>
+            <span class="n">model_kwargs</span><span class="p">[</span><span class="s2">"attn_implementation"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"flash_attention_2"</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_use_better_transformers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_LOGGER</span><span class="p">:</span>
+                <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="s2">"Using BetterTransformers optimization - make sure the `optimum` package is installed via "</span>
+                    <span class="s2">"`pip install -U optimum`"</span>
+                <span class="p">)</span>
+            <span class="n">model_kwargs</span><span class="p">[</span><span class="s2">"attn_implementation"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"sdpa"</span>
+
+        <span class="c1"># Initialize the speech recognition pipeline:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_pipeline</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+            <span class="n">task</span><span class="o">=</span><span class="s2">"automatic-speech-recognition"</span><span class="p">,</span>
+            <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_model_name</span><span class="p">,</span>
+            <span class="n">model_kwargs</span><span class="o">=</span><span class="n">model_kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
+            <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span><span class="p">,</span>
+            <span class="n">max_new_tokens</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_new_tokens</span><span class="p">,</span>
+            <span class="n">chunk_length_s</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_chunk_length_s</span><span class="p">,</span>
+            <span class="n">return_timestamps</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_return_timestamps</span><span class="p">,</span>
+            <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch_dtype</span><span class="p">,</span>
+            <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Prepare the generation kwargs:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_kwargs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"language"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spoken_language</span><span class="p">,</span>
+            <span class="s2">"task"</span><span class="p">:</span> <span class="s2">"translate"</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_translate_to_english</span> <span class="k">else</span> <span class="s2">"transcribe"</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Initialize the assistant model (if needed):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_assistant_model</span><span class="p">:</span>
+            <span class="n">assistant_model</span> <span class="o">=</span> <span class="n">AutoModelForCausalLM</span><span class="o">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_assistant_model</span><span class="p">,</span> <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch_dtype</span><span class="p">,</span> <span class="o">**</span><span class="n">model_kwargs</span>
+            <span class="p">)</span>
+            <span class="n">assistant_model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_generate_kwargs</span><span class="p">[</span><span class="s2">"assistant_model"</span><span class="p">]</span> <span class="o">=</span> <span class="n">assistant_model</span></div>
+
+<div class="viewcode-block" id="Transcriber.transcribe"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.Transcriber.transcribe">[docs]</a>    <span class="k">def</span> <span class="nf">transcribe</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
+        <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batches_queue</span><span class="p">:</span> <span class="n">Queue</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]],</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Transcribe the given audio files. The transcriptions will be sent to a queue or a batch processor for further</span>
+<span class="sd">        processing like writing to text files. If no queue or batch processor is given, the transcriptions outputs from</span>
+<span class="sd">        the pipeline will be returned. Otherwise, `None` is returned.</span>
+
+<span class="sd">        :param audio_files:     The audio files to transcribe.</span>
+<span class="sd">        :param batch_processor: A batch processor.</span>
+<span class="sd">        :param batches_queue:   A multiprocessing queue to put the batches in.</span>
+<span class="sd">        :param verbose:         Whether to show a progress bar. Default is False.</span>
+
+<span class="sd">        :returns: The transcriptions outputs from the pipeline if no queue or batch processor is given, otherwise,</span>
+<span class="sd">                  `None`.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Wrap the audio files with a function to iterate over them via a generator (save memory and runtime with</span>
+        <span class="c1"># Huggingface's pipelines as they preload each input while inference is running):</span>
+        <span class="k">def</span> <span class="nf">audio_iterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_per_channel_transcription</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">audio_file</span> <span class="ow">in</span> <span class="n">audio_files</span><span class="p">:</span>
+                    <span class="n">audio</span><span class="p">,</span> <span class="n">sampling_rate</span> <span class="o">=</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">audio_file</span><span class="p">))</span>
+                    <span class="n">audio</span> <span class="o">=</span> <span class="n">audio</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+                    <span class="k">for</span> <span class="n">channel</span> <span class="ow">in</span> <span class="n">audio</span><span class="p">:</span>
+                        <span class="k">yield</span> <span class="p">{</span><span class="s2">"raw"</span><span class="p">:</span> <span class="n">channel</span><span class="p">,</span> <span class="s2">"sampling_rate"</span><span class="p">:</span> <span class="n">sampling_rate</span><span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">audio_file</span> <span class="ow">in</span> <span class="n">audio_files</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="nb">str</span><span class="p">(</span><span class="n">audio_file</span><span class="p">)</span>
+
+        <span class="c1"># Create a batch iterator:</span>
+        <span class="k">def</span> <span class="nf">batch_iterator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">audio</span> <span class="ow">in</span> <span class="n">audio_iterator</span><span class="p">():</span>
+                <span class="n">batch</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">audio</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span><span class="p">:</span>
+                    <span class="k">yield</span> <span class="n">batch</span>
+                    <span class="n">batch</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">if</span> <span class="n">batch</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">batch</span>
+
+        <span class="c1"># Prepare the successes dataframe and errors dictionary to be returned:</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Infer through the pipeline:</span>
+        <span class="k">for</span> <span class="n">input_batch</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span>
+            <span class="n">batch_iterator</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">audio_iterator</span><span class="p">(),</span>
+            <span class="n">desc</span><span class="o">=</span><span class="s2">"Transcribing"</span><span class="p">,</span>
+            <span class="n">unit</span><span class="o">=</span><span class="s2">"channel"</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_per_channel_transcription</span> <span class="k">else</span> <span class="s2">"audio file"</span><span class="p">,</span>
+            <span class="n">total</span><span class="o">=</span><span class="p">(</span>
+                <span class="p">(</span>
+                    <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">)</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">_batch_size</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_per_channel_transcription</span> <span class="ow">or</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">,</span>
+        <span class="p">):</span>
+            <span class="c1"># Infer:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">output_batch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transcription_pipeline</span><span class="p">(</span>
+                    <span class="n">input_batch</span><span class="p">,</span>
+                    <span class="n">generate_kwargs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_generate_kwargs</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+                <span class="c1"># Collect the exception:</span>
+                <span class="n">output_batch</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exception</span><span class="p">)</span>
+                <span class="c1"># Align to batch size:</span>
+                <span class="n">output_batch</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="p">[</span><span class="n">output_batch</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_batch</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_batch</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+                    <span class="k">else</span> <span class="p">[</span><span class="n">output_batch</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="c1"># To align with batching, if batch size is 1, wrap the output with a list:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">output_batch</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="n">output_batch</span> <span class="o">=</span> <span class="p">[</span><span class="n">output_batch</span><span class="p">]</span>
+            <span class="c1"># If a batch processor is given, process the batch:</span>
+            <span class="k">if</span> <span class="n">batch_processor</span><span class="p">:</span>
+                <span class="c1"># Process it directly:</span>
+                <span class="n">batch_processor</span><span class="o">.</span><span class="n">process_batch</span><span class="p">(</span><span class="n">batch</span><span class="o">=</span><span class="n">output_batch</span><span class="p">)</span>
+                <span class="n">batch_processor</span><span class="o">.</span><span class="n">do_tasks</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="n">batches_queue</span><span class="p">:</span>
+                <span class="c1"># Otherwise, queue the batch:</span>
+                <span class="n">batches_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">output_batch</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Otherwise, collect the output as is without processing:</span>
+                <span class="n">outputs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output_batch</span><span class="p">)</span>
+
+        <span class="c1"># Check if given a multiprocessing queue or a batch processor:</span>
+        <span class="k">if</span> <span class="n">batches_queue</span><span class="p">:</span>
+            <span class="n">batches_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">outputs</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">batch_processor</span> <span class="k">else</span> <span class="kc">None</span></div></div>
+
+
+<span class="c1">#: The value to send into multiprocessing queues to stop the process:</span>
+<span class="n">_MULTIPROCESSING_STOP_MARK</span> <span class="o">=</span> <span class="s2">"STOP"</span>
+
+
+<span class="k">def</span> <span class="nf">_multiprocessing_process_batches</span><span class="p">(</span>
+    <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span><span class="p">,</span>
+    <span class="n">batches_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span>
+    <span class="n">tasks_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span>
+    <span class="n">n_task_completers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Process the batches in the given batches queue and put the tasks in the given tasks queue. The function will stop</span>
+<span class="sd">    when the given batches queue will receive the stop mark. It is aimed to be used with multiprocessing as a process.</span>
+
+<span class="sd">    :param batch_processor:   A batch processor to process the batches.</span>
+<span class="sd">    :param batches_queue:     A queue to get the batches from.</span>
+<span class="sd">    :param tasks_queue:       A queue to put the tasks in.</span>
+<span class="sd">    :param n_task_completers: The number of task completers (processes that run the `_multiprocessing_complete_tasks`</span>
+<span class="sd">                              function). A stop mark will be sent to the tasks queue for each task completer.</span>
+<span class="sd">    """</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Get the batch:</span>
+        <span class="n">batch</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="n">batches_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">batch</span> <span class="o">==</span> <span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Process the batch:</span>
+        <span class="n">batch_processor</span><span class="o">.</span><span class="n">process_batch</span><span class="p">(</span><span class="n">batch</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
+
+        <span class="c1"># Get the tasks:</span>
+        <span class="n">tasks</span> <span class="o">=</span> <span class="n">batch_processor</span><span class="o">.</span><span class="n">get_tasks</span><span class="p">()</span>
+
+        <span class="c1"># Queue the tasks:</span>
+        <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
+            <span class="n">tasks_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">to_tuple</span><span class="p">())</span>
+
+    <span class="c1"># Mark the end of the batches:</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_task_completers</span><span class="p">):</span>
+        <span class="n">tasks_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_multiprocessing_complete_tasks</span><span class="p">(</span><span class="n">tasks_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">results_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Complete the tasks in the given queue and put the results in the given results queue. The function will stop when</span>
+<span class="sd">    the given tasks queue will receive the stop mark. It is aimed to be used with multiprocessing as a process.</span>
+
+<span class="sd">    :param tasks_queue:   A queue to get the tasks from.</span>
+<span class="sd">    :param results_queue: A queue to put the results in.</span>
+<span class="sd">    """</span>
+    <span class="n">tasks_map</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">BaseTask</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="n">BaseTask</span><span class="p">,</span>
+        <span class="n">SpeechDiarizationTask</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="n">SpeechDiarizationTask</span><span class="p">,</span>
+        <span class="n">SpeechDiarizationPerChannelTask</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="n">SpeechDiarizationPerChannelTask</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Get the task:</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">tasks_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">task</span> <span class="o">==</span> <span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="c1"># Reconstruct the task:</span>
+        <span class="n">task_class</span><span class="p">,</span> <span class="n">task_kwargs</span> <span class="o">=</span> <span class="n">task</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">tasks_map</span><span class="p">[</span><span class="n">task_class</span><span class="p">](</span><span class="o">**</span><span class="n">task_kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Complete the task:</span>
+        <span class="n">task</span><span class="o">.</span><span class="n">do_task</span><span class="p">()</span>
+        <span class="n">results_queue</span><span class="o">.</span><span class="n">put</span><span class="p">((</span><span class="n">task</span><span class="o">.</span><span class="n">is_failed</span><span class="p">(),</span> <span class="n">task</span><span class="o">.</span><span class="n">get_result</span><span class="p">()))</span>
+
+    <span class="c1"># Mark the end of the tasks:</span>
+    <span class="n">results_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">)</span>
+
+
+<span class="c1"># Get the global logger:</span>
+<span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+
+
+<div class="viewcode-block" id="open_mpi_handler"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.open_mpi_handler">[docs]</a><span class="k">def</span> <span class="nf">open_mpi_handler</span><span class="p">(</span>
+    <span class="n">worker_inputs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">):</span>
+    <span class="k">global</span> <span class="n">_LOGGER</span>
+
+    <span class="c1"># Check for MLRun and OpenMPI availability:</span>
+    <span class="n">context</span><span class="p">,</span> <span class="n">comm</span> <span class="o">=</span> <span class="n">_check_mlrun_and_open_mpi</span><span class="p">()</span>
+
+    <span class="c1"># Check if MLRun is available, set the global logger to MLRun's:</span>
+    <span class="k">if</span> <span class="n">context</span><span class="p">:</span>
+        <span class="n">_LOGGER</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">logger</span>
+
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">handler</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">comm</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">handler</span>
+
+        <span class="nd">@wraps</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="c1"># Get the open mpi environment properties:</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+            <span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+
+            <span class="c1"># Give the correct chunk of the workers inputs:</span>
+            <span class="k">for</span> <span class="n">worker_input</span> <span class="ow">in</span> <span class="n">worker_inputs</span><span class="p">:</span>
+                <span class="n">input_argument</span> <span class="o">=</span> <span class="n">kwargs</span><span class="p">[</span><span class="n">worker_input</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">input_argument</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">_get_audio_files</span><span class="p">(</span>
+                        <span class="n">data_path</span><span class="o">=</span><span class="n">Path</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+                    <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">size</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">"Cannot split the input '</span><span class="si">{</span><span class="n">worker_input</span><span class="si">}</span><span class="s2">' of length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2"> workers. "</span>
+                        <span class="sa">f</span><span class="s2">"Please reduce the amount of workers for this input."</span>
+                    <span class="p">)</span>
+                <span class="n">even_chunk_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span> <span class="o">//</span> <span class="n">size</span>
+                <span class="n">chunk_start</span> <span class="o">=</span> <span class="n">rank</span> <span class="o">*</span> <span class="n">even_chunk_size</span>
+                <span class="n">chunk_end</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="p">(</span><span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">even_chunk_size</span>
+                    <span class="k">if</span> <span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">size</span>
+                    <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="n">input_argument</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Rank #</span><span class="si">{</span><span class="n">rank</span><span class="si">}</span><span class="s2">: Processing input chunk of '</span><span class="si">{</span><span class="n">worker_input</span><span class="si">}</span><span class="s2">' "</span>
+                    <span class="sa">f</span><span class="s2">"from index </span><span class="si">{</span><span class="n">chunk_start</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">chunk_end</span><span class="si">}</span><span class="s2">."</span>
+                <span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">input_argument</span><span class="p">[</span><span class="n">chunk_start</span><span class="p">:</span><span class="n">chunk_end</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">input_argument</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+                    <span class="n">input_argument</span> <span class="o">=</span> <span class="n">input_argument</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">chunk_start</span><span class="p">:</span><span class="n">chunk_end</span><span class="p">:,</span> <span class="p">:]</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">worker_input</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_argument</span>
+
+            <span class="c1"># Set the root worker only arguments:</span>
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">root_worker_inputs</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">root_worker_inputs</span><span class="p">)</span>
+
+            <span class="c1"># Run the worker:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">handler</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Save the output directory of this worker:</span>
+            <span class="n">output_directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="c1"># Send the output to the root rank (rank #0):</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="c1"># Join the data from all workers:</span>
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Collecting data from workers to root worker."</span><span class="p">)</span>
+
+                <span class="c1"># Check if there are different output directories:</span>
+                <span class="n">output_directories</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">Path</span><span class="p">(</span><span class="n">out_dir</span><span class="p">)</span> <span class="k">for</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">output</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+                    <span class="c1"># True means the other workers should pass their files to the root worker (rank 0):</span>
+                    <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">output_directories</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="n">r</span><span class="p">)</span>
+
+                <span class="c1"># If there are different output directories, listen to the other workers:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output_directories</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="c1"># Collect the files from the other workers:</span>
+                    <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+                        <span class="n">files</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">comm</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">r</span><span class="p">))</span>
+                    <span class="c1"># Write the files to the root worker's output directory:</span>
+                    <span class="k">for</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">file_content</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+                        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_directory</span> <span class="o">/</span> <span class="n">file_name</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">file_content</span><span class="p">)</span>
+
+                <span class="c1"># Concatenate the dataframes:</span>
+                <span class="n">dataframe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span><span class="n">objs</span><span class="o">=</span><span class="p">[</span><span class="n">df</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">output</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+                <span class="c1"># Concatenate the errors dictionaries:</span>
+                <span class="n">errors_dictionary</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span>
+                    <span class="n">operator</span><span class="o">.</span><span class="n">ior</span><span class="p">,</span> <span class="p">[</span><span class="n">err</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">err</span> <span class="ow">in</span> <span class="n">output</span><span class="p">],</span> <span class="p">{}</span>
+                <span class="p">)</span>
+
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_directory</span><span class="p">),</span> <span class="n">dataframe</span><span class="p">,</span> <span class="n">errors_dictionary</span>
+
+            <span class="c1"># Listen to rank 0 to see if there are different output directories and this rank need to send its files to</span>
+            <span class="c1"># it:</span>
+            <span class="k">if</span> <span class="n">comm</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+                <span class="n">files</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">output_directory</span><span class="p">):</span>
+                    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_directory</span> <span class="o">/</span> <span class="n">file</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                        <span class="n">files</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">file</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()))</span>
+                <span class="n">comm</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">files</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span></div>
+
+
+<span class="k">def</span> <span class="nf">_check_mlrun_and_open_mpi</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="s2">"mlrun.MLClientCtx"</span><span class="p">,</span> <span class="s2">"mpi4py.MPI.Intracomm"</span><span class="p">]:</span>
+    <span class="n">is_mpi</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">import</span> <span class="nn">mlrun</span>
+
+        <span class="n">context</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_ctx</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"mlrun"</span><span class="p">)</span>
+        <span class="n">is_mpi</span> <span class="o">=</span> <span class="n">context</span><span class="o">.</span><span class="n">labels</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"kind"</span><span class="p">,</span> <span class="s2">"job"</span><span class="p">)</span> <span class="o">==</span> <span class="s2">"mpijob"</span>
+
+        <span class="k">if</span> <span class="n">is_mpi</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="kn">from</span> <span class="nn">mpi4py</span> <span class="kn">import</span> <span class="n">MPI</span>
+
+                <span class="k">return</span> <span class="n">context</span><span class="p">,</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+            <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">mpi4py_not_found</span><span class="p">:</span>
+                <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                    <span class="s2">"To distribute the function using MLRun's 'mpijob' you need to have `mpi4py` package in your "</span>
+                    <span class="s2">"interpreter. Please run `pip install mpi4py` and make sure you have open-mpi."</span>
+                <span class="p">)</span>
+                <span class="k">raise</span> <span class="n">mpi4py_not_found</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">context</span><span class="p">,</span> <span class="kc">None</span>
+    <span class="k">except</span> <span class="ne">ModuleNotFoundError</span> <span class="k">as</span> <span class="n">module_not_found</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_mpi</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">module_not_found</span>
+    <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="transcribe"><a class="viewcode-back" href="documentation.html#transcribe.transcribe.transcribe">[docs]</a><span class="nd">@open_mpi_handler</span><span class="p">(</span><span class="n">worker_inputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"data_path"</span><span class="p">],</span> <span class="n">root_worker_inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">"verbose"</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+<span class="k">def</span> <span class="nf">transcribe</span><span class="p">(</span>
+    <span class="c1"># Input / Output kwargs:</span>
+    <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]]],</span>
+    <span class="n">output_directory</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="c1"># Model loading kwargs:</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"openai/whisper-tiny"</span><span class="p">,</span>
+    <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_flash_attention_2</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_better_transformers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="c1"># Generation kwargs:</span>
+    <span class="n">assistant_model</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_new_tokens</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">128</span><span class="p">,</span>
+    <span class="n">chunk_length_s</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="n">spoken_language</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">translate_to_english</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="c1"># Diarization kwargs:</span>
+    <span class="n">speech_diarization</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">speech_diarize_per_channel</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">speaker_labels</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="c1"># Other kwargs:</span>
+    <span class="n">use_multiprocessing</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Transcribe audio files into text files and collect additional data. The end result is a directory of transcribed</span>
+<span class="sd">    text files and a dataframe containing the following columns:</span>
+
+<span class="sd">    * audio_file - The audio file path.</span>
+<span class="sd">    * transcription_file - The transcribed text file name in the output directory.</span>
+
+<span class="sd">    The transcription is based on Huggingface's ASR pipeline -</span>
+<span class="sd">    https://huggingface.co/transformers/main_classes/pipelines.html#transformers.AutomaticSpeechRecognitionPipeline and</span>
+<span class="sd">    is tested with OpenAI's Whisper models - https://huggingface.co/openai.</span>
+
+<span class="sd">    If one of the speaker diarization parameters are given (either `speech_diarization` or</span>
+<span class="sd">    `speech_diarize_per_channel`), the transcription will be written in a conversation format, where each speaker will</span>
+<span class="sd">    be written in a separate line::</span>
+
+<span class="sd">        speaker_1: text</span>
+<span class="sd">        speaker_2: text</span>
+<span class="sd">        speaker_1: text</span>
+<span class="sd">        ...</span>
+
+<span class="sd">    :param data_path:                  A directory of audio files or a single file or a list of files to transcribe.</span>
+<span class="sd">    :param output_directory:           Path to a directory to save all transcribed audio files. If not given, will save</span>
+<span class="sd">                                       the transcribed files in a temporary directory.</span>
+<span class="sd">    :param model_name:                 The model name to use. Should be a model from the OpenAI's Whisper models for</span>
+<span class="sd">                                       best results (for example "tiny", "base", "large", etc.). See here for more</span>
+<span class="sd">                                       information: https://huggingface.co/openai?search_models=whisper.</span>
+<span class="sd">    :param device:                     The device to use for inference. If not given, will use GPU if available.</span>
+<span class="sd">    :param use_flash_attention_2:      Whether to use the Flash Attention 2 implementation. It can be used only with</span>
+<span class="sd">                                       one of the following GPUs: Nvidia H series and Nvidia A series. T4 support</span>
+<span class="sd">                                       will be available soon.</span>
+
+<span class="sd">                                       Note: If both `use_flash_attention_2` and</span>
+<span class="sd">                                       `use_better_transformers` are `None`, the optimization will be chosen</span>
+<span class="sd">                                       automatically according to the available resources.</span>
+
+<span class="sd">    :param use_better_transformers:    Whether to use the Better Transformers library to further optimize the model.</span>
+<span class="sd">                                       Should be used for all use cases that do not support flash attention 2.</span>
+
+<span class="sd">                                       Note: If both `use_flash_attention_2` and `use_better_transformers` are</span>
+<span class="sd">                                       `None`, the optimization will be chosen automatically according to the</span>
+<span class="sd">                                       available resources.</span>
+<span class="sd">    :param assistant_model:            The assistant model name to use for inference. Notice that the optimizations</span>
+<span class="sd">                                       (flash attention 2 and better transformers) will be applied for the assistant as</span>
+<span class="sd">                                       well. Should be a model from Huggingface's distil-whisper (see here for more</span>
+<span class="sd">                                       information: https://github.com/huggingface/distil-whisper).</span>
+
+<span class="sd">                                       Note: Currently an assistant model is only usable with batch size of 1.</span>
+<span class="sd">    :param max_new_tokens:             The maximum number of new tokens to generate. This is used to limit the</span>
+<span class="sd">                                       generation length. Default is 128 tokens.</span>
+<span class="sd">    :param chunk_length_s:             The audio chunk to split the audio to (in seconds). Default is 30 seconds.</span>
+<span class="sd">    :param batch_size:                 The batch size to use for inference. Default is 2.</span>
+<span class="sd">    :param spoken_language:            Aim whisper to know what language is spoken. If None, it will try to detect</span>
+<span class="sd">                                       it.</span>
+<span class="sd">    :param translate_to_english:       Whether to translate the transcriptions to English.</span>
+<span class="sd">    :param speech_diarization:         A speech diarization dictionary with the file names to transcribe as keys and</span>
+<span class="sd">                                       their diarization as value. The diarization is a list of tuples:</span>
+<span class="sd">                                       (start, end, speaker). An example</span>
+<span class="sd">                                       for a diarization dictionary::</span>
+
+<span class="sd">                                       {</span>
+<span class="sd">                                           "audio_file_name": [</span>
+<span class="sd">                                               {</span>
+<span class="sd">                                                   "start": 0.0,</span>
+<span class="sd">                                                   "end": 2.0,</span>
+<span class="sd">                                                   "speaker": "Agent",</span>
+<span class="sd">                                               },</span>
+<span class="sd">                                               {</span>
+<span class="sd">                                                   "start": 2.0,</span>
+<span class="sd">                                                   "end": 4.0,</span>
+<span class="sd">                                                   "speaker": "Client",</span>
+<span class="sd">                                               },</span>
+<span class="sd">                                               ...</span>
+<span class="sd">                                           ],</span>
+<span class="sd">                                           ...</span>
+<span class="sd">                                       }</span>
+
+<span class="sd">                                       Note: The diarization must be for the entire duration of the audio file (as long</span>
+<span class="sd">                                       as Whisper is predicting words up until then.</span>
+<span class="sd">    :param speech_diarize_per_channel: Perform speech diarization per channel. Each speaker is expected to belong to</span>
+<span class="sd">                                       a separate channel in the audio. Notice: This will make the transcription</span>
+<span class="sd">                                       slower as each channel wil be transcribed separatly. If a speech diarization</span>
+<span class="sd">                                       is passed (via the `speech_diarization` parameter), this parameter is</span>
+<span class="sd">                                       ignored.</span>
+<span class="sd">    :param speaker_labels:             A list of speaker labels by channel order to use for writing the</span>
+<span class="sd">                                       transcription with respect to per channel speech diarization. This won't be</span>
+<span class="sd">                                       used together with a given speech diarization (via the `speech_diarization`</span>
+<span class="sd">                                       parameter).</span>
+<span class="sd">    :param use_multiprocessing:        Whether to use multiprocessing to transcribe the audio files. Can be either a</span>
+<span class="sd">                                       boolean value or an integer. If `True`, will use the default amount of workers</span>
+<span class="sd">                                       (3): 1 for transcription, 1 for batch processing and 1 for task completion (such</span>
+<span class="sd">                                       as speech diarization and writing to files). To control the amount of tasks</span>
+<span class="sd">                                       completion workers, an integer can be provided to specify the amount of workers.</span>
+<span class="sd">                                       `False`, will use a single process. Default is `False`.</span>
+<span class="sd">    :param verbose:                    Whether to print the progress of the transcription. Default is `False`.</span>
+<span class="sd">    """</span>
+    <span class="k">global</span> <span class="n">_LOGGER</span>
+
+    <span class="c1"># Get the input audio files to transcribe:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Collecting audio files."</span><span class="p">)</span>
+    <span class="n">audio_files</span> <span class="o">=</span> <span class="n">_get_audio_files</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="n">data_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Collected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">)</span><span class="si">}</span><span class="s2"> audio files."</span><span class="p">)</span>
+
+    <span class="c1"># Get the output directory:</span>
+    <span class="k">if</span> <span class="n">output_directory</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"No output directory given, using temporary directory."</span><span class="p">)</span>
+        <span class="n">output_directory</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
+    <span class="n">output_directory</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_directory</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+    <span class="n">output_directory</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Transcriptions will be saved to: </span><span class="si">{</span><span class="n">output_directory</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># Initialize a batch processor according to user requirements (no speech diarization, given speech diarization,</span>
+    <span class="c1"># speech diarization per channel):</span>
+    <span class="k">if</span> <span class="n">speech_diarization</span><span class="p">:</span>
+        <span class="n">batch_processor</span> <span class="o">=</span> <span class="n">SpeechDiarizationBatchProcessor</span><span class="p">(</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">output_directory</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
+            <span class="n">speech_diarization</span><span class="o">=</span><span class="n">speech_diarization</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">speech_diarize_per_channel</span><span class="p">:</span>
+        <span class="n">batch_processor</span> <span class="o">=</span> <span class="n">PerChannelSpeechDiarizationBatchProcessor</span><span class="p">(</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">output_directory</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
+            <span class="n">n_channels</span><span class="o">=</span><span class="n">speech_diarize_per_channel</span><span class="p">,</span>
+            <span class="n">speakers</span><span class="o">=</span><span class="n">speaker_labels</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">batch_processor</span> <span class="o">=</span> <span class="n">BatchProcessor</span><span class="p">(</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">output_directory</span><span class="o">=</span><span class="n">output_directory</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Initialize the transcription pipeline:</span>
+    <span class="n">transcriber</span> <span class="o">=</span> <span class="n">Transcriber</span><span class="p">(</span>
+        <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+        <span class="n">use_flash_attention_2</span><span class="o">=</span><span class="n">use_flash_attention_2</span><span class="p">,</span>
+        <span class="n">use_better_transformers</span><span class="o">=</span><span class="n">use_better_transformers</span><span class="p">,</span>
+        <span class="n">assistant_model</span><span class="o">=</span><span class="n">assistant_model</span><span class="p">,</span>
+        <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+        <span class="n">max_new_tokens</span><span class="o">=</span><span class="n">max_new_tokens</span><span class="p">,</span>
+        <span class="n">chunk_length_s</span><span class="o">=</span><span class="n">chunk_length_s</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">return_timestamps</span><span class="o">=</span><span class="p">(</span>
+            <span class="s2">"word"</span>
+            <span class="k">if</span> <span class="n">speech_diarization</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">speech_diarize_per_channel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+            <span class="k">else</span> <span class="kc">False</span>
+        <span class="p">),</span>
+        <span class="n">per_channel_transcription</span><span class="o">=</span><span class="n">speech_diarize_per_channel</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">spoken_language</span><span class="o">=</span><span class="n">spoken_language</span><span class="p">,</span>
+        <span class="n">translate_to_english</span><span class="o">=</span><span class="n">translate_to_english</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Run the transcription:</span>
+    <span class="k">if</span> <span class="n">use_multiprocessing</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">_parallel_run</span><span class="p">(</span>
+            <span class="n">n_workers</span><span class="o">=</span><span class="n">use_multiprocessing</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">use_multiprocessing</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+            <span class="k">else</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">batch_processor</span><span class="o">=</span><span class="n">batch_processor</span><span class="p">,</span>
+            <span class="n">transcriber</span><span class="o">=</span><span class="n">transcriber</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">_run</span><span class="p">(</span>
+            <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+            <span class="n">batch_processor</span><span class="o">=</span><span class="n">batch_processor</span><span class="p">,</span>
+            <span class="n">transcriber</span><span class="o">=</span><span class="n">transcriber</span><span class="p">,</span>
+            <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Process the results:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Summarizing the results."</span><span class="p">)</span>
+    <span class="n">successes</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">errors</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">is_error</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">is_error</span><span class="p">:</span>
+            <span class="n">errors</span><span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">successes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    <span class="n">successes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">successes</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"audio_file"</span><span class="p">,</span> <span class="s2">"transcription_file"</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Done (</span><span class="si">{</span><span class="n">successes</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">audio_files</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"Transcriptions summary:</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">successes</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_directory</span><span class="p">),</span> <span class="n">successes</span><span class="p">,</span> <span class="n">errors</span></div>
+
+
+<span class="k">def</span> <span class="nf">_get_audio_files</span><span class="p">(</span>
+    <span class="n">data_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Get the audio files to transcribe. If a path to a directory is given, all files in the directory will be collected.</span>
+
+<span class="sd">    :param data_path: The data path to collect the audio files from.</span>
+
+<span class="sd">    :returns: The audio files list.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Check if given a list of paths:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">audio_files</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">data_path</span><span class="p">:</span>
+            <span class="n">audio_files</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_get_audio_files</span><span class="p">(</span><span class="n">data_path</span><span class="o">=</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">audio_files</span>
+
+    <span class="c1"># Check if given a single string path to cast it to a `pathlib.Path`:</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">data_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span><span class="o">.</span><span class="n">absolute</span><span class="p">()</span>
+
+    <span class="c1"># Check if the path is of a directory or a file:</span>
+    <span class="k">if</span> <span class="n">data_path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="c1"># Get all files inside the directory:</span>
+        <span class="n">audio_files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data_path</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*.*"</span><span class="p">))</span>
+    <span class="k">elif</span> <span class="n">data_path</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">audio_files</span> <span class="o">=</span> <span class="p">[</span><span class="n">data_path</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"Unrecognized data path. The parameter `data_path` must be a valid path to either a directory path or a "</span>
+            <span class="sa">f</span><span class="s2">"file. Given: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span><span class="si">}</span><span class="s2"> "</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">audio_files</span>
+
+
+<span class="k">def</span> <span class="nf">_run</span><span class="p">(</span>
+    <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
+    <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span><span class="p">,</span>
+    <span class="n">transcriber</span><span class="p">:</span> <span class="n">Transcriber</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Run the transcription without multiprocessing.</span>
+
+<span class="sd">    :param audio_files:     The audio files to transcribe.</span>
+<span class="sd">    :param batch_processor: The batch processor to use.</span>
+<span class="sd">    :param transcriber:     The transcriber to use.</span>
+<span class="sd">    :param verbose:         Verbosity.</span>
+
+<span class="sd">    :returns: The collected results.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Load the transcription pipeline:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading the transcription pipeline."</span><span class="p">)</span>
+    <span class="n">transcriber</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Transcription pipeline loaded."</span><span class="p">)</span>
+
+    <span class="c1"># Transcribe the files:</span>
+    <span class="n">transcriber</span><span class="o">.</span><span class="n">transcribe</span><span class="p">(</span>
+        <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span>
+        <span class="n">batch_processor</span><span class="o">=</span><span class="n">batch_processor</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Return the results:</span>
+    <span class="k">return</span> <span class="n">batch_processor</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">_parallel_run</span><span class="p">(</span>
+    <span class="n">n_workers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">audio_files</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span>
+    <span class="n">batch_processor</span><span class="p">:</span> <span class="n">BatchProcessor</span><span class="p">,</span>
+    <span class="n">transcriber</span><span class="p">:</span> <span class="n">Transcriber</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Run the transcription with multiprocessing.</span>
+
+<span class="sd">    :param n_workers:       The amount of workers to use as task completers.</span>
+<span class="sd">    :param audio_files:     The audio files to transcribe.</span>
+<span class="sd">    :param batch_processor: The batch processor to use.</span>
+<span class="sd">    :param transcriber:     The transcriber to use.</span>
+<span class="sd">    :param verbose:         Verbosity.</span>
+
+<span class="sd">    :returns: The collected results.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Initialize the multiprocessing queues:</span>
+    <span class="n">batches_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">tasks_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+    <span class="n">results_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
+    <span class="c1"># Initialize the multiprocessing processes:</span>
+    <span class="n">batch_processing_process</span> <span class="o">=</span> <span class="n">Process</span><span class="p">(</span>
+        <span class="n">target</span><span class="o">=</span><span class="n">_multiprocessing_process_batches</span><span class="p">,</span>
+        <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span>
+            <span class="s2">"batch_processor"</span><span class="p">:</span> <span class="n">batch_processor</span><span class="p">,</span>
+            <span class="s2">"batches_queue"</span><span class="p">:</span> <span class="n">batches_queue</span><span class="p">,</span>
+            <span class="s2">"tasks_queue"</span><span class="p">:</span> <span class="n">tasks_queue</span><span class="p">,</span>
+            <span class="s2">"n_task_completers"</span><span class="p">:</span> <span class="n">n_workers</span><span class="p">,</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+    <span class="n">task_completion_processes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Process</span><span class="p">(</span>
+            <span class="n">target</span><span class="o">=</span><span class="n">_multiprocessing_complete_tasks</span><span class="p">,</span>
+            <span class="n">kwargs</span><span class="o">=</span><span class="p">{</span><span class="s2">"tasks_queue"</span><span class="p">:</span> <span class="n">tasks_queue</span><span class="p">,</span> <span class="s2">"results_queue"</span><span class="p">:</span> <span class="n">results_queue</span><span class="p">},</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_workers</span><span class="p">)</span>
+    <span class="p">]</span>
+
+    <span class="c1"># Start the multiprocessing processes:</span>
+    <span class="n">batch_processing_process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">task_completion_processes</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="c1"># Load the transcription pipeline:</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading the transcription pipeline."</span><span class="p">)</span>
+    <span class="n">transcriber</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="n">_LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Transcription pipeline loaded."</span><span class="p">)</span>
+
+    <span class="c1"># Transcribe the files:</span>
+    <span class="n">transcriber</span><span class="o">.</span><span class="n">transcribe</span><span class="p">(</span>
+        <span class="n">audio_files</span><span class="o">=</span><span class="n">audio_files</span><span class="p">,</span> <span class="n">batches_queue</span><span class="o">=</span><span class="n">batches_queue</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Collect the results:</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stop_marks_counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Get a result from the queue:</span>
+        <span class="n">result</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="n">results_queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="n">_MULTIPROCESSING_STOP_MARK</span><span class="p">:</span>
+            <span class="n">stop_marks_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">stop_marks_counter</span> <span class="o">==</span> <span class="n">n_workers</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Collect the result:</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="c1"># Wait for the processes to finish:</span>
+    <span class="n">results_queue</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span>
+    <span class="n">batch_processing_process</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">task_completion_processes</span><span class="p">:</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+</pre></div>
+</div>
+</main>
+<footer class="footer-article noprint">
+<!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<div class="footer-content row">
+<footer class="col footer"><p>
+  
+      © Copyright .<br/>
+</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+</body>
+</html>

@@ -129,17 +129,15 @@
 <span class="c1"># limitations under the License.</span>
 <span class="c1">#</span>
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">mlrun</span>
 <span class="kn">import</span> <span class="nn">mlrun.datastore</span>
-<span class="kn">import</span> <span class="nn">mlrun.utils</span>
 <span class="kn">import</span> <span class="nn">mlrun.feature_store</span> <span class="k">as</span> <span class="nn">fs</span>
+<span class="kn">import</span> <span class="nn">mlrun.utils</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">PlotArtifact</span>
+<span class="kn">import</span> <span class="nn">plotly.express</span> <span class="k">as</span> <span class="nn">px</span>
+<span class="kn">from</span> <span class="nn">mlrun.artifacts</span> <span class="kn">import</span> <span class="n">PlotlyArtifact</span>
 <span class="kn">from</span> <span class="nn">mlrun.datastore.targets</span> <span class="kn">import</span> <span class="n">ParquetTarget</span>
 <span class="c1"># MLRun utils</span>
 <span class="kn">from</span> <span class="nn">mlrun.utils.helpers</span> <span class="kn">import</span> <span class="n">create_class</span>
@@ -156,15 +154,6 @@
     <span class="s2">"LogisticRegression"</span><span class="p">:</span> <span class="s2">"LogisticRegression"</span><span class="p">,</span>
     <span class="s2">"ExtraTreesClassifier"</span><span class="p">:</span> <span class="s2">"ExtraTreesClassifier"</span><span class="p">,</span>
 <span class="p">}</span>
-
-
-<span class="k">def</span> <span class="nf">_clear_current_figure</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Clear matplotlib current figure.</span>
-<span class="sd">    """</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">cla</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 
 <div class="viewcode-block" id="show_values_on_bars"><a class="viewcode-back" href="documentation.html#feature_selection.feature_selection.show_values_on_bars">[docs]</a><span class="k">def</span> <span class="nf">show_values_on_bars</span><span class="p">(</span><span class="n">axs</span><span class="p">,</span> <span class="n">h_v</span><span class="o">=</span><span class="s2">"v"</span><span class="p">,</span> <span class="n">space</span><span class="o">=</span><span class="mf">0.4</span><span class="p">):</span>
@@ -190,33 +179,18 @@
 
 
 <div class="viewcode-block" id="plot_stat"><a class="viewcode-back" href="documentation.html#feature_selection.feature_selection.plot_stat">[docs]</a><span class="k">def</span> <span class="nf">plot_stat</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">stat_name</span><span class="p">,</span> <span class="n">stat_df</span><span class="p">):</span>
-    <span class="n">_clear_current_figure</span><span class="p">()</span>
-
-    <span class="c1"># Add chart</span>
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
-    <span class="n">stat_chart</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span>
+    <span class="n">sorted_df</span> <span class="o">=</span> <span class="n">stat_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">stat_name</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+        <span class="n">data_frame</span><span class="o">=</span><span class="n">sorted_df</span><span class="p">,</span>
         <span class="n">x</span><span class="o">=</span><span class="n">stat_name</span><span class="p">,</span>
-        <span class="n">y</span><span class="o">=</span><span class="s2">"index"</span><span class="p">,</span>
-        <span class="n">data</span><span class="o">=</span><span class="n">stat_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">stat_name</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(),</span>
-        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">sorted_df</span><span class="o">.</span><span class="n">index</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2"> feature scores"</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="n">stat_name</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-
-    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">stat_chart</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
-        <span class="n">width</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
-            <span class="mi">5</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">(),</span>
-            <span class="n">p</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.55</span> <span class="o">*</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">(),</span>
-            <span class="s2">"</span><span class="si">{:1.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">width</span><span class="p">),</span>
-            <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span>
-            <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span>
-        <span class="p">)</span>
-
     <span class="n">context</span><span class="o">.</span><span class="n">log_artifact</span><span class="p">(</span>
-        <span class="n">PlotArtifact</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">()),</span>
-        <span class="n">local_path</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">"plots"</span><span class="p">,</span> <span class="s2">"feature_selection"</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2">.html"</span><span class="p">),</span>
-    <span class="p">)</span>
-    <span class="n">_clear_current_figure</span><span class="p">()</span></div>
+        <span class="n">item</span><span class="o">=</span><span class="n">PlotlyArtifact</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">stat_name</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="n">fig</span><span class="p">),</span>
+        <span class="n">local_path</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">stat_name</span><span class="si">}</span><span class="s2">.html"</span><span class="p">,</span>
+    <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="feature_selection"><a class="viewcode-back" href="documentation.html#feature_selection.feature_selection.feature_selection">[docs]</a><span class="k">def</span> <span class="nf">feature_selection</span><span class="p">(</span>
@@ -231,7 +205,6 @@
     <span class="n">sample_ratio</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">output_vector_name</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">ignore_type_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">is_feature_vector</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Applies selected feature selection statistical functions or models on our 'df_artifact'.</span>
@@ -254,10 +227,9 @@
 <span class="sd">                                model name (ex. LinearSVC), formalized json (contains 'CLASS',</span>
 <span class="sd">                                'FIT', 'META') or a path to such json file.</span>
 <span class="sd">    :param max_scaled_scores:   produce feature scores table scaled with max_scaler.</span>
-<span class="sd">    :param sample_ratio:        percentage of the dataset the user whishes to compute the feature selection process on.</span>
+<span class="sd">    :param sample_ratio:        percentage of the dataset the user wishes to compute the feature selection process on.</span>
 <span class="sd">    :param output_vector_name:  creates a new feature vector containing only the identifies features.</span>
 <span class="sd">    :param ignore_type_errors:  skips datatypes that are neither float nor int within the feature vector.</span>
-<span class="sd">    :param is_feature_vector:   bool stating if the data is passed as a feature vector.</span>
 <span class="sd">    """</span>
     <span class="n">stat_filters</span> <span class="o">=</span> <span class="n">stat_filters</span> <span class="ow">or</span> <span class="n">DEFAULT_STAT_FILTERS</span>
     <span class="n">model_filters</span> <span class="o">=</span> <span class="n">model_filters</span> <span class="ow">or</span> <span class="n">DEFAULT_MODEL_FILTERS</span>
