@@ -1,3 +1,88 @@
+### Change log [2024-09-25 10:34:26]
+1. Item Updated: `coxph_test` (from version: `1.1.0` to `1.1.0`)
+2. Item Updated: `v2_model_server` (from version: `1.2.0` to `1.2.0`)
+3. Item Updated: `translate` (from version: `0.1.0` to `0.1.0`)
+4. Item Updated: `text_to_audio_generator` (from version: `1.2.0` to `1.2.0`)
+5. Item Updated: `gen_class_data` (from version: `1.2.0` to `1.2.0`)
+6. Item Updated: `feature_selection` (from version: `1.5.0` to `1.5.0`)
+7. Item Updated: `arc_to_parquet` (from version: `1.4.1` to `1.4.1`)
+8. Item Updated: `azureml_serving` (from version: `1.1.0` to `1.1.0`)
+9. Item Updated: `describe_dask` (from version: `1.1.0` to `1.1.0`)
+10. Item Updated: `question_answering` (from version: `0.4.0` to `0.4.0`)
+11. Item Updated: `transcribe` (from version: `1.1.0` to `1.1.0`)
+12. Item Updated: `sklearn_classifier_dask` (from version: `1.1.1` to `1.1.1`)
+13. Item Updated: `pyannote_audio` (from version: `1.2.0` to `1.2.0`)
+14. Item Updated: `pii_recognizer` (from version: `0.3.0` to `0.3.0`)
+15. Item Updated: `silero_vad` (from version: `1.3.0` to `1.3.0`)
+16. Item Updated: `test_classifier` (from version: `1.1.0` to `1.1.0`)
+17. Item Updated: `batch_inference_v2` (from version: `2.5.0` to `2.5.0`)
+18. Item Updated: `open_archive` (from version: `1.1.0` to `1.1.0`)
+19. Item Updated: `hugging_face_serving` (from version: `1.1.0` to `1.1.0`)
+20. Item Updated: `batch_inference` (from version: `1.7.0` to `1.7.0`)
+21. Item Updated: `sklearn_classifier` (from version: `1.1.1` to `1.1.1`)
+22. Item Updated: `aggregate` (from version: `1.3.0` to `1.3.0`)
+23. Item Updated: `model_monitoring_batch` (from version: `1.1.0` to `1.1.0`)
+24. Item Updated: `validate_great_expectations` (from version: `1.1.0` to `1.1.0`)
+25. Item Updated: `coxph_trainer` (from version: `1.1.0` to `1.1.0`)
+26. Item Updated: `structured_data_generator` (from version: `1.5.0` to `1.5.0`)
+27. Item Updated: `churn_server` (from version: `1.2.0` to `1.2.0`)
+28. Item Updated: `describe_spark` (from version: `1.1.0` to `1.1.0`)
+29. Item Updated: `onnx_utils` (from version: `1.2.0` to `1.2.0`)
+30. Item Updated: `xgb_trainer` (from version: `1.1.1` to `1.1.1`)
+31. Item Updated: `v2_model_tester` (from version: `1.1.0` to `1.1.0`)
+32. Item Updated: `xgb_test` (from version: `1.1.1` to `1.1.1`)
+33. Item Updated: `model_server_tester` (from version: `1.1.0` to `1.1.0`)
+34. Item Updated: `send_email` (from version: `1.2.0` to `1.2.0`)
+35. Item Updated: `auto_trainer` (from version: `1.7.0` to `1.7.0`)
+36. Item Updated: `azureml_utils` (from version: `1.3.0` to `1.3.0`)
+37. Item Updated: `load_dataset` (from version: `1.2.0` to `1.2.0`)
+38. Item Updated: `tf2_serving` (from version: `1.1.0` to `1.1.0`)
+39. Item Updated: `describe` (from version: `1.3.0` to `1.3.0`)
+40. Item Updated: `mlflow_utils` (from version: `1.0.0` to `1.0.0`)
+41. Item Updated: `model_server` (from version: `1.1.0` to `1.1.0`)
+42. New item created: `noise_reduction` (version: `1.0.0`)
+43. Item Updated: `github_utils` (from version: `1.1.0` to `1.1.0`)
+44. Item Removed: `tf2_serving_v2`
+45. Item Removed: `sql_to_file`
+46. Item Removed: `bert_embeddings`
+47. Item Removed: `pandas_profiling_report`
+48. Item Removed: `load_dask`
+49. Item Removed: `slack_notify`
+50. Item Removed: `xgb_serving`
+51. Item Removed: `stream_to_parquet`
+52. Item Removed: `concept_drift`
+53. Item Removed: `tf1_serving`
+54. Item Removed: `model_monitoring_stream`
+55. Item Removed: `virtual_drift`
+56. Item Removed: `rnn_serving`
+57. Item Removed: `feature_perms`
+58. Item Removed: `concept_drift_streaming`
+59. Item Removed: `ingest`
+60. Item Removed: `get_offline_features`
+61. Item Removed: `snowflake_dask`
+62. Item Removed: `hugging_face_classifier_trainer`
+63. Item Removed: `huggingface_auto_trainer`
+64. Item Removed: `load_dask`
+65. Item Removed: `xgb_serving`
+66. Item Removed: `sql_to_file`
+67. Item Removed: `slack_notify`
+68. Item Removed: `ingest`
+69. Item Removed: `bert_embeddings`
+70. Item Removed: `concept_drift`
+71. Item Removed: `pandas_profiling_report`
+72. Item Removed: `concept_drift_streaming`
+73. Item Removed: `tf2_serving_v2`
+74. Item Removed: `stream_to_parquet`
+75. Item Removed: `feature_perms`
+76. Item Removed: `get_offline_features`
+77. Item Removed: `virtual_drift`
+78. Item Removed: `rnn_serving`
+79. Item Removed: `tf1_serving`
+80. Item Removed: `model_monitoring_stream`
+81. Item Removed: `snowflake_dask`
+82. Item Removed: `hugging_face_classifier_trainer`
+83. Item Removed: `huggingface_auto_trainer`
+
 ### Change log [2024-09-25 06:57:57]
 1. Item Updated: `coxph_test` (from version: `1.1.0` to `1.1.0`)
 2. Item Updated: `v2_model_server` (from version: `1.2.0` to `1.2.0`)
