@@ -228,27 +228,26 @@
         <span class="n">artifacts_tag</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
         <span class="c1"># Drift analysis parameters</span>
         <span class="n">perform_drift_analysis</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">trigger_monitoring_job</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">batch_image_job</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"mlrun/mlrun"</span><span class="p">,</span>
         <span class="n">endpoint_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">,</span>
         <span class="c1"># The following model endpoint parameters are relevant only if:</span>
         <span class="c1"># perform drift analysis is not disabled</span>
         <span class="c1"># a new model endpoint record is going to be generated</span>
         <span class="n">model_endpoint_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"batch-infer"</span><span class="p">,</span>
-        <span class="n">model_endpoint_drift_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span>
-        <span class="n">model_endpoint_possible_drift_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
         <span class="n">model_endpoint_sample_set</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
             <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
         <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">predict_kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
-<span class="sd">    Perform a prediction on a given dataset with the given model. Please make sure that you have already logged the model</span>
-<span class="sd">    under the current project.</span>
-<span class="sd">    Can perform drift analysis between the sample set statistics stored in the model to the current input data. The</span>
-<span class="sd">    drift rule is the value per-feature mean of the TVD and Hellinger scores according to the thresholds configures</span>
-<span class="sd">    here. When performing drift analysis, this function either uses an existing model endpoint record or creates</span>
-<span class="sd">    a new one.</span>
+<span class="sd">    Perform a prediction on the provided dataset using the specified model.</span>
+<span class="sd">    Ensure that the model has already been logged under the current project.</span>
+
+<span class="sd">    If you wish to apply monitoring tools (e.g., drift analysis), set the perform_drift_analysis parameter to True.</span>
+<span class="sd">    This will create a new model endpoint record under the specified model_endpoint_name.</span>
+<span class="sd">    Additionally, ensure that model monitoring is enabled at the project level by calling the</span>
+<span class="sd">    project.enable_model_monitoring() function. You can also apply monitoring to an existing model by providing its</span>
+<span class="sd">    endpoint id or name, and the monitoring tools will be applied to that endpoint.</span>
+
 <span class="sd">    At the moment, this function is supported for `mlrun&gt;=1.5.0` versions.</span>
 
 <span class="sd">    :param context:                                 MLRun context.</span>
@@ -276,26 +275,17 @@
 <span class="sd">                                                    'prediction'.</span>
 <span class="sd">    :param batch_id:                                The ID of the given batch (inference dataset). If `None`, it will be generated.</span>
 <span class="sd">                                                    Will be logged as a result of the run.</span>
-<span class="sd">    :param artifacts_tag:                           Tag to use for all the artifacts resulted from the function (result set and</span>
-<span class="sd">                                                    model monitoring artifacts)</span>
+<span class="sd">    :param artifacts_tag:                           Tag to use for prediction set result artifact.</span>
 <span class="sd">    :param perform_drift_analysis:                  Whether to perform drift analysis between the sample set of the model object to the</span>
 <span class="sd">                                                    dataset given. By default, None, which means it will perform drift analysis if the</span>
 <span class="sd">                                                    model already has feature stats that are considered as a reference sample set.</span>
 <span class="sd">                                                    Performing drift analysis on a new endpoint id will generate a new model endpoint</span>
-<span class="sd">                                                    record. Please note that in order to trigger the drift analysis job, you need to</span>
-<span class="sd">                                                    set `trigger_monitoring_job=True`. Otherwise, the drift analysis will be triggered</span>
-<span class="sd">                                                    only as part the scheduled monitoring job (if exist in the current project) or</span>
-<span class="sd">                                                    if triggered manually by the user.</span>
-<span class="sd">    :param trigger_monitoring_job:                  Whether to trigger the batch drift analysis after the infer job.</span>
-<span class="sd">    :param batch_image_job:                         The image that will be used to register the monitoring batch job if not exist.</span>
-<span class="sd">                                                    By default, the image is mlrun/mlrun.</span>
+<span class="sd">                                                    record.</span>
 <span class="sd">    :param endpoint_id:                             Model endpoint unique ID. If `perform_drift_analysis` was set, the endpoint_id</span>
 <span class="sd">                                                    will be used either to perform the analysis on existing model endpoint or to</span>
 <span class="sd">                                                    generate a new model endpoint record.</span>
 <span class="sd">    :param model_endpoint_name:                     If a new model endpoint is generated, the model name will be presented under this</span>
 <span class="sd">                                                    endpoint.</span>
-<span class="sd">    :param model_endpoint_drift_threshold:          The threshold of which to mark drifts. Defaulted to 0.7.</span>
-<span class="sd">    :param model_endpoint_possible_drift_threshold: The threshold of which to mark possible drifts. Defaulted to 0.5.</span>
 <span class="sd">    :param model_endpoint_sample_set:               A sample dataset to give to compare the inputs in the drift analysis.</span>
 <span class="sd">                                                    Can be provided as an input (DataItem) or as a parameter (e.g. string, list, DataFrame).</span>
 <span class="sd">                                                    The default chosen sample set will always be the one who is set in the model artifact itself.</span>
@@ -376,11 +366,6 @@
             <span class="n">model_endpoint_name</span><span class="o">=</span><span class="n">model_endpoint_name</span><span class="p">,</span>
             <span class="n">infer_results_df</span><span class="o">=</span><span class="n">result_set</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span>
             <span class="n">sample_set_statistics</span><span class="o">=</span><span class="n">sample_set_statistics</span><span class="p">,</span>
-            <span class="n">drift_threshold</span><span class="o">=</span><span class="n">model_endpoint_drift_threshold</span><span class="p">,</span>
-            <span class="n">possible_drift_threshold</span><span class="o">=</span><span class="n">model_endpoint_possible_drift_threshold</span><span class="p">,</span>
-            <span class="n">artifacts_tag</span><span class="o">=</span><span class="n">artifacts_tag</span><span class="p">,</span>
-            <span class="n">trigger_monitoring_job</span><span class="o">=</span><span class="n">trigger_monitoring_job</span><span class="p">,</span>
-            <span class="n">default_batch_image</span><span class="o">=</span><span class="n">batch_image_job</span><span class="p">,</span>
         <span class="p">)</span></div>
 </pre></div>
 </div>
