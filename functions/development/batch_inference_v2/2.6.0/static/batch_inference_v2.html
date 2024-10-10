@@ -236,7 +236,17 @@
         <span class="n">model_endpoint_sample_set</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
             <span class="n">mlrun</span><span class="o">.</span><span class="n">DataItem</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
         <span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+
+        <span class="c1"># the following parameters are deprecated and will be removed once the versioning mechanism is implemented</span>
+        <span class="c1"># TODO: Remove the following parameters once FHUB-13 is resolved</span>
+        <span class="n">trigger_monitoring_job</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_image_job</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model_endpoint_drift_threshold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">model_endpoint_possible_drift_threshold</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+
+        <span class="c1"># prediction kwargs to pass to the model predict function</span>
         <span class="o">**</span><span class="n">predict_kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Perform a prediction on the provided dataset using the specified model.</span>
@@ -289,9 +299,32 @@
 <span class="sd">    :param model_endpoint_sample_set:               A sample dataset to give to compare the inputs in the drift analysis.</span>
 <span class="sd">                                                    Can be provided as an input (DataItem) or as a parameter (e.g. string, list, DataFrame).</span>
 <span class="sd">                                                    The default chosen sample set will always be the one who is set in the model artifact itself.</span>
+<span class="sd">    :param trigger_monitoring_job:                  Whether to trigger the batch drift analysis after the infer job.</span>
+<span class="sd">    :param batch_image_job:                         The image that will be used to register the monitoring batch job if not exist.</span>
+<span class="sd">                                                    By default, the image is mlrun/mlrun.</span>
+<span class="sd">    :param model_endpoint_drift_threshold:          The threshold of which to mark drifts. Defaulted to 0.7.</span>
+<span class="sd">    :param model_endpoint_possible_drift_threshold: The threshold of which to mark possible drifts. Defaulted to 0.5.</span>
 
 <span class="sd">    raises MLRunInvalidArgumentError: if both `model_path` and `endpoint_id` are not provided</span>
 <span class="sd">    """</span>
+
+
+    <span class="k">if</span> <span class="n">trigger_monitoring_job</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"The `trigger_monitoring_job` parameter is deprecated and will be removed once the versioning mechanism is implemented. "</span>
+                               <span class="s2">"if you are using mlrun&lt;1.7.0, please import the previous version of this function, for example "</span>
+                               <span class="s2">"'hub://batch_inference_v2:2.5.0'."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">batch_image_job</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"The `batch_image_job` parameter is deprecated and will be removed once the versioning mechanism is implemented. "</span>
+                               <span class="s2">"if you are using mlrun&lt;1.7.0, please import the previous version of this function, for example "</span>
+                               <span class="s2">"'hub://batch_inference_v2:2.5.0'."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">model_endpoint_drift_threshold</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"The `model_endpoint_drift_threshold` parameter is deprecated and will be removed once the versioning mechanism is implemented. "</span>
+                               <span class="s2">"if you are using mlrun&lt;1.7.0, please import the previous version of this function, for example "</span>
+                               <span class="s2">"'hub://batch_inference_v2:2.5.0'."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">model_endpoint_possible_drift_threshold</span><span class="p">:</span>
+        <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"The `model_endpoint_possible_drift_threshold` parameter is deprecated and will be removed once the versioning mechanism is implemented. "</span>
+                               <span class="s2">"if you are using mlrun&lt;1.7.0, please import the previous version of this function, for example "</span>
+                               <span class="s2">"'hub://batch_inference_v2:2.5.0'."</span><span class="p">)</span>
 
     <span class="c1"># Loading the model:</span>
     <span class="n">context</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loading model..."</span><span class="p">)</span>
