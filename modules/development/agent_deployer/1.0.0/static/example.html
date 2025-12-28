@@ -193,11 +193,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2025-12-03 07:17:36,530 [info] Project loaded successfully: {"project_name":"langchain-example-10"}
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="create-openai-secret">
@@ -367,11 +362,11 @@ document.write(`
             <span class="n">prompt_template</span><span class="o">=</span> <span class="s2">"""</span>
 <span class="s2">            Answer the following questions as best you can.</span>
 <span class="s2">            You have access to the following tools:</span>
-<span class="s2">            </span><span class="si">{tools}</span>
+<span class="s2">            {{tools}}</span>
 <span class="s2">            Use the following format:</span>
 <span class="s2">            Question: the input question you must answer</span>
 <span class="s2">            Thought: you should always think about what to do</span>
-<span class="s2">            Action: the action to take, should be one of [</span><span class="si">{tool_names}</span><span class="s2">]</span>
+<span class="s2">            Action: the action to take, should be one of [{{tool_names}}]</span>
 <span class="s2">            Action Input: the input to the action</span>
 <span class="s2">            Observation: the result of the action</span>
 <span class="s2">            ... (this Thought/Action/Action Input/Observation can repeat N times)</span>
@@ -383,13 +378,6 @@ document.write(`
 <span class="s2">            Thought:</span><span class="si">{agent_scratchpad}</span>
 <span class="s2">            """</span><span class="p">,</span>
 <span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2025-12-03 10:55:46,194 [info] Project loaded successfully: {"project_name":"langchain-example-10"}
-&gt; 2025-12-03 10:55:46,463 [info] Model monitoring credentials were set successfully. Please keep in mind that if you already had model monitoring functions / model monitoring infra / tracked model server deployed on your project, you will need to redeploy them. For redeploying the model monitoring infra, first disable it using `project.disable_model_monitoring()` and then enable it using `project.enable_model_monitoring()`.
-details: MLRunConflictError("The following model-montioring infrastructure functions are already deployed, aborting: ['model-monitoring-controller', 'model-monitoring-writer']\nIf you want to redeploy the model-monitoring controller (maybe with different base-period), use update_model_monitoring_controller.If you want to redeploy all of model-monitoring infrastructure, call disable_model_monitoringbefore calling enable_model_monitoring again.")
 </pre></div>
 </div>
 </div>
@@ -406,7 +394,7 @@ details: MLRunConflictError("The following model-montioring infrastructure funct
 <h1>Invoke the deployed agent:<a class="headerlink" href="#invoke-the-deployed-agent" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">"./"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"question"</span> <span class="p">:</span> <span class="s2">"If a pizza costs $18.75 and I want to buy 3, plus a 15% tip, what is the total cost?"</span><span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">func</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">"./"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"question"</span> <span class="p">:</span> <span class="s2">"If a pizza costs $18.75 and I want to buy 3, what is the total cost?"</span><span class="p">})</span>
 </pre></div>
 </div>
 </div>
