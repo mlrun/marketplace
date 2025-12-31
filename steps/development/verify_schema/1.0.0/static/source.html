@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css"
+            rel="stylesheet"
+            integrity="sha384-oaMLBGEzBOJx3UHwac0cVndtX5fxGQIfnAeFZ35RTgqPcYlbprH9o9PUV/F8Le07"
+            crossorigin="anonymous"
+    />
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"
+            integrity="sha384-RH2xi4eIQ/gjtbs9fUXM68sLSi99C7ZWBRX1vDrVv6GQXRibxXLbwO2NGZB74MbU"
+            crossorigin="anonymous"
+    ></script>
+    <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/python.min.js"
+            integrity="sha384-eXRt+aAa2ig1yFVDQCLis8k9s/1dikTcigj+/R07yNdIxc8BAG/b1uHDyEW3of17"
+            crossorigin="anonymous"
+    ></script>
+    <title>Source</title>
+    <script>hljs.highlightAll();</script>
+</head>
+
+<body style="background-color:darkgray; margin: 0 0 0 0;">
+    <pre style="margin: 0 1em;">
+        <code class="python">
+# Copyright 2025 Iguazio
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+class VerifySchema:
+    """
+    This step validates that an event dictionary contains exactly the keys defined in the schema,
+    raising a KeyError if any are missing or unexpected.
+    """
+
+    def __init__(self, schema: list, allow_unexpected_keys: bool = False):
+        self.schema = schema
+        self.allow_unexpected_keys = allow_unexpected_keys
+
+    def do(self, event: dict):
+        # Check if all keys in the expected schema are present in the event
+        missing = set(self.schema) - set(event)
+        if missing:
+            raise KeyError(f"Schema verification failed: missing keys {missing} in event: {event}")
+
+        if self.allow_unexpected_keys:
+            return event
+
+        # Check if there are any unexpected keys in the event
+        unexpected = set(event) - set(self.schema)
+        if unexpected:
+            raise KeyError(f"Schema verification failed: unexpected keys {unexpected} in event: {event}")
+
+        return event
+
+        </code>
+    </pre>
+</body>
+</html>
