@@ -1,1 +1,1 @@
-{"kind": ["monitoring_application", "generic"], "categories": ["structured-ML", "model-serving", "genai"]}
+{"kind": ["generic", "monitoring_application"], "categories": ["model-serving", "genai", "structured-ML"]}
