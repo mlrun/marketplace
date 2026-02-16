@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+
+<html data-content_root="../../" data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>onnx_utils.onnx_utils</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css?v=8f2a1f02" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/css/custom.css?v=a569c0df" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+<script src="../../../_static/doctools.js?v=9bcbadda"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>DOCUMENTATION_OPTIONS.pagename = '_modules/onnx_utils/onnx_utils';</script>
+<link href="../../genindex.html" rel="index" title="Index"/>
+<link href="../../search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="light" data-offset="180">
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<input class="sidebar-toggle" id="pst-primary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+<input class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="../../search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="" autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="" spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+</div>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
+</div>
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<a class="navbar-brand logo" href="../../index.html">
+<p class="title logo__title"></p>
+</a></div>
+<div class="sidebar-primary-item">
+<script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="sbt-scroll-pixel-helper"></div>
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
+</button></div>
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
+<div class="article-header-buttons">
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+</div></div>
+</div>
+</div>
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1></h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+</div>
+</div>
+</div>
+<div id="searchbox"></div>
+<article class="bd-article">
+<h1>Source code for onnx_utils.onnx_utils</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2019 Iguazio</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the "License");</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an "AS IS" BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="c1">#</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">_ToONNXConversions</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    An ONNX conversion functions library class.</span>
+<span class="sd">    """</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">tf_keras_to_onnx</span><span class="p">(</span>
+        <span class="n">model_handler</span><span class="p">,</span>
+        <span class="n">onnx_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">optimize_model</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">input_signature</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert a TF.Keras model to an ONNX model and log it back to MLRun as a new model object.</span>
+
+<span class="sd">        :param model_handler:   An initialized TFKerasModelHandler with a loaded model to convert to ONNX.</span>
+<span class="sd">        :param onnx_model_name: The name to use to log the converted ONNX model. If not given, the given `model_name`</span>
+<span class="sd">                                will be used with an additional suffix `_onnx`. Defaulted to None.</span>
+<span class="sd">        :param optimize_model:  Whether or not to optimize the ONNX model using 'onnxoptimizer' before saving the model.</span>
+<span class="sd">                                Defaulted to True.</span>
+<span class="sd">        :param input_signature: A list of the input layers shape and data type properties. Expected to receive a list</span>
+<span class="sd">                                where each element is an input layer tuple. An input layer tuple is a tuple of:</span>
+<span class="sd">                                [0] = Layer's shape, a tuple of integers.</span>
+<span class="sd">                                [1] = Layer's data type, a mlrun.data_types.ValueType string.</span>
+<span class="sd">                                If None, the input signature will be tried to be read from the model artifact. Defaulted</span>
+<span class="sd">                                to None.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Import the framework and handler:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.tf_keras</span><span class="w"> </span><span class="kn">import</span> <span class="n">TFKerasUtils</span>
+
+        <span class="c1"># Check the given 'input_signature' parameter:</span>
+        <span class="k">if</span> <span class="n">input_signature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Read the inputs from the model:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">model_handler</span><span class="o">.</span><span class="n">read_inputs_from_model</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunRuntimeError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"Please provide the 'input_signature' parameter. The function tried reading the input layers "</span>
+                    <span class="sa">f</span><span class="s2">"information automatically but failed with the following error: </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">"</span>
+                <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Parse the 'input_signature' parameter:</span>
+            <span class="n">input_signature</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">TensorSpec</span><span class="p">(</span>
+                    <span class="n">shape</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span>
+                    <span class="n">dtype</span><span class="o">=</span><span class="n">TFKerasUtils</span><span class="o">.</span><span class="n">convert_value_type_to_tf_dtype</span><span class="p">(</span>
+                        <span class="n">value_type</span><span class="o">=</span><span class="n">value_type</span>
+                    <span class="p">),</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">value_type</span><span class="p">)</span> <span class="ow">in</span> <span class="n">input_signature</span>
+            <span class="p">]</span>
+
+        <span class="c1"># Convert to ONNX:</span>
+        <span class="n">model_handler</span><span class="o">.</span><span class="n">to_onnx</span><span class="p">(</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">onnx_model_name</span><span class="p">,</span>
+            <span class="n">input_signature</span><span class="o">=</span><span class="n">input_signature</span><span class="p">,</span>
+            <span class="n">optimize</span><span class="o">=</span><span class="n">optimize_model</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pytorch_to_onnx</span><span class="p">(</span>
+        <span class="n">model_handler</span><span class="p">,</span>
+        <span class="n">onnx_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">optimize_model</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">input_signature</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">input_layers_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">output_layers_names</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dynamic_axes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">is_batched</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Convert a PyTorch model to an ONNX model and log it back to MLRun as a new model object.</span>
+
+<span class="sd">        :param model_handler:       An initialized PyTorchModelHandler with a loaded model to convert to ONNX.</span>
+<span class="sd">        :param onnx_model_name:     The name to use to log the converted ONNX model. If not given, the given</span>
+<span class="sd">                                    `model_name` will be used with an additional suffix `_onnx`. Defaulted to None.</span>
+<span class="sd">        :param optimize_model:      Whether or not to optimize the ONNX model using 'onnxoptimizer' before saving the</span>
+<span class="sd">                                    model. Defaulted to True.</span>
+<span class="sd">        :param input_signature:     A list of the input layers shape and data type properties. Expected to receive a</span>
+<span class="sd">                                    list where each element is an input layer tuple. An input layer tuple is a tuple of:</span>
+<span class="sd">                                    [0] = Layer's shape, a tuple of integers.</span>
+<span class="sd">                                    [1] = Layer's data type, a mlrun.data_types.ValueType string.</span>
+<span class="sd">                                    If None, the input signature will be tried to be read from the model artifact.</span>
+<span class="sd">                                    Defaulted to None.</span>
+<span class="sd">        :param input_layers_names:  List of names to assign to the input nodes of the graph in order. All of the other</span>
+<span class="sd">                                    parameters (inner layers) can be set as well by passing additional names in the</span>
+<span class="sd">                                    list. The order is by the order of the parameters in the model. If None, the inputs</span>
+<span class="sd">                                    will be read from the handler's inputs. If its also None, it is defaulted to:</span>
+<span class="sd">                                    "input_0", "input_1", ...</span>
+<span class="sd">        :param output_layers_names: List of names to assign to the output nodes of the graph in order. If None, the</span>
+<span class="sd">                                    outputs will be read from the handler's outputs. If its also None, it is defaulted</span>
+<span class="sd">                                    to: "output_0" (for multiple outputs, this parameter must be provided).</span>
+<span class="sd">        :param dynamic_axes:        If part of the input / output shape is dynamic, like (batch_size, 3, 32, 32) you can</span>
+<span class="sd">                                    specify it by giving a dynamic axis to the input / output layer by its name as</span>
+<span class="sd">                                    follows: {</span>
+<span class="sd">                                        "input layer name": {0: "batch_size"},</span>
+<span class="sd">                                        "output layer name": {0: "batch_size"},</span>
+<span class="sd">                                    }</span>
+<span class="sd">                                    If provided, the 'is_batched' flag will be ignored. Defaulted to None.</span>
+<span class="sd">        :param is_batched:          Whether to include a batch size as the first axis in every input and output layer.</span>
+<span class="sd">                                    Defaulted to True. Will be ignored if 'dynamic_axes' is provided.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Import the framework and handler:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.pytorch</span><span class="w"> </span><span class="kn">import</span> <span class="n">PyTorchUtils</span>
+
+        <span class="c1"># Parse the 'input_signature' parameter:</span>
+        <span class="k">if</span> <span class="n">input_signature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">input_signature</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span>
+                        <span class="n">size</span><span class="o">=</span><span class="n">shape</span><span class="p">,</span>
+                        <span class="n">dtype</span><span class="o">=</span><span class="n">PyTorchUtils</span><span class="o">.</span><span class="n">convert_value_type_to_torch_dtype</span><span class="p">(</span>
+                            <span class="n">value_type</span><span class="o">=</span><span class="n">value_type</span>
+                        <span class="p">),</span>
+                    <span class="p">)</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">value_type</span><span class="p">)</span> <span class="ow">in</span> <span class="n">input_signature</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Convert to ONNX:</span>
+        <span class="n">model_handler</span><span class="o">.</span><span class="n">to_onnx</span><span class="p">(</span>
+            <span class="n">model_name</span><span class="o">=</span><span class="n">onnx_model_name</span><span class="p">,</span>
+            <span class="n">input_sample</span><span class="o">=</span><span class="n">input_signature</span><span class="p">,</span>
+            <span class="n">optimize</span><span class="o">=</span><span class="n">optimize_model</span><span class="p">,</span>
+            <span class="n">input_layers_names</span><span class="o">=</span><span class="n">input_layers_names</span><span class="p">,</span>
+            <span class="n">output_layers_names</span><span class="o">=</span><span class="n">output_layers_names</span><span class="p">,</span>
+            <span class="n">dynamic_axes</span><span class="o">=</span><span class="n">dynamic_axes</span><span class="p">,</span>
+            <span class="n">is_batched</span><span class="o">=</span><span class="n">is_batched</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<span class="c1"># Map for getting the conversion function according to the provided framework:</span>
+<span class="n">_CONVERSION_MAP</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"tensorflow.keras"</span><span class="p">:</span> <span class="n">_ToONNXConversions</span><span class="o">.</span><span class="n">tf_keras_to_onnx</span><span class="p">,</span>
+    <span class="s2">"torch"</span><span class="p">:</span> <span class="n">_ToONNXConversions</span><span class="o">.</span><span class="n">pytorch_to_onnx</span><span class="p">,</span>
+<span class="p">}</span>  <span class="c1"># type: Dict[str, Callable]</span>
+
+
+<div class="viewcode-block" id="to_onnx">
+<a class="viewcode-back" href="documentation.html#onnx_utils.onnx_utils.to_onnx">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">to_onnx</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">load_model_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">onnx_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">optimize_model</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">framework_kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Convert the given model to an ONNX model.</span>
+
+<span class="sd">    :param context:           The MLRun function execution context</span>
+<span class="sd">    :param model_path:        The model path store object.</span>
+<span class="sd">    :param load_model_kwargs: Keyword arguments to pass to the `AutoMLRun.load_model` method.</span>
+<span class="sd">    :param onnx_model_name:   The name to use to log the converted ONNX model. If not given, the given `model_name` will</span>
+<span class="sd">                              be used with an additional suffix `_onnx`. Defaulted to None.</span>
+<span class="sd">    :param optimize_model:    Whether to optimize the ONNX model using 'onnxoptimizer' before saving the model.</span>
+<span class="sd">                              Defaulted to True.</span>
+<span class="sd">    :param framework_kwargs:  Additional arguments each framework may require to convert to ONNX. To get the doc string</span>
+<span class="sd">                              of the desired framework onnx conversion function, pass "help".</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.auto_mlrun.auto_mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">AutoMLRun</span>
+
+    <span class="c1"># Get a model handler of the required framework:</span>
+    <span class="n">load_model_kwargs</span> <span class="o">=</span> <span class="n">load_model_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">model_handler</span> <span class="o">=</span> <span class="n">AutoMLRun</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span>
+        <span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">load_model_kwargs</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get the model's framework:</span>
+    <span class="n">framework</span> <span class="o">=</span> <span class="n">model_handler</span><span class="o">.</span><span class="n">FRAMEWORK_NAME</span>
+
+    <span class="c1"># Use the conversion map to get the specific framework to onnx conversion:</span>
+    <span class="k">if</span> <span class="n">framework</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_CONVERSION_MAP</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunInvalidArgumentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"The following framework: '</span><span class="si">{</span><span class="n">framework</span><span class="si">}</span><span class="s2">', has no ONNX conversion."</span>
+        <span class="p">)</span>
+    <span class="n">conversion_function</span> <span class="o">=</span> <span class="n">_CONVERSION_MAP</span><span class="p">[</span><span class="n">framework</span><span class="p">]</span>
+
+    <span class="c1"># Check if needed to print the function's doc string ("help" is passed):</span>
+    <span class="k">if</span> <span class="n">framework_kwargs</span> <span class="o">==</span> <span class="s2">"help"</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">conversion_function</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Set the default empty framework kwargs if needed:</span>
+    <span class="k">if</span> <span class="n">framework_kwargs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">framework_kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Run the conversion:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">conversion_function</span><span class="p">(</span>
+            <span class="n">model_handler</span><span class="o">=</span><span class="n">model_handler</span><span class="p">,</span>
+            <span class="n">onnx_model_name</span><span class="o">=</span><span class="n">onnx_model_name</span><span class="p">,</span>
+            <span class="n">optimize_model</span><span class="o">=</span><span class="n">optimize_model</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">framework_kwargs</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">exception</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">MLRunInvalidArgumentError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"ERROR: A TypeError exception was raised during the conversion:</span><span class="se">\n</span><span class="si">{</span><span class="n">exception</span><span class="si">}</span><span class="s2">. "</span>
+            <span class="sa">f</span><span class="s2">"Please read the </span><span class="si">{</span><span class="n">framework</span><span class="si">}</span><span class="s2"> framework conversion function doc string by passing 'help' in the "</span>
+            <span class="sa">f</span><span class="s2">"'framework_kwargs' dictionary parameter."</span>
+        <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="optimize">
+<a class="viewcode-back" href="documentation.html#onnx_utils.onnx_utils.optimize">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">optimize</span><span class="p">(</span>
+    <span class="n">context</span><span class="p">:</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">MLClientCtx</span><span class="p">,</span>
+    <span class="n">model_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">handler_init_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">optimizations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">fixed_point</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">optimized_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Optimize the given ONNX model.</span>
+
+<span class="sd">    :param context:              The MLRun function execution context.</span>
+<span class="sd">    :param model_path:           Path to the ONNX model object.</span>
+<span class="sd">    :param handler_init_kwargs:  Keyword arguments to pass to the `ONNXModelHandler` init method preloading.</span>
+<span class="sd">    :param optimizations:        List of possible optimizations. To see what optimizations are available, pass "help".</span>
+<span class="sd">                                 If None, all the optimizations will be used. Defaulted to None.</span>
+<span class="sd">    :param fixed_point:          Optimize the weights using fixed point. Defaulted to False.</span>
+<span class="sd">    :param optimized_model_name: The name of the optimized model. If None, the original model will be overridden.</span>
+<span class="sd">                                 Defaulted to None.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Import the model handler:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">onnxoptimizer</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.frameworks.onnx</span><span class="w"> </span><span class="kn">import</span> <span class="n">ONNXModelHandler</span>
+
+    <span class="c1"># Check if needed to print the available optimizations ("help" is passed):</span>
+    <span class="k">if</span> <span class="n">optimizations</span> <span class="o">==</span> <span class="s2">"help"</span><span class="p">:</span>
+        <span class="n">available_passes</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">* "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">onnxoptimizer</span><span class="o">.</span><span class="n">get_available_passes</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The available optimizations are:</span><span class="se">\n</span><span class="s2">* </span><span class="si">{</span><span class="n">available_passes</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="c1"># Create the model handler:</span>
+    <span class="n">handler_init_kwargs</span> <span class="o">=</span> <span class="n">handler_init_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+    <span class="n">model_handler</span> <span class="o">=</span> <span class="n">ONNXModelHandler</span><span class="p">(</span>
+        <span class="n">model_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="n">context</span><span class="p">,</span> <span class="o">**</span><span class="n">handler_init_kwargs</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Load the ONNX model:</span>
+    <span class="n">model_handler</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
+
+    <span class="c1"># Optimize the model using the given configurations:</span>
+    <span class="n">model_handler</span><span class="o">.</span><span class="n">optimize</span><span class="p">(</span><span class="n">optimizations</span><span class="o">=</span><span class="n">optimizations</span><span class="p">,</span> <span class="n">fixed_point</span><span class="o">=</span><span class="n">fixed_point</span><span class="p">)</span>
+
+    <span class="c1"># Rename if needed:</span>
+    <span class="k">if</span> <span class="n">optimized_model_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">model_handler</span><span class="o">.</span><span class="n">set_model_name</span><span class="p">(</span><span class="n">model_name</span><span class="o">=</span><span class="n">optimized_model_name</span><span class="p">)</span>
+
+    <span class="c1"># Log the optimized model:</span>
+    <span class="n">model_handler</span><span class="o">.</span><span class="n">log</span><span class="p">()</span></div>
+
+</pre></div>
+</article>
+<footer class="prev-next-footer d-print-none">
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+</div>
+<footer class="bd-footer-content">
+<div class="bd-footer-content__inner container">
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+<footer class="bd-footer">
+</footer>
+</body>
+</html>
