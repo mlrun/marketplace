@@ -1,6 +1,3 @@
-### Change log [2026-02-16 07:33:06]
-1. Item Updated: `verify_schema` (from version: `1.0.0` to `1.0.0`)
-
 ### Change log [2026-02-16 07:33:00]
 1. New item created: `langchain_mlrun` (version: `0.0.1`)
 2. Item Updated: `count_events` (from version: `1.0.0` to `1.0.0`)
@@ -9,8 +6,8 @@
 5. Item Updated: `evidently_iris` (from version: `1.0.0` to `1.0.0`)
 6. Item Updated: `vllm_module` (from version: `1.0.0` to `1.0.0`)
 7. Item Updated: `agent_deployer` (from version: `1.0.0` to `1.0.0`)
-
-### Change log [2026-02-16 07:32:49]
+8. 
+### Change log [2026-02-15 13:31:05]
 1. Item Updated: `mlflow_utils` (from version: `1.2.0` to `1.2.0`)
 2. Item Updated: `open_archive` (from version: `1.2.0` to `1.2.0`)
 3. Item Updated: `pii_recognizer` (from version: `0.4.0` to `0.4.0`)
