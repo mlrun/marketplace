@@ -1,1 +1,1 @@
-{"kind": ["generic"], "categories": ["model-serving", "data-preparation", "utilities"]}
+{"categories": ["utilities", "data-preparation", "genai", "model-serving"], "kind": ["generic"]}

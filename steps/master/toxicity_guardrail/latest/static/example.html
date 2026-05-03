@@ -1,0 +1,413 @@
+
+<!DOCTYPE html>
+
+<html data-content_root="./" data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Pipeline: Toxicity Guardrail (Hub Step) → LLM Model Runner</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css?v=8f2a1f02" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/css/custom.css?v=a569c0df" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+<script src="../../../_static/doctools.js?v=9bcbadda"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'toxicity_guardrail_example';</script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="light" data-offset="180">
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<input class="sidebar-toggle" id="pst-primary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+<input class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="" autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="" spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+</div>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
+</div>
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<a class="navbar-brand logo" href="index.html">
+<p class="title logo__title"></p>
+</a></div>
+<div class="sidebar-primary-item">
+<script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="sbt-scroll-pixel-helper"></div>
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
+</button></div>
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
+<div class="article-header-buttons">
+<div class="dropdown dropdown-download-buttons">
+<button aria-expanded="false" aria-label="Download this page" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-download"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-download-source-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="../src/toxicity_guardrail.ipynb" target="_blank" title="Download source file">
+<span class="btn__icon-container">
+<i class="fas fa-file"></i>
+</span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+<li>
+<button class="btn btn-sm btn-download-pdf-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="window.print()" title="Print to PDF">
+<span class="btn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
+</div>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+</div>
+</div>
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>Pipeline: Toxicity Guardrail (Hub Step) → LLM Model Runner</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pipeline: Toxicity Guardrail (Hub Step) → LLM Model Runner</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-credentials-from-a-local-env-file">Load credentials from a local <code class="docutils literal notranslate"><span class="pre">.env</span></code> file.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-serving-graph">Build the serving graph</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div id="searchbox"></div>
+<article class="bd-article">
+<section id="pipeline-toxicity-guardrail-hub-step-llm-model-runner">
+<h1>Pipeline: Toxicity Guardrail (Hub Step) → LLM Model Runner<a class="headerlink" href="#pipeline-toxicity-guardrail-hub-step-llm-model-runner" title="Link to this heading">#</a></h1>
+<p>A unified serving graph that:</p>
+<ol class="arabic simple">
+<li><p>Routes the user’s question through a toxicity guardrail hub step</p></li>
+<li><p>If safe → calls a <code class="docutils literal notranslate"><span class="pre">ModelRunnerStep</span></code> (LLM) and returns the answer</p></li>
+<li><p>If toxic → blocks the request with a clear rejection response</p></li>
+</ol>
+<p>Create or load the MLRun project that will hold the serving function and its secrets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
+<span class="n">project</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s2">"hubstep-guardrail-toxicity"</span><span class="p">,</span> <span class="n">user_project</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">"./"</span><span class="p">,</span> <span class="n">allow_cross_project</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2026-04-27 10:59:47,707 [info] Loading project from path: {"path":"./","project_name":"hubstep-guardrail-toxicity","user_project":false}
+&gt; 2026-04-27 11:00:02,102 [info] Project loaded successfully: {"path":"./","project_name":"hubstep-guardrail-toxicity","stored_in_db":true}
+</pre></div>
+</div>
+</div>
+</div>
+<section id="load-credentials-from-a-local-env-file">
+<h2>Load credentials from a local <code class="docutils literal notranslate"><span class="pre">.env</span></code> file.<a class="headerlink" href="#load-credentials-from-a-local-env-file" title="Link to this heading">#</a></h2>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">OPENAI_API_KEY</span><span class="o">=</span><span class="s2">"..."</span>
+<span class="n">OPENAI_BASE_URL</span><span class="o">=</span><span class="s2">"..."</span>
+<span class="n">OPENAI_MODEL</span><span class="o">=</span><span class="s2">"..."</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dotenv</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">(</span><span class="s2">"cred.env"</span><span class="p">,</span> <span class="n">override</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Store the credentials as project secrets - see also <a class="reference external" href="http://docs.mlrun.org/en/stable/secrets.html">working with secrets</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">project</span><span class="o">.</span><span class="n">set_secrets</span><span class="p">(</span>
+    <span class="n">secrets</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">"OPENAI_API_KEY"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">),</span>
+        <span class="s2">"OPENAI_BASE_URL"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"OPENAI_BASE_URL"</span><span class="p">),</span>
+        <span class="s2">"OPENAI_MODEL"</span><span class="p">:</span>   <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">"OPENAI_MODEL"</span><span class="p">),</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+<span class="n">project</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="build-the-serving-graph">
+<h1>Build the serving graph<a class="headerlink" href="#build-the-serving-graph" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">LLMModel</span></code> wraps an OpenAI-compatible API and reads credentials to the project secrets set above.
+<code class="docutils literal notranslate"><span class="pre">format_answer</span></code> is a plain function that flattens the <code class="docutils literal notranslate"><span class="pre">ModelRunnerStep</span></code> output dict
+(<code class="docutils literal notranslate"><span class="pre">{"llm_model":</span> <span class="pre">{"answer":</span> <span class="pre">...}}</span></code>) into a simple <code class="docutils literal notranslate"><span class="pre">{"answer":</span> <span class="pre">...}</span></code> response.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="n">writefile</span> <span class="n">serving_graph</span><span class="o">.</span><span class="n">py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.serving</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">LLMModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""OpenAI-compatible LLM. Credentials and model are read from env vars:</span>
+<span class="sd">    OPENAI_API_KEY, OPENAI_BASE_URL (optional), OPENAI_MODEL (optional, falls back to default_model_name).</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"gpt-4o-mini"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_model_name</span> <span class="o">=</span> <span class="n">default_model_name</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">openai</span><span class="o">,</span><span class="w"> </span><span class="nn">os</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OPENAI_MODEL"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_model_name</span><span class="p">)</span>
+        <span class="n">client_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"api_key"</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"OPENAI_API_KEY"</span><span class="p">]}</span>
+        <span class="n">base_url</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OPENAI_BASE_URL"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_url</span><span class="p">:</span>
+            <span class="n">client_kwargs</span><span class="p">[</span><span class="s2">"base_url"</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_url</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_client</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">OpenAI</span><span class="p">(</span><span class="o">**</span><span class="n">client_kwargs</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="n">question</span> <span class="o">=</span> <span class="n">body</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"question"</span><span class="p">,</span> <span class="s2">""</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"system"</span><span class="p">,</span> <span class="s2">"content"</span><span class="p">:</span> <span class="s2">"You are a helpful assistant."</span><span class="p">},</span>
+                <span class="p">{</span><span class="s2">"role"</span><span class="p">:</span> <span class="s2">"user"</span><span class="p">,</span>   <span class="s2">"content"</span><span class="p">:</span> <span class="n">question</span><span class="p">},</span>
+            <span class="p">],</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"answer"</span><span class="p">:</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_name</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">format_answer</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Flatten ModelRunnerStep output: {"llm_model": {"answer": ...}} → {"answer": ...}"""</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">model_output</span> <span class="ow">in</span> <span class="n">event</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model_output</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">model_output</span>
+    <span class="k">return</span> <span class="n">event</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Overwriting serving_graph.py
+</pre></div>
+</div>
+</div>
+</div>
+<p>Wire the three-step async flow graph:</p>
+<ol class="arabic simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">toxicity_guardrail</span></code></strong> — loaded directly from <code class="docutils literal notranslate"><span class="pre">hub://toxicity_guardrail</span></code>; blocks requests with a toxicity score ≥ <code class="docutils literal notranslate"><span class="pre">threshold</span></code></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">llm_runner</span></code></strong> — a <code class="docutils literal notranslate"><span class="pre">ModelRunnerStep</span></code> that runs <code class="docutils literal notranslate"><span class="pre">LLMModel</span></code> against the OpenAI-compatible API</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">format_answer</span></code></strong> — flattens the runner output and sends the response back to the caller</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.serving</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelRunnerStep</span>
+
+<span class="n">fn_pipeline</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">set_function</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"toxicity-llm-pipeline"</span><span class="p">,</span>
+    <span class="n">func</span><span class="o">=</span><span class="s2">"serving_graph.py"</span><span class="p">,</span>
+    <span class="n">kind</span><span class="o">=</span><span class="s2">"serving"</span><span class="p">,</span>
+    <span class="n">image</span><span class="o">=</span><span class="s2">"mlrun/mlrun"</span><span class="p">,</span>
+    <span class="n">requirements</span><span class="o">=</span><span class="p">[</span><span class="s2">"transformers"</span><span class="p">,</span> <span class="s2">"torch"</span><span class="p">,</span> <span class="s2">"openai"</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="c1"># Credentials come from Kubernetes secrets set above — no set_envs() needed for them.</span>
+
+<span class="n">graph</span> <span class="o">=</span> <span class="n">fn_pipeline</span><span class="o">.</span><span class="n">set_topology</span><span class="p">(</span><span class="s2">"flow"</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">"async"</span><span class="p">)</span>
+
+<span class="n">graph</span><span class="o">.</span><span class="n">add_step</span><span class="p">(</span>
+    <span class="n">class_name</span><span class="o">=</span><span class="s2">"hub://toxicity_guardrail"</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">"toxicity_guardrail"</span><span class="p">,</span>
+    <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">model_runner</span> <span class="o">=</span> <span class="n">ModelRunnerStep</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"llm_runner"</span><span class="p">)</span>
+<span class="n">model_runner</span><span class="o">.</span><span class="n">add_model</span><span class="p">(</span><span class="n">endpoint_name</span><span class="o">=</span><span class="s2">"llm_model"</span><span class="p">,</span> <span class="n">model_class</span><span class="o">=</span><span class="s2">"LLMModel"</span><span class="p">)</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">add_step</span><span class="p">(</span><span class="n">model_runner</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="s2">"toxicity_guardrail"</span><span class="p">)</span>
+
+<span class="n">graph</span><span class="o">.</span><span class="n">add_step</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"format_answer"</span><span class="p">,</span> <span class="n">handler</span><span class="o">=</span><span class="s2">"format_answer"</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="s2">"llm_runner"</span><span class="p">)</span><span class="o">.</span><span class="n">respond</span><span class="p">()</span>
+
+<span class="n">graph</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rankdir</span><span class="o">=</span><span class="s2">"LR"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Deploy the Serving function, with the required packages (<code class="docutils literal notranslate"><span class="pre">transformers</span></code>, <code class="docutils literal notranslate"><span class="pre">torch</span></code>, <code class="docutils literal notranslate"><span class="pre">openai</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">addr</span> <span class="o">=</span> <span class="n">project</span><span class="o">.</span><span class="n">deploy_function</span><span class="p">(</span><span class="n">fn_pipeline</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Test the pipeline with a safe question and a toxic one.
+Safe requests pass through to the LLM and return an answer; toxic ones are blocked by the guardrail before reaching the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># --- Safe input: should return an LLM answer ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"=== Safe input ==="</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">fn_pipeline</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"question"</span><span class="p">:</span> <span class="s2">"What is the capital of the USA?"</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Response:"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+
+<span class="c1"># --- Toxic input: should be blocked ---</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">=== Toxic input ==="</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">fn_pipeline</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="p">{</span><span class="s2">"question"</span><span class="p">:</span> <span class="s2">"You're completely useless and everything you do is a failure"</span><span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Response:"</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Blocked (expected): </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Safe input ===
+Response: {'answer': 'Washington, D.C. It’s a federal district, not part of any state.', 'model': 'gpt-5-nano-2025-08-07'}
+
+=== Toxic input ===
+Blocked (expected): bad function response 500: Exception caught in handler - "Request blocked: toxicity score 0.953 &gt;= 0.5"
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</article>
+<footer class="prev-next-footer d-print-none">
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
+  </div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pipeline: Toxicity Guardrail (Hub Step) → LLM Model Runner</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-credentials-from-a-local-env-file">Load credentials from a local <code class="docutils literal notranslate"><span class="pre">.env</span></code> file.</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-serving-graph">Build the serving graph</a></li>
+</ul>
+</nav></div>
+</div></div>
+</div>
+<footer class="bd-footer-content">
+<div class="bd-footer-content__inner container">
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+<footer class="bd-footer">
+</footer>
+</body>
+</html>

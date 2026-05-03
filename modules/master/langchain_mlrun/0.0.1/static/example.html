@@ -1,0 +1,1094 @@
+
+<!DOCTYPE html>
+
+<html data-content_root="./" data-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>LangChain ✕ MLRun Integration</title>
+<script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+<!-- Loaded before other Sphinx assets -->
+<link href="../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link href="../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" rel="preload" type="font/woff2"/>
+<link as="font" crossorigin="" href="../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" rel="preload" type="font/woff2"/>
+<link href="../../../_static/pygments.css?v=8f2a1f02" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/styles/sphinx-book-theme.css?v=eba8b062" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/togglebutton.css?v=13237357" rel="stylesheet" type="text/css"/>
+<link href="../../../_static/css/custom.css?v=a569c0df" rel="stylesheet" type="text/css"/>
+<!-- Pre-loaded scripts that we'll load fully later -->
+<link as="script" href="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<link as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" rel="preload"/>
+<script src="../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/documentation_options.js?v=9eb32ce0"></script>
+<script src="../../../_static/doctools.js?v=9bcbadda"></script>
+<script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+<script>let toggleHintShow = 'Click to show';</script>
+<script>let toggleHintHide = 'Click to hide';</script>
+<script>let toggleOpenOnPrint = 'true';</script>
+<script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+<script src="../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+<script>DOCUMENTATION_OPTIONS.pagename = 'langchain_mlrun_example';</script>
+<link href="genindex.html" rel="index" title="Index"/>
+<link href="search.html" rel="search" title="Search"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="en" name="docsearch:language"/>
+</head>
+<body data-bs-root-margin="0px 0px -60%" data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-default-mode="light" data-offset="180">
+<div class="skip-link d-print-none" id="pst-skip-link"><a href="#main-content">Skip to main content</a></div>
+<div id="pst-scroll-pixel-helper"></div>
+<button class="btn rounded-pill" id="pst-back-to-top" type="button">
+<i class="fa-solid fa-arrow-up"></i>Back to top</button>
+<input class="sidebar-toggle" id="pst-primary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+<input class="sidebar-toggle" id="pst-secondary-sidebar-checkbox" type="checkbox"/>
+<label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+<div class="search-button__wrapper">
+<div class="search-button__overlay"></div>
+<div class="search-button__search-container">
+<form action="search.html" class="bd-search d-flex align-items-center" method="get">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input aria-label="" autocapitalize="off" autocomplete="off" autocorrect="off" class="form-control" id="search-input" name="q" placeholder="" spellcheck="false" type="search"/>
+<span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+</div>
+<div class="pst-async-banner-revealer d-none">
+<aside aria-label="Version warning" class="d-none d-print-none" id="bd-header-version-warning"></aside>
+</div>
+<header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+</header>
+<div class="bd-container">
+<div class="bd-container__inner bd-page-width">
+<div class="bd-sidebar-primary bd-sidebar">
+<div class="sidebar-header-items sidebar-primary__section">
+</div>
+<div class="sidebar-primary-items__start sidebar-primary__section">
+<div class="sidebar-primary-item">
+<a class="navbar-brand logo" href="index.html">
+<p class="title logo__title"></p>
+</a></div>
+<div class="sidebar-primary-item">
+<script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+<div class="sidebar-primary-item"><nav aria-label="Main" class="bd-links bd-docs-nav">
+<div class="bd-toc-item navbar-nav active">
+</div>
+</nav></div>
+</div>
+<div class="sidebar-primary-items__end sidebar-primary__section">
+</div>
+<div id="rtd-footer-container"></div>
+</div>
+<main class="bd-main" id="main-content" role="main">
+<div class="sbt-scroll-pixel-helper"></div>
+<div class="bd-content">
+<div class="bd-article-container">
+<div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+<div class="header-article-items__start">
+<div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle primary sidebar">
+<span class="fa-solid fa-bars"></span>
+</button></div>
+</div>
+<div class="header-article-items__end">
+<div class="header-article-item">
+<div class="article-header-buttons">
+<div class="dropdown dropdown-download-buttons">
+<button aria-expanded="false" aria-label="Download this page" class="btn dropdown-toggle" data-bs-toggle="dropdown" type="button">
+<i class="fas fa-download"></i>
+</button>
+<ul class="dropdown-menu">
+<li><a class="btn btn-sm btn-download-source-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" href="../src/langchain_mlrun.ipynb" target="_blank" title="Download source file">
+<span class="btn__icon-container">
+<i class="fas fa-file"></i>
+</span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+<li>
+<button class="btn btn-sm btn-download-pdf-button dropdown-item" data-bs-placement="left" data-bs-toggle="tooltip" onclick="window.print()" title="Print to PDF">
+<span class="btn__icon-container">
+<i class="fas fa-file-pdf"></i>
+</span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+</ul>
+</div>
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" data-bs-placement="bottom" data-bs-toggle="tooltip" title="Toggle secondary sidebar">
+<span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+</div>
+</div>
+</div>
+<div class="onlyprint" id="jb-print-docs-body">
+<h1>LangChain ✕ MLRun Integration</h1>
+<!-- Table of contents -->
+<div id="print-main-content">
+<div id="jb-print-toc">
+<div>
+<h2> Contents </h2>
+</div>
+<nav aria-label="Page">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-components">Main Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settings">Settings</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-via-code-configuration">Example - via code configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-environment-variable-configuration">Example - environment variable configuration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mlrun-tracer">MLRun Tracer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-setup-utility-function">Monitoring Setup Utility Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain-monitoring-application">LangChain Monitoring Application</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-apply-mlrun">How to Apply MLRun?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-tracing">Auto Tracing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-tracing">Manual Tracing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-development-setup-optional">Local Development Setup (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-set-environment-variables">Step 1: Set Environment Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-set-up-port-forwarding">Step 2: Set Up Port Forwarding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-project">Create Project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enable-monitoring">Enable Monitoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-langchain-mlrun">Import <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-monitorable-endpoint">Create Monitorable Endpoint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-environment-variables-for-auto-tracing">Setup Environment Variables for Auto Tracing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-langchain-or-langgraph-code">Run <code class="docutils literal notranslate"><span class="pre">langchain</span></code> or <code class="docutils literal notranslate"><span class="pre">langgraph</span></code> Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-langchain-monitoring-application">Test the LangChain Monitoring Application</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-monitoring-application">Deploy the Monitoring Application</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div id="searchbox"></div>
+<article class="bd-article">
+<section id="langchain-mlrun-integration">
+<h1>LangChain ✕ MLRun Integration<a class="headerlink" href="#langchain-mlrun-integration" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code> is a hub module that implements LangChain integration with MLRun. Using the module allows MLRun to orchestrate LangChain and LangGraph code, enabling tracing and monitoring batch workflows and realtime deployments.</p>
+<hr class="docutils"/>
+<section id="main-components">
+<h2>Main Components<a class="headerlink" href="#main-components" title="Link to this heading">#</a></h2>
+<p>This is a short brief of the components available to import from the <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code> module. For full docs, see the documentation page.</p>
+<section id="settings">
+<h3>Settings<a class="headerlink" href="#settings" title="Link to this heading">#</a></h3>
+<p>The module uses Pydantic settings classes that can be configured programmatically or via environment variables. The main class is <code class="docutils literal notranslate"><span class="pre">MLRunTracerSettings</span></code>. It contains two sub-settings:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MLRunTracerClientSettings</span></code> - Connection settings (stream path, container, endpoint info). Env prefix: <code class="docutils literal notranslate"><span class="pre">"LC_MLRUN_TRACER_CLIENT_"</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MLRunTracerMonitorSettings</span></code> - Controls what/how runs are captured (filters, labels, debug mode). Env prefix: <code class="docutils literal notranslate"><span class="pre">"LC_MLRUN_TRACER_MONITOR_"</span></code></p></li>
+</ul>
+<p>For more information about each setting, see the class docstrings.</p>
+<section id="example-via-code-configuration">
+<h4>Example - via code configuration<a class="headerlink" href="#example-via-code-configuration" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_mlrun</span><span class="w"> </span><span class="kn">import</span> <span class="n">MLRunTracerSettings</span><span class="p">,</span> <span class="n">MLRunTracerClientSettings</span><span class="p">,</span> <span class="n">MLRunTracerMonitorSettings</span>
+
+<span class="n">settings</span> <span class="o">=</span> <span class="n">MLRunTracerSettings</span><span class="p">(</span>
+    <span class="n">client</span><span class="o">=</span><span class="n">MLRunTracerClientSettings</span><span class="p">(</span>
+        <span class="n">stream_path</span><span class="o">=</span><span class="s2">"my-project/model-endpoints/stream-v1"</span><span class="p">,</span>
+        <span class="n">container</span><span class="o">=</span><span class="s2">"projects"</span><span class="p">,</span>
+        <span class="n">model_endpoint_name</span><span class="o">=</span><span class="s2">"my_endpoint"</span><span class="p">,</span>
+        <span class="n">model_endpoint_uid</span><span class="o">=</span><span class="s2">"abc123"</span><span class="p">,</span>
+        <span class="n">serving_function</span><span class="o">=</span><span class="s2">"my_function"</span><span class="p">,</span>
+    <span class="p">),</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="n">MLRunTracerMonitorSettings</span><span class="p">(</span>
+        <span class="n">label</span><span class="o">=</span><span class="s2">"production"</span><span class="p">,</span>
+        <span class="n">root_run_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Only monitor root runs, not child runs</span>
+        <span class="n">tags_filter</span><span class="o">=</span><span class="p">[</span><span class="s2">"important"</span><span class="p">],</span>  <span class="c1"># Only monitor runs with this tag</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="example-environment-variable-configuration">
+<h4>Example - environment variable configuration<a class="headerlink" href="#example-environment-variable-configuration" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LC_MLRUN_TRACER_CLIENT_STREAM_PATH</span><span class="o">=</span><span class="s2">"my-project/model-endpoints/stream-v1"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LC_MLRUN_TRACER_CLIENT_CONTAINER</span><span class="o">=</span><span class="s2">"projects"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LC_MLRUN_TRACER_MONITOR_LABEL</span><span class="o">=</span><span class="s2">"production"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">LC_MLRUN_TRACER_MONITOR_ROOT_RUN_ONLY</span><span class="o">=</span><span class="s2">"true"</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mlrun-tracer">
+<h3>MLRun Tracer<a class="headerlink" href="#mlrun-tracer" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">MLRunTracer</span></code> is a LangChain-compatible tracer that converts LangChain <code class="docutils literal notranslate"><span class="pre">Run</span></code> objects into MLRun monitoring events and publishes them to a V3IO stream.</p>
+<p>Key points:</p>
+<ul class="simple">
+<li><p><strong>No inheritance required</strong> - use it directly without subclassing.</p></li>
+<li><p><strong>Fully customizable via settings</strong> - control filtering, summarization, and output format.</p></li>
+<li><p><strong>Custom summarizer support</strong> - pass your own <code class="docutils literal notranslate"><span class="pre">run_summarizer_function</span></code> via settings to customize how runs are converted to events.</p></li>
+</ul>
+</section>
+<section id="monitoring-setup-utility-function">
+<h3>Monitoring Setup Utility Function<a class="headerlink" href="#monitoring-setup-utility-function" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">setup_langchain_monitoring()</span></code> is a utility function that creates the necessary MLRun infrastructure for LangChain monitoring. This is a <strong>temporary workaround</strong> until custom endpoint creation support is added to MLRun.</p>
+<p>The function returns a dictionary of environment variables to configure auto-tracing. See how to use it in the tutorial section below.</p>
+</section>
+<section id="langchain-monitoring-application">
+<h3>LangChain Monitoring Application<a class="headerlink" href="#langchain-monitoring-application" title="Link to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">LangChainMonitoringApp</span></code> is a base class (inheriting from MLRun’s <code class="docutils literal notranslate"><span class="pre">ModelMonitoringApplicationBase</span></code>) for building monitoring applications that process events from the MLRun Tracer.</p>
+<p>It offers several built-in helper methods and metrics for analyzing LangChain runs:</p>
+<ul class="simple">
+<li><p>Helper methods:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_structured_runs()</span></code> - Parse raw monitoring samples into structured run dictionaries with filtering options</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iterate_structured_runs()</span></code> - Iterate over all runs including nested child runs</p></li>
+</ul>
+</li>
+<li><p>Metric methods:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">calculate_average_latency()</span></code> - Average latency across root runs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">calculate_success_rate()</span></code> - Percentage of runs without errors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count_token_usage()</span></code> - Total input/output tokens from LLM runs</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">count_run_names()</span></code> - Count occurrences of each run name</p></li>
+</ul>
+</li>
+</ul>
+<p>The base app can be used as-is, but it is recommended to extend it with your own custom monitoring logic.</p>
+</section>
+</section>
+<hr class="docutils"/>
+<section id="how-to-apply-mlrun">
+<h2>How to Apply MLRun?<a class="headerlink" href="#how-to-apply-mlrun" title="Link to this heading">#</a></h2>
+<section id="auto-tracing">
+<h3>Auto Tracing<a class="headerlink" href="#auto-tracing" title="Link to this heading">#</a></h3>
+<p>Auto tracing automatically instruments all LangChain code by setting the <code class="docutils literal notranslate"><span class="pre">LC_MLRUN_MONITORING_ENABLED</span></code> environment variable and importing the module:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"LC_MLRUN_MONITORING_ENABLED"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"1"</span>
+<span class="c1"># Set other LC_MLRUN_TRACER_* environment variables as needed...</span>
+
+<span class="c1"># Import the module BEFORE any LangChain code</span>
+<span class="n">langchain_mlrun</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">"hub://langchain_mlrun"</span><span class="p">)</span>
+
+<span class="c1"># All LangChain/LangGraph code below will be automatically traced</span>
+<span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="manual-tracing">
+<h3>Manual Tracing<a class="headerlink" href="#manual-tracing" title="Link to this heading">#</a></h3>
+<p>For more control, use the <code class="docutils literal notranslate"><span class="pre">mlrun_monitoring()</span></code> context manager to trace specific code blocks:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">langchain_mlrun</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">"hub://langchain_mlrun"</span><span class="p">)</span>
+<span class="n">mlrun_monitoring</span> <span class="o">=</span> <span class="n">langchain_mlrun</span><span class="o">.</span><span class="n">mlrun_monitoring</span>
+<span class="n">MLRunTracerSettings</span> <span class="o">=</span> <span class="n">langchain_mlrun</span><span class="o">.</span><span class="n">MLRunTracerSettings</span>
+
+<span class="c1"># Optional: customize settings</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">MLRunTracerSettings</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">mlrun_monitoring</span><span class="p">(</span><span class="n">settings</span><span class="o">=</span><span class="n">settings</span><span class="p">)</span> <span class="k">as</span> <span class="n">tracer</span><span class="p">:</span>
+    <span class="c1"># Only LangChain code within this block will be traced</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"MLRun"</span><span class="p">})</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils"/>
+<section id="tutorial">
+<h2>Tutorial<a class="headerlink" href="#tutorial" title="Link to this heading">#</a></h2>
+<p>In this tutorial we’ll show how to orchestrate LangChain based code with MLRun using the <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code> hub module.</p>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<p>Install MLRun and the <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code> requirements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>mlrun<span class="w"> </span>langchain~<span class="o">=</span><span class="m">1</span>.2<span class="w"> </span>pydantic-settings~<span class="o">=</span><span class="m">2</span>.12<span class="w"> </span>kafka-python~<span class="o">=</span><span class="m">2</span>.3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="local-development-setup-optional">
+<h3>Local Development Setup (Optional)<a class="headerlink" href="#local-development-setup-optional" title="Link to this heading">#</a></h3>
+<blockquote>
+<div><p>Skip this section if you’re running inside a Jupyter instance deployed in the MLRun cluster.</p>
+</div></blockquote>
+<p>If you’re running this notebook from your local machine, follow these steps:</p>
+<section id="step-1-set-environment-variables">
+<h4>Step 1: Set Environment Variables<a class="headerlink" href="#step-1-set-environment-variables" title="Link to this heading">#</a></h4>
+<p>Run the cell below to set up all required environment variables for local development.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="c1"># MLRun API endpoint:</span>
+<span class="c1"># os.environ["MLRUN_DBPATH"] = "http://localhost:30070"</span>
+
+<span class="c1"># Kafka Configuration:</span>
+<span class="c1"># os.environ["KAFKA_BROKER"] = "&lt;kafka-broker-address&gt;"</span>
+
+<span class="c1"># TDEngine Configuration:</span>
+<span class="c1"># os.environ["TDENGINE_HOST"] = "&lt;tdengine-host&gt;"</span>
+<span class="c1"># os.environ["TDENGINE_PORT"] = "&lt;tdengine-port&gt;"</span>
+<span class="c1"># os.environ["TDENGINE_USER"] = "&lt;tdengine-username&gt;"</span>
+<span class="c1"># os.environ["TDENGINE_PASSWORD"] = "&lt;tdengine-password&gt;"</span>
+
+<span class="c1"># MinIO/S3 Configuration:</span>
+<span class="c1"># os.environ["AWS_ACCESS_KEY_ID"] = "&lt;your-minio-access-key&gt;"</span>
+<span class="c1"># os.environ["AWS_SECRET_ACCESS_KEY"] = "&lt;your-minio-secret-key&gt;"</span>
+<span class="c1"># os.environ["AWS_ENDPOINT_URL_S3"] = "&lt;s3-endpoint-url&gt;"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="step-2-set-up-port-forwarding">
+<h4>Step 2: Set Up Port Forwarding<a class="headerlink" href="#step-2-set-up-port-forwarding" title="Link to this heading">#</a></h4>
+<p>Set up port-forwarding to access cluster services. Run these commands in separate terminal windows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># MLRun API</span>
+kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>mlrun<span class="w"> </span>svc/mlrun-api<span class="w"> </span><span class="m">30070</span>:8080
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># MinIO (S3-compatible storage)</span>
+kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>mlrun<span class="w"> </span>svc/minio<span class="w"> </span><span class="m">9000</span>:9000
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Kafka (for CE mode) - requires /etc/hosts entry: 127.0.0.1 kafka-stream</span>
+kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>mlrun<span class="w"> </span>svc/kafka-stream<span class="w"> </span><span class="m">9092</span>:9092
+</pre></div>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># TDEngine (for CE mode) - requires /etc/hosts entry: 127.0.0.1 tdengine-tsdb</span>
+kubectl<span class="w"> </span>port-forward<span class="w"> </span>-n<span class="w"> </span>mlrun<span class="w"> </span>svc/tdengine-tsdb<span class="w"> </span><span class="m">6041</span>:6041
+</pre></div>
+</div>
+</section>
+</section>
+<section id="create-project">
+<h3>Create Project<a class="headerlink" href="#create-project" title="Link to this heading">#</a></h3>
+<p>We’ll first create an MLRun project</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">mlrun</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"MLRun version: </span><span class="si">{</span><span class="n">mlrun</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"CE Mode: </span><span class="si">{</span><span class="n">mlrun</span><span class="o">.</span><span class="n">mlconf</span><span class="o">.</span><span class="n">is_ce_mode</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">project</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">get_or_create_project</span><span class="p">(</span><span class="s2">"langchain-mlrun-tutorial"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Project: </span><span class="si">{</span><span class="n">project</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>MLRun version: 1.10.0
+CE Mode: True
+&gt; 2026-02-03 21:43:18,053 [info] Loading project from path: {"path":"./","project_name":"langchain-mlrun-tutorial","user_project":false}
+&gt; 2026-02-03 21:43:18,141 [info] Project loaded successfully: {"path":"./","project_name":"langchain-mlrun-tutorial","stored_in_db":true}
+Project: langchain-mlrun-tutorial
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="enable-monitoring">
+<h3>Enable Monitoring<a class="headerlink" href="#enable-monitoring" title="Link to this heading">#</a></h3>
+<p>To use MLRun’s monitoring feature in our project we first need to set up the monitoring infrastructure.</p>
+<ul class="simple">
+<li><p><strong>MLRun CE</strong>: Uses Kafka for streaming (automatically detected)</p></li>
+<li><p><strong>MLRun Enterprise</strong>: Uses V3IO for streaming (automatically detected)</p></li>
+</ul>
+<p>The cell below automatically detects your MLRun mode and sets up the appropriate streaming infrastructure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create datastore profiles (based on CE or Enterprise):</span>
+<span class="k">if</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">mlconf</span><span class="o">.</span><span class="n">is_ce_mode</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Setting up Kafka streaming for MLRun CE..."</span><span class="p">)</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.datastore.datastore_profile</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatastoreProfileKafkaStream</span><span class="p">,</span> <span class="n">DatastoreProfileTDEngine</span>
+    
+    <span class="n">stream_profile</span> <span class="o">=</span> <span class="n">DatastoreProfileKafkaStream</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"kafka-stream-profile"</span><span class="p">,</span>
+        <span class="n">brokers</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"KAFKA_BROKER"</span><span class="p">],</span>
+        <span class="n">topics</span><span class="o">=</span><span class="p">[],</span>
+    <span class="p">)</span>
+    <span class="n">tsdb_profile</span> <span class="o">=</span> <span class="n">DatastoreProfileTDEngine</span><span class="p">(</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">"tsdb-profile"</span><span class="p">,</span>
+        <span class="n">user</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"TDENGINE_USER"</span><span class="p">],</span>
+        <span class="n">password</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"TDENGINE_PASSWORD"</span><span class="p">],</span>
+        <span class="n">host</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"TDENGINE_HOST"</span><span class="p">],</span>
+        <span class="n">port</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"TDENGINE_PORT"</span><span class="p">]),</span>
+    <span class="p">)</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">register_datastore_profile</span><span class="p">(</span><span class="n">stream_profile</span><span class="p">)</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">register_datastore_profile</span><span class="p">(</span><span class="n">tsdb_profile</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>  <span class="c1"># Enterprise</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Setting up V3IO streaming for MLRun Enterprise..."</span><span class="p">)</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">mlrun.datastore</span><span class="w"> </span><span class="kn">import</span> <span class="n">DatastoreProfileV3io</span>
+    
+    <span class="n">stream_profile</span> <span class="o">=</span> <span class="n">DatastoreProfileV3io</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"v3io-ds"</span><span class="p">,</span> <span class="n">v3io_access_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"V3IO_ACCESS_KEY"</span><span class="p">])</span>
+    <span class="n">tsdb_profile</span> <span class="o">=</span> <span class="n">stream_profile</span>
+    <span class="n">project</span><span class="o">.</span><span class="n">register_datastore_profile</span><span class="p">(</span><span class="n">stream_profile</span><span class="p">)</span>
+
+<span class="c1"># Enable monitoring in our project:</span>
+<span class="n">project</span><span class="o">.</span><span class="n">set_model_monitoring_credentials</span><span class="p">(</span>
+    <span class="n">stream_profile_name</span><span class="o">=</span><span class="n">stream_profile</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+    <span class="n">tsdb_profile_name</span><span class="o">=</span><span class="n">tsdb_profile</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">project</span><span class="o">.</span><span class="n">enable_model_monitoring</span><span class="p">(</span>
+    <span class="n">base_period</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">wait_for_deployment</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Monitoring enabled successfully!"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-langchain-mlrun">
+<h3>Import <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code><a class="headerlink" href="#import-langchain-mlrun" title="Link to this heading">#</a></h3>
+<p>Now we’ll import <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code> from the hub.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the module from the hub:</span>
+<span class="n">langchain_mlrun</span> <span class="o">=</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">"hub://langchain_mlrun"</span><span class="p">)</span>
+
+<span class="c1"># Import the utility function and monitoring application from the module:</span>
+<span class="n">setup_langchain_monitoring</span> <span class="o">=</span> <span class="n">langchain_mlrun</span><span class="o">.</span><span class="n">setup_langchain_monitoring</span>
+<span class="n">LangChainMonitoringApp</span> <span class="o">=</span> <span class="n">langchain_mlrun</span><span class="o">.</span><span class="n">LangChainMonitoringApp</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-monitorable-endpoint">
+<h3>Create Monitorable Endpoint<a class="headerlink" href="#create-monitorable-endpoint" title="Link to this heading">#</a></h3>
+<p>Endpoints are the entities being monitored by MLRun. We’ll use the <code class="docutils literal notranslate"><span class="pre">setup_langchain_monitoring()</span></code> utility function to create the model monitoring endpoint.</p>
+<p>For MLRun CE mode, you must pass the <code class="docutils literal notranslate"><span class="pre">kafka_stream_profile_name</span></code> parameter with the name of the registered Kafka stream profile.</p>
+<p>By default, the endpoint name will be <code class="docutils literal notranslate"><span class="pre">"langchain_mlrun_endpoint"</span></code> but you can change it by using the <code class="docutils literal notranslate"><span class="pre">model_endpoint_name</span></code> parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pass kafka_stream_profile_name for CE mode (required)</span>
+<span class="n">env_vars</span> <span class="o">=</span> <span class="n">setup_langchain_monitoring</span><span class="p">(</span>
+    <span class="n">kafka_stream_profile_name</span><span class="o">=</span><span class="n">stream_profile</span><span class="o">.</span><span class="n">name</span> <span class="k">if</span> <span class="n">mlrun</span><span class="o">.</span><span class="n">mlconf</span><span class="o">.</span><span class="n">is_ce_mode</span><span class="p">()</span> <span class="k">else</span> <span class="kc">None</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Creating LangChain model endpoint
+
+  [✓] Loading Project......................... Done (0.00s)
+  [✓] Creating Model.......................... Done (0.31s)                            
+  [✓] Creating Function....................... Done (0.04s)                                  
+  [✓] Creating Model Endpoint................. Done (0.09s)                        
+
+✨ Done! LangChain monitoring model endpoint created successfully.
+You can now set the following environment variables to enable MLRun tracing in your LangChain code:
+
+{
+    "MLRUN_MONITORING_ENABLED": "1",
+    "MLRUN_TRACER_CLIENT_PROJECT": "langchain-mlrun-tutorial",
+    "MLRUN_TRACER_CLIENT_MODEL_ENDPOINT_NAME": "langchain_mlrun_endpoint",
+    "MLRUN_TRACER_CLIENT_MODEL_ENDPOINT_UID": "d1d2b2686772441cacf687b45cd48ffa",
+    "MLRUN_TRACER_CLIENT_SERVING_FUNCTION": "langchain_mlrun_function",
+    "MLRUN_TRACER_CLIENT_KAFKA_STREAM_PROFILE_NAME": "kafka-stream-profile"
+}
+
+To customize the monitoring behavior, you can also set additional environment variables prefixed with 'MLRUN_TRACER_MONITOR_'. Refer to the MLRun tracer documentation for more details.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-environment-variables-for-auto-tracing">
+<h3>Setup Environment Variables for Auto Tracing<a class="headerlink" href="#setup-environment-variables-for-auto-tracing" title="Link to this heading">#</a></h3>
+<p>We’ll use the environment variables returned from <code class="docutils literal notranslate"><span class="pre">setup_langchain_monitoring</span></code> to setup the environment for auto-tracing. Read the printed outputs for more information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">env_vars</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-langchain-or-langgraph-code">
+<h3>Run <code class="docutils literal notranslate"><span class="pre">langchain</span></code> or <code class="docutils literal notranslate"><span class="pre">langgraph</span></code> Code<a class="headerlink" href="#run-langchain-or-langgraph-code" title="Link to this heading">#</a></h3>
+<p>Here we have 3 functions, each using different method utilizing LLMs with <code class="docutils literal notranslate"><span class="pre">langchain</span></code> and <code class="docutils literal notranslate"><span class="pre">langgraph</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">run_simple_chain</span></code> - Using <code class="docutils literal notranslate"><span class="pre">langchain</span></code>’s chains.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_simple_agent</span></code> - Using <code class="docutils literal notranslate"><span class="pre">langchain</span></code>’s <code class="docutils literal notranslate"><span class="pre">create_agent</span></code> function and <code class="docutils literal notranslate"><span class="pre">tool</span></code>s.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_langgraph_graph</span></code> - Using pure <code class="docutils literal notranslate"><span class="pre">langgraph</span></code>.</p></li>
+</ul>
+<blockquote>
+<div><p><strong>Notice</strong>: You don’t need to set OpenAI API credentials, there is a mock <code class="docutils literal notranslate"><span class="pre">ChatModel</span></code> that will replace it if the credentials are not set in the environment. If you wish to use OpenAI models, make sure you <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">langchain_openai</span></code> and set the <code class="docutils literal notranslate"><span class="pre">OPENAI_API_KEY</span></code> environment variable before continue to the next cell.</p>
+</div></blockquote>
+<p>Because the auto-tracing environment is set, any run will be automatically traced and monitored!</p>
+<p>Feel free to adjust the code as you like.</p>
+<blockquote>
+<div><p><strong>Remember</strong>: To enable auto-tracing you do need to set the environment variables and import the <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code> module before any LangChain code. For batch jobs and realtime functions, make sure you set env vars in the MLRun function and add the import line <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span> <span class="pre">=</span> <span class="pre">mlrun.import_module("hub://langchain_mlrun")</span></code> at the top of your code.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">add</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.language_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">LanguageModelInput</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.runnables</span><span class="w"> </span><span class="kn">import</span> <span class="n">Runnable</span><span class="p">,</span> <span class="n">RunnableLambda</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatPromptTemplate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.output_parsers</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrOutputParser</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.language_models.fake_chat_models</span><span class="w"> </span><span class="kn">import</span> <span class="n">FakeListChatModel</span><span class="p">,</span> <span class="n">GenericFakeChatModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain.agents</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_agent</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">AIMessage</span><span class="p">,</span> <span class="n">HumanMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span><span class="p">,</span> <span class="n">BaseTool</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseMessage</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_check_openai_credentials</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Check if OpenAI API key is set in environment variables.</span>
+
+<span class="sd">    :return: True if OPENAI_API_KEY is set, False otherwise.</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="s2">"OPENAI_API_KEY"</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span>
+
+
+<span class="c1"># Import ChatOpenAI only if OpenAI credentials are available (meaning `langchain-openai` must be installed).</span>
+<span class="k">if</span> <span class="n">_check_openai_credentials</span><span class="p">():</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">langchain_openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
+
+    
+<span class="k">class</span><span class="w"> </span><span class="nc">_ToolEnabledFakeModel</span><span class="p">(</span><span class="n">GenericFakeChatModel</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    A fake chat model that supports tool binding for running agent tracing tests.</span>
+<span class="sd">    """</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">bind_tools</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">tools</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span>
+            <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">|</span> <span class="nb">type</span> <span class="o">|</span> <span class="n">Callable</span> <span class="o">|</span> <span class="n">BaseTool</span>  <span class="c1"># noqa: UP006</span>
+        <span class="p">],</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">tool_choice</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Runnable</span><span class="p">[</span><span class="n">LanguageModelInput</span><span class="p">,</span> <span class="n">AIMessage</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+
+<span class="c1">#: Tag value for testing tag filtering.</span>
+<span class="n">_dummy_tag</span> <span class="o">=</span> <span class="s2">"dummy_tag"</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_simple_chain</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Run a simple LangChain chain that gets a fact about a topic.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Build a simple chain: prompt -&gt; llm -&gt; str output parser</span>
+    <span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4o-mini"</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="n">_dummy_tag</span><span class="p">]</span>
+    <span class="p">)</span> <span class="k">if</span> <span class="n">_check_openai_credentials</span><span class="p">()</span> <span class="k">else</span> <span class="p">(</span>
+        <span class="n">FakeListChatModel</span><span class="p">(</span>
+            <span class="n">responses</span><span class="o">=</span><span class="p">[</span>
+                <span class="s2">"MLRun is an open-source orchestrator for machine learning pipelines."</span>
+            <span class="p">],</span>
+            <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="n">_dummy_tag</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">prompt</span> <span class="o">=</span> <span class="n">ChatPromptTemplate</span><span class="o">.</span><span class="n">from_template</span><span class="p">(</span><span class="s2">"Tell me a short fact about </span><span class="si">{topic}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">chain</span> <span class="o">=</span> <span class="n">prompt</span> <span class="o">|</span> <span class="n">llm</span> <span class="o">|</span> <span class="n">StrOutputParser</span><span class="p">()</span>
+
+    <span class="c1"># Run the chain:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">chain</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"MLRun"</span><span class="p">})</span>
+    <span class="k">return</span> <span class="n">response</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_simple_agent</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Run a simple LangChain agent that uses two tools to get weather and stock price.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Define the tools:</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_weather</span><span class="p">(</span><span class="n">city</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Get the current weather for a specific city."""</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"The weather in </span><span class="si">{</span><span class="n">city</span><span class="si">}</span><span class="s2"> is 22°C and sunny."</span>
+
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_stock_price</span><span class="p">(</span><span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Get the current stock price for a symbol."""</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"The stock price for </span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> is $150.25."</span>
+
+    <span class="c1"># Define the model:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4o-mini"</span><span class="p">,</span>
+        <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="n">_dummy_tag</span><span class="p">]</span>
+    <span class="p">)</span> <span class="k">if</span> <span class="n">_check_openai_credentials</span><span class="p">()</span> <span class="k">else</span> <span class="p">(</span>
+        <span class="n">_ToolEnabledFakeModel</span><span class="p">(</span>
+            <span class="n">messages</span><span class="o">=</span><span class="nb">iter</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">AIMessage</span><span class="p">(</span>
+                        <span class="n">content</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
+                        <span class="n">tool_calls</span><span class="o">=</span><span class="p">[</span>
+                            <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"get_weather"</span><span class="p">,</span> <span class="s2">"args"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"city"</span><span class="p">:</span> <span class="s2">"London"</span><span class="p">},</span> <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"call_abc123"</span><span class="p">},</span>
+                            <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="s2">"get_stock_price"</span><span class="p">,</span> <span class="s2">"args"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"symbol"</span><span class="p">:</span> <span class="s2">"AAPL"</span><span class="p">},</span> <span class="s2">"id"</span><span class="p">:</span> <span class="s2">"call_def456"</span><span class="p">}</span>
+                        <span class="p">]</span>
+                    <span class="p">),</span>
+                    <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">"The weather in London is 22°C and AAPL is trading at $150.25."</span><span class="p">)</span>
+                <span class="p">]</span>
+            <span class="p">),</span>
+            <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="n">_dummy_tag</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Create the agent:</span>
+    <span class="n">agent</span> <span class="o">=</span> <span class="n">create_agent</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+        <span class="n">tools</span><span class="o">=</span><span class="p">[</span><span class="n">get_weather</span><span class="p">,</span> <span class="n">get_stock_price</span><span class="p">],</span>
+        <span class="n">system_prompt</span><span class="o">=</span><span class="s2">"You are a helpful assistant with access to tools."</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Run the agent:</span>
+    <span class="k">return</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">"messages"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"What is the weather in London and the stock price of AAPL?"</span><span class="p">]})</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_langgraph_graph</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Run a LangGraph agent that uses reflection to correct its answer.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Define the graph state:</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">AgentState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+        <span class="n">messages</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">BaseMessage</span><span class="p">],</span> <span class="n">add</span><span class="p">]</span>
+        <span class="n">attempts</span><span class="p">:</span> <span class="nb">int</span>
+
+    <span class="c1"># Define the model:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">"gpt-4o-mini"</span><span class="p">)</span> <span class="k">if</span> <span class="n">_check_openai_credentials</span><span class="p">()</span> <span class="k">else</span> <span class="p">(</span>
+        <span class="n">_ToolEnabledFakeModel</span><span class="p">(</span>
+            <span class="n">messages</span><span class="o">=</span><span class="nb">iter</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">"There are 2 'r's in Strawberry."</span><span class="p">),</span>  <span class="c1"># Mocking the failure</span>
+                    <span class="n">AIMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">"I stand corrected. S-t-r-a-w-b-e-r-r-y. There are 3 'r's."</span><span class="p">),</span>  <span class="c1"># Mocking the fix</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Define the graph nodes and router:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">call_model</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">):</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">"messages"</span><span class="p">])</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"messages"</span><span class="p">:</span> <span class="p">[</span><span class="n">response</span><span class="p">],</span> <span class="s2">"attempts"</span><span class="p">:</span> <span class="n">state</span><span class="p">[</span><span class="s2">"attempts"</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">reflect_node</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">):</span>
+        <span class="n">prompt</span> <span class="o">=</span> <span class="s2">"Wait, count the 'r's again slowly, letter by letter. Are you sure?"</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"messages"</span><span class="p">:</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">prompt</span><span class="p">)]}</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">router</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"reflect"</span><span class="p">,</span> <span class="n">END</span><span class="p">]:</span>
+        <span class="c1"># Make sure there are 2 attempts at least for an answer:</span>
+        <span class="k">if</span> <span class="n">state</span><span class="p">[</span><span class="s2">"attempts"</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">"reflect"</span>
+        <span class="k">return</span> <span class="n">END</span>
+
+    <span class="c1"># Build the graph:</span>
+    <span class="n">builder</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">AgentState</span><span class="p">)</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="n">call_model</span><span class="p">)</span>
+    <span class="n">tagged_reflect_node</span> <span class="o">=</span> <span class="n">RunnableLambda</span><span class="p">(</span><span class="n">reflect_node</span><span class="p">)</span><span class="o">.</span><span class="n">with_config</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="n">_dummy_tag</span><span class="p">])</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">"reflect"</span><span class="p">,</span> <span class="n">tagged_reflect_node</span><span class="p">)</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">)</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span><span class="s2">"model"</span><span class="p">,</span> <span class="n">router</span><span class="p">)</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">"reflect"</span><span class="p">,</span> <span class="s2">"model"</span><span class="p">)</span>
+    <span class="n">graph</span> <span class="o">=</span> <span class="n">builder</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+
+    <span class="c1"># Run the graph:</span>
+    <span class="k">return</span> <span class="n">graph</span><span class="o">.</span><span class="n">invoke</span><span class="p">({</span><span class="s2">"messages"</span><span class="p">:</span> <span class="p">[</span><span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">"How many 'r's in Strawberry?"</span><span class="p">)],</span> <span class="s2">"attempts"</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s create some traffic, we’ll run whatever function you want in a loop to get some events. We take timestamps in order to use them later to run the monitoring application on the data we’ll send.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run LangChain code and now it should be tracked and monitored in MLRun:</span>
+<span class="n">start_timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">run_simple_agent</span><span class="p">()</span>
+<span class="n">end_timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2026-02-04 00:05:52,553 [info] Project loaded successfully: {"project_name":"langchain-mlrun-tutorial"}
+</pre></div>
+</div>
+</div>
+</div>
+<blockquote>
+<div><p><strong>Note</strong>: Please wait a minute or two until the events are processed.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="test-the-langchain-monitoring-application">
+<h3>Test the LangChain Monitoring Application<a class="headerlink" href="#test-the-langchain-monitoring-application" title="Link to this heading">#</a></h3>
+<p>To test a monitoring application, we use the <code class="docutils literal notranslate"><span class="pre">evaluate</span></code> class method. We’ll run an evaluation on the data we just sent. It is a small local job and should run fast.</p>
+<p>Keep an eye for the returned metrics from the monitoring application.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LangChainMonitoringApp</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span>
+    <span class="n">func_name</span><span class="o">=</span><span class="s2">"langchain-monitoring-app-test"</span><span class="p">,</span>
+    <span class="n">func_path</span><span class="o">=</span><span class="s2">"langchain_mlrun.py"</span><span class="p">,</span>
+    <span class="n">run_local</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">endpoints</span><span class="o">=</span><span class="p">[</span><span class="n">env_vars</span><span class="p">[</span><span class="s2">"LC_MLRUN_TRACER_CLIENT_MODEL_ENDPOINT_NAME"</span><span class="p">]],</span>
+    <span class="n">start</span><span class="o">=</span><span class="n">start_timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+    <span class="n">end</span><span class="o">=</span><span class="n">end_timestamp</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2026-02-03 21:50:26,671 [info] Changing function name - adding `"-batch"` suffix: {"func_name":"langchain-monitoring-app-test-batch"}
+&gt; 2026-02-03 21:50:26,815 [warning] It is recommended to use k8s secret (specify secret_name), specifying aws_access_key/aws_secret_key directly is unsafe.
+&gt; 2026-02-03 21:50:26,829 [info] Storing function: {"db":"http://localhost:30070","name":"langchain-monitoring-app-test-batch--handler","uid":"f2c3c94681094915beb2c5c1ccc0dac8"}
+&gt; 2026-02-03 21:50:27,953 [warning] No data was found for any of the specified endpoints. No results were produced: {"application_name":"langchain-monitoring-app-test-batch","end":"2026-02-03T21:54:26.640556","endpoints":["langchain_mlrun_endpoint"],"start":"2026-02-03T21:48:24.904667"}
+</pre></div>
+</div>
+<div class="output text_html"><style>
+.dictlist {
+  background-color: #4EC64B;
+  text-align: center;
+  margin: 4px;
+  border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;}
+.artifact {
+  cursor: pointer;
+  background-color: #4EC64B;
+  text-align: left;
+  margin: 4px; border-radius: 3px; padding: 0px 3px 1px 3px; display: inline-block;
+}
+div.block.hidden {
+  display: none;
+}
+.clickable {
+  cursor: pointer;
+}
+.ellipsis {
+  display: inline-block;
+  max-width: 60px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.master-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.master-tbl {
+  flex: 3
+}
+.master-wrapper > div {
+  margin: 4px;
+  padding: 10px;
+}
+iframe.fileview {
+  border: 0 none;
+  height: 100%;
+  width: 100%;
+  white-space: pre-wrap;
+}
+.pane-header-title {
+  width: 80%;
+  font-weight: 500;
+}
+.pane-header {
+  line-height: 1;
+  background-color: #4EC64B;
+  padding: 3px;
+}
+.pane-header .close {
+  font-size: 20px;
+  font-weight: 700;
+  float: right;
+  margin-top: -5px;
+}
+.master-wrapper .right-pane {
+  border: 1px inset silver;
+  width: 40%;
+  min-height: 300px;
+  flex: 3
+  min-width: 500px;
+}
+.master-wrapper * {
+  box-sizing: border-box;
+}
+</style><script>
+function copyToClipboard(fld) {
+    if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+        var textarea = document.createElement('textarea');
+        textarea.textContent = fld.innerHTML;
+        textarea.style.position = 'fixed';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            return document.execCommand('copy'); // Security exception may be thrown by some browsers.
+        } catch (ex) {
+
+        } finally {
+            document.body.removeChild(textarea);
+        }
+    }
+}
+function expandPanel(el) {
+  const panelName = "#" + el.getAttribute('paneName');
+
+  // Get the base URL of the current notebook
+  var baseUrl = window.location.origin;
+
+  // Construct the full URL
+  var fullUrl = new URL(el.title, baseUrl).href;
+
+  document.querySelector(panelName + "-title").innerHTML = fullUrl
+  iframe = document.querySelector(panelName + "-body");
+
+  const tblcss = `<style> body { font-family: Arial, Helvetica, sans-serif;}
+    #csv { margin-bottom: 15px; }
+    #csv table { border-collapse: collapse;}
+    #csv table td { padding: 4px 8px; border: 1px solid silver;} </style>`;
+
+  function csvToHtmlTable(str) {
+    return '<div id="csv"><table><tr><td>' +  str.replace(/[\n\r]+$/g, '').replace(/[\n\r]+/g, '</td></tr><tr><td>')
+      .replace(/,/g, '</td><td>') + '</td></tr></table></div>';
+  }
+
+  function reqListener () {
+    if (fullUrl.endsWith(".csv")) {
+      iframe.setAttribute("srcdoc", tblcss + csvToHtmlTable(this.responseText));
+    } else {
+      iframe.setAttribute("srcdoc", this.responseText);
+    }
+    console.log(this.responseText);
+  }
+
+  const oReq = new XMLHttpRequest();
+  oReq.addEventListener("load", reqListener);
+  oReq.open("GET", fullUrl);
+  oReq.send();
+
+
+  //iframe.src = fullUrl;
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (resultPane.classList.contains("hidden")) {
+    resultPane.classList.remove("hidden");
+  }
+}
+function closePanel(el) {
+  const panelName = "#" + el.getAttribute('paneName')
+  const resultPane = document.querySelector(panelName + "-pane");
+  if (!resultPane.classList.contains("hidden")) {
+    resultPane.classList.add("hidden");
+  }
+}
+
+</script>
+<div class="master-wrapper">
+<div class="block master-tbl"><div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+<thead>
+<tr style="text-align: right;">
+<th>project</th>
+<th>uid</th>
+<th>iter</th>
+<th>start</th>
+<th>end</th>
+<th>state</th>
+<th>kind</th>
+<th>name</th>
+<th>labels</th>
+<th>inputs</th>
+<th>parameters</th>
+<th>results</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>langchain-mlrun-tutorial</td>
+<td><div title="f2c3c94681094915beb2c5c1ccc0dac8">...c0dac8</div></td>
+<td>0</td>
+<td>Feb 03 19:50:26</td>
+<td>NaT</td>
+<td>completed</td>
+<td>run</td>
+<td>langchain-monitoring-app-test-batch--handler</td>
+<td><div class="dictlist">kind=local</div><div class="dictlist">owner=Tomer_Weitzman</div><div class="dictlist">host=M-QXN63PHMF9</div></td>
+<td></td>
+<td><div class="dictlist">endpoints=['langchain_mlrun_endpoint']</div><div class="dictlist">start=2026-02-03T21:48:24.904667</div><div class="dictlist">end=2026-02-03T21:54:26.640556</div><div class="dictlist">base_period=None</div><div class="dictlist">write_output=False</div><div class="dictlist">existing_data_handling=fail_on_overlap</div><div class="dictlist">stream_profile=None</div></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="right-pane block hidden" id="result54d8bae8-pane">
+<div class="pane-header">
+<span class="pane-header-title" id="result54d8bae8-title">Title</span>
+<span class="close clickable" onclick="closePanel(this)" panename="result54d8bae8">×</span>
+</div>
+<iframe class="fileview" id="result54d8bae8-body"></iframe>
+</div>
+</div>
+</div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output text_html"><b> &gt; to track results use the .show() or .logs() methods </b></div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&gt; 2026-02-03 21:50:28,001 [info] Run execution finished: {"name":"langchain-monitoring-app-test-batch--handler","status":"completed"}
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;mlrun.model.RunObject at 0x132cfaa50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="deploy-the-monitoring-application">
+<h3>Deploy the Monitoring Application<a class="headerlink" href="#deploy-the-monitoring-application" title="Link to this heading">#</a></h3>
+<p>All that’s left to do now is to deploy our monitoring application!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Deploy the monitoring app:</span>
+<span class="n">LangChainMonitoringApp</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span>
+    <span class="n">func_name</span><span class="o">=</span><span class="s2">"langchain-monitoring-app"</span><span class="p">,</span>
+    <span class="n">func_path</span><span class="o">=</span><span class="s2">"langchain_mlrun.py"</span><span class="p">,</span>
+    <span class="n">image</span><span class="o">=</span><span class="s2">"mlrun/mlrun"</span><span class="p">,</span>
+    <span class="n">requirements</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">"langchain"</span><span class="p">,</span>
+        <span class="s2">"pydantic-settings"</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once it is deployed, you can run events again and see the monitoring application in MLRun UI in action:</p>
+<p><img alt="mlrun ui example" src="notebook_images/mlrun_ui.png"/></p>
+</section>
+</section>
+</section>
+</article>
+<footer class="prev-next-footer d-print-none">
+<div class="prev-next-area">
+</div>
+</footer>
+</div>
+<div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+<div class="sidebar-secondary-item">
+<div class="page-toc tocsection onthispage">
+<i class="fa-solid fa-list"></i> Contents
+  </div>
+<nav class="bd-toc-nav page-toc">
+<ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-components">Main Components</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#settings">Settings</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-via-code-configuration">Example - via code configuration</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-environment-variable-configuration">Example - environment variable configuration</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mlrun-tracer">MLRun Tracer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-setup-utility-function">Monitoring Setup Utility Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#langchain-monitoring-application">LangChain Monitoring Application</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-apply-mlrun">How to Apply MLRun?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-tracing">Auto Tracing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-tracing">Manual Tracing</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tutorial">Tutorial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-development-setup-optional">Local Development Setup (Optional)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-set-environment-variables">Step 1: Set Environment Variables</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-set-up-port-forwarding">Step 2: Set Up Port Forwarding</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-project">Create Project</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enable-monitoring">Enable Monitoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#import-langchain-mlrun">Import <code class="docutils literal notranslate"><span class="pre">langchain_mlrun</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-monitorable-endpoint">Create Monitorable Endpoint</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-environment-variables-for-auto-tracing">Setup Environment Variables for Auto Tracing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-langchain-or-langgraph-code">Run <code class="docutils literal notranslate"><span class="pre">langchain</span></code> or <code class="docutils literal notranslate"><span class="pre">langgraph</span></code> Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-langchain-monitoring-application">Test the LangChain Monitoring Application</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deploy-the-monitoring-application">Deploy the Monitoring Application</a></li>
+</ul>
+</li>
+</ul>
+</nav></div>
+</div></div>
+</div>
+<footer class="bd-footer-content">
+<div class="bd-footer-content__inner container">
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+<div class="footer-item">
+</div>
+</div>
+</footer>
+</main>
+</div>
+</div>
+<!-- Scripts loaded after <body> so the DOM is not blocked -->
+<script src="../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+<footer class="bd-footer">
+</footer>
+</body>
+</html>
