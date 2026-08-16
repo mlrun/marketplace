@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2023 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -48,9 +48,9 @@ import tqdm
 from langchain.chat_models import ChatOpenAI
 
 
-def _set_openai_secrets() -> bool:
-    key = "OPENAI_API_KEY"
-    base = "OPENAI_API_BASE"
+def _set_openai_secrets() -&gt; bool:
+    key = &#34;OPENAI_API_KEY&#34;
+    base = &#34;OPENAI_API_BASE&#34;
     # Check if the key is already in the environment variables:
     if key in os.environ and base in os.environ:
         return True
@@ -59,26 +59,26 @@ def _set_openai_secrets() -> bool:
         import mlrun
     except ModuleNotFoundError:
         raise EnvironmentError(
-            f"One or more of the OpenAI required environment variables ('{key}', '{base}') are missing."
-            f"Please set them as environment variables or install mlrun (`pip install mlrun`)"
-            f"and set them as project secrets using `projecy.set_secrets`."
+            f&#34;One or more of the OpenAI required environment variables (&#39;{key}&#39;, &#39;{base}&#39;) are missing.&#34;
+            f&#34;Please set them as environment variables or install mlrun (`pip install mlrun`)&#34;
+            f&#34;and set them as project secrets using `projecy.set_secrets`.&#34;
         )
 
     # Check if the key is in the secrets:
-    context = mlrun.get_or_create_ctx(name="context")
+    context = mlrun.get_or_create_ctx(name=&#34;context&#34;)
     openai_key = context.get_secret(key)
     openai_base = context.get_secret(base)
 
     # If the key is not in the secrets, return False:
     if not openai_key:
         raise EnvironmentError(
-            f"Could not find OpenAI API key in the environment variables or secrets,"
-            f" please set it as: {key}."
+            f&#34;Could not find OpenAI API key in the environment variables or secrets,&#34;
+            f&#34; please set it as: {key}.&#34;
         )
     if not openai_base:
         raise EnvironmentError(
-            f"Could not find OpenAI API base in the environment variables or secrets,"
-            f" please set it as: {base}."
+            f&#34;Could not find OpenAI API base in the environment variables or secrets,&#34;
+            f&#34; please set it as: {base}.&#34;
         )
     # If the key is in the secrets, set it in the environment variables and return True:
     os.environ[key] = openai_key
@@ -89,41 +89,41 @@ def _set_openai_secrets() -> bool:
 def generate_data(
     fields: list,
     amount: int = 10,
-    model_name: str = "gpt-3.5-turbo",
-    language: str = "en",
+    model_name: str = &#34;gpt-3.5-turbo&#34;,
+    language: str = &#34;en&#34;,
     chunk_size: int = 50,
-) -> list:
-    """
+) -&gt; list:
+    &#34;&#34;&#34;
     Structured data of elements according to the given parameters.
-    The data can be later logged as a structured file with MLRun's `returns` parameter.
+    The data can be later logged as a structured file with MLRun&#39;s `returns` parameter.
 
     :param fields: A list of fields to randomly generate.
     :param amount: The number of variants to generate.
     :param model_name: The name of the model to use for conversation generation.
                        You should choose one of GPT-4 or GPT-3.5 from the list here: https://platform.openai.com/docs/models.
-                       Default: 'gpt-3.5-turbo'.
+                       Default: &#39;gpt-3.5-turbo&#39;.
     :param language: The language to use for the generated conversation text.
     :param chunk_size: Number of samples generated at each GPT query.
-    """
-    instructions = ""
+    &#34;&#34;&#34;
+    instructions = &#34;&#34;
     for field in fields:
         # Split the field to key and instruction:
-        if ":" in field:
-            key, instruction = field.split(":", 1)
+        if &#34;:&#34; in field:
+            key, instruction = field.split(&#34;:&#34;, 1)
         else:
-            key, instruction = field, "no special instruction"
+            key, instruction = field, &#34;no special instruction&#34;
         # Replace spaces with underscores for the key to be used as a json key:
-        key = key.strip().replace(" ", "_")
-        instructions += f"* {key}: {instruction}\n"
+        key = key.strip().replace(&#34; &#34;, &#34;_&#34;)
+        instructions += f&#34;* {key}: {instruction}\n&#34;
 
     # Create the prompt structure:
     prompt_structure = (
-        f"generate the following values {amount} times randomly, in an order that creates a json table.\n"
-        f"Use the following keys and instructions (example: 'key: instruction or no special instruction'): "
-        f"{instructions}.\n"
-        f"Please generate the values in {language} language. \n"
-        f"Make sure the names of the keys are the same as the given field name.\n"
-        f"Please return only the json format without any introduction and ending"
+        f&#34;generate the following values {amount} times randomly, in an order that creates a json table.\n&#34;
+        f&#34;Use the following keys and instructions (example: &#39;key: instruction or no special instruction&#39;): &#34;
+        f&#34;{instructions}.\n&#34;
+        f&#34;Please generate the values in {language} language. \n&#34;
+        f&#34;Make sure the names of the keys are the same as the given field name.\n&#34;
+        f&#34;Please return only the json format without any introduction and ending&#34;
     )
 
     # Set the OpenAI secrets:
@@ -134,13 +134,13 @@ def generate_data(
 
     # Start generating data:
     data = []
-    for _ in tqdm.tqdm(range((amount // chunk_size) + 1), desc="Generating"):
+    for _ in tqdm.tqdm(range((amount // chunk_size) + 1), desc=&#34;Generating&#34;):
         # We try to generate the data 3 times, if we fail we raise an error:
         for tryout in range(3):
             # If the amount wanted is bigger than the chunk size, we generate a chunk of data in the size of the chunk
             # and decrease the amount by the chunk size.
             # otherwise we generate a chunk of data in the size of the amount:
-            if amount > chunk_size:
+            if amount &gt; chunk_size:
                 current_chunk_size = chunk_size
                 amount -= chunk_size
             else:
@@ -155,10 +155,10 @@ def generate_data(
             chunk_data = llm.predict(text=prompt)
 
             # Validate the response for correct python `list` structure
-            chunk_data = chunk_data[chunk_data.find("[") : chunk_data.rfind("]") + 1]
-            if chunk_data.count("[") != chunk_data.count("]"):
+            chunk_data = chunk_data[chunk_data.find(&#34;[&#34;) : chunk_data.rfind(&#34;]&#34;) + 1]
+            if chunk_data.count(&#34;[&#34;) != chunk_data.count(&#34;]&#34;):
                 print(
-                    "Failed to get proper json format from model, number of '[' doesn't match number of ']'."
+                    &#34;Failed to get proper json format from model, number of &#39;[&#39; doesn&#39;t match number of &#39;]&#39;.&#34;
                 )
                 continue
             chunk_data = ast.literal_eval(chunk_data)
@@ -166,8 +166,8 @@ def generate_data(
             break
         if tryout == 3:
             raise RuntimeError(
-                f"Could not generate a proper json format for the given fields, using given model: {model_name}."
-                f" Hint: Gpt-4 works best for most scenarios."
+                f&#34;Could not generate a proper json format for the given fields, using given model: {model_name}.&#34;
+                f&#34; Hint: Gpt-4 works best for most scenarios.&#34;
             )
     return data
 

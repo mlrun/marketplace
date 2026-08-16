@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -48,7 +48,7 @@ import mlrun
 
 import warnings
 
-warnings.filterwarnings("ignore")
+warnings.filterwarnings(&#34;ignore&#34;)
 
 import joblib
 import numpy as np
@@ -73,24 +73,24 @@ def train_model(
     context: mlrun.MLClientCtx,
     dataset: mlrun.DataItem,
     model_pkg_class: str,
-    label_column: str = "label",
+    label_column: str = &#34;label&#34;,
     train_validation_size: float = 0.75,
     sample: float = 1.0,
-    models_dest: str = "models",
-    test_set_key: str = "test_set",
-    plots_dest: str = "plots",
+    models_dest: str = &#34;models&#34;,
+    test_set_key: str = &#34;test_set&#34;,
+    plots_dest: str = &#34;plots&#34;,
     dask_function: str = None,
     dask_client=None,
-    file_ext: str = "parquet",
+    file_ext: str = &#34;parquet&#34;,
     random_state: int = 42,
-) -> None:
+) -&gt; None:
 
-    """
+    &#34;&#34;&#34;
     Train a sklearn classifier with Dask
 
     :param context:                 Function context.
     :param dataset:                 Raw data file.
-    :param model_pkg_class:         Model to train, e.g, "sklearn.ensemble.RandomForestClassifier",
+    :param model_pkg_class:         Model to train, e.g, &#34;sklearn.ensemble.RandomForestClassifier&#34;,
                                     or json model config.
     :param label_column:            (label) Ground-truth y labels.
     :param train_validation_size:   (0.75) Train validation set proportion out of the full dataset.
@@ -102,23 +102,23 @@ def train_model(
     :param dask_client:             dask client object
     :param file_ext:                (parquet) format for test_set_key hold out data
     :param random_state:            (42) sklearn seed
-    """
+    &#34;&#34;&#34;
     if dask_function:
         client = mlrun.import_function(dask_function).client
     elif dask_client:
         client = dask_client
     else:
-        raise ValueError("dask client was not provided")
+        raise ValueError(&#34;dask client was not provided&#34;)
 
-    context.logger.info("Read Data")
+    context.logger.info(&#34;Read Data&#34;)
     df = dataset.as_df(df_module=dd)
 
-    context.logger.info("Prep Data")
-    numerics = ["int16", "int32", "int64", "float16", "float32", "float64"]
+    context.logger.info(&#34;Prep Data&#34;)
+    numerics = [&#34;int16&#34;, &#34;int32&#34;, &#34;int64&#34;, &#34;float16&#34;, &#34;float32&#34;, &#34;float64&#34;]
     df = df.select_dtypes(include=numerics)
 
     if df.isna().any().any().compute() == True:
-        raise Exception("NAs valus found")
+        raise Exception(&#34;NAs valus found&#34;)
 
     df_header = df.columns
 
@@ -131,7 +131,7 @@ def train_model(
     classes = df[label_column].drop_duplicates()  # no unique values in dask
     classes = [str(i) for i in classes]
 
-    context.logger.info("Split and Train")
+    context.logger.info(&#34;Split and Train&#34;)
     X_train, X_test, y_train, y_test = model_selection.train_test_split(
         X, y, train_size=train_validation_size, random_state=random_state
     )
@@ -143,16 +143,16 @@ def train_model(
 
     model_config = gen_sklearn_model(model_pkg_class, context.parameters.items())
 
-    model_config["FIT"].update({"X": X_train_transformed, "y": y_train})
+    model_config[&#34;FIT&#34;].update({&#34;X&#34;: X_train_transformed, &#34;y&#34;: y_train})
 
-    ClassifierClass = create_class(model_config["META"]["class"])
+    ClassifierClass = create_class(model_config[&#34;META&#34;][&#34;class&#34;])
 
-    model = ClassifierClass(**model_config["CLASS"])
+    model = ClassifierClass(**model_config[&#34;CLASS&#34;])
 
-    with joblib.parallel_backend("dask"):
-        model = model.fit(**model_config["FIT"])
+    with joblib.parallel_backend(&#34;dask&#34;):
+        model = model.fit(**model_config[&#34;FIT&#34;])
 
-    context.logger.info("Evaluate")
+    context.logger.info(&#34;Evaluate&#34;)
     extra_data_dict = {}
     for report in (ROCAUC, ClassificationReport, ConfusionMatrix):
         report_name = str(report.__name__)
@@ -171,19 +171,19 @@ def train_model(
         )
         extra_data_dict[str(report)] = plot
 
-        if report_name == "ROCAUC":
+        if report_name == &#34;ROCAUC&#34;:
             context.log_results(
-                {"micro": viz.roc_auc.get("micro"), "macro": viz.roc_auc.get("macro")}
+                {&#34;micro&#34;: viz.roc_auc.get(&#34;micro&#34;), &#34;macro&#34;: viz.roc_auc.get(&#34;macro&#34;)}
             )
 
-        elif report_name == "ClassificationReport":
+        elif report_name == &#34;ClassificationReport&#34;:
             for score_name in viz.scores_:
                 for score_class in viz.scores_[score_name]:
 
                     context.log_results(
                         {
                             score_name
-                            + "-"
+                            + &#34;-&#34;
                             + score_class: viz.scores_[score_name].get(score_class)
                         }
                     )
@@ -199,38 +199,38 @@ def train_model(
     viz.score(X_test_transformed, y_test)
 
     plot = context.log_artifact(
-        PlotArtifact("FeatureImportances", body=viz.fig, title="FeatureImportances"),
+        PlotArtifact(&#34;FeatureImportances&#34;, body=viz.fig, title=&#34;FeatureImportances&#34;),
         db_key=False,
     )
-    extra_data_dict["FeatureImportances"] = plot
+    extra_data_dict[&#34;FeatureImportances&#34;] = plot
 
     plt.cla()
     plt.clf()
     plt.close()
 
-    context.logger.info("Log artifacts")
+    context.logger.info(&#34;Log artifacts&#34;)
     artifact_path = context.artifact_subpath(models_dest)
 
-    context.set_label("class", model_pkg_class)
+    context.set_label(&#34;class&#34;, model_pkg_class)
 
     context.log_model(
-        "model",
+        &#34;model&#34;,
         body=dumps(model),
         artifact_path=artifact_path,
-        model_file="model.pkl",
+        model_file=&#34;model.pkl&#34;,
         extra_data=extra_data_dict,
         metrics=context.results,
-        labels={"class": model_pkg_class},
+        labels={&#34;class&#34;: model_pkg_class},
     )
 
     context.log_artifact(
-        "standard_scaler",
+        &#34;standard_scaler&#34;,
         body=dumps(scaler),
         artifact_path=artifact_path,
     )
 
     context.log_artifact(
-        "label_encoder",
+        &#34;label_encoder&#34;,
         body=dumps(encoder),
         artifact_path=artifact_path,
     )
@@ -241,11 +241,11 @@ def train_model(
         df=pd.DataFrame(df_to_save, columns=df_header),  # improve log dataset ability
         format=file_ext,
         index=False,
-        labels={"data-type": "held-out"},
-        artifact_path=context.artifact_subpath("data"),
+        labels={&#34;data-type&#34;: &#34;held-out&#34;},
+        artifact_path=context.artifact_subpath(&#34;data&#34;),
     )
 
-    context.logger.info("Done!")
+    context.logger.info(&#34;Done!&#34;)
 
         </code>
     </pre>

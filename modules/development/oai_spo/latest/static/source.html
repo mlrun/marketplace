@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2025 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -54,7 +54,7 @@ from config.config import load_config
 
 
 class OaiHub:
-    """
+    &#34;&#34;&#34;
     OAI Hub class for managing MLRun project setup and artifact logging.
     
     This class handles:
@@ -62,7 +62,7 @@ class OaiHub:
     - Project creation/retrieval
     - Input data processing and logging
     - Configuration dataset logging
-    """
+    &#34;&#34;&#34;
     
     def __init__(
         self,
@@ -74,7 +74,7 @@ class OaiHub:
         default_image: str,
         source: str,
     ):
-        """
+        &#34;&#34;&#34;
         Initialize OaiHub instance.
         
         Args:
@@ -85,7 +85,7 @@ class OaiHub:
             pipeline_config_path: Path to pipeline configuration YAML
             default_image: Default Docker image for the project
             source: Source location for the project (S3 path)
-        """
+        &#34;&#34;&#34;
         self.project_name = project_name
         self.data_dir = data_dir
         self.default_env_file = default_env_file
@@ -97,87 +97,87 @@ class OaiHub:
         self.project: Optional[mlrun.projects.MlrunProject] = None
         self.pipeline_config = None
     
-    def setup_environment(self) -> str:
-        """
+    def setup_environment(self) -&gt; str:
+        &#34;&#34;&#34;
         Load environment variables from env file.
         Prefers local env file if it exists, otherwise uses default.
         
         Returns:
             Path to the env file that was loaded
-        """
+        &#34;&#34;&#34;
         env_file = (
             self.local_env_file
             if os.path.exists(self.local_env_file)
             else self.default_env_file
         )
-        print(f"Loading environment from: {env_file}")
+        print(f&#34;Loading environment from: {env_file}&#34;)
         mlrun.set_env_from_file(env_file)
         return env_file
     
     def load_configuration(self):
-        """Load pipeline configuration from YAML file."""
-        print(f"Loading configuration from: {self.pipeline_config_path}")
+        &#34;&#34;&#34;Load pipeline configuration from YAML file.&#34;&#34;&#34;
+        print(f&#34;Loading configuration from: {self.pipeline_config_path}&#34;)
         self.pipeline_config = load_config(self.pipeline_config_path)
     
-    def get_or_create_project(self) -> mlrun.projects.MlrunProject:
-        """
+    def get_or_create_project(self) -&gt; mlrun.projects.MlrunProject:
+        &#34;&#34;&#34;
         Get or create the MLRun project.
         
         Returns:
             MLRun project instance
-        """
-        print(f"Getting or creating project '{self.project_name}'...")
+        &#34;&#34;&#34;
+        print(f&#34;Getting or creating project &#39;{self.project_name}&#39;...&#34;)
         self.project = mlrun.get_or_create_project(
             self.project_name,
             parameters={
-                "source": self.source,
-                "pipeline_config_path": self.pipeline_config_path,
-                "default_image": self.default_image,
+                &#34;source&#34;: self.source,
+                &#34;pipeline_config_path&#34;: self.pipeline_config_path,
+                &#34;default_image&#34;: self.default_image,
             },
         )
         return self.project
     
-    def process_and_log_input_data(self) -> Optional[str]:
-        """
+    def process_and_log_input_data(self) -&gt; Optional[str]:
+        &#34;&#34;&#34;
         Process input data (shift dates to current time) and log as artifact.
         
         Returns:
             Artifact key if successful, None otherwise
-        """
-        print("Processing 'input_data'...")
-        input_data_path = os.path.join(self.data_dir, "01_raw/sample_input_data.csv")
+        &#34;&#34;&#34;
+        print(&#34;Processing &#39;input_data&#39;...&#34;)
+        input_data_path = os.path.join(self.data_dir, &#34;01_raw/sample_input_data.csv&#34;)
         
         if not os.path.exists(input_data_path):
-            print(f"Warning: {input_data_path} not found.")
+            print(f&#34;Warning: {input_data_path} not found.&#34;)
             return None
         
         orig_input_data = pd.read_csv(input_data_path)
         
         # Shift dates to current time
-        if "date" in orig_input_data.columns:
+        if &#34;date&#34; in orig_input_data.columns:
             # Convert to datetime if not already
-            orig_input_data["date"] = pd.to_datetime(orig_input_data["date"])
+            orig_input_data[&#34;date&#34;] = pd.to_datetime(orig_input_data[&#34;date&#34;])
             
             # Calculate delta to shift max date to now
-            max_date = orig_input_data["date"].max()
+            max_date = orig_input_data[&#34;date&#34;].max()
             delta = dt.datetime.now() - max_date
             
             # Apply shift and floor to hour
-            orig_input_data["date"] = orig_input_data["date"] + delta
-            orig_input_data["date"] = orig_input_data["date"].dt.floor("h")
+            orig_input_data[&#34;date&#34;] = orig_input_data[&#34;date&#34;] + delta
+            orig_input_data[&#34;date&#34;] = orig_input_data[&#34;date&#34;].dt.floor(&#34;h&#34;)
         
-        print("Logging 'input_data' artifact...")
+        print(&#34;Logging &#39;input_data&#39; artifact...&#34;)
         artifact = self.project.log_dataset(
-            key="input_data",
+            key=&#34;input_data&#34;,
             df=orig_input_data,
-            format="csv"
+            format=&#34;csv&#34;
         )
         return artifact.key if artifact else None
     
     def log_config_dataset(
         self, key: str, filename: str, label_schema: str
-    ) -> Optional[str]:
-        """
+    ) -&gt; Optional[str]:
+        &#34;&#34;&#34;
         Log a configuration dataset from a CSV file.
         
         Args:
@@ -187,56 +187,56 @@ class OaiHub:
             
         Returns:
             Artifact key if successful, None otherwise
-        """
-        file_path = os.path.join(self.data_dir, f"01_raw/{filename}")
+        &#34;&#34;&#34;
+        file_path = os.path.join(self.data_dir, f&#34;01_raw/{filename}&#34;)
         
         if not os.path.exists(file_path):
-            print(f"Warning: {file_path} not found, skipping {key}.")
+            print(f&#34;Warning: {file_path} not found, skipping {key}.&#34;)
             return None
         
-        print(f"Logging '{key}' from {filename}...")
-        df = pd.read_csv(file_path, sep=";")
+        print(f&#34;Logging &#39;{key}&#39; from {filename}...&#34;)
+        df = pd.read_csv(file_path, sep=&#34;;&#34;)
         artifact = self.project.log_dataset(
             key=key,
             df=df,
-            format="csv",
-            labels={"parameters_schema": label_schema},
+            format=&#34;csv&#34;,
+            labels={&#34;parameters_schema&#34;: label_schema},
         )
         return artifact.key if artifact else None
     
     def log_all_config_datasets(self):
-        """Log all configuration datasets."""
+        &#34;&#34;&#34;Log all configuration datasets.&#34;&#34;&#34;
         config_datasets = [
-            ("sample_tags_raw", "sample_tags_raw_config.csv", "raw"),
-            ("sample_tags_meta", "sample_tags_meta_config.csv", "meta"),
-            ("sample_tags_outliers", "sample_tags_outliers_config.csv", "outliers"),
-            ("sample_tags_imputation", "sample_tags_imputation_config.csv", "impute"),
+            (&#34;sample_tags_raw&#34;, &#34;sample_tags_raw_config.csv&#34;, &#34;raw&#34;),
+            (&#34;sample_tags_meta&#34;, &#34;sample_tags_meta_config.csv&#34;, &#34;meta&#34;),
+            (&#34;sample_tags_outliers&#34;, &#34;sample_tags_outliers_config.csv&#34;, &#34;outliers&#34;),
+            (&#34;sample_tags_imputation&#34;, &#34;sample_tags_imputation_config.csv&#34;, &#34;impute&#34;),
             (
-                "sample_tags_on_off_dependencies",
-                "sample_tags_on_off_dependencies_config.csv",
-                "on_off",
+                &#34;sample_tags_on_off_dependencies&#34;,
+                &#34;sample_tags_on_off_dependencies_config.csv&#34;,
+                &#34;on_off&#34;,
             ),
-            ("sample_tags_resample", "sample_tags_resample_config.csv", "resample"),
+            (&#34;sample_tags_resample&#34;, &#34;sample_tags_resample_config.csv&#34;, &#34;resample&#34;),
         ]
         
         for key, filename, label_schema in config_datasets:
             self.log_config_dataset(key, filename, label_schema)
     
     def setup(self):
-        """
+        &#34;&#34;&#34;
         Complete setup process:
         1. Setup environment
         2. Load configuration
         3. Get or create project
         4. Process and log input data
         5. Log all configuration datasets
-        """
+        &#34;&#34;&#34;
         self.setup_environment()
         self.load_configuration()
         self.get_or_create_project()
         self.process_and_log_input_data()
         self.log_all_config_datasets()
-        print("Artifact logging completed.")
+        print(&#34;Artifact logging completed.&#34;)
 
 
         </code>
