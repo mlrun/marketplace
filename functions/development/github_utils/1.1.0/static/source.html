@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -50,53 +50,53 @@ from mlrun import DataItem, get_run_db, mlconf
 
 
 def pr_comment(
-    context, repo: str, issue: int, message: str = "", message_file: DataItem = None
+    context, repo: str, issue: int, message: str = &#34;&#34;, message_file: DataItem = None
 ):
 
-    token = context.get_secret("GITHUB_TOKEN") or os.environ.get("GITHUB_TOKEN")
+    token = context.get_secret(&#34;GITHUB_TOKEN&#34;) or os.environ.get(&#34;GITHUB_TOKEN&#34;)
     if message_file and not message:
         message = message_file.get()
     elif not message and not message_file:
-        raise ValueError("pr message or message file must be provided")
+        raise ValueError(&#34;pr message or message file must be provided&#34;)
 
     headers = {
-        "Accept": "application/vnd.github.v3+json",
-        "Authorization": f"token {token}",
+        &#34;Accept&#34;: &#34;application/vnd.github.v3+json&#34;,
+        &#34;Authorization&#34;: f&#34;token {token}&#34;,
     }
-    url = f"https://api.github.com/repos/{repo}/issues/{issue}/comments"
+    url = f&#34;https://api.github.com/repos/{repo}/issues/{issue}/comments&#34;
 
-    resp = requests.post(url=url, json={"body": str(message)}, headers=headers)
+    resp = requests.post(url=url, json={&#34;body&#34;: str(message)}, headers=headers)
     if not resp.ok:
-        errmsg = f"bad pr comment resp!!\n{resp.text}"
+        errmsg = f&#34;bad pr comment resp!!\n{resp.text}&#34;
         context.logger.error(errmsg)
         raise IOError(errmsg)
 
 
-def run_summary_comment(context, workflow_id, repo: str, issue: int, project=""):
+def run_summary_comment(context, workflow_id, repo: str, issue: int, project=&#34;&#34;):
     db = get_run_db().connect()
     project = project or context.project
-    runs = db.list_runs(project=project, labels=f"workflow={workflow_id}")
+    runs = db.list_runs(project=project, labels=f&#34;workflow={workflow_id}&#34;)
 
     had_errors = i = 0
     for r in runs:
-        name = r["metadata"]["name"]
-        if r["status"].get("state", "") == "error":
+        name = r[&#34;metadata&#34;][&#34;name&#34;]
+        if r[&#34;status&#34;].get(&#34;state&#34;, &#34;&#34;) == &#34;error&#34;:
             had_errors += 1
         if name == context.name:
             del runs[i]
         i += 1
 
-    print("errors:", had_errors)
+    print(&#34;errors:&#34;, had_errors)
 
-    html = "### Run Results\nWorkflow {} finished with {} errors".format(
+    html = &#34;### Run Results\nWorkflow {} finished with {} errors&#34;.format(
         workflow_id, had_errors
     )
-    html += "<br>click the hyper links below to see detailed results<br>"
+    html += &#34;&lt;br&gt;click the hyper links below to see detailed results&lt;br&gt;&#34;
     html += runs.show(display=False, short=True)
     if repo:
         pr_comment(context, repo, issue, html)
     else:
-        print("repo not defined")
+        print(&#34;repo not defined&#34;)
         print(html)
 
         </code>

@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -53,18 +53,18 @@ import numpy as np
 
 import warnings
 
-warnings.filterwarnings("ignore")
+warnings.filterwarnings(&#34;ignore&#34;)
 
 
 class ClassifierModel(mlrun.serving.V2ModelServer):
     def load(self):
-        """load and initialize the model and/or other elements"""
-        model_file, extra_data = self.get_model(".pkl")
-        self.model = load(open(model_file, "rb"))
+        &#34;&#34;&#34;load and initialize the model and/or other elements&#34;&#34;&#34;
+        model_file, extra_data = self.get_model(&#34;.pkl&#34;)
+        self.model = load(open(model_file, &#34;rb&#34;))
 
-    def predict(self, body: dict) -> List:
-        """Generate model predictions from sample."""
-        feats = np.asarray(body["inputs"])
+    def predict(self, body: dict) -&gt; List:
+        &#34;&#34;&#34;Generate model predictions from sample.&#34;&#34;&#34;
+        feats = np.asarray(body[&#34;inputs&#34;])
         result: np.ndarray = self.model.predict(feats)
         return result.tolist()
 

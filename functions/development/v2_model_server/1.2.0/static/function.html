@@ -31,9 +31,9 @@
 kind: serving
 metadata:
   name: v2-model-server
-  tag: ''
+  tag: &#39;&#39;
   hash: ad85919d3b9cf2acae43a3434ba56e01b005755e
-  project: ''
+  project: &#39;&#39;
   labels:
     author: Iguazio
     framework: sklearn
@@ -41,7 +41,7 @@ metadata:
   - model-serving
   - machine-learning
 spec:
-  command: ''
+  command: &#39;&#39;
   args: []
   image: mlrun/mlrun
   entry_points:
@@ -50,42 +50,42 @@ spec:
       doc: load and initialize the model and/or other elements
       parameters:
       - name: self
-        default: ''
+        default: &#39;&#39;
       outputs:
-      - default: ''
+      - default: &#39;&#39;
       lineno: 16
     predict:
       name: predict
       doc: Generate model predictions from sample.
       parameters:
       - name: self
-        default: ''
+        default: &#39;&#39;
       - name: body
         type: dict
-        default: ''
+        default: &#39;&#39;
       outputs:
-      - default: ''
+      - default: &#39;&#39;
         type: List
       lineno: 21
     init_context:
       name: init_context
-      doc: ''
+      doc: &#39;&#39;
       parameters:
       - name: context
-        default: ''
+        default: &#39;&#39;
       outputs:
-      - default: ''
+      - default: &#39;&#39;
       lineno: 39
     handler:
       name: handler
-      doc: ''
+      doc: &#39;&#39;
       parameters:
       - name: context
-        default: ''
+        default: &#39;&#39;
       - name: event
-        default: ''
+        default: &#39;&#39;
       outputs:
-      - default: ''
+      - default: &#39;&#39;
       lineno: 42
   description: generic sklearn model server
   min_replicas: 1
@@ -108,7 +108,7 @@ spec:
         commands: []
         noBaseImagesPull: true
         functionSourceCode: IyBDb3B5cmlnaHQgMjAxOSBJZ3VhemlvCiMKIyBMaWNlbnNlZCB1bmRlciB0aGUgQXBhY2hlIExpY2Vuc2UsIFZlcnNpb24gMi4wICh0aGUgIkxpY2Vuc2UiKTsKIyB5b3UgbWF5IG5vdCB1c2UgdGhpcyBmaWxlIGV4Y2VwdCBpbiBjb21wbGlhbmNlIHdpdGggdGhlIExpY2Vuc2UuCiMgWW91IG1heSBvYnRhaW4gYSBjb3B5IG9mIHRoZSBMaWNlbnNlIGF0CiMKIyAgICAgaHR0cDovL3d3dy5hcGFjaGUub3JnL2xpY2Vuc2VzL0xJQ0VOU0UtMi4wCiMKIyBVbmxlc3MgcmVxdWlyZWQgYnkgYXBwbGljYWJsZSBsYXcgb3IgYWdyZWVkIHRvIGluIHdyaXRpbmcsIHNvZnR3YXJlCiMgZGlzdHJpYnV0ZWQgdW5kZXIgdGhlIExpY2Vuc2UgaXMgZGlzdHJpYnV0ZWQgb24gYW4gIkFTIElTIiBCQVNJUywKIyBXSVRIT1VUIFdBUlJBTlRJRVMgT1IgQ09ORElUSU9OUyBPRiBBTlkgS0lORCwgZWl0aGVyIGV4cHJlc3Mgb3IgaW1wbGllZC4KIyBTZWUgdGhlIExpY2Vuc2UgZm9yIHRoZSBzcGVjaWZpYyBsYW5ndWFnZSBnb3Zlcm5pbmcgcGVybWlzc2lvbnMgYW5kCiMgbGltaXRhdGlvbnMgdW5kZXIgdGhlIExpY2Vuc2UuCiMKIyBHZW5lcmF0ZWQgYnkgbnVjbGlvLmV4cG9ydC5OdWNsaW9FeHBvcnRlcgoKaW1wb3J0IG1scnVuCgpmcm9tIGNsb3VkcGlja2xlIGltcG9ydCBsb2FkCmZyb20gdHlwaW5nIGltcG9ydCBMaXN0CmZyb20gc2tsZWFybi5kYXRhc2V0cyBpbXBvcnQgbG9hZF9pcmlzCmltcG9ydCBudW1weSBhcyBucAoKaW1wb3J0IHdhcm5pbmdzCgp3YXJuaW5ncy5maWx0ZXJ3YXJuaW5ncygiaWdub3JlIikKCgpjbGFzcyBDbGFzc2lmaWVyTW9kZWwobWxydW4uc2VydmluZy5WMk1vZGVsU2VydmVyKToKICAgIGRlZiBsb2FkKHNlbGYpOgogICAgICAgICIiImxvYWQgYW5kIGluaXRpYWxpemUgdGhlIG1vZGVsIGFuZC9vciBvdGhlciBlbGVtZW50cyIiIgogICAgICAgIG1vZGVsX2ZpbGUsIGV4dHJhX2RhdGEgPSBzZWxmLmdldF9tb2RlbCgiLnBrbCIpCiAgICAgICAgc2VsZi5tb2RlbCA9IGxvYWQob3Blbihtb2RlbF9maWxlLCAicmIiKSkKCiAgICBkZWYgcHJlZGljdChzZWxmLCBib2R5OiBkaWN0KSAtPiBMaXN0OgogICAgICAgICIiIkdlbmVyYXRlIG1vZGVsIHByZWRpY3Rpb25zIGZyb20gc2FtcGxlLiIiIgogICAgICAgIGZlYXRzID0gbnAuYXNhcnJheShib2R5WyJpbnB1dHMiXSkKICAgICAgICByZXN1bHQ6IG5wLm5kYXJyYXkgPSBzZWxmLm1vZGVsLnByZWRpY3QoZmVhdHMpCiAgICAgICAgcmV0dXJuIHJlc3VsdC50b2xpc3QoKQpmcm9tIG1scnVuLnJ1bnRpbWVzIGltcG9ydCBudWNsaW9faW5pdF9ob29rCmRlZiBpbml0X2NvbnRleHQoY29udGV4dCk6CiAgICBudWNsaW9faW5pdF9ob29rKGNvbnRleHQsIGdsb2JhbHMoKSwgJ3NlcnZpbmdfdjInKQoKZGVmIGhhbmRsZXIoY29udGV4dCwgZXZlbnQpOgogICAgcmV0dXJuIGNvbnRleHQubWxydW5faGFuZGxlcihjb250ZXh0LCBldmVudCkK
-  source: ''
+  source: &#39;&#39;
   function_kind: serving_v2
   default_class: ClassifierModel
   build:

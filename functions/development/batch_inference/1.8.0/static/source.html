@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -49,10 +49,10 @@ from typing import Any, Dict, List, Tuple, Union
 import semver
 
 import mlrun
-if semver.compare(mlrun.__version__, "1.5.0") >= 0:
+if semver.compare(mlrun.__version__, &#34;1.5.0&#34;) &gt;= 0:
     raise mlrun.errors.MLRunNotFoundError(
-        f"When using `mlrun` version >=1.5.0, please use "
-        f"batch inference `v2` function ('hub://batch_inference_v2')."
+        f&#34;When using `mlrun` version &gt;=1.5.0, please use &#34;
+        f&#34;batch inference `v2` function (&#39;hub://batch_inference_v2&#39;).&#34;
     )
 
 import mlrun.datastore
@@ -78,8 +78,8 @@ def _read_dataset_as_dataframe(
     feature_columns: Union[str, List[str]] = None,
     label_columns: Union[str, List[str]] = None,
     drop_columns: Union[str, List[str], int, List[int]] = None,
-) -> Tuple[pd.DataFrame, List[str]]:
-    """
+) -&gt; Tuple[pd.DataFrame, List[str]]:
+    &#34;&#34;&#34;
     Parse the given dataset into a DataFrame and drop the columns accordingly. In addition, the label columns will be
     parsed and validated as well.
 
@@ -97,7 +97,7 @@ def _read_dataset_as_dataframe(
               [1] = Label columns.
 
     raises MLRunInvalidArgumentError: If the `drop_columns` are not matching the dataset or unsupported dataset type.
-    """
+    &#34;&#34;&#34;
     # Turn the `drop labels` into a list if given:
     if drop_columns is not None:
         if not isinstance(drop_columns, list):
@@ -116,14 +116,14 @@ def _read_dataset_as_dataframe(
     elif isinstance(dataset, (list, np.ndarray)):
         if not feature_columns:
             raise mlrun.errors.MLRunInvalidArgumentError(
-                "Feature columns list must be provided when dataset input as from type list or numpy array"
+                &#34;Feature columns list must be provided when dataset input as from type list or numpy array&#34;
             )
         # Parse the list / numpy array into a DataFrame:
         dataset = pd.DataFrame(dataset, columns=feature_columns)
         # Validate the `drop_columns` is given as integers:
         if drop_columns and not all(isinstance(col, int) for col in drop_columns):
             raise mlrun.errors.MLRunInvalidArgumentError(
-                "`drop_columns` must be an integer / list of integers if provided as a list."
+                &#34;`drop_columns` must be an integer / list of integers if provided as a list.&#34;
             )
     elif isinstance(dataset, mlrun.DataItem):
         # Turn the DataITem to DataFrame:
@@ -134,8 +134,8 @@ def _read_dataset_as_dataframe(
             dataset = pd.DataFrame(dataset)
         except ValueError as e:
             raise mlrun.errors.MLRunInvalidArgumentError(
-                f"Could not parse the given dataset of type {type(dataset)} into a pandas DataFrame. "
-                f"Received the following error: {e}"
+                f&#34;Could not parse the given dataset of type {type(dataset)} into a pandas DataFrame. &#34;
+                f&#34;Received the following error: {e}&#34;
             )
     # Drop columns if needed:
     if drop_columns:
@@ -151,8 +151,8 @@ def _read_dataset_as_dataframe(
 
 def _prepare_result_set(
     x: pd.DataFrame, label_columns: List[str], y_pred: np.ndarray
-) -> pd.DataFrame:
-    """
+) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
     Set default label column names and validate given names to prepare the result set - a concatenation of the inputs
     (x) and the model predictions (y_pred).
 
@@ -165,30 +165,30 @@ def _prepare_result_set(
 
     raises MLRunInvalidArgumentError: If the labels columns amount do not match the outputs or if one of the label
                                        column already exists in the dataset.
-    """
+    &#34;&#34;&#34;
     # Prepare default target columns names if not provided:
     prediction_columns_amount = 1 if len(y_pred.shape) == 1 else y_pred.shape[1]
     if len(label_columns) == 0:
         # Add default label column names:
         if prediction_columns_amount == 1:
-            label_columns = ["predicted_label"]
+            label_columns = [&#34;predicted_label&#34;]
         else:
             label_columns = [
-                f"predicted_label_{i}" for i in range(prediction_columns_amount)
+                f&#34;predicted_label_{i}&#34; for i in range(prediction_columns_amount)
             ]
 
     # Validate the label columns:
     if prediction_columns_amount != len(label_columns):
         # No equality between provided label column names and outputs amount:
         raise mlrun.errors.MLRunInvalidArgumentError(
-            f"The number of predicted labels: {prediction_columns_amount} "
-            f"is not equal to the given label columns: {len(label_columns)}"
+            f&#34;The number of predicted labels: {prediction_columns_amount} &#34;
+            f&#34;is not equal to the given label columns: {len(label_columns)}&#34;
         )
-    common_labels = set(label_columns) & set(x.columns.tolist())
+    common_labels = set(label_columns) &amp; set(x.columns.tolist())
     if common_labels:
         # Label column exist in the original inputs:
         raise mlrun.errors.MLRunInvalidArgumentError(
-            f"The labels: {common_labels} are already existed in the given dataset."
+            f&#34;The labels: {common_labels} are already existed in the given dataset.&#34;
         )
 
     return pd.concat(
@@ -198,8 +198,8 @@ def _prepare_result_set(
 
 def _get_sample_set_statistics(
     sample_set: DatasetType = None, model_artifact_feature_stats: dict = None
-) -> dict:
-    """
+) -&gt; dict:
+    &#34;&#34;&#34;
     Get the sample set statistics either from the given sample set or the statistics logged with the model while
     favoring the given sample set.
 
@@ -210,14 +210,14 @@ def _get_sample_set_statistics(
     :returns: The sample set statistics.
 
     raises MLRunInvalidArgumentError: If no sample set or statistics were given.
-    """
+    &#34;&#34;&#34;
     # Check if a sample set was provided:
     if sample_set is None:
         # Check if the model was logged with a sample set:
         if model_artifact_feature_stats is None:
             raise mlrun.errors.MLRunInvalidArgumentError(
-                "Cannot perform drift analysis as there is no sample set to compare to. The model artifact was not "
-                "logged with a sample set and `sample_set` was not provided to the function."
+                &#34;Cannot perform drift analysis as there is no sample set to compare to. The model artifact was not &#34;
+                &#34;logged with a sample set and `sample_set` was not provided to the function.&#34;
             )
         # Return the statistics logged with the model:
         return model_artifact_feature_stats
@@ -234,20 +234,20 @@ def _get_drift_result(
     tvd: float,
     hellinger: float,
     threshold: float,
-) -> Tuple[bool, float]:
-    """
+) -&gt; Tuple[bool, float]:
+    &#34;&#34;&#34;
     Calculate the drift result by the following equation: (tvd + hellinger) / 2
 
-    :param tvd:       The feature's TVD value.
-    :param hellinger: The feature's Hellinger value.
+    :param tvd:       The feature&#39;s TVD value.
+    :param hellinger: The feature&#39;s Hellinger value.
     :param threshold: The threshold from which the value is considered a drift.
 
     :returns: A tuple of:
               [0] = Boolean value as the drift status.
               [1] = The result.
-    """
+    &#34;&#34;&#34;
     result = (tvd + hellinger) / 2
-    if result >= threshold:
+    if result &gt;= threshold:
         return True, result
     return False, result
 
@@ -258,8 +258,8 @@ def _perform_drift_analysis(
     drift_threshold: float,
     possible_drift_threshold: float,
     inf_capping: float,
-) -> Tuple[Artifact, Artifact, dict]:
-    """
+) -&gt; Tuple[Artifact, Artifact, dict]:
+    &#34;&#34;&#34;
     Perform drift analysis, producing the drift table artifact for logging post prediction.
 
     :param sample_set_statistics:    The statistics of the sample set logged along a model.
@@ -272,8 +272,8 @@ def _perform_drift_analysis(
               [0] = An MLRun artifact holding the HTML code of the drift table plot.
               [1] = An MLRun artifact holding the metric per feature dictionary.
               [2] = Results to log the final analysis outcome.
-    """
-    # Calculate the input's statistics:
+    &#34;&#34;&#34;
+    # Calculate the input&#39;s statistics:
     inputs_statistics = calculate_inputs_statistics(
         sample_set_statistics=sample_set_statistics,
         inputs=inputs,
@@ -300,10 +300,10 @@ def _perform_drift_analysis(
         ]
     )
     input_features = set(inputs.columns)
-    if len(sample_features & input_features) != len(input_features):
+    if len(sample_features &amp; input_features) != len(input_features):
         raise mlrun.errors.MLRunInvalidArgumentError(
-            f"Not all feature names were matching between the inputs and the sample set provided: "
-            f"{input_features - sample_features | sample_features - input_features}"
+            f&#34;Not all feature names were matching between the inputs and the sample set provided: &#34;
+            f&#34;{input_features - sample_features | sample_features - input_features}&#34;
         )
 
     # Plot:
@@ -318,8 +318,8 @@ def _perform_drift_analysis(
     # Prepare metrics per feature dictionary:
     metrics_per_feature = {
         feature: _get_drift_result(
-            tvd=metric_dictionary["tvd"],
-            hellinger=metric_dictionary["hellinger"],
+            tvd=metric_dictionary[&#34;tvd&#34;],
+            hellinger=metric_dictionary[&#34;hellinger&#34;],
             threshold=drift_threshold,
         )[1]
         for feature, metric_dictionary in metrics.items()
@@ -328,19 +328,19 @@ def _perform_drift_analysis(
 
     # Calculate the final analysis result:
     drift_status, drift_metric = _get_drift_result(
-        tvd=metrics["tvd_mean"],
-        hellinger=metrics["hellinger_mean"],
+        tvd=metrics[&#34;tvd_mean&#34;],
+        hellinger=metrics[&#34;hellinger_mean&#34;],
         threshold=drift_threshold,
     )
 
     return (
-        Artifact(body=html_plot, format="html", key="drift_table_plot"),
+        Artifact(body=html_plot, format=&#34;html&#34;, key=&#34;drift_table_plot&#34;),
         Artifact(
             body=json.dumps(metrics_per_feature),
-            format="json",
-            key="features_drift_results",
+            format=&#34;json&#34;,
+            key=&#34;features_drift_results&#34;,
         ),
-        {"drift_status": drift_status, "drift_metric": drift_metric},
+        {&#34;drift_status&#34;: drift_status, &#34;drift_metric&#34;: drift_metric},
     )
 
 
@@ -352,17 +352,17 @@ def infer(
     label_columns: Union[str, List[str]] = None,
     feature_columns: Union[str, List[str]] = None,
     log_result_set: bool = True,
-    result_set_name: str = "prediction",
+    result_set_name: str = &#34;prediction&#34;,
     batch_id: str = None,
     perform_drift_analysis: bool = None,
     sample_set: DatasetType = None,
     drift_threshold: float = 0.7,
     possible_drift_threshold: float = 0.5,
     inf_capping: float = 10.0,
-    artifacts_tag: str = "",
+    artifacts_tag: str = &#34;&#34;,
     **predict_kwargs: Dict[str, Any],
 ):
-    """
+    &#34;&#34;&#34;
     Perform a prediction on a given dataset with the given model. Can perform drift analysis between the sample set
     statistics stored in the model to the current input data. The drift rule is the value per-feature mean of the TVD
     and Hellinger scores according to the thresholds configures here.
@@ -383,7 +383,7 @@ def infer(
     :param log_result_set:           Whether to log the result set - a DataFrame of the given inputs concatenated with
                                      the predictions. Defaulted to True.
     :param result_set_name:          The db key to set name of the prediction result and the filename. Defaulted to
-                                     'prediction'.
+                                     &#39;prediction&#39;.
     :param batch_id:                 The ID of the given batch (inference dataset). If `None`, it will be generated.
                                      Will be logged as a result of the run.
     :param perform_drift_analysis:   Whether to perform drift analysis between the sample set of the model object to the
@@ -396,9 +396,9 @@ def infer(
     :param possible_drift_threshold: The threshold of which to mark possible drifts. Defaulted to 0.5.
     :param inf_capping:              The value to set for when it reached infinity. Defaulted to 10.0.
     :param artifacts_tag:            Tag to use for all the artifacts resulted from the function.
-    """
+    &#34;&#34;&#34;
     # Loading the model:
-    context.logger.info(f"Loading model...")
+    context.logger.info(f&#34;Loading model...&#34;)
     model_handler = AutoMLRun.load_model(model_path=model, context=context)
     if label_columns is None:
         label_columns = [
@@ -411,7 +411,7 @@ def infer(
         ]
 
     # Get dataset by object, URL or by FeatureVector:
-    context.logger.info(f"Loading data...")
+    context.logger.info(f&#34;Loading data...&#34;)
     x, label_columns = _read_dataset_as_dataframe(
         dataset=dataset,
         feature_columns=feature_columns,
@@ -420,7 +420,7 @@ def infer(
     )
 
     # Predict:
-    context.logger.info(f"Calculating prediction...")
+    context.logger.info(f&#34;Calculating prediction...&#34;)
     y_pred = model_handler.model.predict(x, **predict_kwargs)
 
     # Prepare the result set:
@@ -429,7 +429,7 @@ def infer(
     # Check for logging the result set:
     if log_result_set:
         # Log the result set:
-        context.logger.info(f"Logging result set (x | prediction)...")
+        context.logger.info(f&#34;Logging result set (x | prediction)...&#34;)
         context.log_dataset(
             key=result_set_name,
             df=result_set,
@@ -440,7 +440,7 @@ def infer(
         if batch_id is None:
             batch_id = hashlib.sha224(str(datetime.now()).encode()).hexdigest()
         context.log_result(
-            key="batch_id",
+            key=&#34;batch_id&#34;,
             value=batch_id,
         )
 
@@ -451,7 +451,7 @@ def infer(
     ):
         perform_drift_analysis = True
     if perform_drift_analysis:
-        context.logger.info("Performing drift analysis...")
+        context.logger.info(&#34;Performing drift analysis...&#34;)
         # Get the sample set statistics (either from the sample set or from the statistics logged with the model):
         sample_set_statistics = _get_sample_set_statistics(
             sample_set=sample_set,
