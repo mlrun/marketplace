@@ -31,9 +31,9 @@
 kind: job
 metadata:
   name: sklearn-classifier-dask
-  tag: ''
+  tag: &#39;&#39;
   hash: e542038fbb84f790b7144b529665f36d70d80906
-  project: ''
+  project: &#39;&#39;
   labels:
     author: Iguazio
     framework: sklearn
@@ -41,7 +41,7 @@ metadata:
   - machine-learning
   - model-training
 spec:
-  command: ''
+  command: &#39;&#39;
   args: []
   image: mlrun/ml-models
   build:
@@ -57,16 +57,16 @@ spec:
       - name: context
         type: MLClientCtx
         doc: Function context.
-        default: ''
+        default: &#39;&#39;
       - name: dataset
         type: DataItem
         doc: Raw data file.
-        default: ''
+        default: &#39;&#39;
       - name: model_pkg_class
         type: str
-        doc: Model to train, e.g, "sklearn.ensemble.RandomForestClassifier", or json
+        doc: Model to train, e.g, &#34;sklearn.ensemble.RandomForestClassifier&#34;, or json
           model config.
-        default: ''
+        default: &#39;&#39;
       - name: label_column
         type: str
         doc: (label) Ground-truth y labels.
@@ -108,13 +108,13 @@ spec:
         doc: (42) sklearn seed
         default: 42
       outputs:
-      - default: ''
+      - default: &#39;&#39;
       lineno: 42
-  description: train any classifier using scikit-learn's API over Dask
+  description: train any classifier using scikit-learn&#39;s API over Dask
   default_handler: train_model
   disable_auto_mount: false
   env: []
-  priority_class_name: ''
+  priority_class_name: &#39;&#39;
   preemption_mode: prevent
   affinity: null
   tolerations: null

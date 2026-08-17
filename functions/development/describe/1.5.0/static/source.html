@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -50,7 +50,7 @@ from typing import Union
 import mlrun
 import numpy as np
 
-warnings.simplefilter(action="ignore", category=FutureWarning)
+warnings.simplefilter(action=&#34;ignore&#34;, category=FutureWarning)
 
 import mlrun.feature_store as fstore
 import pandas as pd
@@ -69,23 +69,23 @@ from mlrun.execution import MLClientCtx
 from mlrun.feature_store import FeatureSet
 from plotly.subplots import make_subplots
 
-pd.set_option("display.float_format", lambda x: "%.2f" % x)
+pd.set_option(&#34;display.float_format&#34;, lambda x: &#34;%.2f&#34; % x)
 MAX_SIZE_OF_DF = 500000
 
 
 def analyze(
     context: MLClientCtx,
-    name: str = "dataset",
+    name: str = &#34;dataset&#34;,
     table: Union[FeatureSet, DataItem] = None,
     label_column: str = None,
-    plots_dest: str = "plots",
+    plots_dest: str = &#34;plots&#34;,
     random_state: int = 1,
-    problem_type: str = "classification",
-    dask_key: str = "dask_key",
+    problem_type: str = &#34;classification&#34;,
+    dask_key: str = &#34;dask_key&#34;,
     dask_function: str = None,
     dask_client=None,
-) -> None:
-    """
+) -&gt; None:
+    &#34;&#34;&#34;
     The function will output the following artifacts per
     column within the data frame (based on data types)
     If the data has more than 500,000 sample we
@@ -101,19 +101,19 @@ def analyze(
     imbalance-weights-vec csv
 
     :param context:                 The function context
-    :param name:                    Key of dataset to database ("dataset" for default)
+    :param name:                    Key of dataset to database (&#34;dataset&#34; for default)
     :param table:                   MLRun input pointing to pandas dataframe (csv/parquet file path) or FeatureSet
                                     as param
     :param label_column:            Ground truth column label
     :param plots_dest:              Destination folder of summary plots (relative to artifact_path)
-                                    ("plots" for default)
+                                    (&#34;plots&#34; for default)
     :param random_state:            When the table has more than 500,000 samples, we sample randomly 500,000 samples
     :param problem_type             The type of the ML problem the data facing - regression, classification or None
                                     (classification for default)
-    :param dask_key:                Key of dataframe in dask client "datasets" attribute
+    :param dask_key:                Key of dataframe in dask client &#34;datasets&#34; attribute
     :param dask_function:           Dask function url (db://..)
     :param dask_client:             Dask client object
-    """
+    &#34;&#34;&#34;
     data_item, featureset, creat, update = False, False, False, False
     get_from_table = True
     if dask_function or dask_client:
@@ -123,7 +123,7 @@ def analyze(
         elif dask_client:
             client = dask_client
         else:
-            raise ValueError("dask client was not provided")
+            raise ValueError(&#34;dask client was not provided&#34;)
 
         if dask_key in client.datasets:
             df = client.get_dataset(dask_key)
@@ -132,46 +132,46 @@ def analyze(
             get_from_table = True
         else:
             context.logger.info(
-                f"only these datasets are available {client.datasets} in client {client}"
+                f&#34;only these datasets are available {client.datasets} in client {client}&#34;
             )
-            raise Exception("dataset not found on dask cluster")
+            raise Exception(&#34;dataset not found on dask cluster&#34;)
 
     if get_from_table:
         if type(table) == DataItem:
             if table.meta is None:
                 data_item, creat, update = True, True, False
-            elif table.meta.kind == "dataset":
+            elif table.meta.kind == &#34;dataset&#34;:
                 data_item, creat, update = True, False, True
-            elif table.meta.kind == "FeatureVector":
+            elif table.meta.kind == &#34;FeatureVector&#34;:
                 data_item, creat, update = True, False, False
-            elif table.meta.kind == "FeatureSet":
+            elif table.meta.kind == &#34;FeatureSet&#34;:
                 featureset, creat, update = True, False, False
 
         if data_item:
             df = table.as_df()
         elif featureset:
             project_name, set_name = (
-                table._path.split("/")[2],
-                table._path.split("/")[4],
+                table._path.split(&#34;/&#34;)[2],
+                table._path.split(&#34;/&#34;)[4],
             )
             feature_set = fstore.get_feature_set(
-                f"store://feature-sets/{project_name}/{set_name}"
+                f&#34;store://feature-sets/{project_name}/{set_name}&#34;
             )
             df = feature_set.to_dataframe()
         else:
-            context.logger.error(f"Wrong table type.")
+            context.logger.error(f&#34;Wrong table type.&#34;)
             return
 
-    if df.size > MAX_SIZE_OF_DF:
+    if df.size &gt; MAX_SIZE_OF_DF:
         df = df.sample(n=int(MAX_SIZE_OF_DF / df.shape[1]), random_state=random_state)
     extra_data = {}
 
     if label_column not in df.columns:
         label_column = None
 
-    extra_data["describe csv"] = context.log_artifact(
-        TableArtifact("describe-csv", df=df.describe()),
-        local_path=f"{plots_dest}/describe.csv",
+    extra_data[&#34;describe csv&#34;] = context.log_artifact(
+        TableArtifact(&#34;describe-csv&#34;, df=df.describe()),
+        local_path=f&#34;{plots_dest}/describe.csv&#34;,
     )
 
     try:
@@ -179,33 +179,33 @@ def analyze(
             context, df, extra_data, label_column, plots_dest
         )
     except Exception as e:
-        context.logger.warn(f"Failed to create histogram matrix artifact due to: {e}")
+        context.logger.warn(f&#34;Failed to create histogram matrix artifact due to: {e}&#34;)
     try:
         _create_features_histogram_artifacts(
             context, df, extra_data, label_column, plots_dest, problem_type
         )
     except Exception as e:
-        context.logger.warn(f"Failed to create pairplot histograms due to: {e}")
+        context.logger.warn(f&#34;Failed to create pairplot histograms due to: {e}&#34;)
     try:
         _create_features_2d_scatter_artifacts(
             context, df, extra_data, label_column, plots_dest, problem_type
         )
     except Exception as e:
-        context.logger.warn(f"Failed to create pairplot 2d_scatter due to: {e}")
+        context.logger.warn(f&#34;Failed to create pairplot 2d_scatter due to: {e}&#34;)
     try:
         _create_violin_artifact(context, df, extra_data, plots_dest)
     except Exception as e:
-        context.logger.warn(f"Failed to create violin distribution plots due to: {e}")
+        context.logger.warn(f&#34;Failed to create violin distribution plots due to: {e}&#34;)
     try:
         _create_imbalance_artifact(
             context, df, extra_data, label_column, plots_dest, problem_type
         )
     except Exception as e:
-        context.logger.warn(f"Failed to create class imbalance plot due to: {e}")
+        context.logger.warn(f&#34;Failed to create class imbalance plot due to: {e}&#34;)
     try:
         _create_corr_artifact(context, df, extra_data, label_column, plots_dest)
     except Exception as e:
-        context.logger.warn(f"Failed to create features correlation plot due to: {e}")
+        context.logger.warn(f&#34;Failed to create features correlation plot due to: {e}&#34;)
 
     if not data_item:
         return
@@ -213,14 +213,14 @@ def analyze(
     artifact = table.artifact_url
     if creat:  # dataset not stored
         artifact = DatasetArtifact(
-            key="dataset", stats=True, df=df, extra_data=extra_data
+            key=&#34;dataset&#34;, stats=True, df=df, extra_data=extra_data
         )
         artifact = context.log_artifact(artifact, db_key=name)
-        context.logger.info(f"The data set is logged to the project under {name} name")
+        context.logger.info(f&#34;The data set is logged to the project under {name} name&#34;)
 
     if update:
         update_dataset_meta(artifact, extra_data=extra_data)
-        context.logger.info(f"The data set named {name} is updated")
+        context.logger.info(f&#34;The data set named {name} is updated&#34;)
 
     # TODO : 3-D plot on on selected features.
     # TODO : Reintegration plot on on selected features.
@@ -234,16 +234,16 @@ def _create_histogram_mat_artifact(
     label_column: str,
     plots_dest: str,
 ):
-    """
+    &#34;&#34;&#34;
     Create and log a histogram matrix artifact
-    """
+    &#34;&#34;&#34;
     context.log_artifact(
         item=Artifact(
-            key="hist",
-            body=b"<b> Deprecated, see the artifacts scatter-2d "
-            b"and histograms instead<b>",
+            key=&#34;hist&#34;,
+            body=b&#34;&lt;b&gt; Deprecated, see the artifacts scatter-2d &#34;
+            b&#34;and histograms instead&lt;b&gt;&#34;,
         ),
-        local_path=f"{plots_dest}/hist.html",
+        local_path=f&#34;{plots_dest}/hist.html&#34;,
     )
 
 
@@ -255,31 +255,31 @@ def _create_features_histogram_artifacts(
     plots_dest: str,
     problem_type: str,
 ):
-    """
+    &#34;&#34;&#34;
     Create and log a histogram artifact for each feature
-    """
+    &#34;&#34;&#34;
 
     figs = dict()
-    first_feature_name = ""
-    if label_column is not None and problem_type == "classification":
+    first_feature_name = &#34;&#34;
+    if label_column is not None and problem_type == &#34;classification&#34;:
         all_labels = df[label_column].unique()
     visible = True
     for column_name in df.columns:
         if column_name == label_column:
             continue
 
-        if label_column is not None and problem_type == "classification":
+        if label_column is not None and problem_type == &#34;classification&#34;:
             for label in all_labels:
                 sub_fig = go.Histogram(
-                    histfunc="count",
+                    histfunc=&#34;count&#34;,
                     x=df.loc[df[label_column] == label][column_name],
                     name=str(label),
                     visible=visible,
                 )
-                figs[f"{column_name}@?@{label}"] = sub_fig
+                figs[f&#34;{column_name}@?@{label}&#34;] = sub_fig
         else:
-            sub_fig = go.Histogram(histfunc="count", x=df[column_name], visible=visible)
-            figs[f"{column_name}@?@{1}"] = sub_fig
+            sub_fig = go.Histogram(histfunc=&#34;count&#34;, x=df[column_name], visible=visible)
+            figs[f&#34;{column_name}@?@{1}&#34;] = sub_fig
         if visible:
             first_feature_name = column_name
         visible = False
@@ -291,51 +291,51 @@ def _create_features_histogram_artifacts(
     fig.update_layout(
         updatemenus=[
             {
-                "buttons": [
+                &#34;buttons&#34;: [
                     {
-                        "label": column_name,
-                        "method": "update",
-                        "args": [
+                        &#34;label&#34;: column_name,
+                        &#34;method&#34;: &#34;update&#34;,
+                        &#34;args&#34;: [
                             {
-                                "visible": [
-                                    key.split("@?@")[0] == column_name
+                                &#34;visible&#34;: [
+                                    key.split(&#34;@?@&#34;)[0] == column_name
                                     for key in figs.keys()
                                 ],
-                                "xaxis": {
-                                    "range": [
+                                &#34;xaxis&#34;: {
+                                    &#34;range&#34;: [
                                         min(df[column_name]),
                                         max(df[column_name]),
                                     ]
                                 },
                             },
-                            {"title": f"<i><b>Histogram of {column_name}</b></i>"},
+                            {&#34;title&#34;: f&#34;&lt;i&gt;&lt;b&gt;Histogram of {column_name}&lt;/b&gt;&lt;/i&gt;&#34;},
                         ],
                     }
                     for column_name in df.columns
                     if column_name != label_column
                 ],
-                "direction": "down",
-                "pad": {"r": 10, "t": 10},
-                "showactive": True,
-                "x": 0.25,
-                "xanchor": "left",
-                "y": 1.1,
-                "yanchor": "top",
+                &#34;direction&#34;: &#34;down&#34;,
+                &#34;pad&#34;: {&#34;r&#34;: 10, &#34;t&#34;: 10},
+                &#34;showactive&#34;: True,
+                &#34;x&#34;: 0.25,
+                &#34;xanchor&#34;: &#34;left&#34;,
+                &#34;y&#34;: 1.1,
+                &#34;yanchor&#34;: &#34;top&#34;,
             }
         ],
         annotations=[
             dict(
-                text="Select Feature Name ",
+                text=&#34;Select Feature Name &#34;,
                 showarrow=False,
                 x=0,
                 y=1.05,
-                yref="paper",
-                xref="paper",
-                align="left",
-                xanchor="left",
-                yanchor="top",
+                yref=&#34;paper&#34;,
+                xref=&#34;paper&#34;,
+                align=&#34;left&#34;,
+                xanchor=&#34;left&#34;,
+                yanchor=&#34;top&#34;,
                 font={
-                    "color": "blue",
+                    &#34;color&#34;: &#34;blue&#34;,
                 },
             )
         ],
@@ -346,13 +346,13 @@ def _create_features_histogram_artifacts(
         height=400,
         autosize=False,
         margin=dict(t=100, b=0, l=0, r=0),
-        template="plotly_white",
+        template=&#34;plotly_white&#34;,
     )
 
-    fig.update_layout(title_text=f"<i><b>Histograms of {first_feature_name}</b></i>")
-    extra_data[f"histograms"] = context.log_artifact(
-        PlotlyArtifact(key=f"histograms", figure=fig),
-        local_path=f"{plots_dest}/histograms.html",
+    fig.update_layout(title_text=f&#34;&lt;i&gt;&lt;b&gt;Histograms of {first_feature_name}&lt;/b&gt;&lt;/i&gt;&#34;)
+    extra_data[f&#34;histograms&#34;] = context.log_artifact(
+        PlotlyArtifact(key=f&#34;histograms&#34;, figure=fig),
+        local_path=f&#34;{plots_dest}/histograms.html&#34;,
     )
 
 
@@ -364,9 +364,9 @@ def _create_features_2d_scatter_artifacts(
     plots_dest: str,
     problem_type: str,
 ):
-    """
+    &#34;&#34;&#34;
     Create and log a scatter-2d artifact for each couple of features
-    """
+    &#34;&#34;&#34;
     features = [
         column_name for column_name in df.columns if column_name != label_column
     ]
@@ -376,13 +376,13 @@ def _create_features_2d_scatter_artifacts(
     else:
         labels = [None]
     fig = go.Figure()
-    if label_column is not None and problem_type == "classification":
+    if label_column is not None and problem_type == &#34;classification&#34;:
         for l in labels:
             fig.add_trace(
                 go.Scatter(
                     x=df.loc[df[label_column] == l][features[0]],
                     y=df.loc[df[label_column] == l][features[0]],
-                    mode="markers",
+                    mode=&#34;markers&#34;,
                     visible=True,
                     showlegend=True,
                     name=str(l),
@@ -393,18 +393,18 @@ def _create_features_2d_scatter_artifacts(
             go.Scatter(
                 x=df[features[0]],
                 y=df[features[0]],
-                mode="markers",
+                mode=&#34;markers&#34;,
                 visible=True,
             )
         )
-    elif problem_type == "regression":
+    elif problem_type == &#34;regression&#34;:
         fig.add_trace(
             go.Scatter(
                 x=df[features[0]],
                 y=df[features[0]],
-                mode="markers",
+                mode=&#34;markers&#34;,
                 marker=dict(
-                    color=df[label_column], colorscale="Viridis", showscale=True
+                    color=df[label_column], colorscale=&#34;Viridis&#34;, showscale=True
                 ),
                 visible=True,
             )
@@ -414,13 +414,13 @@ def _create_features_2d_scatter_artifacts(
     y_buttons = []
 
     for ncol in features:
-        if problem_type == "classification" and label_column is not None:
+        if problem_type == &#34;classification&#34; and label_column is not None:
             x_buttons.append(
                 dict(
-                    method="update",
+                    method=&#34;update&#34;,
                     label=ncol,
                     args=[
-                        {"x": [df.loc[df[label_column] == l][ncol] for l in labels]},
+                        {&#34;x&#34;: [df.loc[df[label_column] == l][ncol] for l in labels]},
                         np.arange(len(labels)).tolist(),
                     ],
                 )
@@ -428,28 +428,28 @@ def _create_features_2d_scatter_artifacts(
 
             y_buttons.append(
                 dict(
-                    method="update",
+                    method=&#34;update&#34;,
                     label=ncol,
                     args=[
-                        {"y": [df.loc[df[label_column] == l][ncol] for l in labels]},
+                        {&#34;y&#34;: [df.loc[df[label_column] == l][ncol] for l in labels]},
                         np.arange(len(labels)).tolist(),
                     ],
                 )
             )
         else:
             x_buttons.append(
-                dict(method="update", label=ncol, args=[{"x": [df[ncol]]}])
+                dict(method=&#34;update&#34;, label=ncol, args=[{&#34;x&#34;: [df[ncol]]}])
             )
 
             y_buttons.append(
-                dict(method="update", label=ncol, args=[{"y": [df[ncol]]}])
+                dict(method=&#34;update&#34;, label=ncol, args=[{&#34;y&#34;: [df[ncol]]}])
             )
 
     # Pass buttons to the updatemenus argument
     fig.update_layout(
         updatemenus=[
-            dict(buttons=x_buttons, direction="up", x=0.5, y=-0.1),
-            dict(buttons=y_buttons, direction="down", x=-max_feature_len / 100, y=0.5),
+            dict(buttons=x_buttons, direction=&#34;up&#34;, x=0.5, y=-0.1),
+            dict(buttons=y_buttons, direction=&#34;down&#34;, x=-max_feature_len / 100, y=0.5),
         ]
     )
 
@@ -458,22 +458,22 @@ def _create_features_2d_scatter_artifacts(
         height=400,
         autosize=False,
         margin=dict(t=100, b=0, l=0, r=0),
-        template="plotly_white",
+        template=&#34;plotly_white&#34;,
     )
 
-    fig.update_layout(title_text=f"<i><b>Scatter-2d</b></i>")
-    extra_data[f"scatter-2d"] = context.log_artifact(
-        PlotlyArtifact(key=f"scatter-2d", figure=fig),
-        local_path=f"{plots_dest}/scatter-2d.html",
+    fig.update_layout(title_text=f&#34;&lt;i&gt;&lt;b&gt;Scatter-2d&lt;/b&gt;&lt;/i&gt;&#34;)
+    extra_data[f&#34;scatter-2d&#34;] = context.log_artifact(
+        PlotlyArtifact(key=f&#34;scatter-2d&#34;, figure=fig),
+        local_path=f&#34;{plots_dest}/scatter-2d.html&#34;,
     )
 
 
 def _create_violin_artifact(
     context: MLClientCtx, df: pd.DataFrame, extra_data: dict, plots_dest: str
 ):
-    """
+    &#34;&#34;&#34;
     Create and log a violin artifact
-    """
+    &#34;&#34;&#34;
     cols = 5
     rows = (df.shape[1] // cols) + 1
     fig = make_subplots(rows=rows, cols=cols)
@@ -496,16 +496,16 @@ def _create_violin_artifact(
 
         plot_num += 1
 
-    fig["layout"].update(
+    fig[&#34;layout&#34;].update(
         height=(rows + 1) * 200,
         width=(cols + 1) * 200,
-        title="<i><b>Violin Plots</b></i>",
+        title=&#34;&lt;i&gt;&lt;b&gt;Violin Plots&lt;/b&gt;&lt;/i&gt;&#34;,
     )
 
     fig.update_layout(showlegend=False)
-    extra_data["violin"] = context.log_artifact(
-        PlotlyArtifact(key="violin", figure=fig),
-        local_path=f"{plots_dest}/violin.html",
+    extra_data[&#34;violin&#34;] = context.log_artifact(
+        PlotlyArtifact(key=&#34;violin&#34;, figure=fig),
+        local_path=f&#34;{plots_dest}/violin.html&#34;,
     )
 
 
@@ -517,37 +517,37 @@ def _create_imbalance_artifact(
     plots_dest: str,
     problem_type: str,
 ):
-    """
+    &#34;&#34;&#34;
     Create and log an imbalance class artifact (csv + plot)
-    """
+    &#34;&#34;&#34;
     if label_column:
-        if problem_type == "classification":
-            values_column = "count"
+        if problem_type == &#34;classification&#34;:
+            values_column = &#34;count&#34;
             labels_count = df[label_column].value_counts().sort_index()
             df_labels_count = pd.DataFrame(labels_count)
             df_labels_count[label_column] = labels_count.index
-            df_labels_count.rename(columns={"": values_column}, inplace=True)
+            df_labels_count.rename(columns={&#34;&#34;: values_column}, inplace=True)
             df_labels_count[values_column] = df_labels_count[values_column] / sum(
                 df_labels_count[values_column]
             )
             fig = px.pie(df_labels_count, names=label_column, values=values_column)
         else:
             fig = px.histogram(
-                histfunc="count",
+                histfunc=&#34;count&#34;,
                 x=df[label_column],
             )
             hist = np.histogram(df[label_column])
             df_labels_count = pd.DataFrame(
-                {"min_val": hist[1], "count": hist[0].tolist() + [0]}
+                {&#34;min_val&#34;: hist[1], &#34;count&#34;: hist[0].tolist() + [0]}
             )
-        fig.update_layout(title_text="<i><b>Labels Imbalance</b></i>")
-        extra_data["imbalance"] = context.log_artifact(
-            PlotlyArtifact(key="imbalance", figure=fig),
-            local_path=f"{plots_dest}/imbalance.html",
+        fig.update_layout(title_text=&#34;&lt;i&gt;&lt;b&gt;Labels Imbalance&lt;/b&gt;&lt;/i&gt;&#34;)
+        extra_data[&#34;imbalance&#34;] = context.log_artifact(
+            PlotlyArtifact(key=&#34;imbalance&#34;, figure=fig),
+            local_path=f&#34;{plots_dest}/imbalance.html&#34;,
         )
-        extra_data["imbalance-csv"] = context.log_artifact(
-            TableArtifact("imbalance-weights-vec", df=df_labels_count),
-            local_path=f"{plots_dest}/imbalance-weights-vec.csv",
+        extra_data[&#34;imbalance-csv&#34;] = context.log_artifact(
+            TableArtifact(&#34;imbalance-weights-vec&#34;, df=df_labels_count),
+            local_path=f&#34;{plots_dest}/imbalance-weights-vec.csv&#34;,
         )
 
 
@@ -558,33 +558,33 @@ def _create_corr_artifact(
     label_column: str,
     plots_dest: str,
 ):
-    """
+    &#34;&#34;&#34;
     Create and log an correlation-matrix artifact (csv + plot)
-    """
+    &#34;&#34;&#34;
     if label_column is not None:
         df = df.drop([label_column], axis=1)
     tblcorr = df.corr(numeric_only=True)
-    extra_data["correlation-matrix-csv"] = context.log_artifact(
-        TableArtifact("correlation-matrix-csv", df=tblcorr, visible=True),
-        local_path=f"{plots_dest}/correlation-matrix.csv",
+    extra_data[&#34;correlation-matrix-csv&#34;] = context.log_artifact(
+        TableArtifact(&#34;correlation-matrix-csv&#34;, df=tblcorr, visible=True),
+        local_path=f&#34;{plots_dest}/correlation-matrix.csv&#34;,
     )
 
     z = tblcorr.values.tolist()
-    z_text = [["{:.2f}".format(y) for y in x] for x in z]
+    z_text = [[&#34;{:.2f}&#34;.format(y) for y in x] for x in z]
     fig = ff.create_annotated_heatmap(
         z,
         x=list(tblcorr.columns),
         y=list(tblcorr.columns),
         annotation_text=z_text,
-        colorscale="agsunset",
+        colorscale=&#34;agsunset&#34;,
     )
-    fig["layout"]["yaxis"]["autorange"] = "reversed"  # l -> r
-    fig.update_layout(title_text="<i><b>Correlation matrix</b></i>")
-    fig["data"][0]["showscale"] = True
+    fig[&#34;layout&#34;][&#34;yaxis&#34;][&#34;autorange&#34;] = &#34;reversed&#34;  # l -&gt; r
+    fig.update_layout(title_text=&#34;&lt;i&gt;&lt;b&gt;Correlation matrix&lt;/b&gt;&lt;/i&gt;&#34;)
+    fig[&#34;data&#34;][0][&#34;showscale&#34;] = True
 
-    extra_data["correlation"] = context.log_artifact(
-        PlotlyArtifact(key="correlation", figure=fig),
-        local_path=f"{plots_dest}/correlation.html",
+    extra_data[&#34;correlation&#34;] = context.log_artifact(
+        PlotlyArtifact(key=&#34;correlation&#34;, figure=fig),
+        local_path=f&#34;{plots_dest}/correlation.html&#34;,
     )
 
         </code>

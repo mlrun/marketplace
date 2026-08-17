@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -46,7 +46,7 @@
 
 import warnings
 
-warnings.simplefilter(action="ignore", category=FutureWarning)
+warnings.simplefilter(action=&#34;ignore&#34;, category=FutureWarning)
 
 
 from cloudpickle import dumps
@@ -63,48 +63,48 @@ def train_model(
     context: MLClientCtx,
     model_pkg_class: str,
     dataset: DataItem,
-    label_column: str = "labels",
+    label_column: str = &#34;labels&#34;,
     encode_cols: List[str] = [],
     sample: int = -1,
     test_size: float = 0.30,
     train_val_split: float = 0.70,
-    test_set_key: str = "test_set",
+    test_set_key: str = &#34;test_set&#34;,
     model_evaluator=None,
-    models_dest: str = "",
-    plots_dest: str = "plots",
-    file_ext: str = "parquet",
-    model_pkg_file: str = "",
+    models_dest: str = &#34;&#34;,
+    plots_dest: str = &#34;plots&#34;,
+    file_ext: str = &#34;parquet&#34;,
+    model_pkg_file: str = &#34;&#34;,
     random_state: int = 1,
-) -> None:
-    """train a classifier
+) -&gt; None:
+    &#34;&#34;&#34;train a classifier
 
     An optional cutom model evaluator can be supplied that should have the signature:
     `my_custom_evaluator(context, xvalid, yvalid, model)` and return a dictionary of
-    scalar "results", a "plots" keys with a list of PlotArtifacts, and
-    and "tables" key containing a returned list of TableArtifacts.
+    scalar &#34;results&#34;, a &#34;plots&#34; keys with a list of PlotArtifacts, and
+    and &#34;tables&#34; key containing a returned list of TableArtifacts.
 
     :param context:           the function context
-    :param model_pkg_class:   the model to train, e.g, "sklearn.neural_networks.MLPClassifier",
+    :param model_pkg_class:   the model to train, e.g, &#34;sklearn.neural_networks.MLPClassifier&#34;,
                               or json model config
-    :param dataset:           ("data") name of raw data file
+    :param dataset:           (&#34;data&#34;) name of raw data file
     :param label_column:      ground-truth (y) labels
     :param encode_cols:       dictionary of names and prefixes for columns that are
                               to hot be encoded.
     :param sample:            Selects the first n rows, or select a sample
-                              starting from the first. If negative <-1, select
+                              starting from the first. If negative &lt;-1, select
                               a random sample
     :param test_size:         (0.05) test set size
     :param train_val_split:   (0.75) Once the test set has been removed the
                               training set gets this proportion.
     :param test_set_key:      key of held out data in artifact store
     :param model_evaluator:   (None) a custom model evaluator can be specified
-    :param models_dest:       ("") models subfolder on artifact path
+    :param models_dest:       (&#34;&#34;) models subfolder on artifact path
     :param plots_dest:        plot subfolder on artifact path
-    :param file_ext:          ("parquet") format for test_set_key hold out data
+    :param file_ext:          (&#34;parquet&#34;) format for test_set_key hold out data
     :param random_state:      (1) sklearn rng seed
 
-    """
-    models_dest = models_dest or "model"
+    &#34;&#34;&#34;
+    models_dest = models_dest or &#34;model&#34;
 
     raw, labels, header = get_sample(dataset, sample, label_column)
 
@@ -126,19 +126,19 @@ def train_model(
         df=test_set,
         format=file_ext,
         index=False,
-        labels={"data-type": "held-out"},
-        artifact_path=context.artifact_subpath("data"),
+        labels={&#34;data-type&#34;: &#34;held-out&#34;},
+        artifact_path=context.artifact_subpath(&#34;data&#34;),
     )
 
     model_config = gen_sklearn_model(model_pkg_class, context.parameters.items())
 
-    model_config["FIT"].update({"X": xtrain, "y": ytrain.values})
+    model_config[&#34;FIT&#34;].update({&#34;X&#34;: xtrain, &#34;y&#34;: ytrain.values})
 
-    ClassifierClass = create_class(model_config["META"]["class"])
+    ClassifierClass = create_class(model_config[&#34;META&#34;][&#34;class&#34;])
 
-    model = ClassifierClass(**model_config["CLASS"])
+    model = ClassifierClass(**model_config[&#34;CLASS&#34;])
 
-    model.fit(**model_config["FIT"])
+    model.fit(**model_config[&#34;FIT&#34;])
 
     artifact_path = context.artifact_subpath(models_dest)
     plots_path = context.artifact_subpath(models_dest, plots_dest)
@@ -151,24 +151,24 @@ def train_model(
             context, xvalid, yvalid, model, plots_artifact_path=plots_path
         )
 
-    kwargs = {"training_set": test_set, "label_column": label_column}
-    split = model_pkg_class.rsplit(".", 1)
+    kwargs = {&#34;training_set&#34;: test_set, &#34;label_column&#34;: label_column}
+    split = model_pkg_class.rsplit(&#34;.&#34;, 1)
     if split and len(split) == 2:
-        kwargs["algorithm"] = split[1]
+        kwargs[&#34;algorithm&#34;] = split[1]
 
-    if dataset.meta and dataset.meta.kind == "FeatureVector":
-        kwargs["feature_vector"] = dataset.meta.uri
+    if dataset.meta and dataset.meta.kind == &#34;FeatureVector&#34;:
+        kwargs[&#34;feature_vector&#34;] = dataset.meta.uri
 
-    context.set_label("class", model_pkg_class)
+    context.set_label(&#34;class&#34;, model_pkg_class)
     context.log_model(
-        "model",
+        &#34;model&#34;,
         body=dumps(model),
         artifact_path=artifact_path,
         extra_data=eval_metrics,
-        model_file="model.pkl",
+        model_file=&#34;model.pkl&#34;,
         metrics=context.results,
-        labels={"class": model_pkg_class},
-        framework="sklearn",
+        labels={&#34;class&#34;: model_pkg_class},
+        framework=&#34;sklearn&#34;,
         **kwargs
     )
 

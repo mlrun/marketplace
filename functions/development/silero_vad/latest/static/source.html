@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2024 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -53,16 +53,16 @@ from tqdm import tqdm
 
 
 class BaseTask:
-    """
+    &#34;&#34;&#34;
     A base class for a task to complete after VAD.
-    """
+    &#34;&#34;&#34;
 
     def __init__(self, audio_file: Path):
-        """
+        &#34;&#34;&#34;
         Initialize the base task.
 
         :param audio_file: The audio file assigned to the task.
-        """
+        &#34;&#34;&#34;
         # Store the audio file:
         self._audio_file = audio_file
 
@@ -70,71 +70,71 @@ class BaseTask:
         self._result = None
 
     @property
-    def audio_file(self) -> Path:
-        """
+    def audio_file(self) -&gt; Path:
+        &#34;&#34;&#34;
         Get the audio file of the task.
 
         :returns: The audio file of the task.
-        """
+        &#34;&#34;&#34;
         return self._audio_file
 
     def do_task(
         self, speech_timestamps: Union[List[Dict[str, int]], List[List[Dict[str, int]]]]
     ):
-        """
+        &#34;&#34;&#34;
         Do the task on the given speech timestamps. The base task will simply save the speech timestamps as the result.
 
         :param speech_timestamps: The speech timestamps to do the task on as outputted from the VAD.
-        """
+        &#34;&#34;&#34;
         self._result = speech_timestamps
 
-    def get_result(self) -> Tuple[str, list]:
-        """
+    def get_result(self) -&gt; Tuple[str, list]:
+        &#34;&#34;&#34;
         Get the result of the task. A tuple of the audio file name and the result.
 
         :returns: The result of the task.
-        """
+        &#34;&#34;&#34;
         return self._audio_file.name, self._result
 
-    def to_tuple(self) -> Tuple[str, dict]:
-        """
+    def to_tuple(self) -&gt; Tuple[str, dict]:
+        &#34;&#34;&#34;
         Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).
 
         :returns: The converted task.
-        """
-        return self.__class__.__name__, {"audio_file": self._audio_file}
+        &#34;&#34;&#34;
+        return self.__class__.__name__, {&#34;audio_file&#34;: self._audio_file}
 
 
 class SpeechDiarizationTask(BaseTask):
-    """
+    &#34;&#34;&#34;
     A speech diarization task. The task will diarize the VAD speech timestamps into speakers.
-    """
+    &#34;&#34;&#34;
 
     def __init__(self, audio_file: Path, speaker_labels: List[str]):
-        """
+        &#34;&#34;&#34;
         Initialize the speech diarization task.
 
         :param audio_file:     The audio file assigned to the task.
         :param speaker_labels: The speaker labels to use for the diarization. If not given, the speakers will be named
-                               "speaker_0", "speaker_1", etc.
-        """
+                               &#34;speaker_0&#34;, &#34;speaker_1&#34;, etc.
+        &#34;&#34;&#34;
         super().__init__(audio_file=audio_file)
         self._speaker_labels = speaker_labels
 
     def do_task(self, speech_timestamps: List[List[Dict[str, int]]]):
-        """
+        &#34;&#34;&#34;
         Do the task on the given speech timestamps. The task will diarize the VAD speech timestamps into speakers.
 
         :param speech_timestamps: The speech timestamps per channel to do the task on as outputted from the VAD.
-        """
+        &#34;&#34;&#34;
         # Get the speaker labels (set default if not given):
         speaker_labels = self._speaker_labels or [
-            f"speaker_{i}" for i in range(len(speech_timestamps))
+            f&#34;speaker_{i}&#34; for i in range(len(speech_timestamps))
         ]
 
         # Diarize - organize the speech timestamps into a single list of speakers and sort it by start time:
         speech_diarization = [
-            (speech_timestamp["start"], speech_timestamp["end"], speaker_label)
+            (speech_timestamp[&#34;start&#34;], speech_timestamp[&#34;end&#34;], speaker_label)
             for speaker_label, channel_speech_timestamps in zip(
                 speaker_labels, speech_timestamps
             )
@@ -143,20 +143,20 @@ class SpeechDiarizationTask(BaseTask):
         speech_diarization.sort()
         self._result = speech_diarization
 
-    def to_tuple(self) -> Tuple[str, dict]:
-        """
+    def to_tuple(self) -&gt; Tuple[str, dict]:
+        &#34;&#34;&#34;
         Convert the task to a tuple to reconstruct it later (used for multiprocessing to pass in queue).
 
         :returns: The converted task.
-        """
+        &#34;&#34;&#34;
         task_class, task_kwargs = super().to_tuple()
-        return task_class, {**task_kwargs, "speaker_labels": self._speaker_labels}
+        return task_class, {**task_kwargs, &#34;speaker_labels&#34;: self._speaker_labels}
 
 
 class TaskCreator:
-    """
+    &#34;&#34;&#34;
     A task creator to create different tasks to run after the VAD.
-    """
+    &#34;&#34;&#34;
 
     #: A map from task class name to task class to use in `from_tuple`:
     _MAP = {
@@ -165,41 +165,41 @@ class TaskCreator:
     }
 
     def __init__(self, task_type: Type[BaseTask], task_kwargs: dict = None):
-        """
+        &#34;&#34;&#34;
         Initialize the task creator.
         :param task_type: The task type - a `BaseTask` subclass.
         :param task_kwargs: Additional keyword arguments to pass to the to be created tasks.
-        """
+        &#34;&#34;&#34;
         self._task_type = task_type
         self._task_kwargs = task_kwargs or {}
 
-    def create_task(self, audio_file: Path) -> BaseTask:
-        """
+    def create_task(self, audio_file: Path) -&gt; BaseTask:
+        &#34;&#34;&#34;
         Create a task with the given audio file.
 
         :param audio_file: The audio file to assign to the task.
 
         :returns: The created task.
-        """
+        &#34;&#34;&#34;
         return self._task_type(audio_file=audio_file, **self._task_kwargs)
 
     @classmethod
-    def from_tuple(cls, task_tuple: Tuple[str, dict]) -> BaseTask:
-        """
+    def from_tuple(cls, task_tuple: Tuple[str, dict]) -&gt; BaseTask:
+        &#34;&#34;&#34;
         Create a task from a tuple of the audio file name and the task kwargs.
 
         :param task_tuple: The task tuple to create the task from.
 
         :returns: The created task.
-        """
+        &#34;&#34;&#34;
         task_class, task_kwargs = task_tuple
         return cls._MAP[task_class](**task_kwargs)
 
 
 class VoiceActivityDetector:
-    """
+    &#34;&#34;&#34;
     A voice activity detection wrapper for the silero VAD model - https://github.com/snakers4/silero-vad.
-    """
+    &#34;&#34;&#34;
 
     def __init__(
         self,
@@ -210,21 +210,21 @@ class VoiceActivityDetector:
         threshold: float = 0.5,
         sampling_rate: int = 16_000,
         min_speech_duration_ms: int = 250,
-        max_speech_duration_s: float = float("inf"),
+        max_speech_duration_s: float = float(&#34;inf&#34;),
         min_silence_duration_ms: int = 100,
         window_size_samples: int = 512,
         speech_pad_ms: int = 30,
         return_seconds: bool = False,
         per_channel: bool = False,
     ):
-        """
+        &#34;&#34;&#34;
         Initialize the voice activity detector.
 
         :param use_onnx:                Whether to use ONNX for inference. Default is True.
         :param force_onnx_cpu:          Whether to force ONNX to use CPU for inference. Default is True.
         :param threshold:               Speech threshold. Silero VAD outputs speech probabilities for each audio chunk,
                                         probabilities ABOVE this value are considered as SPEECH. It is better to tune
-                                        this parameter for each dataset separately, but "lazy" 0.5 is pretty good for
+                                        this parameter for each dataset separately, but &#34;lazy&#34; 0.5 is pretty good for
                                         most datasets.
         :param sampling_rate:           Currently, silero VAD models support 8000 and 16000 sample rates.
         :param min_speech_duration_ms:  Final speech chunks shorter min_speech_duration_ms are thrown out.
@@ -243,7 +243,7 @@ class VoiceActivityDetector:
                                         samples (default - False).
         :param per_channel:             Whether to return timestamps per channel (default - False). This will run VAD
                                         on each channel separately and return a list of timestamps per channel.
-        """
+        &#34;&#34;&#34;
         # Store configurations:
         self._use_onnx = use_onnx
         self._force_onnx_cpu = force_onnx_cpu
@@ -262,14 +262,14 @@ class VoiceActivityDetector:
         self._get_speech_timestamps: FunctionType = None
 
     def load(self, force_reload: bool = True):
-        """
+        &#34;&#34;&#34;
         Load the VAD model.
 
         :param force_reload: Whether to force reload the model even if it was already loaded. Default is True.
-        """
+        &#34;&#34;&#34;
         model, utils = torch.hub.load(
-            repo_or_dir="snakers4/silero-vad",
-            model="silero_vad",
+            repo_or_dir=&#34;snakers4/silero-vad&#34;,
+            model=&#34;silero_vad&#34;,
             force_reload=force_reload,
             onnx=self._use_onnx,
             force_onnx_cpu=self._force_onnx_cpu,
@@ -286,8 +286,8 @@ class VoiceActivityDetector:
     def detect_voice(
         self,
         audio_file: Path,
-    ) -> Union[List[Dict[str, int]], List[List[Dict[str, int]]]]:
-        """
+    ) -&gt; Union[List[Dict[str, int]], List[List[Dict[str, int]]]]:
+        &#34;&#34;&#34;
         Infer the audio through the VAD model and return the speech timestamps.
 
         :param audio_file: The audio file to infer.
@@ -295,11 +295,11 @@ class VoiceActivityDetector:
         :returns: The speech timestamps in the audio. A list of timestamps where each timestamp is a dictionary with the
                  following keys:
 
-                 * "start": The start sample index of the speech in the audio.
-                 * "end":   The end sample index of the speech in the audio.
+                 * &#34;start&#34;: The start sample index of the speech in the audio.
+                 * &#34;end&#34;:   The end sample index of the speech in the audio.
 
                  If `per_channel` is True, a list of timestamps per channel will be returned.
-        """
+        &#34;&#34;&#34;
         # Cast to a numpy array:
         audio = self._read_audio(audio_file)
 
@@ -341,19 +341,19 @@ class VoiceActivityDetector:
     def _read_audio(
         self,
         path: Path,
-    ) -> torch.Tensor:
-        """
+    ) -&gt; torch.Tensor:
+        &#34;&#34;&#34;
         Read the audio from the given path and return it as a tensor.
 
         :param path: The path to the audio file.
 
         :returns: The audio as a tensor.
-        """
+        &#34;&#34;&#34;
         # Read the audio:
         audio, sampling_rate = torchaudio.load(str(path))
 
         # Check if the audio is stereo and if so, convert it to mono (only if not per channel):
-        if audio.size(0) > 1 and not self._per_channel:
+        if audio.size(0) &gt; 1 and not self._per_channel:
             audio = audio.mean(dim=0, keepdim=True)
 
         # Resample the audio if needed:
@@ -368,20 +368,20 @@ class VoiceActivityDetector:
 
 
 #: The value to send into multiprocessing queues to stop the process:
-_MULTIPROCESSING_STOP_MARK = "STOP"
+_MULTIPROCESSING_STOP_MARK = &#34;STOP&#34;
 
 
 def _multiprocessing_complete_tasks(
     vad_init_kwargs: dict, tasks_queue: Queue, results_queue: Queue
 ):
-    """
+    &#34;&#34;&#34;
     Complete the tasks in the given queue and put the results in the given results queue. The function will stop when
     the given tasks queue will receive the stop mark. It is aimed to be used with multiprocessing as a process.
 
     :param vad_init_kwargs: The VAD initialization kwargs.
     :param tasks_queue:     A queue to get the tasks from.
     :param results_queue:   A queue to put the results in.
-    """
+    &#34;&#34;&#34;
     # Initialize and load the VAD:
     vad = VoiceActivityDetector(**vad_init_kwargs)
     vad.load(force_reload=False)
@@ -415,7 +415,7 @@ def _multiprocessing_complete_tasks(
 try:
     import mlrun
 
-    _LOGGER = mlrun.get_or_create_ctx("silero_vad").logger
+    _LOGGER = mlrun.get_or_create_ctx(&#34;silero_vad&#34;).logger
 except ModuleNotFoundError:
     _LOGGER = logging.getLogger()
 
@@ -430,7 +430,7 @@ def detect_voice(
     threshold: float = 0.5,
     sampling_rate: int = 16_000,
     min_speech_duration_ms: int = 250,
-    max_speech_duration_s: float = float("inf"),
+    max_speech_duration_s: float = float(&#34;inf&#34;),
     min_silence_duration_ms: int = 100,
     window_size_samples: int = 512,
     speech_pad_ms: int = 30,
@@ -440,7 +440,7 @@ def detect_voice(
     use_multiprocessing: int = 0,
     verbose: bool = False,
 ):
-    """
+    &#34;&#34;&#34;
     Perform voice activity detection on given audio files using the silero VAD model -
     https://github.com/snakers4/silero-vad. The end result is a dictionary with the file names as keys and their
     VAD timestamps dictionaries as value.
@@ -448,16 +448,16 @@ def detect_voice(
     For example::
 
         {
-            "file_1.wav": [
-                {"start": 0, "end": 16000},
-                {"start": 16000, "end": 32000},
-                {"start": 32000, "end": 48000},
+            &#34;file_1.wav&#34;: [
+                {&#34;start&#34;: 0, &#34;end&#34;: 16000},
+                {&#34;start&#34;: 16000, &#34;end&#34;: 32000},
+                {&#34;start&#34;: 32000, &#34;end&#34;: 48000},
                 ...
             ],
-            "file_2.wav": [
-                {"start": 0, "end": 16000},
-                {"start": 16000, "end": 32000},
-                {"start": 32000, "end": 48000},
+            &#34;file_2.wav&#34;: [
+                {&#34;start&#34;: 0, &#34;end&#34;: 16000},
+                {&#34;start&#34;: 16000, &#34;end&#34;: 32000},
+                {&#34;start&#34;: 32000, &#34;end&#34;: 48000},
                 ...
             ],
             ...
@@ -470,7 +470,7 @@ def detect_voice(
     :param force_onnx_cpu:          Whether to force ONNX to use CPU for inference. Default is True.
     :param threshold:               Speech threshold. Silero VAD outputs speech probabilities for each audio chunk,
                                     probabilities ABOVE this value are considered as SPEECH. It is better to tune
-                                    this parameter for each dataset separately, but "lazy" 0.5 is pretty good for
+                                    this parameter for each dataset separately, but &#34;lazy&#34; 0.5 is pretty good for
                                     most datasets.
     :param sampling_rate:           Currently, silero VAD models support 8000 and 16000 sample rates.
     :param min_speech_duration_ms:  Final speech chunks shorter min_speech_duration_ms are thrown out.
@@ -493,29 +493,29 @@ def detect_voice(
     :param use_multiprocessing:     The number of workers to use for multiprocessing. If 0, no multiprocessing will
                                     be used. Default is 0.
     :param verbose:                 Verbosity.
-    """
+    &#34;&#34;&#34;
     global _LOGGER
 
     # Get the input audio files to transcribe:
     if verbose:
-        _LOGGER.info("Collecting audio files.")
+        _LOGGER.info(&#34;Collecting audio files.&#34;)
     audio_files = _get_audio_files(data_path=data_path)
     if verbose:
-        _LOGGER.info(f"Collected {len(audio_files)} audio files.")
+        _LOGGER.info(f&#34;Collected {len(audio_files)} audio files.&#34;)
 
     # Initialize the transcription pipeline:
     vad_init_kwargs = {
-        "use_onnx": use_onnx,
-        "force_onnx_cpu": force_onnx_cpu,
-        "threshold": threshold,
-        "sampling_rate": sampling_rate,
-        "min_speech_duration_ms": min_speech_duration_ms,
-        "max_speech_duration_s": max_speech_duration_s,
-        "min_silence_duration_ms": min_silence_duration_ms,
-        "window_size_samples": window_size_samples,
-        "speech_pad_ms": speech_pad_ms,
-        "return_seconds": return_seconds,
-        "per_channel": per_channel,
+        &#34;use_onnx&#34;: use_onnx,
+        &#34;force_onnx_cpu&#34;: force_onnx_cpu,
+        &#34;threshold&#34;: threshold,
+        &#34;sampling_rate&#34;: sampling_rate,
+        &#34;min_speech_duration_ms&#34;: min_speech_duration_ms,
+        &#34;max_speech_duration_s&#34;: max_speech_duration_s,
+        &#34;min_silence_duration_ms&#34;: min_silence_duration_ms,
+        &#34;window_size_samples&#34;: window_size_samples,
+        &#34;speech_pad_ms&#34;: speech_pad_ms,
+        &#34;return_seconds&#34;: return_seconds,
+        &#34;per_channel&#34;: per_channel,
     }
 
     # Create the task creator:
@@ -526,7 +526,7 @@ def detect_voice(
         results = _parallel_run(
             n_workers=use_multiprocessing,
             audio_files=audio_files,
-            description="Detecting voice",
+            description=&#34;Detecting voice&#34;,
             vad_init_kwargs=vad_init_kwargs,
             task_creator=task_creator,
             verbose=verbose,
@@ -534,7 +534,7 @@ def detect_voice(
     else:
         results = _run(
             audio_files=audio_files,
-            description="Detecting voice",
+            description=&#34;Detecting voice&#34;,
             vad_init_kwargs=vad_init_kwargs,
             task_creator=task_creator,
             verbose=verbose,
@@ -554,7 +554,7 @@ def diarize(
     threshold: float = 0.5,
     sampling_rate: int = 16_000,
     min_speech_duration_ms: int = 250,
-    max_speech_duration_s: float = float("inf"),
+    max_speech_duration_s: float = float(&#34;inf&#34;),
     min_silence_duration_ms: int = 100,
     window_size_samples: int = 512,
     speech_pad_ms: int = 30,
@@ -564,7 +564,7 @@ def diarize(
     use_multiprocessing: int = 0,
     verbose: bool = False,
 ):
-    """
+    &#34;&#34;&#34;
     Perform speech diarization on given audio files using the silero VAD model - https://github.com/snakers4/silero-vad.
     The speech diarization is performed per channel so that each channel in the audio belong to a different speaker. The
     end result is a dictionary with the file names as keys and their diarization as value. A diarization is a list
@@ -573,16 +573,16 @@ def diarize(
     For example::
 
         {
-            "file_1.wav": [
-                (0.0, 1.0, "speaker_0"),
-                (1.0, 2.0, "speaker_1"),
-                (2.0, 3.0, "speaker_0"),
+            &#34;file_1.wav&#34;: [
+                (0.0, 1.0, &#34;speaker_0&#34;),
+                (1.0, 2.0, &#34;speaker_1&#34;),
+                (2.0, 3.0, &#34;speaker_0&#34;),
                 ...
             ],
-            "file_2.wav": [
-                (0.0, 1.0, "speaker_0"),
-                (1.0, 2.0, "speaker_1"),
-                (2.0, 3.0, "speaker_0"),
+            &#34;file_2.wav&#34;: [
+                (0.0, 1.0, &#34;speaker_0&#34;),
+                (1.0, 2.0, &#34;speaker_1&#34;),
+                (2.0, 3.0, &#34;speaker_0&#34;),
                 ...
             ],
             ...
@@ -595,7 +595,7 @@ def diarize(
     :param force_onnx_cpu:          Whether to force ONNX to use CPU for inference. Default is True.
     :param threshold:               Speech threshold. Silero VAD outputs speech probabilities for each audio chunk,
                                     probabilities ABOVE this value are considered as SPEECH. It is better to tune
-                                    this parameter for each dataset separately, but "lazy" 0.5 is pretty good for
+                                    this parameter for each dataset separately, but &#34;lazy&#34; 0.5 is pretty good for
                                     most datasets.
     :param sampling_rate:           Currently, silero VAD models support 8000 and 16000 sample rates.
     :param min_speech_duration_ms:  Final speech chunks shorter min_speech_duration_ms are thrown out.
@@ -612,38 +612,38 @@ def diarize(
                                     these may affect model performance!
     :param speech_pad_ms:           Final speech chunks are padded by speech_pad_ms each side.
     :param speaker_labels:          The speaker labels to use for the diarization. If not given, the speakers will be
-                                    named "speaker_0", "speaker_1", etc.
+                                    named &#34;speaker_0&#34;, &#34;speaker_1&#34;, etc.
     :param use_multiprocessing:     The number of workers to use for multiprocessing. If 0, no multiprocessing will
                                     be used. Default is 0.
     :param verbose:                 Verbosity.
-    """
+    &#34;&#34;&#34;
     global _LOGGER
 
     # Get the input audio files to transcribe:
     if verbose:
-        _LOGGER.info("Collecting audio files.")
+        _LOGGER.info(&#34;Collecting audio files.&#34;)
     audio_files = _get_audio_files(data_path=data_path)
     if verbose:
-        _LOGGER.info(f"Collected {len(audio_files)} audio files.")
+        _LOGGER.info(f&#34;Collected {len(audio_files)} audio files.&#34;)
 
     # Initialize the transcription pipeline:
     vad_init_kwargs = {
-        "use_onnx": use_onnx,
-        "force_onnx_cpu": force_onnx_cpu,
-        "threshold": threshold,
-        "sampling_rate": sampling_rate,
-        "min_speech_duration_ms": min_speech_duration_ms,
-        "max_speech_duration_s": max_speech_duration_s,
-        "min_silence_duration_ms": min_silence_duration_ms,
-        "window_size_samples": window_size_samples,
-        "speech_pad_ms": speech_pad_ms,
-        "return_seconds": True,
-        "per_channel": True,
+        &#34;use_onnx&#34;: use_onnx,
+        &#34;force_onnx_cpu&#34;: force_onnx_cpu,
+        &#34;threshold&#34;: threshold,
+        &#34;sampling_rate&#34;: sampling_rate,
+        &#34;min_speech_duration_ms&#34;: min_speech_duration_ms,
+        &#34;max_speech_duration_s&#34;: max_speech_duration_s,
+        &#34;min_silence_duration_ms&#34;: min_silence_duration_ms,
+        &#34;window_size_samples&#34;: window_size_samples,
+        &#34;speech_pad_ms&#34;: speech_pad_ms,
+        &#34;return_seconds&#34;: True,
+        &#34;per_channel&#34;: True,
     }
 
     # Create the task creator:
     task_creator = TaskCreator(
-        task_type=SpeechDiarizationTask, task_kwargs={"speaker_labels": speaker_labels}
+        task_type=SpeechDiarizationTask, task_kwargs={&#34;speaker_labels&#34;: speaker_labels}
     )
 
     # Run the transcription:
@@ -651,7 +651,7 @@ def diarize(
         results = _parallel_run(
             n_workers=use_multiprocessing,
             audio_files=audio_files,
-            description="Diarizing",
+            description=&#34;Diarizing&#34;,
             vad_init_kwargs=vad_init_kwargs,
             task_creator=task_creator,
             verbose=verbose,
@@ -659,7 +659,7 @@ def diarize(
     else:
         results = _run(
             audio_files=audio_files,
-            description="Diarizing",
+            description=&#34;Diarizing&#34;,
             vad_init_kwargs=vad_init_kwargs,
             task_creator=task_creator,
             verbose=verbose,
@@ -671,15 +671,15 @@ def diarize(
 
 def _get_audio_files(
     data_path: Union[Path, str, list],
-) -> List[Path]:
-    """
+) -&gt; List[Path]:
+    &#34;&#34;&#34;
     Get the audio files from the data path. If a path to a directory is given, all files in the directory will be
     collected.
 
     :param data_path: The data path to collect the audio files from.
 
     :returns: The audio files list.
-    """
+    &#34;&#34;&#34;
     # Check if given a list of paths:
     if isinstance(data_path, list):
         audio_files = []
@@ -694,13 +694,13 @@ def _get_audio_files(
     # Check if the path is of a directory or a file:
     if data_path.is_dir():
         # Get all files inside the directory:
-        audio_files = list(data_path.glob("*.*"))
+        audio_files = list(data_path.glob(&#34;*.*&#34;))
     elif data_path.is_file():
         audio_files = [data_path]
     else:
         raise ValueError(
-            f"Unrecognized data path. The parameter `data_path` must be a valid path to either a directory path or a "
-            f"file. Given: {str(data_path)} "
+            f&#34;Unrecognized data path. The parameter `data_path` must be a valid path to either a directory path or a &#34;
+            f&#34;file. Given: {str(data_path)} &#34;
         )
 
     return audio_files
@@ -712,8 +712,8 @@ def _run(
     vad_init_kwargs: dict,
     task_creator: TaskCreator,
     verbose: bool,
-) -> List[Tuple[bool, Tuple[str, list]]]:
-    """
+) -&gt; List[Tuple[bool, Tuple[str, list]]]:
+    &#34;&#34;&#34;
     Load a VAD and use it to complete the tasks that will be created on the provided files using the given task creator.
 
     :param audio_files:     The audio files to use.
@@ -723,21 +723,21 @@ def _run(
     :param verbose:         Verbosity.
 
     :returns: The collected results.
-    """
+    &#34;&#34;&#34;
     # Load the VAD:
     vad = VoiceActivityDetector(**vad_init_kwargs)
     if verbose:
-        _LOGGER.info(f"Loading the VAD model.")
+        _LOGGER.info(f&#34;Loading the VAD model.&#34;)
     vad.load()
     if verbose:
-        _LOGGER.info("VAD model loaded.")
+        _LOGGER.info(&#34;VAD model loaded.&#34;)
 
     # Run the VAD on the audio files and collect the results:
     results = []
     for audio_file in tqdm(
         audio_files,
         desc=description,
-        unit="file",
+        unit=&#34;file&#34;,
         total=len(audio_files),
         disable=not verbose,
     ):
@@ -764,8 +764,8 @@ def _parallel_run(
     vad_init_kwargs: dict,
     task_creator: TaskCreator,
     verbose: bool,
-) -> List[Tuple[bool, Tuple[str, list]]]:
-    """
+) -&gt; List[Tuple[bool, Tuple[str, list]]]:
+    &#34;&#34;&#34;
     Run multiple VAD workers with multiprocessing to complete the tasks that will be created on the provided files using
     the given task creator.
 
@@ -777,20 +777,20 @@ def _parallel_run(
     :param verbose:         Verbosity.
 
     :returns: The collected results.
-    """
+    &#34;&#34;&#34;
     # Load the VAD (download once, and it will be loaded then per process later on):
     if verbose:
-        _LOGGER.info(f"Loading the VAD model.")
+        _LOGGER.info(f&#34;Loading the VAD model.&#34;)
     vad = VoiceActivityDetector(**vad_init_kwargs)
     vad.load()
     if verbose:
-        _LOGGER.info("VAD model loaded.")
+        _LOGGER.info(&#34;VAD model loaded.&#34;)
 
     # Check the number of workers:
-    if n_workers > len(audio_files):
+    if n_workers &gt; len(audio_files):
         _LOGGER.warning(
-            f"The number of workers ({n_workers}) is larger than the number of audio files ({len(audio_files)}). "
-            f"Setting the number of workers to {len(audio_files)}."
+            f&#34;The number of workers ({n_workers}) is larger than the number of audio files ({len(audio_files)}). &#34;
+            f&#34;Setting the number of workers to {len(audio_files)}.&#34;
         )
         n_workers = len(audio_files)
 
@@ -803,9 +803,9 @@ def _parallel_run(
         Process(
             target=_multiprocessing_complete_tasks,
             kwargs={
-                "vad_init_kwargs": vad_init_kwargs,
-                "tasks_queue": tasks_queue,
-                "results_queue": results_queue,
+                &#34;vad_init_kwargs&#34;: vad_init_kwargs,
+                &#34;tasks_queue&#34;: tasks_queue,
+                &#34;results_queue&#34;: results_queue,
             },
         )
         for _ in range(n_workers)
@@ -828,7 +828,7 @@ def _parallel_run(
     stop_marks_counter = 0
     with tqdm(
         desc=description,
-        unit="file",
+        unit=&#34;file&#34;,
         total=len(audio_files),
         disable=not verbose,
     ) as progressbar:
@@ -853,17 +853,17 @@ def _parallel_run(
 
 def _process_results(
     results: List[Tuple[bool, Tuple[str, list]]], verbose: bool
-) -> Tuple[dict, dict]:
-    """
+) -&gt; Tuple[dict, dict]:
+    &#34;&#34;&#34;
     Process the results of the tasks.
 
     :param results: The results to process.
     :param verbose: Verbosity.
 
     :returns: The processed results as a tuple of successes and errors.
-    """
+    &#34;&#34;&#34;
     if verbose:
-        _LOGGER.info("Summarizing the results.")
+        _LOGGER.info(&#34;Summarizing the results.&#34;)
     successes = {}
     errors = {}
     for is_error, result in results:
@@ -872,7 +872,7 @@ def _process_results(
         else:
             successes[result[0]] = result[1]
     if verbose:
-        _LOGGER.info(f"Done ({len(successes)}/{len(successes) + len(errors)})\n")
+        _LOGGER.info(f&#34;Done ({len(successes)}/{len(successes) + len(errors)})\n&#34;)
 
     return successes, errors
 
