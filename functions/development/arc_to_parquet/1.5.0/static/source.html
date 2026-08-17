@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -65,7 +65,7 @@ def _chunk_readwrite(
         dtype,
         dataset
 ):
-    """stream read and write archives
+    &#34;&#34;&#34;stream read and write archives
 
     pandas reads and parquet writes
 
@@ -73,7 +73,7 @@ def _chunk_readwrite(
     -----
     * dest_path can be either a file.parquet, or in hte case of partitioned parquet
       it will be only the destination folder of the parquet partition files
-    """
+    &#34;&#34;&#34;
     pqwriter = None
     header = []
     for i, df in enumerate(pd.read_csv(archive_url, chunksize=chunksize,
@@ -101,16 +101,16 @@ def arc_to_parquet(
         header: List[str] = [None],
         chunksize: int = 0,
         dtype=None,
-        encoding: str = "latin-1",
-        key: str = "data",
-        dataset: str = "None",
+        encoding: str = &#34;latin-1&#34;,
+        key: str = &#34;data&#34;,
+        dataset: str = &#34;None&#34;,
         part_cols=[],
-        file_ext: str = "parquet",
+        file_ext: str = &#34;parquet&#34;,
         index: bool = False,
         refresh_data: bool = False,
         stats: bool = False
-) -> None:
-    """Open a file/object archive and save as a parquet file or dataset
+) -&gt; None:
+    &#34;&#34;&#34;Open a file/object archive and save as a parquet file or dataset
 
     Notes
     -----
@@ -125,19 +125,19 @@ def arc_to_parquet(
 
     :param context:        the function context
     :param archive_url:    MLRun data input (DataItem object)
-    :param chunksize:      (0) when > 0, row size (chunk) to retrieve
+    :param chunksize:      (0) when &gt; 0, row size (chunk) to retrieve
                            per iteration
     :param dtype           destination data type of specified columns
-    :param encoding        ("latin-8") file encoding
+    :param encoding        (&#34;latin-8&#34;) file encoding
     :param key:            key in artifact store (when log_data=True)
-    :param dataset:        (None) if not None then "target_path/dataset"
+    :param dataset:        (None) if not None then &#34;target_path/dataset&#34;
                            is folder for partitioned files
     :param part_cols:      ([]) list of partitioning columns
     :param file_ext:       (parquet) csv/parquet file extension
     :param index:          (False) pandas save index option
     :param refresh_data:   (False) overwrite existing data at that location
     :param stats:          (None) calculate table stats when logging artifact
-    """
+    &#34;&#34;&#34;
     base_path = context.artifact_path
     os.makedirs(base_path, exist_ok=True)
 
@@ -147,21 +147,21 @@ def arc_to_parquet(
         dest_path = os.path.join(base_path, dataset)
         exists = os.path.isdir(dest_path)
     else:
-        dest_path = os.path.join(base_path, key + f".{file_ext}")
+        dest_path = os.path.join(base_path, key + f&#34;.{file_ext}&#34;)
         exists = os.path.isfile(dest_path)
 
     if not exists:
-        context.logger.info("destination file does not exist, downloading")
-        if chunksize > 0:
+        context.logger.info(&#34;destination file does not exist, downloading&#34;)
+        if chunksize &gt; 0:
             header = _chunk_readwrite(archive_url, dest_path, chunksize,
                                       encoding, dtype, dataset)
-            context.log_dataset(key=key, stats=stats, format='parquet',
+            context.log_dataset(key=key, stats=stats, format=&#39;parquet&#39;,
                                 target_path=dest_path)
         else:
             df = pd.read_csv(archive_url)
             context.log_dataset(key, df=df, format=file_ext, index=index)
     else:
-        context.logger.info("destination file already exists, nothing done")
+        context.logger.info(&#34;destination file already exists, nothing done&#34;)
         </code>
     </pre>
 </body>
