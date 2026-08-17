@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -59,12 +59,12 @@ def model_server_tester(
     context,
     table: DataItem,
     addr: str,
-    label_column: str = "label",
-    model: str = "",
+    label_column: str = &#34;label&#34;,
+    model: str = &#34;&#34;,
     match_err: bool = False,
     rows: int = 20,
 ):
-    """Test a model server
+    &#34;&#34;&#34;Test a model server
 
     :param table:         csv/parquet table with test data
     :param addr:          function address/url
@@ -72,32 +72,32 @@ def model_server_tester(
     :param model:         tested model name
     :param match_err:     raise error on validation (require proper test set)
     :param rows:          number of rows to use from test set
-    """
+    &#34;&#34;&#34;
 
     table = table.as_df()
 
     y_list = table.pop(label_column).values.tolist()
-    context.logger.info(f"testing with dataset against {addr}, model: {model}")
-    if rows and rows < table.shape[0]:
+    context.logger.info(f&#34;testing with dataset against {addr}, model: {model}&#34;)
+    if rows and rows &lt; table.shape[0]:
         table = table.sample(rows)
 
     count = err_count = match = 0
     times = []
     for x, y in zip(table.values, y_list):
         count += 1
-        event_data = json.dumps({"instances": [x.tolist()]})
+        event_data = json.dumps({&#34;instances&#34;: [x.tolist()]})
         had_err = False
         try:
             start = datetime.now()
-            resp = requests.put(f"{addr}/{model}/predict", json=event_data)
+            resp = requests.put(f&#34;{addr}/{model}/predict&#34;, json=event_data)
             if not resp.ok:
-                context.logger.error(f"bad function resp!!\n{resp.text}")
+                context.logger.error(f&#34;bad function resp!!\n{resp.text}&#34;)
                 err_count += 1
                 continue
             times.append((datetime.now() - start).microseconds)
 
         except OSError as err:
-            context.logger.error(f"error in request, data:{event_data}, error: {err}")
+            context.logger.error(f&#34;error in request, data:{event_data}, error: {err}&#34;)
             err_count += 1
             continue
 
@@ -105,29 +105,29 @@ def model_server_tester(
         if y == y_resp:
             match += 1
 
-    context.log_result("total_tests", count)
-    context.log_result("errors", err_count)
-    context.log_result("match", match)
-    if count - err_count > 0:
+    context.log_result(&#34;total_tests&#34;, count)
+    context.log_result(&#34;errors&#34;, err_count)
+    context.log_result(&#34;match&#34;, match)
+    if count - err_count &gt; 0:
         times_arr = np.array(times)
-        context.log_result("avg_latency", int(np.mean(times_arr)))
-        context.log_result("min_latency", int(np.amin(times_arr)))
-        context.log_result("max_latency", int(np.amax(times_arr)))
+        context.log_result(&#34;avg_latency&#34;, int(np.mean(times_arr)))
+        context.log_result(&#34;min_latency&#34;, int(np.amin(times_arr)))
+        context.log_result(&#34;max_latency&#34;, int(np.amax(times_arr)))
 
-        chart = ChartArtifact("latency", header=["Test", "Latency (microsec)"])
+        chart = ChartArtifact(&#34;latency&#34;, header=[&#34;Test&#34;, &#34;Latency (microsec)&#34;])
         for i in range(len(times)):
             chart.add_row([i + 1, int(times[i])])
         context.log_artifact(chart)
 
     context.logger.info(
-        f"run {count} tests, {err_count} errors and {match} match expected value"
+        f&#34;run {count} tests, {err_count} errors and {match} match expected value&#34;
     )
 
     if err_count:
-        raise ValueError(f"failed on {err_count} tests of {count}")
+        raise ValueError(f&#34;failed on {err_count} tests of {count}&#34;)
 
     if match_err and match != count:
-        raise ValueError(f"only {match} results match out of {count}")
+        raise ValueError(f&#34;only {match} results match out of {count}&#34;)
 
         </code>
     </pre>

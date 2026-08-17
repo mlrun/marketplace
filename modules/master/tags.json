@@ -1,1 +1,1 @@
-{"kind": ["generic", "monitoring_application"], "categories": ["llm", "tracing", "langchain", "langgraph", "genai", "structured-ML", "model-serving", "monitoring"]}
+{"categories": ["genai", "langchain", "model-serving", "structured-ML", "langgraph", "tracing", "monitoring", "llm"], "kind": ["monitoring_application", "generic"]}
