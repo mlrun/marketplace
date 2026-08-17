@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -72,32 +72,32 @@ def _env_or_secret(context, key):
     return context.get_secret(key)
 
 
-def _load_workspace(context: MLClientCtx) -> Workspace:
-    """
+def _load_workspace(context: MLClientCtx) -&gt; Workspace:
+    &#34;&#34;&#34;
     Loading AzureML Workspace with Azure secrets.
 
     :param context: MLRun context.
     :returns:       AzureML Workspace
-    """
+    &#34;&#34;&#34;
 
-    if hasattr(context, "_azure_workspace"):
+    if hasattr(context, &#34;_azure_workspace&#34;):
         return context._azure_workspace
 
-    context.logger.info("Loading AzureML Workspace")
+    context.logger.info(&#34;Loading AzureML Workspace&#34;)
     # Azure service authentication:
     service_authentication = ServicePrincipalAuthentication(
-        tenant_id=_env_or_secret(context, "AZURE_TENANT_ID"),
-        service_principal_id=_env_or_secret(context, "AZURE_SERVICE_PRINCIPAL_ID"),
+        tenant_id=_env_or_secret(context, &#34;AZURE_TENANT_ID&#34;),
+        service_principal_id=_env_or_secret(context, &#34;AZURE_SERVICE_PRINCIPAL_ID&#34;),
         service_principal_password=_env_or_secret(
-            context, "AZURE_SERVICE_PRINCIPAL_PASSWORD"
+            context, &#34;AZURE_SERVICE_PRINCIPAL_PASSWORD&#34;
         ),
     )
 
     # Loading Azure workspace:
     workspace = Workspace(
-        subscription_id=_env_or_secret(context, "AZURE_SUBSCRIPTION_ID"),
-        resource_group=_env_or_secret(context, "AZURE_RESOURCE_GROUP"),
-        workspace_name=_env_or_secret(context, "AZURE_WORKSPACE_NAME"),
+        subscription_id=_env_or_secret(context, &#34;AZURE_SUBSCRIPTION_ID&#34;),
+        resource_group=_env_or_secret(context, &#34;AZURE_RESOURCE_GROUP&#34;),
+        workspace_name=_env_or_secret(context, &#34;AZURE_WORKSPACE_NAME&#34;),
         auth=service_authentication,
     )
 
@@ -107,22 +107,22 @@ def _load_workspace(context: MLClientCtx) -> Workspace:
 
 def _init_experiment(
     context: MLClientCtx, experiment_name: str
-) -> Tuple[Workspace, Experiment]:
-    """
+) -&gt; Tuple[Workspace, Experiment]:
+    &#34;&#34;&#34;
     Initialize workspace and experiment in Azure ML. Uses Service
     Principal authentication via environment variables.
 
     :param context:         MLRun context.
     :param experiment_name: Name of experiment to create in Azure ML.
     :returns:               Azure ML Workspace and Experiment.
-    """
+    &#34;&#34;&#34;
 
     # Initialize experiment via Service Principal Authentication:
     # https://docs.microsoft.com/en-us/azure/machine-learning/how-to-setup-authentication#use-service-principal-authentication
 
     workspace = _load_workspace(context)
 
-    context.logger.info(f"Initializing AzureML experiment {experiment_name}")
+    context.logger.info(f&#34;Initializing AzureML experiment {experiment_name}&#34;)
     # Creating experiment:
     experiment = Experiment(workspace, experiment_name)
 
@@ -132,10 +132,10 @@ def _init_experiment(
 def init_compute(
     context: MLClientCtx,
     cpu_cluster_name: str,
-    vm_size: str = "STANDARD_D2_V2",
+    vm_size: str = &#34;STANDARD_D2_V2&#34;,
     max_nodes: int = 1,
-) -> ComputeTarget:
-    """
+) -&gt; ComputeTarget:
+    &#34;&#34;&#34;
     Initialize Azure ML compute target to run experiment. Checks for
     existing compute target and creates new if does not exist.
 
@@ -144,15 +144,15 @@ def init_compute(
     :param vm_size:          Azure machine type for compute target.
     :param max_nodes:        Maximum number of concurrent compute targets.
     :returns:                Azure ML Compute Target.
-    """
+    &#34;&#34;&#34;
 
     workspace = _load_workspace(context)
-    context.logger.info(f"Initializing AzureML compute target {cpu_cluster_name}")
+    context.logger.info(f&#34;Initializing AzureML compute target {cpu_cluster_name}&#34;)
 
     # Verify that cluster does not exist already:
     try:
         compute_target = ComputeTarget(workspace=workspace, name=cpu_cluster_name)
-        context.logger.info("Found existing cluster, will use it.")
+        context.logger.info(&#34;Found existing cluster, will use it.&#34;)
     except ComputeTargetException:
         compute_config = AmlCompute.provisioning_configuration(
             vm_size=vm_size, max_nodes=max_nodes
@@ -172,7 +172,7 @@ def register_dataset(
     data: DataItem,
     create_new_version: bool = False,
 ):
-    """
+    &#34;&#34;&#34;
     Register dataset object (can be also an Iguazio FeatureVector) in Azure ML.
     Uploads parquet file to Azure blob storage and registers
     that file as a dataset in Azure ML.
@@ -183,21 +183,21 @@ def register_dataset(
     :param data:                  MLRun FeatureVector or dataset object to upload.
     :param create_new_version:    Register Azure dataset as new version. Must be used when
                                   modifying dataset schema.
-    """
+    &#34;&#34;&#34;
 
     # test for Azure storage connection environment variable or secret:
     assert _env_or_secret(
-        context, "AZURE_STORAGE_CONNECTION_STRING"
-    ), "AZURE_STORAGE_CONNECTION_STRING secret not set"
+        context, &#34;AZURE_STORAGE_CONNECTION_STRING&#34;
+    ), &#34;AZURE_STORAGE_CONNECTION_STRING secret not set&#34;
 
     # Connect to AzureML experiment and datastore:
-    context.logger.info("Connecting to AzureML experiment default datastore")
+    context.logger.info(&#34;Connecting to AzureML experiment default datastore&#34;)
 
     workspace = _load_workspace(context)
     datastore = workspace.get_default_datastore()
 
     # Azure blob path (default datastore for workspace):
-    blob_path = f"az://{datastore.container_name}/{dataset_name}"
+    blob_path = f&#34;az://{datastore.container_name}/{dataset_name}&#34;
 
     store_uri_prefix, _ = mlrun.datastore.parse_store_uri(data.artifact_url)
     feature_vector_case = mlrun.utils.StorePrefix.FeatureVector == store_uri_prefix
@@ -205,32 +205,32 @@ def register_dataset(
     if feature_vector_case:
         # FeatureVector case:
         context.logger.info(
-            f"Retrieving feature vector and uploading to Azure blob storage: {blob_path}"
+            f&#34;Retrieving feature vector and uploading to Azure blob storage: {blob_path}&#34;
         )
         f_store.get_offline_features(data.meta.uri, target=ParquetTarget(path=blob_path))
     else:
         blob_path += data.suffix
         # DataItem case:
         context.logger.info(
-            f"Retrieving feature vector and uploading to Azure blob storage: {blob_path}"
+            f&#34;Retrieving feature vector and uploading to Azure blob storage: {blob_path}&#34;
         )
         data_in_bytes = data.get()
         get_dataitem(blob_path).put(data_in_bytes)
 
     # Register dataset in AzureML:
-    context.logger.info(f"Registering dataset {dataset_name} in Azure ML")
-    if data.suffix == ".parquet" or feature_vector_case:
+    context.logger.info(f&#34;Registering dataset {dataset_name} in Azure ML&#34;)
+    if data.suffix == &#34;.parquet&#34; or feature_vector_case:
         dataset = Dataset.Tabular.from_parquet_files(
-            path=(datastore, f"{dataset_name}.parquet"), validate=False
+            path=(datastore, f&#34;{dataset_name}.parquet&#34;), validate=False
         )
     else:
         context.logger.info(
-            f"OpenSSL version must be 1.1. Overriding the OpenSSL version to 1.1"
+            f&#34;OpenSSL version must be 1.1. Overriding the OpenSSL version to 1.1&#34;
         )
         # OpenSSL version must be 1.1
-        os.environ["CLR_OPENSSL_VERSION_OVERRIDE"] = "1.1"
+        os.environ[&#34;CLR_OPENSSL_VERSION_OVERRIDE&#34;] = &#34;1.1&#34;
         dataset = Dataset.Tabular.from_delimited_files(
-            path=(datastore, f"{dataset_name}{data.suffix}"), validate=False
+            path=(datastore, f&#34;{dataset_name}{data.suffix}&#34;), validate=False
         )
 
     dataset.register(
@@ -241,26 +241,26 @@ def register_dataset(
     )
 
     # Output registered dataset name in Azure:
-    context.log_result("dataset_blob_path", blob_path)
+    context.log_result(&#34;dataset_blob_path&#34;, blob_path)
 
 
 def download_model(
     context: MLClientCtx,
     model_name: str,
     model_version: int,
-    target_dir: str = ".",
-) -> None:
-    """
+    target_dir: str = &#34;.&#34;,
+) -&gt; None:
+    &#34;&#34;&#34;
     Download trained model from Azure ML to local filesystem.
 
     :param context:       MLRun context.
     :param model_name:    Name of trained and registered model.
     :param model_version: Version of model to download.
     :param target_dir:    Target directory to download model.
-    """
+    &#34;&#34;&#34;
     # Loading workspace if not provided:
     workspace = _load_workspace(context)
-    context.logger.info(f"Downloading model {model_name}:{model_version}")
+    context.logger.info(f&#34;Downloading model {model_name}:{model_version}&#34;)
     model = Model(workspace, model_name, version=model_version)
     model.download(target_dir=target_dir, exist_ok=True)
 
@@ -271,19 +271,19 @@ def upload_model(
     model_path: str,
     model_description: str = None,
     model_tags: dict = None,
-) -> None:
-    """
+) -&gt; None:
+    &#34;&#34;&#34;
     Upload pre-trained model from local filesystem to Azure ML.
     :param context:           MLRun context.
     :param model_name:        Name of trained and registered model.
     :param model_path:        Path to file on local filesystem.
     :param model_description: Description of models.
     :param model_tags:        KV pairs of model tags.
-    """
+    &#34;&#34;&#34;
     # Loading workspace if not provided:
     workspace = _load_workspace(context)
 
-    context.logger.info(f"Upload model {model_name} from {model_path}")
+    context.logger.info(f&#34;Upload model {model_name} from {model_path}&#34;)
     Model.register(
         workspace=workspace,
         model_path=model_path,
@@ -294,9 +294,9 @@ def upload_model(
 
 
 def _get_top_n_runs(
-    remote_run: AutoMLRun, n: int = 5, primary_metric: str = "accuracy"
-) -> List[ScriptRun]:
-    """
+    remote_run: AutoMLRun, n: int = 5, primary_metric: str = &#34;accuracy&#34;
+) -&gt; List[ScriptRun]:
+    &#34;&#34;&#34;
     Get top N complete runs from experiment sorted by primary metric.
 
     :param remote_run:     Azure ML Run.
@@ -304,17 +304,17 @@ def _get_top_n_runs(
     :param primary_metric: Metric to sort by.
 
     :returns:              List of top N runs sorted by primary metric.
-    """
+    &#34;&#34;&#34;
     # Collect all models:
     complete_runs = [
         run
-        for run in remote_run.get_children(status="Completed")
-        if not any(s in run.id for s in ["setup", "worker"])
+        for run in remote_run.get_children(status=&#34;Completed&#34;)
+        if not any(s in run.id for s in [&#34;setup&#34;, &#34;worker&#34;])
     ]
 
     # Checking that the required number of runs are done:
-    if len(complete_runs) < n:
-        raise ValueError(f"Expected {n} runs but only received {len(complete_runs)}")
+    if len(complete_runs) &lt; n:
+        raise ValueError(f&#34;Expected {n} runs but only received {len(complete_runs)}&#34;)
 
     # Sorting by the primary metric:
     sorted_runs = sorted(
@@ -325,56 +325,56 @@ def _get_top_n_runs(
 
 def _get_model_hp(
     run: ScriptRun,
-) -> dict:
-    """
+) -&gt; dict:
+    &#34;&#34;&#34;
     Get hyper-parameters of trained AzureML model.
     Combine the hyper-parameters of the data transformation and training to a dictionary.
-    The prefix of the dictionary keys corresponds to 'data transformation' and 'training'.
+    The prefix of the dictionary keys corresponds to &#39;data transformation&#39; and &#39;training&#39;.
 
     :param run: Run object of AzureML trained model.
 
     :returns:    A dictionary as described in the docstring.
-    """
+    &#34;&#34;&#34;
 
-    spec_field = "pipeline_spec"
+    spec_field = &#34;pipeline_spec&#34;
     if spec_field not in run.properties:
         return {}
     spec_string = run.properties[spec_field]
     spec_dict = json.loads(spec_string)
 
-    if "objects" not in spec_dict:
+    if &#34;objects&#34; not in spec_dict:
         # No hyper-params
         return {}
-    hp_dicts = spec_dict["objects"]
+    hp_dicts = spec_dict[&#34;objects&#34;]
     # after training there are two hyper-parameters dicts inside the run object:
     assert (
         len(hp_dicts) == 2
-    ), "after training there are two hyper-parameters dicts inside the run object"
+    ), &#34;after training there are two hyper-parameters dicts inside the run object&#34;
     result_dict = {}
     dict_keys = [
-        ["data_trans_class_name", "data_trans_module", "data_trans_spec_class"],
+        [&#34;data_trans_class_name&#34;, &#34;data_trans_module&#34;, &#34;data_trans_spec_class&#34;],
         [
-            "train_class_name",
-            "train_module",
-            "train_param_kwargs_C",
-            "train_param_kwargs_class_weight",
-            "train_spec_class",
+            &#34;train_class_name&#34;,
+            &#34;train_module&#34;,
+            &#34;train_param_kwargs_C&#34;,
+            &#34;train_param_kwargs_class_weight&#34;,
+            &#34;train_spec_class&#34;,
         ],
     ]
 
     # creating hyper-params dict with key prefixes for each part:
-    kwargs_prefix = "param_kwargs"
-    for d, name, keys in zip(hp_dicts, ["data_trans", "train"], dict_keys):
+    kwargs_prefix = &#34;param_kwargs&#34;
+    for d, name, keys in zip(hp_dicts, [&#34;data_trans&#34;, &#34;train&#34;], dict_keys):
         for key in keys:
 
             if kwargs_prefix in key:
                 result_dict[key] = d[kwargs_prefix][
-                    key.replace(f"{name}_{kwargs_prefix}_", "")
+                    key.replace(f&#34;{name}_{kwargs_prefix}_&#34;, &#34;&#34;)
                 ]
             else:
-                result_dict[key] = d[key.replace(f"{name}_", "")]
+                result_dict[key] = d[key.replace(f&#34;{name}_&#34;, &#34;&#34;)]
             if not result_dict[key]:
-                result_dict[key] = ""
+                result_dict[key] = &#34;&#34;
 
     return result_dict
 
@@ -387,11 +387,11 @@ def submit_training_job(
     registered_dataset_name: str,
     automl_settings: dict,
     training_set: DataItem,
-    label_column_name: str = '',
+    label_column_name: str = &#39;&#39;,
     save_n_models: int = 3,
     show_output: bool = True,
-) -> None:
-    """
+) -&gt; None:
+    &#34;&#34;&#34;
     Submit training job to Azure AutoML and download trained model
     when completed. Uses previously registered dataset for training.
 
@@ -406,12 +406,12 @@ def submit_training_job(
                                     monitoring integration.
     :param show_output:             Displaying Azure logs.
     :param save_n_models:           How many of the top performing models to log.
-    """
+    &#34;&#34;&#34;
     # Loading workspace if not provided:
     workspace = _load_workspace(context)
 
     # Setup experiment:
-    context.logger.info("Setting up experiment parameters")
+    context.logger.info(&#34;Setting up experiment parameters&#34;)
     dataset = Dataset.get_by_name(workspace, name=registered_dataset_name)
 
     # Get training set to log with model:
@@ -420,7 +420,7 @@ def submit_training_job(
     if mlrun.utils.StorePrefix.FeatureVector == store_uri_prefix:
         feature_vector = training_set.meta.uri
         label_column_name = label_column_name or training_set.meta.status.label_column
-        context.logger.info(f'label column name: {label_column_name}')
+        context.logger.info(f&#39;label column name: {label_column_name}&#39;)
         training_set = f_store.get_offline_features(feature_vector).to_dataframe()
     else:
         training_set = training_set.as_df()
@@ -434,28 +434,28 @@ def submit_training_job(
     )
 
     # Run experiment on AzureML:
-    context.logger.info("Submitting and running experiment")
+    context.logger.info(&#34;Submitting and running experiment&#34;)
     remote_run = experiment.submit(automl_config)
     remote_run.wait_for_completion(show_output=show_output)
     if show_output:
         # Azure log ending row:
-        print(f"\n{'*' * 92}\n")
+        print(f&#34;\n{&#39;*&#39; * 92}\n&#34;)
     # Get top N runs to log:
     top_runs = _get_top_n_runs(
         remote_run=remote_run,
         n=save_n_models,
-        primary_metric=automl_settings["primary_metric"],
+        primary_metric=automl_settings[&#34;primary_metric&#34;],
     )
 
     # Register, download, and log models:
     for i, run in enumerate(top_runs):
         # Register model:
-        context.logger.info("Registering model")
+        context.logger.info(&#34;Registering model&#34;)
         model = run.register_model(
-            model_name=register_model_name, model_path="outputs/model.pkl"
+            model_name=register_model_name, model_path=&#34;outputs/model.pkl&#34;
         )
         context.logger.info(
-            f"Registered model with name '{model.name}', id '{model.id}', version '{model.version}'"
+            f&#34;Registered model with name &#39;{model.name}&#39;, id &#39;{model.id}&#39;, version &#39;{model.version}&#39;&#34;
         )
 
         # Download model locally:
@@ -463,33 +463,33 @@ def submit_training_job(
             context=context,
             model_name=register_model_name,
             model_version=model.version,
-            target_dir=f"./{model.version}",
+            target_dir=f&#34;./{model.version}&#34;,
         )
 
         metrics = {k.lower(): val for k, val in run.get_metrics().items()}
-        del metrics["confusion_matrix"]
-        del metrics["accuracy_table"]
+        del metrics[&#34;confusion_matrix&#34;]
+        del metrics[&#34;accuracy_table&#34;]
 
         # Collect model hyper-parameters:
         model_hp_dict = _get_model_hp(run)
         with context.get_child_context(**model_hp_dict) as child:
-            model_key = f"model_{i + 1}_{model_hp_dict['data_trans_class_name'].lower()}_{model_hp_dict['train_class_name'].lower()}"
+            model_key = f&#34;model_{i + 1}_{model_hp_dict[&#39;data_trans_class_name&#39;].lower()}_{model_hp_dict[&#39;train_class_name&#39;].lower()}&#34;
             # Log model:
             context.logger.info(
-                f"Logging {model_key} model to MLRun"
+                f&#34;Logging {model_key} model to MLRun&#34;
             )
             child.log_results(metrics)
             child.log_model(
-                "model",
+                &#34;model&#34;,
                 db_key=model_key,
-                artifact_path=context.artifact_subpath("models"),
+                artifact_path=context.artifact_subpath(&#34;models&#34;),
                 metrics=metrics,
-                model_file=f"{model.version}/model.pkl",
+                model_file=f&#34;{model.version}/model.pkl&#34;,
                 training_set=training_set,
                 label_column=label_column_name,
                 feature_vector=feature_vector,
-                framework="AzureML",
-                algorithm=model_hp_dict.get("train_class_name"),
+                framework=&#34;AzureML&#34;,
+                algorithm=model_hp_dict.get(&#34;train_class_name&#34;),
             )
             if i == 0:
                 # This also logs the model:
@@ -501,22 +501,22 @@ def train(
     context: MLClientCtx,
     dataset: DataItem,
     # Init experiment and compute
-    experiment_name: str = "",
-    cpu_cluster_name: str = "",
-    vm_size: str = "STANDARD_D2_V2",
+    experiment_name: str = &#34;&#34;,
+    cpu_cluster_name: str = &#34;&#34;,
+    vm_size: str = &#34;STANDARD_D2_V2&#34;,
     max_nodes: int = 1,
     # Register dataset
-    dataset_name: str = "",
-    dataset_description: str = "",
+    dataset_name: str = &#34;&#34;,
+    dataset_description: str = &#34;&#34;,
     create_new_version: bool = False,
-    label_column_name: str = "",
+    label_column_name: str = &#34;&#34;,
     # Submit training job
-    register_model_name: str = "",
+    register_model_name: str = &#34;&#34;,
     save_n_models: int = 1,
     log_azure: bool = True,
     automl_settings: str = None,
-) -> None:
-    """
+) -&gt; None:
+    &#34;&#34;&#34;
     Whole training flow for Azure AutoML. Registers dataset/feature vector,
     submits training job to Azure AutoML, and downloads trained model
     when completed.
@@ -542,24 +542,24 @@ def train(
     :param save_n_models:       How many of the top performing models to log.
     :param log_azure:           Displaying Azure logs.
     :param automl_settings:     JSON string of all Azure AutoML settings.
-    """
+    &#34;&#34;&#34;
     if not automl_settings:
         automl_settings = {
-            "task": "classification",
-            "debug_log": "automl_errors.log",
-            # "experiment_exit_score": 0.9,
-            "enable_early_stopping": False,
-            "allowed_models": ["LogisticRegression", "SGD", "SVM"],
-            "iterations": 3,
-            "iteration_timeout_minutes": 2,
-            "max_concurrent_iterations": 2,
-            "max_cores_per_iteration": -1,
-            "n_cross_validations": 5,
-            "primary_metric": "accuracy",
-            "featurization": "off",
-            "model_explainability": False,
-            "enable_voting_ensemble": False,
-            "enable_stack_ensemble": False,
+            &#34;task&#34;: &#34;classification&#34;,
+            &#34;debug_log&#34;: &#34;automl_errors.log&#34;,
+            # &#34;experiment_exit_score&#34;: 0.9,
+            &#34;enable_early_stopping&#34;: False,
+            &#34;allowed_models&#34;: [&#34;LogisticRegression&#34;, &#34;SGD&#34;, &#34;SVM&#34;],
+            &#34;iterations&#34;: 3,
+            &#34;iteration_timeout_minutes&#34;: 2,
+            &#34;max_concurrent_iterations&#34;: 2,
+            &#34;max_cores_per_iteration&#34;: -1,
+            &#34;n_cross_validations&#34;: 5,
+            &#34;primary_metric&#34;: &#34;accuracy&#34;,
+            &#34;featurization&#34;: &#34;off&#34;,
+            &#34;model_explainability&#34;: False,
+            &#34;enable_voting_ensemble&#34;: False,
+            &#34;enable_stack_ensemble&#34;: False,
         }
 
     # Init experiment and compute

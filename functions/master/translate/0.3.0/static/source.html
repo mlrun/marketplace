@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2023 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -56,13 +56,13 @@ from tqdm import tqdm
 _LOGGER = logging.getLogger()
 
 
-def _check_mlrun_and_open_mpi() -> Tuple["mlrun.MLClientCtx", "mpi4py.MPI.Intracomm"]:
+def _check_mlrun_and_open_mpi() -&gt; Tuple[&#34;mlrun.MLClientCtx&#34;, &#34;mpi4py.MPI.Intracomm&#34;]:
     is_mpi = False
     try:
         import mlrun
 
-        context = mlrun.get_or_create_ctx(name="mlrun")
-        is_mpi = context.labels.get("kind", "job") == "mpijob"
+        context = mlrun.get_or_create_ctx(name=&#34;mlrun&#34;)
+        is_mpi = context.labels.get(&#34;kind&#34;, &#34;job&#34;) == &#34;mpijob&#34;
 
         if is_mpi:
             try:
@@ -71,8 +71,8 @@ def _check_mlrun_and_open_mpi() -> Tuple["mlrun.MLClientCtx", "mpi4py.MPI.Intrac
                 return context, MPI.COMM_WORLD
             except ModuleNotFoundError as mpi4py_not_found:
                 context.logger.error(
-                    "To distribute the function using MLRun's 'mpijob' you need to have `mpi4py` package in your "
-                    "interpreter. Please run `pip install mpi4py` and make sure you have open-mpi."
+                    &#34;To distribute the function using MLRun&#39;s &#39;mpijob&#39; you need to have `mpi4py` package in your &#34;
+                    &#34;interpreter. Please run `pip install mpi4py` and make sure you have open-mpi.&#34;
                 )
                 raise mpi4py_not_found
         else:
@@ -91,7 +91,7 @@ def open_mpi_handler(
     # Check for MLRun and OpenMPI availability:
     context, comm = _check_mlrun_and_open_mpi()
 
-    # Check if MLRun is available, set the global logger to MLRun's:
+    # Check if MLRun is available, set the global logger to MLRun&#39;s:
     if context:
         _LOGGER = context.logger
 
@@ -114,21 +114,21 @@ def open_mpi_handler(
                     input_argument = _get_text_files(
                         data_path=pathlib.Path(input_argument).absolute()
                     )
-                if len(input_argument) < size:
+                if len(input_argument) &lt; size:
                     raise ValueError(
-                        f"Cannot split the input '{worker_input}' of length {len(input_argument)} to {size} workers. "
-                        f"Please reduce the amount of workers for this input."
+                        f&#34;Cannot split the input &#39;{worker_input}&#39; of length {len(input_argument)} to {size} workers. &#34;
+                        f&#34;Please reduce the amount of workers for this input.&#34;
                     )
                 even_chunk_size = len(input_argument) // size
                 chunk_start = rank * even_chunk_size
                 chunk_end = (
                     (rank + 1) * even_chunk_size
-                    if rank + 1 < size
+                    if rank + 1 &lt; size
                     else len(input_argument)
                 )
                 context.logger.info(
-                    f"Rank #{rank}: Processing input chunk of '{worker_input}' "
-                    f"from index {chunk_start} to {chunk_end}."
+                    f&#34;Rank #{rank}: Processing input chunk of &#39;{worker_input}&#39; &#34;
+                    f&#34;from index {chunk_start} to {chunk_end}.&#34;
                 )
                 if isinstance(input_argument, list):
                     input_argument = input_argument[chunk_start:chunk_end]
@@ -147,7 +147,7 @@ def open_mpi_handler(
             output = comm.gather(output, root=0)
             if rank == 0:
                 # Join the outputs:
-                context.logger.info("Collecting data from workers to root worker.")
+                context.logger.info(&#34;Collecting data from workers to root worker.&#34;)
                 output_directory = output[0][0]
                 dataframe = pd.concat(objs=[df for _, df, _ in output], axis=0)
                 errors_dictionary = reduce(
@@ -161,7 +161,7 @@ def open_mpi_handler(
     return decorator
 
 
-@open_mpi_handler(worker_inputs=["data_path"], root_worker_inputs={"verbose": True})
+@open_mpi_handler(worker_inputs=[&#34;data_path&#34;], root_worker_inputs={&#34;verbose&#34;: True})
 def translate(
     data_path: Union[str, List[str], pathlib.Path],
     output_directory: str,
@@ -173,9 +173,9 @@ def translate(
     batch_size: int = 1,
     translation_kwargs: dict = None,
     verbose: bool = False,
-) -> Tuple[str, pd.DataFrame, dict]:
-    """
-    Translate text files using a transformer model from Huggingface's hub according to the source and target languages
+) -&gt; Tuple[str, pd.DataFrame, dict]:
+    &#34;&#34;&#34;
+    Translate text files using a transformer model from Huggingface&#39;s hub according to the source and target languages
     given (or using the directly provided model name). The end result is a directory of translated text files and a
     dataframe containing the following columns:
 
@@ -186,9 +186,9 @@ def translate(
     :param output_directory:   Directory where the translated files will be saved.
     :param model_name:         The name of a model to load. If None, the model name is constructed using the source and
                                target languages parameters.
-    :param source_language:    The source language code (e.g., 'en' for English).
-    :param target_language:    The target language code (e.g., 'en' for English).
-    :param model_kwargs:       Keyword arguments to pass regarding the loading of the model in HuggingFace's `pipeline`
+    :param source_language:    The source language code (e.g., &#39;en&#39; for English).
+    :param target_language:    The target language code (e.g., &#39;en&#39; for English).
+    :param model_kwargs:       Keyword arguments to pass regarding the loading of the model in HuggingFace&#39;s `pipeline`
                                function.
     :param device:             The device index for transformers. Default will prefer cuda if available.
     :param batch_size:         The number of batches to use in translation. The files are translated one by one, but the
@@ -202,23 +202,23 @@ def translate(
               * Path to the output directory.
               * A dataframe dataset of the translated file names.
               * A dictionary of errored files that were not translated.
-    """
+    &#34;&#34;&#34;
     global _LOGGER
 
     # Get the input text files to translate:
     if verbose:
-        _LOGGER.info("Collecting text files.")
+        _LOGGER.info(&#34;Collecting text files.&#34;)
     if isinstance(data_path, str):
         data_path = pathlib.Path(data_path).absolute()
         text_files = _get_text_files(data_path=data_path)
     else:
         text_files = data_path
     if verbose:
-        _LOGGER.info(f"Collected {len(text_files)} text files.")
+        _LOGGER.info(f&#34;Collected {len(text_files)} text files.&#34;)
 
     # Get the translation pipeline:
     if verbose:
-        _LOGGER.info(f"Loading model - using device '{device}'.")
+        _LOGGER.info(f&#34;Loading model - using device &#39;{device}&#39;.&#34;)
     translation_pipeline, model_name = _get_translation_pipeline(
         model_name=model_name,
         source_language=source_language,
@@ -228,7 +228,7 @@ def translate(
         batch_size=batch_size if batch_size != 1 else None,
     )
     if verbose:
-        _LOGGER.info(f"Model '{model_name}' was loaded successfully.")
+        _LOGGER.info(f&#34;Model &#39;{model_name}&#39; was loaded successfully.&#34;)
 
     # Prepare the successes dataframe and errors dictionary to be returned:
     successes = []
@@ -243,7 +243,7 @@ def translate(
 
     # Go over the audio files and transcribe:
     for text_file in tqdm(
-        text_files, desc="Translating", unit="file", disable=not verbose
+        text_files, desc=&#34;Translating&#34;, unit=&#34;file&#34;, disable=not verbose
     ):
         try:
             # Translate:
@@ -268,14 +268,14 @@ def translate(
         except Exception as exception:
             # Note the exception as error in the dictionary:
             if verbose:
-                _LOGGER.warning(f"Error in file: '{text_file.name}'")
+                _LOGGER.warning(f&#34;Error in file: &#39;{text_file.name}&#39;&#34;)
             errors[str(text_file.name)] = str(exception)
             continue
 
     # Construct the translations dataframe:
     columns = [
-        "text_file",
-        "translation_file",
+        &#34;text_file&#34;,
+        &#34;translation_file&#34;,
     ]
     successes = pd.DataFrame(
         successes,
@@ -285,26 +285,26 @@ def translate(
     # Print the head of the produced dataframe and return:
     if verbose:
         _LOGGER.info(
-            f"Done ({successes.shape[0]}/{len(text_files)})\n"
-            f"Translations summary:\n"
-            f"{successes.head()}"
+            f&#34;Done ({successes.shape[0]}/{len(text_files)})\n&#34;
+            f&#34;Translations summary:\n&#34;
+            f&#34;{successes.head()}&#34;
         )
     return str(output_directory), successes, errors
 
 
 def _get_text_files(
     data_path: pathlib.Path,
-) -> List[pathlib.Path]:
+) -&gt; List[pathlib.Path]:
     # Check if the path is of a directory or a file:
     if data_path.is_dir():
         # Get all files inside the directory:
-        text_files = list(data_path.glob("*.*"))
+        text_files = list(data_path.glob(&#34;*.*&#34;))
     elif data_path.is_file():
         text_files = [data_path]
     else:
         raise ValueError(
-            f"Unrecognized data path. The parameter `data_path` must be either a directory path or a file path. "
-            f"Given: {str(data_path)} "
+            f&#34;Unrecognized data path. The parameter `data_path` must be either a directory path or a file path. &#34;
+            f&#34;Given: {str(data_path)} &#34;
         )
 
     return text_files
@@ -317,21 +317,21 @@ def _get_translation_pipeline(
     device: str = None,
     model_kwargs: dict = None,
     batch_size: int = None,
-) -> Tuple[transformers.Pipeline, str]:
+) -&gt; Tuple[transformers.Pipeline, str]:
     # Construct the model name - if model name is provided (not None) then we take it, otherwise we check both source
     # and target were provided to construct the model name:
     if model_name is None and (source_language is None or target_language is None):
         raise ValueError(
-            "No model name were given and missing source and / or target languages. In order to translate you must "
-            "pass a `model_name` or both `source_language` and `target_language`."
+            &#34;No model name were given and missing source and / or target languages. In order to translate you must &#34;
+            &#34;pass a `model_name` or both `source_language` and `target_language`.&#34;
         )
     elif model_name is None:
-        model_name = f"Helsinki-NLP/opus-mt-{source_language}-{target_language}"
+        model_name = f&#34;Helsinki-NLP/opus-mt-{source_language}-{target_language}&#34;
 
     # Initialize the translation pipeline:
     try:
         translation_pipeline = transformers.pipeline(
-            task="translation",
+            task=&#34;translation&#34;,
             model=model_name,
             tokenizer=model_name,
             device=device,
@@ -340,19 +340,19 @@ def _get_translation_pipeline(
         )
     except OSError as load_exception:
         if (
-            "is not a valid model identifier listed on 'https://huggingface.co/models'"
+            &#34;is not a valid model identifier listed on &#39;https://huggingface.co/models&#39;&#34;
             in str(load_exception)
             and source_language
         ):
             raise ValueError(
-                f"The model '{model_name}' is not a valid model identifier. "
-                f"The parameters `source_language` and `target_language` are used to construct a Helsinki model for "
-                f"text to text generation, but the model created from the given languages does not exist. "
-                f"You may check language identifiers at "
-                f"https://developers.google.com/admin-sdk/directory/v1/languages, and if the error was not fixed, one "
-                f"or more language code might be with 3 letters and needs to be found online. "
-                f"Remember, you can always choose a model directly from the Huggingface hub by using the `model_name` "
-                f"parameter."
+                f&#34;The model &#39;{model_name}&#39; is not a valid model identifier. &#34;
+                f&#34;The parameters `source_language` and `target_language` are used to construct a Helsinki model for &#34;
+                f&#34;text to text generation, but the model created from the given languages does not exist. &#34;
+                f&#34;You may check language identifiers at &#34;
+                f&#34;https://developers.google.com/admin-sdk/directory/v1/languages, and if the error was not fixed, one &#34;
+                f&#34;or more language code might be with 3 letters and needs to be found online. &#34;
+                f&#34;Remember, you can always choose a model directly from the Huggingface hub by using the `model_name` &#34;
+                f&#34;parameter.&#34;
             ) from load_exception
         raise load_exception
 
@@ -363,13 +363,13 @@ def _translate(
     text_file: pathlib.Path,
     translation_pipeline: transformers.Pipeline,
     translation_kwargs: dict,
-) -> str:
+) -&gt; str:
     # Read the text from file:
-    with open(text_file, "r") as fp:
+    with open(text_file, &#34;r&#34;) as fp:
         text = fp.read()
 
     # Split to paragraphs and each paragraph to sentences:
-    paragraphs = [paragraph.split(".") for paragraph in text.split("\n")]
+    paragraphs = [paragraph.split(&#34;.&#34;) for paragraph in text.split(&#34;\n&#34;)]
 
     # Discover the newline indexes to restore the file to its structure post translation:
     newlines_indexes = []
@@ -381,7 +381,7 @@ def _translate(
 
     # Prepare the batches (each sentence from the paragraphs). Notice we add a dot not only to restore the sentence
     # structure but to ignore empty strings as it will ruin the translation:
-    sentences = [f"{line}." for paragraph in paragraphs for line in paragraph]
+    sentences = [f&#34;{line}.&#34; for paragraph in paragraphs for line in paragraph]
 
     # Translate the sentences:
     translations = translation_pipeline(sentences, **translation_kwargs)
@@ -391,36 +391,36 @@ def _translate(
     newline_index = newlines_indexes.pop(0) if newlines_indexes else None
     for i, translation in enumerate(translations):
         # Get the translation:
-        text = translation["translation_text"]
+        text = translation[&#34;translation_text&#34;]
         # Validate if it was an empty sentence before:
-        if text == ".":
-            text = ""
+        if text == &#34;.&#34;:
+            text = &#34;&#34;
         # Check if needed to insert a newline:
         if newline_index and newline_index == i:
-            text += "\n"
+            text += &#34;\n&#34;
             newline_index = newlines_indexes.pop(0) if newlines_indexes else None
         # Collect it:
         translated_text.append(text)
-    translated_text = "".join(translated_text)
+    translated_text = &#34;&#34;.join(translated_text)
 
     return translated_text
 
 
 def _save_to_file(
     translation: str, file_name: str, output_directory: pathlib.Path
-) -> pathlib.Path:
+) -&gt; pathlib.Path:
     # Prepare the file full path (checking for no duplications):
-    translation_file = output_directory / f"{file_name}.txt"
+    translation_file = output_directory / f&#34;{file_name}.txt&#34;
     i = 1
     while translation_file.exists():
         i += 1
-        translation_file = output_directory / f"{file_name}_{i}.txt"
+        translation_file = output_directory / f&#34;{file_name}_{i}.txt&#34;
 
     # Make sure all directories are created:
     translation_file.parent.mkdir(exist_ok=True, parents=True)
 
     # Write to file:
-    with open(translation_file, "w") as fp:
+    with open(translation_file, &#34;w&#34;) as fp:
         fp.write(translation)
 
     return translation_file
