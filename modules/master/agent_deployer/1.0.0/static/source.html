@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2024 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -54,7 +54,7 @@ from mlrun.datastore.datastore_profile import (
     DatastoreProfileKafkaStream,
 )
 
-# TimescaleDB support (mlrun >= 1.11), fallback to TDEngine for older versions
+# TimescaleDB support (mlrun &gt;= 1.11), fallback to TDEngine for older versions
 try:
     from mlrun.datastore.datastore_profile import DatastoreProfilePostgreSQL
 
@@ -77,11 +77,11 @@ class AgentDeployer:
         outputs: Optional[list[str]] = None,
         inputs: Optional[list[str]] = None,
         requirements: Optional[list[str]] = None,
-        image: str = "mlrun/mlrun",
+        image: str = &#34;mlrun/mlrun&#34;,
         set_model_monitoring: bool = False,
         **model_params,
     ):
-        """
+        &#34;&#34;&#34;
         Class to deploy an agent as a serving function in MLRun.
 
         :param agent_name: Name of the agent
@@ -91,10 +91,10 @@ class AgentDeployer:
         :param function: Path to the function file.
         :param result_path: when specified selects the key/path in the output event to use as model monitoring
                                       outputs this require that the output event body will behave like a dict,
-                                      expects scopes to be defined by dot notation (e.g "data.d").
+                                      expects scopes to be defined by dot notation (e.g &#34;data.d&#34;).
         :param inputs_path: when specified selects the key/path in the event to use as model monitoring inputs
                                       this require that the event body will behave like a dict, expects scopes to be
-                                      defined by dot notation (e.g "data.d").
+                                      defined by dot notation (e.g &#34;data.d&#34;).
         :param outputs: list of the model outputs (e.g. labels) ,if provided will override the outputs
                                       that been configured in the model artifact, please note that those outputs need to
                                       be equal to the model_class predict method outputs (length, and order).
@@ -105,7 +105,7 @@ class AgentDeployer:
         :param image: Docker image to be used for the function
         :param set_model_monitoring: Whether to configure model monitoring
         :param model_params: Parameters for model instantiation
-        """
+        &#34;&#34;&#34;
 
         self._function = None
         self._project = None
@@ -124,44 +124,44 @@ class AgentDeployer:
             self.configure_model_monitoring()
 
     def configure_model_monitoring(self):
-        """Configure model monitoring for the active project."""
+        &#34;&#34;&#34;Configure model monitoring for the active project.&#34;&#34;&#34;
         if not self.project:
             raise mlrun.errors.MLRunInvalidArgumentError(
-                "No active project detected, unable to set model monitoring"
+                &#34;No active project detected, unable to set model monitoring&#34;
             )
         if mlconf.is_ce_mode():
-            mlrun_namespace = os.environ.get("MLRUN_NAMESPACE", "mlrun")
+            mlrun_namespace = os.environ.get(&#34;MLRUN_NAMESPACE&#34;, &#34;mlrun&#34;)
             if _USE_TIMESCALEDB:
                 tsdb_profile = DatastoreProfilePostgreSQL(
-                    name="timescaledb-tsdb-profile",
-                    user="postgres",
-                    password="postgres",
-                    host=f"timescaledb.{mlrun_namespace}.svc.cluster.local",
-                    port="5432",
-                    database="postgres",
+                    name=&#34;timescaledb-tsdb-profile&#34;,
+                    user=&#34;postgres&#34;,
+                    password=&#34;postgres&#34;,
+                    host=f&#34;timescaledb.{mlrun_namespace}.svc.cluster.local&#34;,
+                    port=&#34;5432&#34;,
+                    database=&#34;postgres&#34;,
                 )
             else:
                 # Fallback for older mlrun versions
                 tsdb_profile = DatastoreProfileTDEngine(
-                    name="tdengine-tsdb-profile",
-                    user="root",
-                    password="taosdata",
-                    host=f"tdengine-tsdb.{mlrun_namespace}.svc.cluster.local",
-                    port="6041",
+                    name=&#34;tdengine-tsdb-profile&#34;,
+                    user=&#34;root&#34;,
+                    password=&#34;taosdata&#34;,
+                    host=f&#34;tdengine-tsdb.{mlrun_namespace}.svc.cluster.local&#34;,
+                    port=&#34;6041&#34;,
                 )
 
             stream_profile = DatastoreProfileKafkaStream(
-                name="kafka-stream-profile",
-                brokers=f"kafka-stream.{mlrun_namespace}.svc.cluster.local:9092",
+                name=&#34;kafka-stream-profile&#34;,
+                brokers=f&#34;kafka-stream.{mlrun_namespace}.svc.cluster.local:9092&#34;,
                 topics=[],
             )
         else:
             tsdb_profile = DatastoreProfileV3io(
-                name="v3io-tsdb-profile",
+                name=&#34;v3io-tsdb-profile&#34;,
                 v3io_access_key=mlconf.get_v3io_access_key(),
             )
             stream_profile = DatastoreProfileV3io(
-                name="v3io-stream-profile",
+                name=&#34;v3io-stream-profile&#34;,
                 v3io_access_key=mlconf.get_v3io_access_key(),
             )
 
@@ -179,13 +179,13 @@ class AgentDeployer:
             )
         except (mlrun.errors.MLRunConflictError, mlrun.errors.MLRunHTTPError) as e:
             logger.info(
-                "While calling enable_model_monitoring, caught expected exception:",
+                &#34;While calling enable_model_monitoring, caught expected exception:&#34;,
                 error=str(e),
             )
 
     @property
     def project(self):
-        """Get the current MLRun project."""
+        &#34;&#34;&#34;Get the current MLRun project.&#34;&#34;&#34;
         if self._project:
             return self._project
         self._project = get_current_project(silent=True)
@@ -193,29 +193,29 @@ class AgentDeployer:
 
     @property
     def project_name(self):
-        """Get the name of the current MLRun project."""
+        &#34;&#34;&#34;Get the name of the current MLRun project.&#34;&#34;&#34;
         if self._project_name:
             return self._project_name
         if self.project:
             self._project_name = self.project.metadata.name
             return self._project_name
         raise mlrun.errors.MLRunInvalidArgumentError(
-            "No current project found to get project name"
+            &#34;No current project found to get project name&#34;
         )
 
-    def get_function(self) -> ServingRuntime:
-        """
+    def get_function(self) -&gt; ServingRuntime:
+        &#34;&#34;&#34;
         Get the serving function, loading it if necessary.
-        """
+        &#34;&#34;&#34;
         if self._function is None:
             self._load_function()
         return self._function
 
-    def deploy_function(self, enable_tracking: bool) -> ServingRuntime:
-        """
+    def deploy_function(self, enable_tracking: bool) -&gt; ServingRuntime:
+        &#34;&#34;&#34;
         Deploy the agent as a serving function in MLRun.
         :param enable_tracking: Whether to enable tracking for the function.
-        """
+        &#34;&#34;&#34;
 
         function = self.get_function()
         function.set_tracking(enable_tracking=enable_tracking)
@@ -224,16 +224,16 @@ class AgentDeployer:
 
     def _load_function(
         self,
-    ) -> ServingRuntime:
+    ) -&gt; ServingRuntime:
         self._function = code_to_function(
-            name=f"{self.agent_name}_serving_function",
+            name=f&#34;{self.agent_name}_serving_function&#34;,
             filename=self.function_file,
             project=self.project_name,
-            kind="serving",
+            kind=&#34;serving&#34;,
             image=self.image,
             requirements=self.requirements,
         )
-        graph = self._function.set_topology(topology="flow", engine="async")
+        graph = self._function.set_topology(topology=&#34;flow&#34;, engine=&#34;async&#34;)
         model_runner_step = ModelRunnerStep()
         model_runner_step.add_model(
             model_class=self.model_class_name,
@@ -242,7 +242,7 @@ class AgentDeployer:
             input_path=self.inputs_path,
             outputs=self.output_schema,
             inputs=self.input_schema,
-            execution_mechanism="naive",
+            execution_mechanism=&#34;naive&#34;,
             **self.model_params,
         )
         graph.to(model_runner_step).respond()

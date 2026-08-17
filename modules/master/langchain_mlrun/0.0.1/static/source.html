@@ -30,22 +30,22 @@
         <code class="python">
 # Copyright 2026 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
+&#34;&#34;&#34;
 MLRun to LangChain integration - a tracer that converts LangChain Run objects into serializable event and send them to
 MLRun monitoring.
-"""
+&#34;&#34;&#34;
 
 from abc import ABC, abstractmethod
 import copy
@@ -76,13 +76,13 @@ from mlrun.model_monitoring.applications import (
 import mlrun.common.schemas.model_monitoring.constants as mm_constants
 
 #: Environment variable name to use MLRun monitoring tracer via LangChain global tracing system:
-mlrun_monitoring_env_var = "LC_MLRUN_MONITORING_ENABLED"
+mlrun_monitoring_env_var = &#34;LC_MLRUN_MONITORING_ENABLED&#34;
 
 
 class _MLRunEndPointClient(ABC):
-    """
+    &#34;&#34;&#34;
     An MLRun model endpoint monitoring client base class to connect and send events on a monitoring stream.
-    """
+    &#34;&#34;&#34;
 
     def __init__(
         self,
@@ -92,16 +92,16 @@ class _MLRunEndPointClient(ABC):
         serving_function_tag: str | None = None,
         project: str | mlrun.projects.MlrunProject = None,
     ):
-        """
+        &#34;&#34;&#34;
         Initialize an MLRun model endpoint monitoring client.
 
         :param model_endpoint_name: The monitoring endpoint related model name.
         :param model_endpoint_uid: Model endpoint unique identifier.
         :param serving_function: Serving function name or ``RemoteRuntime`` object.
-        :param serving_function_tag: Optional function tag (defaults to 'latest').
+        :param serving_function_tag: Optional function tag (defaults to &#39;latest&#39;).
         :param project: Project name or ``MlrunProject``. If ``None``, uses the current project.
         raise: MLRunInvalidArgumentError: If there is no current active project and no `project` argument was provided.
-        """
+        &#34;&#34;&#34;
         # Store the provided info:
         self._model_endpoint_name = model_endpoint_name
         self._model_endpoint_uid = model_endpoint_uid
@@ -112,9 +112,9 @@ class _MLRunEndPointClient(ABC):
                 self._project_name = mlrun.get_current_project(silent=False).name
             except mlrun.errors.MLRunInvalidArgumentError:
                 raise mlrun.errors.MLRunInvalidArgumentError(
-                    "There is no current active project. Either use `mlrun.get_or_create_project` prior to "
-                    "initializing the monitoring tracer or pass a project name to load. You can also set the "
-                    "environment variable: 'LC_MLRUN_TRACER_CLIENT_PROJECT'."
+                    &#34;There is no current active project. Either use `mlrun.get_or_create_project` prior to &#34;
+                    &#34;initializing the monitoring tracer or pass a project name to load. You can also set the &#34;
+                    &#34;environment variable: &#39;LC_MLRUN_TRACER_CLIENT_PROJECT&#39;.&#34;
                 )
         elif isinstance(project, str):
             self._project_name = project
@@ -124,7 +124,7 @@ class _MLRunEndPointClient(ABC):
         # Load function:
         if isinstance(serving_function, str):
             self._serving_function_name = serving_function
-            self._serving_function_tag = serving_function_tag or "latest"
+            self._serving_function_tag = serving_function_tag or &#34;latest&#34;
         else:
             self._serving_function_name = serving_function.metadata.name
             self._serving_function_tag = (
@@ -133,25 +133,25 @@ class _MLRunEndPointClient(ABC):
 
         # Prepare the sample:
         self._event_sample = {
-            "class": "CustomStream",
-            "worker": "0",
-            "model": self._model_endpoint_name,
-            "host": socket.gethostname(),
-            "function_uri": f"{self._project_name}/{self._serving_function_name}:{self._serving_function_tag}",
-            "endpoint_id": self._model_endpoint_uid,
-            "sampling_percentage": 100,
-            "request": {"inputs": [], "background_task_state": "succeeded"},
-            "op": "infer",
-            "resp": {
-                "id": None,
-                "model_name": self._model_endpoint_name,
-                "outputs": [],
-                "timestamp": None,
-                "model_endpoint_uid": self._model_endpoint_uid,
+            &#34;class&#34;: &#34;CustomStream&#34;,
+            &#34;worker&#34;: &#34;0&#34;,
+            &#34;model&#34;: self._model_endpoint_name,
+            &#34;host&#34;: socket.gethostname(),
+            &#34;function_uri&#34;: f&#34;{self._project_name}/{self._serving_function_name}:{self._serving_function_tag}&#34;,
+            &#34;endpoint_id&#34;: self._model_endpoint_uid,
+            &#34;sampling_percentage&#34;: 100,
+            &#34;request&#34;: {&#34;inputs&#34;: [], &#34;background_task_state&#34;: &#34;succeeded&#34;},
+            &#34;op&#34;: &#34;infer&#34;,
+            &#34;resp&#34;: {
+                &#34;id&#34;: None,
+                &#34;model_name&#34;: self._model_endpoint_name,
+                &#34;outputs&#34;: [],
+                &#34;timestamp&#34;: None,
+                &#34;model_endpoint_uid&#34;: self._model_endpoint_uid,
             },
-            "when": None,
-            "microsec": 496,
-            "effective_sample_count": 1,
+            &#34;when&#34;: None,
+            &#34;microsec&#34;: 496,
+            &#34;effective_sample_count&#34;: 1,
         }
 
     @abstractmethod
@@ -164,25 +164,25 @@ class _MLRunEndPointClient(ABC):
         request_timestamp: str,
         response_timestamp: str,
     ):
-        """
+        &#34;&#34;&#34;
         Monitor the provided event, sending it to the model endpoint monitoring stream.
 
         :param event_id: Unique event identifier used as the monitored record id.
         :param label: Label for the run/event.
         :param input_data: Serialized input data for the run.
         :param output_data: Serialized output data for the run.
-        :param request_timestamp: Request/start timestamp in the format of '%Y-%m-%d %H:%M:%S%z'.
-        :param response_timestamp: Response/end timestamp in the format of '%Y-%m-%d %H:%M:%S%z'.
-        """
+        :param request_timestamp: Request/start timestamp in the format of &#39;%Y-%m-%d %H:%M:%S%z&#39;.
+        :param response_timestamp: Response/end timestamp in the format of &#39;%Y-%m-%d %H:%M:%S%z&#39;.
+        &#34;&#34;&#34;
         pass
 
     def flush(self):
-        """
+        &#34;&#34;&#34;
         Flush any buffered messages to ensure they are sent to the stream.
 
         For streaming backends that buffer messages (like Kafka), this ensures delivery. For backends that send
         immediately (like V3IO), this may be a no-op.
-        """
+        &#34;&#34;&#34;
         pass
 
     def _create_event(
@@ -193,36 +193,36 @@ class _MLRunEndPointClient(ABC):
         output_data: dict,
         request_timestamp: str,
         response_timestamp: str,
-    ) -> dict:
-        """
+    ) -&gt; dict:
+        &#34;&#34;&#34;
         Create a new event out of the stored event sample.
 
         :param event_id: Unique event identifier used as the monitored record id.
         :param label: Label for the run/event.
         :param input_data: Serialized input data for the run.
         :param output_data: Serialized output data for the run.
-        :param request_timestamp: Request/start timestamp in the format of '%Y-%m-%d %H:%M:%S%z'.
-        :param response_timestamp: Response/end timestamp in the format of '%Y-%m-%d %H:%M:%S%z'.
+        :param request_timestamp: Request/start timestamp in the format of &#39;%Y-%m-%d %H:%M:%S%z&#39;.
+        :param response_timestamp: Response/end timestamp in the format of &#39;%Y-%m-%d %H:%M:%S%z&#39;.
 
         :returns: The event to send to the monitoring stream.
-        """
+        &#34;&#34;&#34;
         # Copy the sample:
         event = copy.deepcopy(self._event_sample)
 
         # Edit event with given parameters:
-        event["when"] = request_timestamp
-        event["request"]["inputs"].append(orjson.dumps({"label": label, "input": input_data}).decode('utf-8'))
-        event["resp"]["timestamp"] = response_timestamp
-        event["resp"]["outputs"].append(orjson.dumps(output_data).decode('utf-8'))
-        event["resp"]["id"] = event_id
+        event[&#34;when&#34;] = request_timestamp
+        event[&#34;request&#34;][&#34;inputs&#34;].append(orjson.dumps({&#34;label&#34;: label, &#34;input&#34;: input_data}).decode(&#39;utf-8&#39;))
+        event[&#34;resp&#34;][&#34;timestamp&#34;] = response_timestamp
+        event[&#34;resp&#34;][&#34;outputs&#34;].append(orjson.dumps(output_data).decode(&#39;utf-8&#39;))
+        event[&#34;resp&#34;][&#34;id&#34;] = event_id
 
         return event
 
 
 class _V3IOMLRunEndPointClient(_MLRunEndPointClient):
-    """
+    &#34;&#34;&#34;
     An MLRun model endpoint monitoring client to connect and send events on a V3IO stream.
-    """
+    &#34;&#34;&#34;
 
     def __init__(
         self,
@@ -234,7 +234,7 @@ class _V3IOMLRunEndPointClient(_MLRunEndPointClient):
         serving_function_tag: str | None = None,
         project: str | mlrun.projects.MlrunProject = None,
     ):
-        """
+        &#34;&#34;&#34;
         Initialize an MLRun model endpoint monitoring client.
 
         :param monitoring_stream_path: V3IO stream path.
@@ -242,10 +242,10 @@ class _V3IOMLRunEndPointClient(_MLRunEndPointClient):
         :param model_endpoint_name: The monitoring endpoint related model name.
         :param model_endpoint_uid: Model endpoint unique identifier.
         :param serving_function: Serving function name or ``RemoteRuntime`` object.
-        :param serving_function_tag: Optional function tag (defaults to 'latest').
+        :param serving_function_tag: Optional function tag (defaults to &#39;latest&#39;).
         :param project: Project name or ``MlrunProject``. If ``None``, uses the current project.
         raise: MLRunInvalidArgumentError: If there is no current active project and no `project` argument was provided.
-        """
+        &#34;&#34;&#34;
         super().__init__(
             model_endpoint_name=model_endpoint_name,
             model_endpoint_uid=model_endpoint_uid,
@@ -272,16 +272,16 @@ class _V3IOMLRunEndPointClient(_MLRunEndPointClient):
         request_timestamp: str,
         response_timestamp: str,
     ):
-        """
+        &#34;&#34;&#34;
         Monitor the provided event, sending it to the model endpoint monitoring stream.
 
         :param event_id: Unique event identifier used as the monitored record id.
         :param label: Label for the run/event.
         :param input_data: Serialized input data for the run.
         :param output_data: Serialized output data for the run.
-        :param request_timestamp: Request/start timestamp in the format of '%Y-%m-%d %H:%M:%S%z'.
-        :param response_timestamp: Response/end timestamp in the format of '%Y-%m-%d %H:%M:%S%z'.
-        """
+        :param request_timestamp: Request/start timestamp in the format of &#39;%Y-%m-%d %H:%M:%S%z&#39;.
+        :param response_timestamp: Response/end timestamp in the format of &#39;%Y-%m-%d %H:%M:%S%z&#39;.
+        &#34;&#34;&#34;
         # Copy the sample:
         event = self._create_event(
             event_id=event_id,
@@ -296,14 +296,14 @@ class _V3IOMLRunEndPointClient(_MLRunEndPointClient):
         self._v3io_client.stream.put_records(
             container=self._monitoring_container,
             stream_path=self._monitoring_stream_path,
-            records=[{"data": orjson.dumps(event).decode('utf-8')}],
+            records=[{&#34;data&#34;: orjson.dumps(event).decode(&#39;utf-8&#39;)}],
         )
 
 
 class _KafkaMLRunEndPointClient(_MLRunEndPointClient):
-    """
+    &#34;&#34;&#34;
     An MLRun model endpoint monitoring client to connect and send events on a Kafka stream.
-    """
+    &#34;&#34;&#34;
 
     def __init__(
         self,
@@ -315,7 +315,7 @@ class _KafkaMLRunEndPointClient(_MLRunEndPointClient):
         project: str | mlrun.projects.MlrunProject = None,
         kafka_linger_ms: int = 0,
     ):
-        """
+        &#34;&#34;&#34;
         Initialize an MLRun model endpoint monitoring client for Kafka.
 
         :param kafka_stream_profile_name: The name of the registered DatastoreProfileKafkaStream to use for Kafka
@@ -324,12 +324,12 @@ class _KafkaMLRunEndPointClient(_MLRunEndPointClient):
         :param model_endpoint_name: The monitoring endpoint related model name.
         :param model_endpoint_uid: Model endpoint unique identifier.
         :param serving_function: Serving function name or ``RemoteRuntime`` object.
-        :param serving_function_tag: Optional function tag (defaults to 'latest').
+        :param serving_function_tag: Optional function tag (defaults to &#39;latest&#39;).
         :param project: Project name or ``MlrunProject``. If ``None``, uses the current project.
         :param kafka_linger_ms: Kafka producer linger.ms setting controlling message batching. Messages are
             accumulated for up to this duration before being sent as a batch. Default: 500ms.
         raise: MLRunInvalidArgumentError: If there is no current active project and no `project` argument was provided.
-        """
+        &#34;&#34;&#34;
         super().__init__(
             model_endpoint_name=model_endpoint_name,
             model_endpoint_uid=model_endpoint_uid,
@@ -353,22 +353,22 @@ class _KafkaMLRunEndPointClient(_MLRunEndPointClient):
         kafka_params = KafkaParameters(kwargs=profile_attrs)
         producer_config = kafka_params.producer()
 
-        # Extract broker and determine topic (use profile's topic if available, otherwise use MLRun's standard naming):
-        self._monitoring_broker = profile_attrs.get("brokers")
-        topics = profile_attrs.get("topics", [])
+        # Extract broker and determine topic (use profile&#39;s topic if available, otherwise use MLRun&#39;s standard naming):
+        self._monitoring_broker = profile_attrs.get(&#34;brokers&#34;)
+        topics = profile_attrs.get(&#34;topics&#34;, [])
         self._monitoring_topic = topics[0] if topics else get_kafka_topic(project=project_obj.name)
 
         # Remove bootstrap_servers from producer_config to avoid duplicate argument error:
-        producer_config.pop("bootstrap_servers", None)
+        producer_config.pop(&#34;bootstrap_servers&#34;, None)
 
         # Initialize a Kafka producer with full config from profile:
         self._kafka_producer = KafkaProducer(
             bootstrap_servers=self._monitoring_broker,
-            key_serializer=lambda k: k.encode("utf-8") if isinstance(k, str) else k,
+            key_serializer=lambda k: k.encode(&#34;utf-8&#34;) if isinstance(k, str) else k,
             value_serializer=(
                 lambda v: v if isinstance(v, bytes)
                 else orjson.dumps(v) if isinstance(v, dict)
-                else str(v).encode("utf-8")
+                else str(v).encode(&#34;utf-8&#34;)
             ),
             linger_ms=kafka_linger_ms,
             **producer_config,
@@ -383,16 +383,16 @@ class _KafkaMLRunEndPointClient(_MLRunEndPointClient):
         request_timestamp: str,
         response_timestamp: str,
     ):
-        """
+        &#34;&#34;&#34;
         Monitor the provided event, sending it to the model endpoint monitoring stream.
 
         :param event_id: Unique event identifier used as the monitored record id.
         :param label: Label for the run/event.
         :param input_data: Serialized input data for the run.
         :param output_data: Serialized output data for the run.
-        :param request_timestamp: Request/start timestamp in the format of '%Y-%m-%d %H:%M:%S%z'.
-        :param response_timestamp: Response/end timestamp in the format of '%Y-%m-%d %H:%M:%S%z'.
-        """
+        :param request_timestamp: Request/start timestamp in the format of &#39;%Y-%m-%d %H:%M:%S%z&#39;.
+        :param response_timestamp: Response/end timestamp in the format of &#39;%Y-%m-%d %H:%M:%S%z&#39;.
+        &#34;&#34;&#34;
         # Copy the sample:
         event = self._create_event(
             event_id=event_id,
@@ -411,163 +411,163 @@ class _KafkaMLRunEndPointClient(_MLRunEndPointClient):
         )
 
     def flush(self):
-        """
+        &#34;&#34;&#34;
         Flush all buffered messages to ensure they are sent to Kafka.
 
         Blocks until all buffered messages are delivered and acknowledged by the broker.
-        """
+        &#34;&#34;&#34;
         self._kafka_producer.flush()
 
 
 class MLRunTracerClientSettings(BaseSettings):
-    """
+    &#34;&#34;&#34;
     MLRun tracer monitoring client configurations. These are mandatory arguments for allowing MLRun to send monitoring
     events to a specific model endpoint stream.
-    """
+    &#34;&#34;&#34;
 
     v3io_stream_path: str | None = None
-    """
+    &#34;&#34;&#34;
     The V3IO stream path to send the events to.
-    """
+    &#34;&#34;&#34;
 
     v3io_container: str | None = None
-    """
+    &#34;&#34;&#34;
     The V3IO stream container.
-    """
+    &#34;&#34;&#34;
 
     kafka_stream_profile_name: str | None = None
-    """
+    &#34;&#34;&#34;
     The name of the registered DatastoreProfileKafkaStream to use for Kafka configuration. This profile should be
     registered via ``project.register_datastore_profile()`` and contains all Kafka settings including broker, topic,
     SASL credentials, SSL config, etc.
-    """
+    &#34;&#34;&#34;
 
     kafka_linger_ms: int = 500
-    """
+    &#34;&#34;&#34;
     The Kafka producer linger.ms setting controlling message batching (in milliseconds). Messages are accumulated for 
     up to this duration before being sent as a batch, reducing network overhead. 
     
     The tracer always flushes at the end of each root run, guaranteeing delivery regardless of this setting. 
     Default: 500ms. Set to 0 to disable batching (each message sent immediately).
-    """
+    &#34;&#34;&#34;
 
     model_endpoint_name: str = ...
-    """
+    &#34;&#34;&#34;
     The model endpoint name.
-    """
+    &#34;&#34;&#34;
 
     model_endpoint_uid: str = ...
-    """
+    &#34;&#34;&#34;
     The model endpoint UID.
-    """
+    &#34;&#34;&#34;
 
     serving_function: str = ...
-    """
+    &#34;&#34;&#34;
     The serving function name.
-    """
+    &#34;&#34;&#34;
 
     serving_function_tag: str | None = None
-    """
-    The serving function tag. If not set, it will be 'latest' by default.
-    """
+    &#34;&#34;&#34;
+    The serving function tag. If not set, it will be &#39;latest&#39; by default.
+    &#34;&#34;&#34;
 
     project: str | None = None
-    """
+    &#34;&#34;&#34;
     The MLRun project name related to the serving function and model endpoint.
-    """
+    &#34;&#34;&#34;
 
     #: Pydantic model configuration to set the environment variable prefix.
-    model_config = SettingsConfigDict(env_prefix="LC_MLRUN_TRACER_CLIENT_")
+    model_config = SettingsConfigDict(env_prefix=&#34;LC_MLRUN_TRACER_CLIENT_&#34;)
 
-    @model_validator(mode='after')
-    def validate_stream_settings(self) -> 'MLRunTracerClientSettings':
-        """
+    @model_validator(mode=&#39;after&#39;)
+    def validate_stream_settings(self) -&gt; &#39;MLRunTracerClientSettings&#39;:
+        &#34;&#34;&#34;
         Validate that either V3IO settings or stream profile name is provided, but not both or none.
 
         :returns: The validated settings instance.
-        """
+        &#34;&#34;&#34;
         v3io_settings = all([self.v3io_container, self.v3io_stream_path])
         kafka_settings = self.kafka_stream_profile_name is not None
 
         if v3io_settings and kafka_settings:
-            raise ValueError("Provide either V3IO settings OR Kafka settings, not both.")
+            raise ValueError(&#34;Provide either V3IO settings OR Kafka settings, not both.&#34;)
         if not v3io_settings and not kafka_settings:
-            raise ValueError("You must provide either a complete V3IO settings or complete Kafka settings. See docs for more information")
+            raise ValueError(&#34;You must provide either a complete V3IO settings or complete Kafka settings. See docs for more information&#34;)
         return self
 
 class MLRunTracerMonitorSettings(BaseSettings):
-    """
+    &#34;&#34;&#34;
     MLRun tracer monitoring configurations. These are optional arguments to customize the LangChain runs summarization
     into monitorable MLRun endpoint events. If needed, a custom summarization can be passed.
-    """
+    &#34;&#34;&#34;
 
-    label: str = "default"
-    """
+    label: str = &#34;default&#34;
+    &#34;&#34;&#34;
     Label to use for all monitored runs. Can be used to differentiate between different monitored sources on the same 
     endpoint.
-    """
+    &#34;&#34;&#34;
 
     tags_filter: list[str] | None = None
-    """
+    &#34;&#34;&#34;
     Filter runs by tags. Only runs with at least one tag in this list will be monitored.
     If None, no tag-based filtering is applied and runs with any tags are considered.
     Default: None.
-    """
+    &#34;&#34;&#34;
 
     run_types_filter: list[str] | None = None
-    """
-    Filter runs by run types (e.g. "chain", "llm", "chat", "tool").
+    &#34;&#34;&#34;
+    Filter runs by run types (e.g. &#34;chain&#34;, &#34;llm&#34;, &#34;chat&#34;, &#34;tool&#34;).
     Only runs whose `run_type` appears in this list will be monitored.
     If None, no run-type filtering is applied.
     Default: None.
-    """
+    &#34;&#34;&#34;
 
     names_filter: list[str] | None = None
-    """
+    &#34;&#34;&#34;
     Filter runs by class/name. Only runs whose `name` appears in this list will be monitored.
     If None, no name-based filtering is applied.
     Default: None.
-    """
+    &#34;&#34;&#34;
 
     include_full_run: bool = False
-    """
+    &#34;&#34;&#34;
     If True, include the complete serialized run dict (the output of `run._get_dicts_safe()`)
     in the event outputs under the key `full_run`. Useful for debugging or when consumers need
     the raw run payload. Default: False.
-    """
+    &#34;&#34;&#34;
 
     include_errors: bool = True
-    """
+    &#34;&#34;&#34;
     If True, include run error information in the outputs under the `error` key.
     If False, runs that contain an error may be skipped by the summarizer filters.
     Default: True.
-    """
+    &#34;&#34;&#34;
 
     include_metadata: bool = True
-    """
+    &#34;&#34;&#34;
     If True, include run metadata (environment, tool metadata, etc.) in the inputs under
     the `metadata` key. Default: True.
-    """
+    &#34;&#34;&#34;
 
     include_latency: bool = True
-    """
+    &#34;&#34;&#34;
     If True, include latency information in the outputs under the `latency` key.
     Default: True.
-    """
+    &#34;&#34;&#34;
 
     root_run_only: bool = False
-    """
+    &#34;&#34;&#34;
     If True, only the root/top-level run will be monitored and any child runs will be
     ignored/removed from monitoring. Use when only the top-level run should produce events.
     Default: False.
-    """
+    &#34;&#34;&#34;
 
     split_runs: bool = False
-    """
+    &#34;&#34;&#34;
     If True, child runs are emitted as separate monitoring events (each run summarized and
     sent individually). If False, child runs are nested inside the parent/root run event under
     `child_runs`. Default: False.
-    """
+    &#34;&#34;&#34;
 
     run_summarizer_function: (
         str
@@ -577,88 +577,88 @@ class MLRunTracerMonitorSettings(BaseSettings):
         ]
         | None
     ) = None
-    """
+    &#34;&#34;&#34;
     A function to summarize a `Run` object into a tuple of inputs and outputs. Can be passed directly or via a full 
-    module path ("a.b.c.my_summarizer" will be imported as `from a.b.c import my_summarizer`).
+    module path (&#34;a.b.c.my_summarizer&#34; will be imported as `from a.b.c import my_summarizer`).
 
     A summarizer is a function that will be used to process a run into monitoring events. The function is expected to be 
     of type:
     `Callable[[Run, Optional[BaseSettings]], Generator[tuple[dict, dict] | None, None, None]]`, meaning 
     get a run object and optionally a settings object and return a generator yielding tuples of serialized dictionaries, 
     the (inputs, outputs) to send to MLRun monitoring as events or `None` to skip monitoring this run.
-    """
+    &#34;&#34;&#34;
 
     run_summarizer_settings: str | BaseSettings | None = None
-    """
+    &#34;&#34;&#34;
     Settings to pass to the run summarizer function. Can be passed directly or via a full module path to be imported
     and initialized. If the summarizer function does not require settings, this can be left as None.
-    """
+    &#34;&#34;&#34;
 
     debug: bool = False
-    """
+    &#34;&#34;&#34;
     If True, disable sending events to MLRun and instead route events to `debug_target_list`
     or print them as JSON to stdout. Useful for unit tests and local debugging. Default: False.
-    """
+    &#34;&#34;&#34;
 
     debug_target_list: list[dict] | bool = False
-    """
+    &#34;&#34;&#34;
     Optional list to which debug events will be appended when `debug` is True.
     If set, each generated event dict will be appended to this list. If not set and `debug` is True,
     events will be printed to stdout as JSON. Default: False.
-    """
+    &#34;&#34;&#34;
 
     #: Pydantic model configuration to set the environment variable prefix.
-    model_config = SettingsConfigDict(env_prefix="LC_MLRUN_TRACER_MONITOR_")
+    model_config = SettingsConfigDict(env_prefix=&#34;LC_MLRUN_TRACER_MONITOR_&#34;)
 
-    @field_validator('debug_target_list', mode='before')
+    @field_validator(&#39;debug_target_list&#39;, mode=&#39;before&#39;)
     @classmethod
     def convert_bool_to_list(cls, v):
-        """
+        &#34;&#34;&#34;
         Convert a boolean `True` value to an empty list for `debug_target_list`.
 
         :param v: The value to validate.
 
         :returns: An empty list if `v` is True, otherwise the original value.
-        """
+        &#34;&#34;&#34;
         if v is True:
             return []
         return v
 
 
 class MLRunTracerSettings(BaseSettings):
-    """
+    &#34;&#34;&#34;
     MLRun tracer settings to configure the tracer. The settings are split into two groups:
 
     * `client`: settings required to connect and send events to the MLRun monitoring stream.
     * `monitor`: settings controlling which LangChain runs are summarized and sent and how.
-    """
+    &#34;&#34;&#34;
 
     client: MLRunTracerClientSettings = Field(default_factory=MLRunTracerClientSettings)
-    """
+    &#34;&#34;&#34;
     Client configuration group (``MLRunTracerClientSettings``).
 
     Contains the mandatory connection and endpoint information required to publish monitoring
     events. Values may be supplied programmatically or via environment variables prefixed with
     `LC_MLRUN_TRACER_CLIENT_`. See more at ``MLRunTracerClientSettings``.
-    """
+    &#34;&#34;&#34;
 
     monitor: MLRunTracerMonitorSettings = Field(default_factory=MLRunTracerMonitorSettings)
-    """
+    &#34;&#34;&#34;
     Monitoring configuration group (``MLRunTracerMonitorSettings``).
 
     Controls what runs are captured, how they are summarized (including custom summarizer import
     options), whether child runs are split or nested, and debug behavior. Values may be supplied
     programmatically or via environment variables prefixed with `LC_MLRUN_TRACER_MONITOR_`. 
     See more at ``MLRunTracerMonitorSettings``.
-    """
+    &#34;&#34;&#34;
 
     #: Pydantic model configuration to set the environment variable prefix.
-    model_config = SettingsConfigDict(env_prefix="LC_MLRUN_TRACER_")
+    model_config = SettingsConfigDict(env_prefix=&#34;LC_MLRUN_TRACER_&#34;)
 
 
 class MLRunTracer(BaseTracer):
-    """
-    MLRun tracer for LangChain runs allowing monitoring LangChain and LangGraph in production using MLRun's monitoring.
+    &#34;&#34;&#34;
+    MLRun tracer for LangChain runs allowing monitoring LangChain and LangGraph in production using MLRun&#39;s monitoring.
 
     There are two usage modes for the MLRun tracer following LangChain tracing best practices:
 
@@ -670,7 +670,7 @@ class MLRunTracer(BaseTracer):
             # LangChain code here.
             pass
 
-    2. **Auto Mode** - Setting the `LC_MLRUN_MONITORING_ENABLED="1"` environment variable::
+    2. **Auto Mode** - Setting the `LC_MLRUN_MONITORING_ENABLED=&#34;1&#34;` environment variable::
 
         import mlrun_integration.tracer
 
@@ -698,26 +698,26 @@ class MLRunTracer(BaseTracer):
             # LangChain code here.
             pass
 
-    2. Or via environment variables following the prefix 'LC_MLRUN_TRACER_CLIENT_' for client settings and
-       'LC_MLRUN_TRACER_MONITOR_' for monitoring settings.
-    """
+    2. Or via environment variables following the prefix &#39;LC_MLRUN_TRACER_CLIENT_&#39; for client settings and
+       &#39;LC_MLRUN_TRACER_MONITOR_&#39; for monitoring settings.
+    &#34;&#34;&#34;
 
     #: A singleton tracer for when using the tracer via environment variable to activate global tracing.
-    _singleton_tracer: "MLRunTracer | None" = None
+    _singleton_tracer: &#34;MLRunTracer | None&#34; = None
     #: A thread lock for initializing the tracer singleton safely.
     _lock = threading.Lock()
     #: A boolean flag to know whether the singleton was initialized.
     _initialized = False
 
-    def __new__(cls, *args, **kwargs) -> "MLRunTracer":
-        """
+    def __new__(cls, *args, **kwargs) -&gt; &#34;MLRunTracer&#34;:
+        &#34;&#34;&#34;
         Create or return an ``MLRunTracer`` instance.
 
-        When ``LC_MLRUN_MONITORING_ENABLED`` is not set to ``"1"``, a normal instance is returned.
-        When the env var is ``"1"``, a process-wide singleton is returned. Creation is thread-safe.
+        When ``LC_MLRUN_MONITORING_ENABLED`` is not set to ``&#34;1&#34;``, a normal instance is returned.
+        When the env var is ``&#34;1&#34;``, a process-wide singleton is returned. Creation is thread-safe.
 
-        :returns: MLRunTracer instance (singleton if 'auto' mode is active).
-        """
+        :returns: MLRunTracer instance (singleton if &#39;auto&#39; mode is active).
+        &#34;&#34;&#34;
         # Check if needed to use a singleton as the user is using the MLRun tracer by setting the environment variable
         # and not manually (via context manager):
         if not cls._check_for_env_var_usage():
@@ -734,13 +734,13 @@ class MLRunTracer(BaseTracer):
         return cls._singleton_tracer
 
     def __init__(self, settings: MLRunTracerSettings = None, **kwargs):
-        """
+        &#34;&#34;&#34;
         Initialize the tracer.
 
         :param settings: Settings to use for the tracer. If not passed, defaults are used and environment variables are
             applied per Pydantic settings behavior.
         :param kwargs: Passed to the base initializer.
-        """
+        &#34;&#34;&#34;
         # Proceed with initialization only if singleton mode is not required or the singleton was not initialized:
         if self._check_for_env_var_usage() and self._initialized:
             return
@@ -778,21 +778,21 @@ class MLRunTracer(BaseTracer):
         self._initialized = True
 
     @property
-    def settings(self) -> MLRunTracerSettings:
-        """
+    def settings(self) -&gt; MLRunTracerSettings:
+        &#34;&#34;&#34;
         Access the effective settings.
 
         :returns: The settings used by this tracer.
-        """
+        &#34;&#34;&#34;
         return self._settings
 
-    def _get_mlrun_client(self) -> _MLRunEndPointClient:
-        """
+    def _get_mlrun_client(self) -&gt; _MLRunEndPointClient:
+        &#34;&#34;&#34;
         Create and return an MLRun model endpoint monitoring client based on the MLRun (CE or not) and current
         configuration.
 
         :returns: An MLRun model endpoint monitoring client.
-        """
+        &#34;&#34;&#34;
         if mlrun.mlconf.is_ce_mode():
             return _KafkaMLRunEndPointClient(
                 kafka_stream_profile_name=self._client_settings.kafka_stream_profile_name,
@@ -814,9 +814,9 @@ class MLRunTracer(BaseTracer):
         )
 
     def _import_custom_run_summarizer(self):
-        """
+        &#34;&#34;&#34;
         Import or assign a custom run summarizer (and its custom settings) if configured.
-        """
+        &#34;&#34;&#34;
         # If the user did not pass a run summarizer function, return:
         if not self._monitor_settings.run_summarizer_function:
             return
@@ -843,16 +843,16 @@ class MLRunTracer(BaseTracer):
                     self._monitor_settings.run_summarizer_settings
                 )
 
-    def _persist_run(self, run: Run, level: int = 0) -> None:
-        """
+    def _persist_run(self, run: Run, level: int = 0) -&gt; None:
+        &#34;&#34;&#34;
         Summarize the run (and its children) into MLRun monitoring events.
 
-        Note: This will use the MLRun tracer's default summarization that can be configured via
+        Note: This will use the MLRun tracer&#39;s default summarization that can be configured via
         ``MLRunTracerMonitorSettings``, unless a custom summarizer was provided (via the same settings).
 
         :param run: LangChain run object to process holding all the nested tree of runs.
         :param level: The nesting level of the run (0 for root runs, incremented for child runs).
-        """
+        &#34;&#34;&#34;
         try:
             # Serialize the run:
             serialized_run = self._serialize_run(
@@ -868,7 +868,7 @@ class MLRunTracer(BaseTracer):
                     if summarized_run:
                         inputs, outputs = summarized_run
                         self._send_run_event(
-                            event_id=serialized_run["id"],
+                            event_id=serialized_run[&#34;id&#34;],
                             inputs=inputs,
                             outputs=outputs,
                             start_time=run.start_time,
@@ -884,9 +884,9 @@ class MLRunTracer(BaseTracer):
                 summarized_run = self._summarize_run(serialized_run=serialized_run, include_children=False)
                 if summarized_run:
                     inputs, outputs = summarized_run
-                    inputs["child_level"] = level
+                    inputs[&#34;child_level&#34;] = level
                     self._send_run_event(
-                        event_id=serialized_run["id"],
+                        event_id=serialized_run[&#34;id&#34;],
                         inputs=inputs,
                         outputs=outputs,
                         start_time=run.start_time,
@@ -902,9 +902,9 @@ class MLRunTracer(BaseTracer):
             if not summarized_run:
                 return
             inputs, outputs = summarized_run
-            inputs["child_level"] = level
+            inputs[&#34;child_level&#34;] = level
             self._send_run_event(
-                event_id=serialized_run["id"],
+                event_id=serialized_run[&#34;id&#34;],
                 inputs=inputs,
                 outputs=outputs,
                 start_time=run.start_time,
@@ -915,27 +915,27 @@ class MLRunTracer(BaseTracer):
             if level == 0 and self._mlrun_client:
                 self._mlrun_client.flush()
 
-    def _serialize_run(self, run: Run, include_child_runs: bool) -> dict:
-        """
+    def _serialize_run(self, run: Run, include_child_runs: bool) -&gt; dict:
+        &#34;&#34;&#34;
         Serialize a LangChain run into a dictionary.
 
         :param run: The run to serialize.
         :param include_child_runs: Whether to include child runs in the serialization.
 
         :returns: The serialized run dictionary.
-        """
+        &#34;&#34;&#34;
         # In LangChain 1.2.3+, the Run model uses Pydantic v2 with child_runs marked as Field(exclude=True), so we
         # must manually serialize child runs. Still excluding manually for future compatibility. In previous
         # LangChain versions, Run was Pydantic v1, so we use dict.
         serialized_run = (
-            run.model_dump(exclude={"child_runs"})
-            if hasattr(run, "model_dump")
-            else run.dict(exclude={"child_runs"})
+            run.model_dump(exclude={&#34;child_runs&#34;})
+            if hasattr(run, &#34;model_dump&#34;)
+            else run.dict(exclude={&#34;child_runs&#34;})
         )
 
         # Manually serialize child runs if needed:
         if include_child_runs and run.child_runs:
-            serialized_run["child_runs"] = [
+            serialized_run[&#34;child_runs&#34;] = [
                 self._serialize_run(child_run, include_child_runs=True)
                 for child_run in run.child_runs
             ]
@@ -943,123 +943,123 @@ class MLRunTracer(BaseTracer):
         return orjson.loads(orjson.dumps(serialized_run, default=self._serialize_default))
 
     def _serialize_default(self, obj: Any):
-        """
+        &#34;&#34;&#34;
         Default serializer for objects present in LangChain run that are not serializable by default JSON encoder. It
         includes handling Pydantic v1 and v2 models, UUIDs, and datetimes.
 
         :param obj: The object to serialize.
 
         :returns: The serialized object.
-        """
+        &#34;&#34;&#34;
         if isinstance(obj, UUID):
             return str(obj)
         if isinstance(obj, datetime.datetime):
             return obj.isoformat()
-        if hasattr(obj, "model_dump"):
+        if hasattr(obj, &#34;model_dump&#34;):
             return orjson.loads(orjson.dumps(obj.model_dump(), default=self._serialize_default))
-        if hasattr(obj, "dict"):
+        if hasattr(obj, &#34;dict&#34;):
             return orjson.loads(orjson.dumps(obj.dict(), default=self._serialize_default))
         return str(obj)
 
-    def _filter_by_tags(self, serialized_run: dict) -> bool:
-        """
+    def _filter_by_tags(self, serialized_run: dict) -&gt; bool:
+        &#34;&#34;&#34;
         Apply tag-based filtering.
 
         :param serialized_run: Serialized run dictionary.
 
         :returns: True if the run passes tag filters or if no tag filter is configured.
-        """
+        &#34;&#34;&#34;
         # Check if the user enabled filtering by tags:
         if not self._monitor_settings.tags_filter:
             return True
 
         # Filter the run:
         return not set(self._monitor_settings.tags_filter).isdisjoint(
-            serialized_run["tags"]
+            serialized_run[&#34;tags&#34;]
         )
 
-    def _filter_by_run_types(self, serialized_run: dict) -> bool:
-        """
+    def _filter_by_run_types(self, serialized_run: dict) -&gt; bool:
+        &#34;&#34;&#34;
         Apply run-type filtering.
 
         :param serialized_run: Serialized run dictionary.
 
-        :returns: True if the run's ``run_type`` is allowed or if no run-type filter is configured.
-        """
+        :returns: True if the run&#39;s ``run_type`` is allowed or if no run-type filter is configured.
+        &#34;&#34;&#34;
         # Check if the user enabled filtering by run types:
         if not self._monitor_settings.run_types_filter:
             return True
 
         # Filter the run:
-        return serialized_run["run_type"] in self._monitor_settings.run_types_filter
+        return serialized_run[&#34;run_type&#34;] in self._monitor_settings.run_types_filter
 
-    def _filter_by_names(self, serialized_run: dict) -> bool:
-        """
+    def _filter_by_names(self, serialized_run: dict) -&gt; bool:
+        &#34;&#34;&#34;
         Apply class/name filtering.
 
         :param serialized_run: Serialized run dictionary.
 
-        :returns: True if the run's ``name`` is allowed or if no name filter is configured.
-        """
+        :returns: True if the run&#39;s ``name`` is allowed or if no name filter is configured.
+        &#34;&#34;&#34;
         # Check if the user enabled filtering by class names:
         if not self._monitor_settings.names_filter:
             return True
 
         # Filter the run:
-        return serialized_run["name"] in self._monitor_settings.names_filter
+        return serialized_run[&#34;name&#34;] in self._monitor_settings.names_filter
 
-    def _get_run_inputs(self, serialized_run: dict) -> dict[str, Any]:
-        """
+    def _get_run_inputs(self, serialized_run: dict) -&gt; dict[str, Any]:
+        &#34;&#34;&#34;
         Build the inputs dictionary for a monitoring event.
 
         :param serialized_run: Serialized run dictionary.
 
         :returns: A dictionary containing inputs, run metadata and (optionally) additional metadata.
-        """
+        &#34;&#34;&#34;
         inputs = {
-            "inputs": serialized_run["inputs"],
-            "run_type": serialized_run["run_type"],
-            "run_name": serialized_run["name"],
-            "tags": serialized_run["tags"],
-            "run_id": serialized_run["id"],
-            "start_timestamp": serialized_run["start_time"],
+            &#34;inputs&#34;: serialized_run[&#34;inputs&#34;],
+            &#34;run_type&#34;: serialized_run[&#34;run_type&#34;],
+            &#34;run_name&#34;: serialized_run[&#34;name&#34;],
+            &#34;tags&#34;: serialized_run[&#34;tags&#34;],
+            &#34;run_id&#34;: serialized_run[&#34;id&#34;],
+            &#34;start_timestamp&#34;: serialized_run[&#34;start_time&#34;],
         }
-        if "parent_run_id" in serialized_run:
+        if &#34;parent_run_id&#34; in serialized_run:
             # Parent run ID is excluded when child runs are joined in the same event. When child runs are split, it is
             # included and can be used to reconstruct the run tree if needed.
-            inputs = {**inputs, "parent_run_id": serialized_run["parent_run_id"]}
-        if self._monitor_settings.include_metadata and "metadata" in serialized_run:
-            inputs = {**inputs, "metadata": serialized_run["metadata"]}
+            inputs = {**inputs, &#34;parent_run_id&#34;: serialized_run[&#34;parent_run_id&#34;]}
+        if self._monitor_settings.include_metadata and &#34;metadata&#34; in serialized_run:
+            inputs = {**inputs, &#34;metadata&#34;: serialized_run[&#34;metadata&#34;]}
 
         return inputs
 
-    def _get_run_outputs(self, serialized_run: dict) -> dict[str, Any]:
-        """
+    def _get_run_outputs(self, serialized_run: dict) -&gt; dict[str, Any]:
+        &#34;&#34;&#34;
         Build the outputs dictionary for a monitoring event.
 
         :param serialized_run: Serialized run dictionary.
 
         :returns: A dictionary with outputs and optional other collected info depending on monitor settings.
-        """
-        outputs = {"outputs": serialized_run["outputs"], "end_timestamp": serialized_run["end_time"]}
-        if self._monitor_settings.include_latency and "latency" in serialized_run:
-            outputs = {**outputs, "latency": serialized_run["latency"]}
+        &#34;&#34;&#34;
+        outputs = {&#34;outputs&#34;: serialized_run[&#34;outputs&#34;], &#34;end_timestamp&#34;: serialized_run[&#34;end_time&#34;]}
+        if self._monitor_settings.include_latency and &#34;latency&#34; in serialized_run:
+            outputs = {**outputs, &#34;latency&#34;: serialized_run[&#34;latency&#34;]}
         if self._monitor_settings.include_errors:
-            outputs = {**outputs, "error": serialized_run["error"]}
+            outputs = {**outputs, &#34;error&#34;: serialized_run[&#34;error&#34;]}
         if self._monitor_settings.include_full_run:
-            outputs = {**outputs, "full_run": serialized_run}
+            outputs = {**outputs, &#34;full_run&#34;: serialized_run}
 
         return outputs
 
-    def _summarize_run(self, serialized_run: dict, include_children: bool) -> tuple[dict, dict] | None:
-        """
+    def _summarize_run(self, serialized_run: dict, include_children: bool) -&gt; tuple[dict, dict] | None:
+        &#34;&#34;&#34;
         Summarize a single run into (inputs, outputs) if it passes filters.
 
         :param serialized_run: Serialized run dictionary.
         :param include_children: Whether to include child runs.
 
         :returns: The summarized run (inputs, outputs) tuple if the run should be monitored, otherwise ``None``.
-        """
+        &#34;&#34;&#34;
         # Pass filters:
         if not (
             self._filter_by_tags(serialized_run=serialized_run)
@@ -1069,7 +1069,7 @@ class MLRunTracer(BaseTracer):
             return None
 
         # Check if needed to include errors:
-        if serialized_run["error"] and not self._monitor_settings.include_errors:
+        if serialized_run[&#34;error&#34;] and not self._monitor_settings.include_errors:
             return None
 
         # Prepare the inputs and outputs:
@@ -1078,16 +1078,16 @@ class MLRunTracer(BaseTracer):
 
         # Check if needed to include child runs:
         if include_children:
-            outputs["child_runs"] = []
-            for child_run in serialized_run.get("child_runs", []):
+            outputs[&#34;child_runs&#34;] = []
+            for child_run in serialized_run.get(&#34;child_runs&#34;, []):
                 # Recursively summarize the child run:
                 summarized_child_run = self._summarize_run(serialized_run=child_run, include_children=True)
                 if summarized_child_run:
                     inputs_child, outputs_child = summarized_child_run
-                    outputs["child_runs"].append(
+                    outputs[&#34;child_runs&#34;].append(
                         {
-                            "input_data": inputs_child,
-                            "output_data": outputs_child,
+                            &#34;input_data&#34;: inputs_child,
+                            &#34;output_data&#34;: outputs_child,
                         }
                     )
 
@@ -1096,7 +1096,7 @@ class MLRunTracer(BaseTracer):
     def _send_run_event(
         self, event_id: str, inputs: dict, outputs: dict, start_time: datetime.datetime, end_time: datetime.datetime
     ):
-        """
+        &#34;&#34;&#34;
         Send a monitoring event for a single run.
 
         Note: If monitor debug mode is enabled, appends to ``debug_target_list`` or prints JSON.
@@ -1106,14 +1106,14 @@ class MLRunTracer(BaseTracer):
         :param outputs: Outputs dictionary for the event.
         :param start_time: Request/start timestamp.
         :param end_time: Response/end timestamp.
-        """
+        &#34;&#34;&#34;
         event = {
-            "event_id": event_id,
-            "label": self._monitor_settings.label,
-            "input_data": {"input_data": inputs},  # So it will be a single "input feature" in MLRun monitoring.
-            "output_data": {"output_data": outputs},  # So it will be a single "output feature" in MLRun monitoring.
-            "request_timestamp": start_time.strftime("%Y-%m-%d %H:%M:%S%z"),
-            "response_timestamp": end_time.strftime("%Y-%m-%d %H:%M:%S%z"),
+            &#34;event_id&#34;: event_id,
+            &#34;label&#34;: self._monitor_settings.label,
+            &#34;input_data&#34;: {&#34;input_data&#34;: inputs},  # So it will be a single &#34;input feature&#34; in MLRun monitoring.
+            &#34;output_data&#34;: {&#34;output_data&#34;: outputs},  # So it will be a single &#34;output feature&#34; in MLRun monitoring.
+            &#34;request_timestamp&#34;: start_time.strftime(&#34;%Y-%m-%d %H:%M:%S%z&#34;),
+            &#34;response_timestamp&#34;: end_time.strftime(&#34;%Y-%m-%d %H:%M:%S%z&#34;),
         }
         if self._monitor_settings.debug:
             if isinstance(self._monitor_settings.debug_target_list, list):
@@ -1125,41 +1125,41 @@ class MLRunTracer(BaseTracer):
         self._mlrun_client.monitor(**event)
 
     @staticmethod
-    def _check_for_env_var_usage() -> bool:
-        """
+    def _check_for_env_var_usage() -&gt; bool:
+        &#34;&#34;&#34;
         Check whether global env-var activated tracing is requested.
 
-        :returns: True when ``LC_MLRUN_MONITORING_ENABLED`` environment variable equals ``"1"``.
-        """
-        return os.environ.get(mlrun_monitoring_env_var, "0") == "1"
+        :returns: True when ``LC_MLRUN_MONITORING_ENABLED`` environment variable equals ``&#34;1&#34;``.
+        &#34;&#34;&#34;
+        return os.environ.get(mlrun_monitoring_env_var, &#34;0&#34;) == &#34;1&#34;
 
     @staticmethod
-    def _import_from_module_path(module_path: str) -> Any:
-        """
+    def _import_from_module_path(module_path: str) -&gt; Any:
+        &#34;&#34;&#34;
         Import an object from a full module path string.
 
         :param module_path: Full dotted path, e.g. ``a.b.module.object``.
 
         :returns: The imported object.
-        """
+        &#34;&#34;&#34;
         try:
-            module_name, object_name = module_path.rsplit(".", 1)
+            module_name, object_name = module_path.rsplit(&#34;.&#34;, 1)
             module = importlib.import_module(module_name)
             obj = getattr(module, object_name)
         except ValueError as value_error:
             raise ValueError(
-                f"The provided '{module_path}' is not valid: it must have at least one '.'. "
-                f"If the class is locally defined, please add '__main__.MyObject' to the path."
+                f&#34;The provided &#39;{module_path}&#39; is not valid: it must have at least one &#39;.&#39;. &#34;
+                f&#34;If the class is locally defined, please add &#39;__main__.MyObject&#39; to the path.&#34;
             ) from value_error
         except ImportError as import_error:
             raise ImportError(
-                f"Could not import '{module_path}'. Tried to import '{module_name}' and failed with the following "
-                f"error: {import_error}."
+                f&#34;Could not import &#39;{module_path}&#39;. Tried to import &#39;{module_name}&#39; and failed with the following &#34;
+                f&#34;error: {import_error}.&#34;
             ) from import_error
         except AttributeError as attribute_error:
             raise AttributeError(
-                f"Could not import '{object_name}'. Tried to run 'from {module_name} import {object_name}' and could "
-                f"not find it: {attribute_error}"
+                f&#34;Could not import &#39;{object_name}&#39;. Tried to run &#39;from {module_name} import {object_name}&#39; and could &#34;
+                f&#34;not find it: {attribute_error}&#34;
             ) from attribute_error
 
         return obj
@@ -1168,13 +1168,13 @@ class MLRunTracer(BaseTracer):
 #: MLRun monitoring context variable to set when the user wraps his code with `mlrun_monitoring`. From this context
 # variable LangChain will get the tracer in a thread-safe way.
 mlrun_monitoring_var: ContextVar[MLRunTracer | None] = ContextVar(
-    "mlrun_monitoring", default=None
+    &#34;mlrun_monitoring&#34;, default=None
 )
 
 
 @contextmanager
 def mlrun_monitoring(settings: MLRunTracerSettings | None = None):
-    """
+    &#34;&#34;&#34;
     Context manager to enable MLRun tracing for LangChain code to monitor LangChain runs.
 
     Example usage::
@@ -1187,7 +1187,7 @@ def mlrun_monitoring(settings: MLRunTracerSettings | None = None):
             ...
 
     :param settings: The settings to use to configure the tracer.
-    """
+    &#34;&#34;&#34;
     mlrun_tracer = MLRunTracer(settings=settings)
     token = mlrun_monitoring_var.set(mlrun_tracer)
     try:
@@ -1207,15 +1207,15 @@ register_configure_hook(
 # Temporary convenient function to set up the monitoring infrastructure required for the tracer.
 def setup_langchain_monitoring(
     project: str | mlrun.MlrunProject = None,
-    function_name: str = "langchain_mlrun_function",
-    model_name: str = "langchain_mlrun_model",
-    model_endpoint_name: str = "langchain_mlrun_endpoint",
-    v3io_container: str = "projects",
+    function_name: str = &#34;langchain_mlrun_function&#34;,
+    model_name: str = &#34;langchain_mlrun_model&#34;,
+    model_endpoint_name: str = &#34;langchain_mlrun_endpoint&#34;,
+    v3io_container: str = &#34;projects&#34;,
     v3io_stream_path: str = None,
     kafka_stream_profile_name: str = None,
     kafka_linger_ms: int = 500,
-) -> dict:
-    """
+) -&gt; dict:
+    &#34;&#34;&#34;
     Create a model endpoint in the given project to be used for LangChain monitoring with MLRun and returns the
     necessary environment variables to configure the MLRun tracer client. The project should already exist and have
     monitoring enabled::
@@ -1235,7 +1235,7 @@ def setup_langchain_monitoring(
     :param model_endpoint_name: The name of the model endpoint to create.
     :param v3io_container: The V3IO container where the monitoring stream is located (for MLRun Enterprise).
     :param v3io_stream_path: The V3IO stream path for monitoring (for MLRun Enterprise). If None,
-        ``<project.name>/model-endpoints/stream-v1`` will be used.
+        ``&lt;project.name&gt;/model-endpoints/stream-v1`` will be used.
     :param kafka_stream_profile_name: The name of the registered ``DatastoreProfileKafkaStream`` to use for Kafka
         configuration (required for MLRun CE). This profile should be registered via
         ``project.register_datastore_profile()`` and contains all Kafka settings including broker, topic,
@@ -1246,7 +1246,7 @@ def setup_langchain_monitoring(
 
     :returns: A dictionary with the necessary environment variables to configure the MLRun tracer client.
     raise: MLRunInvalidArgumentError: If no project is provided and there is no current active project.
-    """
+    &#34;&#34;&#34;
     import io
     import time
     import sys
@@ -1258,19 +1258,19 @@ def setup_langchain_monitoring(
     from mlrun.features import Feature
 
     class ProgressStep:
-        """
+        &#34;&#34;&#34;
         A context manager to display progress of a code block with timing and optional output suppression.
-        """
+        &#34;&#34;&#34;
 
         def __init__(self, label: str, indent: int = 2, width: int = 40, clean: bool = True):
-            """
+            &#34;&#34;&#34;
             Initialize the ProgressStep context manager.
 
             :param label: The label to display for the progress step.
             :param indent: The number of spaces to indent the label.
             :param width: The width to pad the label for alignment.
             :param clean: Whether to suppress stdout and stderr during the block execution.
-            """
+            &#34;&#34;&#34;
             # Store parameters:
             self._label = label
             self._indent = indent
@@ -1282,20 +1282,20 @@ def setup_langchain_monitoring(
             self._sink = io.StringIO()
             self._stdout_redirect = None
             self._stderr_redirect = None
-            self._last_line_length = 0  # To track the line printed when terminals don't support '\033[K'.
+            self._last_line_length = 0  # To track the line printed when terminals don&#39;t support &#39;\033[K&#39;.
 
             # Capture the stream currently in use (before and if clean is true and we redirect it):
             self._terminal = sys.stdout
 
         def __enter__(self):
-            """
+            &#34;&#34;&#34;
             Enter the context manager, starting the timer and printing the initial status.
-            """
+            &#34;&#34;&#34;
             # Start timer:
             self._start_time = time.perf_counter()
 
             # Print without newline (using \r to allow overwriting):
-            self._write(icon=" ", status="Running", new_line=False)
+            self._write(icon=&#34; &#34;, status=&#34;Running&#34;, new_line=False)
 
             # Silence all internal noise:
             if self._clean:
@@ -1307,13 +1307,13 @@ def setup_langchain_monitoring(
             return self
 
         def __exit__(self, exc_type, exc_val, exc_tb):
-            """
+            &#34;&#34;&#34;
             Exit the context manager, stopping the timer and printing the final status.
 
             :param exc_type: The exception type, if any.
             :param exc_val: The exception value, if any.
             :param exc_tb: The exception traceback, if any.
-            """
+            &#34;&#34;&#34;
             # Restore stdout/stderr:
             if self._clean:
                 self._stdout_redirect.__exit__(exc_type, exc_val, exc_tb)
@@ -1322,40 +1322,40 @@ def setup_langchain_monitoring(
             # Calculate elapsed time:
             elapsed = time.perf_counter() - self._start_time
 
-            # Move cursor back to start of line ('\r') and overwrite ('\033[K' clears the line to the right):
+            # Move cursor back to start of line (&#39;\r&#39;) and overwrite (&#39;\033[K&#39; clears the line to the right):
             if exc_type is None:
-                self._write(icon="✓", status=f"Done ({elapsed:.2f}s)", new_line=True)
+                self._write(icon=&#34;✓&#34;, status=f&#34;Done ({elapsed:.2f}s)&#34;, new_line=True)
             else:
-                self._write(icon="✕", status="Failed", new_line=True)
+                self._write(icon=&#34;✕&#34;, status=&#34;Failed&#34;, new_line=True)
 
         def update(self, status: str):
-            """
+            &#34;&#34;&#34;
             Update the status message displayed for the progress step.
 
             :param status: The new status message to display.
-            """
-            self._write(icon=" ", status=status, new_line=False)
+            &#34;&#34;&#34;
+            self._write(icon=&#34; &#34;, status=status, new_line=False)
 
         def _write(self, icon: str, status: str, new_line: bool):
-            """
+            &#34;&#34;&#34;
             Write the progress line to the terminal, handling line clearing for terminals that do not support it.
 
             :param icon: The icon to display (e.g., checkmark, cross, space).
             :param status: The status message to display.
             :param new_line: Whether to end the line with a newline character.
-            """
+            &#34;&#34;&#34;
             # Construct the basic line
-            line = f"\r{' ' * self._indent}[{icon}] {self._label.ljust(self._width, '.')} {status}"
+            line = f&#34;\r{&#39; &#39; * self._indent}[{icon}] {self._label.ljust(self._width, &#39;.&#39;)} {status}&#34;
 
             # Calculate if we need to pad with spaces to clear the old, longer line:
             padding = max(0, self._last_line_length - len(line))
 
             # Add spaces to clear old text (add the ANSI clear for terminals that support it):
-            line = f"{line}{' ' * padding}\033[K"
+            line = f&#34;{line}{&#39; &#39; * padding}\033[K&#34;
 
             # Add newline if needed:
             if new_line:
-                line += "\n"
+                line += &#34;\n&#34;
 
             # Write to terminal:
             self._terminal.write(line)
@@ -1364,83 +1364,83 @@ def setup_langchain_monitoring(
             # Update the max length seen so far:
             self._last_line_length = len(line)
 
-    print("Creating LangChain model endpoint\n")
+    print(&#34;Creating LangChain model endpoint\n&#34;)
 
     # Get the project:
-    with ProgressStep("Loading Project"):
+    with ProgressStep(&#34;Loading Project&#34;):
         if project is None:
             try:
                 project = mlrun.get_current_project(silent=False)
             except mlrun.errors.MLRunInvalidArgumentError:
                 raise mlrun.errors.MLRunInvalidArgumentError(
-                    "There is no current active project. Either use `mlrun.get_or_create_project` prior to "
-                    "creating the monitoring endpoint or pass a project name to load."
+                    &#34;There is no current active project. Either use `mlrun.get_or_create_project` prior to &#34;
+                    &#34;creating the monitoring endpoint or pass a project name to load.&#34;
                 )
         if isinstance(project, str):
             project = mlrun.load_project(name=project)
 
     # Create and log the dummy model:
-    with ProgressStep(f"Creating Model") as progress_step:
+    with ProgressStep(f&#34;Creating Model&#34;) as progress_step:
         # Check if the model already exists:
-        progress_step.update("Checking if model exists")
+        progress_step.update(&#34;Checking if model exists&#34;)
         try:
             dummy_model = project.get_artifact(key=model_name)
         except mlrun.MLRunNotFoundError:
             dummy_model = None
         # If not, create and log it:
         if not dummy_model:
-            progress_step.update(f"Logging model '{model_name}'")
+            progress_step.update(f&#34;Logging model &#39;{model_name}&#39;&#34;)
             with tempfile.TemporaryDirectory() as tmpdir:
                 # Create a dummy model file:
-                dummy_model_path = os.path.join(tmpdir, "for_langchain_mlrun_tracer.pkl")
-                with open(dummy_model_path, "wb") as f:
-                    pickle.dump({"dummy": "model"}, f)
+                dummy_model_path = os.path.join(tmpdir, &#34;for_langchain_mlrun_tracer.pkl&#34;)
+                with open(dummy_model_path, &#34;wb&#34;) as f:
+                    pickle.dump({&#34;dummy&#34;: &#34;model&#34;}, f)
                 # Log the model:
                 dummy_model = project.log_model(
                     key=model_name,
                     model_file=dummy_model_path,
-                    inputs=[Feature(value_type="str", name="input")],
-                    outputs=[Feature(value_type='str', name="output")]
+                    inputs=[Feature(value_type=&#34;str&#34;, name=&#34;input&#34;)],
+                    outputs=[Feature(value_type=&#39;str&#39;, name=&#34;output&#34;)]
                 )
 
     # Create and set the dummy function:
-    with ProgressStep("Creating Function") as progress_step:
+    with ProgressStep(&#34;Creating Function&#34;) as progress_step:
         # Check if the function already exists:
-        progress_step.update("Checking if function exists")
+        progress_step.update(&#34;Checking if function exists&#34;)
         try:
             dummy_function = project.get_function(key=function_name)
         except mlrun.MLRunNotFoundError:
             dummy_function = None
         # If not, create and save it:
         if not dummy_function:
-            progress_step.update(f"Setting function '{function_name}'")
+            progress_step.update(f&#34;Setting function &#39;{function_name}&#39;&#34;)
             with tempfile.TemporaryDirectory() as tmpdir:
                 # Create a dummy function file:
-                dummy_function_code = """
+                dummy_function_code = &#34;&#34;&#34;
 def handler(context, event):
-    return "ok"
-"""
-                dummy_function_path = os.path.join(tmpdir, "dummy_function.py")
-                with open(dummy_function_path, "w") as f:
+    return &#34;ok&#34;
+&#34;&#34;&#34;
+                dummy_function_path = os.path.join(tmpdir, &#34;dummy_function.py&#34;)
+                with open(dummy_function_path, &#34;w&#34;) as f:
                     f.write(dummy_function_code)
                 # Set the function in the project:
                 dummy_function = project.set_function(
-                    func=dummy_function_path, name=function_name, image="mlrun/mlrun", kind="nuclio"
+                    func=dummy_function_path, name=function_name, image=&#34;mlrun/mlrun&#34;, kind=&#34;nuclio&#34;
                 )
                 dummy_function.save()
 
     # Create the model endpoint:
-    with ProgressStep("Creating Model Endpoint") as progress_step:
+    with ProgressStep(&#34;Creating Model Endpoint&#34;) as progress_step:
         # Get the MLRun DB:
-        progress_step.update("Getting MLRun DB")
+        progress_step.update(&#34;Getting MLRun DB&#34;)
         db = mlrun.get_run_db()
         # Check if the model endpoint already exists:
-        progress_step.update("Checking if endpoint exists")
+        progress_step.update(&#34;Checking if endpoint exists&#34;)
         model_endpoint = project.list_model_endpoints(names=[model_endpoint_name]).endpoints
         if model_endpoint:
             model_endpoint = model_endpoint[0]
         else:
-            progress_step.update("Creating model endpoint")
+            progress_step.update(&#34;Creating model endpoint&#34;)
             model_endpoint = mlrun.common.schemas.ModelEndpoint(
                 metadata=mlrun.common.schemas.ModelEndpointMetadata(
                     project=project.name,
@@ -1449,9 +1449,9 @@ def handler(context, event):
                 ),
                 spec=mlrun.common.schemas.ModelEndpointSpec(
                     function_name=dummy_function.metadata.name,
-                    function_tag="latest",
+                    function_tag=&#34;latest&#34;,
                     model_path=dummy_model.uri,
-                    model_class="CustomStream",
+                    model_class=&#34;CustomStream&#34;,
                 ),
                 status=mlrun.common.schemas.ModelEndpointStatus(
                     monitoring_mode=mm_constants.ModelMonitoringMode.enabled,
@@ -1459,7 +1459,7 @@ def handler(context, event):
             )
             db.create_model_endpoint(model_endpoint=model_endpoint)
             # Wait for the model endpoint UID to be set:
-            progress_step.update("Waiting for model endpoint")
+            progress_step.update(&#34;Waiting for model endpoint&#34;)
             uid_exist_flag = False
             while not uid_exist_flag:
                 model_endpoint = project.list_model_endpoints(names=[model_endpoint_name])
@@ -1468,46 +1468,46 @@ def handler(context, event):
                     uid_exist_flag = True
 
     # Set parameters defaults:
-    v3io_stream_path = v3io_stream_path or f"{project.name}/model-endpoints/stream-v1"
+    v3io_stream_path = v3io_stream_path or f&#34;{project.name}/model-endpoints/stream-v1&#34;
 
     if mlrun.mlconf.is_ce_mode():
         if kafka_stream_profile_name is None:
             raise ValueError(
-                "kafka_stream_profile_name is required for MLRun CE mode. Register a DatastoreProfileKafkaStream and "
-                "pass its name."
+                &#34;kafka_stream_profile_name is required for MLRun CE mode. Register a DatastoreProfileKafkaStream and &#34;
+                &#34;pass its name.&#34;
             )
         client_env_vars = {
-            "LC_MLRUN_TRACER_CLIENT_KAFKA_STREAM_PROFILE_NAME": kafka_stream_profile_name,
-            "LC_MLRUN_TRACER_CLIENT_KAFKA_LINGER_MS": str(kafka_linger_ms),
+            &#34;LC_MLRUN_TRACER_CLIENT_KAFKA_STREAM_PROFILE_NAME&#34;: kafka_stream_profile_name,
+            &#34;LC_MLRUN_TRACER_CLIENT_KAFKA_LINGER_MS&#34;: str(kafka_linger_ms),
         }
     else:
         client_env_vars = {
-            "LC_MLRUN_TRACER_CLIENT_V3IO_STREAM_PATH": v3io_stream_path,
-            "LC_MLRUN_TRACER_CLIENT_V3IO_CONTAINER": v3io_container,
+            &#34;LC_MLRUN_TRACER_CLIENT_V3IO_STREAM_PATH&#34;: v3io_stream_path,
+            &#34;LC_MLRUN_TRACER_CLIENT_V3IO_CONTAINER&#34;: v3io_container,
         }
 
     # Prepare the environment variables:
     env_vars = {
-        "LC_MLRUN_MONITORING_ENABLED": "1",
-        "LC_MLRUN_TRACER_CLIENT_PROJECT": project.name,
-        "LC_MLRUN_TRACER_CLIENT_MODEL_ENDPOINT_NAME": model_endpoint.metadata.name,
-        "LC_MLRUN_TRACER_CLIENT_MODEL_ENDPOINT_UID": model_endpoint.metadata.uid,
-        "LC_MLRUN_TRACER_CLIENT_SERVING_FUNCTION": function_name,
+        &#34;LC_MLRUN_MONITORING_ENABLED&#34;: &#34;1&#34;,
+        &#34;LC_MLRUN_TRACER_CLIENT_PROJECT&#34;: project.name,
+        &#34;LC_MLRUN_TRACER_CLIENT_MODEL_ENDPOINT_NAME&#34;: model_endpoint.metadata.name,
+        &#34;LC_MLRUN_TRACER_CLIENT_MODEL_ENDPOINT_UID&#34;: model_endpoint.metadata.uid,
+        &#34;LC_MLRUN_TRACER_CLIENT_SERVING_FUNCTION&#34;: function_name,
         **client_env_vars
     }
-    print("\n✨ Done! LangChain monitoring model endpoint created successfully.")
-    print("You can now set the following environment variables to enable MLRun tracing in your LangChain code:\n")
+    print(&#34;\n✨ Done! LangChain monitoring model endpoint created successfully.&#34;)
+    print(&#34;You can now set the following environment variables to enable MLRun tracing in your LangChain code:\n&#34;)
     print(json.dumps(env_vars, indent=4))
     print(
-        "\nTo customize the monitoring behavior, you can also set additional environment variables prefixed with "
-        "'LC_MLRUN_TRACER_MONITOR_'. Refer to the MLRun tracer documentation for more details.\n"
+        &#34;\nTo customize the monitoring behavior, you can also set additional environment variables prefixed with &#34;
+        &#34;&#39;LC_MLRUN_TRACER_MONITOR_&#39;. Refer to the MLRun tracer documentation for more details.\n&#34;
     )
 
     return env_vars
 
 
 class LangChainMonitoringApp(ModelMonitoringApplicationBase):
-    """
+    &#34;&#34;&#34;
     A base monitoring application for LangChain that calculates common metrics on LangChain runs traced with the MLRun
     tracer.
 
@@ -1516,14 +1516,14 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
     token usage, and run name counts.
 
     If inheriting, the main method to override is `do_tracking`, which performs the tracking on the monitoring context.
-    """
+    &#34;&#34;&#34;
 
-    def do_tracking(self, monitoring_context: MonitoringApplicationContext) -> (
+    def do_tracking(self, monitoring_context: MonitoringApplicationContext) -&gt; (
         ModelMonitoringApplicationResult |
         list[ModelMonitoringApplicationResult | ModelMonitoringApplicationMetric] |
         dict[str, Any]
     ):
-        """
+        &#34;&#34;&#34;
         The main function that performs tracking on the monitoring context. The LangChain monitoring app by default
         will calculate all the provided metrics on the structured runs extracted from the monitoring context sample
         dataframe.
@@ -1531,7 +1531,7 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
         :param monitoring_context: The monitoring context containing the sample dataframe.
 
         :returns: The monitoring artifacts, metrics and results.
-        """
+        &#34;&#34;&#34;
         # Get the structured runs from the monitoring context:
         structured_runs, _ = self.get_structured_runs(monitoring_context=monitoring_context)
 
@@ -1543,27 +1543,27 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
 
         return [
             ModelMonitoringApplicationMetric(
-                name="average_latency",
+                name=&#34;average_latency&#34;,
                 value=average_latency,
             ),
             ModelMonitoringApplicationMetric(
-                name="success_rate",
+                name=&#34;success_rate&#34;,
                 value=success_rate,
             ),
             ModelMonitoringApplicationMetric(
-                name="total_input_tokens",
-                value=token_usage["total_input_tokens"],
+                name=&#34;total_input_tokens&#34;,
+                value=token_usage[&#34;total_input_tokens&#34;],
             ),
             ModelMonitoringApplicationMetric(
-                name="total_output_tokens",
-                value=token_usage["total_output_tokens"],
+                name=&#34;total_output_tokens&#34;,
+                value=token_usage[&#34;total_output_tokens&#34;],
             ),
             ModelMonitoringApplicationMetric(
-                name="combined_total_tokens",
-                value=token_usage["combined_total"],
+                name=&#34;combined_total_tokens&#34;,
+                value=token_usage[&#34;combined_total&#34;],
             ),
             *[ModelMonitoringApplicationMetric(
-                name=f"run_name_counts_{run_name}",
+                name=f&#34;run_name_counts_{run_name}&#34;,
                 value=count,
             ) for run_name, count in run_name_counts.items()],
         ]
@@ -1578,8 +1578,8 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
         flatten_child_runs: bool = False,
         ignore_child_runs: bool = False,
         ignore_errored_runs: bool = False,
-    ) -> tuple[list[dict], list[dict]]:
-        """
+    ) -&gt; tuple[list[dict], list[dict]]:
+        &#34;&#34;&#34;
         Get the structured runs from the monitoring context sample dataframe. The sample dataframe contains the raw
         input and output data as JSON strings - the way the MLRun tracer sends them as events to MLRun monitoring. This
         function parses the JSON strings into structured dictionaries that can be used for further metrics calculations
@@ -1604,9 +1604,9 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
 
         :returns: A list of structured run dictionaries that passed the filters and a list of samples that could not be
             parsed due to errors.
-        """
+        &#34;&#34;&#34;
         # Retrieve the input and output samples from the monitoring context:
-        samples = monitoring_context.sample_df[['input', 'output']].to_dict('records')
+        samples = monitoring_context.sample_df[[&#39;input&#39;, &#39;output&#39;]].to_dict(&#39;records&#39;)
 
         # Prepare to collect structured samples:
         structured_samples = []
@@ -1616,11 +1616,11 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
         for sample in samples:
             try:
                 # Parse the input data into structured format:
-                parsed_input = orjson.loads(sample['input'])
-                label = parsed_input['label']
-                parsed_input = parsed_input["input"]["input_data"]
+                parsed_input = orjson.loads(sample[&#39;input&#39;])
+                label = parsed_input[&#39;label&#39;]
+                parsed_input = parsed_input[&#34;input&#34;][&#34;input_data&#34;]
                 # Parse the output data into structured format:
-                parsed_output = orjson.loads(sample['output'])["output_data"]
+                parsed_output = orjson.loads(sample[&#39;output&#39;])[&#34;output_data&#34;]
                 structured_samples.extend(
                     LangChainMonitoringApp._collect_run(
                         structured_input=parsed_input,
@@ -1653,8 +1653,8 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
         flatten_child_runs: bool = False,
         ignore_child_runs: bool = False,
         ignore_errored_runs: bool = False,
-    ) -> list[dict]:
-        """
+    ) -&gt; list[dict]:
+        &#34;&#34;&#34;
         Recursively collect runs from the structured input and output data, applying filters as specified.
 
         :param structured_input: The structured input data of the run.
@@ -1670,7 +1670,7 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
         :param ignore_errored_runs: Flag to ignore errored runs as described in `get_structured_runs`.
 
         :returns: A list of structured run dictionaries that passed the filters.
-        """
+        &#34;&#34;&#34;
         # Prepare to collect runs:
         runs = []
 
@@ -1679,19 +1679,19 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
             return runs
 
         # Handle child runs:
-        if "child_runs" in structured_output:
+        if &#34;child_runs&#34; in structured_output:
             # Check if we need to ignore or flatten child runs:
             if ignore_child_runs:
-                structured_output.pop("child_runs")
+                structured_output.pop(&#34;child_runs&#34;)
             elif flatten_child_runs:
                 # Recursively collect child runs:
-                child_runs = structured_output.pop("child_runs")
+                child_runs = structured_output.pop(&#34;child_runs&#34;)
                 flattened_runs = []
                 for child_run in child_runs:
                     flattened_runs.extend(
                         LangChainMonitoringApp._collect_run(
-                            structured_input=child_run["input_data"],
-                            structured_output=child_run["output_data"],
+                            structured_input=child_run[&#34;input_data&#34;],
+                            structured_output=child_run[&#34;output_data&#34;],
                             label=label,
                             child_level=child_level + 1,
                             tags_filter=tags_filter,
@@ -1705,57 +1705,57 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
                 runs.extend(flattened_runs)
 
         # Filter by tags, run name, run type, and errors:
-        if tags_filter and not set(structured_input["tags"]).isdisjoint(tags_filter):
+        if tags_filter and not set(structured_input[&#34;tags&#34;]).isdisjoint(tags_filter):
             return runs
-        if run_name_filter and structured_input["run_name"] not in run_name_filter:
+        if run_name_filter and structured_input[&#34;run_name&#34;] not in run_name_filter:
             return runs
-        if run_type_filter and structured_input["run_type"] not in run_type_filter:
+        if run_type_filter and structured_input[&#34;run_type&#34;] not in run_type_filter:
             return runs
-        if ignore_errored_runs and structured_output.get("error", None):
+        if ignore_errored_runs and structured_output.get(&#34;error&#34;, None):
             return runs
 
         # Collect the current run:
-        runs.append({"label": label, "input_data": structured_input, "output_data": structured_output,
-                     "child_level": child_level})
+        runs.append({&#34;label&#34;: label, &#34;input_data&#34;: structured_input, &#34;output_data&#34;: structured_output,
+                     &#34;child_level&#34;: child_level})
         return runs
 
     @staticmethod
-    def iterate_structured_runs(structured_runs: list[dict]) -> Generator[dict, None, None]:
-        """
+    def iterate_structured_runs(structured_runs: list[dict]) -&gt; Generator[dict, None, None]:
+        &#34;&#34;&#34;
         Iterates over all runs in the structured samples, including child runs.
 
         :param structured_runs: List of structured run samples.
 
         :returns: A generator yielding each run structure.
-        """
+        &#34;&#34;&#34;
         # TODO: Add an option to stop at a certain child level.
         for structured_run in structured_runs:
-            if "child_runs" in structured_run['output_data']:
-                for child_run in structured_run['output_data']['child_runs']:
+            if &#34;child_runs&#34; in structured_run[&#39;output_data&#39;]:
+                for child_run in structured_run[&#39;output_data&#39;][&#39;child_runs&#39;]:
                     yield from LangChainMonitoringApp.iterate_structured_runs([{
-                        "label": structured_run['label'],
-                        "input_data": child_run['input_data'],
-                        "output_data": child_run['output_data'],
-                        "child_level": structured_run['child_level'] + 1
+                        &#34;label&#34;: structured_run[&#39;label&#39;],
+                        &#34;input_data&#34;: child_run[&#39;input_data&#39;],
+                        &#34;output_data&#34;: child_run[&#39;output_data&#39;],
+                        &#34;child_level&#34;: structured_run[&#39;child_level&#39;] + 1
                     }])
             yield structured_run
 
     @staticmethod
-    def count_run_names(structured_runs: list[dict]) -> dict[str, int]:
-        """
+    def count_run_names(structured_runs: list[dict]) -&gt; dict[str, int]:
+        &#34;&#34;&#34;
         Counts occurrences of each run name in the structured samples.
 
         :param structured_runs: List of structured run samples.
 
         :returns: A dictionary with run names as keys and their counts as values.
-        """
+        &#34;&#34;&#34;
         # TODO: Add a nice plot artifact that will draw the bar chart for what is being used the most.
         # Prepare to count run names:
         run_name_counts = {}
 
         # Go over all the runs:
         for structured_run in LangChainMonitoringApp.iterate_structured_runs(structured_runs):
-            run_name = structured_run['input_data']['run_name']
+            run_name = structured_run[&#39;input_data&#39;][&#39;run_name&#39;]
             if run_name in run_name_counts:
                 run_name_counts[run_name] += 1
             else:
@@ -1764,15 +1764,15 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
         return run_name_counts
 
     @staticmethod
-    def count_token_usage(structured_runs: list[dict]) -> dict:
-        """
-        Calculates total tokens by only counting unique 'llm' type runs.
+    def count_token_usage(structured_runs: list[dict]) -&gt; dict:
+        &#34;&#34;&#34;
+        Calculates total tokens by only counting unique &#39;llm&#39; type runs.
 
         :param structured_runs: List of structured run samples.
 
         :returns: A dictionary with total input tokens, total output tokens, and combined total tokens.
-        """
-        # TODO: Add a token count per model breakdown (a dictionary of <model_provider>:<model_name> to token counts)
+        &#34;&#34;&#34;
+        # TODO: Add a token count per model breakdown (a dictionary of &lt;model_provider&gt;:&lt;model_name&gt; to token counts)
         #       including an artifact that will plot it nicely. Pay attention that different providers use different
         #       keys in the response metadata. We should implement a mapping for that so each provider will have its own
         #       handler that will know how to extract the relevant info out of a run.
@@ -1784,67 +1784,67 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
         for structured_run in LangChainMonitoringApp.iterate_structured_runs(structured_runs):
             # Count only LLM type runs as chain runs may include duplicative information as they accumulate the tokens
             # from the child runs:
-            if structured_run['input_data']['run_type'] != 'llm':
+            if structured_run[&#39;input_data&#39;][&#39;run_type&#39;] != &#39;llm&#39;:
                 continue
             # Look for the token count information:
-            outputs = structured_run['output_data']["outputs"]
+            outputs = structured_run[&#39;output_data&#39;][&#34;outputs&#34;]
             # Newer implementations should have the metadata in the `AIMessage` kwargs under generations:
-            if "generations" in outputs:
-                for generation in outputs["generations"]:  # Iterate over generations.
+            if &#34;generations&#34; in outputs:
+                for generation in outputs[&#34;generations&#34;]:  # Iterate over generations.
                     for sample in generation:  # Iterate over the generation batch.
-                        token_usage = sample.get("message", {}).get("kwargs", {}).get("usage_metadata", {})
+                        token_usage = sample.get(&#34;message&#34;, {}).get(&#34;kwargs&#34;, {}).get(&#34;usage_metadata&#34;, {})
                         if token_usage:
                             total_input_tokens += (
-                                token_usage.get('input_tokens', 0)
-                                or token_usage.get('prompt_tokens', 0)
+                                token_usage.get(&#39;input_tokens&#39;, 0)
+                                or token_usage.get(&#39;prompt_tokens&#39;, 0)
                             )
                             total_output_tokens += (
-                                    token_usage.get('output_tokens', 0) or
-                                    token_usage.get('completion_tokens', 0)
+                                    token_usage.get(&#39;output_tokens&#39;, 0) or
+                                    token_usage.get(&#39;completion_tokens&#39;, 0)
                             )
                 continue
             # Older implementations may have the metadata under `llm_output`:
-            if "llm_output" in outputs:
-                token_usage = outputs["llm_output"].get("token_usage", {})
+            if &#34;llm_output&#34; in outputs:
+                token_usage = outputs[&#34;llm_output&#34;].get(&#34;token_usage&#34;, {})
                 if token_usage:
-                    total_input_tokens += token_usage.get('input_tokens', 0) or token_usage.get('prompt_tokens', 0)
+                    total_input_tokens += token_usage.get(&#39;input_tokens&#39;, 0) or token_usage.get(&#39;prompt_tokens&#39;, 0)
                     total_output_tokens += (
-                        token_usage.get('output_tokens', 0) or
-                        token_usage.get('completion_tokens', 0)
+                        token_usage.get(&#39;output_tokens&#39;, 0) or
+                        token_usage.get(&#39;completion_tokens&#39;, 0)
                     )
 
         return {
-            "total_input_tokens": total_input_tokens,
-            "total_output_tokens": total_output_tokens,
-            "combined_total": total_input_tokens + total_output_tokens
+            &#34;total_input_tokens&#34;: total_input_tokens,
+            &#34;total_output_tokens&#34;: total_output_tokens,
+            &#34;combined_total&#34;: total_input_tokens + total_output_tokens
         }
 
     @staticmethod
-    def calculate_success_rate(structured_runs: list[dict]) -> float:
-        """
+    def calculate_success_rate(structured_runs: list[dict]) -&gt; float:
+        &#34;&#34;&#34;
         Calculates the success rate across all runs.
 
         :param structured_runs: List of structured run samples.
 
         :returns: Success rate as a float percentage between 0 and 1.
-        """
+        &#34;&#34;&#34;
         # TODO: Add an option to see errors breakdown by kind of error and maybe an option to show which run name yielded
         #       most of the errors with artifacts showcasing it.
         successful_count = 0
         for structured_run in structured_runs:
-            if 'error' not in structured_run['output_data'] or structured_run['output_data']['error'] is None:
+            if &#39;error&#39; not in structured_run[&#39;output_data&#39;] or structured_run[&#39;output_data&#39;][&#39;error&#39;] is None:
                 successful_count += 1
         return successful_count / len(structured_runs) if structured_runs else 0.0
 
     @staticmethod
-    def calculate_average_latency(structured_runs: list[dict]) -> float:
-        """
+    def calculate_average_latency(structured_runs: list[dict]) -&gt; float:
+        &#34;&#34;&#34;
         Calculates the average latency across all runs.
 
         :param structured_runs: List of structured run samples.
 
         :returns: Average latency in milliseconds.
-        """
+        &#34;&#34;&#34;
         # TODO: Add an option to calculate latency per run name (to know which runs are slower/faster) and then return an
         #       artifact showcasing it.
         # Prepare to calculate average latency:
@@ -1854,20 +1854,20 @@ class LangChainMonitoringApp(ModelMonitoringApplicationBase):
         # Go over all the root runs:
         for structured_run in structured_runs:
             # Skip child runs:
-            if structured_run["child_level"] > 0:
+            if structured_run[&#34;child_level&#34;] &gt; 0:
                 continue
             # Check if latency is already provided:
-            if "latency" in structured_run['output_data']:
-                total_latency += structured_run['output_data']['latency']
+            if &#34;latency&#34; in structured_run[&#39;output_data&#39;]:
+                total_latency += structured_run[&#39;output_data&#39;][&#39;latency&#39;]
                 count += 1
                 continue
             # Calculate latency from timestamps:
-            start_time = datetime.datetime.fromisoformat(structured_run['input_data']['start_timestamp'])
-            end_time = datetime.datetime.fromisoformat(structured_run['output_data']['end_timestamp'])
+            start_time = datetime.datetime.fromisoformat(structured_run[&#39;input_data&#39;][&#39;start_timestamp&#39;])
+            end_time = datetime.datetime.fromisoformat(structured_run[&#39;output_data&#39;][&#39;end_timestamp&#39;])
             total_latency += (end_time - start_time).total_seconds() * 1000  # Convert to milliseconds
             count += 1
 
-        return total_latency / count if count > 0 else 0.0
+        return total_latency / count if count &gt; 0 else 0.0
 
         </code>
     </pre>

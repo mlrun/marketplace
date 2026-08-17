@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -62,28 +62,28 @@ from sklearn.preprocessing import MinMaxScaler
 # SKLearn estimators list
 from sklearn.utils import all_estimators
 
-DEFAULT_STAT_FILTERS = ["f_classif", "mutual_info_classif", "chi2", "f_regression"]
+DEFAULT_STAT_FILTERS = [&#34;f_classif&#34;, &#34;mutual_info_classif&#34;, &#34;chi2&#34;, &#34;f_regression&#34;]
 DEFAULT_MODEL_FILTERS = {
-    "LinearSVC": "LinearSVC",
-    "LogisticRegression": "LogisticRegression",
-    "ExtraTreesClassifier": "ExtraTreesClassifier",
+    &#34;LinearSVC&#34;: &#34;LinearSVC&#34;,
+    &#34;LogisticRegression&#34;: &#34;LogisticRegression&#34;,
+    &#34;ExtraTreesClassifier&#34;: &#34;ExtraTreesClassifier&#34;,
 }
 
 
-def show_values_on_bars(axs, h_v="v", space=0.4):
+def show_values_on_bars(axs, h_v=&#34;v&#34;, space=0.4):
     def _show_on_single_plot(ax_):
-        if h_v == "v":
+        if h_v == &#34;v&#34;:
             for p in ax_.patches:
                 _x = p.get_x() + p.get_width() / 2
                 _y = p.get_y() + p.get_height()
                 value = int(p.get_height())
-                ax_.text(_x, _y, value, ha="center")
-        elif h_v == "h":
+                ax_.text(_x, _y, value, ha=&#34;center&#34;)
+        elif h_v == &#34;h&#34;:
             for p in ax_.patches:
                 _x = p.get_x() + p.get_width() + float(space)
                 _y = p.get_y() + p.get_height()
                 value = int(p.get_width())
-                ax_.text(_x, _y, value, ha="left")
+                ax_.text(_x, _y, value, ha=&#34;left&#34;)
 
     if isinstance(axs, np.ndarray):
         for idx, ax in np.ndenumerate(axs):
@@ -98,12 +98,12 @@ def plot_stat(context, stat_name, stat_df):
         data_frame=sorted_df,
         x=stat_name,
         y=sorted_df.index,
-        title=f"{stat_name} feature scores",
+        title=f&#34;{stat_name} feature scores&#34;,
         color=stat_name,
     )
     context.log_artifact(
         item=PlotlyArtifact(key=stat_name, figure=fig),
-        local_path=f"{stat_name}.html",
+        local_path=f&#34;{stat_name}.html&#34;,
     )
 
 
@@ -120,11 +120,11 @@ def feature_selection(
     output_vector_name: float = None,
     ignore_type_errors: bool = False,
 ):
-    """
-    Applies selected feature selection statistical functions or models on our 'df_artifact'.
+    &#34;&#34;&#34;
+    Applies selected feature selection statistical functions or models on our &#39;df_artifact&#39;.
 
-    Each statistical function or model will vote for it's best K selected features.
-    If a feature has >= 'min_votes' votes, it will be selected.
+    Each statistical function or model will vote for it&#39;s best K selected features.
+    If a feature has &gt;= &#39;min_votes&#39; votes, it will be selected.
 
     :param context:             the function context.
     :param df_artifact:         dataframe to pass as input.
@@ -138,13 +138,13 @@ def feature_selection(
     :param stat_filters:        statistical functions to apply to the features
                                 (from sklearn.feature_selection).
     :param model_filters:       models to use for feature evaluation, can be specified by
-                                model name (ex. LinearSVC), formalized json (contains 'CLASS',
-                                'FIT', 'META') or a path to such json file.
+                                model name (ex. LinearSVC), formalized json (contains &#39;CLASS&#39;,
+                                &#39;FIT&#39;, &#39;META&#39;) or a path to such json file.
     :param max_scaled_scores:   produce feature scores table scaled with max_scaler.
     :param sample_ratio:        percentage of the dataset the user wishes to compute the feature selection process on.
     :param output_vector_name:  creates a new feature vector containing only the identifies features.
     :param ignore_type_errors:  skips datatypes that are neither float nor int within the feature vector.
-    """
+    &#34;&#34;&#34;
     stat_filters = stat_filters or DEFAULT_STAT_FILTERS
     model_filters = model_filters or DEFAULT_MODEL_FILTERS
     # Check if df.meta is valid, if it is, look for a feature vector
@@ -154,20 +154,20 @@ def feature_selection(
     # Look inside meta.spec.label_feature to identify the label_column if the user did not specify it
     if label_column is None:
         if is_feature_vector:
-            label_column = df_artifact.meta.spec.label_feature.split(".")[1]
+            label_column = df_artifact.meta.spec.label_feature.split(&#34;.&#34;)[1]
         else:
-            raise ValueError("No label_column was given, please add a label_column.")
+            raise ValueError(&#34;No label_column was given, please add a label_column.&#34;)
 
     # Use the feature vector as dataframe
     df = df_artifact.as_df()
 
     # Ensure k is not bigger than the total number of features
-    if k > df.shape[1]:
+    if k &gt; df.shape[1]:
         raise ValueError(
-            f"K cannot be bigger than the total number of features ({df.shape[1]}). Please choose a smaller K."
+            f&#34;K cannot be bigger than the total number of features ({df.shape[1]}). Please choose a smaller K.&#34;
         )
-    elif k < 1:
-        raise ValueError("K cannot be smaller than 1. Please choose a bigger K.")
+    elif k &lt; 1:
+        raise ValueError(&#34;K cannot be smaller than 1. Please choose a bigger K.&#34;)
 
     # Create a sample dataframe of the original feature vector
     if sample_ratio:
@@ -184,17 +184,17 @@ def feature_selection(
 
     if np.object_ in list(X.dtypes) and ignore_type_errors is False:
         raise ValueError(
-            f"{df.select_dtypes(include=['object']).columns.tolist()} are neither float or int."
+            f&#34;{df.select_dtypes(include=[&#39;object&#39;]).columns.tolist()} are neither float or int.&#34;
         )
 
     # Create selected statistical estimators
     stat_functions_list = {
         stat_name: SelectKBest(
-            score_func=create_class(f"sklearn.feature_selection.{stat_name}"), k=k
+            score_func=create_class(f&#34;sklearn.feature_selection.{stat_name}&#34;), k=k
         )
         for stat_name in stat_filters
     }
-    requires_abs = ["chi2"]
+    requires_abs = [&#34;chi2&#34;]
 
     # Run statistic filters
     selected_features_agg = {}
@@ -217,33 +217,33 @@ def feature_selection(
             selected_features_agg[stat_name] = selected_features
 
         except Exception as e:
-            context.logger.info(f"Couldn't calculate {stat_name} because of: {e}")
+            context.logger.info(f&#34;Couldn&#39;t calculate {stat_name} because of: {e}&#34;)
 
     # Create models from class name / json file / json params
-    all_sklearn_estimators = dict(all_estimators()) if len(model_filters) > 0 else {}
+    all_sklearn_estimators = dict(all_estimators()) if len(model_filters) &gt; 0 else {}
     selected_models = {}
     for model_name, model in model_filters.items():
-        if ".json" in model:
-            current_model = json.load(open(model, "r"))
-            classifier_class = create_class(current_model["META"]["class"])
-            selected_models[model_name] = classifier_class(**current_model["CLASS"])
+        if &#34;.json&#34; in model:
+            current_model = json.load(open(model, &#34;r&#34;))
+            classifier_class = create_class(current_model[&#34;META&#34;][&#34;class&#34;])
+            selected_models[model_name] = classifier_class(**current_model[&#34;CLASS&#34;])
         elif model in all_sklearn_estimators:
             selected_models[model_name] = all_sklearn_estimators[model_name]()
 
         else:
             try:
                 current_model = json.loads(model)
-                classifier_class = create_class(current_model["META"]["class"])
-                selected_models[model_name] = classifier_class(**current_model["CLASS"])
+                classifier_class = create_class(current_model[&#34;META&#34;][&#34;class&#34;])
+                selected_models[model_name] = classifier_class(**current_model[&#34;CLASS&#34;])
             except Exception as e:
-                context.logger.info(f"unable to load {model} because of: {e}")
+                context.logger.info(f&#34;unable to load {model} because of: {e}&#34;)
 
     # Run model filters
     models_df = pd.DataFrame(index=X.columns)
     for model_name, model in selected_models.items():
 
-        if model_name == "LogisticRegression":
-            model.set_params(solver="liblinear")
+        if model_name == &#34;LogisticRegression&#34;:
+            model.set_params(solver=&#34;liblinear&#34;)
 
         # Train model and get feature importance
         select_from_model = SelectFromModel(model).fit(X, y)
@@ -252,9 +252,9 @@ def feature_selection(
         selected_features_agg[model_name] = feature_names.tolist()
 
         # Collect model feature importance
-        if hasattr(select_from_model.estimator_, "coef_"):
+        if hasattr(select_from_model.estimator_, &#34;coef_&#34;):
             stat_df = select_from_model.estimator_.coef_
-        elif hasattr(select_from_model.estimator_, "feature_importances_"):
+        elif hasattr(select_from_model.estimator_, &#34;feature_importances_&#34;):
             stat_df = select_from_model.estimator_.feature_importances_
 
         stat_df = pd.DataFrame(index=X.columns, columns=[model_name], data=stat_df[0])
@@ -262,13 +262,13 @@ def feature_selection(
 
         plot_stat(context, model_name, stat_df)
 
-    # Create feature_scores DF with stat & model filters scores
+    # Create feature_scores DF with stat &amp; model filters scores
     result_matrix_df = pd.concat([stats_df, models_df], axis=1, sort=False)
     context.log_dataset(
-        key="feature_scores",
+        key=&#34;feature_scores&#34;,
         df=result_matrix_df,
-        local_path="feature_scores.parquet",
-        format="parquet",
+        local_path=&#34;feature_scores.parquet&#34;,
+        format=&#34;parquet&#34;,
     )
     if max_scaled_scores:
         normalized_df = result_matrix_df.replace([np.inf, -np.inf], np.nan).values
@@ -280,10 +280,10 @@ def feature_selection(
             index=result_matrix_df.index,
         )
         context.log_dataset(
-            key="max_scaled_scores_feature_scores",
+            key=&#34;max_scaled_scores_feature_scores&#34;,
             df=normalized_df,
-            local_path="max_scaled_scores_feature_scores.parquet",
-            format="parquet",
+            local_path=&#34;max_scaled_scores_feature_scores.parquet&#34;,
+            format=&#34;parquet&#34;,
         )
 
     # Create feature count DataFrame
@@ -291,12 +291,12 @@ def feature_selection(
         result_matrix_df[test_name] = [
             1 if x in selected_features_agg[test_name] else 0 for x in X.columns
         ]
-    result_matrix_df.loc[:, "num_votes"] = result_matrix_df.sum(axis=1)
+    result_matrix_df.loc[:, &#34;num_votes&#34;] = result_matrix_df.sum(axis=1)
     context.log_dataset(
-        key="selected_features_count",
+        key=&#34;selected_features_count&#34;,
         df=result_matrix_df,
-        local_path="selected_features_count.parquet",
-        format="parquet",
+        local_path=&#34;selected_features_count.parquet&#34;,
+        format=&#34;parquet&#34;,
     )
 
     # How many votes are needed for a feature to be selected?
@@ -305,19 +305,19 @@ def feature_selection(
     else:
         num_filters = len(stat_filters) + len(model_filters)
         votes_needed = int(np.floor(num_filters * max(min(min_votes, 1), 0)))
-    context.logger.info(f"votes needed to be selected: {votes_needed}")
+    context.logger.info(f&#34;votes needed to be selected: {votes_needed}&#34;)
 
     # Create final feature dataframe
     selected_features = result_matrix_df[
-        result_matrix_df.num_votes >= votes_needed
+        result_matrix_df.num_votes &gt;= votes_needed
     ].index.tolist()
     good_feature_df = df.loc[:, selected_features]
     final_df = pd.concat([good_feature_df, y], axis=1)
     context.log_dataset(
-        key="selected_features",
+        key=&#34;selected_features&#34;,
         df=final_df,
-        local_path="selected_features.parquet",
-        format="parquet",
+        local_path=&#34;selected_features.parquet&#34;,
+        format=&#34;parquet&#34;,
     )
 
     # Creating a new feature vector containing only the identified top features
@@ -337,8 +337,8 @@ def feature_selection(
         top_features_fv = fs.FeatureVector(
             output_vector_name,
             matched_selections,
-            label_feature="labels.label",
-            description="feature vector composed strictly of our top features",
+            label_feature=&#34;labels.label&#34;,
+            description=&#34;feature vector composed strictly of our top features&#34;,
         )
 
         # Saving
@@ -346,7 +346,7 @@ def feature_selection(
         top_features_fv.get_offline_features(target=ParquetTarget())
 
         # Logging our new feature vector URI
-        context.log_result("top_features_vector", top_features_fv.uri)
+        context.log_result(&#34;top_features_vector&#34;, top_features_fv.uri)
 
         </code>
     </pre>

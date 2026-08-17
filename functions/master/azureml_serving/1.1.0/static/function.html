@@ -31,27 +31,27 @@
 kind: serving
 metadata:
   name: azureml-serving
-  tag: ''
+  tag: &#39;&#39;
   hash: c0f404820b8f0fe92d2d1cfe9dbcc068be1a13bf
-  project: ''
+  project: &#39;&#39;
   labels:
     author: Iguazio
   categories:
   - machine-learning
   - model-serving
 spec:
-  command: ''
+  command: &#39;&#39;
   args: []
   image: mlrun/mlrun
   build:
     commands:
     - python -m pip install azureml-automl-runtime~=1.38.1
-    code_origin: ""
-    origin_filename: ""
+    code_origin: &#34;&#34;
+    origin_filename: &#34;&#34;
   description: AzureML serving function
   disable_auto_mount: false
   env: []
-  priority_class_name: ''
+  priority_class_name: &#39;&#39;
   preemption_mode: prevent
   min_replicas: 1
   max_replicas: 4
@@ -72,7 +72,7 @@ spec:
         commands: []
         noBaseImagesPull: true
         functionSourceCode: IyBEbyBub3QgZGVsZXRlIQoKZnJvbSBtbHJ1bi5ydW50aW1lcyBpbXBvcnQgbnVjbGlvX2luaXRfaG9vawpkZWYgaW5pdF9jb250ZXh0KGNvbnRleHQpOgogICAgbnVjbGlvX2luaXRfaG9vayhjb250ZXh0LCBnbG9iYWxzKCksICdzZXJ2aW5nX3YyJykKCmRlZiBoYW5kbGVyKGNvbnRleHQsIGV2ZW50KToKICAgIHJldHVybiBjb250ZXh0Lm1scnVuX2hhbmRsZXIoY29udGV4dCwgZXZlbnQpCg==
-  source: ''
+  source: &#39;&#39;
   function_kind: serving_v2
   default_class: mlrun.frameworks.sklearn.PickleModelServer
   secret_sources: []

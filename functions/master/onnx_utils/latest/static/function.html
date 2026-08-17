@@ -30,7 +30,7 @@
         <code class="yaml">
 metadata:
   name: onnx-utils
-  tag: ''
+  tag: &#39;&#39;
   categories:
   - utilities
   - deep-learning
@@ -51,16 +51,16 @@ spec:
         default: null
       - name: optimize_model
         type: bool
-        doc: Whether or not to optimize the ONNX model using 'onnxoptimizer' before
+        doc: Whether or not to optimize the ONNX model using &#39;onnxoptimizer&#39; before
           saving the model. Defaulted to True.
         default: true
       - name: input_signature
         type: List[Tuple[Tuple[int], str]]
-        doc: 'A list of the input layers shape and data type properties. Expected
+        doc: &#39;A list of the input layers shape and data type properties. Expected
           to receive a list where each element is an input layer tuple. An input layer
-          tuple is a tuple of: [0] = Layer''s shape, a tuple of integers. [1] = Layer''s
+          tuple is a tuple of: [0] = Layer&#39;&#39;s shape, a tuple of integers. [1] = Layer&#39;&#39;s
           data type, a mlrun.data_types.ValueType string. If None, the input signature
-          will be tried to be read from the model artifact. Defaulted to None.'
+          will be tried to be read from the model artifact. Defaulted to None.&#39;
         default: null
       doc: Convert a TF.Keras model to an ONNX model and log it back to MLRun as a
         new model object.
@@ -81,44 +81,44 @@ spec:
         default: null
       - name: optimize_model
         type: bool
-        doc: Whether or not to optimize the ONNX model using 'onnxoptimizer' before
+        doc: Whether or not to optimize the ONNX model using &#39;onnxoptimizer&#39; before
           saving the model. Defaulted to True.
         default: true
       - name: input_signature
         type: List[Tuple[Tuple[int, ], str]]
-        doc: 'A list of the input layers shape and data type properties. Expected
+        doc: &#39;A list of the input layers shape and data type properties. Expected
           to receive a list where each element is an input layer tuple. An input layer
-          tuple is a tuple of: [0] = Layer''s shape, a tuple of integers. [1] = Layer''s
+          tuple is a tuple of: [0] = Layer&#39;&#39;s shape, a tuple of integers. [1] = Layer&#39;&#39;s
           data type, a mlrun.data_types.ValueType string. If None, the input signature
-          will be tried to be read from the model artifact. Defaulted to None.'
+          will be tried to be read from the model artifact. Defaulted to None.&#39;
         default: null
       - name: input_layers_names
         type: List[str]
-        doc: 'List of names to assign to the input nodes of the graph in order. All
+        doc: &#39;List of names to assign to the input nodes of the graph in order. All
           of the other parameters (inner layers) can be set as well by passing additional
           names in the list. The order is by the order of the parameters in the model.
-          If None, the inputs will be read from the handler''s inputs. If its also
-          None, it is defaulted to: "input_0", "input_1", ...'
+          If None, the inputs will be read from the handler&#39;&#39;s inputs. If its also
+          None, it is defaulted to: &#34;input_0&#34;, &#34;input_1&#34;, ...&#39;
         default: null
       - name: output_layers_names
         type: List[str]
-        doc: 'List of names to assign to the output nodes of the graph in order. If
-          None, the outputs will be read from the handler''s outputs. If its also
-          None, it is defaulted to: "output_0" (for multiple outputs, this parameter
-          must be provided).'
+        doc: &#39;List of names to assign to the output nodes of the graph in order. If
+          None, the outputs will be read from the handler&#39;&#39;s outputs. If its also
+          None, it is defaulted to: &#34;output_0&#34; (for multiple outputs, this parameter
+          must be provided).&#39;
         default: null
       - name: dynamic_axes
         type: Dict[str, Dict[int, str]]
-        doc: 'If part of the input / output shape is dynamic, like (batch_size, 3,
+        doc: &#39;If part of the input / output shape is dynamic, like (batch_size, 3,
           32, 32) you can specify it by giving a dynamic axis to the input / output
-          layer by its name as follows: { "input layer name": {0: "batch_size"}, "output
-          layer name": {0: "batch_size"}, } If provided, the ''is_batched'' flag will
-          be ignored. Defaulted to None.'
+          layer by its name as follows: { &#34;input layer name&#34;: {0: &#34;batch_size&#34;}, &#34;output
+          layer name&#34;: {0: &#34;batch_size&#34;}, } If provided, the &#39;&#39;is_batched&#39;&#39; flag will
+          be ignored. Defaulted to None.&#39;
         default: null
       - name: is_batched
         type: bool
         doc: Whether to include a batch size as the first axis in every input and
-          output layer. Defaulted to True. Will be ignored if 'dynamic_axes' is provided.
+          output layer. Defaulted to True. Will be ignored if &#39;dynamic_axes&#39; is provided.
         default: true
       doc: Convert a PyTorch model to an ONNX model and log it back to MLRun as a
         new model object.
@@ -146,14 +146,14 @@ spec:
         default: null
       - name: optimize_model
         type: bool
-        doc: Whether to optimize the ONNX model using 'onnxoptimizer' before saving
+        doc: Whether to optimize the ONNX model using &#39;onnxoptimizer&#39; before saving
           the model. Defaulted to True.
         default: true
       - name: framework_kwargs
         type: Dict[str, Any]
         doc: Additional arguments each framework may require to convert to ONNX. To
           get the doc string of the desired framework onnx conversion function, pass
-          "help".
+          &#34;help&#34;.
         default: null
       doc: Convert the given model to an ONNX model.
       lineno: 160
@@ -175,7 +175,7 @@ spec:
       - name: optimizations
         type: List[str]
         doc: List of possible optimizations. To see what optimizations are available,
-          pass "help". If None, all the optimizations will be used. Defaulted to None.
+          pass &#34;help&#34;. If None, all the optimizations will be used. Defaulted to None.
         default: null
       - name: fixed_point
         type: bool
@@ -190,10 +190,10 @@ spec:
       lineno: 224
       has_varargs: false
       has_kwargs: false
-  image: ''
+  image: &#39;&#39;
   default_handler: to_onnx
   allow_empty_resources: true
-  command: ''
+  command: &#39;&#39;
   disable_auto_mount: false
   description: ONNX intigration in MLRun, some utils functions for the ONNX framework,
     optimizing and converting models from different framework to ONNX using MLRun.
@@ -214,8 +214,8 @@ spec:
     - onnxmltools~=1.13.0
     - tf2onnx~=1.16.1
     - plotly~=5.23
-    origin_filename: ''
-    code_origin: ''
+    origin_filename: &#39;&#39;
+    code_origin: &#39;&#39;
 verbose: false
 
         </code>

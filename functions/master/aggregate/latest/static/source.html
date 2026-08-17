@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -53,19 +53,19 @@ from typing import Union
 
 def aggregate(context,
               df_artifact: Union[DataItem, pd.core.frame.DataFrame],
-              save_to: str = 'aggregated-df.pq',
+              save_to: str = &#39;aggregated-df.pq&#39;,
               keys: list = None,
               metrics: list = None,
               labels: list = None,
-              metric_aggregations: list = ['mean'],
-              label_aggregations: list = ['max'],
-              suffix: str = '',
+              metric_aggregations: list = [&#39;mean&#39;],
+              label_aggregations: list = [&#39;max&#39;],
+              suffix: str = &#39;&#39;,
               window: int = 3,
               center: bool = False,
               inplace: bool = False,
               drop_na: bool = True,
               files_to_select: int = 1):
-    """Time-series aggregation function
+    &#34;&#34;&#34;Time-series aggregation function
     
     Will perform a rolling aggregation on {df_artifact}, over {window} by the selected {keys}
     applying {metric_aggregations} on {metrics} and {label_aggregations} on {labels}. adding {suffix} to the
@@ -87,11 +87,11 @@ def aggregate(context,
     :param metrics:     Array containing a list of metrics to run the aggregations on. (default=None) 
     :param labels:      Array containing a list of labels to run the aggregations on. (default=None) 
     :param metric_aggregations: Array containing a list of aggregation function names to run on {metrics}.
-                        (Ex: 'mean', 'std') (default='mean')
+                        (Ex: &#39;mean&#39;, &#39;std&#39;) (default=&#39;mean&#39;)
     :param label_aggregations:  Array containing a list of aggregation function names to run on {metrics}.
-                        (Ex: 'max', 'min') (default='max') 
-    :param suffix:      Suffix to add to the feature name, E.g: <Feature_Name>_<Agg_Function>_<Suffix>
-                        (Ex: 'last_60_minutes') (default='')
+                        (Ex: &#39;max&#39;, &#39;min&#39;) (default=&#39;max&#39;) 
+    :param suffix:      Suffix to add to the feature name, E.g: &lt;Feature_Name&gt;_&lt;Agg_Function&gt;_&lt;Suffix&gt;
+                        (Ex: &#39;last_60_minutes&#39;) (default=&#39;&#39;)
     :param window:      Window size to perform the rolling aggregate on. (default=3)
     :param center:      If True, Sets the value for the central sample in the window,
                         If False, will set the value to the last sample. (default=False)
@@ -99,26 +99,26 @@ def aggregate(context,
                         If False, will join the aggregated results with the original dataframe
     :param drop_na:     Will drop na lines due to the Rolling.
     :param files_to_select: Specifies the number of *latest* files to select (and concat) for aggregation.
-    """
+    &#34;&#34;&#34;
     
     from_model = type(df_artifact) == pd.DataFrame
     if from_model:
-        context.logger.info('Aggregating from Buffer')
+        context.logger.info(&#39;Aggregating from Buffer&#39;)
         input_df = df_artifact
     else:
-        if df_artifact.url.endswith('/'):   # is a directory?
-            mpath = [os.path.join(df_artifact.url, file) for file in df_artifact.listdir() if file.endswith(('parquet', 'pq'))]
+        if df_artifact.url.endswith(&#39;/&#39;):   # is a directory?
+            mpath = [os.path.join(df_artifact.url, file) for file in df_artifact.listdir() if file.endswith((&#39;parquet&#39;, &#39;pq&#39;))]
             files_by_updated = sorted(mpath, key=os.path.getmtime, reverse=True)
             context.logger.info(files_by_updated)
             latest = files_by_updated[:files_to_select]
-            context.logger.info(f'Aggregating {latest}')
+            context.logger.info(f&#39;Aggregating {latest}&#39;)
             input_df = pd.concat([context.get_dataitem(df).as_df() for df in latest])
         else:  # A regular artifact
-            context.logger.info(f'Aggregating {df_artifact.url}')
+            context.logger.info(f&#39;Aggregating {df_artifact.url}&#39;)
             input_df = df_artifact.as_df()
     
     if not (metrics or labels):
-        raise ValueError('please specify metrics or labels param')
+        raise ValueError(&#39;please specify metrics or labels param&#39;)
     
     if keys:
         current_index = input_df.index.names
@@ -129,40 +129,40 @@ def aggregate(context,
         
     if metrics:
         metrics_df = df.loc[:, metrics].rolling(window=window, center=center).aggregate(metric_aggregations)
-        metrics_df.columns = ['_'.join(col).strip() for col in metrics_df.columns.values]
+        metrics_df.columns = [&#39;_&#39;.join(col).strip() for col in metrics_df.columns.values]
         
         if suffix:
-            metrics_df.columns = [f'{metric}_{suffix}' for metric in metrics_df.columns]
+            metrics_df.columns = [f&#39;{metric}_{suffix}&#39; for metric in metrics_df.columns]
             
         if not inplace:
-            final_df = pd.merge(input_df, metrics_df, suffixes=('', suffix), left_index=True, right_index=True)
+            final_df = pd.merge(input_df, metrics_df, suffixes=(&#39;&#39;, suffix), left_index=True, right_index=True)
         else:
             final_df = metrics_df
 
     if labels:
         labels_df = df.loc[:, labels].rolling(window=window,
                                               center=center).aggregate(label_aggregations)
-        labels_df.columns = ['_'.join(col).strip() for col in labels_df.columns.values]
+        labels_df.columns = [&#39;_&#39;.join(col).strip() for col in labels_df.columns.values]
         
         if suffix:
-            labels_df.columns = [f'{label}_{suffix}' for label in labels_df.columns]
+            labels_df.columns = [f&#39;{label}_{suffix}&#39; for label in labels_df.columns]
             
         if metrics:
-            final_df = pd.merge(final_df, labels_df, suffixes=('', suffix), left_index=True, right_index=True)   
+            final_df = pd.merge(final_df, labels_df, suffixes=(&#39;&#39;, suffix), left_index=True, right_index=True)   
         else:
             if not inplace:
-                final_df = pd.merge(input_df, labels_df, suffixes=('', suffix), left_index=True, right_index=True)      
+                final_df = pd.merge(input_df, labels_df, suffixes=(&#39;&#39;, suffix), left_index=True, right_index=True)      
             else:
                 final_df = labels_df
                 
     if drop_na:
         final_df = final_df.dropna()
         
-    context.logger.info('Logging artifact')
+    context.logger.info(&#39;Logging artifact&#39;)
     if not from_model:
-        context.log_dataset(key='aggregate', 
+        context.log_dataset(key=&#39;aggregate&#39;, 
                             df=final_df, 
-                            format='parquet',
+                            format=&#39;parquet&#39;,
                             local_path=save_to)
     else:
         return final_df
