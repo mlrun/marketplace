@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2023 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -61,13 +61,13 @@ from tqdm import tqdm
 _LOGGER = logging.getLogger()
 
 
-def _check_mlrun_and_open_mpi() -> Tuple["mlrun.MLClientCtx", "mpi4py.MPI.Intracomm"]:
+def _check_mlrun_and_open_mpi() -&gt; Tuple[&#34;mlrun.MLClientCtx&#34;, &#34;mpi4py.MPI.Intracomm&#34;]:
     is_mpi = False
     try:
         import mlrun
 
-        context = mlrun.get_or_create_ctx(name="mlrun")
-        is_mpi = context.labels.get("kind", "job") == "mpijob"
+        context = mlrun.get_or_create_ctx(name=&#34;mlrun&#34;)
+        is_mpi = context.labels.get(&#34;kind&#34;, &#34;job&#34;) == &#34;mpijob&#34;
 
         if is_mpi:
             try:
@@ -76,8 +76,8 @@ def _check_mlrun_and_open_mpi() -> Tuple["mlrun.MLClientCtx", "mpi4py.MPI.Intrac
                 return context, MPI.COMM_WORLD
             except ModuleNotFoundError as mpi4py_not_found:
                 context.logger.error(
-                    "To distribute the function using MLRun's 'mpijob' you need to have `mpi4py` package in your "
-                    "interpreter. Please run `pip install mpi4py` and make sure you have open-mpi."
+                    &#34;To distribute the function using MLRun&#39;s &#39;mpijob&#39; you need to have `mpi4py` package in your &#34;
+                    &#34;interpreter. Please run `pip install mpi4py` and make sure you have open-mpi.&#34;
                 )
                 raise mpi4py_not_found
         else:
@@ -96,7 +96,7 @@ def open_mpi_handler(
     # Check for MLRun and OpenMPI availability:
     context, comm = _check_mlrun_and_open_mpi()
 
-    # Check if MLRun is available, set the global logger to MLRun's:
+    # Check if MLRun is available, set the global logger to MLRun&#39;s:
     if context:
         _LOGGER = context.logger
 
@@ -119,21 +119,21 @@ def open_mpi_handler(
                     input_argument = _get_audio_files(
                         data_path=pathlib.Path(input_argument).absolute()
                     )
-                if len(input_argument) < size:
+                if len(input_argument) &lt; size:
                     raise ValueError(
-                        f"Cannot split the input '{worker_input}' of length {len(input_argument)} to {size} workers. "
-                        f"Please reduce the amount of workers for this input."
+                        f&#34;Cannot split the input &#39;{worker_input}&#39; of length {len(input_argument)} to {size} workers. &#34;
+                        f&#34;Please reduce the amount of workers for this input.&#34;
                     )
                 even_chunk_size = len(input_argument) // size
                 chunk_start = rank * even_chunk_size
                 chunk_end = (
                     (rank + 1) * even_chunk_size
-                    if rank + 1 < size
+                    if rank + 1 &lt; size
                     else len(input_argument)
                 )
                 context.logger.info(
-                    f"Rank #{rank}: Processing input chunk of '{worker_input}' "
-                    f"from index {chunk_start} to {chunk_end}."
+                    f&#34;Rank #{rank}: Processing input chunk of &#39;{worker_input}&#39; &#34;
+                    f&#34;from index {chunk_start} to {chunk_end}.&#34;
                 )
                 if isinstance(input_argument, list):
                     input_argument = input_argument[chunk_start:chunk_end]
@@ -152,7 +152,7 @@ def open_mpi_handler(
             output = comm.gather(output, root=0)
             if rank == 0:
                 # Join the outputs:
-                context.logger.info("Collecting data from workers to root worker.")
+                context.logger.info(&#34;Collecting data from workers to root worker.&#34;)
                 diarization_dictionary = reduce(
                     operator.ior, [dia for dia, _ in output], {}
                 )
@@ -165,20 +165,20 @@ def open_mpi_handler(
     return decorator
 
 
-@open_mpi_handler(worker_inputs=["data_path"], root_worker_inputs={"verbose": True})
+@open_mpi_handler(worker_inputs=[&#34;data_path&#34;], root_worker_inputs={&#34;verbose&#34;: True})
 def diarize(
     data_path: Union[str, List[str]],
-    model_name: str = "pyannote/speaker-diarization-3.0",
+    model_name: str = &#34;pyannote/speaker-diarization-3.0&#34;,
     access_token: str = None,
     device: str = None,
     speakers_labels: List[str] = None,
-    speaker_prefix: str = "speaker_",
+    speaker_prefix: str = &#34;speaker_&#34;,
     separate_by_channels: bool = False,
     minimum_speakers: int = None,
     maximum_speakers: int = None,
     verbose: bool = False,
-) -> Tuple[Dict[str, List[Tuple[float, float, str]]], Dict[str, str]]:
-    """
+) -&gt; Tuple[Dict[str, List[Tuple[float, float, str]]], Dict[str, str]]:
+    &#34;&#34;&#34;
     Perform speech diarization on given audio files using pyannote-audio (https://github.com/pyannote/pyannote-audio).
     The end result is a dictionary with the file names as keys and their diarization as value. A diarization is a list
     of tuples: (start, end, speaker_label).
@@ -187,11 +187,11 @@ def diarize(
     token can be passed in one of the following options:
 
     * Use the parameter `access_token`.
-    * Set an environment variable named "HUGGING_FACE_HUB_TOKEN".
-    * If using MLRun, you can pass it as a secret named "HUGGING_FACE_HUB_TOKEN".
+    * Set an environment variable named &#34;HUGGING_FACE_HUB_TOKEN&#34;.
+    * If using MLRun, you can pass it as a secret named &#34;HUGGING_FACE_HUB_TOKEN&#34;.
 
     To get access to the models on Huggingface, visit their page. For example, to use the default diarization model set
-    in this function ("pyannote/speaker-diarization-3.0"), you need access for these two models:
+    in this function (&#34;pyannote/speaker-diarization-3.0&#34;), you need access for these two models:
 
     * https://huggingface.co/pyannote/segmentation-3.0
     * https://huggingface.co/pyannote/speaker-diarization-3.0
@@ -208,18 +208,18 @@ def diarize(
 
     :param data_path:            A directory of the audio files, a single file or a list of files to transcribe.
     :param model_name:           One of the official diarization model names (referred as diarization pipelines) of
-                                 `pyannote.audio` Huggingface page. Default: "pyannote/speaker-diarization-3.0".
+                                 `pyannote.audio` Huggingface page. Default: &#34;pyannote/speaker-diarization-3.0&#34;.
     :param access_token:         An access token to pass for using the `pyannote.audio` models. If not provided, it
-                                 will be looking for the environment variable "HUGGING_FACE_HUB_TOKEN". If MLRun is
-                                 available, it will look for a secret "HUGGING_FACE_HUB_TOKEN".
-    :param device:               Device to load the model. Can be one of {"cuda", "cpu"}. Default will prefer "cuda" if
+                                 will be looking for the environment variable &#34;HUGGING_FACE_HUB_TOKEN&#34;. If MLRun is
+                                 available, it will look for a secret &#34;HUGGING_FACE_HUB_TOKEN&#34;.
+    :param device:               Device to load the model. Can be one of {&#34;cuda&#34;, &#34;cpu&#34;}. Default will prefer &#34;cuda&#34; if
                                  available.
     :param speakers_labels:      Labels to use for the recognized speakers. Default: numeric labels (0, 1, ...).
     :param separate_by_channels: If each speaker is speaking in a separate channel, you can diarize each channel and
                                  combine the result into a single diarization. Each label set in the `speakers_labels`
                                  parameter will be assigned to a specific channel by order.
     :param speaker_prefix:       A prefix to add for the speakers labels. This parameter is ignored if
-                                 `speakers_labels` is not None. Default: "speaker".
+                                 `speakers_labels` is not None. Default: &#34;speaker&#34;.
     :param minimum_speakers:     Set the minimum expected amount of speakers to be in the audio files. This parameter is
                                  ignored if `speakers_labels` is not None.
     :param maximum_speakers:     Set the maximum expected amount of speakers to be in the audio files. This parameter is
@@ -230,7 +230,7 @@ def diarize(
 
               * Speech diarization dictionary.
               * A dictionary of errored files that were not transcribed.
-    """
+    &#34;&#34;&#34;
     global _LOGGER
 
     # Get the input audio files to diarize:
@@ -244,11 +244,11 @@ def diarize(
     access_token = _get_access_token(parameter=access_token)
     if access_token is None:
         raise ValueError(
-            "A Huggingface access token must be provided to use `pyannote.audio` models. Access token can be passed "
-            "via one of the following options:\n"
-            "* Use the parameter `access_token`.\n"
-            "* Set an environment variable named 'HUGGING_FACE_HUB_TOKEN'.\n"
-            "* If using MLRun, you can pass it as a secret named 'HUGGING_FACE_HUB_TOKEN'."
+            &#34;A Huggingface access token must be provided to use `pyannote.audio` models. Access token can be passed &#34;
+            &#34;via one of the following options:\n&#34;
+            &#34;* Use the parameter `access_token`.\n&#34;
+            &#34;* Set an environment variable named &#39;HUGGING_FACE_HUB_TOKEN&#39;.\n&#34;
+            &#34;* If using MLRun, you can pass it as a secret named &#39;HUGGING_FACE_HUB_TOKEN&#39;.&#34;
         )
 
     # Load the diarization pipeline:
@@ -257,8 +257,8 @@ def diarize(
     )
 
     # Set the device:
-    device = device or ("cuda" if torch.cuda.is_available() else "cpu")
-    if device != "cpu":
+    device = device or (&#34;cuda&#34; if torch.cuda.is_available() else &#34;cpu&#34;)
+    if device != &#34;cpu&#34;:
         pipeline.to(torch.device(device))
 
     # Prepare the successes dataframe and errors dictionary to be returned:
@@ -268,16 +268,16 @@ def diarize(
     # Prepare the diarization keyword arguments:
     diarize_kwargs = {}
     if speakers_labels:
-        diarize_kwargs["num_speakers"] = len(speakers_labels)
+        diarize_kwargs[&#34;num_speakers&#34;] = len(speakers_labels)
     else:
         if minimum_speakers:
-            diarize_kwargs["min_speakers"] = minimum_speakers
+            diarize_kwargs[&#34;min_speakers&#34;] = minimum_speakers
         if maximum_speakers:
-            diarize_kwargs["max_speakers"] = maximum_speakers
+            diarize_kwargs[&#34;max_speakers&#34;] = maximum_speakers
 
     # Go over the audio files and diarize:
     for audio_file in tqdm(
-        audio_files, desc="Diarizing", unit="file", disable=not verbose
+        audio_files, desc=&#34;Diarizing&#34;, unit=&#34;file&#34;, disable=not verbose
     ):
         try:
             # Load audio file:
@@ -295,41 +295,41 @@ def diarize(
         except Exception as exception:
             # Note the exception as error in the dictionary:
             if verbose:
-                _LOGGER.warning(f"Error in file: '{audio_file.name}'")
+                _LOGGER.warning(f&#34;Error in file: &#39;{audio_file.name}&#39;&#34;)
             errors[str(audio_file.name)] = str(exception)
             continue
 
     # Print the head of the produced dataframe and return:
     if verbose:
-        _LOGGER.info(f"Done ({len(diarizations)}/{len(audio_files)})\n")
+        _LOGGER.info(f&#34;Done ({len(diarizations)}/{len(audio_files)})\n&#34;)
     return diarizations, errors
 
 
 def _get_audio_files(
     data_path: pathlib.Path,
-) -> List[pathlib.Path]:
+) -&gt; List[pathlib.Path]:
     # Check if the path is of a directory or a file:
     if data_path.is_dir():
         # Get all files inside the directory:
-        audio_files = list(data_path.glob("*.*"))
+        audio_files = list(data_path.glob(&#34;*.*&#34;))
     elif data_path.is_file():
         audio_files = [data_path]
     else:
         raise ValueError(
-            f"Unrecognized data path. The parameter `data_path` must be either a directory path or a file path. "
-            f"Given: {str(data_path)} "
+            f&#34;Unrecognized data path. The parameter `data_path` must be either a directory path or a file path. &#34;
+            f&#34;Given: {str(data_path)} &#34;
         )
 
     return audio_files
 
 
-def _get_access_token(parameter: str) -> str:
+def _get_access_token(parameter: str) -&gt; str:
     # If given as a parameter, return it:
     if parameter:
         return parameter
 
     # Otherwise, look at the environment variable:
-    environment_variable = os.environ.get("HUGGING_FACE_HUB_TOKEN")
+    environment_variable = os.environ.get(&#34;HUGGING_FACE_HUB_TOKEN&#34;)
     if environment_variable:
         return environment_variable
 
@@ -338,8 +338,8 @@ def _get_access_token(parameter: str) -> str:
     try:
         import mlrun
 
-        context = mlrun.get_or_create_ctx(name="mlrun")
-        secret = context.get_secret(key="HUGGING_FACE_HUB_TOKEN")
+        context = mlrun.get_or_create_ctx(name=&#34;mlrun&#34;)
+        secret = context.get_secret(key=&#34;HUGGING_FACE_HUB_TOKEN&#34;)
     except ModuleNotFoundError:
         pass
 
@@ -354,32 +354,32 @@ def _diarize(
     separate_by_channels: bool,
     speaker_prefix: str,
     diarize_kwargs: dict,
-) -> List[Tuple[float, float, str]]:
+) -&gt; List[Tuple[float, float, str]]:
     # If there is no need for separation by channels, we diarize and return:
     if not separate_by_channels:
         # Diarize:
         diarization: pyannote.core.Annotation = pipeline(
-            file={"waveform": audio, "sample_rate": sample_rate}, **diarize_kwargs
+            file={&#34;waveform&#34;: audio, &#34;sample_rate&#34;: sample_rate}, **diarize_kwargs
         )
         # Verify speakers labels (should not fail here as we set `num_speakers=len(speakers_labels)` when inferring
         # through the pipeline):
         if speakers_labels:
             given_speakers = len(speakers_labels)
             found_speakers = len(set(diarization.labels()))
-            if given_speakers < found_speakers:
+            if given_speakers &lt; found_speakers:
                 raise ValueError(
-                    f"Not enough `speakers_labels` were given. Got {given_speakers} labels but the diarization "
-                    f"recognized {found_speakers} speakers."
+                    f&#34;Not enough `speakers_labels` were given. Got {given_speakers} labels but the diarization &#34;
+                    f&#34;recognized {found_speakers} speakers.&#34;
                 )
         # Return as a diarization list - a sorted list of tuples of start time, end time and a label (the default label
-        # returned is "SPEAKER_i" so we take only the index out of it):
+        # returned is &#34;SPEAKER_i&#34; so we take only the index out of it):
         return [
             (
                 segment.start,
                 segment.end,
-                speakers_labels[int(label.split("_")[1])]
+                speakers_labels[int(label.split(&#34;_&#34;)[1])]
                 if speakers_labels
-                else f"{speaker_prefix}{int(label.split('_')[1])}",
+                else f&#34;{speaker_prefix}{int(label.split(&#39;_&#39;)[1])}&#34;,
             )
             for segment, track, label in diarization.itertracks(yield_label=True)
         ]
@@ -394,10 +394,10 @@ def _diarize(
             pipeline=pipeline,
             speakers_labels=[
                 speakers_labels[channel]
-            ],  # Take the channel's label only.
+            ],  # Take the channel&#39;s label only.
             separate_by_channels=False,
             speaker_prefix=speaker_prefix,
-            diarize_kwargs={"num_speakers": 1},  # Set to one speaker.
+            diarize_kwargs={&#34;num_speakers&#34;: 1},  # Set to one speaker.
         )
         for channel in range(audio.shape[0])
     ]

@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2023 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -61,77 +61,77 @@ from tqdm import tqdm
 try:
     import flair as fl
 except ModuleNotFoundError:
-    print("Flair is not installed")
+    print(&#34;Flair is not installed&#34;)
 
-# There is a conflict between Rust-based tokenizers' parallel processing
-# and Python's fork operations during multiprocessing. To avoid this, we need
+# There is a conflict between Rust-based tokenizers&#39; parallel processing
+# and Python&#39;s fork operations during multiprocessing. To avoid this, we need
 # the following two lines
 
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
-warnings.filterwarnings("ignore")
+os.environ[&#34;TOKENIZERS_PARALLELISM&#34;] = &#34;false&#34;
+warnings.filterwarnings(&#34;ignore&#34;)
 
-logger = logging.getLogger("pii-recognizer")
+logger = logging.getLogger(&#34;pii-recognizer&#34;)
 
 
 # Add the constant classes of Models and Entities to govern the whole package
 class Models:
-    WHOLE = "whole"
-    PATTERN = "pattern"
-    SPACY = "spacy"
-    FLAIR = "flair"
+    WHOLE = &#34;whole&#34;
+    PATTERN = &#34;pattern&#34;
+    SPACY = &#34;spacy&#34;
+    FLAIR = &#34;flair&#34;
 
 
 class Entities:
-    CREDIT_CARD = "CREDIT_CARD"
-    SSN = "SSN"
-    PHONE = "PHONE"
-    EMAIL = "EMAIL"
-    LOCATION = "LOCATION"
-    PERSON = "PERSON"
-    NRP = "NRP"
-    ORGANIZATION = "ORGANIZATION"
-    DATE_TIME = "DATE_TIME"
-    GPE = ("GPE",)
-    MAC_ADDRESS = "MAC_ADDRESS"
-    US_BANK_NUMBER = "US_BANK_NUMBER"
-    IMEI = "IMEI"
-    TITLE = "TITLE"
-    LICENSE_PLATE = "LICENSE_PLATE"
-    US_PASSPORT = "US_PASSPORT"
-    CURRENCY = "CURRENCY"
-    ROUTING_NUMBER = "ROUTING_NUMBER"
-    US_ITIN = "US_ITIN"
-    US_BANK_NUMBER = "US_BANK_NUMBER"
-    US_DRIVER_LICENSE = "US_DRIVER_LICENSE"
-    AGE = "AGE"
-    PASSWORD = "PASSWORD"
-    SWIFT_CODE = "SWIFT_CODE"
+    CREDIT_CARD = &#34;CREDIT_CARD&#34;
+    SSN = &#34;SSN&#34;
+    PHONE = &#34;PHONE&#34;
+    EMAIL = &#34;EMAIL&#34;
+    LOCATION = &#34;LOCATION&#34;
+    PERSON = &#34;PERSON&#34;
+    NRP = &#34;NRP&#34;
+    ORGANIZATION = &#34;ORGANIZATION&#34;
+    DATE_TIME = &#34;DATE_TIME&#34;
+    GPE = (&#34;GPE&#34;,)
+    MAC_ADDRESS = &#34;MAC_ADDRESS&#34;
+    US_BANK_NUMBER = &#34;US_BANK_NUMBER&#34;
+    IMEI = &#34;IMEI&#34;
+    TITLE = &#34;TITLE&#34;
+    LICENSE_PLATE = &#34;LICENSE_PLATE&#34;
+    US_PASSPORT = &#34;US_PASSPORT&#34;
+    CURRENCY = &#34;CURRENCY&#34;
+    ROUTING_NUMBER = &#34;ROUTING_NUMBER&#34;
+    US_ITIN = &#34;US_ITIN&#34;
+    US_BANK_NUMBER = &#34;US_BANK_NUMBER&#34;
+    US_DRIVER_LICENSE = &#34;US_DRIVER_LICENSE&#34;
+    AGE = &#34;AGE&#34;
+    PASSWORD = &#34;PASSWORD&#34;
+    SWIFT_CODE = &#34;SWIFT_CODE&#34;
 
 
 class PatternRecognizerFactory:
-    """
+    &#34;&#34;&#34;
     Factory for creating pattern recognizers, it can be extended in the future to
     add more regex pattern for different entities. For the pattern recognizer to work,
     we need construct a list of regex patterns for each entity.
-    """
+    &#34;&#34;&#34;
 
     RECOGNIZABLE_ENTITIES = {
-        "CREDIT_CARD": [pa.Pattern("CREDIT_CARD", r"\b(?:\d[ -]*?){13,16}\b", 0.5)],
-        "SSN": [pa.Pattern("SSN", r"\b\d{3}-?\d{2}-?\d{4}\b", 0.5)],
-        "PHONE": [pa.Pattern("PHONE", r"\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}", 0.5)],
-        "EMAIL": [pa.Pattern("EMAIL", r"\S+@\S+", 0.5)],
+        &#34;CREDIT_CARD&#34;: [pa.Pattern(&#34;CREDIT_CARD&#34;, r&#34;\b(?:\d[ -]*?){13,16}\b&#34;, 0.5)],
+        &#34;SSN&#34;: [pa.Pattern(&#34;SSN&#34;, r&#34;\b\d{3}-?\d{2}-?\d{4}\b&#34;, 0.5)],
+        &#34;PHONE&#34;: [pa.Pattern(&#34;PHONE&#34;, r&#34;\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}&#34;, 0.5)],
+        &#34;EMAIL&#34;: [pa.Pattern(&#34;EMAIL&#34;, r&#34;\S+@\S+&#34;, 0.5)],
     }
 
     # create a list of pattern recognizers
     @classmethod
     def _create_pattern_recognizer(cls):
-        """
+        &#34;&#34;&#34;
         For each entity, create a list of patterns to recognize it
 
         :param cls: PatternRecognizerFactory class
 
         :returns: List of pattern recognizers
-        """
+        &#34;&#34;&#34;
 
         # Entities to recognize and their regex patterns
 
@@ -142,62 +142,62 @@ class PatternRecognizerFactory:
 
 
 class CustomSpacyRecognizer(pa.LocalRecognizer):
-    """
+    &#34;&#34;&#34;
     Custom Spacy Recognizer from Presidio Analyzer trained on Privy data.
     The privy data is generated using this https://github.com/pixie-io/pixie/tree/main/src/datagen/pii/privy
-    It can be used to recognize custom entities, Since we want to use Presidio's Registries to generate AnalyzerEngine,
-    it inherits from Presidio Analyzer's LocalRecognizer class.
-    """
+    It can be used to recognize custom entities, Since we want to use Presidio&#39;s Registries to generate AnalyzerEngine,
+    it inherits from Presidio Analyzer&#39;s LocalRecognizer class.
+    &#34;&#34;&#34;
 
     # Entities to recognize
 
     RECOGNIZABLE_ENTITIES = {
-        "LOCATION",
-        "PERSON",
-        "NRP",
-        "ORGANIZATION",
-        "DATE_TIME",
+        &#34;LOCATION&#34;,
+        &#34;PERSON&#34;,
+        &#34;NRP&#34;,
+        &#34;ORGANIZATION&#34;,
+        &#34;DATE_TIME&#34;,
     }
 
     # Default explanation for this recognizer
 
     _DEFAULT_EXPLANATION = (
-        "Identified as {} by Spacy's Named Entity Recognition (Privy-trained)"
+        &#34;Identified as {} by Spacy&#39;s Named Entity Recognition (Privy-trained)&#34;
     )
 
     # Label groups to check
 
     _DEFAULT_CHECK_LABEL_GROUPS = [
-        ({"LOCATION"}, {"LOC", "LOCATION", "STREET_ADDRESS", "COORDINATE"}),
-        ({"PERSON"}, {"PER", "PERSON"}),
-        ({"NRP"}, {"NORP", "NRP"}),
-        ({"ORGANIZATION"}, {"ORG"}),
-        ({"DATE_TIME"}, {"DATE_TIME"}),
+        ({&#34;LOCATION&#34;}, {&#34;LOC&#34;, &#34;LOCATION&#34;, &#34;STREET_ADDRESS&#34;, &#34;COORDINATE&#34;}),
+        ({&#34;PERSON&#34;}, {&#34;PER&#34;, &#34;PERSON&#34;}),
+        ({&#34;NRP&#34;}, {&#34;NORP&#34;, &#34;NRP&#34;}),
+        ({&#34;ORGANIZATION&#34;}, {&#34;ORG&#34;}),
+        ({&#34;DATE_TIME&#34;}, {&#34;DATE_TIME&#34;}),
     ]
 
     # pretrained model for this recognizer
 
     _DEFAULT_MODEL_LANGUAGES = {
-        "en": "beki/en_spacy_pii_distilbert",
+        &#34;en&#34;: &#34;beki/en_spacy_pii_distilbert&#34;,
     }
 
     _DEFAULT_PRESIDIO_EQUIVALENCES = {
-        "PER": "PERSON",
-        "LOC": "LOCATION",
-        "ORG": "ORGANIZATION",
-        "NROP": "NRP",
-        "DATE_TIME": "DATE_TIME",
+        &#34;PER&#34;: &#34;PERSON&#34;,
+        &#34;LOC&#34;: &#34;LOCATION&#34;,
+        &#34;ORG&#34;: &#34;ORGANIZATION&#34;,
+        &#34;NROP&#34;: &#34;NRP&#34;,
+        &#34;DATE_TIME&#34;: &#34;DATE_TIME&#34;,
     }
 
     def __init__(
         self,
-        supported_language: str = "en",
+        supported_language: str = &#34;en&#34;,
         supported_entities: List[str] = None,
         check_label_groups: Tuple[Set, Set] = None,
         context: List[str] = None,
         ner_strength: float = 1,
     ):
-        """
+        &#34;&#34;&#34;
         Initialize Spacy Recognizer.
 
         :param supported_language: Language to use, default is English
@@ -207,7 +207,7 @@ class CustomSpacyRecognizer(pa.LocalRecognizer):
         :param ner_strength:       Default confidence for NER prediction
 
         :returns: SpacyRecognizer object
-        """
+        &#34;&#34;&#34;
 
         # Default confidence for NER prediction
         self.ner_strength = ner_strength
@@ -223,15 +223,15 @@ class CustomSpacyRecognizer(pa.LocalRecognizer):
 
     def _build_spacy_explanation(
         self, original_score: float, explanation: str
-    ) -> pa.AnalysisExplanation:
-        """
+    ) -&gt; pa.AnalysisExplanation:
+        &#34;&#34;&#34;
         Create explanation for why this result was detected.
 
         :param original_score: Score given by this recognizer
         :param explanation:    Explanation string
 
         :returns: Presidio AnalysisExplanation object
-        """
+        &#34;&#34;&#34;
         explanation = pa.AnalysisExplanation(
             recognizer=self.__class__.__name__,
             original_score=original_score,
@@ -241,7 +241,7 @@ class CustomSpacyRecognizer(pa.LocalRecognizer):
 
     # main method for the recognizer
     def analyze(self, text: str, entities: List[str], nlp_artifacts=None):  # noqa D102
-        """
+        &#34;&#34;&#34;
         Analyze text using Spacy.
 
         :param text:          Text to analyze
@@ -249,10 +249,10 @@ class CustomSpacyRecognizer(pa.LocalRecognizer):
         :param nlp_artifacts: NLP artifacts to use
 
         :returns: List of Presidio RecognizerResult objects
-        """
+        &#34;&#34;&#34;
         results = []
         if not nlp_artifacts:
-            logger.warning("Skipping SpaCy, nlp artifacts not provided...")
+            logger.warning(&#34;Skipping SpaCy, nlp artifacts not provided...&#34;)
             return results
 
         ner_entities = nlp_artifacts.entities
@@ -289,8 +289,8 @@ class CustomSpacyRecognizer(pa.LocalRecognizer):
     @staticmethod
     def __check_label(
         entity: str, label: str, check_label_groups: Tuple[Set, Set]
-    ) -> bool:
-        """
+    ) -&gt; bool:
+        &#34;&#34;&#34;
         Check if the label is in the label group.
 
         :param entity:             Entity to check
@@ -298,7 +298,7 @@ class CustomSpacyRecognizer(pa.LocalRecognizer):
         :param check_label_groups: Label groups to check
 
         :returns: True if the label is in the label group, False otherwise
-        """
+        &#34;&#34;&#34;
         return any(
             entity in egrp and label in lgrp for egrp, lgrp in check_label_groups
         )
@@ -306,85 +306,85 @@ class CustomSpacyRecognizer(pa.LocalRecognizer):
 
 # Class to use Flair with Presidio as an external recognizer.
 class FlairRecognizer(pa.EntityRecognizer):
-    """
+    &#34;&#34;&#34;
     Wrapper for a flair model, if needed to be used within Presidio Analyzer.
     This is to make sure the recognizer can be registered with Presidio registry.
-    """
+    &#34;&#34;&#34;
 
     RECOGNIZABLE_ENTITIES = {
-        "LOCATION",
-        "PERSON",
-        "NRP",
-        "GPE",
-        "ORGANIZATION",
-        "MAC_ADDRESS",
-        "US_BANK_NUMBER",
-        "IMEI",
-        "TITLE",
-        "LICENSE_PLATE",
-        "US_PASSPORT",
-        "CURRENCY",
-        "ROUTING_NUMBER",
-        "US_ITIN",
-        "US_BANK_NUMBER",
-        "US_DRIVER_LICENSE",
-        "AGE",
-        "PASSWORD",
-        "SWIFT_CODE",
+        &#34;LOCATION&#34;,
+        &#34;PERSON&#34;,
+        &#34;NRP&#34;,
+        &#34;GPE&#34;,
+        &#34;ORGANIZATION&#34;,
+        &#34;MAC_ADDRESS&#34;,
+        &#34;US_BANK_NUMBER&#34;,
+        &#34;IMEI&#34;,
+        &#34;TITLE&#34;,
+        &#34;LICENSE_PLATE&#34;,
+        &#34;US_PASSPORT&#34;,
+        &#34;CURRENCY&#34;,
+        &#34;ROUTING_NUMBER&#34;,
+        &#34;US_ITIN&#34;,
+        &#34;US_BANK_NUMBER&#34;,
+        &#34;US_DRIVER_LICENSE&#34;,
+        &#34;AGE&#34;,
+        &#34;PASSWORD&#34;,
+        &#34;SWIFT_CODE&#34;,
     }
 
     # This is used to construct the explanation for the result
 
-    _DEFAULT_EXPLANATION = "Identified as {} by Flair's Named Entity Recognition"
+    _DEFAULT_EXPLANATION = &#34;Identified as {} by Flair&#39;s Named Entity Recognition&#34;
 
     _DEFAULT_CHECK_LABEL_GROUPS = [
-        ({"LOCATION"}, {"LOC", "LOCATION", "STREET_ADDRESS", "COORDINATE"}),
-        ({"PERSON"}, {"PER", "PERSON"}),
-        ({"NRP"}, {"NORP", "NRP"}),
-        ({"GPE"}, {"GPE"}),
-        ({"ORGANIZATION"}, {"ORG"}),
-        ({"MAC_ADDRESS"}, {"MAC_ADDRESS"}),
-        ({"US_BANK_NUMBER"}, {"US_BANK_NUMBER"}),
-        ({"IMEI"}, {"IMEI"}),
-        ({"TITLE"}, {"TITLE"}),
-        ({"LICENSE_PLATE"}, {"LICENSE_PLATE"}),
-        ({"US_PASSPORT"}, {"US_PASSPORT"}),
-        ({"CURRENCY"}, {"CURRENCY"}),
-        ({"ROUTING_NUMBER"}, {"ROUTING_NUMBER"}),
-        ({"AGE"}, {"AGE"}),
-        ({"CURRENCY"}, {"CURRENCY"}),
-        ({"SWIFT_CODE"}, {"SWIFT_CODE"}),
-        ({"US_ITIN"}, {"US_ITIN"}),
-        ({"US_BANK_NUMBER"}, {"US_BANK_NUMBER"}),
-        ({"US_DRIVER_LICENSE"}, {"US_DRIVER_LICENSE"}),
+        ({&#34;LOCATION&#34;}, {&#34;LOC&#34;, &#34;LOCATION&#34;, &#34;STREET_ADDRESS&#34;, &#34;COORDINATE&#34;}),
+        ({&#34;PERSON&#34;}, {&#34;PER&#34;, &#34;PERSON&#34;}),
+        ({&#34;NRP&#34;}, {&#34;NORP&#34;, &#34;NRP&#34;}),
+        ({&#34;GPE&#34;}, {&#34;GPE&#34;}),
+        ({&#34;ORGANIZATION&#34;}, {&#34;ORG&#34;}),
+        ({&#34;MAC_ADDRESS&#34;}, {&#34;MAC_ADDRESS&#34;}),
+        ({&#34;US_BANK_NUMBER&#34;}, {&#34;US_BANK_NUMBER&#34;}),
+        ({&#34;IMEI&#34;}, {&#34;IMEI&#34;}),
+        ({&#34;TITLE&#34;}, {&#34;TITLE&#34;}),
+        ({&#34;LICENSE_PLATE&#34;}, {&#34;LICENSE_PLATE&#34;}),
+        ({&#34;US_PASSPORT&#34;}, {&#34;US_PASSPORT&#34;}),
+        ({&#34;CURRENCY&#34;}, {&#34;CURRENCY&#34;}),
+        ({&#34;ROUTING_NUMBER&#34;}, {&#34;ROUTING_NUMBER&#34;}),
+        ({&#34;AGE&#34;}, {&#34;AGE&#34;}),
+        ({&#34;CURRENCY&#34;}, {&#34;CURRENCY&#34;}),
+        ({&#34;SWIFT_CODE&#34;}, {&#34;SWIFT_CODE&#34;}),
+        ({&#34;US_ITIN&#34;}, {&#34;US_ITIN&#34;}),
+        ({&#34;US_BANK_NUMBER&#34;}, {&#34;US_BANK_NUMBER&#34;}),
+        ({&#34;US_DRIVER_LICENSE&#34;}, {&#34;US_DRIVER_LICENSE&#34;}),
     ]
 
     _DEFAULT_MODEL_LANGUAGES = {
-        "en": "beki/flair-pii-distilbert",
+        &#34;en&#34;: &#34;beki/flair-pii-distilbert&#34;,
     }
 
     _DEFAULT_PRESIDIO_EQUIVALENCES = {
-        "PER": "PERSON",
-        "LOC": "LOCATION",
-        "ORG": "ORGANIZATION",
-        "NROP": "NRP",
-        "URL": "URL",
-        "US_ITIN": "US_ITIN",
-        "US_PASSPORT": "US_PASSPORT",
-        "IBAN_CODE": "IBAN_CODE",
-        "IP_ADDRESS": "IP_ADDRESS",
-        "EMAIL_ADDRESS": "EMAIL",
-        "US_DRIVER_LICENSE": "US_DRIVER_LICENSE",
-        "US_BANK_NUMBER": "US_BANK_NUMBER",
+        &#34;PER&#34;: &#34;PERSON&#34;,
+        &#34;LOC&#34;: &#34;LOCATION&#34;,
+        &#34;ORG&#34;: &#34;ORGANIZATION&#34;,
+        &#34;NROP&#34;: &#34;NRP&#34;,
+        &#34;URL&#34;: &#34;URL&#34;,
+        &#34;US_ITIN&#34;: &#34;US_ITIN&#34;,
+        &#34;US_PASSPORT&#34;: &#34;US_PASSPORT&#34;,
+        &#34;IBAN_CODE&#34;: &#34;IBAN_CODE&#34;,
+        &#34;IP_ADDRESS&#34;: &#34;IP_ADDRESS&#34;,
+        &#34;EMAIL_ADDRESS&#34;: &#34;EMAIL&#34;,
+        &#34;US_DRIVER_LICENSE&#34;: &#34;US_DRIVER_LICENSE&#34;,
+        &#34;US_BANK_NUMBER&#34;: &#34;US_BANK_NUMBER&#34;,
     }
 
     def __init__(
         self,
-        supported_language: str = "en",
+        supported_language: str = &#34;en&#34;,
         supported_entities: List[str] = None,
         check_label_groups: Tuple[Set, Set] = None,
     ):
-        """
+        &#34;&#34;&#34;
         Initialize the FlairRecognizer.
 
         :param supported_language: Language to use
@@ -393,7 +393,7 @@ class FlairRecognizer(pa.EntityRecognizer):
 
         :returns: FlairRecognizer object
 
-        """
+        &#34;&#34;&#34;
         self.check_label_groups = check_label_groups or self._DEFAULT_CHECK_LABEL_GROUPS
 
         supported_entities = supported_entities or self.RECOGNIZABLE_ENTITIES
@@ -404,7 +404,7 @@ class FlairRecognizer(pa.EntityRecognizer):
         super().__init__(
             supported_entities=supported_entities,
             supported_language=supported_language,
-            name="Flair Analytics",
+            name=&#34;Flair Analytics&#34;,
         )
 
     # main method for the recognizer
@@ -413,8 +413,8 @@ class FlairRecognizer(pa.EntityRecognizer):
         text: str,
         entities: List[str],
         nlp_artifacts: pa.nlp_engine.NlpArtifacts = None,
-    ) -> List[pa.RecognizerResult]:
-        """
+    ) -&gt; List[pa.RecognizerResult]:
+        &#34;&#34;&#34;
         Analyze text and return the results.
 
         :param text:          The text for analysis.
@@ -422,7 +422,7 @@ class FlairRecognizer(pa.EntityRecognizer):
         :param nlp_artifacts: Not used by this recognizer but needed for the interface.
 
         :returns: The list of Presidio RecognizerResult constructed from the recognized Flair detections.
-        """
+        &#34;&#34;&#34;
 
         results = []
 
@@ -439,7 +439,7 @@ class FlairRecognizer(pa.EntityRecognizer):
                 continue
 
             # Go over the sentences and check if the entity is in the sentence.
-            for ent in sentences.get_spans("ner"):
+            for ent in sentences.get_spans(&#34;ner&#34;):
                 if not self.__check_label(
                     entity, ent.labels[0].value, self.check_label_groups
                 ):
@@ -463,15 +463,15 @@ class FlairRecognizer(pa.EntityRecognizer):
 
     def _convert_to_recognizer_result(
         self, entity: fl.data.Span, explanation: str
-    ) -> pa.RecognizerResult:
-        """
+    ) -&gt; pa.RecognizerResult:
+        &#34;&#34;&#34;
         Convert Flair result to Presidio RecognizerResult.
 
         :param entity:      Flair entity of Span
         :param explanation: Presidio AnalysisExplanation
 
         :returns: Presidio RecognizerResult
-        """
+        &#34;&#34;&#34;
 
         # Convert the entity type to Presidio entity type
         entity_type = self._DEFAULT_PRESIDIO_EQUIVALENCES.get(entity.tag, entity.tag)
@@ -492,15 +492,15 @@ class FlairRecognizer(pa.EntityRecognizer):
 
     def _build_flair_explanation(
         self, original_score: float, explanation: str
-    ) -> pa.AnalysisExplanation:
-        """
+    ) -&gt; pa.AnalysisExplanation:
+        &#34;&#34;&#34;
         Create explanation for why this result was detected.
 
         :param original_score: Score given by this recognizer
         :param explanation:    Explanation string
 
         :returns: Presidio AnalysisExplanation
-        """
+        &#34;&#34;&#34;
 
         # Create the Presidio AnalysisExplanation for the result
         explanation = pa.AnalysisExplanation(
@@ -514,7 +514,7 @@ class FlairRecognizer(pa.EntityRecognizer):
     @staticmethod
     def __check_label(
         entity: str, label: str, check_label_groups: Tuple[Set, Set]
-    ) -> bool:
+    ) -&gt; bool:
         return any(
             entity in egrp and label in lgrp for egrp, lgrp in check_label_groups
         )
@@ -523,15 +523,15 @@ class FlairRecognizer(pa.EntityRecognizer):
 # get the analyzer engine based on the model
 def _get_analyzer_engine(
     model: str = None, entities: List[str] = None
-) -> pa.AnalyzerEngine:
-    """
+) -&gt; pa.AnalyzerEngine:
+    &#34;&#34;&#34;
     Return pa.AnalyzerEngine.
 
-    :param model: The model to use. Can be "spacy", "flair", "pattern" or "whole".
+    :param model: The model to use. Can be &#34;spacy&#34;, &#34;flair&#34;, &#34;pattern&#34; or &#34;whole&#34;.
     :param entities: The list of entities to use.
 
     :returns: pa.AnalyzerEngine
-    """
+    &#34;&#34;&#34;
     # recognizer registry that can store multiple recognizers
     registry = pa.RecognizerRegistry()
     if model == Models.SPACY:
@@ -559,24 +559,24 @@ def _get_analyzer_engine(
         for recognizer in pattern_recognizer_factory._create_pattern_recognizer():
             registry.add_recognizer(recognizer)
     elif not model and entities:
-        if set(entities) & CustomSpacyRecognizer.RECOGNIZABLE_ENTITIES:
+        if set(entities) &amp; CustomSpacyRecognizer.RECOGNIZABLE_ENTITIES:
             spacy_recognizer = CustomSpacyRecognizer()
             registry.add_recognizer(spacy_recognizer)
-        if set(entities) & FlairRecognizer.RECOGNIZABLE_ENTITIES:
+        if set(entities) &amp; FlairRecognizer.RECOGNIZABLE_ENTITIES:
             flair_recognizer = FlairRecognizer()
             registry.add_recognizer(flair_recognizer)
         # add the pattern recognizer
-        if set(entities) & (set(PatternRecognizerFactory.RECOGNIZABLE_ENTITIES.keys())):
+        if set(entities) &amp; (set(PatternRecognizerFactory.RECOGNIZABLE_ENTITIES.keys())):
             pattern_recognizer_factory = PatternRecognizerFactory()
             for recognizer in pattern_recognizer_factory._create_pattern_recognizer():
                 registry.add_recognizer(recognizer)
     else:
         raise ValueError(
-            f"argument of model and entities can not be None at the same time"
+            f&#34;argument of model and entities can not be None at the same time&#34;
         )
     analyzer = pa.AnalyzerEngine(
         registry=registry,
-        supported_languages=["en"],
+        supported_languages=[&#34;en&#34;],
     )
 
     supported_entities = analyzer.get_supported_entities()
@@ -586,18 +586,18 @@ def _get_analyzer_engine(
             item for item in entities if item not in supported_entities
         ]
         raise ValueError(
-            f"The current model {model} doesn't support the following entities: {not_supported_entities}. "
-            f"Supported entities are: {supported_entities}"
+            f&#34;The current model {model} doesn&#39;t support the following entities: {not_supported_entities}. &#34;
+            f&#34;Supported entities are: {supported_entities}&#34;
         )
     return analyzer
 
 
-def _get_anonymizer_engine() -> pre_anoymizer.AnonymizerEngine:
-    """
+def _get_anonymizer_engine() -&gt; pre_anoymizer.AnonymizerEngine:
+    &#34;&#34;&#34;
     Return AnonymizerEngine.
 
     :returns: The AnonymizerEngine.
-    """
+    &#34;&#34;&#34;
     return pre_anoymizer.AnonymizerEngine()
 
 
@@ -606,8 +606,8 @@ def _anonymize(
     analyze_results: List[pa.RecognizerResult],
     entity_operator_map: dict = None,
     is_full_text: bool = True,
-) -> str:
-    """
+) -&gt; str:
+    &#34;&#34;&#34;
     Anonymize identified input using Presidio Abonymizer.
 
     :param text:                The text for analysis.
@@ -616,9 +616,9 @@ def _anonymize(
     :param is_full_text:        Whether the text is full text or not.
 
     :returns: The anonymized text.
-    """
+    &#34;&#34;&#34;
     if not text:
-        return ""
+        return &#34;&#34;
 
     anonymizer_engine = _get_anonymizer_engine()
     if not entity_operator_map:
@@ -654,7 +654,7 @@ def _anonymize(
                 score=result.score,
             )
             for result in analyze_results
-            if result.start >= start_idx and result.end <= end_idx
+            if result.start &gt;= start_idx and result.end &lt;= end_idx
         ]
 
         # If PII is detected
@@ -666,13 +666,13 @@ def _anonymize(
 
         current_idx = end_idx
 
-    return " ".join(anonymized_sentences)
+    return &#34; &#34;.join(anonymized_sentences)
 
 
 def _get_tokens(
     text: str, analyze_results: List[pa.RecognizerResult], is_full: bool = True
-) -> List[str]:
-    """
+) -&gt; List[str]:
+    &#34;&#34;&#34;
     Get the full tokens or only contains the entities that can form a sentence.
 
     :param text:            The text for analysis.
@@ -680,7 +680,7 @@ def _get_tokens(
     :param is_full:         Whether return full tokens or just the tokens that only contains the entities that can form a sentence.
 
     :returns: The tokens.
-    """
+    &#34;&#34;&#34;
 
     tokens = []
     # sort by start index
@@ -692,7 +692,7 @@ def _get_tokens(
         # append entity text and entity type
         tokens.append((text[res.start : res.end], res.entity_type))
 
-        # if another entity coming i.e. we're not at the last results element,
+        # if another entity coming i.e. we&#39;re not at the last results element,
         # add text up to next entity
         if i != len(results) - 1:
             tokens.append(text[res.end : results[i + 1].start])
@@ -705,7 +705,7 @@ def _get_tokens(
     if not is_full:
         last_end_sentence = 0
         for i, token in enumerate(tokens):
-            if any(item in token for item in [".", "!", "?"]) and any(
+            if any(item in token for item in [&#34;.&#34;, &#34;!&#34;, &#34;?&#34;]) and any(
                 type(item) is tuple for item in tokens[last_end_sentence:i]
             ):
                 part_annontated_tokens.append(tokens[last_end_sentence:i])
@@ -716,8 +716,8 @@ def _get_tokens(
 
 def _annotate(
     text: str, st_analyze_results: List[pa.RecognizerResult], is_full_html: bool = True
-) -> List[str]:
-    """
+) -&gt; List[str]:
+    &#34;&#34;&#34;
     Annotate identified input using Presidio Anonymizer.
 
     :param text:               The text for analysis.
@@ -726,7 +726,7 @@ def _annotate(
 
     :returns: The list of tokens with the identified entities.
 
-    """
+    &#34;&#34;&#34;
     return _get_tokens(text, st_analyze_results, is_full_html)
 
 
@@ -737,8 +737,8 @@ def _process(
     entities: List[str] = None,
     entities_operator_map: dict = None,
     is_full_text: bool = True,
-) -> Tuple[str, list]:
-    """
+) -&gt; Tuple[str, list]:
+    &#34;&#34;&#34;
     Process the text of str using the model.
 
     :param text:                  Text to process
@@ -752,7 +752,7 @@ def _process(
 
               * the anonymized text
               * the list of Presidio RecognizerResult constructed from analysis
-    """
+    &#34;&#34;&#34;
 
     # get the analyzer engine
     analyzer = model
@@ -760,7 +760,7 @@ def _process(
     # analyze the text that can be used for anonymization
     results = analyzer.analyze(
         text=text,
-        language="en",
+        language=&#34;en&#34;,
         entities=entities,
         score_threshold=score_threshold,
         return_decision_process=True,
@@ -775,7 +775,7 @@ def _process(
 def _get_single_html(
     text: str, results: List[pa.RecognizerResult], is_full_html: bool = True
 ):
-    """
+    &#34;&#34;&#34;
     Generate the html for a single txt file.
 
     :param text:         The text for analysis.
@@ -783,28 +783,28 @@ def _get_single_html(
     :param is_full_html: Whether generate full html or not.
 
     :returns: The html string for a single txt file.
-    """
+    &#34;&#34;&#34;
     # convert the results to tokens to generate the html
     tokens = _annotate(text, results, is_full_html)
     html = at_util.get_annotated_html(*tokens)
 
     # avoid the error during rendering of the \n in the html
-    backslash_char = "\\"
+    backslash_char = &#34;\\&#34;
 
-    html_str = f"<p>{html.replace('{backslash_char}n', '<br>')}</p>"
+    html_str = f&#34;&lt;p&gt;{html.replace(&#39;{backslash_char}n&#39;, &#39;&lt;br&gt;&#39;)}&lt;/p&gt;&#34;
 
     return html_str
 
 
 def _get_single_json(results: List[pa.RecognizerResult], is_full_report: bool = True):
-    """
+    &#34;&#34;&#34;
     Generate the json for a single txt file.
 
     :param results:        The list of Presidio RecognizerResult constructed from analysis.
     :param is_full_report: Whether generate full json or not.
 
     :returns: The json string for a single txt file.
-    """
+    &#34;&#34;&#34;
     # generate the stats report if needed
     if not is_full_report:
         stats = []
@@ -823,7 +823,7 @@ def _get_all_html(
     res_dict: dict,
     is_full_html: bool = True,
 ):
-    """
+    &#34;&#34;&#34;
     Generate the html for all txt files.
 
     :param txt_content:  The dictionary of txt file name and content.
@@ -832,29 +832,29 @@ def _get_all_html(
 
     :returns: The html string for all txt files.
 
-    """
+    &#34;&#34;&#34;
     # These are placeholder for the html string
-    html_index = "<html><head><title>Highlighted Pii Entities</title></head><body><h1>Highlighted Pii Entities</h1><ul>"
-    html_content = ""
+    html_index = &#34;&lt;html&gt;&lt;head&gt;&lt;title&gt;Highlighted Pii Entities&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Highlighted Pii Entities&lt;/h1&gt;&lt;ul&gt;&#34;
+    html_content = &#34;&#34;
     for txt_file, results in res_dict.items():
         txt = txt_content[txt_file]
-        html_index += f"<li><a href='#{txt_file}'>{txt_file}</a></li>"
-        html_content += f"<li><h2>{txt_file}</h2><p>{_get_single_html(txt, results, is_full_html)}</p></li>"
-    html_index += "</ul>"
-    html_res = f"{html_index}{html_content}</body></html>"
+        html_index += f&#34;&lt;li&gt;&lt;a href=&#39;#{txt_file}&#39;&gt;{txt_file}&lt;/a&gt;&lt;/li&gt;&#34;
+        html_content += f&#34;&lt;li&gt;&lt;h2&gt;{txt_file}&lt;/h2&gt;&lt;p&gt;{_get_single_html(txt, results, is_full_html)}&lt;/p&gt;&lt;/li&gt;&#34;
+    html_index += &#34;&lt;/ul&gt;&#34;
+    html_res = f&#34;{html_index}{html_content}&lt;/body&gt;&lt;/html&gt;&#34;
 
     return html_res
 
 
 def _get_all_rpt(res_dict: dict, is_full_report: bool = True):
-    """
+    &#34;&#34;&#34;
     Generate the stats report for all txt files.
 
     :param res_dict:       The dictionary of txt file name and the list of Presidio RecognizerResult constructed from analysis.
     :param is_full_report: Whether generate full report or not.
 
     :returns: The stats report for all txt files.
-    """
+    &#34;&#34;&#34;
     # These are placeholder for the json report
     stats_dict = {}
     for txt_file, results in res_dict.items():
@@ -865,8 +865,8 @@ def _get_all_rpt(res_dict: dict, is_full_report: bool = True):
                 new_stats.append(item.to_dict())
             else:
                 tmp_dict = item.to_dict()
-                tmp_dict.pop("analysis_explanation")
-                tmp_dict.pop("recognition_metadata")
+                tmp_dict.pop(&#34;analysis_explanation&#34;)
+                tmp_dict.pop(&#34;recognition_metadata&#34;)
                 new_stats.append(tmp_dict)
         stats_dict[txt_file] = new_stats
     return stats_dict
@@ -888,8 +888,8 @@ def recognize_pii(
     is_full_text: bool = True,
     is_full_html: bool = True,
     is_full_report: bool = True,
-) -> Union[Tuple[str, pd.DataFrame, dict, dict], Tuple[str, pd.DataFrame, dict]]:
-    """
+) -&gt; Union[Tuple[str, pd.DataFrame, dict, dict], Tuple[str, pd.DataFrame, dict]]:
+    &#34;&#34;&#34;
     Walk through the input path, recognize PII in text and store the anonymized text in the output path.
     Generate the html with different colors for each entity, json report of the explanation.
 
@@ -900,7 +900,7 @@ def recognize_pii(
     :param output_directory:     The output directory path to store the anonymized text.
     :param entities:             The list of entities to recognize.
     :param entity_operator_map:  The map of entity to operator (mask, redact, replace, keep, hash, and its params)
-    :param model:                The model to use. Can be "spacy", "flair", "pattern" or "whole".
+    :param model:                The model to use. Can be &#34;spacy&#34;, &#34;flair&#34;, &#34;pattern&#34; or &#34;whole&#34;.
     :param generate_json:        Whether to generate the json report of the explanation.
     :param generate_html:        Whether to generate the html report of the explanation.
     :param is_full_text:         Whether to return the full text or only the masked text.
@@ -913,7 +913,7 @@ def recognize_pii(
               * The json report of the explanation (if generate_json is True)
               * A dictionary of errors files that were not processed
 
-    """
+    &#34;&#34;&#34;
 
     # Set output directory
     if output_directory is None:
@@ -932,12 +932,12 @@ def recognize_pii(
     txt_content = {}
     # Load the model:
     analyzer = _get_analyzer_engine(model, entities)
-    logger.info("Model loaded")
+    logger.info(&#34;Model loaded&#34;)
     # Go over the text files in the input path, analyze and anonymize them:
     for txt_file in tqdm(
-        list(txt_files_directory.glob("*.txt")),
-        desc="Processing files",
-        unit="file",
+        list(txt_files_directory.glob(&#34;*.txt&#34;)),
+        desc=&#34;Processing files&#34;,
+        unit=&#34;file&#34;,
     ):
         try:
             # Load the str from the text file
@@ -954,25 +954,25 @@ def recognize_pii(
             )
             res_dict[str(txt_file)] = results
             # Store the anonymized text in the output path
-            output_file = output_directory / f"{txt_file.stem}.txt"
+            output_file = output_directory / f&#34;{txt_file.stem}.txt&#34;
             output_file.parent.mkdir(parents=True, exist_ok=True)
-            with open(output_file, "w") as f:
+            with open(output_file, &#34;w&#34;) as f:
                 f.write(anonymized_text)
             successes.append([txt_file.name, output_file.name])
         except Exception as e:
             errors[str(txt_file)] = str(e)
-            logger.error(f"Error processing {txt_file}: {e}")
+            logger.error(f&#34;Error processing {txt_file}: {e}&#34;)
 
     successes = pd.DataFrame(
         successes,
-        columns=["original_file", "anonymized_file"],
+        columns=[&#34;original_file&#34;, &#34;anonymized_file&#34;],
     )
 
     if generate_html:
         # Generate the html report
         html_res = _get_all_html(txt_content, res_dict, is_full_html)
         # Store the html report in the context
-        arti_html = mlrun.artifacts.Artifact(body=html_res, format="html", key=html_key)
+        arti_html = mlrun.artifacts.Artifact(body=html_res, format=&#34;html&#34;, key=html_key)
         context.log_artifact(arti_html)
     if generate_json:
         # Generate the json report

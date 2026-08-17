@@ -31,9 +31,9 @@
 kind: job
 metadata:
   name: test-classifier
-  tag: ''
+  tag: &#39;&#39;
   hash: b4d447a2328975e90a0dbc7a28f82009924cc157
-  project: ''
+  project: &#39;&#39;
   labels:
     author: Iguazio
     framework: sklearn
@@ -41,7 +41,7 @@ metadata:
   - machine-learning
   - model-testing
 spec:
-  command: ''
+  command: &#39;&#39;
   args: []
   image: mlrun/mlrun
   env: []
@@ -49,7 +49,7 @@ spec:
   entry_points:
     test_classifier:
       name: test_classifier
-      doc: 'Test one or more classifier models against held-out dataset
+      doc: &#39;Test one or more classifier models against held-out dataset
 
 
         Using held-out test features, evaluates the peformance of the estimated model
@@ -57,23 +57,23 @@ spec:
 
         Can be part of a kubeflow pipeline as a test step that is run post EDA and
 
-        training/validation cycles'
+        training/validation cycles&#39;
       parameters:
       - name: context
         doc: the function context
-        default: ''
+        default: &#39;&#39;
       - name: models_path
         type: DataItem
         doc: artifact models representing a file or a folder
-        default: ''
+        default: &#39;&#39;
       - name: test_set
         type: DataItem
         doc: test features and labels
-        default: ''
+        default: &#39;&#39;
       - name: label_column
         type: str
         doc: column name for ground truth labels
-        default: ''
+        default: &#39;&#39;
       - name: score_method
         type: str
         doc: for multiclass classification
@@ -81,10 +81,10 @@ spec:
       - name: plots_dest
         type: str
         doc: dir for test plots
-        default: ''
+        default: &#39;&#39;
       - name: model_evaluator
-        doc: 'NOT IMPLEMENTED: specific method to generate eval, passed in as string
-          or available in this folder'
+        doc: &#39;NOT IMPLEMENTED: specific method to generate eval, passed in as string
+          or available in this folder&#39;
         default: null
       - name: default_model
         type: str
@@ -97,7 +97,7 @@ spec:
         doc: (True) update model, when running as stand alone no need in update
         default: true
       outputs:
-      - default: ''
+      - default: &#39;&#39;
       lineno: 17
   description: test a classifier using held-out or new data
   build:
