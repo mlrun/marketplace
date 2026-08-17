@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2025 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -52,10 +52,10 @@ class ToxicityGuardrailStep:
         context=None,
         name=None,
         threshold: float = 0.5,
-        model_name: str = "unitary/toxic-bert",
+        model_name: str = &#34;unitary/toxic-bert&#34;,
         **kwargs,
     ):
-        """
+        &#34;&#34;&#34;
         A serving graph step that filters out toxic requests using a pre-trained
         text classification model.
 
@@ -64,27 +64,27 @@ class ToxicityGuardrailStep:
         :param threshold: Toxicity score threshold; requests whose toxicity score meets or
                           exceeds this value are blocked with a ValueError. Defaults to 0.5.
         :param model_name: HuggingFace model identifier used for text classification.
-                           Defaults to "unitary/toxic-bert".
+                           Defaults to &#34;unitary/toxic-bert&#34;.
         :param kwargs: Additional keyword arguments forwarded to the serving graph step base.
-        """
+        &#34;&#34;&#34;
         self.threshold = threshold
         self.model_name = model_name
         self._classifier = None
 
-    def post_init(self, mode="sync", **kwargs):
-        self._classifier = pipeline("text-classification", model=self.model_name)
+    def post_init(self, mode=&#34;sync&#34;, **kwargs):
+        self._classifier = pipeline(&#34;text-classification&#34;, model=self.model_name)
 
-    def do(self, event: Dict[str, Any]) -> Dict[str, Any]:
-        question = event.get("question", "")
+    def do(self, event: Dict[str, Any]) -&gt; Dict[str, Any]:
+        question = event.get(&#34;question&#34;, &#34;&#34;)
         result = self._classifier(question)[0]
         score = (
-            result["score"]
-            if result["label"] == "toxic"
-            else 1 - result["score"]
+            result[&#34;score&#34;]
+            if result[&#34;label&#34;] == &#34;toxic&#34;
+            else 1 - result[&#34;score&#34;]
         )
-        if score >= self.threshold:
+        if score &gt;= self.threshold:
             raise ValueError(
-                f"Request blocked: toxicity score {score:.3f} >= {self.threshold}"
+                f&#34;Request blocked: toxicity score {score:.3f} &gt;= {self.threshold}&#34;
             )
         return event
 

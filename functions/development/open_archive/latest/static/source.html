@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2025 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -57,18 +57,18 @@ from urllib.parse import urlparse
 def open_archive(
         context: MLClientCtx,
         archive_url: DataItem,
-        subdir: str = "content/",
-        key: str = "content",
+        subdir: str = &#34;content/&#34;,
+        key: str = &#34;content&#34;,
         target_path: str = None,
 ):
-    """Open a file/object archive into a target directory. Currently, supports zip and tar.gz.
+    &#34;&#34;&#34;Open a file/object archive into a target directory. Currently, supports zip and tar.gz.
 
     :param context:      function execution context
     :param archive_url:  url of archive file
-    :param subdir:       path within artifact store where extracted files are stored, default is "/content"
+    :param subdir:       path within artifact store where extracted files are stored, default is &#34;/content&#34;
     :param key:          key of archive contents in artifact store
     :param target_path:  file system path to store extracted files
-    """
+    &#34;&#34;&#34;
 
     # Resolves the archive locally
     archive_url = archive_url.local()
@@ -76,74 +76,74 @@ def open_archive(
     # When custom artifact path is defined
     if not target_path and context.artifact_path:
         parsed_subdir = urlparse(context.artifact_path)
-        if parsed_subdir.scheme == 's3':
+        if parsed_subdir.scheme == &#39;s3&#39;:
             subdir = os.path.join(context.artifact_path, subdir)
-        elif parsed_subdir.scheme == 'v3io':
+        elif parsed_subdir.scheme == &#39;v3io&#39;:
             v3io_subdir = os.path.join(context.artifact_path, subdir)  # Using v3io_subdir for logging
-            subdir = '/v3io' + parsed_subdir.path + '/' + subdir
-            context.logger.info(f'Using v3io scheme, extracting to {subdir}')
+            subdir = &#39;/v3io&#39; + parsed_subdir.path + &#39;/&#39; + subdir
+            context.logger.info(f&#39;Using v3io scheme, extracting to {subdir}&#39;)
         else:
-            context.logger.info(f'Unrecognizable scheme, extracting to {subdir}')
+            context.logger.info(f&#39;Unrecognizable scheme, extracting to {subdir}&#39;)
 
     # When working on CE, target path might be on s3
-    if 's3' in (target_path or subdir):
-        context.logger.info(f'Using s3 scheme, extracting to {target_path or subdir}')
+    if &#39;s3&#39; in (target_path or subdir):
+        context.logger.info(f&#39;Using s3 scheme, extracting to {target_path or subdir}&#39;)
 
-        if archive_url.endswith("gz"):
+        if archive_url.endswith(&#34;gz&#34;):
             _extract_gz_file(archive_url=archive_url, subdir=subdir, target_path=target_path, in_s3=True)
 
-        elif archive_url.endswith("zip"):
+        elif archive_url.endswith(&#34;zip&#34;):
             _extract_zip_file(archive_url=archive_url, subdir=subdir, target_path=target_path, in_s3=True)
         else:
-            raise ValueError(f"unsupported archive type in {archive_url}")
+            raise ValueError(f&#34;unsupported archive type in {archive_url}&#34;)
     else:
-        if archive_url.endswith("gz"):
+        if archive_url.endswith(&#34;gz&#34;):
             _extract_gz_file(archive_url=archive_url, subdir=subdir, target_path=target_path)
-        elif archive_url.endswith("zip"):
+        elif archive_url.endswith(&#34;zip&#34;):
             _extract_zip_file(archive_url=archive_url, subdir=subdir, target_path=target_path)
         else:
-            raise ValueError(f"unsupported archive type in {archive_url}")
+            raise ValueError(f&#34;unsupported archive type in {archive_url}&#34;)
 
     if v3io_subdir:
         subdir = v3io_subdir
 
-    context.logger.info(f'Logging artifact to {(target_path or subdir)}')
+    context.logger.info(f&#39;Logging artifact to {(target_path or subdir)}&#39;)
     context.log_artifact(DirArtifact(key=key, target_path=(target_path or subdir)))
 
 
-def _extract_gz_file(archive_url: str, target_path: str = None, subdir: str = "content/", in_s3: bool = False):
+def _extract_gz_file(archive_url: str, target_path: str = None, subdir: str = &#34;content/&#34;, in_s3: bool = False):
     if in_s3:
         client = _init_boto3_client()
-        with tarfile.open(archive_url, mode="r|gz") as ref:
+        with tarfile.open(archive_url, mode=&#34;r|gz&#34;) as ref:
             for member in ref.getmembers():
                 data = ref.extractfile(member=member).read()
                 client.put_object(Body=data, Bucket=urlparse(target_path or subdir).netloc,
-                                  Key=f'{urlparse(target_path or subdir).path[1:]}{member.name}')
+                                  Key=f&#39;{urlparse(target_path or subdir).path[1:]}{member.name}&#39;)
     else:
         os.makedirs(target_path or subdir, exist_ok=True)
-        with tarfile.open(archive_url, mode="r:gz") as ref:
+        with tarfile.open(archive_url, mode=&#34;r:gz&#34;) as ref:
             for entry in ref:
                 # Validate that there is no path traversal in the archive
-                if os.path.isabs(entry.name) or ".." in entry.name:
-                    raise ValueError(f"Illegal tar archive entry: {entry.name}")
+                if os.path.isabs(entry.name) or &#34;..&#34; in entry.name:
+                    raise ValueError(f&#34;Illegal tar archive entry: {entry.name}&#34;)
 
                 ref.extract(entry, target_path or subdir)
 
 
-def _extract_zip_file(archive_url, target_path: str = None, subdir: str = "content/", in_s3: bool = False):
+def _extract_zip_file(archive_url, target_path: str = None, subdir: str = &#34;content/&#34;, in_s3: bool = False):
     if in_s3:
         client = _init_boto3_client()
-        with zipfile.ZipFile(archive_url, "r") as ref:
+        with zipfile.ZipFile(archive_url, &#34;r&#34;) as ref:
             for filename in ref.namelist():
                 data = ref.read(filename)
                 client.put_object(Body=data, Bucket=urlparse(target_path or subdir).netloc,
-                                  Key=f'{urlparse(target_path or subdir).path[1:]}{filename}')
+                                  Key=f&#39;{urlparse(target_path or subdir).path[1:]}{filename}&#39;)
     else:
-        with zipfile.ZipFile(archive_url, "r") as ref:
+        with zipfile.ZipFile(archive_url, &#34;r&#34;) as ref:
             # Validate that there is no path traversal in the archive
             for entry in ref.namelist():
-                if os.path.isabs(entry) or ".." in entry:
-                    raise ValueError(f"Illegal zip archive entry: {entry}")
+                if os.path.isabs(entry) or &#34;..&#34; in entry:
+                    raise ValueError(f&#34;Illegal zip archive entry: {entry}&#34;)
             os.makedirs(target_path or subdir, exist_ok=True)
             ref.extractall(target_path or subdir)
 
@@ -153,12 +153,12 @@ def _init_boto3_client():
     
     # Backward compatibility: Support both S3_ENDPOINT_URL (deprecated) and AWS_ENDPOINT_URL_S3
     # TODO: Remove this in 1.12.0
-    endpoint_url = os.environ.get('AWS_ENDPOINT_URL_S3') or os.environ.get('S3_ENDPOINT_URL')
+    endpoint_url = os.environ.get(&#39;AWS_ENDPOINT_URL_S3&#39;) or os.environ.get(&#39;S3_ENDPOINT_URL&#39;)
     
     if endpoint_url:
-        client = boto3.client('s3', endpoint_url=endpoint_url)
+        client = boto3.client(&#39;s3&#39;, endpoint_url=endpoint_url)
     else:
-        client = boto3.client('s3')
+        client = boto3.client(&#39;s3&#39;)
     return client
         </code>
     </pre>

@@ -41,19 +41,19 @@ from scipy.io import wavfile
 from tqdm import tqdm
 
 #: The value to send into multiprocessing queues to stop the process:
-_MULTIPROCESSING_STOP_MARK = "STOP"
+_MULTIPROCESSING_STOP_MARK = &#34;STOP&#34;
 
 # Get the global logger:
 try:
     import mlrun
 
-    _LOGGER = mlrun.get_or_create_ctx("noise_reduce").logger
+    _LOGGER = mlrun.get_or_create_ctx(&#34;noise_reduce&#34;).logger
 except ModuleNotFoundError:
     _LOGGER = logging.getLogger()
 
 
 class ReduceNoiseBase(metaclass=ABCMeta):
-    """
+    &#34;&#34;&#34;
     Base class for noise reduction.
     This class is aimed to be inherited by specific noise reduction algorithms.
     You must implement the following methods:
@@ -62,7 +62,7 @@ class ReduceNoiseBase(metaclass=ABCMeta):
     - load_audio:   The method to load the audio from a file.
 
     After implementing the above methods, you can use the reduce_noise method to reduce noise from audio files.
-    """
+    &#34;&#34;&#34;
     def __init__(
         self,
         target_directory: Path,
@@ -73,8 +73,8 @@ class ReduceNoiseBase(metaclass=ABCMeta):
         self.verbose = verbose
         self.silence_threshold = silence_threshold
 
-    def reduce_noise(self, audio_file: Path) -> Tuple[bool, Tuple[str, str]]:
-        """
+    def reduce_noise(self, audio_file: Path) -&gt; Tuple[bool, Tuple[str, str]]:
+        &#34;&#34;&#34;
         Reduce noise from the given audio file.
 
         :param audio_file:  The audio file to reduce noise from.
@@ -84,10 +84,10 @@ class ReduceNoiseBase(metaclass=ABCMeta):
          - a tuple of:
             - audio file name
             - target path in case of success / error message in case of failure.
-        """
+        &#34;&#34;&#34;
         try:
             if self.verbose:
-                _LOGGER.info(f"Reducing noise from {audio_file.name}.")
+                _LOGGER.info(f&#34;Reducing noise from {audio_file.name}.&#34;)
 
             # Load audio data:
             audio = self.load_audio(file=str(audio_file))
@@ -108,40 +108,40 @@ class ReduceNoiseBase(metaclass=ABCMeta):
             )
 
             if self.verbose:
-                _LOGGER.info(f"Saved cleaned audio file to {target_path}.")
+                _LOGGER.info(f&#34;Saved cleaned audio file to {target_path}.&#34;)
 
             return False, (audio_file.name, str(target_path))
         except Exception as exception:
             if self.verbose:
-                _LOGGER.error(f"Failed to reduce noise from {audio_file.name}.")
-                _LOGGER.error(f"Error: {exception}")
+                _LOGGER.error(f&#34;Failed to reduce noise from {audio_file.name}.&#34;)
+                _LOGGER.error(f&#34;Error: {exception}&#34;)
             # Collect the error:
             return True, (audio_file.name, str(exception))
 
     @abstractmethod
-    def clean_audio(self, data) -> Union[np.ndarray, torch.Tensor]:
-        """
+    def clean_audio(self, data) -&gt; Union[np.ndarray, torch.Tensor]:
+        &#34;&#34;&#34;
         Clean the audio from noise. Here you should implement the noise reduction algorithm.
 
         :param data:    The audio data to clean.
 
         :returns: The cleaned audio.
-        """
+        &#34;&#34;&#34;
         pass
 
     @abstractmethod
     def save_audio(self, audio: np.ndarray, target_path: Path):
-        """
+        &#34;&#34;&#34;
         Save the audio to a file.
 
         :param audio:       The audio to save.
         :param target_path: The target path to save the audio to.
-        """
+        &#34;&#34;&#34;
         pass
 
     @abstractmethod
-    def load_audio(self, file: str) -> Tuple[Union[np.ndarray, torch.Tensor], int]:
-        """
+    def load_audio(self, file: str) -&gt; Tuple[Union[np.ndarray, torch.Tensor], int]:
+        &#34;&#34;&#34;
         Load the audio from a file.
 
         :param file:    The file to load the audio from.
@@ -149,15 +149,15 @@ class ReduceNoiseBase(metaclass=ABCMeta):
         :returns: A tuple of:
             - the audio data
             - the sample rate
-        """
+        &#34;&#34;&#34;
         pass
 
     def update_to_wav_suffix(self, audio_file: Path):
         target_path = self.target_directory / audio_file.name
-        if target_path.suffix != ".wav":
+        if target_path.suffix != &#34;.wav&#34;:
             old_suffix = target_path.suffix[1:]
-            target_path = target_path.with_stem(target_path.stem + f"_{old_suffix}")
-            return target_path.with_suffix(".wav")
+            target_path = target_path.with_stem(target_path.stem + f&#34;_{old_suffix}&#34;)
+            return target_path.with_suffix(&#34;.wav&#34;)
         else:
             return target_path
 
@@ -165,13 +165,13 @@ class ReduceNoiseBase(metaclass=ABCMeta):
         self,
         audio: np.ndarray,
     ):
-        """
+        &#34;&#34;&#34;
         Remove silence sections from the audio.
 
         :param audio:   The audio to remove silence from.
 
         :returns: The audio without silence.
-        """
+        &#34;&#34;&#34;
         if self.silence_threshold is None:
             return audio
 
@@ -208,7 +208,7 @@ class ReduceNoise(ReduceNoiseBase):
 
     def save_audio(self, audio: np.ndarray, target_path: Path):
         # If the audio has more than one channel, transpose it in order to save it:
-        if len(audio) > 1:
+        if len(audio) &gt; 1:
             audio = audio.T
 
         wavfile.write(
@@ -217,7 +217,7 @@ class ReduceNoise(ReduceNoiseBase):
             data=audio,
         )
 
-    def load_audio(self, file: str) -> np.ndarray:
+    def load_audio(self, file: str) -&gt; np.ndarray:
         data, sr = librosa.load(
             path=file,
             sr=self.sample_rate,
@@ -235,11 +235,11 @@ class ReduceNoise(ReduceNoiseBase):
         data_to_reduce = data[self.channel] if self.channel is not None else data
         return data_to_reduce
 
-    def clean_audio(self, data: np.ndarray) -> np.ndarray:
+    def clean_audio(self, data: np.ndarray) -&gt; np.ndarray:
         try:
             import noisereduce
         except ImportError as e:
-            raise ImportError("Please install noisereduce package") from e
+            raise ImportError(&#34;Please install noisereduce package&#34;) from e
 
         reduced_noise = noisereduce.reduce_noise(y=data, sr=self.sample_rate)
 
@@ -272,10 +272,10 @@ class DFN(ReduceNoiseBase):
         try:
             from df.enhance import init_df
         except ImportError as e:
-            raise ImportError("Please install deepfilternet packages") from e
+            raise ImportError(&#34;Please install deepfilternet packages&#34;) from e
 
         if self.verbose:
-            _LOGGER.info("Loading DeepFilterNet2 model.")
+            _LOGGER.info(&#34;Loading DeepFilterNet2 model.&#34;)
 
         # Load the model:
         model, df_state, _ = init_df()
@@ -287,7 +287,7 @@ class DFN(ReduceNoiseBase):
         try:
             from df.enhance import save_audio
         except ImportError as e:
-            raise ImportError("Please install deepfilternet package") from e
+            raise ImportError(&#34;Please install deepfilternet package&#34;) from e
         save_audio(
             file=target_path.name,
             audio=audio,
@@ -295,19 +295,19 @@ class DFN(ReduceNoiseBase):
             output_dir=str(self.target_directory),
         )
 
-    def load_audio(self, file: str) -> torch.Tensor:
+    def load_audio(self, file: str) -&gt; torch.Tensor:
         try:
             from df.enhance import load_audio
         except ImportError as e:
-            raise ImportError("Please install deepfilternet package") from e
+            raise ImportError(&#34;Please install deepfilternet package&#34;) from e
         audio, _ = load_audio(file=file, sr=self.sample_rate, **self.kwargs)
         return audio
 
-    def clean_audio(self, data: torch.Tensor) -> torch.Tensor:
+    def clean_audio(self, data: torch.Tensor) -&gt; torch.Tensor:
         try:
             from df.enhance import enhance
         except ImportError as e:
-            raise ImportError("Please install deepfilternet package") from e
+            raise ImportError(&#34;Please install deepfilternet package&#34;) from e
         return enhance(
             model=self.model,
             df_state=self.df_state,
@@ -323,7 +323,7 @@ def _multiprocessing_complete_tasks(
     tasks_queue: Queue,
     results_queue: Queue,
 ):
-    """
+    &#34;&#34;&#34;
     Complete the tasks in the given queue and put the results in the given results queue. The function will stop when
     the given tasks queue will receive the stop mark. It is aimed to be used with multiprocessing as a process.
 
@@ -331,7 +331,7 @@ def _multiprocessing_complete_tasks(
     :param noise_reduce_arguments:  The noisereduce initialization kwargs.
     :param tasks_queue:             A queue to get the tasks from.
     :param results_queue:           A queue to put the results in.
-    """
+    &#34;&#34;&#34;
     # Initialize the reduce noise object
     noise_reducer = noise_reduce_type(**noise_reduce_arguments)
 
@@ -359,7 +359,7 @@ def reduce_noise_dfn(
     verbose: bool = True,
     **kwargs,
 ):
-    """
+    &#34;&#34;&#34;
     Reduce noise from audio files using DeepFilterNet.
     For more information about the noise reduction algorithm see:
     https://github.com/Rikorose/DeepFilterNet
@@ -376,9 +376,9 @@ def reduce_noise_dfn(
     :param verbose:             verbosity level. If True, display progress bar and logs.
     :param kwargs:              additional arguments to pass to torchaudio.load(). For more information see:
                                 https://pytorch.org/audio/stable/generated/torchaudio.load.html
-    """
+    &#34;&#34;&#34;
     if verbose:
-        _LOGGER.info("Reducing noise from audio files.")
+        _LOGGER.info(&#34;Reducing noise from audio files.&#34;)
 
     # create target directory:
     target_directory = _create_target_directory(target_directory)
@@ -387,10 +387,10 @@ def reduce_noise_dfn(
     audio_files = _get_audio_files(audio_source)
 
     noise_reduce_arguments = {
-        "target_directory": target_directory,
-        "pad": pad,
-        "atten_lim_db": atten_lim_db,
-        "silence_threshold": silence_threshold,
+        &#34;target_directory&#34;: target_directory,
+        &#34;pad&#34;: pad,
+        &#34;atten_lim_db&#34;: atten_lim_db,
+        &#34;silence_threshold&#34;: silence_threshold,
         **kwargs,
     }
 
@@ -400,7 +400,7 @@ def reduce_noise_dfn(
             noise_reduce_arguments=noise_reduce_arguments,
             n_workers=use_multiprocessing,
             audio_files=audio_files,
-            description="Noise-reduction",
+            description=&#34;Noise-reduction&#34;,
             verbose=verbose,
         )
     else:
@@ -408,7 +408,7 @@ def reduce_noise_dfn(
             noise_reduce_type=DFN,
             noise_reduce_arguments=noise_reduce_arguments,
             audio_files=audio_files,
-            description="Noise-reduction",
+            description=&#34;Noise-reduction&#34;,
             verbose=verbose,
         )
 
@@ -425,7 +425,7 @@ def reduce_noise(
     use_multiprocessing: int = 0,
     verbose: bool = True,
 ):
-    """
+    &#34;&#34;&#34;
     Reduce noise from audio file or directory containing audio files.
     The audio files must be in .wav format.
     The cleaned audio files will be saved in the target_directory.
@@ -446,9 +446,9 @@ def reduce_noise(
     :param use_multiprocessing: Number of processes to use for cleaning the audio files.
                                 If 0, no multiprocessing is used.
     :param verbose:             Verbosity level. If True, display progress bar.
-    """
+    &#34;&#34;&#34;
     if verbose:
-        _LOGGER.info("Reducing noise from audio files.")
+        _LOGGER.info(&#34;Reducing noise from audio files.&#34;)
 
     # create target directory:
     target_directory = _create_target_directory(target_directory)
@@ -458,11 +458,11 @@ def reduce_noise(
 
     # Create the reduce noise object:
     noise_reduce_arguments = {
-        "target_directory": target_directory,
-        "sample_rate": sample_rate,
-        "duration": duration,
-        "channel": channel,
-        "silence_threshold": silence_threshold,
+        &#34;target_directory&#34;: target_directory,
+        &#34;sample_rate&#34;: sample_rate,
+        &#34;duration&#34;: duration,
+        &#34;channel&#34;: channel,
+        &#34;silence_threshold&#34;: silence_threshold,
     }
 
     if use_multiprocessing:
@@ -471,7 +471,7 @@ def reduce_noise(
             noise_reduce_arguments=noise_reduce_arguments,
             n_workers=use_multiprocessing,
             audio_files=audio_files,
-            description="Noise-reduction",
+            description=&#34;Noise-reduction&#34;,
             verbose=verbose,
         )
     else:
@@ -479,14 +479,14 @@ def reduce_noise(
             noise_reduce_type=ReduceNoise,
             noise_reduce_arguments=noise_reduce_arguments,
             audio_files=audio_files,
-            description="Noise-reduction",
+            description=&#34;Noise-reduction&#34;,
             verbose=verbose,
         )
 
     return _process_results(results, verbose)
 
 
-def _create_target_directory(target_directory: str) -> str:
+def _create_target_directory(target_directory: str) -&gt; str:
     target_directory = Path(target_directory)
     if not target_directory.exists():
         target_directory.mkdir(parents=True, exist_ok=True)
@@ -497,12 +497,12 @@ def _get_audio_files(audio_source: str):
     audio_source = Path(audio_source)
     audio_files = []
     if audio_source.is_dir():
-        audio_files = list(audio_source.glob("*.*"))
+        audio_files = list(audio_source.glob(&#34;*.*&#34;))
     elif audio_source.is_file():
         audio_files.append(audio_source)
     else:
         raise ValueError(
-            f"audio_source must be a file or a directory, got {audio_source}"
+            f&#34;audio_source must be a file or a directory, got {audio_source}&#34;
         )
     return audio_files
 
@@ -514,8 +514,8 @@ def _parallel_run(
     audio_files: List[Path],
     description: str,
     verbose: bool,
-) -> List[Tuple[bool, Tuple[str, str]]]:
-    """
+) -&gt; List[Tuple[bool, Tuple[str, str]]]:
+    &#34;&#34;&#34;
     Run multiple noise reduce workers with multiprocessing to complete the tasks that will be created on the provided
     files using the given task creator.
 
@@ -526,12 +526,12 @@ def _parallel_run(
     :param verbose:             Verbosity.
 
     :returns: The collected results.
-    """
+    &#34;&#34;&#34;
     # Check the number of workers:
-    if n_workers > len(audio_files):
+    if n_workers &gt; len(audio_files):
         _LOGGER.warning(
-            f"The number of workers ({n_workers}) is larger than the number of audio files ({len(audio_files)}). "
-            f"Setting the number of workers to {len(audio_files)}."
+            f&#34;The number of workers ({n_workers}) is larger than the number of audio files ({len(audio_files)}). &#34;
+            f&#34;Setting the number of workers to {len(audio_files)}.&#34;
         )
         n_workers = len(audio_files)
 
@@ -544,10 +544,10 @@ def _parallel_run(
         Process(
             target=_multiprocessing_complete_tasks,
             kwargs={
-                "noise_reduce_type": noise_reduce_type,
-                "noise_reduce_arguments": noise_reduce_arguments,
-                "tasks_queue": tasks_queue,
-                "results_queue": results_queue,
+                &#34;noise_reduce_type&#34;: noise_reduce_type,
+                &#34;noise_reduce_arguments&#34;: noise_reduce_arguments,
+                &#34;tasks_queue&#34;: tasks_queue,
+                &#34;results_queue&#34;: results_queue,
             },
         )
         for _ in range(n_workers)
@@ -571,7 +571,7 @@ def _parallel_run(
     stop_marks_counter = 0
     with tqdm(
         desc=description,
-        unit="file",
+        unit=&#34;file&#34;,
         total=len(audio_files),
         disable=not verbose,
     ) as progressbar:
@@ -600,8 +600,8 @@ def _run(
     audio_files: List[Path],
     description: str,
     verbose: bool,
-) -> List[Tuple[bool, Tuple[str, str]]]:
-    """
+) -&gt; List[Tuple[bool, Tuple[str, str]]]:
+    &#34;&#34;&#34;
     Run the noise reduce algorithm on the given audio files and collect the results.
 
     :param noise_reduce_type:       The noise reduce type to use.
@@ -611,7 +611,7 @@ def _run(
     :param verbose:                 Verbosity.
 
     :returns: The collected results.
-    """
+    &#34;&#34;&#34;
     # Create the reduce noise object:
     noise_reducer = noise_reduce_type(**noise_reduce_arguments)
 
@@ -620,7 +620,7 @@ def _run(
     for audio_file in tqdm(
         audio_files,
         desc=description,
-        unit="file",
+        unit=&#34;file&#34;,
         total=len(audio_files),
         disable=not verbose,
     ):
@@ -631,17 +631,17 @@ def _run(
 
 def _process_results(
     results: List[Tuple[bool, Tuple[str, str]]], verbose: bool
-) -> Tuple[dict, dict]:
-    """
+) -&gt; Tuple[dict, dict]:
+    &#34;&#34;&#34;
     Process the results of the tasks.
 
     :param results: The results to process.
     :param verbose: Verbosity.
 
     :returns: The processed results as a tuple of successes and errors.
-    """
+    &#34;&#34;&#34;
     if verbose:
-        _LOGGER.info("Summarizing the results.")
+        _LOGGER.info(&#34;Summarizing the results.&#34;)
     successes = {}
     errors = {}
     for is_error, result in results:
@@ -650,7 +650,7 @@ def _process_results(
         else:
             successes[result[0]] = result[1]
     if verbose:
-        _LOGGER.info(f"Done ({len(successes)}/{len(successes) + len(errors)})\n")
+        _LOGGER.info(f&#34;Done ({len(successes)}/{len(successes) + len(errors)})\n&#34;)
 
     return successes, errors
 
