@@ -31,15 +31,15 @@
 kind: job
 metadata:
   name: github-utils
-  tag: ''
+  tag: &#39;&#39;
   hash: d8e639af306794ce6f59eb246f0b845c016c9da4
-  project: ''
+  project: &#39;&#39;
   labels:
     author: Iguazio
   categories:
   - utilities
 spec:
-  command: ''
+  command: &#39;&#39;
   args: []
   image: mlrun/mlrun
   env: []
@@ -47,43 +47,43 @@ spec:
   entry_points:
     pr_comment:
       name: pr_comment
-      doc: ''
+      doc: &#39;&#39;
       parameters:
       - name: context
-        default: ''
+        default: &#39;&#39;
       - name: repo
         type: str
-        default: ''
+        default: &#39;&#39;
       - name: issue
         type: int
-        default: ''
+        default: &#39;&#39;
       - name: message
         type: str
-        default: ''
+        default: &#39;&#39;
       - name: message_file
         type: DataItem
         default: null
       outputs:
-      - default: ''
+      - default: &#39;&#39;
       lineno: 8
     run_summary_comment:
       name: run_summary_comment
-      doc: ''
+      doc: &#39;&#39;
       parameters:
       - name: context
-        default: ''
+        default: &#39;&#39;
       - name: workflow_id
-        default: ''
+        default: &#39;&#39;
       - name: repo
         type: str
-        default: ''
+        default: &#39;&#39;
       - name: issue
         type: int
-        default: ''
+        default: &#39;&#39;
       - name: project
-        default: ''
+        default: &#39;&#39;
       outputs:
-      - default: ''
+      - default: &#39;&#39;
       lineno: 31
   description: add comments to github pull request
   build:

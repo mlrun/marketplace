@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2025 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #   http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -64,24 +64,24 @@ from evidently.ui.workspace import (
     OrgID,
 )
 
-_PROJECT_NAME = "Iris Monitoring"
-_PROJECT_DESCRIPTION = "Test project using iris dataset"
+_PROJECT_NAME = &#34;Iris Monitoring&#34;
+_PROJECT_DESCRIPTION = &#34;Test project using iris dataset&#34;
 
 
 class EvidentlyIrisMonitoringApp(EvidentlyModelMonitoringApplicationBase):
-    """
+    &#34;&#34;&#34;
     This model monitoring application is a simple example of integrating MLRun with Evidently for data monitoring,
     which you can adapt to fit your own project needs or use as a reference implementation.
-    """
-    NAME = "Evidently-App-Test"
+    &#34;&#34;&#34;
+    NAME = &#34;Evidently-App-Test&#34;
 
     def __init__(
         self,
-        evidently_project_id: Optional["STR_UUID"] = None,
+        evidently_project_id: Optional[&#34;STR_UUID&#34;] = None,
         evidently_workspace_path: Optional[str] = None,
         cloud_workspace: bool = False,
-        evidently_organization_id: Optional["OrgID"] = None,
-    ) -> None:
+        evidently_organization_id: Optional[&#34;OrgID&#34;] = None,
+    ) -&gt; None:
         self.org_id = evidently_organization_id
         self._init_iris_data()
         super().__init__(
@@ -90,15 +90,15 @@ class EvidentlyIrisMonitoringApp(EvidentlyModelMonitoringApplicationBase):
             cloud_workspace=cloud_workspace,
         )
 
-    def _init_iris_data(self) -> None:
+    def _init_iris_data(self) -&gt; None:
         iris = load_iris()
         self.columns = [norm_column_name(col) for col in iris.feature_names]
         self.train_set = pd.DataFrame(iris.data, columns=self.columns)
 
     def do_tracking(
         self, monitoring_context: mm_context.MonitoringApplicationContext
-    ) -> ModelMonitoringApplicationResult:
-        monitoring_context.logger.info("Running evidently app")
+    ) -&gt; ModelMonitoringApplicationResult:
+        monitoring_context.logger.info(&#34;Running evidently app&#34;)
 
         sample_df = monitoring_context.sample_df[self.columns]
 
@@ -110,12 +110,12 @@ class EvidentlyIrisMonitoringApp(EvidentlyModelMonitoringApplicationBase):
         )
 
         self.log_evidently_object(
-            monitoring_context, data_drift_report_run, "evidently_report"
+            monitoring_context, data_drift_report_run, &#34;evidently_report&#34;
         )
-        monitoring_context.logger.info("Logged evidently object")
+        monitoring_context.logger.info(&#34;Logged evidently object&#34;)
 
         return ModelMonitoringApplicationResult(
-            name="data_drift_test",
+            name=&#34;data_drift_test&#34;,
             value=0.5,
             kind=ResultKindApp.data_drift,
             status=ResultStatusApp.potential_detection,
@@ -123,7 +123,7 @@ class EvidentlyIrisMonitoringApp(EvidentlyModelMonitoringApplicationBase):
 
     def create_report_run(
         self, sample_df: pd.DataFrame, schedule_time: pd.Timestamp
-    ) -> "Snapshot":
+    ) -&gt; &#34;Snapshot&#34;:
         metrics = [
             DataDriftPreset(),
             DatasetMissingValueCount(),
@@ -131,14 +131,14 @@ class EvidentlyIrisMonitoringApp(EvidentlyModelMonitoringApplicationBase):
         ]
         metrics.extend(
             [
-                ValueDrift(column=col_name, method="wasserstein")
+                ValueDrift(column=col_name, method=&#34;wasserstein&#34;)
                 for col_name in self.columns
             ]
         )
 
         data_drift_report = Report(
             metrics=metrics,
-            metadata={"timestamp": str(schedule_time)},
+            metadata={&#34;timestamp&#34;: str(schedule_time)},
             include_tests=True,
         )
 

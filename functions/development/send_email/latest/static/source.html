@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -59,46 +59,46 @@ def send_email(
     sender: str,
     to: str,
     subject: str,
-    content: str = "",
+    content: str = &#34;&#34;,
     server_addr: str = None,
     attachments: List[str] = [],
-) -> None:
-    """Send an email.
+) -&gt; None:
+    &#34;&#34;&#34;Send an email.
     :param sender: Sender email address
     :param context: The function context
     :param to: Email address of mail recipient
     :param subject: Email subject
     :param content: Optional mail text
-    :param server_addr: Address of SMTP server to use. Use format <addr>:<port>
+    :param server_addr: Address of SMTP server to use. Use format &lt;addr&gt;:&lt;port&gt;
     :param attachments: List of attachments to add.
-    """
+    &#34;&#34;&#34;
 
-    email_user = context.get_secret("SMTP_USER")
-    email_pass = context.get_secret("SMTP_PASSWORD")
+    email_user = context.get_secret(&#34;SMTP_USER&#34;)
+    email_pass = context.get_secret(&#34;SMTP_PASSWORD&#34;)
     if email_user is None or email_pass is None:
-        context.logger.error("Missing sender email or password - cannot send email.")
+        context.logger.error(&#34;Missing sender email or password - cannot send email.&#34;)
         return
 
     if server_addr is None:
-        context.logger.error("Server not specified - cannot send email.")
+        context.logger.error(&#34;Server not specified - cannot send email.&#34;)
         return
 
     msg = EmailMessage()
-    msg["From"] = sender
-    msg["Subject"] = subject
-    msg["To"] = to
+    msg[&#34;From&#34;] = sender
+    msg[&#34;Subject&#34;] = subject
+    msg[&#34;To&#34;] = to
     msg.set_content(content)
 
     for filename in attachments:
-        context.logger.info(f"Looking at attachment: {filename}")
+        context.logger.info(f&#34;Looking at attachment: {filename}&#34;)
         if not os.path.isfile(filename):
-            context.logger.warning(f"Filename does not exist {filename}")
+            context.logger.warning(f&#34;Filename does not exist {filename}&#34;)
             continue
         ctype, encoding = mimetypes.guess_type(filename)
         if ctype is None or encoding is not None:
-            ctype = "application/octet-stream"
-        maintype, subtype = ctype.split("/", 1)
-        with open(filename, "rb") as fp:
+            ctype = &#34;application/octet-stream&#34;
+        maintype, subtype = ctype.split(&#34;/&#34;, 1)
+        with open(filename, &#34;rb&#34;) as fp:
             msg.add_attachment(
                 fp.read(),
                 maintype=maintype,
@@ -106,7 +106,7 @@ def send_email(
                 filename=os.path.basename(filename),
             )
             context.logger.info(
-                f"Added attachment: Filename: {filename}, of mimetype: {maintype}, {subtype}"
+                f&#34;Added attachment: Filename: {filename}, of mimetype: {maintype}, {subtype}&#34;
             )
 
     try:
@@ -114,11 +114,11 @@ def send_email(
         s.starttls()
         s.login(email_user, email_pass)
         s.send_message(msg)
-        context.logger.info("Email sent successfully.")
+        context.logger.info(&#34;Email sent successfully.&#34;)
     except smtplib.SMTPException as exp:
-        context.logger.error(f"SMTP exception caught in SMTP code: {exp}")
+        context.logger.error(f&#34;SMTP exception caught in SMTP code: {exp}&#34;)
     except ConnectionError as ce:
-        context.logger.error(f"Connection error caught in SMTP code: {ce}")
+        context.logger.error(f&#34;Connection error caught in SMTP code: {ce}&#34;)
 
         </code>
     </pre>
