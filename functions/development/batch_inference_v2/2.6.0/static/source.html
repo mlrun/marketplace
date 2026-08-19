@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2023 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -50,8 +50,8 @@ try:
     import mlrun.model_monitoring.api
 except ModuleNotFoundError:
     raise mlrun.errors.MLRunNotFoundError(
-        f"Please update your `mlrun` version to >=1.5.0 or use an "
-        f"older version of the batch inference function."
+        f&#34;Please update your `mlrun` version to &gt;=1.5.0 or use an &#34;
+        f&#34;older version of the batch inference function.&#34;
     )
 
 import numpy as np
@@ -59,8 +59,8 @@ import pandas as pd
 from mlrun.frameworks.auto_mlrun import AutoMLRun
 
 
-def _prepare_result_set(x: pd.DataFrame, label_columns: List[str], y_pred: np.ndarray) -> pd.DataFrame:
-    """
+def _prepare_result_set(x: pd.DataFrame, label_columns: List[str], y_pred: np.ndarray) -&gt; pd.DataFrame:
+    &#34;&#34;&#34;
     Set default label column names and validate given names to prepare the result set - a concatenation of the inputs
     (x) and the model predictions (y_pred).
 
@@ -73,30 +73,30 @@ def _prepare_result_set(x: pd.DataFrame, label_columns: List[str], y_pred: np.nd
 
     raises MLRunInvalidArgumentError: If the labels columns amount do not match the outputs or if one of the label
                                        column already exists in the dataset.
-    """
+    &#34;&#34;&#34;
     # Prepare default target columns names if not provided:
     prediction_columns_amount = 1 if len(y_pred.shape) == 1 else y_pred.shape[1]
     if len(label_columns) == 0:
         # Add default label column names:
         if prediction_columns_amount == 1:
-            label_columns = ["predicted_label"]
+            label_columns = [&#34;predicted_label&#34;]
         else:
             label_columns = [
-                f"predicted_label_{i}" for i in range(prediction_columns_amount)
+                f&#34;predicted_label_{i}&#34; for i in range(prediction_columns_amount)
             ]
 
     # Validate the label columns:
     if prediction_columns_amount != len(label_columns):
         # No equality between provided label column names and outputs amount:
         raise mlrun.errors.MLRunInvalidArgumentError(
-            f"The number of predicted labels: {prediction_columns_amount} "
-            f"is not equal to the given label columns: {len(label_columns)}"
+            f&#34;The number of predicted labels: {prediction_columns_amount} &#34;
+            f&#34;is not equal to the given label columns: {len(label_columns)}&#34;
         )
-    common_labels = set(label_columns) & set(x.columns.tolist())
+    common_labels = set(label_columns) &amp; set(x.columns.tolist())
     if common_labels:
         # Label column exist in the original inputs:
         raise mlrun.errors.MLRunInvalidArgumentError(
-            f"The labels: {common_labels} are already existed in the given dataset."
+            f&#34;The labels: {common_labels} are already existed in the given dataset.&#34;
         )
 
     return pd.concat(
@@ -110,7 +110,7 @@ def _get_sample_set_statistics_parameters(context: mlrun.MLClientCtx,
                                           model_artifact_feature_stats: dict,
                                           feature_columns: Optional[List],
                                           drop_columns: Optional[List],
-                                          label_columns: Optional[List]) -> Dict[str, Any]:
+                                          label_columns: Optional[List]) -&gt; Dict[str, Any]:
     statics_input_full_dict = dict(sample_set=model_endpoint_sample_set,
                                    model_artifact_feature_stats=model_artifact_feature_stats,
                                    sample_set_columns=feature_columns,
@@ -122,10 +122,10 @@ def _get_sample_set_statistics_parameters(context: mlrun.MLClientCtx,
     #  we will now send only the parameters it expects.
     statistics_input_filtered = {key: statics_input_full_dict[key] for key in statics_function_input_dict}
     if len(statistics_input_filtered) != len(statics_function_input_dict):
-        context.logger.warning(f"get_sample_set_statistics is in an older version; "
-                               "some parameters will not be sent to the function."
-                               f" Expected input: {list(statics_function_input_dict.keys())},"
-                               f" actual input: {list(statistics_input_filtered.keys())}")
+        context.logger.warning(f&#34;get_sample_set_statistics is in an older version; &#34;
+                               &#34;some parameters will not be sent to the function.&#34;
+                               f&#34; Expected input: {list(statics_function_input_dict.keys())},&#34;
+                               f&#34; actual input: {list(statistics_input_filtered.keys())}&#34;)
     return statistics_input_filtered
 
 
@@ -137,16 +137,16 @@ def infer(
         label_columns: Union[str, List[str]] = None,
         feature_columns: Union[str, List[str]] = None,
         log_result_set: bool = True,
-        result_set_name: str = "prediction",
+        result_set_name: str = &#34;prediction&#34;,
         batch_id: str = None,
-        artifacts_tag: str = "",
+        artifacts_tag: str = &#34;&#34;,
         # Drift analysis parameters
         perform_drift_analysis: bool = None,
-        endpoint_id: str = "",
+        endpoint_id: str = &#34;&#34;,
         # The following model endpoint parameters are relevant only if:
         # perform drift analysis is not disabled
         # a new model endpoint record is going to be generated
-        model_endpoint_name: str = "batch-infer",
+        model_endpoint_name: str = &#34;batch-infer&#34;,
         model_endpoint_sample_set: Union[
             mlrun.DataItem, list, dict, pd.DataFrame, pd.Series, np.ndarray
         ] = None,
@@ -162,7 +162,7 @@ def infer(
         **predict_kwargs: Dict[str, Any],
 
 ):
-    """
+    &#34;&#34;&#34;
     Perform a prediction on the provided dataset using the specified model.
     Ensure that the model has already been logged under the current project.
 
@@ -172,7 +172,7 @@ def infer(
     project.enable_model_monitoring() function. You can also apply monitoring to an existing model by providing its
     endpoint id or name, and the monitoring tools will be applied to that endpoint.
 
-    At the moment, this function is supported for `mlrun>=1.5.0` versions.
+    At the moment, this function is supported for `mlrun&gt;=1.5.0` versions.
 
     :param context:                                 MLRun context.
     :param dataset:                                 The dataset to infer through the model. Provided as an input (DataItem)
@@ -184,7 +184,7 @@ def infer(
                                                     To generate a valid model store URI, please log the model before running this function.
                                                     If `endpoint_id` of existing model endpoint is provided, make sure
                                                     that it has a similar model store path, otherwise the drift analysis
-                                                    won't be triggered.
+                                                    won&#39;t be triggered.
     :param drop_columns:                            A string / integer or a list of strings / integers that represent the column names
                                                     / indices to drop. When the dataset is a list or a numpy array this parameter must
                                                     be represented by integers.
@@ -196,7 +196,7 @@ def infer(
     :param log_result_set:                          Whether to log the result set - a DataFrame of the given inputs concatenated with
                                                     the predictions. Defaulted to True.
     :param result_set_name:                         The db key to set name of the prediction result and the filename. Defaulted to
-                                                    'prediction'.
+                                                    &#39;prediction&#39;.
     :param batch_id:                                The ID of the given batch (inference dataset). If `None`, it will be generated.
                                                     Will be logged as a result of the run.
     :param artifacts_tag:                           Tag to use for prediction set result artifact.
@@ -220,35 +220,35 @@ def infer(
     :param model_endpoint_possible_drift_threshold: The threshold of which to mark possible drifts. Defaulted to 0.5.
 
     raises MLRunInvalidArgumentError: if both `model_path` and `endpoint_id` are not provided
-    """
+    &#34;&#34;&#34;
 
 
     if trigger_monitoring_job:
-        context.logger.warning("The `trigger_monitoring_job` parameter is deprecated and will be removed once the versioning mechanism is implemented. "
-                               "if you are using mlrun<1.7.0, please import the previous version of this function, for example "
-                               "'hub://batch_inference_v2:2.5.0'.")
+        context.logger.warning(&#34;The `trigger_monitoring_job` parameter is deprecated and will be removed once the versioning mechanism is implemented. &#34;
+                               &#34;if you are using mlrun&lt;1.7.0, please import the previous version of this function, for example &#34;
+                               &#34;&#39;hub://batch_inference_v2:2.5.0&#39;.&#34;)
     if batch_image_job:
-        context.logger.warning("The `batch_image_job` parameter is deprecated and will be removed once the versioning mechanism is implemented. "
-                               "if you are using mlrun<1.7.0, please import the previous version of this function, for example "
-                               "'hub://batch_inference_v2:2.5.0'.")
+        context.logger.warning(&#34;The `batch_image_job` parameter is deprecated and will be removed once the versioning mechanism is implemented. &#34;
+                               &#34;if you are using mlrun&lt;1.7.0, please import the previous version of this function, for example &#34;
+                               &#34;&#39;hub://batch_inference_v2:2.5.0&#39;.&#34;)
     if model_endpoint_drift_threshold:
-        context.logger.warning("The `model_endpoint_drift_threshold` parameter is deprecated and will be removed once the versioning mechanism is implemented. "
-                               "if you are using mlrun<1.7.0, please import the previous version of this function, for example "
-                               "'hub://batch_inference_v2:2.5.0'.")
+        context.logger.warning(&#34;The `model_endpoint_drift_threshold` parameter is deprecated and will be removed once the versioning mechanism is implemented. &#34;
+                               &#34;if you are using mlrun&lt;1.7.0, please import the previous version of this function, for example &#34;
+                               &#34;&#39;hub://batch_inference_v2:2.5.0&#39;.&#34;)
     if model_endpoint_possible_drift_threshold:
-        context.logger.warning("The `model_endpoint_possible_drift_threshold` parameter is deprecated and will be removed once the versioning mechanism is implemented. "
-                               "if you are using mlrun<1.7.0, please import the previous version of this function, for example "
-                               "'hub://batch_inference_v2:2.5.0'.")
+        context.logger.warning(&#34;The `model_endpoint_possible_drift_threshold` parameter is deprecated and will be removed once the versioning mechanism is implemented. &#34;
+                               &#34;if you are using mlrun&lt;1.7.0, please import the previous version of this function, for example &#34;
+                               &#34;&#39;hub://batch_inference_v2:2.5.0&#39;.&#34;)
 
     # Loading the model:
-    context.logger.info(f"Loading model...")
+    context.logger.info(f&#34;Loading model...&#34;)
     if isinstance(model_path, mlrun.DataItem):
         model_path = model_path.artifact_url
     if not mlrun.datastore.is_store_uri(model_path):
         raise mlrun.errors.MLRunInvalidArgumentError(
-            f"The provided model path ({model_path}) is invalid - should start with `store://`. "
-            f"Please make sure that you have logged the model using `project.log_model()` "
-            f"which generates a unique store uri for the logged model."
+            f&#34;The provided model path ({model_path}) is invalid - should start with `store://`. &#34;
+            f&#34;Please make sure that you have logged the model using `project.log_model()` &#34;
+            f&#34;which generates a unique store uri for the logged model.&#34;
         )
     model_handler = AutoMLRun.load_model(model_path=model_path, context=context)
 
@@ -263,7 +263,7 @@ def infer(
         ]
 
     # Get dataset by object, URL or by FeatureVector:
-    context.logger.info(f"Loading data...")
+    context.logger.info(f&#34;Loading data...&#34;)
     x, label_columns = mlrun.model_monitoring.api.read_dataset_as_dataframe(
         dataset=dataset,
         feature_columns=feature_columns,
@@ -272,7 +272,7 @@ def infer(
     )
 
     # Predict:
-    context.logger.info(f"Calculating prediction...")
+    context.logger.info(f&#34;Calculating prediction...&#34;)
     y_pred = model_handler.model.predict(x, **predict_kwargs)
 
     # Prepare the result set:
@@ -295,7 +295,7 @@ def infer(
     ):
         perform_drift_analysis = True
     if perform_drift_analysis:
-        context.logger.info("Performing drift analysis...")
+        context.logger.info(&#34;Performing drift analysis...&#34;)
         # Get the sample set statistics (either from the sample set or from the statistics logged with the model)
         statistics_input_filtered = _get_sample_set_statistics_parameters(
             context=context,

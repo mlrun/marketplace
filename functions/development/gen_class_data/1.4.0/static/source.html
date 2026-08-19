@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -55,16 +55,16 @@ def gen_class_data(
         m_features: int,
         k_classes: int,
         header: Optional[List[str]],
-        label_column: Optional[str] = "labels",
+        label_column: Optional[str] = &#34;labels&#34;,
         weight: float = 0.5,
         random_state: int = 1,
-        key: str = "classifier-data",
-        file_ext: str = "parquet",
+        key: str = &#34;classifier-data&#34;,
+        file_ext: str = &#34;parquet&#34;,
         sk_params={}
 ):
-    """Create a binary classification sample dataset and save.
+    &#34;&#34;&#34;Create a binary classification sample dataset and save.
     If no filename is given it will default to:
-    "simdata-{n_samples}X{m_features}.parquet".
+    &#34;simdata-{n_samples}X{m_features}.parquet&#34;.
 
     Additional scikit-learn parameters can be set using **sk_params, please see https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html for more details.
 
@@ -79,7 +79,7 @@ def gen_class_data(
     :param key:           key of data in artifact store
     :param file_ext:      (pqt) extension for parquet file
     :param sk_params:     additional parameters for `sklearn.datasets.make_classification`
-    """
+    &#34;&#34;&#34;
     features, labels = make_classification(
         n_samples=n_samples,
         n_features=m_features,
@@ -91,7 +91,7 @@ def gen_class_data(
     # make dataframes, add column names, concatenate (X, y)
     X = pd.DataFrame(features)
     if not header:
-        X.columns = ["feat_" + str(x) for x in range(m_features)]
+        X.columns = [&#34;feat_&#34; + str(x) for x in range(m_features)]
     else:
         X.columns = header
 

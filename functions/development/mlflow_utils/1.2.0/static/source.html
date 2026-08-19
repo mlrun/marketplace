@@ -36,39 +36,39 @@ import pandas as pd
 
 
 class MLFlowModelServer(V2ModelServer):
-    """
+    &#34;&#34;&#34;
     MLFlow tracker Model serving class, inheriting the V2ModelServer class for being initialized automatically by the model
     server and be able to run locally as part of a nuclio serverless function, or as part of a real-time pipeline.
-    """
+    &#34;&#34;&#34;
 
     def load(self):
-        """
+        &#34;&#34;&#34;
         loads a model that was logged by the MLFlow tracker model
-        """
-        # Unzip the model dir and then use mlflow's load function
-        model_file, _ = self.get_model(".zip")
-        model_path_unzip = model_file.replace(".zip", "")
+        &#34;&#34;&#34;
+        # Unzip the model dir and then use mlflow&#39;s load function
+        model_file, _ = self.get_model(&#34;.zip&#34;)
+        model_path_unzip = model_file.replace(&#34;.zip&#34;, &#34;&#34;)
 
-        with zipfile.ZipFile(model_file, "r") as zip_ref:
+        with zipfile.ZipFile(model_file, &#34;r&#34;) as zip_ref:
             zip_ref.extractall(model_path_unzip)
 
         self.model = mlflow.pyfunc.load_model(model_path_unzip)
 
-    def predict(self, request: Dict[str, Any]) -> list:
-        """
+    def predict(self, request: Dict[str, Any]) -&gt; list:
+        &#34;&#34;&#34;
         Infer the inputs through the model. The inferred data will
-        be read from the "inputs" key of the request.
+        be read from the &#34;inputs&#34; key of the request.
 
-        :param request: The request to the model using xgboost's predict.
-                The input to the model will be read from the "inputs" key.
+        :param request: The request to the model using xgboost&#39;s predict.
+                The input to the model will be read from the &#34;inputs&#34; key.
 
-        :return: The model's prediction on the given input.
-        """
+        :return: The model&#39;s prediction on the given input.
+        &#34;&#34;&#34;
 
         # Get the inputs and set to accepted type:
-        inputs = pd.DataFrame(request["inputs"])
+        inputs = pd.DataFrame(request[&#34;inputs&#34;])
 
-        # Predict using the model's predict function:
+        # Predict using the model&#39;s predict function:
         predictions = self.model.predict(inputs)
 
         # Return as list:

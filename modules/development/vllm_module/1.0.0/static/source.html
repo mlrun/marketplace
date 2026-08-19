@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2025 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -50,7 +50,7 @@
 from typing import Dict, Optional, List
 
 class VLLMModule:
-    """
+    &#34;&#34;&#34;
     VLLMModule
     
     This module provides a lightweight wrapper for deploying a vLLM
@@ -68,36 +68,36 @@ class VLLMModule:
     The module is designed to be used in Jupyter notebooks and MLRun pipelines,
     allowing users to deploy and test large language models on Kubernetes
     with minimal configuration.
-    """
+    &#34;&#34;&#34;
 
     def __init__(
             self,
             project: str,
             *,
             node_selector: Optional[Dict[str, str]] = None,
-            name: str = "vllm",
-            image: str = "vllm/vllm-openai:latest",
-            model: str = "Qwen/Qwen2.5-Omni-3B",
+            name: str = &#34;vllm&#34;,
+            image: str = &#34;vllm/vllm-openai:latest&#34;,
+            model: str = &#34;Qwen/Qwen2.5-Omni-3B&#34;,
             gpus: int = 1,
-            mem: str = "10G",
+            mem: str = &#34;10G&#34;,
             port: int = 8000,
-            dtype: str = "auto",
-            uvicorn_log_level: str = "info",
+            dtype: str = &#34;auto&#34;,
+            uvicorn_log_level: str = &#34;info&#34;,
             max_tokens: int = 500,
     ):
-        if gpus < 1:
-            raise ValueError("gpus must be >= 1")
+        if gpus &lt; 1:
+            raise ValueError(&#34;gpus must be &gt;= 1&#34;)
 
         
         
         if node_selector is None:
-            node_selector = {"alpha.eksctl.io/nodegroup-name": "added-gpu"}
+            node_selector = {&#34;alpha.eksctl.io/nodegroup-name&#34;: &#34;added-gpu&#34;}
         
         if not isinstance(max_tokens, int):
-            raise TypeError("max_tokens must be an integer")
+            raise TypeError(&#34;max_tokens must be an integer&#34;)
 
-        if max_tokens < 1:
-            raise ValueError("max_tokens must be >= 1")
+        if max_tokens &lt; 1:
+            raise ValueError(&#34;max_tokens must be &gt;= 1&#34;)
 
         self.project = project
         self.name = name
@@ -113,7 +113,7 @@ class VLLMModule:
 
         self.vllm_app = self.project.set_function(
             name=self.name,
-            kind="application",
+            kind=&#34;application&#34;,
             image=self.image,
         )
 
@@ -125,27 +125,27 @@ class VLLMModule:
         self.vllm_app.set_internal_application_port(self.port)
 
         args: List[str] = [
-            "serve",
+            &#34;serve&#34;,
             self.model,
-            "--dtype",
+            &#34;--dtype&#34;,
             self.dtype,
-            "--port",
+            &#34;--port&#34;,
             str(self.port),
         ]
 
         if self.uvicorn_log_level:
-            args += ["--uvicorn-log-level", self.uvicorn_log_level]
+            args += [&#34;--uvicorn-log-level&#34;, self.uvicorn_log_level]
 
-        if self.gpus > 1:
-            args += ["--tensor-parallel-size", str(gpus)]
+        if self.gpus &gt; 1:
+            args += [&#34;--tensor-parallel-size&#34;, str(gpus)]
 
             # For more than one GPU you should create a share volume for the multiple GPUs
-            self.vllm_app.spec.volumes = [{"name": "dshm", "emptyDir": {"medium": "Memory"}}]
-            self.vllm_app.spec.volume_mounts = [{"name": "dshm", "mountPath": "/dev/shm"}]
+            self.vllm_app.spec.volumes = [{&#34;name&#34;: &#34;dshm&#34;, &#34;emptyDir&#34;: {&#34;medium&#34;: &#34;Memory&#34;}}]
+            self.vllm_app.spec.volume_mounts = [{&#34;name&#34;: &#34;dshm&#34;, &#34;mountPath&#34;: &#34;/dev/shm&#34;}]
 
     
 
-        self.vllm_app.spec.command = "vllm"
+        self.vllm_app.spec.command = &#34;vllm&#34;
         self.vllm_app.spec.args = args
 
         self.vllm_app.spec.min_replicas = 1
@@ -156,7 +156,7 @@ class VLLMModule:
 
     def add_args(self, extra_args: List[str]):
         if not isinstance(extra_args, list) or not all(isinstance(x, str) for x in extra_args):
-            raise ValueError("extra_args must be a list of strings")
+            raise ValueError(&#34;extra_args must be a list of strings&#34;)
         self.vllm_app.spec.args += extra_args
 
 

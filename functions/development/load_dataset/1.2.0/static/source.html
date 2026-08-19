@@ -30,14 +30,14 @@
         <code class="python">
 # Copyright 2019 Iguazio
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
+# distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
@@ -50,21 +50,21 @@ from mlrun.execution import MLClientCtx
 def load_dataset(
     context: MLClientCtx,
     dataset: str,
-    name: str = "",
-    file_ext: str = "parquet",
+    name: str = &#34;&#34;,
+    file_ext: str = &#34;parquet&#34;,
     params: dict = {},
-) -> None:
-    """Loads a scikit-learn toy dataset for classification or regression
+) -&gt; None:
+    &#34;&#34;&#34;Loads a scikit-learn toy dataset for classification or regression
 
-    The following datasets are available ('name' : desription):
+    The following datasets are available (&#39;name&#39; : desription):
 
-        'boston'          : boston house-prices dataset (regression)
-        'iris'            : iris dataset (classification)
-        'diabetes'        : diabetes dataset (regression)
-        'digits'          : digits dataset (classification)
-        'linnerud'        : linnerud dataset (multivariate regression)
-        'wine'            : wine dataset (classification)
-        'breast_cancer'   : breast cancer wisconsin dataset (classification)
+        &#39;boston&#39;          : boston house-prices dataset (regression)
+        &#39;iris&#39;            : iris dataset (classification)
+        &#39;diabetes&#39;        : diabetes dataset (regression)
+        &#39;digits&#39;          : digits dataset (classification)
+        &#39;linnerud&#39;        : linnerud dataset (multivariate regression)
+        &#39;wine&#39;            : wine dataset (classification)
+        &#39;breast_cancer&#39;   : breast cancer wisconsin dataset (classification)
 
     The scikit-learn functions return a data bunch including the following items:
     - data              the features matrix
@@ -81,22 +81,22 @@ def load_dataset(
     :param name:       artifact name (defaults to dataset)
     :param file_ext:   output file_ext: parquet or csv
     :param params:     params of the sklearn load_data method
-    """
+    &#34;&#34;&#34;
     dataset = str(dataset)
-    pkg_module = "sklearn.datasets"
-    fname = f"load_{dataset}"
+    pkg_module = &#34;sklearn.datasets&#34;
+    fname = f&#34;load_{dataset}&#34;
 
     pkg_module = __import__(pkg_module, fromlist=[fname])
     load_data_fn = getattr(pkg_module, fname)
 
     data = load_data_fn(**params)
-    feature_names = data["feature_names"]
+    feature_names = data[&#34;feature_names&#34;]
 
-    xy = np.concatenate([data["data"], data["target"].reshape(-1, 1)], axis=1)
-    if hasattr(feature_names, "append"):
-        feature_names.append("labels")
+    xy = np.concatenate([data[&#34;data&#34;], data[&#34;target&#34;].reshape(-1, 1)], axis=1)
+    if hasattr(feature_names, &#34;append&#34;):
+        feature_names.append(&#34;labels&#34;)
     else:
-        feature_names = np.append(feature_names, "labels")
+        feature_names = np.append(feature_names, &#34;labels&#34;)
     df = pd.DataFrame(data=xy, columns=feature_names)
 
     context.log_dataset(name or dataset, df=df, format=file_ext, index=False)

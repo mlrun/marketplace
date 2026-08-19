@@ -31,16 +31,16 @@
 kind: job
 metadata:
   name: model-server-tester
-  tag: ''
+  tag: &#39;&#39;
   hash: 3b203a2799e44992539eafd32a4b8979bbcc8001
-  project: ''
+  project: &#39;&#39;
   labels:
     author: Iguazio
   categories:
   - monitoring
   - model-serving
 spec:
-  command: ''
+  command: &#39;&#39;
   args: []
   image: mlrun/mlrun
   env: []
@@ -51,15 +51,15 @@ spec:
       doc: Test a model server
       parameters:
       - name: context
-        default: ''
+        default: &#39;&#39;
       - name: table
         type: DataItem
         doc: csv/parquet table with test data
-        default: ''
+        default: &#39;&#39;
       - name: addr
         type: str
         doc: function address/url
-        default: ''
+        default: &#39;&#39;
       - name: label_column
         type: str
         doc: name of the label column in table
@@ -67,7 +67,7 @@ spec:
       - name: model
         type: str
         doc: tested model name
-        default: ''
+        default: &#39;&#39;
       - name: match_err
         type: bool
         doc: raise error on validation (require proper test set)
@@ -77,7 +77,7 @@ spec:
         doc: number of rows to use from test set
         default: 20
       outputs:
-      - default: ''
+      - default: &#39;&#39;
       lineno: 14
   description: test model servers
   build:
